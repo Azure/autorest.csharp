@@ -62,8 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
         {
-            var bodyType = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
-            bool isResourceList = bodyType != clientMethod.GetBodyType();
+            (var bodyType, bool isResourceList) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);

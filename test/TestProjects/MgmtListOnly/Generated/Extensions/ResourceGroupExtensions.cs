@@ -31,7 +31,7 @@ namespace MgmtListOnly
         }
         #endregion
 
-        #region ResourceGroupFeatures
+        #region ResourceGroupFeature
         private static ResourceGroupFeaturesRestOperations GetResourceGroupFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ResourceGroupFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -145,7 +145,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region ResourceGroupNonPageableFeatures
+        #region ResourceGroupNonPageableFeature
         private static ResourceGroupNonPageableFeaturesRestOperations GetResourceGroupNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ResourceGroupNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -219,7 +219,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region Keys
+        #region Key
         private static KeysRestOperations GetKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new KeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -232,7 +232,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<KeyPublishResult>> PublishKeysAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<KeyPublishResult>> PublishKeyAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -247,7 +247,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PublishKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PublishKey");
                 scope.Start();
                 try
                 {
@@ -270,7 +270,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static Response<KeyPublishResult> PublishKeys(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<KeyPublishResult> PublishKey(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -285,7 +285,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PublishKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PublishKey");
                 scope.Start();
                 try
                 {

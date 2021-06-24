@@ -639,14 +639,14 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<ChildWithPost>> CreateOrUpdateChildWithPostsAsync(ChildWithPost parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ChildWithPost>> CreateOrUpdateChildWithPostAsync(ChildWithPost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.CreateOrUpdateChildWithPosts");
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.CreateOrUpdateChildWithPost");
             scope.Start();
             try
             {
@@ -664,14 +664,14 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ChildWithPost> CreateOrUpdateChildWithPosts(ChildWithPost parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ChildWithPost> CreateOrUpdateChildWithPost(ChildWithPost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.CreateOrUpdateChildWithPosts");
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.CreateOrUpdateChildWithPost");
             scope.Start();
             try
             {
@@ -688,11 +688,11 @@ namespace MgmtListOnly
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ResponseNotCalledValue> ListResponseNotCalledValues(CancellationToken cancellationToken = default)
+        public Pageable<ResponseNotCalledValue> ListResponseNotCalledValue(CancellationToken cancellationToken = default)
         {
             Page<ResponseNotCalledValue> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValues");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -707,7 +707,7 @@ namespace MgmtListOnly
             }
             Page<ResponseNotCalledValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValues");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -726,11 +726,11 @@ namespace MgmtListOnly
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ResponseNotCalledValue> ListResponseNotCalledValuesAsync(CancellationToken cancellationToken = default)
+        public AsyncPageable<ResponseNotCalledValue> ListResponseNotCalledValueAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<ResponseNotCalledValue>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValues");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -745,7 +745,7 @@ namespace MgmtListOnly
             }
             async Task<Page<ResponseNotCalledValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValues");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -762,9 +762,9 @@ namespace MgmtListOnly
         }
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ResponseNotCalledValueListNoPageResult>> ListResponseNotCalledValueListNoPagesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ResponseNotCalledValueListNoPageResult>> ListResponseNotCalledValueNoPageAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueListNoPages");
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueNoPage");
             scope.Start();
             try
             {
@@ -780,9 +780,9 @@ namespace MgmtListOnly
 
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResponseNotCalledValueListNoPageResult> ListResponseNotCalledValueListNoPages(CancellationToken cancellationToken = default)
+        public virtual Response<ResponseNotCalledValueListNoPageResult> ListResponseNotCalledValueNoPage(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueListNoPages");
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueNoPage");
             scope.Start();
             try
             {

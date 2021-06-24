@@ -33,10 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             OperationGroup = operationGroup;
             DefaultName = defaultName;
 
-            if (operationGroup.TryGetListInstanceSchema(out var schema))
-                SchemaName = schema.Name.ToPlural();
-            else
-                SchemaName = operationGroup.Key;
+            SchemaName = operationGroup.Key.ToSingular();
         }
 
         protected override string DefaultName { get; }
@@ -51,14 +48,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
 
-        private string OverrideMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod) {
+        private string OverrideMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod)
+        {
             var verb = operation.CSharpName();
+            var schemaName = SchemaName;
+            (_, bool isListFunction) = restClientMethod.GetBodyTypeForList(operationGroup, _context);
+            if (isListFunction)
+            {
+                schemaName = schemaName.ToPlural();
+            } 
             const string list = "List";
             if (verb.StartsWith(list, StringComparison.InvariantCultureIgnoreCase))
             {
-                return $"{list}{SchemaName}{verb.Substring(list.Length)}";
+                return $"{list}{schemaName}{verb.Substring(list.Length)}";
             }
-            return $"{operation.CSharpName()}{SchemaName}";
+            return $"{operation.CSharpName()}{schemaName}";
         }
     }
 }

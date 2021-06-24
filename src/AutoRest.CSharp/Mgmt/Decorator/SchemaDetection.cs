@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -58,49 +56,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Indicates if the given operation group is a ListOnly child resource.
-        /// If the operation group is a ListOnly child, will return true indicating
-        /// the corresponding container, data... classes should not be generated.
+        /// Indicates if the given operation group is a ListOnly operation group.
+        /// If the operation group is a ListOnly which corresponds to a NonResource, 
+        /// this function will return true indicating the corresponding container, data... classes should not be generated.
         /// </summary>
         /// <param name="operationGroup">Operation group.</param>
         /// <param name="config">Management plane configuration.</param>
         /// <returns></returns>
         public static bool IsListOnly(this OperationGroup operationGroup, MgmtConfiguration config)
         {
-            return TryGetListInstanceSchema(operationGroup, out var _);
-        }
-
-        /// <summary>
-        /// This extension method returns whether this operation group only contains one resource definition. If true, this method
-        /// will output the schema of the resource body
-        /// </summary>
-        /// <param name="operationGroup">the operation group to check</param>
-        /// <param name="schema">the resource schema, will be null if this method returns false</param>
-        /// <returns>true if the given operation group corresponds to a resource</returns>
-        public static bool TryGetResourceSchema(this OperationGroup operationGroup, [MaybeNullWhen(false)] out Schema schema)
-        {
-            schema = null;
-            if (operationGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out var output))
-            {
-                schema = GetBodyParameter(output.First(), operationGroup).Schema;
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// The extension method returns whether this operation group only contains one List operation. If true, this method will
-        /// output the schema of the listed instance
-        /// </summary>
-        /// <param name="operationGroup">the operation group to check</param>
-        /// <param name="schema">the listed instance schema, will be null if this method returns false</param>
-        /// <returns>true if the given operation group only contains one list operation</returns>
-        public static bool TryGetListInstanceSchema(this OperationGroup operationGroup, [MaybeNullWhen(false)] out Schema schema)
-        {
-            schema = null;
-
-            // if operation count is not 1, does not meet the ListOnlyChild criteria. Return false
+            // if operation count is not 1, does not meet the ListOnly criteria. Return false
             if (operationGroup.Operations.Count != 1)
             {
                 return false;
@@ -123,8 +88,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     return false;
                 }
 
-                schema = arraySchemas?.FirstOrDefault()?.ElementType;
-                return schema != null;
+                return arraySchemas?.FirstOrDefault()?.ElementType != null;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// This extension method returns whether this operation group only contains one resource definition. If true, this method
+        /// will output the schema of the resource body
+        /// </summary>
+        /// <param name="operationGroup">the operation group to check</param>
+        /// <param name="schema">the resource schema, will be null if this method returns false</param>
+        /// <returns>true if the given operation group corresponds to a resource</returns>
+        public static bool TryGetResourceSchema(this OperationGroup operationGroup, [MaybeNullWhen(false)] out Schema schema)
+        {
+            schema = null;
+            if (operationGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out var output))
+            {
+                schema = GetBodyParameter(output.First(), operationGroup).Schema;
+                return true;
             }
 
             return false;

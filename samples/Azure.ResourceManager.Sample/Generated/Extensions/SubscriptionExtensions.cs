@@ -771,7 +771,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineImages
+        #region VirtualMachineImage
         private static VirtualMachineImagesRestOperations GetVirtualMachineImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new VirtualMachineImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -786,7 +786,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -813,7 +813,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImages");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImage");
                 scope.Start();
                 try
                 {
@@ -838,7 +838,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
-        public static Response<VirtualMachineImage> GetVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineImage> GetVirtualMachineImage(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -865,7 +865,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImages");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImage");
                 scope.Start();
                 try
                 {
@@ -892,7 +892,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImageAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -915,7 +915,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImages");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImage");
                 scope.Start();
                 try
                 {
@@ -942,7 +942,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImage(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -965,7 +965,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImages");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImage");
                 scope.Start();
                 try
                 {
@@ -987,7 +987,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagesOffersAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImageOffersAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1002,7 +1002,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesOffers");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImageOffers");
                 scope.Start();
                 try
                 {
@@ -1024,7 +1024,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> A valid image publisher. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImagesOffers(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImageOffers(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1039,7 +1039,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesOffers");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImageOffers");
                 scope.Start();
                 try
                 {
@@ -1060,7 +1060,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagesPublishersAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagePublishersAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1071,7 +1071,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesPublishers");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagePublishers");
                 scope.Start();
                 try
                 {
@@ -1092,7 +1092,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImagesPublishers(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImagePublishers(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1103,7 +1103,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesPublishers");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagePublishers");
                 scope.Start();
                 try
                 {
@@ -1126,7 +1126,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagesSkusAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImageSkusAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1145,7 +1145,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesSkus");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImageSkus");
                 scope.Start();
                 try
                 {
@@ -1168,7 +1168,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="offer"> A valid image publisher offer. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImagesSkus(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImageSkus(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1187,7 +1187,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImagesSkus");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImageSkus");
                 scope.Start();
                 try
                 {
@@ -1205,7 +1205,7 @@ namespace Azure.ResourceManager.Sample
 
         #endregion
 
-        #region Usages
+        #region Usage
         private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -1317,7 +1317,7 @@ namespace Azure.ResourceManager.Sample
 
         #endregion
 
-        #region VirtualMachineSizes
+        #region VirtualMachineSize
         private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -1399,7 +1399,7 @@ namespace Azure.ResourceManager.Sample
 
         #endregion
 
-        #region LogAnalytics
+        #region LogAnalytic
         private static LogAnalyticsRestOperations GetLogAnalyticsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);

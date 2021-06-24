@@ -20,7 +20,7 @@ namespace Azure.Management.Storage
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region SkuInformations
+        #region Sku
         private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SkusRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkuInformations");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkus");
                     scope.Start();
                     try
                     {
@@ -68,7 +68,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkuInformations");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkus");
                     scope.Start();
                     try
                     {
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
 
         #endregion
 
-        #region Usages
+        #region Usage
         private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);

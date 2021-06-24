@@ -18,7 +18,7 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SshPublicKeys
+        #region SshPublicKey
         private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -31,7 +31,7 @@ namespace ResourceRename
         /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -42,7 +42,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKey");
                 scope.Start();
                 try
                 {
@@ -65,7 +65,7 @@ namespace ResourceRename
         /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response<SshPublicKeyInfo> CreateSshPublicKeys(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
+        public static Response<SshPublicKeyInfo> CreateSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -76,7 +76,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKey");
                 scope.Start();
                 try
                 {
@@ -97,7 +97,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response> DeleteSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response> DeleteSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -108,7 +108,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKey");
                 scope.Start();
                 try
                 {
@@ -129,7 +129,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response DeleteSshPublicKeys(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static Response DeleteSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -140,7 +140,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKey");
                 scope.Start();
                 try
                 {
@@ -161,7 +161,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -172,7 +172,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKey");
                 scope.Start();
                 try
                 {
@@ -193,7 +193,7 @@ namespace ResourceRename
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response<SshPublicKeyInfo> GetSshPublicKeys(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static Response<SshPublicKeyInfo> GetSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -204,7 +204,7 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKey");
                 scope.Start();
                 try
                 {

@@ -18,7 +18,7 @@ namespace ExactMatchInheritance
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region ExactMatchModel2s
+        #region ExactMatchModel2
         private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -30,7 +30,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2sAsync(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -49,7 +49,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2s");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
@@ -71,7 +71,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel2> PutExactMatchModel2s(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public static Response<ExactMatchModel2> PutExactMatchModel2(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -90,7 +90,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2s");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
@@ -108,7 +108,7 @@ namespace ExactMatchInheritance
 
         #endregion
 
-        #region ExactMatchModel4s
+        #region ExactMatchModel4
         private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -120,7 +120,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4sAsync(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -139,7 +139,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4s");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {
@@ -161,7 +161,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel4> PutExactMatchModel4s(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public static Response<ExactMatchModel4> PutExactMatchModel4(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -180,7 +180,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4s");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {

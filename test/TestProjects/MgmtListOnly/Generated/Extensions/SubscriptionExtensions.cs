@@ -21,7 +21,7 @@ namespace MgmtListOnly
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region FakeFeatures
+        #region FakeFeature
         private static FakeFeaturesRestOperations GetFakeFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new FakeFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -119,7 +119,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region FakeNonPageableFeatures
+        #region FakeNonPageableFeature
         private static FakeNonPageableFeaturesRestOperations GetFakeNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new FakeNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -177,7 +177,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region ApiKeys
+        #region ApiKey
         private static ApiKeysRestOperations GetApiKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ApiKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -235,7 +235,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region Usages
+        #region Usage
         private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -349,7 +349,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region NonPageableUsages
+        #region NonPageableUsage
         private static NonPageableUsagesRestOperations GetNonPageableUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new NonPageableUsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);

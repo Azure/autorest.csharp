@@ -19,7 +19,7 @@ namespace OperationGroupMappings
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region Usages
+        #region Usage
         private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);

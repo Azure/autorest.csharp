@@ -118,7 +118,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region NonResourceModel1s
+        #region NonResourceModel1
         private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -129,7 +129,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -144,7 +144,7 @@ namespace SupersetFlattenInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1");
                 scope.Start();
                 try
                 {
@@ -165,7 +165,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<NonResourceModel1> PutNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -180,7 +180,7 @@ namespace SupersetFlattenInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1");
                 scope.Start();
                 try
                 {
@@ -200,7 +200,7 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -211,7 +211,7 @@ namespace SupersetFlattenInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1");
                 scope.Start();
                 try
                 {
@@ -231,7 +231,7 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        public static Response<NonResourceModel1> GetNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -242,7 +242,7 @@ namespace SupersetFlattenInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1s");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1");
                 scope.Start();
                 try
                 {
