@@ -145,11 +145,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.Line($"#region Get {resourceOperation.Type.Name.ToPlural()} operation");
+            // The resourceOperation already has a suffix "Operations" therefore it is already in plural form
+            // there we do not need to change it to plural again
+            writer.Line($"#region Get {resourceOperation.Type.Name} operation");
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceOperation.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceOperation.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resourceOperation.Type} Get{resourceOperation.Type.Name.ToPlural()}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
+            using (writer.Scope($"public static {resourceOperation.Type} Get{resourceOperation.Type.Name}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
             {
                 writer.Line($"return new {resourceOperation.Type.Name}(subscriptionOperations);");
             }

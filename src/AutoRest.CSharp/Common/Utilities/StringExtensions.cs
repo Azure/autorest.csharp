@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.RegularExpressions;
+using Humanizer;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Utilities
@@ -238,21 +239,14 @@ namespace AutoRest.CSharp.Utilities
         }
 
 
-        public static string ToPlural(this string single)
+        public static string ToPlural(this string single, bool inputIsKnownToBeSingular = true)
         {
-            if (new Regex("([^aeiou])y$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "([^aeiou])y$", "ie");
-            }
-            else if (new Regex("fe?$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "fe?$", "ve");
-            }
-            else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
-            }
-            return single + "s";
+            return single.Pluralize(inputIsKnownToBeSingular);
+        }
+
+        public static string ToSingular(this string plural, bool inputIsKnownToBePlural = true)
+        {
+            return plural.Singularize(inputIsKnownToBePlural);
         }
     }
 }

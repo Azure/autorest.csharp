@@ -104,6 +104,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-file\\Generated"
     },
+    "body-file-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-file\\Generated"
+    },
     "body-formdata": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata\\Generated"
@@ -151,6 +155,10 @@
     "custom-baseUrl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\Generated"
+    },
+    "custom-baseUrl-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\custom-baseUrl\\Generated"
     },
     "custom-baseUrl-more-options": {
       "commandName": "Project",
@@ -204,6 +212,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\httpInfrastructure\\Generated"
     },
+    "httpInfrastructure-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\httpInfrastructure\\Generated"
+    },
     "Inheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Inheritance\\Generated"
@@ -223,6 +235,10 @@
     "media_types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\Generated"
+    },
+    "media_types-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
     "MgmtListOnly": {
       "commandName": "Project",

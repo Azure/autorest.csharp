@@ -873,9 +873,9 @@ namespace Azure.Management.Storage
             return new FileShareContainer(this);
         }
 
-        /// <summary> Gets a list of ManagementPoliies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPoliies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyContainer GetManagementPoliies()
+        /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
+        public ManagementPolicyContainer GetManagementPolicies()
         {
             return new ManagementPolicyContainer(this);
         }

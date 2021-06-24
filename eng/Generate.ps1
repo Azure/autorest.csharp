@@ -89,10 +89,16 @@ $llcArgs = "--low-level-client=true --security=AzureKey --security-header-name=F
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel =
     'body-complex',
+    'body-file',
     'body-string',
+    'custom-baseUrl',
     'header',
-    'url',
-    'url-multi-collectionFormat';
+    'httpInfrastructure',
+    'media_types',
+    #'lro',
+    #'paging',
+    'url-multi-collectionFormat',
+    'url';
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
