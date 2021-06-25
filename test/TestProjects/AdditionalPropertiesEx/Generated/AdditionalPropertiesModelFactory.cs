@@ -19,6 +19,8 @@ namespace AdditionalPropertiesEx
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = new int(), IReadOnlyDictionary<string, string> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, string>();
+
             return new OutputAdditionalPropertiesModel(id, additionalProperties);
         }
 
@@ -28,6 +30,8 @@ namespace AdditionalPropertiesEx
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = new int(), IReadOnlyDictionary<string, string> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, string>();
+
             return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
     }

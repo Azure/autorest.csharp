@@ -22,6 +22,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.EntitiesResult"/> instance for mocking. </returns>
         public static EntitiesResult EntitiesResult(IEnumerable<DocumentEntities> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
+            documents ??= new List<DocumentEntities>();
+            errors ??= new List<DocumentError>();
+
             return new EntitiesResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
@@ -33,6 +36,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.DocumentEntities"/> instance for mocking. </returns>
         public static DocumentEntities DocumentEntities(string id = null, IEnumerable<Entity> entities = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
+            entities ??= new List<Entity>();
+            warnings ??= new List<TextAnalyticsWarning>();
+
             return new DocumentEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
@@ -86,6 +92,8 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.TextAnalyticsError"/> instance for mocking. </returns>
         public static TextAnalyticsError TextAnalyticsError(ErrorCodeValue code = new ErrorCodeValue(), string message = null, string target = null, InnerError innererror = null, IEnumerable<TextAnalyticsError> details = null)
         {
+            details ??= new List<TextAnalyticsError>();
+
             return new TextAnalyticsError(code, message, target, innererror, details?.ToList());
         }
 
@@ -98,6 +106,8 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.InnerError"/> instance for mocking. </returns>
         public static InnerError InnerError(InnerErrorCodeValue code = new InnerErrorCodeValue(), string message = null, IReadOnlyDictionary<string, string> details = null, string target = null, InnerError innererror = null)
         {
+            details ??= new Dictionary<string, string>();
+
             return new InnerError(code, message, details, target, innererror);
         }
 
@@ -120,6 +130,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.EntityLinkingResult"/> instance for mocking. </returns>
         public static EntityLinkingResult EntityLinkingResult(IEnumerable<DocumentLinkedEntities> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
+            documents ??= new List<DocumentLinkedEntities>();
+            errors ??= new List<DocumentError>();
+
             return new EntityLinkingResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
@@ -131,6 +144,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.DocumentLinkedEntities"/> instance for mocking. </returns>
         public static DocumentLinkedEntities DocumentLinkedEntities(string id = null, IEnumerable<LinkedEntity> entities = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
+            entities ??= new List<LinkedEntity>();
+            warnings ??= new List<TextAnalyticsWarning>();
+
             return new DocumentLinkedEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
@@ -144,6 +160,8 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.LinkedEntity"/> instance for mocking. </returns>
         public static LinkedEntity LinkedEntity(string name = null, IEnumerable<Match> matches = null, string language = null, string id = null, string url = null, string dataSource = null)
         {
+            matches ??= new List<Match>();
+
             return new LinkedEntity(name, matches?.ToList(), language, id, url, dataSource);
         }
 
@@ -166,6 +184,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.KeyPhraseResult"/> instance for mocking. </returns>
         public static KeyPhraseResult KeyPhraseResult(IEnumerable<DocumentKeyPhrases> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
+            documents ??= new List<DocumentKeyPhrases>();
+            errors ??= new List<DocumentError>();
+
             return new KeyPhraseResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
@@ -177,6 +198,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.DocumentKeyPhrases"/> instance for mocking. </returns>
         public static DocumentKeyPhrases DocumentKeyPhrases(string id = null, IEnumerable<string> keyPhrases = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
+            keyPhrases ??= new List<string>();
+            warnings ??= new List<TextAnalyticsWarning>();
+
             return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics);
         }
 
@@ -188,6 +212,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.LanguageResult"/> instance for mocking. </returns>
         public static LanguageResult LanguageResult(IEnumerable<DocumentLanguage> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
+            documents ??= new List<DocumentLanguage>();
+            errors ??= new List<DocumentError>();
+
             return new LanguageResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
@@ -199,6 +226,8 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.DocumentLanguage"/> instance for mocking. </returns>
         public static DocumentLanguage DocumentLanguage(string id = null, DetectedLanguage detectedLanguage = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
+            warnings ??= new List<TextAnalyticsWarning>();
+
             return new DocumentLanguage(id, detectedLanguage, warnings?.ToList(), statistics);
         }
 
@@ -220,6 +249,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.SentimentResponse"/> instance for mocking. </returns>
         public static SentimentResponse SentimentResponse(IEnumerable<DocumentSentiment> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
+            documents ??= new List<DocumentSentiment>();
+            errors ??= new List<DocumentError>();
+
             return new SentimentResponse(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
@@ -233,6 +265,9 @@ namespace CognitiveServices.TextAnalytics
         /// <returns> A new <see cref="Models.DocumentSentiment"/> instance for mocking. </returns>
         public static DocumentSentiment DocumentSentiment(string id = null, DocumentSentimentValue sentiment = new DocumentSentimentValue(), DocumentStatistics statistics = null, SentimentConfidenceScorePerLabel confidenceScores = null, IEnumerable<SentenceSentiment> sentences = null, IEnumerable<TextAnalyticsWarning> warnings = null)
         {
+            sentences ??= new List<SentenceSentiment>();
+            warnings ??= new List<TextAnalyticsWarning>();
+
             return new DocumentSentiment(id, sentiment, statistics, confidenceScores, sentences?.ToList(), warnings?.ToList());
         }
 

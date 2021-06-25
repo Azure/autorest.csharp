@@ -74,21 +74,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return Constant.Default(inputType.WithNullable(true));
                 }
 
+                // Use default value if it is provided
                 if (defaultValue != null)
                 {
                     return defaultValue.Value;
                 }
 
+                // Non-null value types must be instantiated
                 if (inputType.IsValueType && !inputType.IsNullable)
                 {
-                    return Constant.NewInstanceOf(inputType);
+                    return Constant.NewInstanceOf(implementationType);
                 }
 
-                if (TypeFactory.IsCollectionType(implementationType))
+                // Collections must be instantiated
+                if (TypeFactory.IsCollectionType(inputType))
                 {
                     return Constant.NewInstanceOf(implementationType.WithNullable(false));
                 }
 
+                // Return typed null for everything else
                 return Constant.Default(implementationType.WithNullable(true));
             }
         }

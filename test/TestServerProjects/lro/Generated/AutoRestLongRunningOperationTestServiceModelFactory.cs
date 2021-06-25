@@ -22,6 +22,8 @@ namespace lro
         /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
         public static Resource Resource(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Resource(id, type, tags, location, name);
         }
 
@@ -36,6 +38,8 @@ namespace lro
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
         }
 

@@ -23,6 +23,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
         public static Resource Resource(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Resource(id, name, type, location, tags);
         }
 
@@ -49,6 +51,11 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.NetworkInterface"/> instance for mocking. </returns>
         public static NetworkInterface NetworkInterface(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, SubResource virtualMachine = null, NetworkSecurityGroup networkSecurityGroup = null, PrivateEndpoint privateEndpoint = null, IEnumerable<NetworkInterfaceIPConfiguration> ipConfigurations = null, IEnumerable<NetworkInterfaceTapConfiguration> tapConfigurations = null, NetworkInterfaceDnsSettings dnsSettings = null, string macAddress = null, bool? primary = null, bool? enableAcceleratedNetworking = null, bool? enableIPForwarding = null, IEnumerable<string> hostedWorkloads = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            ipConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
+            hostedWorkloads ??= new List<string>();
+
             return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
         }
 
@@ -68,6 +75,12 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.NetworkSecurityGroup"/> instance for mocking. </returns>
         public static NetworkSecurityGroup NetworkSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<SecurityRule> securityRules = null, IEnumerable<SecurityRule> defaultSecurityRules = null, IEnumerable<NetworkInterface> networkInterfaces = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            securityRules ??= new List<SecurityRule>();
+            defaultSecurityRules ??= new List<SecurityRule>();
+            networkInterfaces ??= new List<NetworkInterface>();
+            subnets ??= new List<Subnet>();
+
             return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
@@ -94,6 +107,13 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.SecurityRule"/> instance for mocking. </returns>
         public static SecurityRule SecurityRule(string id = null, string name = null, string etag = null, string description = null, SecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, string sourceAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> sourceApplicationSecurityGroups = null, string destinationAddressPrefix = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<ApplicationSecurityGroup> destinationApplicationSecurityGroups = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null, ProvisioningState? provisioningState = null)
         {
+            sourceAddressPrefixes ??= new List<string>();
+            sourceApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+            destinationAddressPrefixes ??= new List<string>();
+            destinationApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+            sourcePortRanges ??= new List<string>();
+            destinationPortRanges ??= new List<string>();
+
             return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
         }
 
@@ -109,6 +129,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ApplicationSecurityGroup"/> instance for mocking. </returns>
         public static ApplicationSecurityGroup ApplicationSecurityGroup(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
         }
 
@@ -136,6 +158,16 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.Subnet"/> instance for mocking. </returns>
         public static Subnet Subnet(string id = null, string name = null, string etag = null, string addressPrefix = null, IEnumerable<string> addressPrefixes = null, NetworkSecurityGroup networkSecurityGroup = null, RouteTable routeTable = null, SubResource natGateway = null, IEnumerable<ServiceEndpointPropertiesFormat> serviceEndpoints = null, IEnumerable<ServiceEndpointPolicy> serviceEndpointPolicies = null, IEnumerable<PrivateEndpoint> privateEndpoints = null, IEnumerable<IPConfiguration> ipConfigurations = null, IEnumerable<IPConfigurationProfile> ipConfigurationProfiles = null, IEnumerable<ResourceNavigationLink> resourceNavigationLinks = null, IEnumerable<ServiceAssociationLink> serviceAssociationLinks = null, IEnumerable<Delegation> delegations = null, string purpose = null, ProvisioningState? provisioningState = null, string privateEndpointNetworkPolicies = null, string privateLinkServiceNetworkPolicies = null)
         {
+            addressPrefixes ??= new List<string>();
+            serviceEndpoints ??= new List<ServiceEndpointPropertiesFormat>();
+            serviceEndpointPolicies ??= new List<ServiceEndpointPolicy>();
+            privateEndpoints ??= new List<PrivateEndpoint>();
+            ipConfigurations ??= new List<IPConfiguration>();
+            ipConfigurationProfiles ??= new List<IPConfigurationProfile>();
+            resourceNavigationLinks ??= new List<ResourceNavigationLink>();
+            serviceAssociationLinks ??= new List<ServiceAssociationLink>();
+            delegations ??= new List<Delegation>();
+
             return new Subnet(id, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
         }
 
@@ -153,6 +185,10 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.RouteTable"/> instance for mocking. </returns>
         public static RouteTable RouteTable(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<Route> routes = null, IEnumerable<Subnet> subnets = null, bool? disableBgpRoutePropagation = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            routes ??= new List<Route>();
+            subnets ??= new List<Subnet>();
+
             return new RouteTable(id, name, type, location, tags, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
         }
 
@@ -177,6 +213,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ServiceEndpointPropertiesFormat"/> instance for mocking. </returns>
         public static ServiceEndpointPropertiesFormat ServiceEndpointPropertiesFormat(string service = null, IEnumerable<string> locations = null, ProvisioningState? provisioningState = null)
         {
+            locations ??= new List<string>();
+
             return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState);
         }
 
@@ -194,6 +232,10 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ServiceEndpointPolicy"/> instance for mocking. </returns>
         public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = null, IEnumerable<Subnet> subnets = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
+            subnets ??= new List<Subnet>();
+
             return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
         }
 
@@ -208,6 +250,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ServiceEndpointPolicyDefinition"/> instance for mocking. </returns>
         public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = null, string name = null, string etag = null, string description = null, string service = null, IEnumerable<string> serviceResources = null, ProvisioningState? provisioningState = null)
         {
+            serviceResources ??= new List<string>();
+
             return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources?.ToList(), provisioningState);
         }
 
@@ -226,6 +270,11 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.PrivateEndpoint"/> instance for mocking. </returns>
         public static PrivateEndpoint PrivateEndpoint(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, Subnet subnet = null, IEnumerable<NetworkInterface> networkInterfaces = null, ProvisioningState? provisioningState = null, IEnumerable<PrivateLinkServiceConnection> privateLinkServiceConnections = null, IEnumerable<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = null)
         {
+            tags ??= new Dictionary<string, string>();
+            networkInterfaces ??= new List<NetworkInterface>();
+            privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
+            manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
+
             return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
         }
 
@@ -242,6 +291,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.PrivateLinkServiceConnection"/> instance for mocking. </returns>
         public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = null, string name = null, string type = null, string etag = null, ProvisioningState? provisioningState = null, string privateLinkServiceId = null, IEnumerable<string> groupIds = null, string requestMessage = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null)
         {
+            groupIds ??= new List<string>();
+
             return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
         }
 
@@ -283,6 +334,10 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.PublicIPAddress"/> instance for mocking. </returns>
         public static PublicIPAddress PublicIPAddress(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, PublicIPAddressSku sku = null, string etag = null, IEnumerable<string> zones = null, IPAllocationMethod? publicIPAllocationMethod = null, IPVersion? publicIPAddressVersion = null, IPConfiguration ipConfiguration = null, PublicIPAddressDnsSettings dnsSettings = null, DdosSettings ddosSettings = null, IEnumerable<IpTag> ipTags = null, string ipAddress = null, SubResource publicIPPrefix = null, int? idleTimeoutInMinutes = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            zones ??= new List<string>();
+            ipTags ??= new List<IpTag>();
+
             return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
         }
 
@@ -326,6 +381,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ServiceAssociationLink"/> instance for mocking. </returns>
         public static ServiceAssociationLink ServiceAssociationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null, bool? allowDelete = null, IEnumerable<string> locations = null)
         {
+            locations ??= new List<string>();
+
             return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
         }
 
@@ -339,6 +396,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.Delegation"/> instance for mocking. </returns>
         public static Delegation Delegation(string id = null, string name = null, string etag = null, string serviceName = null, IEnumerable<string> actions = null, ProvisioningState? provisioningState = null)
         {
+            actions ??= new List<string>();
+
             return new Delegation(id, name, etag, serviceName, actions?.ToList(), provisioningState);
         }
 
@@ -362,6 +421,12 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfiguration"/> instance for mocking. </returns>
         public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = null, string name = null, string etag = null, IEnumerable<VirtualNetworkTap> virtualNetworkTaps = null, IEnumerable<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = null, IEnumerable<BackendAddressPool> loadBalancerBackendAddressPools = null, IEnumerable<InboundNatRule> loadBalancerInboundNatRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, bool? primary = null, PublicIPAddress publicIPAddress = null, IEnumerable<ApplicationSecurityGroup> applicationSecurityGroups = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = null)
         {
+            virtualNetworkTaps ??= new List<VirtualNetworkTap>();
+            applicationGatewayBackendAddressPools ??= new List<ApplicationGatewayBackendAddressPool>();
+            loadBalancerBackendAddressPools ??= new List<BackendAddressPool>();
+            loadBalancerInboundNatRules ??= new List<InboundNatRule>();
+            applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
+
             return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
         }
 
@@ -381,6 +446,9 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.VirtualNetworkTap"/> instance for mocking. </returns>
         public static VirtualNetworkTap VirtualNetworkTap(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, string etag = null, IEnumerable<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = null, string resourceGuid = null, ProvisioningState? provisioningState = null, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = null, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = null, int? destinationPort = null)
         {
+            tags ??= new Dictionary<string, string>();
+            networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
+
             return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
 
@@ -417,6 +485,12 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.FrontendIPConfiguration"/> instance for mocking. </returns>
         public static FrontendIPConfiguration FrontendIPConfiguration(string id = null, string name = null, string etag = null, string type = null, IEnumerable<string> zones = null, IEnumerable<SubResource> inboundNatRules = null, IEnumerable<SubResource> inboundNatPools = null, IEnumerable<SubResource> outboundRules = null, IEnumerable<SubResource> loadBalancingRules = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, IPVersion? privateIPAddressVersion = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, SubResource publicIPPrefix = null, ProvisioningState? provisioningState = null)
         {
+            zones ??= new List<string>();
+            inboundNatRules ??= new List<SubResource>();
+            inboundNatPools ??= new List<SubResource>();
+            outboundRules ??= new List<SubResource>();
+            loadBalancingRules ??= new List<SubResource>();
+
             return new FrontendIPConfiguration(id, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
         }
 
@@ -431,6 +505,9 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.ApplicationGatewayBackendAddressPool"/> instance for mocking. </returns>
         public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<ApplicationGatewayBackendAddress> backendAddresses = null, ProvisioningState? provisioningState = null)
         {
+            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
+
             return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
         }
 
@@ -447,6 +524,10 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.BackendAddressPool"/> instance for mocking. </returns>
         public static BackendAddressPool BackendAddressPool(string id = null, string name = null, string etag = null, string type = null, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = null, IEnumerable<SubResource> loadBalancingRules = null, SubResource outboundRule = null, IEnumerable<SubResource> outboundRules = null, ProvisioningState? provisioningState = null)
         {
+            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
+            loadBalancingRules ??= new List<SubResource>();
+            outboundRules ??= new List<SubResource>();
+
             return new BackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
         }
 
@@ -477,6 +558,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/> instance for mocking. </returns>
         public static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId = null, string requiredMemberName = null, IEnumerable<string> fqdns = null)
         {
+            fqdns ??= new List<string>();
+
             return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList());
         }
 
@@ -489,6 +572,9 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.NetworkInterfaceDnsSettings"/> instance for mocking. </returns>
         public static NetworkInterfaceDnsSettings NetworkInterfaceDnsSettings(IEnumerable<string> dnsServers = null, IEnumerable<string> appliedDnsServers = null, string internalDnsNameLabel = null, string internalFqdn = null, string internalDomainNameSuffix = null)
         {
+            dnsServers ??= new List<string>();
+            appliedDnsServers ??= new List<string>();
+
             return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
 
@@ -498,6 +584,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.EffectiveRouteListResult"/> instance for mocking. </returns>
         public static EffectiveRouteListResult EffectiveRouteListResult(IEnumerable<EffectiveRoute> value = null, string nextLink = null)
         {
+            value ??= new List<EffectiveRoute>();
+
             return new EffectiveRouteListResult(value?.ToList(), nextLink);
         }
 
@@ -512,6 +600,9 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.EffectiveRoute"/> instance for mocking. </returns>
         public static EffectiveRoute EffectiveRoute(string name = null, bool? disableBgpRoutePropagation = null, EffectiveRouteSource? source = null, EffectiveRouteState? state = null, IEnumerable<string> addressPrefix = null, IEnumerable<string> nextHopIpAddress = null, RouteNextHopType? nextHopType = null)
         {
+            addressPrefix ??= new List<string>();
+            nextHopIpAddress ??= new List<string>();
+
             return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType);
         }
 
@@ -521,6 +612,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupListResult"/> instance for mocking. </returns>
         public static EffectiveNetworkSecurityGroupListResult EffectiveNetworkSecurityGroupListResult(IEnumerable<EffectiveNetworkSecurityGroup> value = null, string nextLink = null)
         {
+            value ??= new List<EffectiveNetworkSecurityGroup>();
+
             return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink);
         }
 
@@ -532,6 +625,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroup"/> instance for mocking. </returns>
         public static EffectiveNetworkSecurityGroup EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup = null, EffectiveNetworkSecurityGroupAssociation association = null, IEnumerable<EffectiveNetworkSecurityRule> effectiveSecurityRules = null, string tagMap = null)
         {
+            effectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
+
             return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap);
         }
 
@@ -563,6 +658,13 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityRule"/> instance for mocking. </returns>
         public static EffectiveNetworkSecurityRule EffectiveNetworkSecurityRule(string name = null, EffectiveSecurityRuleProtocol? protocol = null, string sourcePortRange = null, string destinationPortRange = null, IEnumerable<string> sourcePortRanges = null, IEnumerable<string> destinationPortRanges = null, string sourceAddressPrefix = null, string destinationAddressPrefix = null, IEnumerable<string> sourceAddressPrefixes = null, IEnumerable<string> destinationAddressPrefixes = null, IEnumerable<string> expandedSourceAddressPrefix = null, IEnumerable<string> expandedDestinationAddressPrefix = null, SecurityRuleAccess? access = null, int? priority = null, SecurityRuleDirection? direction = null)
         {
+            sourcePortRanges ??= new List<string>();
+            destinationPortRanges ??= new List<string>();
+            sourceAddressPrefixes ??= new List<string>();
+            destinationAddressPrefixes ??= new List<string>();
+            expandedSourceAddressPrefix ??= new List<string>();
+            expandedDestinationAddressPrefix ??= new List<string>();
+
             return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction);
         }
 
@@ -586,6 +688,15 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.LoadBalancer"/> instance for mocking. </returns>
         public static LoadBalancer LoadBalancer(string id = null, string name = null, string type = null, string location = null, IDictionary<string, string> tags = null, LoadBalancerSku sku = null, string etag = null, IEnumerable<FrontendIPConfiguration> frontendIPConfigurations = null, IEnumerable<BackendAddressPool> backendAddressPools = null, IEnumerable<LoadBalancingRule> loadBalancingRules = null, IEnumerable<Probe> probes = null, IEnumerable<InboundNatRule> inboundNatRules = null, IEnumerable<InboundNatPool> inboundNatPools = null, IEnumerable<OutboundRule> outboundRules = null, string resourceGuid = null, ProvisioningState? provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+            frontendIPConfigurations ??= new List<FrontendIPConfiguration>();
+            backendAddressPools ??= new List<BackendAddressPool>();
+            loadBalancingRules ??= new List<LoadBalancingRule>();
+            probes ??= new List<Probe>();
+            inboundNatRules ??= new List<InboundNatRule>();
+            inboundNatPools ??= new List<InboundNatPool>();
+            outboundRules ??= new List<OutboundRule>();
+
             return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
         }
 
@@ -627,6 +738,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.Probe"/> instance for mocking. </returns>
         public static Probe Probe(string id = null, string name = null, string etag = null, string type = null, IEnumerable<SubResource> loadBalancingRules = null, ProbeProtocol? protocol = null, int? port = null, int? intervalInSeconds = null, int? numberOfProbes = null, string requestPath = null, ProvisioningState? provisioningState = null)
         {
+            loadBalancingRules ??= new List<SubResource>();
+
             return new Probe(id, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
 
@@ -665,6 +778,8 @@ namespace Azure.Network.Management.Interface
         /// <returns> A new <see cref="Models.OutboundRule"/> instance for mocking. </returns>
         public static OutboundRule OutboundRule(string id = null, string name = null, string etag = null, string type = null, int? allocatedOutboundPorts = null, IEnumerable<SubResource> frontendIPConfigurations = null, SubResource backendAddressPool = null, ProvisioningState? provisioningState = null, LoadBalancerOutboundRuleProtocol? protocol = null, bool? enableTcpReset = null, int? idleTimeoutInMinutes = null)
         {
+            frontendIPConfigurations ??= new List<SubResource>();
+
             return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }

@@ -50,6 +50,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
         {
+            clusters ??= new Dictionary<string, IList<string>>();
+
             return new KeysResult(clusters);
         }
 
@@ -61,6 +63,10 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.TrainResult"/> instance for mocking. </returns>
         public static TrainResult TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments = null, IEnumerable<FormFieldsReport> fields = null, float? averageModelAccuracy = null, IEnumerable<ErrorInformation> errors = null)
         {
+            trainingDocuments ??= new List<TrainingDocumentInfo>();
+            fields ??= new List<FormFieldsReport>();
+            errors ??= new List<ErrorInformation>();
+
             return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList());
         }
 
@@ -72,6 +78,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.TrainingDocumentInfo"/> instance for mocking. </returns>
         public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = null, int pages = new int(), IEnumerable<ErrorInformation> errors = null, TrainStatus status = new TrainStatus())
         {
+            errors ??= new List<ErrorInformation>();
+
             return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status);
         }
 
@@ -104,6 +112,11 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
         public static AnalyzeResult AnalyzeResult(string version = null, IEnumerable<ReadResult> readResults = null, IEnumerable<PageResult> pageResults = null, IEnumerable<DocumentResult> documentResults = null, IEnumerable<ErrorInformation> errors = null)
         {
+            readResults ??= new List<ReadResult>();
+            pageResults ??= new List<PageResult>();
+            documentResults ??= new List<DocumentResult>();
+            errors ??= new List<ErrorInformation>();
+
             return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList());
         }
 
@@ -118,6 +131,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.ReadResult"/> instance for mocking. </returns>
         public static ReadResult ReadResult(int page = new int(), float angle = new float(), float width = new float(), float height = new float(), LengthUnit unit = new LengthUnit(), Language? language = null, IEnumerable<TextLine> lines = null)
         {
+            lines ??= new List<TextLine>();
+
             return new ReadResult(page, angle, width, height, unit, language, lines?.ToList());
         }
 
@@ -129,6 +144,9 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.TextLine"/> instance for mocking. </returns>
         public static TextLine TextLine(string text = null, IEnumerable<float> boundingBox = null, Language? language = null, IEnumerable<TextWord> words = null)
         {
+            boundingBox ??= new List<float>();
+            words ??= new List<TextWord>();
+
             return new TextLine(text, boundingBox?.ToList(), language, words?.ToList());
         }
 
@@ -139,6 +157,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.TextWord"/> instance for mocking. </returns>
         public static TextWord TextWord(string text = null, IEnumerable<float> boundingBox = null, float? confidence = null)
         {
+            boundingBox ??= new List<float>();
+
             return new TextWord(text, boundingBox?.ToList(), confidence);
         }
 
@@ -150,6 +170,9 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.PageResult"/> instance for mocking. </returns>
         public static PageResult PageResult(int page = new int(), int? clusterId = null, IEnumerable<Models.KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
         {
+            keyValuePairs ??= new List<Models.KeyValuePair>();
+            tables ??= new List<DataTable>();
+
             return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
         }
 
@@ -171,6 +194,9 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.KeyValueElement"/> instance for mocking. </returns>
         public static KeyValueElement KeyValueElement(string text = null, IEnumerable<float> boundingBox = null, IEnumerable<string> elements = null)
         {
+            boundingBox ??= new List<float>();
+            elements ??= new List<string>();
+
             return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList());
         }
 
@@ -181,6 +207,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.DataTable"/> instance for mocking. </returns>
         public static DataTable DataTable(int rows = new int(), int columns = new int(), IEnumerable<DataTableCell> cells = null)
         {
+            cells ??= new List<DataTableCell>();
+
             return new DataTable(rows, columns, cells?.ToList());
         }
 
@@ -198,6 +226,9 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.DataTableCell"/> instance for mocking. </returns>
         public static DataTableCell DataTableCell(int rowIndex = new int(), int columnIndex = new int(), int? rowSpan = null, int? columnSpan = null, string text = null, IEnumerable<float> boundingBox = null, float confidence = new float(), IEnumerable<string> elements = null, bool? isHeader = null, bool? isFooter = null)
         {
+            boundingBox ??= new List<float>();
+            elements ??= new List<string>();
+
             return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter);
         }
 
@@ -208,6 +239,9 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.DocumentResult"/> instance for mocking. </returns>
         public static DocumentResult DocumentResult(string docType = null, IEnumerable<int> pageRange = null, IReadOnlyDictionary<string, FieldValue> fields = null)
         {
+            pageRange ??= new List<int>();
+            fields ??= new Dictionary<string, FieldValue>();
+
             return new DocumentResult(docType, pageRange?.ToList(), fields);
         }
 
@@ -229,6 +263,11 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.FieldValue"/> instance for mocking. </returns>
         public static FieldValue FieldValue(FieldValueType type = new FieldValueType(), string valueString = null, DateTimeOffset? valueDate = null, TimeSpan? valueTime = null, string valuePhoneNumber = null, float? valueNumber = null, int? valueInteger = null, IEnumerable<FieldValue> valueArray = null, IReadOnlyDictionary<string, FieldValue> valueObject = null, string text = null, IEnumerable<float> boundingBox = null, float? confidence = null, IEnumerable<string> elements = null, int? page = null)
         {
+            valueArray ??= new List<FieldValue>();
+            valueObject ??= new Dictionary<string, FieldValue>();
+            boundingBox ??= new List<float>();
+            elements ??= new List<string>();
+
             return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page);
         }
 
@@ -249,6 +288,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.CopyResult"/> instance for mocking. </returns>
         public static CopyResult CopyResult(Guid modelId = new Guid(), IEnumerable<ErrorInformation> errors = null)
         {
+            errors ??= new List<ErrorInformation>();
+
             return new CopyResult(modelId, errors?.ToList());
         }
 
@@ -259,6 +300,8 @@ namespace Azure.AI.FormRecognizer
         /// <returns> A new <see cref="Models.Models"/> instance for mocking. </returns>
         public static Models.Models Models(ModelsSummary summary = null, IEnumerable<ModelInfo> modelList = null, string nextLink = null)
         {
+            modelList ??= new List<ModelInfo>();
+
             return new Models.Models(summary, modelList?.ToList(), nextLink);
         }
 

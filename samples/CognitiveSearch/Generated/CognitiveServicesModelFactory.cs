@@ -25,6 +25,9 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.SearchDocumentsResult"/> instance for mocking. </returns>
         public static SearchDocumentsResult SearchDocumentsResult(long? count = null, double? coverage = null, IReadOnlyDictionary<string, IList<FacetResult>> facets = null, SearchRequest nextPageParameters = null, IEnumerable<SearchResult> results = null, string nextLink = null)
         {
+            facets ??= new Dictionary<string, IList<FacetResult>>();
+            results ??= new List<SearchResult>();
+
             return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink);
         }
 
@@ -34,6 +37,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.FacetResult"/> instance for mocking. </returns>
         public static FacetResult FacetResult(long? count = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, object>();
+
             return new FacetResult(count, additionalProperties);
         }
 
@@ -44,6 +49,9 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.SearchResult"/> instance for mocking. </returns>
         public static SearchResult SearchResult(double score = new double(), IReadOnlyDictionary<string, IList<string>> highlights = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
+            highlights ??= new Dictionary<string, IList<string>>();
+            additionalProperties ??= new Dictionary<string, object>();
+
             return new SearchResult(score, highlights, additionalProperties);
         }
 
@@ -53,6 +61,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.SuggestDocumentsResult"/> instance for mocking. </returns>
         public static SuggestDocumentsResult SuggestDocumentsResult(IEnumerable<SuggestResult> results = null, double? coverage = null)
         {
+            results ??= new List<SuggestResult>();
+
             return new SuggestDocumentsResult(results?.ToList(), coverage);
         }
 
@@ -62,6 +72,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.SuggestResult"/> instance for mocking. </returns>
         public static SuggestResult SuggestResult(string text = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, object>();
+
             return new SuggestResult(text, additionalProperties);
         }
 
@@ -70,6 +82,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.IndexDocumentsResult"/> instance for mocking. </returns>
         public static IndexDocumentsResult IndexDocumentsResult(IEnumerable<IndexingResult> results = null)
         {
+            results ??= new List<IndexingResult>();
+
             return new IndexDocumentsResult(results?.ToList());
         }
 
@@ -90,6 +104,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.AutocompleteResult"/> instance for mocking. </returns>
         public static AutocompleteResult AutocompleteResult(double? coverage = null, IEnumerable<AutocompleteItem> results = null)
         {
+            results ??= new List<AutocompleteItem>();
+
             return new AutocompleteResult(coverage, results?.ToList());
         }
 
@@ -107,6 +123,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.ListDataSourcesResult"/> instance for mocking. </returns>
         public static ListDataSourcesResult ListDataSourcesResult(IEnumerable<DataSource> dataSources = null)
         {
+            dataSources ??= new List<DataSource>();
+
             return new ListDataSourcesResult(dataSources?.ToList());
         }
 
@@ -115,6 +133,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.ListIndexersResult"/> instance for mocking. </returns>
         public static ListIndexersResult ListIndexersResult(IEnumerable<Indexer> indexers = null)
         {
+            indexers ??= new List<Indexer>();
+
             return new ListIndexersResult(indexers?.ToList());
         }
 
@@ -126,6 +146,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.IndexerExecutionInfo"/> instance for mocking. </returns>
         public static IndexerExecutionInfo IndexerExecutionInfo(IndexerStatus status = new IndexerStatus(), IndexerExecutionResult lastResult = null, IEnumerable<IndexerExecutionResult> executionHistory = null, IndexerLimits limits = null)
         {
+            executionHistory ??= new List<IndexerExecutionResult>();
+
             return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits);
         }
 
@@ -143,6 +165,9 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.IndexerExecutionResult"/> instance for mocking. </returns>
         public static IndexerExecutionResult IndexerExecutionResult(IndexerExecutionStatus status = new IndexerExecutionStatus(), string errorMessage = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null, IEnumerable<ItemError> errors = null, IEnumerable<ItemWarning> warnings = null, int itemCount = new int(), int failedItemCount = new int(), string initialTrackingState = null, string finalTrackingState = null)
         {
+            errors ??= new List<ItemError>();
+            warnings ??= new List<ItemWarning>();
+
             return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState);
         }
 
@@ -186,6 +211,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.ListSkillsetsResult"/> instance for mocking. </returns>
         public static ListSkillsetsResult ListSkillsetsResult(IEnumerable<Skillset> skillsets = null)
         {
+            skillsets ??= new List<Skillset>();
+
             return new ListSkillsetsResult(skillsets?.ToList());
         }
 
@@ -194,6 +221,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.ListSynonymMapsResult"/> instance for mocking. </returns>
         public static ListSynonymMapsResult ListSynonymMapsResult(IEnumerable<SynonymMap> synonymMaps = null)
         {
+            synonymMaps ??= new List<SynonymMap>();
+
             return new ListSynonymMapsResult(synonymMaps?.ToList());
         }
 
@@ -202,6 +231,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.ListIndexesResult"/> instance for mocking. </returns>
         public static ListIndexesResult ListIndexesResult(IEnumerable<Models.Index> indexes = null)
         {
+            indexes ??= new List<Models.Index>();
+
             return new ListIndexesResult(indexes?.ToList());
         }
 
@@ -219,6 +250,8 @@ namespace CognitiveSearch
         /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
         public static AnalyzeResult AnalyzeResult(IEnumerable<TokenInfo> tokens = null)
         {
+            tokens ??= new List<TokenInfo>();
+
             return new AnalyzeResult(tokens?.ToList());
         }
 

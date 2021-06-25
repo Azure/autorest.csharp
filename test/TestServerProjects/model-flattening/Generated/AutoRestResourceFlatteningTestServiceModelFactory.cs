@@ -22,6 +22,8 @@ namespace model_flattening
         /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
         public static Resource Resource(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new Resource(id, type, tags, location, name);
         }
 
@@ -38,6 +40,8 @@ namespace model_flattening
         /// <returns> A new <see cref="Models.FlattenedProduct"/> instance for mocking. </returns>
         public static FlattenedProduct FlattenedProduct(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string pName = null, string typePropertiesType = null, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = null, string provisioningState = null)
         {
+            tags ??= new Dictionary<string, string>();
+
             return new FlattenedProduct(id, type, tags, location, name, pName, typePropertiesType, provisioningStateValues, provisioningState);
         }
 

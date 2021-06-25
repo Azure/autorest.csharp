@@ -31,6 +31,9 @@ namespace body_complex
         /// <returns> A new <see cref="Models.DotFishMarket"/> instance for mocking. </returns>
         public static DotFishMarket DotFishMarket(DotSalmon sampleSalmon = null, IEnumerable<DotSalmon> salmons = null, DotFish sampleFish = null, IEnumerable<DotFish> fishes = null)
         {
+            salmons ??= new List<DotSalmon>();
+            fishes ??= new List<DotFish>();
+
             return new DotFishMarket(sampleSalmon, salmons?.ToList(), sampleFish, fishes?.ToList());
         }
 

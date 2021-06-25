@@ -21,6 +21,8 @@ namespace additionalProperties
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
         public static PetAPTrue PetAPTrue(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, object>();
+
             return new PetAPTrue(id, name, status, additionalProperties);
         }
 
@@ -32,6 +34,8 @@ namespace additionalProperties
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
         public static PetAPObject PetAPObject(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, object>();
+
             return new PetAPObject(id, name, status, additionalProperties);
         }
 
@@ -43,6 +47,8 @@ namespace additionalProperties
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
         public static PetAPString PetAPString(int id = new int(), string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, string>();
+
             return new PetAPString(id, name, status, additionalProperties);
         }
 
@@ -54,6 +60,8 @@ namespace additionalProperties
         /// <returns> A new <see cref="Models.PetAPInProperties"/> instance for mocking. </returns>
         public static PetAPInProperties PetAPInProperties(int id = new int(), string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, float>();
+
             return new PetAPInProperties(id, name, status, additionalProperties);
         }
 
@@ -67,6 +75,9 @@ namespace additionalProperties
         /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
         public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = new int(), string name = null, bool? status = null, string odataLocation = null, IDictionary<string, float> additionalProperties = null, IDictionary<string, string> moreAdditionalProperties = null)
         {
+            additionalProperties ??= new Dictionary<string, float>();
+            moreAdditionalProperties ??= new Dictionary<string, string>();
+
             return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
         }
     }

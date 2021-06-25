@@ -21,6 +21,8 @@ namespace Azure.Storage.Tables
         /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
         public static TableQueryResponse TableQueryResponse(string odataMetadata = null, IEnumerable<TableResponseProperties> value = null)
         {
+            value ??= new List<TableResponseProperties>();
+
             return new TableQueryResponse(odataMetadata, value?.ToList());
         }
 
@@ -53,6 +55,8 @@ namespace Azure.Storage.Tables
         /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
         public static TableEntityQueryResponse TableEntityQueryResponse(string odataMetadata = null, IEnumerable<IDictionary<string, object>> value = null)
         {
+            value ??= new List<IDictionary<string, object>>();
+
             return new TableEntityQueryResponse(odataMetadata, value?.ToList());
         }
 

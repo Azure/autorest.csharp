@@ -25,6 +25,8 @@ namespace xml_service
         /// <returns> A new <see cref="Models.ListContainersResponse"/> instance for mocking. </returns>
         public static ListContainersResponse ListContainersResponse(string serviceEndpoint = null, string prefix = null, string marker = null, int maxResults = new int(), IEnumerable<Container> containers = null, string nextMarker = null)
         {
+            containers ??= new List<Container>();
+
             return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker);
         }
 
@@ -35,6 +37,8 @@ namespace xml_service
         /// <returns> A new <see cref="Models.Container"/> instance for mocking. </returns>
         public static Container Container(string name = null, ContainerProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
         {
+            metadata ??= new Dictionary<string, string>();
+
             return new Container(name, properties, metadata);
         }
 
@@ -72,6 +76,9 @@ namespace xml_service
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
         public static Blobs Blobs(IEnumerable<BlobPrefix> blobPrefix = null, IEnumerable<Blob> blob = null)
         {
+            blobPrefix ??= new List<BlobPrefix>();
+            blob ??= new List<Blob>();
+
             return new Blobs(blobPrefix?.ToList(), blob?.ToList());
         }
 
@@ -92,6 +99,8 @@ namespace xml_service
         /// <returns> A new <see cref="Models.Blob"/> instance for mocking. </returns>
         public static Blob Blob(string name = null, bool deleted = new bool(), string snapshot = null, BlobProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
         {
+            metadata ??= new Dictionary<string, string>();
+
             return new Blob(name, deleted, snapshot, properties, metadata);
         }
 
