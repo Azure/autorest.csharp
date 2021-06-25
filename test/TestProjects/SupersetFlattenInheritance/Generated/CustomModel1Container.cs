@@ -33,7 +33,7 @@ namespace SupersetFlattenInheritance
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private CustomModel1SRestOperations _restClient => new CustomModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private CustomModel1SRestOperations _restClient => new CustomModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;

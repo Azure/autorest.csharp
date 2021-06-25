@@ -34,7 +34,7 @@ namespace Azure.Management.Storage
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private PrivateEndpointConnectionsRestOperations _restClient => new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private PrivateEndpointConnectionsRestOperations _restClient => new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
