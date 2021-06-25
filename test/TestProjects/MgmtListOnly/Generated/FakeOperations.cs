@@ -25,8 +25,6 @@ namespace MgmtListOnly
         private FakesRestOperations _restClient { get; }
         private FakeBarsRestOperations _fakeBarsRestClient { get; }
         private ChildWithPostsRestOperations _childWithPostsRestClient { get; }
-        private ResponseNotCalledValuesRestOperations _responseNotCalledValuesRestClient { get; }
-        private ResponseNotCalledValueNoPagesRestOperations _responseNotCalledValueNoPagesRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="FakeOperations"/> class for mocking. </summary>
         protected FakeOperations()
@@ -42,8 +40,6 @@ namespace MgmtListOnly
             _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             _fakeBarsRestClient = new FakeBarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             _childWithPostsRestClient = new ChildWithPostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            _responseNotCalledValuesRestClient = new ResponseNotCalledValuesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            _responseNotCalledValueNoPagesRestClient = new ResponseNotCalledValueNoPagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes";
@@ -676,117 +672,6 @@ namespace MgmtListOnly
             try
             {
                 var response = _childWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ResponseNotCalledValue> ListResponseNotCalledValue(CancellationToken cancellationToken = default)
-        {
-            Page<ResponseNotCalledValue> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
-                scope.Start();
-                try
-                {
-                    var response = _responseNotCalledValuesRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<ResponseNotCalledValue> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
-                scope.Start();
-                try
-                {
-                    var response = _responseNotCalledValuesRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ResponseNotCalledValue> ListResponseNotCalledValueAsync(CancellationToken cancellationToken = default)
-        {
-            async Task<Page<ResponseNotCalledValue>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
-                scope.Start();
-                try
-                {
-                    var response = await _responseNotCalledValuesRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<ResponseNotCalledValue>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValue");
-                scope.Start();
-                try
-                {
-                    var response = await _responseNotCalledValuesRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ResponseNotCalledValueListNoPageResult>> ListResponseNotCalledValueNoPageAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueNoPage");
-            scope.Start();
-            try
-            {
-                var response = await _responseNotCalledValueNoPagesRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResponseNotCalledValueListNoPageResult> ListResponseNotCalledValueNoPage(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListResponseNotCalledValueNoPage");
-            scope.Start();
-            try
-            {
-                var response = _responseNotCalledValueNoPagesRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)

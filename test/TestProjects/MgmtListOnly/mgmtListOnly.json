@@ -306,88 +306,6 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/responseNotCalledValue": {
-            "get": {
-                "tags": [
-                    "ResponseNotCalledValues"
-                ],
-                "operationId": "ResponseNotCalledValues_List",
-                "description": "Retrieves information about an fake.",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "fakeName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the fake."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ResponseNotCalledValueListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "itemName": "notValue",
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/responseNotCalledValueNoPage": {
-            "get": {
-                "tags": [
-                    "ResponseNotCalledValueNoPages"
-                ],
-                "operationId": "ResponseNotCalledValueNoPages_List",
-                "description": "Retrieves information about an fake.",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "fakeName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the fake."
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ResponseNotCalledValueListNoPageResult"
-                        }
-                    }
-                }
-            }
-        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes": {
             "get": {
                 "tags": [
@@ -874,34 +792,6 @@
             ],
             "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
-        "ResponseNotCalledValue": {
-            "properties": {
-                "bar": {
-                    "type": "string",
-                    "description": "specifies the bar"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
-        },
-        "ResponseNotCalledValueListNoPage": {
-            "properties": {
-                "bar": {
-                    "type": "string",
-                    "description": "specifies the bar"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
-        },
         "ChildWithPost": {
             "properties": {
                 "bar": {
@@ -975,40 +865,6 @@
                 }
             },
             "description": "The instance view of a resource."
-        },
-        "ResponseNotCalledValueListResult": {
-            "properties": {
-                "notValue": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ResponseNotCalledValue"
-                    },
-                    "description": "The list of fakes child"
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "The URI to fetch the next page of FakesChild. Call ListNext() with this URI to fetch the next page of Fakes."
-                }
-            },
-            "required": [
-                "notValue"
-            ],
-            "description": "The List Availability Set Child operation response."
-        },
-        "ResponseNotCalledValueListNoPageResult": {
-            "properties": {
-                "notValue": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ResponseNotCalledValueListNoPage"
-                    },
-                    "description": "The list of fakes child"
-                }
-            },
-            "required": [
-                "notValue"
-            ],
-            "description": "The List Availability Set Child operation response."
         },
         "FakeBarsListResult": {
             "properties": {
