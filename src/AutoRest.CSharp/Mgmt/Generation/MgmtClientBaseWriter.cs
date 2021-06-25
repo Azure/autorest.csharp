@@ -197,7 +197,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    writer.Append($"{parameter.Parameter.Name}, ");
+                    if (PagingMethod.IsPageSizeParameter(parameter.Parameter))
+                    {
+                        // [TODO] print to verbose level: Console.Error.WriteLine($"[INFO]: Pagination size parameter '{parameter.Parameter.Name}' is found");
+                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                        // Add type conversion, because page size parameter could be of various compatible types
+                        if (Type.GetTypeCode(parameter.Parameter.Type.FrameworkType) == TypeCode.String)
+                        {
+                            writer.AppendRaw($"Convert.ToString(pageSizeHint), ");
+                        }
+                        else
+                        {
+                            // all the other types should be numeric, and implicit type conversion can cover
+                            // see https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions
+                            writer.AppendRaw($"pageSizeHint, ");
+                        }
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Parameter.Name}, ");
+                    }
                 }
                 else
                 {

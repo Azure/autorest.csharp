@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
@@ -21,5 +23,16 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public QueryParameter[] Query { get; }
         public RequestHeader[] Headers { get; }
         public RequestBody? Body { get; }
+
+        /// <summary>
+        /// Segments which are parameters
+        /// </summary>
+        public List<PathSegment> PathParameterSegments
+        {
+            get
+            {
+                return PathSegments.Where(m => m.Value.IsConstant == false && m.IsRaw == false).ToList();
+            }
+        }
     }
 }
