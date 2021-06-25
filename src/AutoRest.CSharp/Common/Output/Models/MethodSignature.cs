@@ -8,12 +8,18 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class MethodSignature
     {
-        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, Parameter[] parameters, MethodSignature? baseMethod)
+        public MethodSignature(string name, string? description, string modifiers, Parameter[] parameters, MethodSignature? baseMethod = default)
+            : this(name, description, modifiers, null, null, parameters, baseMethod)
+        {
+        }
+
+        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, string? returnDescription, Parameter[] parameters, MethodSignature? baseMethod = default)
         {
             Name = name;
             Description = description;
             Modifiers = modifiers;
             ReturnType = returnType;
+            ReturnDescription = returnDescription;
             Parameters = parameters;
             BaseMethod = baseMethod;
         }
@@ -22,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         public string? Description { get; }
         public string Modifiers { get; }
         public CSharpType? ReturnType { get; }
+        public string? ReturnDescription { get; }
         public Parameter[] Parameters { get; }
         public MethodSignature? BaseMethod { get; }
     }

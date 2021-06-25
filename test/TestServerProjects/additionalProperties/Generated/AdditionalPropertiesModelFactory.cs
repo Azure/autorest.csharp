@@ -13,55 +13,51 @@ namespace additionalProperties
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
-        /// <summary> Initializes new instance of PetAPTrue class. </summary>
+        /// <summary> Initializes a new instance of PetAPTrue. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
-        public static PetAPTrue PetAPTrue(int id = default, string name = default, bool? status = default, IDictionary<string, object> additionalProperties = default)
+        public static PetAPTrue PetAPTrue(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
             return new PetAPTrue(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes new instance of PetAPObject class. </summary>
+        /// <summary> Initializes a new instance of PetAPObject. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
-        public static PetAPObject PetAPObject(int id = default, string name = default, bool? status = default, IDictionary<string, object> additionalProperties = default)
+        public static PetAPObject PetAPObject(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, object>();
             return new PetAPObject(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes new instance of PetAPString class. </summary>
+        /// <summary> Initializes a new instance of PetAPString. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
-        public static PetAPString PetAPString(int id = default, string name = default, bool? status = default, IDictionary<string, string> additionalProperties = default)
+        public static PetAPString PetAPString(int id = new int(), string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, string>();
             return new PetAPString(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes new instance of PetAPInProperties class. </summary>
+        /// <summary> Initializes a new instance of PetAPInProperties. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <returns> A new <see cref="Models.PetAPInProperties"/> instance for mocking. </returns>
-        public static PetAPInProperties PetAPInProperties(int id = default, string name = default, bool? status = default, IDictionary<string, float> additionalProperties = default)
+        public static PetAPInProperties PetAPInProperties(int id = new int(), string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, float>();
             return new PetAPInProperties(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes new instance of PetAPInPropertiesWithAPString class. </summary>
+        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
@@ -69,10 +65,8 @@ namespace additionalProperties
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <param name="moreAdditionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
-        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = default, string name = default, bool? status = default, string odataLocation = default, IDictionary<string, float> additionalProperties = default, IDictionary<string, string> moreAdditionalProperties = default)
+        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = new int(), string name = null, bool? status = null, string odataLocation = null, IDictionary<string, float> additionalProperties = null, IDictionary<string, string> moreAdditionalProperties = null)
         {
-            additionalProperties ??= new Dictionary<string, float>();
-            moreAdditionalProperties ??= new Dictionary<string, string>();
             return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
         }
     }

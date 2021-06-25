@@ -14,7 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 name,
                 $"Initializes a new instance of {name}",
                 modifiers,
-                null,
                 parameters,
                 baseConstructor?.Signature);
 

@@ -36,6 +36,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<{tag}>", $"</{tag}>", text);
         }
 
+        public static CodeWriter WriteXmlDocumentationParameters(this CodeWriter writer, IEnumerable<Parameter> parameters)
+        {
+            foreach (var parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            return writer;
+        }
+
         public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, string? text)
         {
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);

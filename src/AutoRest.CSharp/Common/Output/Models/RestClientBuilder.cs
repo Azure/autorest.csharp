@@ -279,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models
                         var type = parameter.Value.Type;
                         RequestBody requestBody;
 
-                        if (type.IsFrameworkType && type.FrameworkType == typeof(string))
+                        if (type.IsString())
                         {
                             requestBody = new TextRequestBody(parameter.Value);
                         }
