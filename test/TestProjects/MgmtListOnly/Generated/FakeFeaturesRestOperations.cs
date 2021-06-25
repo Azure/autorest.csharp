@@ -50,7 +50,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListFeaturesMethodRequest()
+        internal HttpMessage CreateListRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -68,9 +68,9 @@ namespace MgmtListOnly
 
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<FakeFeatureListResult>> ListFeaturesMethodAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<FakeFeatureListResult>> ListAsync(CancellationToken cancellationToken = default)
         {
-            using var message = CreateListFeaturesMethodRequest();
+            using var message = CreateListRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -88,9 +88,9 @@ namespace MgmtListOnly
 
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FakeFeatureListResult> ListFeaturesMethod(CancellationToken cancellationToken = default)
+        public Response<FakeFeatureListResult> List(CancellationToken cancellationToken = default)
         {
-            using var message = CreateListFeaturesMethodRequest();
+            using var message = CreateListRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -106,7 +106,7 @@ namespace MgmtListOnly
             }
         }
 
-        internal HttpMessage CreateListFeaturesMethodNextPageRequest(string nextLink)
+        internal HttpMessage CreateListNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -123,14 +123,14 @@ namespace MgmtListOnly
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<FakeFeatureListResult>> ListFeaturesMethodNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeFeatureListResult>> ListNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListFeaturesMethodNextPageRequest(nextLink);
+            using var message = CreateListNextPageRequest(nextLink);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -150,14 +150,14 @@ namespace MgmtListOnly
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<FakeFeatureListResult> ListFeaturesMethodNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<FakeFeatureListResult> ListNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListFeaturesMethodNextPageRequest(nextLink);
+            using var message = CreateListNextPageRequest(nextLink);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

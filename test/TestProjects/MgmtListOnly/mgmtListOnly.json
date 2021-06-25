@@ -311,7 +311,7 @@
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "Fakes_TestMethod",
+                "operationId": "Fakes_List",
                 "description": "Lists all fakes in a resource group.",
                 "parameters": [
                     {
@@ -397,7 +397,7 @@
                 "tags": [
                     "FakeFeatures"
                 ],
-                "operationId": "FakeFeatures_ListFeaturesMethod",
+                "operationId": "FakeFeatures_List",
                 "description": "Lists all fakes features in subscription.",
                 "parameters": [
                     {
@@ -425,7 +425,7 @@
                 "tags": [
                     "FakeNonPageableFeatures"
                 ],
-                "operationId": "FakeNonPageableFeatures_ListFeaturesMethod",
+                "operationId": "FakeNonPageableFeatures_List",
                 "description": "Lists all fakes features in subscription.",
                 "parameters": [
                     {

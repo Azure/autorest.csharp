@@ -30,7 +30,7 @@ namespace MgmtListOnly
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FakeFeature> ListFakeFeaturesFeaturesMethodAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeFeature> ListFakeFeaturesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -38,11 +38,11 @@ namespace MgmtListOnly
                 var restOperations = GetFakeFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<FakeFeature>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeatures");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListFeaturesMethodAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -53,11 +53,11 @@ namespace MgmtListOnly
                 }
                 async Task<Page<FakeFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeatures");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListFeaturesMethodNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -75,7 +75,7 @@ namespace MgmtListOnly
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FakeFeature> ListFakeFeaturesFeaturesMethod(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeFeature> ListFakeFeatures(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -83,11 +83,11 @@ namespace MgmtListOnly
                 var restOperations = GetFakeFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<FakeFeature> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeatures");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListFeaturesMethod(cancellationToken: cancellationToken);
+                        var response = restOperations.List(cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -98,11 +98,11 @@ namespace MgmtListOnly
                 }
                 Page<FakeFeature> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeatures");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListFeaturesMethodNextPage(nextLink, cancellationToken: cancellationToken);
+                        var response = restOperations.ListNextPage(nextLink, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -127,17 +127,17 @@ namespace MgmtListOnly
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<IReadOnlyList<FakeNonPageableFeature>>> ListFakeNonPageableFeaturesFeaturesMethodAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<FakeNonPageableFeature>>> ListFakeNonPageableFeaturesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetFakeNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeaturesFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeatures");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.ListFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -152,17 +152,17 @@ namespace MgmtListOnly
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<IReadOnlyList<FakeNonPageableFeature>> ListFakeNonPageableFeaturesFeaturesMethod(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<FakeNonPageableFeature>> ListFakeNonPageableFeatures(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetFakeNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeaturesFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeatures");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.ListFeaturesMethod(cancellationToken);
+                    var response = restOperations.List(cancellationToken);
                     return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)

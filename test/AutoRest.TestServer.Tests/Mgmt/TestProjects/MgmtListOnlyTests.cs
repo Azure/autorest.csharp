@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         // list-only + parent is not resource -> extra method on [armclient/sub/rg]Extensions
 
         [TestCase("FakeOperations", "ListFakeBars", true)]
-        [TestCase("FakeOperations", "CreateOrUpdateChildWithPosts", true)]
+        [TestCase("FakeOperations", "CreateOrUpdateChildWithPost", true)]
         public void ValidateExtraMethodInParentOperations(string operation, string methodName, bool exist)
         {
             var parentOperations = FindAllOperations().First(o => o.Name == operation);
@@ -19,23 +19,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("ListFakeFeaturesAsync", true)]
-        [TestCase("ListFakeNonPageableFeaturesFeaturesMethodAsync", true)]
+        [TestCase("ListFakeNonPageableFeaturesAsync", true)]
         public void ValidateExtraMethodInExtensionClasses(string methodName, bool exist)
         {
             var subscriptionExtension = FindSubscriptionExtensions();
             Assert.NotNull(subscriptionExtension);
             Assert.AreEqual(exist, subscriptionExtension.GetMethod(methodName) != null, $"Could not find SubscriptionExtensions.{methodName}. Found: {string.Join(", ", subscriptionExtension.GetMethods().Select(m => m.Name))}");
-        }
-
-        /// <summary>
-        /// When the response of a list contains an array attribute but it's not call "value",
-        /// list-only child detection should also see it as list-only.
-        /// </summary>
-        [TestCase("FakeOperations", "ListResponseNotCalledValues", true)]
-        [TestCase("FakeOperations", "ListResponseNotCalledValueListNoPages", true)]
-        public void ValidateWhenPropertyNameIsNotValue(string operation, string methodName, bool exist)
-        {
-            ValidateExtraMethodInParentOperations(operation, methodName, exist);
         }
 
         /// <summary>

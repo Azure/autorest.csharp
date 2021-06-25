@@ -1925,7 +1925,7 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: TestMethod
+            name: List
             description: Lists all fakes in a resource group.
         protocol: !Protocols {}
       - !Operation 
@@ -2311,7 +2311,7 @@ operationGroups:
             nextLinkName: nextLink
         language: !Languages 
           default:
-            name: ListFeaturesMethod
+            name: List
             description: Lists all fakes features in subscription.
             paging:
               nextLinkName: nextLink
@@ -2375,7 +2375,7 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: ListFeaturesMethod
+            name: List
             description: Lists all fakes features in subscription.
         protocol: !Protocols {}
     language: !Languages 
