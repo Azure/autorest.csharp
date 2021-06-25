@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var ctor = modelType.SerializationConstructor;
             var initializers = method.Parameters
-                .Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, w => w.Append($"{p.Name}"), p.Type));
+                .Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, w => w.Identifier($"{p.Name}"), p.Type));
 
             using (writer.WriteMethodDeclaration(method))
             {

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             static Constant GetDefaultValue(CSharpType inputType, CSharpType implementationType, Constant? defaultValue)
             {
                 // Special case for strings
-                if (inputType.IsString())
+                if (inputType.Equals(typeof(string)))
                 {
                     return Constant.Default(inputType.WithNullable(true));
                 }

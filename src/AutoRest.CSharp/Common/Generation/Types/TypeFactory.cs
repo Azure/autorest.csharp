@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
              Debug.Assert(defaultValue.HasValue);
 
-            if (type.IsString())
+            if (type.Equals(typeof(string)))
             {
                 return true;
             }
