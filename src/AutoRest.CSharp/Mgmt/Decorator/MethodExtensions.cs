@@ -60,6 +60,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
         }
 
+        /// <summary>
+        /// Check whether two CSharpType instances equal or not
+        /// This is not the same as left.Equals(right) because this function only checks the names
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         private static bool AreTypesEqual(CSharpType left, CSharpType right)
         {
             if (left.Name != right.Name)
