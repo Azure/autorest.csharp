@@ -33,7 +33,7 @@ namespace ResourceIdentifierChooser
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private SubRes2ResourcesRestOperations _restClient => new SubRes2ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private SubRes2ResourcesRestOperations _restClient => new SubRes2ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;

@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string RestClientField => "_" + RestClientVariable;
         protected override string RestClientAccessibility => "private";
         protected virtual string ContextProperty => "";
+        protected const string BaseUriField = "BaseUri";
 
         protected void WriteUsings(CodeWriter writer)
         {
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
             // subscriptionId might not always be needed. For example `RestOperations` does not have it.
             var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded});");
+            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
             writer.Line();
         }
 

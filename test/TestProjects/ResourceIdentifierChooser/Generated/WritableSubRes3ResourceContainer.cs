@@ -33,7 +33,7 @@ namespace ResourceIdentifierChooser
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private WritableSubRes3ResourcesRestOperations _restClient => new WritableSubRes3ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private WritableSubRes3ResourcesRestOperations _restClient => new WritableSubRes3ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;

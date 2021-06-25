@@ -34,7 +34,7 @@ namespace MgmtSingleton
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private ParentResourcesRestOperations _restClient => new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private ParentResourcesRestOperations _restClient => new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
