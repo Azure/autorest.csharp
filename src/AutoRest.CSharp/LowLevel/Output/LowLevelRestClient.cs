@@ -79,11 +79,15 @@ namespace AutoRest.CSharp.Output.Models
                         body = new RequestContentRequestBody(bodyParam);
                         schemaDocumentation = GetSchemaDocumentationsForParameter(bodyParameter);
 
-                        // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body.
-                        int contentTypeParamIndex = parameters.FindIndex(p => p.Type.FrameworkType == typeof(Azure.Core.ContentType));
-                        if (contentTypeParamIndex >= 0)
+
+                        // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body, and change the
+                        // type to be `Content-Type`
+                        RequestParameter contentTypeRequestParameter = requestParameters.FirstOrDefault(IsSynthesizedContentTypeParameter);
+                        if (contentTypeRequestParameter != null)
                         {
-                            Parameter contentTypeParameter = parameters[contentTypeParamIndex];
+                            int contentTypeParamIndex = parameters.FindIndex(p => p.Name == contentTypeRequestParameter.CSharpName());
+                            Parameter contentTypeParameter = parameters[contentTypeParamIndex] with { Type = new CSharpType(typeof(Azure.Core.ContentType)) };
+
                             parameters.RemoveAt(contentTypeParamIndex);
 
                             // If the content-type paramter came before the the body, the removal of it above shifted the body parameter
