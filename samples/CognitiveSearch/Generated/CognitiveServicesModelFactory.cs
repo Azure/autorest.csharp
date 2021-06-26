@@ -47,7 +47,7 @@ namespace CognitiveSearch
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SearchResult"/> instance for mocking. </returns>
-        public static SearchResult SearchResult(double score = new double(), IReadOnlyDictionary<string, IList<string>> highlights = null, IReadOnlyDictionary<string, object> additionalProperties = null)
+        public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = null, IReadOnlyDictionary<string, object> additionalProperties = null)
         {
             highlights ??= new Dictionary<string, IList<string>>();
             additionalProperties ??= new Dictionary<string, object>();
@@ -93,7 +93,7 @@ namespace CognitiveSearch
         /// <param name="succeeded"> A value indicating whether the indexing operation succeeded for the document identified by the key. </param>
         /// <param name="statusCode"> The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
         /// <returns> A new <see cref="Models.IndexingResult"/> instance for mocking. </returns>
-        public static IndexingResult IndexingResult(string key = null, string errorMessage = null, bool succeeded = new bool(), int statusCode = new int())
+        public static IndexingResult IndexingResult(string key = null, string errorMessage = null, bool succeeded = default, int statusCode = default)
         {
             return new IndexingResult(key, errorMessage, succeeded, statusCode);
         }
@@ -144,7 +144,7 @@ namespace CognitiveSearch
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
         /// <returns> A new <see cref="Models.IndexerExecutionInfo"/> instance for mocking. </returns>
-        public static IndexerExecutionInfo IndexerExecutionInfo(IndexerStatus status = new IndexerStatus(), IndexerExecutionResult lastResult = null, IEnumerable<IndexerExecutionResult> executionHistory = null, IndexerLimits limits = null)
+        public static IndexerExecutionInfo IndexerExecutionInfo(IndexerStatus status = default, IndexerExecutionResult lastResult = null, IEnumerable<IndexerExecutionResult> executionHistory = null, IndexerLimits limits = null)
         {
             executionHistory ??= new List<IndexerExecutionResult>();
 
@@ -163,7 +163,7 @@ namespace CognitiveSearch
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
         /// <returns> A new <see cref="Models.IndexerExecutionResult"/> instance for mocking. </returns>
-        public static IndexerExecutionResult IndexerExecutionResult(IndexerExecutionStatus status = new IndexerExecutionStatus(), string errorMessage = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null, IEnumerable<ItemError> errors = null, IEnumerable<ItemWarning> warnings = null, int itemCount = new int(), int failedItemCount = new int(), string initialTrackingState = null, string finalTrackingState = null)
+        public static IndexerExecutionResult IndexerExecutionResult(IndexerExecutionStatus status = default, string errorMessage = null, DateTimeOffset? startTime = null, DateTimeOffset? endTime = null, IEnumerable<ItemError> errors = null, IEnumerable<ItemWarning> warnings = null, int itemCount = default, int failedItemCount = default, string initialTrackingState = null, string finalTrackingState = null)
         {
             errors ??= new List<ItemError>();
             warnings ??= new List<ItemWarning>();
@@ -179,7 +179,7 @@ namespace CognitiveSearch
         /// <param name="details"> Additional, verbose details about the error to assist in debugging the indexer. This may not be always available. </param>
         /// <param name="documentationLink"> A link to a troubleshooting guide for these classes of errors. This may not be always available. </param>
         /// <returns> A new <see cref="Models.ItemError"/> instance for mocking. </returns>
-        public static ItemError ItemError(string key = null, string errorMessage = null, int statusCode = new int(), string name = null, string details = null, string documentationLink = null)
+        public static ItemError ItemError(string key = null, string errorMessage = null, int statusCode = default, string name = null, string details = null, string documentationLink = null)
         {
             return new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
         }
@@ -240,7 +240,7 @@ namespace CognitiveSearch
         /// <param name="documentCount"> The number of documents in the index. </param>
         /// <param name="storageSize"> The amount of storage in bytes consumed by the index. </param>
         /// <returns> A new <see cref="Models.GetIndexStatisticsResult"/> instance for mocking. </returns>
-        public static GetIndexStatisticsResult GetIndexStatisticsResult(long documentCount = new long(), long storageSize = new long())
+        public static GetIndexStatisticsResult GetIndexStatisticsResult(long documentCount = default, long storageSize = default)
         {
             return new GetIndexStatisticsResult(documentCount, storageSize);
         }
@@ -261,7 +261,7 @@ namespace CognitiveSearch
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
         /// <param name="position"> The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other. </param>
         /// <returns> A new <see cref="Models.TokenInfo"/> instance for mocking. </returns>
-        public static TokenInfo TokenInfo(string token = null, int startOffset = new int(), int endOffset = new int(), int position = new int())
+        public static TokenInfo TokenInfo(string token = null, int startOffset = default, int endOffset = default, int position = default)
         {
             return new TokenInfo(token, startOffset, endOffset, position);
         }
@@ -293,7 +293,7 @@ namespace CognitiveSearch
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
         /// <returns> A new <see cref="Models.ResourceCounter"/> instance for mocking. </returns>
-        public static ResourceCounter ResourceCounter(long usage = new long(), long? quota = null)
+        public static ResourceCounter ResourceCounter(long usage = default, long? quota = null)
         {
             return new ResourceCounter(usage, quota);
         }

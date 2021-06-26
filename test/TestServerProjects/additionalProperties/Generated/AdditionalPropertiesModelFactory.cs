@@ -19,7 +19,7 @@ namespace additionalProperties
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
-        public static PetAPTrue PetAPTrue(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
+        public static PetAPTrue PetAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, object>();
 
@@ -32,7 +32,7 @@ namespace additionalProperties
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
-        public static PetAPObject PetAPObject(int id = new int(), string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
+        public static PetAPObject PetAPObject(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, object>();
 
@@ -45,7 +45,7 @@ namespace additionalProperties
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
-        public static PetAPString PetAPString(int id = new int(), string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
+        public static PetAPString PetAPString(int id = default, string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, string>();
 
@@ -58,7 +58,7 @@ namespace additionalProperties
         /// <param name="status"> . </param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <returns> A new <see cref="Models.PetAPInProperties"/> instance for mocking. </returns>
-        public static PetAPInProperties PetAPInProperties(int id = new int(), string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)
+        public static PetAPInProperties PetAPInProperties(int id = default, string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, float>();
 
@@ -73,7 +73,7 @@ namespace additionalProperties
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <param name="moreAdditionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
-        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = new int(), string name = null, bool? status = null, string odataLocation = null, IDictionary<string, float> additionalProperties = null, IDictionary<string, string> moreAdditionalProperties = null)
+        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = default, string name = null, bool? status = null, string odataLocation = null, IDictionary<string, float> additionalProperties = null, IDictionary<string, string> moreAdditionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, float>();
             moreAdditionalProperties ??= new Dictionary<string, string>();

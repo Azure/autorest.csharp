@@ -23,7 +23,7 @@ namespace xml_service
         /// <param name="containers"> . </param>
         /// <param name="nextMarker"> . </param>
         /// <returns> A new <see cref="Models.ListContainersResponse"/> instance for mocking. </returns>
-        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = null, string prefix = null, string marker = null, int maxResults = new int(), IEnumerable<Container> containers = null, string nextMarker = null)
+        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = null, string prefix = null, string marker = null, int maxResults = default, IEnumerable<Container> containers = null, string nextMarker = null)
         {
             containers ??= new List<Container>();
 
@@ -50,7 +50,7 @@ namespace xml_service
         /// <param name="leaseDuration"> . </param>
         /// <param name="publicAccess"> . </param>
         /// <returns> A new <see cref="Models.ContainerProperties"/> instance for mocking. </returns>
-        public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = new DateTimeOffset(), string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
+        public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
         }
@@ -65,7 +65,7 @@ namespace xml_service
         /// <param name="blobs"> . </param>
         /// <param name="nextMarker"> . </param>
         /// <returns> A new <see cref="Models.ListBlobsResponse"/> instance for mocking. </returns>
-        public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = new int(), string delimiter = null, Blobs blobs = null, string nextMarker = null)
+        public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = default, string delimiter = null, Blobs blobs = null, string nextMarker = null)
         {
             return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
         }
@@ -97,7 +97,7 @@ namespace xml_service
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         /// <returns> A new <see cref="Models.Blob"/> instance for mocking. </returns>
-        public static Blob Blob(string name = null, bool deleted = new bool(), string snapshot = null, BlobProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
+        public static Blob Blob(string name = null, bool deleted = default, string snapshot = null, BlobProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
         {
             metadata ??= new Dictionary<string, string>();
 
@@ -134,7 +134,7 @@ namespace xml_service
         /// <param name="accessTierInferred"> . </param>
         /// <param name="archiveStatus"> . </param>
         /// <returns> A new <see cref="Models.BlobProperties"/> instance for mocking. </returns>
-        public static BlobProperties BlobProperties(DateTimeOffset lastModified = new DateTimeOffset(), string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
+        public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
         {
             return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
         }

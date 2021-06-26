@@ -50,7 +50,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
         /// <param name="confidenceScore"> Confidence score between 0 and 1 of the extracted entity. </param>
         /// <returns> A new <see cref="Models.Entity"/> instance for mocking. </returns>
-        public static Entity Entity(string text = null, string category = null, string subcategory = null, int offset = new int(), int length = new int(), double confidenceScore = new double())
+        public static Entity Entity(string text = null, string category = null, string subcategory = null, int offset = default, int length = default, double confidenceScore = default)
         {
             return new Entity(text, category, subcategory, offset, length, confidenceScore);
         }
@@ -60,7 +60,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
         /// <returns> A new <see cref="Models.TextAnalyticsWarning"/> instance for mocking. </returns>
-        public static TextAnalyticsWarning TextAnalyticsWarning(WarningCodeValue code = new WarningCodeValue(), string message = null, string targetRef = null)
+        public static TextAnalyticsWarning TextAnalyticsWarning(WarningCodeValue code = default, string message = null, string targetRef = null)
         {
             return new TextAnalyticsWarning(code, message, targetRef);
         }
@@ -69,7 +69,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         /// <returns> A new <see cref="Models.DocumentStatistics"/> instance for mocking. </returns>
-        public static DocumentStatistics DocumentStatistics(int charactersCount = new int(), int transactionsCount = new int())
+        public static DocumentStatistics DocumentStatistics(int charactersCount = default, int transactionsCount = default)
         {
             return new DocumentStatistics(charactersCount, transactionsCount);
         }
@@ -90,7 +90,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="innererror"> Inner error contains more specific information. </param>
         /// <param name="details"> Details about specific errors that led to this reported error. </param>
         /// <returns> A new <see cref="Models.TextAnalyticsError"/> instance for mocking. </returns>
-        public static TextAnalyticsError TextAnalyticsError(ErrorCodeValue code = new ErrorCodeValue(), string message = null, string target = null, InnerError innererror = null, IEnumerable<TextAnalyticsError> details = null)
+        public static TextAnalyticsError TextAnalyticsError(ErrorCodeValue code = default, string message = null, string target = null, InnerError innererror = null, IEnumerable<TextAnalyticsError> details = null)
         {
             details ??= new List<TextAnalyticsError>();
 
@@ -104,7 +104,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
         /// <returns> A new <see cref="Models.InnerError"/> instance for mocking. </returns>
-        public static InnerError InnerError(InnerErrorCodeValue code = new InnerErrorCodeValue(), string message = null, IReadOnlyDictionary<string, string> details = null, string target = null, InnerError innererror = null)
+        public static InnerError InnerError(InnerErrorCodeValue code = default, string message = null, IReadOnlyDictionary<string, string> details = null, string target = null, InnerError innererror = null)
         {
             details ??= new Dictionary<string, string>();
 
@@ -117,7 +117,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="erroneousDocumentsCount"> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </param>
         /// <param name="transactionsCount"> Number of transactions for the request. </param>
         /// <returns> A new <see cref="Models.RequestStatistics"/> instance for mocking. </returns>
-        public static RequestStatistics RequestStatistics(int documentsCount = new int(), int validDocumentsCount = new int(), int erroneousDocumentsCount = new int(), long transactionsCount = new long())
+        public static RequestStatistics RequestStatistics(int documentsCount = default, int validDocumentsCount = default, int erroneousDocumentsCount = default, long transactionsCount = default)
         {
             return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
         }
@@ -171,7 +171,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
         /// <returns> A new <see cref="Models.Match"/> instance for mocking. </returns>
-        public static Match Match(double confidenceScore = new double(), string text = null, int offset = new int(), int length = new int())
+        public static Match Match(double confidenceScore = default, string text = null, int offset = default, int length = default)
         {
             return new Match(confidenceScore, text, offset, length);
         }
@@ -236,7 +236,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
         /// <returns> A new <see cref="Models.DetectedLanguage"/> instance for mocking. </returns>
-        public static DetectedLanguage DetectedLanguage(string name = null, string iso6391Name = null, double confidenceScore = new double())
+        public static DetectedLanguage DetectedLanguage(string name = null, string iso6391Name = null, double confidenceScore = default)
         {
             return new DetectedLanguage(name, iso6391Name, confidenceScore);
         }
@@ -263,7 +263,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <returns> A new <see cref="Models.DocumentSentiment"/> instance for mocking. </returns>
-        public static DocumentSentiment DocumentSentiment(string id = null, DocumentSentimentValue sentiment = new DocumentSentimentValue(), DocumentStatistics statistics = null, SentimentConfidenceScorePerLabel confidenceScores = null, IEnumerable<SentenceSentiment> sentences = null, IEnumerable<TextAnalyticsWarning> warnings = null)
+        public static DocumentSentiment DocumentSentiment(string id = null, DocumentSentimentValue sentiment = default, DocumentStatistics statistics = null, SentimentConfidenceScorePerLabel confidenceScores = null, IEnumerable<SentenceSentiment> sentences = null, IEnumerable<TextAnalyticsWarning> warnings = null)
         {
             sentences ??= new List<SentenceSentiment>();
             warnings ??= new List<TextAnalyticsWarning>();
@@ -276,7 +276,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="neutral"> . </param>
         /// <param name="negative"> . </param>
         /// <returns> A new <see cref="Models.SentimentConfidenceScorePerLabel"/> instance for mocking. </returns>
-        public static SentimentConfidenceScorePerLabel SentimentConfidenceScorePerLabel(double positive = new double(), double neutral = new double(), double negative = new double())
+        public static SentimentConfidenceScorePerLabel SentimentConfidenceScorePerLabel(double positive = default, double neutral = default, double negative = default)
         {
             return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
         }
@@ -288,7 +288,7 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
         /// <returns> A new <see cref="Models.SentenceSentiment"/> instance for mocking. </returns>
-        public static SentenceSentiment SentenceSentiment(string text = null, SentenceSentimentValue sentiment = new SentenceSentimentValue(), SentimentConfidenceScorePerLabel confidenceScores = null, int offset = new int(), int length = new int())
+        public static SentenceSentiment SentenceSentiment(string text = null, SentenceSentimentValue sentiment = default, SentimentConfidenceScorePerLabel confidenceScores = null, int offset = default, int length = default)
         {
             return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
         }

@@ -84,15 +84,23 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
-                if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
+                var defaultValue = clientParameter.DefaultValue.Value;
+                if (defaultValue.IsNewInstanceSentinel || !TypeFactory.CanBeInitializedInline(clientParameter.Type, defaultValue))
                 {
-                    writer.Append($" = ");
-                    writer.WriteConstant(clientParameter.DefaultValue.Value);
+                    // initialize with default
+                    if (defaultValue.Type.IsValueType)
+                    {
+                        writer.Append($" = default");
+                    }
+                    else
+                    {
+                        writer.Append($" = null");
+                    }
                 }
                 else
                 {
-                    // initialize with null and set the default later
-                    writer.Append($" = null");
+                    writer.Append($" = ");
+                    writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
             }
             else if (enforceDefaultValue)

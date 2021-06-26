@@ -62,7 +62,7 @@ namespace body_complex
         /// <param name="propB1"> . </param>
         /// <param name="propBH1"> . </param>
         /// <returns> A new <see cref="Models.MyBaseType"/> instance for mocking. </returns>
-        public static MyBaseType MyBaseType(MyKind kind = new MyKind(), string propB1 = null, string propBH1 = null)
+        public static MyBaseType MyBaseType(MyKind kind = default, string propB1 = null, string propBH1 = null)
         {
             return new MyBaseType(kind, propB1, propBH1);
         }
@@ -73,7 +73,7 @@ namespace body_complex
         /// <param name="propBH1"> . </param>
         /// <param name="propD1"> . </param>
         /// <returns> A new <see cref="Models.MyDerivedType"/> instance for mocking. </returns>
-        public static MyDerivedType MyDerivedType(MyKind kind = new MyKind(), string propB1 = null, string propBH1 = null, string propD1 = null)
+        public static MyDerivedType MyDerivedType(MyKind kind = default, string propB1 = null, string propBH1 = null, string propD1 = null)
         {
             return new MyDerivedType(kind, propB1, propBH1, propD1);
         }

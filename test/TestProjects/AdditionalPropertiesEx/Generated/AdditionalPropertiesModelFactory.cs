@@ -17,7 +17,7 @@ namespace AdditionalPropertiesEx
         /// <param name="id"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = new int(), IReadOnlyDictionary<string, string> additionalProperties = null)
+        public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, string>();
 
@@ -28,7 +28,7 @@ namespace AdditionalPropertiesEx
         /// <param name="id"> . </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
-        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = new int(), IReadOnlyDictionary<string, string> additionalProperties = null)
+        public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
         {
             additionalProperties ??= new Dictionary<string, string>();
 

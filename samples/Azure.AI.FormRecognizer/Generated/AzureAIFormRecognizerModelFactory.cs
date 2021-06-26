@@ -40,7 +40,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <returns> A new <see cref="Models.ModelInfo"/> instance for mocking. </returns>
-        public static ModelInfo ModelInfo(Guid modelId = new Guid(), ModelStatus status = new ModelStatus(), DateTimeOffset createdDateTime = new DateTimeOffset(), DateTimeOffset lastUpdatedDateTime = new DateTimeOffset())
+        public static ModelInfo ModelInfo(Guid modelId = default, ModelStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default)
         {
             return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
         }
@@ -76,7 +76,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
         /// <returns> A new <see cref="Models.TrainingDocumentInfo"/> instance for mocking. </returns>
-        public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = null, int pages = new int(), IEnumerable<ErrorInformation> errors = null, TrainStatus status = new TrainStatus())
+        public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = null, int pages = default, IEnumerable<ErrorInformation> errors = null, TrainStatus status = default)
         {
             errors ??= new List<ErrorInformation>();
 
@@ -87,7 +87,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <returns> A new <see cref="Models.FormFieldsReport"/> instance for mocking. </returns>
-        public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = new float())
+        public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
         {
             return new FormFieldsReport(fieldName, accuracy);
         }
@@ -98,7 +98,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <param name="analyzeResult"> Results of the analyze operation. </param>
         /// <returns> A new <see cref="Models.AnalyzeOperationResult"/> instance for mocking. </returns>
-        public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = new OperationStatus(), DateTimeOffset createdDateTime = new DateTimeOffset(), DateTimeOffset lastUpdatedDateTime = new DateTimeOffset(), AnalyzeResult analyzeResult = null)
+        public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, AnalyzeResult analyzeResult = null)
         {
             return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
         }
@@ -129,7 +129,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="language"> The detected language on the page overall. </param>
         /// <param name="lines"> When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order. </param>
         /// <returns> A new <see cref="Models.ReadResult"/> instance for mocking. </returns>
-        public static ReadResult ReadResult(int page = new int(), float angle = new float(), float width = new float(), float height = new float(), LengthUnit unit = new LengthUnit(), Language? language = null, IEnumerable<TextLine> lines = null)
+        public static ReadResult ReadResult(int page = default, float angle = default, float width = default, float height = default, LengthUnit unit = default, Language? language = null, IEnumerable<TextLine> lines = null)
         {
             lines ??= new List<TextLine>();
 
@@ -168,7 +168,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
         /// <param name="tables"> List of data tables extracted from the page. </param>
         /// <returns> A new <see cref="Models.PageResult"/> instance for mocking. </returns>
-        public static PageResult PageResult(int page = new int(), int? clusterId = null, IEnumerable<Models.KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
+        public static PageResult PageResult(int page = default, int? clusterId = null, IEnumerable<Models.KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
         {
             keyValuePairs ??= new List<Models.KeyValuePair>();
             tables ??= new List<DataTable>();
@@ -182,7 +182,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
         /// <param name="confidence"> Confidence value. </param>
         /// <returns> A new <see cref="Models.KeyValuePair"/> instance for mocking. </returns>
-        public static Models.KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = new float())
+        public static Models.KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
         {
             return new Models.KeyValuePair(label, key, value, confidence);
         }
@@ -205,7 +205,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
         /// <returns> A new <see cref="Models.DataTable"/> instance for mocking. </returns>
-        public static DataTable DataTable(int rows = new int(), int columns = new int(), IEnumerable<DataTableCell> cells = null)
+        public static DataTable DataTable(int rows = default, int columns = default, IEnumerable<DataTableCell> cells = null)
         {
             cells ??= new List<DataTableCell>();
 
@@ -224,7 +224,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="isHeader"> Is the current cell a header cell?. </param>
         /// <param name="isFooter"> Is the current cell a footer cell?. </param>
         /// <returns> A new <see cref="Models.DataTableCell"/> instance for mocking. </returns>
-        public static DataTableCell DataTableCell(int rowIndex = new int(), int columnIndex = new int(), int? rowSpan = null, int? columnSpan = null, string text = null, IEnumerable<float> boundingBox = null, float confidence = new float(), IEnumerable<string> elements = null, bool? isHeader = null, bool? isFooter = null)
+        public static DataTableCell DataTableCell(int rowIndex = default, int columnIndex = default, int? rowSpan = null, int? columnSpan = null, string text = null, IEnumerable<float> boundingBox = null, float confidence = default, IEnumerable<string> elements = null, bool? isHeader = null, bool? isFooter = null)
         {
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
@@ -261,7 +261,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
         /// <param name="page"> The 1-based page number in the input document. </param>
         /// <returns> A new <see cref="Models.FieldValue"/> instance for mocking. </returns>
-        public static FieldValue FieldValue(FieldValueType type = new FieldValueType(), string valueString = null, DateTimeOffset? valueDate = null, TimeSpan? valueTime = null, string valuePhoneNumber = null, float? valueNumber = null, int? valueInteger = null, IEnumerable<FieldValue> valueArray = null, IReadOnlyDictionary<string, FieldValue> valueObject = null, string text = null, IEnumerable<float> boundingBox = null, float? confidence = null, IEnumerable<string> elements = null, int? page = null)
+        public static FieldValue FieldValue(FieldValueType type = default, string valueString = null, DateTimeOffset? valueDate = null, TimeSpan? valueTime = null, string valuePhoneNumber = null, float? valueNumber = null, int? valueInteger = null, IEnumerable<FieldValue> valueArray = null, IReadOnlyDictionary<string, FieldValue> valueObject = null, string text = null, IEnumerable<float> boundingBox = null, float? confidence = null, IEnumerable<string> elements = null, int? page = null)
         {
             valueArray ??= new List<FieldValue>();
             valueObject ??= new Dictionary<string, FieldValue>();
@@ -277,7 +277,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <param name="copyResult"> Results of the copy operation. </param>
         /// <returns> A new <see cref="Models.CopyOperationResult"/> instance for mocking. </returns>
-        public static CopyOperationResult CopyOperationResult(OperationStatus status = new OperationStatus(), DateTimeOffset createdDateTime = new DateTimeOffset(), DateTimeOffset lastUpdatedDateTime = new DateTimeOffset(), CopyResult copyResult = null)
+        public static CopyOperationResult CopyOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, CopyResult copyResult = null)
         {
             return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
         }
@@ -286,7 +286,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
         /// <returns> A new <see cref="Models.CopyResult"/> instance for mocking. </returns>
-        public static CopyResult CopyResult(Guid modelId = new Guid(), IEnumerable<ErrorInformation> errors = null)
+        public static CopyResult CopyResult(Guid modelId = default, IEnumerable<ErrorInformation> errors = null)
         {
             errors ??= new List<ErrorInformation>();
 
@@ -310,7 +310,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
         /// <returns> A new <see cref="Models.ModelsSummary"/> instance for mocking. </returns>
-        public static ModelsSummary ModelsSummary(int count = new int(), int limit = new int(), DateTimeOffset lastUpdatedDateTime = new DateTimeOffset())
+        public static ModelsSummary ModelsSummary(int count = default, int limit = default, DateTimeOffset lastUpdatedDateTime = default)
         {
             return new ModelsSummary(count, limit, lastUpdatedDateTime);
         }
