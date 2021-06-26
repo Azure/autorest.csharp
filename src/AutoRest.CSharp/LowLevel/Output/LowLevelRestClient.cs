@@ -59,6 +59,7 @@ namespace AutoRest.CSharp.Output.Models
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParamaters);
                     var accessibility = operation.Accessibility ?? "public";
                     RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
+                    RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
                     LowLevelClientMethod.SchemaDocumentation[]? schemaDocumentation = null;
@@ -79,25 +80,40 @@ namespace AutoRest.CSharp.Output.Models
                         body = new RequestContentRequestBody(bodyParam);
                         schemaDocumentation = GetSchemaDocumentationsForParameter(bodyParameter);
 
-
                         // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body, and change the
                         // type to be `Content-Type`
                         RequestParameter contentTypeRequestParameter = requestParameters.FirstOrDefault(IsSynthesizedContentTypeParameter);
                         if (contentTypeRequestParameter != null)
                         {
                             int contentTypeParamIndex = parameters.FindIndex(p => p.Name == contentTypeRequestParameter.CSharpName());
-                            Parameter contentTypeParameter = parameters[contentTypeParamIndex] with { Type = new CSharpType(typeof(Azure.Core.ContentType)) };
 
-                            parameters.RemoveAt(contentTypeParamIndex);
-
-                            // If the content-type paramter came before the the body, the removal of it above shifted the body parameter
-                            // closer to the start of the list.
-                            if (contentTypeParamIndex < bodyIndex)
+                            // If the service parameter has a constant value (which is the case in general, because most operations only use
+                            // a single content type), it will not be in the parameter list for the operation method.
+                            if (contentTypeParamIndex != -1)
                             {
-                                bodyIndex--;
-                            }
+                                Parameter contentTypeParameter = parameters[contentTypeParamIndex] with { Type = new CSharpType(typeof(Azure.Core.ContentType)) };
 
-                            parameters.Insert(bodyIndex + 1, contentTypeParameter);
+                                parameters.RemoveAt(contentTypeParamIndex);
+
+                                // If the Content-Type paramter came before the the body, the removal of it above shifted the body parameter
+                                // closer to the start of the list.
+                                if (contentTypeParamIndex < bodyIndex)
+                                {
+                                    bodyIndex--;
+                                }
+
+                                parameters.Insert(bodyIndex + 1, contentTypeParameter);
+
+                                // The request headers will have a reference to the parameter we've just updated the type of, so we need to update that reference as well.
+                                for (int i = 0; i < requestHeaders.Length; i++)
+                                {
+                                    var requestHeader = requestHeaders[i];
+                                    if (!requestHeader.Value.IsConstant && requestHeader.Value.Reference.Name == contentTypeParameter.Name)
+                                    {
+                                        requestHeaders[i] = new RequestHeader(requestHeader.Name, contentTypeParameter, requestHeader.SerializationStyle, requestHeader.Format);
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -106,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
                     Parameter options = new Parameter ("options", "The request options", requestType, new Constant(null, requestType), true);
                     parameters.Insert (parameters.Count, options);
 
-                    Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
+                    Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
                     yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, schemaDocumentation, diagnostic);
                 }
