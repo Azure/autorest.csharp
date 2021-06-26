@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
             HashSet<string> visitedSchema = new HashSet<string>();
             Queue<Schema> schemasToExplore = new Queue<Schema>(new Schema[] { parameter.Schema });
-            List<(string SchemaName, List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new ();
+            List<(string SchemaName, List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new();
 
             while (schemasToExplore.Any())
             {
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models
                         schemasToExplore.Enqueue(a.ElementType);
                         break;
                     case ObjectSchema o:
-                        List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> propertyDocumentation = new ();
+                        List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> propertyDocumentation = new();
 
                         // We must also include any properties introduced by our parent chain.
                         foreach (ObjectSchema s in (o.Parents?.All ?? Array.Empty<ComplexSchema>()).Concat(new ComplexSchema[] { o }).OfType<ObjectSchema>())
@@ -140,7 +140,7 @@ namespace AutoRest.CSharp.Output.Models
                             }
                         }
 
-                        documentationObjects.Add(new (parameter.Schema == o ? "Request Body" : StringifyTypeForTable(o), propertyDocumentation));
+                        documentationObjects.Add(new(parameter.Schema == o ? "Request Body" : StringifyTypeForTable(o), propertyDocumentation));
                         break;
                 }
 
