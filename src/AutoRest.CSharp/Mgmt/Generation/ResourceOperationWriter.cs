@@ -124,13 +124,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (!isSingleton)
                 {
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    var subscriptionValue = "Id.SubscriptionId";
-                    if (resourceOperation.ResourceIdentifierType == typeof(TenantResourceIdentifier))
-                    {
-                        subscriptionValue = "subscriptionId";
-                        writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
-                    }
-                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
+                    var subscriptionValue = (resourceOperation.ResourceIdentifierType == typeof(TenantResourceIdentifier)) ? string.Empty : "Id.SubscriptionId, ";
+                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}BaseUri);");
                 }
             }
         }

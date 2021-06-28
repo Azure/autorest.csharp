@@ -33,8 +33,7 @@ namespace ResourceIdentifierChooser
         protected internal SubRes2ResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            Id.TryGetSubscriptionId(out var subscriptionId);
-            _restClient = new SubRes2ResourcesRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            _restClient = new SubRes2ResourcesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/SubRes2Resources";

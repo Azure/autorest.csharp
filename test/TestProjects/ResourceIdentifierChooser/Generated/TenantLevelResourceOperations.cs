@@ -33,8 +33,7 @@ namespace ResourceIdentifierChooser
         protected internal TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            Id.TryGetSubscriptionId(out var subscriptionId);
-            _restClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            _restClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/TenantLevelResources";
