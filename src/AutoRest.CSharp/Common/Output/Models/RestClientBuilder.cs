@@ -555,6 +555,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
+
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),

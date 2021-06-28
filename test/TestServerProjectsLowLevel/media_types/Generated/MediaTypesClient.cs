@@ -51,15 +51,15 @@ namespace media_types_LowLevel
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="contentType"> Upload file type. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> AnalyzeBodyAsync(string contentType, RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(contentType, content, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -92,15 +92,15 @@ namespace media_types_LowLevel
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="contentType"> Upload file type. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response AnalyzeBody(string contentType, RequestContent content, RequestOptions options = null)
+        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(contentType, content, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -133,10 +133,10 @@ namespace media_types_LowLevel
         }
 
         /// <summary> Create Request for <see cref="AnalyzeBody"/> and <see cref="AnalyzeBodyAsync"/> operations. </summary>
-        /// <param name="contentType"> Upload file type. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="contentType"> Upload file type. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreateAnalyzeBodyRequest(string contentType, RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content, ContentType contentType, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -146,7 +146,7 @@ namespace media_types_LowLevel
             uri.AppendPath("/mediatypes/analyze", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", contentType);
+            request.Headers.Add("Content-Type", contentType.ToString());
             request.Content = content;
             return message;
         }
