@@ -506,6 +506,13 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void ModelFactory_AlwaysInitializesCollectionFields()
+        {
+            var model = SchemaMappingModelFactory.MixedModelWithReadonlyProperty();
+            Assert.NotNull(model.ReadonlyListProperty);
+        }
+
+        [Test]
         public void ModelFactory_InstantiatesReadonlyModel()
         {
             const string stringValue = "stringValue";
