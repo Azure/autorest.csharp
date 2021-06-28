@@ -242,7 +242,10 @@
         "PublicModelWithInternalProperty": {
             "type": "object",
             "properties": {
-                "StringProperty": {
+                "InternalProperty": {
+                    "type": "string"
+                },
+                "PublicProperty": {
                     "type": "string"
                 }
             }

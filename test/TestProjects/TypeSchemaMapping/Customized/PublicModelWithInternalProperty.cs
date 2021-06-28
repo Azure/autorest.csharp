@@ -8,7 +8,7 @@ namespace TypeSchemaMapping.Models
 {
     public partial class PublicModelWithInternalProperty
     {
-        [CodeGenMember("StringProperty")]
+        [CodeGenMember("InternalProperty")]
         internal JsonElement StringPropertyJson { get; }
     }
 }

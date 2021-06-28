@@ -19,9 +19,12 @@ namespace TypeSchemaMapping.Models
 
         /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
         /// <param name="stringPropertyJson"> . </param>
-        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson)
+        /// <param name="publicProperty"> . </param>
+        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty)
         {
             StringPropertyJson = stringPropertyJson;
+            PublicProperty = publicProperty;
         }
+        public string PublicProperty { get; }
     }
 }

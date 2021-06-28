@@ -14,16 +14,22 @@ namespace TypeSchemaMapping.Models
     {
         internal static PublicModelWithInternalProperty DeserializePublicModelWithInternalProperty(JsonElement element)
         {
-            Optional<JsonElement> stringProperty = default;
+            Optional<JsonElement> internalProperty = default;
+            Optional<string> publicProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("StringProperty"))
+                if (property.NameEquals("InternalProperty"))
                 {
-                    stringProperty = property.Value.Clone();
+                    internalProperty = property.Value.Clone();
+                    continue;
+                }
+                if (property.NameEquals("PublicProperty"))
+                {
+                    publicProperty = property.Value.GetString();
                     continue;
                 }
             }
-            return new PublicModelWithInternalProperty(stringProperty);
+            return new PublicModelWithInternalProperty(internalProperty, publicProperty.Value);
         }
     }
 }

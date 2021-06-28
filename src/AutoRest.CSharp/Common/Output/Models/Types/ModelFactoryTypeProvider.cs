@@ -40,6 +40,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
+            if (model.Properties.Any(p => p.Declaration.Accessibility != "public" && p.SchemaProperty?.IsDiscriminator != true))
+            {
+                return false;
+            }
+
             var readOnlyProperties = model.Properties
                 .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
                 .ToList();
