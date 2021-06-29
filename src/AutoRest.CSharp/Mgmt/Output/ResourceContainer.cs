@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private PagingMethod? FindListPagingMethod()
         {
-            return PagingMethods.FirstOrDefault(m => m.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
+            return PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
         }
 
         private RestClientMethod? GetPutMethod()
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string SuffixValue => _suffixValue;
 
-        protected override ClientMethod[] GetMethodsInScope()
+        protected override IEnumerable<ClientMethod> GetMethodsInScope()
         {
             var resultList = new List<ClientMethod>();
             foreach (var method in base.GetMethodsInScope())
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     IsPutMethod(method))
                     resultList.Add(method);
             }
-            return resultList.ToArray();
+            return resultList;
         }
 
         private bool IsPutMethod(ClientMethod method)

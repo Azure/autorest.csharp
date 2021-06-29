@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region Toaster
@@ -34,12 +34,12 @@ namespace SubscriptionExtensions
             return new OvensRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Ovens for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<Oven> ListOvensAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -47,7 +47,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {
@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
                 }
                 async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {
@@ -80,12 +80,12 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Ovens for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<Oven> ListOvens(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -93,7 +93,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Oven> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {
@@ -108,7 +108,7 @@ namespace SubscriptionExtensions
                 }
                 Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {
@@ -131,7 +131,7 @@ namespace SubscriptionExtensions
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListOvenByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(OvenOperations.ResourceType);
@@ -144,7 +144,7 @@ namespace SubscriptionExtensions
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListOvenByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(OvenOperations.ResourceType);

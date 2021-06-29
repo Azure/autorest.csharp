@@ -14,5 +14,9 @@
   "OperationGroupToResource": {
     "SupersetModel2s": "NonResource",
     "SupersetModel3s": "NonResource"
+  },
+  "OperationGroupToParent": {
+    "SupersetModel2s": "resourceGroups",
+    "SupersetModel3s": "resourceGroups"
   }
 }
