@@ -62,31 +62,35 @@ namespace AutoRest.CSharp.Generation.Types
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
-        protected bool Equals(CSharpType other)
-        {
-            return Equals(_implementation, other._implementation) && Equals(_type, other._type) && Arguments.SequenceEqual(other.Arguments);
-        }
+        protected bool Equals(CSharpType other, bool ignoreNullable)
+            => Equals(_implementation, other._implementation) &&
+               _type == other._type &&
+               Arguments.SequenceEqual(other.Arguments) &&
+               (ignoreNullable || IsNullable == other.IsNullable);
 
         public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((CSharpType) obj);
+            return obj is CSharpType csType && Equals(csType, ignoreNullable: false);
         }
+
+        public bool EqualsIgnoreNullable(CSharpType other) => Equals(other, ignoreNullable: true);
 
         public bool Equals(Type type)
         {
             return IsFrameworkType && type == FrameworkType;
         }
+
         public override int GetHashCode()
         {
             return HashCode.Combine(_implementation, _type, Arguments);
         }
 
-        public CSharpType WithNullable(bool isNullable) => IsFrameworkType
-            ? new CSharpType(FrameworkType, isNullable, Arguments)
-            : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
+        public CSharpType WithNullable(bool isNullable) =>
+            isNullable == IsNullable ? this : IsFrameworkType
+                ? new CSharpType(FrameworkType, isNullable, Arguments)
+                : new CSharpType(Implementation, Namespace, Name, IsValueType, isNullable);
 
         public static implicit operator CSharpType(Type type) => new CSharpType(type);
 

@@ -12,19 +12,19 @@ namespace custom_baseUrl_paging
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestParameterizedHostTestPagingModelFactory
     {
-        /// <summary> Initializes new instance of Product class. </summary>
+        /// <summary> Initializes a new instance of Product. </summary>
         /// <param name="properties"> . </param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
-        public static Product Product(ProductProperties properties = default)
+        public static Product Product(ProductProperties properties = null)
         {
             return new Product(properties);
         }
 
-        /// <summary> Initializes new instance of ProductProperties class. </summary>
+        /// <summary> Initializes a new instance of ProductProperties. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <returns> A new <see cref="Models.ProductProperties"/> instance for mocking. </returns>
-        public static ProductProperties ProductProperties(int? id = default, string name = default)
+        public static ProductProperties ProductProperties(int? id = null, string name = null)
         {
             return new ProductProperties(id, name);
         }

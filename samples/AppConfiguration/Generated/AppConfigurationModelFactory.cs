@@ -12,18 +12,18 @@ namespace AppConfiguration
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AppConfigurationModelFactory
     {
-        /// <summary> Initializes new instance of Key class. </summary>
+        /// <summary> Initializes a new instance of Key. </summary>
         /// <param name="name"> . </param>
         /// <returns> A new <see cref="Models.Key"/> instance for mocking. </returns>
-        public static Key Key(string name = default)
+        public static Key Key(string name = null)
         {
             return new Key(name);
         }
 
-        /// <summary> Initializes new instance of Label class. </summary>
+        /// <summary> Initializes a new instance of Label. </summary>
         /// <param name="name"> . </param>
         /// <returns> A new <see cref="Models.Label"/> instance for mocking. </returns>
-        public static Label Label(string name = default)
+        public static Label Label(string name = null)
         {
             return new Label(name);
         }
