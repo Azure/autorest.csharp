@@ -175,7 +175,6 @@ namespace AutoRest.CSharp.Generation.Types
             // Assumes AllSchemaTypes.Integer
             _ => schema.Precision switch
             {
-                16 => typeof(short),
                 64 => typeof(long),
                 _ => typeof(int)
             }
