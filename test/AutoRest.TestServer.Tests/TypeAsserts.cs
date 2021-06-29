@@ -32,7 +32,6 @@ namespace AutoRest.TestServer.Tests
             Assert.Fail($"Type \"{type}\" is expected to be static.");
         }
 
-
         public static void TypeIsNotPublic(Type type)
         {
             if (!type.IsPublic)

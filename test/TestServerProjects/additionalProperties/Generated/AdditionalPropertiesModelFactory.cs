@@ -60,20 +60,5 @@ namespace additionalProperties
             additionalProperties ??= new Dictionary<string, float>();
             return new PetAPInProperties(id, name, status, additionalProperties);
         }
-
-        /// <summary> Initializes new instance of PetAPInPropertiesWithAPString class. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
-        /// <param name="odataLocation"> . </param>
-        /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="moreAdditionalProperties"> Additional Properties. </param>
-        /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
-        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = default, string name = default, bool? status = default, string odataLocation = default, IDictionary<string, float> additionalProperties = default, IDictionary<string, string> moreAdditionalProperties = default)
-        {
-            additionalProperties ??= new Dictionary<string, float>();
-            moreAdditionalProperties ??= new Dictionary<string, string>();
-            return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
-        }
     }
 }

@@ -134,8 +134,8 @@ namespace AutoRest.CSharp.Output.Models
                 "nextLink",
                 "The URL to the next page of results.",
                 typeof(string),
-                defaultValue: null,
-                validateNotNull: true);
+                DefaultValue: null,
+                ValidateNotNull: true);
 
             PathSegment[] pathSegments = method.Request.PathSegments
                 .Where(ps => ps.IsRaw)

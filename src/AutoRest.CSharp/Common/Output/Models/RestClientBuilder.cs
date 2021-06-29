@@ -470,11 +470,14 @@ namespace AutoRest.CSharp.Output.Models
                 return new PathSegment(BuilderHelpers.StringConstant(text), false, SerializationFormat.Default, isRaw);
             }
 
-            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
+            var segments = new List<PathSegment>();
+
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
+                var text = span.ToString();
                 if (isLiteral)
                 {
-                    yield return TextSegment(text);
+                    segments.Add(TextSegment(text));
                 }
                 else
                 {
@@ -482,9 +485,11 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         ErrorHelpers.ThrowError ($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                     }
-                    yield return parameters[text];
+                    segments.Add(parameters[text]);
                 }
             }
+
+            return segments;
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
@@ -550,6 +555,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
+
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
