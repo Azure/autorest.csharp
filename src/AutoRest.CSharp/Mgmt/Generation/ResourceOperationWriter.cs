@@ -238,7 +238,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration))
                     && !item.IsSingletonResource(context.Configuration.MgmtConfiguration))
                 {
-                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    var container = context.Library.GetResourceContainer(item);
                     if (container == null)
                         return;
                     writer.Line();
