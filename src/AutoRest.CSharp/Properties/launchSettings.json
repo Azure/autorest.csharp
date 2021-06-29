@@ -240,6 +240,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
+    "MgmtMultipleParentResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMultipleParentResource\\Generated"
+    },
     "MgmtOperations": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtOperations\\Generated"
