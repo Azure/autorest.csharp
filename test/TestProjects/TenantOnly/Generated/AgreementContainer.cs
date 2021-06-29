@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
-    public partial class AgreementContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Agreement, AgreementData>
+    public partial class AgreementContainer : ResourceContainerBase<TenantResourceIdentifier, Agreement, AgreementData>
     {
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
@@ -33,10 +33,10 @@ namespace TenantOnly
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+        public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => BillingAccountOperations.ResourceType;
@@ -138,6 +138,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<TenantResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }

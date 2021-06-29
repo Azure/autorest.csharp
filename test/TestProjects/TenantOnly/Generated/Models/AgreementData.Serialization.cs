@@ -19,7 +19,7 @@ namespace TenantOnly
             Optional<string> foo = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

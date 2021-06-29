@@ -7,6 +7,7 @@ using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -16,11 +17,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceIdentifierChooser
     {
-        internal static Type GetResourceIdentifierType(this OperationGroup operation, MgmtObjectType mgmtObjectType, MgmtConfiguration config)
+        internal static Type GetResourceIdentifierType(this OperationGroup operationGroup, MgmtObjectType mgmtObjectType, BuildContext context)
         {
-            if (operation.ParentResourceType(config) == ResourceTypeBuilder.Subscriptions)
+            var config = context.Configuration.MgmtConfiguration;
+            //Go up until we get to the operation group level that is directly under a resource group, subscription or tenant.
+            while (operationGroup.ParentOperationGroup(context) != null)
+            {
+                operationGroup = operationGroup.ParentOperationGroup(context)!;
+            }
+            if (operationGroup.ParentResourceType(config) == ResourceTypeBuilder.Subscriptions)
                 return typeof(SubscriptionResourceIdentifier);
-            else if (operation.IsTenantResource(config))
+            else if (operationGroup.IsTenantResource(config))
                 return typeof(TenantResourceIdentifier);
             else
                 return typeof(ResourceGroupResourceIdentifier);

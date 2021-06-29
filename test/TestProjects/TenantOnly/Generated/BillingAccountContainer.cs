@@ -33,10 +33,10 @@ namespace TenantOnly
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+        public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;

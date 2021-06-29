@@ -142,7 +142,7 @@ schemas: !Schemas
           name: ApiVersion20200501
           description: Api Version (2020-05-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_19
+    - !ConstantSchema &ref_18
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -152,7 +152,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_24
+    - !ConstantSchema &ref_23
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -180,7 +180,7 @@ schemas: !Schemas
           description: Resource tags
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_22
+    - !ObjectSchema &ref_21
       type: object
       apiVersions:
         - !ApiVersion 
@@ -248,7 +248,7 @@ schemas: !Schemas
           description: A billing account.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_23
+    - !ObjectSchema &ref_22
       type: object
       apiVersions:
         - !ApiVersion 
@@ -272,7 +272,7 @@ schemas: !Schemas
           description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_30
+    - !ObjectSchema &ref_29
       type: object
       apiVersions:
         - !ApiVersion 
@@ -340,20 +340,6 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_18
-    schema: *ref_1
-    implementation: Client
-    required: true
-    extensions:
-      x-ms-priority: 1
-    language: !Languages 
-      default:
-        name: SubscriptionId
-        description: The ID that uniquely identifies an Azure subscription.
-        serializedName: subscriptionId
-    protocol: !Protocols 
-      http: !HttpParameter 
-        in: path
   - !Parameter &ref_16
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
@@ -394,8 +380,7 @@ operationGroups:
         parameters:
           - *ref_16
           - *ref_17
-          - *ref_18
-          - !Parameter &ref_20
+          - !Parameter &ref_19
             schema: *ref_1
             implementation: Method
             required: true
@@ -407,7 +392,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_21
+          - !Parameter &ref_20
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -422,7 +407,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -445,11 +430,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_19
           - *ref_20
-          - *ref_21
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -463,7 +448,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -487,7 +472,7 @@ operationGroups:
         parameters:
           - *ref_16
           - *ref_17
-          - !Parameter &ref_26
+          - !Parameter &ref_25
             schema: *ref_1
             implementation: Method
             required: true
@@ -503,7 +488,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_23
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -515,8 +500,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_25
-                schema: *ref_22
+              - !Parameter &ref_24
+                schema: *ref_21
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -528,7 +513,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -541,7 +526,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_25
+              - *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -555,10 +540,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_26
+          - *ref_25
         responses:
           - !SchemaResponse 
-            schema: *ref_22
+            schema: *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -581,7 +566,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -617,8 +602,7 @@ operationGroups:
         parameters:
           - *ref_16
           - *ref_17
-          - *ref_18
-          - !Parameter &ref_27
+          - !Parameter &ref_26
             schema: *ref_1
             implementation: Method
             required: true
@@ -630,7 +614,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_28
+          - !Parameter &ref_27
             schema: *ref_1
             implementation: Method
             required: true
@@ -642,7 +626,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_29
+          - !Parameter &ref_28
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -657,7 +641,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -680,12 +664,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
+          - *ref_26
           - *ref_27
           - *ref_28
-          - *ref_29
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -699,7 +683,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''

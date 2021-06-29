@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -28,6 +30,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             _valueCache.TryAdd(operationGroup, result);
             return result;
+        }
+
+        public static OperationGroup? ParentOperationGroup(this OperationGroup operationGroup, BuildContext context)
+        {
+            //TODO use cache
+            var config = context.Configuration.MgmtConfiguration;
+            var parentResourceType = operationGroup.ParentResourceType(config);
+            OperationGroup? parentOperationGroup = null;
+
+            foreach (var opGroup in context.CodeModel.OperationGroups)
+            {
+                if (opGroup.ResourceType(config).Equals(parentResourceType))
+                {
+                    parentOperationGroup = opGroup;
+                    break;
+                }
+            }
+            return parentOperationGroup;
         }
 
         private static string GetParent(OperationGroup operationGroup, MgmtConfiguration config)

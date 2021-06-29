@@ -31,9 +31,6 @@
                         "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/subscriptionIdParameter"
-                    },
-                    {
                         "$ref": "#/parameters/billingAccountNameParameter"
                     },
                     {
@@ -128,9 +125,6 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/apiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/billingAccountNameParameter"
@@ -252,13 +246,6 @@
             "required": true,
             "type": "string",
             "description": "The version of the API to be used with the client request. The current version is 2020-05-01."
-        },
-        "subscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID that uniquely identifies an Azure subscription.",
-            "required": true,
-            "type": "string"
         },
         "billingAccountNameParameter": {
             "name": "billingAccountName",
