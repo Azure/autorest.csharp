@@ -270,6 +270,38 @@ namespace CustomNamespace
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<PublicModelWithInternalProperty>> OperationWithPublicModelWithInternalPropertyAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithPublicModelWithInternalProperty");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationWithPublicModelWithInternalPropertyAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PublicModelWithInternalProperty> OperationWithPublicModelWithInternalProperty(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithPublicModelWithInternalProperty");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationWithPublicModelWithInternalProperty(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)

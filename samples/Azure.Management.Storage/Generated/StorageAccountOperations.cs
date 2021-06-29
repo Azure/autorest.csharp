@@ -836,8 +836,8 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPoliies and their operations over a StorageAccount. </returns>
-        public ManagementPolicyContainer GetManagementPoliies()
+        /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
+        public ManagementPolicyContainer GetManagementPolicies()
         {
             return new ManagementPolicyContainer(this);
         }

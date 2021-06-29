@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private RestOperations _restClient => new RestOperations(_clientDiagnostics, Pipeline);
+        private RestOperations _restClient => new RestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Initializes a new instance of the <see cref="RestApiContainer"/> class for mocking. </summary>
         protected RestApiContainer()

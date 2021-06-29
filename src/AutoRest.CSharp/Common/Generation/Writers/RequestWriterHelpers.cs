@@ -258,7 +258,16 @@ namespace AutoRest.CSharp.Generation.Writers
             using (WriteValueNullCheck(writer, header.Value))
             {
                 writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
-                WriteConstantOrParameter(writer, header.Value, enumAsString: true);
+
+                if (header.Value.Type.Equals(typeof(Azure.Core.ContentType)))
+                {
+                    WriteConstantOrParameterAsString(writer, header.Value);
+                }
+                else
+                {
+                    WriteConstantOrParameter(writer, header.Value, enumAsString: true);
+                }
+
                 if (delimiter != null)
                 {
                     writer.Append($", {delimiter:L}");

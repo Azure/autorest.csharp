@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -35,7 +34,7 @@ namespace Azure.ResourceManager.Sample
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private ImagesRestOperations _restClient => new ImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private ImagesRestOperations _restClient => new ImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -160,10 +159,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="imageName"> The name of the image. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<Image> Get(string imageName, CancellationToken cancellationToken = default)
+        public Response<Image> Get(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.Get");
             scope.Start();
@@ -174,7 +174,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(imageName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(new Image(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -184,10 +184,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="imageName"> The name of the image. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<Image>> GetAsync(string imageName, CancellationToken cancellationToken = default)
+        public async Task<Response<Image>> GetAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.Get");
             scope.Start();
@@ -198,7 +199,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(imageName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Image(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

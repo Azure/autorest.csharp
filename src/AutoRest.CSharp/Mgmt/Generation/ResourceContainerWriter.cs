@@ -18,7 +18,6 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -261,35 +260,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetVariants(RestClientMethod method)
         {
             var parameterMapping = BuildParameterMapping(method);
-            // some Get() contains extra non-name parameters which if added to method signature,
-            // would break the inheritance to ResourceContainerBase
-            // e.g. `expand` when getting image in compute RP
-            parameterMapping = parameterMapping.Where(mapping => IsMandatory(mapping.Parameter));
 
             var methodName = "Get";
             var scopeName = methodName;
 
-            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(parameter =>
-            {
-                if (parameter.Parameter.Type.IsStringLike())
-                {
-                    // for string-like parameters, we shall write them as string as base class
-                    return new Parameter(
-                        parameter.Parameter.Name,
-                        parameter.Parameter.Description,
-                        new CSharp.Generation.Types.CSharpType(typeof(string)),
-                        parameter.Parameter.DefaultValue,
-                        parameter.Parameter.ValidateNotNull,
-                        parameter.Parameter.IsApiVersionParameter
-                    );
-                }
-                else
-                {
-                    return parameter.Parameter;
-                }
-            });
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
             WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = {RestClientField}.{method.Name}(");
@@ -300,9 +278,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line($"cancellationToken: cancellationToken);");
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
-            }, isOverride: GetBaseType() != "ContainerBase");
+            }, isOverride: false);
 
             _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = await {RestClientField}.{method.Name}Async(");
@@ -313,7 +292,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
-            }, isOverride: GetBaseType() != "ContainerBase");
+            }, isOverride: false);
         }
 
         private void WriteListVariants()

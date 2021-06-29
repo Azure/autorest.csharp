@@ -13,7 +13,6 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {
@@ -35,7 +34,7 @@ namespace Azure.Management.Storage
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private ManagementPoliciesRestOperations _restClient => new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private ManagementPoliciesRestOperations _restClient => new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -144,20 +143,15 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicy> Get(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
             scope.Start();
             try
             {
-                if (managementPolicyName == null)
-                {
-                    throw new ArgumentNullException(nameof(managementPolicyName));
-                }
-
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
@@ -168,20 +162,15 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<ManagementPolicy>> GetAsync(string managementPolicyName, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicy>> GetAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
             scope.Start();
             try
             {
-                if (managementPolicyName == null)
-                {
-                    throw new ArgumentNullException(nameof(managementPolicyName));
-                }
-
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using AutoRest.CSharp.Generation.Writers;
 using NUnit.Framework;
 
@@ -70,6 +71,14 @@ a
 }
 a0
 ", codeWriter.ToString(false));
+        }
+
+        [Test]
+        public void CorrectlyHandlesCurlyBraces()
+        {
+            var codeWriter = new CodeWriter();
+            codeWriter.Append($"public {typeof(string)} Data {{ get; private set; }}");
+            Assert.AreEqual("public string Data { get; private set; }" + Environment.NewLine, codeWriter.ToString(false));
         }
     }
 }

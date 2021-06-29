@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace ResourceIdentifierChooser
 {
@@ -34,7 +33,7 @@ namespace ResourceIdentifierChooser
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private WritableSubRes3ResourcesRestOperations _restClient => new WritableSubRes3ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private WritableSubRes3ResourcesRestOperations _restClient => new WritableSubRes3ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -159,10 +158,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<WritableSubRes3Resource> Get(string writableSubRes3ResourcesName, CancellationToken cancellationToken = default)
+        public Response<WritableSubRes3Resource> Get(string writableSubRes3ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.Get");
             scope.Start();
@@ -183,10 +182,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<WritableSubRes3Resource>> GetAsync(string writableSubRes3ResourcesName, CancellationToken cancellationToken = default)
+        public async Task<Response<WritableSubRes3Resource>> GetAsync(string writableSubRes3ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.Get");
             scope.Start();

@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
         {
-            Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
+            Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
 
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
             // Remove ignored headers
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Dictionary<string, PathSegment> BuildPathParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
-            Dictionary<string, PathSegment> path = new ();
+            Dictionary<string, PathSegment> path = new();
             foreach (var requestParameter in requestParameters)
             {
                 if (requestParameter.In == ParameterLocation.Path)
@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Dictionary<string, PathSegment> BuildUriParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
-            Dictionary<string, PathSegment> uriParameters = new ();
+            Dictionary<string, PathSegment> uriParameters = new();
             foreach (var requestParameter in requestParameters)
             {
                 if (requestParameter.In == ParameterLocation.Uri)
@@ -194,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private RequestHeader[] BuildHeaders(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
-            List<RequestHeader> headers = new ();
+            List<RequestHeader> headers = new();
             foreach (var requestParameter in requestParameters)
             {
                 if (requestParameter.In == ParameterLocation.Header)
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private QueryParameter[] BuildQueryParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
-            List<QueryParameter> query = new ();
+            List<QueryParameter> query = new();
             foreach (var requestParameter in requestParameters)
             {
                 if (requestParameter.In == ParameterLocation.Query)
@@ -237,7 +237,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
-            List<Parameter> methodParameters = new ();
+            List<Parameter> methodParameters = new();
             foreach (var requestParameter in parameters)
             {
                 var (parameter, _) = allParameters[requestParameter];
@@ -260,7 +260,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             RequestBody? body = null;
 
-            Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new ();
+            Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new();
             foreach (var (requestParameter, (_, value)) in allParameters)
             {
                 if (requestParameter.In == ParameterLocation.Body)
@@ -470,11 +470,14 @@ namespace AutoRest.CSharp.Output.Models
                 return new PathSegment(BuilderHelpers.StringConstant(text), false, SerializationFormat.Default, isRaw);
             }
 
-            foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
+            var segments = new List<PathSegment>();
+
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
+                var text = span.ToString();
                 if (isLiteral)
                 {
-                    yield return TextSegment(text);
+                    segments.Add(TextSegment(text));
                 }
                 else
                 {
@@ -482,9 +485,11 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         ErrorHelpers.ThrowError ($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                     }
-                    yield return parameters[text];
+                    segments.Add(parameters[text]);
                 }
             }
+
+            return segments;
         }
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
@@ -550,6 +555,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
+
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),

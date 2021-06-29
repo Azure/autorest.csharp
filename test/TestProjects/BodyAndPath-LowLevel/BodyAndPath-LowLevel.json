@@ -39,6 +39,51 @@
             }
           }
         }
+      },
+      "/{itemNameStream}": {
+        "post": {
+          "operationId": "createStream",
+          "summary": "Create products",
+          "description": "Resets products.",
+          "consumes": [
+            "application/octet-stream",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "itemNameStream",
+              "in": "path",
+              "description": "item name.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "excluded",
+              "description": "Excluded connection Ids.",
+              "type": "array",
+              "items": {
+                  "type": "string"
+              },
+              "collectionFormat": "multi"
+            },
+            {
+              "in": "body",
+              "name": "message",
+              "description": "The payload body.",
+              "required": true,
+              "schema": {
+                  "format": "binary",
+                  "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
       }      
     },
     "definitions": {},

@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string RestClientField => "_" + RestClientVariable;
         protected override string RestClientAccessibility => "private";
         protected virtual string ContextProperty => "";
+        protected const string BaseUriField = "BaseUri";
 
         protected void WriteUsings(CodeWriter writer)
         {
@@ -46,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
             // subscriptionId might not always be needed. For example `RestOperations` does not have it.
             var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded});");
+            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
             writer.Line();
         }
 
@@ -359,7 +360,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (isResourceList)
                     {
-                        writer.Append($"return Response.FromValue(response.Value.Value.Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)), response.GetRawResponse())");
+                        writer.Append($"return Response.FromValue(response.Value.");
+                        if (isResourceListResultType(clientMethod.ReturnType))
+                        {
+                            writer.Append($"Value.");
+                        }
+                        writer.Append($"Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)), response.GetRawResponse())");
                     }
                     else
                     {
@@ -378,6 +384,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
+        private bool isResourceListResultType(CSharpType? type)
+        {
+            return type != null && !type.IsFrameworkType && type.Implementation is SchemaObjectType schemaObject;
+        }
+
         private CSharpType? GetBodyTypeForList(CSharpType? returnType, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             if (returnType == null)
@@ -386,8 +397,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var result = returnType;
 
             var resourceData = context.Library.GetResourceData(operationGroup);
+            var areTypesEqual = AreTypesEqual(returnType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type));
+            if (areTypesEqual)
+            {
+                return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+            }
 
-            if (resourceData != null && !returnType.IsFrameworkType && returnType.Implementation is SchemaObjectType schemaObject)
+            if (resourceData != null && isResourceListResultType(returnType) && returnType.Implementation is SchemaObjectType schemaObject)
             {
                 var valueProperty = schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
                     AreTypesEqual(p.Declaration.Type, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)));
@@ -492,6 +508,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (IsTerminalState(operationGroup, context) && paramLength == 1)
             {
+                if (operationGroup.IsTupleResource(context))
+                {
+                    name = $"{name}.Parent";
+                    paramNames.Add($"{name}.Name");
+                    paramLength--;
+                    return;
+                }
                 paramNames.Add(GetParentValue(operationGroup, context));
                 paramLength--;
             }

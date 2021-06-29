@@ -61,8 +61,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Append($"{type}, ");
 
                 if (resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
-                    throw new Exception($"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'. " +
-                        "Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
+                    ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
+Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), resourceOperation.ResourceIdentifierType);
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
@@ -243,8 +243,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         return;
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
-                    writer.WriteXmlDocumentationReturns($"An object representing collection of {StringExtensions.Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
-                    using (writer.Scope($"public {container.Type} Get{StringExtensions.Pluralization(container.ResourceName)}()"))
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {resourceOperation.ResourceName}.");
+                    using (writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
                     {
                         writer.Line($"return new {container.Type}(this);");
                     }

@@ -75,25 +75,24 @@ namespace AutoRest.CSharp.Generation.Writers
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
             const string identifierFormatString = ":I";
-            foreach ((string Text, bool IsLiteral) part in StringExtensions.GetPathParts(formattableString.Format))
+            foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattableString.Format))
             {
-                string text = part.Text;
-                if (part.IsLiteral)
+                if (isLiteral)
                 {
-                    AppendRaw(text);
+                    AppendRaw(span);
                     continue;
                 }
 
-                var formatSeparatorIndex = text.IndexOf(':');
+                var formatSeparatorIndex = span.IndexOf(':');
 
                 int index = int.Parse(formatSeparatorIndex == -1
-                    ? text.AsSpan()
-                    : text.AsSpan(0, formatSeparatorIndex));
+                    ? span
+                    : span.Slice(0, formatSeparatorIndex));
 
                 var argument = formattableString.GetArgument(index);
-                var isLiteral = text.EndsWith(literalFormatString);
-                var isDeclaration = text.EndsWith(declarationFormatString);
-                var isIdentifier = text.EndsWith(identifierFormatString);
+                var isLiteralFormat = span.EndsWith(literalFormatString);
+                var isDeclaration = span.EndsWith(declarationFormatString);
+                var isIdentifier = span.EndsWith(identifierFormatString);
                 switch (argument)
                 {
                     case CodeWriterDelegate d:
@@ -116,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         break;
                     default:
-                        if (isLiteral)
+                        if (isLiteralFormat)
                         {
                             Literal(argument);
                             continue;
@@ -355,11 +354,13 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        public CodeWriter AppendRaw(string str)
+        public CodeWriter AppendRaw(string str) => AppendRaw(str.AsSpan());
+
+        private CodeWriter AppendRaw(ReadOnlySpan<char> span)
         {
-            EnsureSpace(str.Length);
-            str.AsSpan().CopyTo(_builder.AsSpan().Slice(_position));
-            _position += str.Length;
+            EnsureSpace(span.Length);
+            span.CopyTo(_builder.AsSpan().Slice(_position));
+            _position += span.Length;
             return this;
         }
 
