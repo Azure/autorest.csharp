@@ -25,12 +25,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 operationGroup = operationGroup.ParentOperationGroup(context)!;
             }
+            if (operationGroup.ParentResourceType(config) == ResourceTypeBuilder.ResourceGroups)
+                return typeof(ResourceGroupResourceIdentifier);
             if (operationGroup.ParentResourceType(config) == ResourceTypeBuilder.Subscriptions)
                 return typeof(SubscriptionResourceIdentifier);
-            else if (operationGroup.IsTenantResource(config))
+            if (operationGroup.ParentResourceType(config) == ResourceTypeBuilder.Tenant)
                 return typeof(TenantResourceIdentifier);
-            else
-                return typeof(ResourceGroupResourceIdentifier);
+
+            return typeof(TenantResourceIdentifier);
         }
     }
 }
