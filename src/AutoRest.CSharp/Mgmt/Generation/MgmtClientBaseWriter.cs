@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
 
-                if (!operationGroup.IsTenantParent(context))
+                if (!isTenantParent)
                     paramNameList.Reverse();
             }
 
