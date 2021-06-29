@@ -1505,9 +1505,9 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
-        public VirtualMachineExtensionContainer GetVirtualMachineExtensions()
+        public VirtualMachineExtensionVirtualMachineScaleSetsContainer GetVirtualMachineExtensions()
         {
-            return new VirtualMachineExtensionContainer(this);
+            return new VirtualMachineExtensionVirtualMachineScaleSetsContainer(this);
         }
 
         /// <summary> Gets a list of VirtualMachineScaleSetVM in the VirtualMachineScaleSet. </summary>

@@ -114,7 +114,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
@@ -122,7 +122,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -500,7 +500,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Gets a list of ChildBodies in the SubParent. </summary>
+        /// <summary> Gets a list of ChildBody in the SubParent. </summary>
         /// <returns> An object representing collection of ChildBodies and their operations over a SubParent. </returns>
         public ChildBodyContainer GetChildBodies()
         {

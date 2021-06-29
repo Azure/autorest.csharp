@@ -7,7 +7,7 @@
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class to add extension methods to Subscription. </summary>
+    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
     }

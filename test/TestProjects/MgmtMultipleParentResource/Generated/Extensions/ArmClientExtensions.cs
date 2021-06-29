@@ -7,7 +7,7 @@
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class to add extension methods to ArmClient. </summary>
+    /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ArmClientExtensions
     {
     }
