@@ -11,7 +11,7 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
-    "FakeBars": "Microsoft.Fake/fakes/availabilitySetChild",
+    "FakeBars": "Microsoft.Fake/fakes/fakeBars",
     "ResponseNotCalledValues": "Microsoft.Fake/fakes/ResponseNotCalledValues",
     "ResponseNotCalledValueNoPages": "Microsoft.Fake/fakes/responseNotCalledValueNoPages",
     "FakeFeatures": "Microsoft.Fake/fakesFeatures",

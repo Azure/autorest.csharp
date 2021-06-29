@@ -8,7 +8,7 @@ require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtListOnly.json
 namespace: MgmtListOnly
 operation-group-to-resource-type:
-    FakeBars: Microsoft.Fake/fakes/availabilitySetChild
+    FakeBars: Microsoft.Fake/fakes/fakeBars
     ResponseNotCalledValues: Microsoft.Fake/fakes/ResponseNotCalledValues
     ResponseNotCalledValueNoPages: Microsoft.Fake/fakes/responseNotCalledValueNoPages
     FakeFeatures: Microsoft.Fake/fakesFeatures
