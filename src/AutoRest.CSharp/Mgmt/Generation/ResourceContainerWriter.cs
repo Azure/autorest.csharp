@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_resourceContainer.ResourceData, _context);
+            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_context);
             _writer.Line($"public new {idType} Id => base.Id as {idType};");
         }
 

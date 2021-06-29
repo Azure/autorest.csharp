@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceIdentifierChooser
     {
-        internal static Type GetResourceIdentifierType(this OperationGroup operationGroup, MgmtObjectType mgmtObjectType, BuildContext context)
+        internal static Type GetResourceIdentifierType(this OperationGroup operationGroup, BuildContext context)
         {
             var config = context.Configuration.MgmtConfiguration;
             //Go up until we get to the operation group level that is directly under a resource group, subscription or tenant.

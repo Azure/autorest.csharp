@@ -17,6 +17,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
+        private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
+
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             string? result = null;
@@ -32,22 +34,25 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
+        // Get the parent operation group. If the parent is resource group, subscription or tenant, it will return null.
         public static OperationGroup? ParentOperationGroup(this OperationGroup operationGroup, BuildContext context)
         {
-            //TODO use cache
+            OperationGroup? result = null;
+            if (_parentCache.TryGetValue(operationGroup, out result))
+                return result;
             var config = context.Configuration.MgmtConfiguration;
             var parentResourceType = operationGroup.ParentResourceType(config);
-            OperationGroup? parentOperationGroup = null;
 
             foreach (var opGroup in context.CodeModel.OperationGroups)
             {
                 if (opGroup.ResourceType(config).Equals(parentResourceType))
                 {
-                    parentOperationGroup = opGroup;
+                    result = opGroup;
                     break;
                 }
             }
-            return parentOperationGroup;
+            _parentCache.TryAdd(operationGroup, result);
+            return result;
         }
 
         private static string GetParent(OperationGroup operationGroup, MgmtConfiguration config)
