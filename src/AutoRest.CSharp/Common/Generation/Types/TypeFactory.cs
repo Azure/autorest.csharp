@@ -84,14 +84,14 @@ namespace AutoRest.CSharp.Generation.Types
         {
              Debug.Assert(defaultValue.HasValue);
 
-            if (type.IsFrameworkType && type.FrameworkType == typeof(string))
+            if (type.Equals(typeof(string)))
             {
                 return true;
             }
 
-            if (TypeFactory.IsStruct(type) && defaultValue.Value.Value != null)
+            if (IsStruct(type) && defaultValue.Value.Value != null)
             {
-                return false;
+                return defaultValue.Value.IsNewInstanceSentinel;
             }
 
             return type.IsValueType || defaultValue.Value.Value == null;
@@ -175,7 +175,6 @@ namespace AutoRest.CSharp.Generation.Types
             // Assumes AllSchemaTypes.Integer
             _ => schema.Precision switch
             {
-                16 => typeof(short),
                 64 => typeof(long),
                 _ => typeof(int)
             }

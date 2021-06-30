@@ -16,11 +16,22 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.Options;
 using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class CodeWriterExtensions
     {
+        public static CodeWriter AppendIf(this CodeWriter writer, FormattableString formattableString, bool condition)
+        {
+            if (condition)
+            {
+                writer.Append(formattableString);
+            }
+
+            return writer;
+        }
+
         public static CodeWriter AppendNullableValue(this CodeWriter writer, CSharpType type)
         {
             if (type.IsNullable && type.IsValueType)
@@ -31,20 +42,65 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
+        {
+            writer.WriteXmlDocumentationSummary(method.Description);
+            writer.WriteXmlDocumentationParameters(method.Parameters);
+            writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
+            if (method.ReturnDescription != null)
+            {
+                writer.WriteXmlDocumentationReturns(method.ReturnDescription);
+            }
+
+            writer
+                .Append($"{method.Modifiers} ")
+                .AppendIf($"{method.ReturnType} ", method.ReturnType != null)
+                .Append($"{method.Name}(");
+
+            foreach (var parameter in method.Parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            if (method.BaseMethod?.Parameters.Length > 0)
+            {
+                writer.Append($": base(");
+                foreach (var parameter in method.BaseMethod.Parameters)
+                {
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+            }
+
+            writer.Line();
+            return writer.Scope();
+        }
+
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
-                if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
+                var defaultValue = clientParameter.DefaultValue.Value;
+                if (defaultValue.IsNewInstanceSentinel || !TypeFactory.CanBeInitializedInline(clientParameter.Type, defaultValue))
                 {
-                    writer.Append($" = ");
-                    writer.WriteConstant(clientParameter.DefaultValue.Value);
+                    // initialize with default
+                    if (defaultValue.Type.IsValueType)
+                    {
+                        writer.Append($" = default");
+                    }
+                    else
+                    {
+                        writer.Append($" = null");
+                    }
                 }
                 else
                 {
-                    // initialize with null and set the default later
-                    writer.Append($" = null");
+                    writer.Append($" = ");
+                    writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
             }
             else if (enforceDefaultValue)
@@ -62,10 +118,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                 {
+                    var defaultValue = parameter.DefaultValue.Value;
                     writer.Append($"{parameter.Name} ??= ");
-                    if (TypeFactory.IsStruct(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
+                    if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsStruct(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
                     {
-                        WriteConstant(writer, parameter.DefaultValue.Value);
+                        WriteConstant(writer, defaultValue);
                     }
                     else
                     {
@@ -118,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            if (constant.Value == Constant.NewInstanceSentinel)
+            if (constant.IsNewInstanceSentinel)
             {
                 writer.Append($"new {constant.Type}()");
                 return;
@@ -235,41 +292,28 @@ namespace AutoRest.CSharp.Generation.Writers
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
         {
-            PropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
-            {
-                var property = constructor.FindPropertyInitializedByParameter(constructorParameter);
-                return initializers.SingleOrDefault(i => i.Property == property);
-            }
-
-            // Checks if constructor parameters can be satisfied by the provided initializer list
-            List<PropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
-            {
-                List<PropertyInitializer> constructorInitializers = new List<PropertyInitializer>();
-                foreach (var constructorParameter in constructor.Parameters)
-                {
-                    var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
-                    if (objectPropertyInitializer == null)
-                        return null;
-
-                    constructorInitializers.Add(objectPropertyInitializer.Value);
-                }
-
-                return constructorInitializers;
-            }
+            var initializersSet = initializers.ToHashSet();
 
             // Find longest satisfiable ctor
-            List<PropertyInitializer>? selectedCtorInitializers = TryGetParameters(constructor);
+            List<PropertyInitializer> selectedCtorInitializers = constructor.Signature.Parameters
+                .Select(constructor.FindPropertyInitializedByParameter)
+                .Select(property => initializersSet.SingleOrDefault(i => i.Property == property))
+                .ToList();
 
-            Debug.Assert(selectedCtorInitializers != null);
+            // Checks if constructor parameters can be satisfied by the provided initializer list
+            Debug.Assert(!selectedCtorInitializers.Contains(default));
 
             // Find properties that would have to be initialized using a foreach loop
-            var collectionInitializers = initializers
+            var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
                 .Where(i => i.Property.IsReadOnly && TypeFactory.IsCollectionType(i.Property.Declaration.Type))
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers
-            var restOfInitializers = initializers.Except(selectedCtorInitializers).Except(collectionInitializers).ToArray();
+            var restOfInitializers = initializersSet
+                .Except(selectedCtorInitializers)
+                .Except(collectionInitializers)
+                .ToArray();
 
             void WriteObjectInitializer(CodeWriter codeWriter)
             {
@@ -284,7 +328,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (initializer.Type != null)
                     {
-                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type, w => w.Append(initializer.Value));
+                        codeWriter.Append(initializer.Value);
+                        codeWriter.WriteConversion(initializer.Type, initializer.Property.Declaration.Type);
                     }
 
                     codeWriter.Append($", ");
@@ -303,7 +348,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
                             if (propertyInitializer.Type != null)
                             {
-                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type, w => w.Append(propertyInitializer.Value));
+                                codeWriter.Append(propertyInitializer.Value);
+                                codeWriter.WriteConversion(propertyInitializer.Type, propertyInitializer.Property.Declaration.Type);
                             }
 
                             codeWriter.Line($",");
@@ -343,7 +389,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 WriteCollectionInitializer(writer, modelVariable);
 
-                valueCallback(writer, writer => writer.Append(modelVariable));
+                valueCallback(writer, w => w.Append(modelVariable));
             }
             else
             {
@@ -354,7 +400,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to, CodeWriterDelegate value)
+        public static CodeWriter WriteConversion(this CodeWriter writer, CSharpType from, CSharpType to)
         {
             if (to.IsFrameworkType && from.IsFrameworkType)
             {
@@ -362,30 +408,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.Append(value);
-                    if (from.IsNullable)
-                    {
-                        writer.Append($"?");
-                    }
-                    writer.Append($".ToList()");
-                    return;
+                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
                 }
-
-                if (to.FrameworkType == typeof(IList<>) &&
+                else if (to.FrameworkType == typeof(IList<>) &&
                     from.FrameworkType == typeof(IEnumerable<>))
                 {
                     writer.UseNamespace(typeof(Enumerable).Namespace!);
-                    writer.Append(value);
-                    if (from.IsNullable)
-                    {
-                        writer.Append($"?");
-                    }
-                    writer.Append($".ToList()");
-                    return;
+                    writer.AppendIf($"?", from.IsNullable).Append($".ToList()");
                 }
             }
 
-            writer.Append(value);
+            return writer;
         }
 
         internal static CodeWriter.CodeWriterScope? WriteDefinedCheck(this CodeWriter writer, ObjectTypeProperty? property)

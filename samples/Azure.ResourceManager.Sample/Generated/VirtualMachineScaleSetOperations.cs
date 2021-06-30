@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -1496,21 +1496,21 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> Gets a list of VirtualMachineScaleSetExtension in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a list of VirtualMachineScaleSetExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtensions()
         {
             return new VirtualMachineScaleSetExtensionContainer(this);
         }
 
-        /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a list of VirtualMachineExtensions in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineExtensionVirtualMachineScaleSetsContainer GetVirtualMachineExtensions()
         {
             return new VirtualMachineExtensionVirtualMachineScaleSetsContainer(this);
         }
 
-        /// <summary> Gets a list of VirtualMachineScaleSetVM in the VirtualMachineScaleSet. </summary>
+        /// <summary> Gets a list of VirtualMachineScaleSetVMs in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineScaleSetVMContainer GetVirtualMachineScaleSetVMs()
         {

@@ -18,8 +18,7 @@
   },
   "OperationGroupToResource": {
     "Operations": "RestApi",
-    "AvailabilitySets": "AvailabilitySet",
-    "Usage": "NonResource"
+    "AvailabilitySets": "AvailabilitySet"
   },
   "OperationGroupToParent": {
     "Usage": "subscriptions"

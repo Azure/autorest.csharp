@@ -2,15 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Diagnostics;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal struct Constant
+    internal readonly struct Constant
     {
         public static object NewInstanceSentinel { get; } = new object();
 
@@ -48,6 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public object? Value { get; }
         public CSharpType Type { get; }
+        public bool IsNewInstanceSentinel => Value == NewInstanceSentinel;
 
         public static Constant NewInstanceOf(CSharpType type)
         {

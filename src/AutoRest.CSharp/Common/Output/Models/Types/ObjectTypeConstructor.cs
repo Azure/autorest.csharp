@@ -8,16 +8,20 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
-        public ObjectTypeConstructor(MemberDeclarationOptions declaration, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(string name, string modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
         {
-            Declaration = declaration;
-            Parameters = parameters;
+            Signature = new MethodSignature(
+                name,
+                $"Initializes a new instance of {name}",
+                modifiers,
+                parameters,
+                baseConstructor?.Signature);
+
             Initializers = initializers;
             BaseConstructor = baseConstructor;
         }
 
-        public MemberDeclarationOptions Declaration { get; }
-        public Parameter[] Parameters { get; }
+        public MethodSignature Signature { get; }
         public ObjectPropertyInitializer[] Initializers { get; }
         public ObjectTypeConstructor? BaseConstructor { get; }
 
@@ -49,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
 
                     var parameterName = propertyInitializer.Value.Reference.Name;
-                    return Parameters.Single(p => p.Name == parameterName);
+                    return Signature.Parameters.Single(p => p.Name == parameterName);
                 }
             }
 

@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
+    /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
         /// <summary> Gets an object representing a the rest api operations. </summary>

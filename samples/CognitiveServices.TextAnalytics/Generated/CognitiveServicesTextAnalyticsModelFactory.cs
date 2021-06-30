@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using CognitiveServices.TextAnalytics.Models;
 
 namespace CognitiveServices.TextAnalytics
@@ -13,33 +14,35 @@ namespace CognitiveServices.TextAnalytics
     /// <summary> Model factory for read-only models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
-        /// <summary> Initializes new instance of EntitiesResult class. </summary>
+        /// <summary> Initializes a new instance of EntitiesResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         /// <returns> A new <see cref="Models.EntitiesResult"/> instance for mocking. </returns>
-        public static EntitiesResult EntitiesResult(IReadOnlyList<DocumentEntities> documents = default, IReadOnlyList<DocumentError> errors = default, RequestStatistics statistics = default, string modelVersion = default)
+        public static EntitiesResult EntitiesResult(IEnumerable<DocumentEntities> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
             documents ??= new List<DocumentEntities>();
             errors ??= new List<DocumentError>();
-            return new EntitiesResult(documents, errors, statistics, modelVersion);
+
+            return new EntitiesResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes new instance of DocumentEntities class. </summary>
+        /// <summary> Initializes a new instance of DocumentEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <returns> A new <see cref="Models.DocumentEntities"/> instance for mocking. </returns>
-        public static DocumentEntities DocumentEntities(string id = default, IReadOnlyList<Entity> entities = default, IReadOnlyList<TextAnalyticsWarning> warnings = default, DocumentStatistics statistics = default)
+        public static DocumentEntities DocumentEntities(string id = null, IEnumerable<Entity> entities = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
             entities ??= new List<Entity>();
             warnings ??= new List<TextAnalyticsWarning>();
-            return new DocumentEntities(id, entities, warnings, statistics);
+
+            return new DocumentEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes new instance of Entity class. </summary>
+        /// <summary> Initializes a new instance of Entity. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="subcategory"> Entity sub type, such as Age/Year/TimeRange etc. </param>
@@ -47,22 +50,22 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
         /// <param name="confidenceScore"> Confidence score between 0 and 1 of the extracted entity. </param>
         /// <returns> A new <see cref="Models.Entity"/> instance for mocking. </returns>
-        public static Entity Entity(string text = default, string category = default, string subcategory = default, int offset = default, int length = default, double confidenceScore = default)
+        public static Entity Entity(string text = null, string category = null, string subcategory = null, int offset = default, int length = default, double confidenceScore = default)
         {
             return new Entity(text, category, subcategory, offset, length, confidenceScore);
         }
 
-        /// <summary> Initializes new instance of TextAnalyticsWarning class. </summary>
+        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
         /// <returns> A new <see cref="Models.TextAnalyticsWarning"/> instance for mocking. </returns>
-        public static TextAnalyticsWarning TextAnalyticsWarning(WarningCodeValue code = default, string message = default, string targetRef = default)
+        public static TextAnalyticsWarning TextAnalyticsWarning(WarningCodeValue code = default, string message = null, string targetRef = null)
         {
             return new TextAnalyticsWarning(code, message, targetRef);
         }
 
-        /// <summary> Initializes new instance of DocumentStatistics class. </summary>
+        /// <summary> Initializes a new instance of DocumentStatistics. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         /// <returns> A new <see cref="Models.DocumentStatistics"/> instance for mocking. </returns>
@@ -71,42 +74,44 @@ namespace CognitiveServices.TextAnalytics
             return new DocumentStatistics(charactersCount, transactionsCount);
         }
 
-        /// <summary> Initializes new instance of DocumentError class. </summary>
+        /// <summary> Initializes a new instance of DocumentError. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <returns> A new <see cref="Models.DocumentError"/> instance for mocking. </returns>
-        public static DocumentError DocumentError(string id = default, TextAnalyticsError error = default)
+        public static DocumentError DocumentError(string id = null, TextAnalyticsError error = null)
         {
             return new DocumentError(id, error);
         }
 
-        /// <summary> Initializes new instance of TextAnalyticsError class. </summary>
+        /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
         /// <param name="details"> Details about specific errors that led to this reported error. </param>
         /// <returns> A new <see cref="Models.TextAnalyticsError"/> instance for mocking. </returns>
-        public static TextAnalyticsError TextAnalyticsError(ErrorCodeValue code = default, string message = default, string target = default, InnerError innererror = default, IReadOnlyList<TextAnalyticsError> details = default)
+        public static TextAnalyticsError TextAnalyticsError(ErrorCodeValue code = default, string message = null, string target = null, InnerError innererror = null, IEnumerable<TextAnalyticsError> details = null)
         {
             details ??= new List<TextAnalyticsError>();
-            return new TextAnalyticsError(code, message, target, innererror, details);
+
+            return new TextAnalyticsError(code, message, target, innererror, details?.ToList());
         }
 
-        /// <summary> Initializes new instance of InnerError class. </summary>
+        /// <summary> Initializes a new instance of InnerError. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="details"> Error details. </param>
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
         /// <returns> A new <see cref="Models.InnerError"/> instance for mocking. </returns>
-        public static InnerError InnerError(InnerErrorCodeValue code = default, string message = default, IReadOnlyDictionary<string, string> details = default, string target = default, InnerError innererror = default)
+        public static InnerError InnerError(InnerErrorCodeValue code = default, string message = null, IReadOnlyDictionary<string, string> details = null, string target = null, InnerError innererror = null)
         {
             details ??= new Dictionary<string, string>();
+
             return new InnerError(code, message, details, target, innererror);
         }
 
-        /// <summary> Initializes new instance of RequestStatistics class. </summary>
+        /// <summary> Initializes a new instance of RequestStatistics. </summary>
         /// <param name="documentsCount"> Number of documents submitted in the request. </param>
         /// <param name="validDocumentsCount"> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </param>
         /// <param name="erroneousDocumentsCount"> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </param>
@@ -117,33 +122,35 @@ namespace CognitiveServices.TextAnalytics
             return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
         }
 
-        /// <summary> Initializes new instance of EntityLinkingResult class. </summary>
+        /// <summary> Initializes a new instance of EntityLinkingResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         /// <returns> A new <see cref="Models.EntityLinkingResult"/> instance for mocking. </returns>
-        public static EntityLinkingResult EntityLinkingResult(IReadOnlyList<DocumentLinkedEntities> documents = default, IReadOnlyList<DocumentError> errors = default, RequestStatistics statistics = default, string modelVersion = default)
+        public static EntityLinkingResult EntityLinkingResult(IEnumerable<DocumentLinkedEntities> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
             documents ??= new List<DocumentLinkedEntities>();
             errors ??= new List<DocumentError>();
-            return new EntityLinkingResult(documents, errors, statistics, modelVersion);
+
+            return new EntityLinkingResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes new instance of DocumentLinkedEntities class. </summary>
+        /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <returns> A new <see cref="Models.DocumentLinkedEntities"/> instance for mocking. </returns>
-        public static DocumentLinkedEntities DocumentLinkedEntities(string id = default, IReadOnlyList<LinkedEntity> entities = default, IReadOnlyList<TextAnalyticsWarning> warnings = default, DocumentStatistics statistics = default)
+        public static DocumentLinkedEntities DocumentLinkedEntities(string id = null, IEnumerable<LinkedEntity> entities = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
             entities ??= new List<LinkedEntity>();
             warnings ??= new List<TextAnalyticsWarning>();
-            return new DocumentLinkedEntities(id, entities, warnings, statistics);
+
+            return new DocumentLinkedEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes new instance of LinkedEntity class. </summary>
+        /// <summary> Initializes a new instance of LinkedEntity. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
         /// <param name="matches"> List of instances this entity appears in the text. </param>
         /// <param name="language"> Language used in the data source. </param>
@@ -151,98 +158,104 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="url"> URL for the entity&apos;s page from the data source. </param>
         /// <param name="dataSource"> Data source used to extract entity linking, such as Wiki/Bing etc. </param>
         /// <returns> A new <see cref="Models.LinkedEntity"/> instance for mocking. </returns>
-        public static LinkedEntity LinkedEntity(string name = default, IReadOnlyList<Match> matches = default, string language = default, string id = default, string url = default, string dataSource = default)
+        public static LinkedEntity LinkedEntity(string name = null, IEnumerable<Match> matches = null, string language = null, string id = null, string url = null, string dataSource = null)
         {
             matches ??= new List<Match>();
-            return new LinkedEntity(name, matches, language, id, url, dataSource);
+
+            return new LinkedEntity(name, matches?.ToList(), language, id, url, dataSource);
         }
 
-        /// <summary> Initializes new instance of Match class. </summary>
+        /// <summary> Initializes a new instance of Match. </summary>
         /// <param name="confidenceScore"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity match text. </param>
         /// <returns> A new <see cref="Models.Match"/> instance for mocking. </returns>
-        public static Match Match(double confidenceScore = default, string text = default, int offset = default, int length = default)
+        public static Match Match(double confidenceScore = default, string text = null, int offset = default, int length = default)
         {
             return new Match(confidenceScore, text, offset, length);
         }
 
-        /// <summary> Initializes new instance of KeyPhraseResult class. </summary>
+        /// <summary> Initializes a new instance of KeyPhraseResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         /// <returns> A new <see cref="Models.KeyPhraseResult"/> instance for mocking. </returns>
-        public static KeyPhraseResult KeyPhraseResult(IReadOnlyList<DocumentKeyPhrases> documents = default, IReadOnlyList<DocumentError> errors = default, RequestStatistics statistics = default, string modelVersion = default)
+        public static KeyPhraseResult KeyPhraseResult(IEnumerable<DocumentKeyPhrases> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
             documents ??= new List<DocumentKeyPhrases>();
             errors ??= new List<DocumentError>();
-            return new KeyPhraseResult(documents, errors, statistics, modelVersion);
+
+            return new KeyPhraseResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes new instance of DocumentKeyPhrases class. </summary>
+        /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <returns> A new <see cref="Models.DocumentKeyPhrases"/> instance for mocking. </returns>
-        public static DocumentKeyPhrases DocumentKeyPhrases(string id = default, IReadOnlyList<string> keyPhrases = default, IReadOnlyList<TextAnalyticsWarning> warnings = default, DocumentStatistics statistics = default)
+        public static DocumentKeyPhrases DocumentKeyPhrases(string id = null, IEnumerable<string> keyPhrases = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
             keyPhrases ??= new List<string>();
             warnings ??= new List<TextAnalyticsWarning>();
-            return new DocumentKeyPhrases(id, keyPhrases, warnings, statistics);
+
+            return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes new instance of LanguageResult class. </summary>
+        /// <summary> Initializes a new instance of LanguageResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         /// <returns> A new <see cref="Models.LanguageResult"/> instance for mocking. </returns>
-        public static LanguageResult LanguageResult(IReadOnlyList<DocumentLanguage> documents = default, IReadOnlyList<DocumentError> errors = default, RequestStatistics statistics = default, string modelVersion = default)
+        public static LanguageResult LanguageResult(IEnumerable<DocumentLanguage> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
             documents ??= new List<DocumentLanguage>();
             errors ??= new List<DocumentError>();
-            return new LanguageResult(documents, errors, statistics, modelVersion);
+
+            return new LanguageResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes new instance of DocumentLanguage class. </summary>
+        /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguage"> Detected Language. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <returns> A new <see cref="Models.DocumentLanguage"/> instance for mocking. </returns>
-        public static DocumentLanguage DocumentLanguage(string id = default, DetectedLanguage detectedLanguage = default, IReadOnlyList<TextAnalyticsWarning> warnings = default, DocumentStatistics statistics = default)
+        public static DocumentLanguage DocumentLanguage(string id = null, DetectedLanguage detectedLanguage = null, IEnumerable<TextAnalyticsWarning> warnings = null, DocumentStatistics statistics = null)
         {
             warnings ??= new List<TextAnalyticsWarning>();
-            return new DocumentLanguage(id, detectedLanguage, warnings, statistics);
+
+            return new DocumentLanguage(id, detectedLanguage, warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes new instance of DetectedLanguage class. </summary>
+        /// <summary> Initializes a new instance of DetectedLanguage. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
         /// <returns> A new <see cref="Models.DetectedLanguage"/> instance for mocking. </returns>
-        public static DetectedLanguage DetectedLanguage(string name = default, string iso6391Name = default, double confidenceScore = default)
+        public static DetectedLanguage DetectedLanguage(string name = null, string iso6391Name = null, double confidenceScore = default)
         {
             return new DetectedLanguage(name, iso6391Name, confidenceScore);
         }
 
-        /// <summary> Initializes new instance of SentimentResponse class. </summary>
+        /// <summary> Initializes a new instance of SentimentResponse. </summary>
         /// <param name="documents"> Sentiment analysis per document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
         /// <returns> A new <see cref="Models.SentimentResponse"/> instance for mocking. </returns>
-        public static SentimentResponse SentimentResponse(IReadOnlyList<DocumentSentiment> documents = default, IReadOnlyList<DocumentError> errors = default, RequestStatistics statistics = default, string modelVersion = default)
+        public static SentimentResponse SentimentResponse(IEnumerable<DocumentSentiment> documents = null, IEnumerable<DocumentError> errors = null, RequestStatistics statistics = null, string modelVersion = null)
         {
             documents ??= new List<DocumentSentiment>();
             errors ??= new List<DocumentError>();
-            return new SentimentResponse(documents, errors, statistics, modelVersion);
+
+            return new SentimentResponse(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes new instance of DocumentSentiment class. </summary>
+        /// <summary> Initializes a new instance of DocumentSentiment. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
@@ -250,14 +263,15 @@ namespace CognitiveServices.TextAnalytics
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <returns> A new <see cref="Models.DocumentSentiment"/> instance for mocking. </returns>
-        public static DocumentSentiment DocumentSentiment(string id = default, DocumentSentimentValue sentiment = default, DocumentStatistics statistics = default, SentimentConfidenceScorePerLabel confidenceScores = default, IReadOnlyList<SentenceSentiment> sentences = default, IReadOnlyList<TextAnalyticsWarning> warnings = default)
+        public static DocumentSentiment DocumentSentiment(string id = null, DocumentSentimentValue sentiment = default, DocumentStatistics statistics = null, SentimentConfidenceScorePerLabel confidenceScores = null, IEnumerable<SentenceSentiment> sentences = null, IEnumerable<TextAnalyticsWarning> warnings = null)
         {
             sentences ??= new List<SentenceSentiment>();
             warnings ??= new List<TextAnalyticsWarning>();
-            return new DocumentSentiment(id, sentiment, statistics, confidenceScores, sentences, warnings);
+
+            return new DocumentSentiment(id, sentiment, statistics, confidenceScores, sentences?.ToList(), warnings?.ToList());
         }
 
-        /// <summary> Initializes new instance of SentimentConfidenceScorePerLabel class. </summary>
+        /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
         /// <param name="positive"> . </param>
         /// <param name="neutral"> . </param>
         /// <param name="negative"> . </param>
@@ -267,14 +281,14 @@ namespace CognitiveServices.TextAnalytics
             return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
         }
 
-        /// <summary> Initializes new instance of SentenceSentiment class. </summary>
+        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
         /// <returns> A new <see cref="Models.SentenceSentiment"/> instance for mocking. </returns>
-        public static SentenceSentiment SentenceSentiment(string text = default, SentenceSentimentValue sentiment = default, SentimentConfidenceScorePerLabel confidenceScores = default, int offset = default, int length = default)
+        public static SentenceSentiment SentenceSentiment(string text = null, SentenceSentimentValue sentiment = default, SentimentConfidenceScorePerLabel confidenceScores = null, int offset = default, int length = default)
         {
             return new SentenceSentiment(text, sentiment, confidenceScores, offset, length);
         }

@@ -12,10 +12,10 @@ namespace ModelWithConverterUsage
     /// <summary> Model factory for read-only models. </summary>
     public static partial class ModelWithConverterUsageModelFactory
     {
-        /// <summary> Initializes new instance of OutputModel class. </summary>
+        /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
-        public static OutputModel OutputModel(string outputModelProperty = default)
+        public static OutputModel OutputModel(string outputModelProperty = null)
         {
             return new OutputModel(outputModelProperty);
         }

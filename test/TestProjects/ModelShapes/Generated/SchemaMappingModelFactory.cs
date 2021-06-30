@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using ModelShapes.Models;
 
 namespace ModelShapes
@@ -13,7 +14,7 @@ namespace ModelShapes
     /// <summary> Model factory for read-only models. </summary>
     public static partial class SchemaMappingModelFactory
     {
-        /// <summary> Initializes new instance of MixedModel class. </summary>
+        /// <summary> Initializes a new instance of MixedModel. </summary>
         /// <param name="requiredString"> . </param>
         /// <param name="requiredInt"> . </param>
         /// <param name="requiredStringList"> . </param>
@@ -33,7 +34,7 @@ namespace ModelShapes
         /// <param name="requiredReadonlyInt"> . </param>
         /// <param name="nonRequiredReadonlyInt"> . </param>
         /// <returns> A new <see cref="Models.MixedModel"/> instance for mocking. </returns>
-        public static MixedModel MixedModel(string requiredString = default, int requiredInt = default, IList<string> requiredStringList = default, IList<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IList<string> nonRequiredStringList = default, IList<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IList<string> requiredNullableStringList = default, IList<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IList<string> nonRequiredNullableStringList = default, IList<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
+        public static MixedModel MixedModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null)
         {
             requiredStringList ??= new List<string>();
             requiredIntList ??= new List<int>();
@@ -43,10 +44,11 @@ namespace ModelShapes
             requiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList, nonRequiredNullableIntList, requiredReadonlyInt, nonRequiredReadonlyInt);
+
+            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt);
         }
 
-        /// <summary> Initializes new instance of OutputModel class. </summary>
+        /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"> . </param>
         /// <param name="requiredInt"> . </param>
         /// <param name="requiredStringList"> . </param>
@@ -66,7 +68,7 @@ namespace ModelShapes
         /// <param name="requiredReadonlyInt"> . </param>
         /// <param name="nonRequiredReadonlyInt"> . </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
-        public static OutputModel OutputModel(string requiredString = default, int requiredInt = default, IReadOnlyList<string> requiredStringList = default, IReadOnlyList<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IReadOnlyList<string> nonRequiredStringList = default, IReadOnlyList<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IReadOnlyList<string> requiredNullableStringList = default, IReadOnlyList<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IReadOnlyList<string> nonRequiredNullableStringList = default, IReadOnlyList<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
+        public static OutputModel OutputModel(string requiredString = null, int requiredInt = default, IEnumerable<string> requiredStringList = null, IEnumerable<int> requiredIntList = null, string nonRequiredString = null, int? nonRequiredInt = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, string requiredNullableString = null, int? requiredNullableInt = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, string nonRequiredNullableString = null, int? nonRequiredNullableInt = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = null)
         {
             requiredStringList ??= new List<string>();
             requiredIntList ??= new List<int>();
@@ -76,23 +78,25 @@ namespace ModelShapes
             requiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList, nonRequiredNullableIntList, requiredReadonlyInt, nonRequiredReadonlyInt);
+
+            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt);
         }
 
-        /// <summary> Initializes new instance of MixedModelWithReadonlyProperty class. </summary>
+        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
         /// <param name="readonlyProperty"> . </param>
         /// <param name="readonlyListProperty"> . </param>
         /// <returns> A new <see cref="Models.MixedModelWithReadonlyProperty"/> instance for mocking. </returns>
-        public static MixedModelWithReadonlyProperty MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty = default, IReadOnlyList<ReadonlyModel> readonlyListProperty = default)
+        public static MixedModelWithReadonlyProperty MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty = null, IEnumerable<ReadonlyModel> readonlyListProperty = null)
         {
             readonlyListProperty ??= new List<ReadonlyModel>();
-            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty);
+
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList());
         }
 
-        /// <summary> Initializes new instance of ReadonlyModel class. </summary>
+        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
         /// <param name="name"> . </param>
         /// <returns> A new <see cref="Models.ReadonlyModel"/> instance for mocking. </returns>
-        public static ReadonlyModel ReadonlyModel(string name = default)
+        public static ReadonlyModel ReadonlyModel(string name = null)
         {
             return new ReadonlyModel(name);
         }
