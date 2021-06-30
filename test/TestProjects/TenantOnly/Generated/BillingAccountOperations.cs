@@ -33,8 +33,7 @@ namespace TenantOnly
         protected internal BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            Id.TryGetSubscriptionId(out var subscriptionId);
-            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts";
