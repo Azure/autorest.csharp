@@ -46,5 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             return false;
         }
+
+        // TODO -- move the logic to determine the extension resource name here
     }
 }

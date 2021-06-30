@@ -25,7 +25,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string OperationsSuffixValue = "Operations";
         private const string ContainerSuffixValue = "Container";
         private const string DataSuffixValue = "Data";
-        private string _prefix;
         private Type? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
         private IEnumerable<ClientMethod>? _methods;
@@ -42,22 +41,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             _context = context;
             OperationGroup = operationGroup;
-            _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
-            var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
-            string midValue = "";
-            if (isExtension)
-            {
-                var parent = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
-                var parentArr = parent.Split('/');
-                midValue = parentArr[parentArr.Length - 1];
-                midValue = FirstCharToUpper(midValue);
-            }
-            DefaultName = _prefix + midValue + SuffixValue;
+            DefaultName = ResourceName + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
         }
 
-        public string ResourceName => OperationGroup.Resource(_context.Configuration.MgmtConfiguration);
+        public Resource Resource => _context.Library.GetArmResource(OperationGroup);
+
+        public string ResourceName => Resource.Type.Name;
 
         protected virtual string SuffixValue => OperationsSuffixValue;
 
@@ -65,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultAccessibility { get; } = "public";
 
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, ResourceName));
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
@@ -109,13 +100,5 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"A class representing the operations that can be performed over a specific {clientPrefix}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
-
-        private static string FirstCharToUpper(string input) =>
-        input switch
-        {
-            null => throw new ArgumentNullException(nameof(input)),
-            "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
-            _ => input.First().ToString().ToUpper() + input.Substring(1)
-        };
     }
 }

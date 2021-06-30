@@ -17,17 +17,17 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing collection of ChildBody and their operations over a SubParent. </summary>
-    public partial class ChildBodyContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ChildBody, ChildBodyData>
+    /// <summary> A class representing collection of ChildBodySubParents and their operations over a SubParent. </summary>
+    public partial class ChildBodySubParentsContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ChildBodySubParents, ChildBodyData>
     {
-        /// <summary> Initializes a new instance of the <see cref="ChildBodyContainer"/> class for mocking. </summary>
-        protected ChildBodyContainer()
+        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParentsContainer"/> class for mocking. </summary>
+        protected ChildBodySubParentsContainer()
         {
         }
 
-        /// <summary> Initializes a new instance of ChildBodyContainer class. </summary>
+        /// <summary> Initializes a new instance of ChildBodySubParentsContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ChildBodyContainer(ResourceOperationsBase parent) : base(parent)
+        internal ChildBodySubParentsContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -45,13 +45,13 @@ namespace MgmtMultipleParentResource
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ChildBody. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a ChildBodySubParents. Please note some properties can be set only during creation. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ChildBody> CreateOrUpdate(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        public Response<ChildBodySubParents> CreateOrUpdate(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -73,13 +73,13 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBody. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a ChildBodySubParents. Please note some properties can be set only during creation. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ChildBody>> CreateOrUpdateAsync(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodySubParents>> CreateOrUpdateAsync(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.CreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.CreateOrUpdate");
             scope.Start();
             try
             {
@@ -102,13 +102,13 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBody. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a ChildBodySubParents. Please note some properties can be set only during creation. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public ChildrenCreateOrUpdateOperation StartCreateOrUpdate(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -131,13 +131,13 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBody. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a ChildBodySubParents. Please note some properties can be set only during creation. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<ChildrenCreateOrUpdateOperation> StartCreateOrUpdateAsync(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -164,9 +164,9 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ChildBody> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<ChildBodySubParents> Get(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.Get");
             scope.Start();
             try
             {
@@ -176,7 +176,7 @@ namespace MgmtMultipleParentResource
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken);
-                return Response.FromValue(new ChildBody(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodySubParents(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,9 +189,9 @@ namespace MgmtMultipleParentResource
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ChildBody>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodySubParents>> GetAsync(string childName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.Get");
             scope.Start();
             try
             {
@@ -201,7 +201,7 @@ namespace MgmtMultipleParentResource
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBody(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodySubParents(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -213,17 +213,17 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get all run commands of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ChildBody" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ChildBody> List(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ChildBodySubParents" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ChildBodySubParents> List(string expand = null, CancellationToken cancellationToken = default)
         {
-            Page<ChildBody> FirstPageFunc(int? pageSizeHint)
+            Page<ChildBodySubParents> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.List");
                 scope.Start();
                 try
                 {
                     var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ChildBodySubParents(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -231,14 +231,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            Page<ChildBody> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ChildBodySubParents> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.List");
                 scope.Start();
                 try
                 {
                     var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new ChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ChildBodySubParents(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -252,17 +252,17 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get all run commands of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ChildBody" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ChildBody> ListAsync(string expand = null, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ChildBodySubParents" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ChildBodySubParents> ListAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            async Task<Page<ChildBody>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ChildBodySubParents>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.List");
                 scope.Start();
                 try
                 {
                     var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ChildBodySubParents(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -270,14 +270,14 @@ namespace MgmtMultipleParentResource
                     throw;
                 }
             }
-            async Task<Page<ChildBody>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ChildBodySubParents>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.List");
                 scope.Start();
                 try
                 {
                     var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new ChildBody(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new ChildBodySubParents(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -288,18 +288,18 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of ChildBody for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of ChildBodySubParents for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.ListAsGenericResource");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ChildBody.ResourceType);
+                var filters = new ResourceFilterCollection(ChildBodySubParentsOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }
@@ -310,18 +310,18 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Filters the list of ChildBody for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of ChildBodySubParents for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsContainer.ListAsGenericResource");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ChildBody.ResourceType);
+                var filters = new ResourceFilterCollection(ChildBodySubParentsOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }
@@ -333,6 +333,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ChildBody, ChildBodyData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ChildBodySubParents, ChildBodyData> Construct() { }
     }
 }

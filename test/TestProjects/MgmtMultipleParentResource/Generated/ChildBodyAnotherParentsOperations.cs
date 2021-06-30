@@ -17,38 +17,38 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing the operations that can be performed over a specific SubParent. </summary>
-    public partial class SubParentOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubParent>
+    /// <summary> A class representing the operations that can be performed over a specific ChildBodyAnotherParents. </summary>
+    public partial class ChildBodyAnotherParentsOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ChildBodyAnotherParents>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private SubParentsRestOperations _restClient { get; }
+        private AnotherChildrenRestOperations _restClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="SubParentOperations"/> class for mocking. </summary>
-        protected SubParentOperations()
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyAnotherParentsOperations"/> class for mocking. </summary>
+        protected ChildBodyAnotherParentsOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubParentOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ChildBodyAnotherParentsOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubParentOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ChildBodyAnotherParentsOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/parents/subParents";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents/children";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<SubParent>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<ChildBodyAnotherParents>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyAnotherParents(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -58,14 +58,14 @@ namespace MgmtMultipleParentResource
         }
 
         /// <inheritdoc />
-        public override Response<SubParent> Get(CancellationToken cancellationToken = default)
+        public override Response<ChildBodyAnotherParents> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyAnotherParents(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -74,17 +74,17 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<SubParent>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyAnotherParents>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyAnotherParents(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -93,17 +93,17 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SubParent> Get(string expand, CancellationToken cancellationToken = default)
+        public Response<ChildBodyAnotherParents> Get(string expand, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return Response.FromValue(new SubParent(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ChildBodyAnotherParents(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,11 +128,11 @@ namespace MgmtMultipleParentResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Delete");
             scope.Start();
             try
             {
@@ -146,11 +146,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.Delete");
             scope.Start();
             try
             {
@@ -164,16 +164,16 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new SubParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new AnotherChildrenDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -182,16 +182,16 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Operation StartDelete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new SubParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new AnotherChildrenDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -205,9 +205,9 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<SubParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyAnotherParents>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.AddTag");
             scope.Start();
             try
             {
@@ -226,9 +226,9 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<SubParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<ChildBodyAnotherParents> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.AddTag");
             scope.Start();
             try
             {
@@ -248,23 +248,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<SubParentsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<AnotherChildrenUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -279,23 +279,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public SubParentsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
+        public AnotherChildrenUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -308,9 +308,9 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<SubParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyAnotherParents>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.SetTags");
             scope.Start();
             try
             {
@@ -328,9 +328,9 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<SubParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<ChildBodyAnotherParents> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.SetTags");
             scope.Start();
             try
             {
@@ -349,21 +349,21 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<SubParentsUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<AnotherChildrenUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -377,21 +377,21 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public SubParentsUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public AnotherChildrenUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -404,9 +404,9 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<SubParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodyAnotherParents>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -424,9 +424,9 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<SubParent> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<ChildBodyAnotherParents> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -445,23 +445,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<SubParentsUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<AnotherChildrenUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -475,36 +475,29 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public SubParentsUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
+        public AnotherChildrenUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentsOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new SubParentUpdate();
+                var patchable = new ChildBodyUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Gets a list of ChildBodySubParents in the SubParent. </summary>
-        /// <returns> An object representing collection of ChildBodySubParents and their operations over a SubParent. </returns>
-        public ChildBodySubParentsContainer GetChildBodySubParents()
-        {
-            return new ChildBodySubParentsContainer(this);
         }
     }
 }
