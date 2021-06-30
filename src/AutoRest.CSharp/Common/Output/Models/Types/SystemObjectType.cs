@@ -74,13 +74,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeConstructor BuildConstructor(IEnumerable<ParameterInfo> paramInfos)
         {
-            MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions("protected", DefaultName, Type);
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var param in paramInfos)
-            {
-                parameters.Add(new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, false));
-
-            }
+            var parameters = paramInfos
+                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, false))
+                .ToArray();
 
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             foreach (var autoRestProperty in Properties)
@@ -89,8 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
             }
 
-            ObjectTypeConstructor ctor = new ObjectTypeConstructor(memberDeclarationOptions, parameters.ToArray(), initializers.ToArray(), GetBaseCtor());
-            return ctor;
+            return new ObjectTypeConstructor(DefaultName, "protected", parameters, initializers.ToArray(), GetBaseCtor());
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructorAttribute)));

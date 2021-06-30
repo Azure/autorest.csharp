@@ -3,37 +3,36 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace AutoRest.CSharp.Generation.Writers
+namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class SubscriptionExtensionsWriter : MgmtClientBaseWriter
+    internal class SubscriptionExtensionsWriter : MgmtExtensionWriter
     {
-        public void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context, IEnumerable<Resource> resources)
+        protected override string Description => "A class to add extension methods to Subscription.";
+        protected override string ExtensionClassType => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions];
+        protected override string ExtensionOperationVariableName => "subscription";
+
+        protected override Type ExtensionOperationVariableType => typeof(SubscriptionOperations);
+
+        public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary("Extension methods for convenient access on SubscriptionOperations in a client");
-                using (writer.Scope($"public static partial class SubscriptionExtensions"))
+                writer.WriteXmlDocumentationSummary(Description);
+                using (writer.Scope($"{Accessibility} static partial class {ExtensionClassType}"))
                 {
-                    foreach (var resource in resources)
+                    foreach (var resource in context.Library.ArmResource)
                     {
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             {
                                 writer.Line($"#region {resource.Type.Name}");
                                 var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                                WriteGetResourceContainerMethod(writer, resourceContainer);
+                                WriteGetResourceContainerMethod(writer, resourceContainer!);
                                 writer.LineRaw("#endregion");
                             }
                         }
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             PagingMethod? pagingMethod = default;
                             foreach (var method in resourceOperation.PagingMethods)
                             {
-                                if (method.Name == "ListAll" || method.Name == "ListBySubscription")
+                                if (method.Method.Name == "ListAll" || method.Method.Name == "ListBySubscription")
                                 {
                                     pagingMethod = method;
                                     break;
@@ -65,7 +64,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             if (pagingMethod != null)
                             {
                                 writer.Line($"#region {resource.Type.Name}");
-                                WriteGetResourceRestOperations(writer, resourceOperation);
+                                WriteGetRestOperations(writer, resourceOperation.RestClient);
 
                                 WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, true);
                                 WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, false);
@@ -77,6 +76,32 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         writer.Line();
                     }
+
+                    // write the standalone list operations with the parent of a subscription
+                    var mgmtExtensionOperations = context.Library.GetNonResourceOperations(ResourceTypeBuilder.Subscriptions);
+
+                    foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
+                    {
+                        writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
+                        WriteGetRestOperations(writer, mgmtExtensionOperation.RestClient);
+
+                        // despite that we should only have one method, but we still using an IEnumerable
+                        foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
+                        {
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
+                        }
+
+                        foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
+                        {
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                        }
+
+                        writer.LineRaw("#endregion");
+                        writer.Line();
+                    }
+
                 }
             }
         }
@@ -92,90 +117,23 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteGetResourceRestOperations(CodeWriter writer, ResourceOperation resourceOperation)
-        {
-            writer.Append($"private static {resourceOperation.RestClient.Type} Get{resourceOperation.RestClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, ");
-            // TODO: Use https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783 rest client parameters
-            foreach (Parameter parameter in resourceOperation.RestClient.Parameters)
-            {
-                if (parameter.IsApiVersionParameter)
-                {
-                    continue;
-                }
-                writer.WriteParameter(parameter);
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
-
-            using (writer.Scope())
-            {
-                writer.Append($"return new {resourceOperation.RestClient.Type}(clientDiagnostics, pipeline, ");
-                foreach (var parameter in resourceOperation.RestClient.Parameters)
-                {
-                    if (parameter.IsApiVersionParameter)
-                    {
-                        continue;
-                    }
-                    writer.Append($"{parameter.Name}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-            }
-            writer.Line();
-        }
-
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
         {
-            Parameter[] nonPathParameters = GetNonPathParameters(pagingMethod.Method);
-            writer.WriteXmlDocumentationSummary($"Lists the {resource.Type.Name}s for this {typeof(SubscriptionOperations)}.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
-            foreach (var param in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(param);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentation("return", $"A collection of resource operations that may take multiple service requests to iterate over.");
-
-            var pageType = resource.Type;
-            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
-            var methodName = $"List{resource.Type.Name}";
-            writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, ");
-            foreach (var param in nonPathParameters)
-            {
-                writer.WriteParameter(param);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-            using (writer.Scope())
-            {
-                writer.Append($"return subscription.UseClientContext((baseUri, credential, options, pipeline) =>");
-                using (writer.Scope())
-                {
-                    var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
-                    var restOperations = new CodeWriterDeclaration("restOperations");
-                    var result = new CodeWriterDeclaration("result");
-
-                    writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
-                    // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{resourceOperation.RestClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
-
-                    WritePagingOperationBody(writer, pagingMethod, async, resource.Type, restOperations.ActualName, clientDiagnostics.ActualName, $".Select(value => new {resource.Type.Name}(subscription, value))");
-                }
-                writer.Append($");");
-            }
-            writer.Line();
+            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod,
+                $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName}s for a {typeof(SubscriptionOperations)} represented as generic resources.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
             writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentation("return", $"A collection of resource operations that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
-            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), typeof(GenericResource)) : new CSharpType(typeof(Pageable<>), typeof(GenericResource));
+            var responseType = typeof(GenericResource).WrapPageable(async);
             using (writer.Scope($"public static {responseType} {CreateMethodName($"List{resourceOperation.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 var filters = new CodeWriterDeclaration("filters");
@@ -199,6 +157,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.LineRaw("#endregion");
             writer.Line();
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            return true;
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // override to do nothing since we do not need anything from subscription.Id in the SubscriptionExtensions class
         }
     }
 }

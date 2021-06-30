@@ -1,7 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Generation.Types;
+using System.Diagnostics;
+using System.Linq;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -15,59 +17,28 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
                 using (writer.Scope($"{modelFactoryType.Declaration.Accessibility} static partial class {modelFactoryType.Type.Name}"))
                 {
-                    foreach (var model in modelFactoryType.Models)
+                    foreach (var method in modelFactoryType.Methods)
                     {
-                        WriteFactoryMethodForSchemaObjectType(writer, model);
+                        WriteFactoryMethodForSchemaObjectType(writer, method);
                         writer.Line();
                     }
                 }
             }
         }
 
-        private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, SchemaObjectType objectType)
+        private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, MethodSignature method)
         {
-            var parameters = objectType.SerializationConstructor.Parameters;
-            writer.WriteXmlDocumentationSummary($"Initializes new instance of {objectType.Type.Name} {(objectType.IsStruct ? "structure" : "class")}.");
-            foreach (var parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentationReturns($"A new <see cref=\"{objectType.Declaration.Namespace}.{objectType.Type.Name}\"/> instance for mocking.");
+            var modelType = method.ReturnType?.Implementation as SchemaObjectType;
+            Debug.Assert(modelType != null);
 
-            writer.Append($"public static {objectType.Type} {objectType.Type.Name}(");
-            foreach (var parameter in parameters)
-            {
-                writer.WriteParameter(parameter, enforceDefaultValue: true);
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
+            var ctor = modelType.SerializationConstructor;
+            var initializers = method.Parameters
+                .Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, w => w.Identifier($"{p.Name}"), p.Type));
 
-            using (writer.Scope())
+            using (writer.WriteMethodDeclaration(method))
             {
-                foreach (var parameter in parameters)
-                {
-                    if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
-                    {
-                        writer.Append($"{parameter.Name} ??= ");
-                        writer.WriteConstant(parameter.DefaultValue.Value);
-                        writer.Line($";");
-                    }
-                    else if (TypeFactory.IsCollectionType(parameter.Type))
-                    {
-                        writer.Line($"{parameter.Name} ??= new {TypeFactory.GetImplementationType(parameter.Type)}();");
-                    }
-                }
-
-                writer.Append($"return new {objectType.Type}(");
-                foreach (var parameter in parameters)
-                {
-                    writer.Identifier(parameter.Name);
-                    writer.AppendRaw(", ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Append($");");
-                writer.Line();
+                writer.WriteParameterNullChecks(method.Parameters);
+                writer.WriteInitialization((w, v) => w.Line($"return {v};"), modelType, ctor, initializers);
             }
         }
     }

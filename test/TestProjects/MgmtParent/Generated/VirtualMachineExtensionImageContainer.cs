@@ -37,7 +37,7 @@ namespace MgmtParent
         private VirtualMachineExtensionImagesRestOperations _restClient => new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+        public new SubscriptionResourceIdentifier Id => base.Id as SubscriptionResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
@@ -343,14 +343,14 @@ namespace MgmtParent
 
         /// <summary> Gets a list of virtual machine extension image types. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<VirtualMachineExtensionImage>>> ListTypesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListTypesAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListTypes");
             scope.Start();
             try
             {
                 var response = await _restClient.ListTypesAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Select(data => new VirtualMachineExtensionImage(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {
@@ -361,14 +361,14 @@ namespace MgmtParent
 
         /// <summary> Gets a list of virtual machine extension image types. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<VirtualMachineExtensionImage>> ListTypes(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListTypes(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListTypes");
             scope.Start();
             try
             {
                 var response = _restClient.ListTypes(Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Select(data => new VirtualMachineExtensionImage(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {
@@ -382,14 +382,14 @@ namespace MgmtParent
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<VirtualMachineExtensionImage>>> ListVersionsAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListVersionsAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListVersions");
             scope.Start();
             try
             {
                 var response = await _restClient.ListVersionsAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Select(data => new VirtualMachineExtensionImage(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {
@@ -403,14 +403,14 @@ namespace MgmtParent
         /// <param name="top"> The Integer to use. </param>
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<VirtualMachineExtensionImage>> ListVersions(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListVersions(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListVersions");
             scope.Start();
             try
             {
                 var response = _restClient.ListVersions(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken);
-                return Response.FromValue(response.Value.Select(data => new VirtualMachineExtensionImage(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {

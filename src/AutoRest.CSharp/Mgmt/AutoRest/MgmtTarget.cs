@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -118,17 +120,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var extensionsWriter = new CodeWriter();
-            resourceGroupExtensionsWriter.WriteExtension(context, extensionsWriter);
-            project.AddGeneratedFile("Extensions/ResourceGroupExtensions.cs", extensionsWriter.ToString());
+            resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, context);
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", extensionsWriter.ToString());
 
             var subscriptionExtensionsCodeWriter = new CodeWriter();
-            var resources = context.Library.ArmResource;
-            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context, resources);
-            project.AddGeneratedFile($"Extensions/SubscriptionExtensions.cs", subscriptionExtensionsCodeWriter.ToString());
+            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
 
             var armClientExtensionsCodeWriter = new CodeWriter();
             armClientExtensionsWriter.WriteExtension(armClientExtensionsCodeWriter, context);
-            project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant]}.cs", armClientExtensionsCodeWriter.ToString());
 
             if (context.Library.RestApiOperationGroup != null)
             {

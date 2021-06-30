@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -82,8 +81,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod.RestClientMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, restMethod.RestClientMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
         }
 
@@ -98,7 +97,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            _writer.Line($"public new {typeof(ResourceGroupResourceIdentifier)} Id => base.Id as {typeof(ResourceGroupResourceIdentifier)};");
+            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_context);
+            _writer.Line($"public new {idType} Id => base.Id as {idType};");
         }
 
         private void WriteResourceOperations()
@@ -160,21 +160,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteContainerMethodScope(false, $"{lroObjectType.Name}", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = {RestClientField}.{restClientMethod.Name}(");
-                foreach (var parameter in parameterMapping)
-                {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
+                WriteArguments(writer, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken);");
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
                     _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
+                    WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
                     _writer.Line($"originalResponse);");
@@ -192,21 +184,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteContainerMethodScope(true, $"{typeof(Task)}<{lroObjectType.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = await {RestClientField}.{restClientMethod.Name}Async(");
-                foreach (var parameter in parameterMapping)
-                {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
+                WriteArguments(writer, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
                     _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
+                    WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
                     _writer.Line($"originalResponse);");
@@ -324,8 +308,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    string asyncText = async ? "Async" : string.Empty;
-                    _writer.Line($"return {typeof(ResourceListOperations)}.ListAtContext{asyncText}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
                 });
             }
         }

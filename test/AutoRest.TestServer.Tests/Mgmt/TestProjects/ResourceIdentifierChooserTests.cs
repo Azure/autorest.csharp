@@ -2,6 +2,7 @@
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
 using ResourceIdentifierChooser;
+using TenantOnly;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -20,6 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(WritableSubResResource), typeof(SubscriptionResourceIdentifier))]
         [TestCase(typeof(WritableSubRes2Resource), typeof(TenantResourceIdentifier))]
         [TestCase(typeof(WritableSubRes3Resource), typeof(ResourceGroupResourceIdentifier))]
+        [TestCase(typeof(Agreement), typeof(TenantResourceIdentifier))]
         public void TestResourceIdentifierChooser(Type dataType, Type expectedIdType)
         {
             Assert.AreEqual(dataType.BaseType.BaseType.GenericTypeArguments[0], expectedIdType);

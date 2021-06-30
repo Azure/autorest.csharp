@@ -16,21 +16,21 @@ modelerfour:
   lenient-model-deduplication: true
 
 operation-group-to-resource-type:
-   Operations: Microsoft.Storage/operations
-   Skus: Microsoft.Storage/skus
-   Usages: Microsoft.Storage/locations/usages
-   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
+  Operations: Microsoft.Storage/operations
+  Skus: Microsoft.Storage/skus
+  Usages: Microsoft.Storage/locations/usages
+  PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-   Operations: NonResource
-   Skus: NonResource
-   Usages: NonResource
-   PrivateLinkResources: NonResource
-   StorageAccounts: StorageAccount
+  Operations: NonResource
+  StorageAccounts: StorageAccount
 operation-group-to-parent:
-    BlobContainers: Microsoft.Storage/storageAccounts
-    FileShares: Microsoft.Storage/storageAccounts
-    Usages: subscriptions
-    StorageAccounts: resourceGroups
+  Operations: tenant
+  Skus: subscriptions
+  BlobContainers: Microsoft.Storage/storageAccounts
+  FileShares: Microsoft.Storage/storageAccounts
+  Usages: subscriptions
+  StorageAccounts: resourceGroups
+  PrivateLinkResources: Microsoft.Storage/storageAccounts
 directive:
   - rename-model:
       from: Operation
@@ -47,4 +47,11 @@ directive:
   - from: swagger-document
     where: $.definitions.ListContainerItems.properties.value.items["$ref"]
     transform: return "#/definitions/BlobContainer"
+    # overwrite "type" of "maxpagesize"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers"].get.parameters[4].type
+    transform: return "integer"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares"].get.parameters[4].type
+    transform: return "integer"
 ```

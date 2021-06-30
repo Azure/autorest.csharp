@@ -12,60 +12,60 @@ namespace xms_error_responses
     /// <summary> Model factory for read-only models. </summary>
     public static partial class XMSErrorResponseExtensionsModelFactory
     {
-        /// <summary> Initializes new instance of Animal class. </summary>
+        /// <summary> Initializes a new instance of Animal. </summary>
         /// <param name="aniType"> . </param>
         /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
-        public static Animal Animal(string aniType = default)
+        public static Animal Animal(string aniType = null)
         {
             return new Animal(aniType);
         }
 
-        /// <summary> Initializes new instance of Pet class. </summary>
+        /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="aniType"> . </param>
         /// <param name="name"> Gets the Pet by id. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string aniType = default, string name = default)
+        public static Pet Pet(string aniType = null, string name = null)
         {
             return new Pet(aniType, name);
         }
 
-        /// <summary> Initializes new instance of PetAction class. </summary>
+        /// <summary> Initializes a new instance of PetAction. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <returns> A new <see cref="Models.PetAction"/> instance for mocking. </returns>
-        public static PetAction PetAction(string actionResponse = default)
+        public static PetAction PetAction(string actionResponse = null)
         {
             return new PetAction(actionResponse);
         }
 
-        /// <summary> Initializes new instance of PetActionError class. </summary>
+        /// <summary> Initializes a new instance of PetActionError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"> . </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
-        public static PetActionError PetActionError(string actionResponse = default, string errorType = default, string errorMessage = default)
+        public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
             return new PetActionError(actionResponse, errorType, errorMessage);
         }
 
-        /// <summary> Initializes new instance of PetSadError class. </summary>
+        /// <summary> Initializes a new instance of PetSadError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"> . </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
-        public static PetSadError PetSadError(string actionResponse = default, string errorType = default, string errorMessage = default, string reason = default)
+        public static PetSadError PetSadError(string actionResponse = null, string errorType = null, string errorMessage = null, string reason = null)
         {
             return new PetSadError(actionResponse, errorType, errorMessage, reason);
         }
 
-        /// <summary> Initializes new instance of PetHungryOrThirstyError class. </summary>
+        /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"> . </param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <param name="hungryOrThirsty"> is the pet hungry or thirsty or both. </param>
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
-        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = default, string errorType = default, string errorMessage = default, string reason = default, string hungryOrThirsty = default)
+        public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorType = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
             return new PetHungryOrThirstyError(actionResponse, errorType, errorMessage, reason, hungryOrThirsty);
         }

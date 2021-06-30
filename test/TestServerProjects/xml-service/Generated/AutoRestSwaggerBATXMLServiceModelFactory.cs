@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using xml_service.Models;
 
 namespace xml_service
@@ -14,7 +15,7 @@ namespace xml_service
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory
     {
-        /// <summary> Initializes new instance of ListContainersResponse class. </summary>
+        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
         /// <param name="serviceEndpoint"> . </param>
         /// <param name="prefix"> . </param>
         /// <param name="marker"> . </param>
@@ -22,24 +23,26 @@ namespace xml_service
         /// <param name="containers"> . </param>
         /// <param name="nextMarker"> . </param>
         /// <returns> A new <see cref="Models.ListContainersResponse"/> instance for mocking. </returns>
-        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = default, string prefix = default, string marker = default, int maxResults = default, IReadOnlyList<Container> containers = default, string nextMarker = default)
+        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = null, string prefix = null, string marker = null, int maxResults = default, IEnumerable<Container> containers = null, string nextMarker = null)
         {
             containers ??= new List<Container>();
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker);
+
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers?.ToList(), nextMarker);
         }
 
-        /// <summary> Initializes new instance of Container class. </summary>
+        /// <summary> Initializes a new instance of Container. </summary>
         /// <param name="name"> . </param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         /// <returns> A new <see cref="Models.Container"/> instance for mocking. </returns>
-        public static Container Container(string name = default, ContainerProperties properties = default, IReadOnlyDictionary<string, string> metadata = default)
+        public static Container Container(string name = null, ContainerProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
         {
             metadata ??= new Dictionary<string, string>();
+
             return new Container(name, properties, metadata);
         }
 
-        /// <summary> Initializes new instance of ContainerProperties class. </summary>
+        /// <summary> Initializes a new instance of ContainerProperties. </summary>
         /// <param name="lastModified"> . </param>
         /// <param name="etag"> . </param>
         /// <param name="leaseStatus"> . </param>
@@ -47,12 +50,12 @@ namespace xml_service
         /// <param name="leaseDuration"> . </param>
         /// <param name="publicAccess"> . </param>
         /// <returns> A new <see cref="Models.ContainerProperties"/> instance for mocking. </returns>
-        public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = default, LeaseStatusType? leaseStatus = default, LeaseStateType? leaseState = default, LeaseDurationType? leaseDuration = default, PublicAccessType? publicAccess = default)
+        public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
         }
 
-        /// <summary> Initializes new instance of ListBlobsResponse class. </summary>
+        /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
         /// <param name="serviceEndpoint"> . </param>
         /// <param name="containerName"> . </param>
         /// <param name="prefix"> . </param>
@@ -62,44 +65,46 @@ namespace xml_service
         /// <param name="blobs"> . </param>
         /// <param name="nextMarker"> . </param>
         /// <returns> A new <see cref="Models.ListBlobsResponse"/> instance for mocking. </returns>
-        public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = default, string containerName = default, string prefix = default, string marker = default, int maxResults = default, string delimiter = default, Blobs blobs = default, string nextMarker = default)
+        public static ListBlobsResponse ListBlobsResponse(string serviceEndpoint = null, string containerName = null, string prefix = null, string marker = null, int maxResults = default, string delimiter = null, Blobs blobs = null, string nextMarker = null)
         {
             return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
         }
 
-        /// <summary> Initializes new instance of Blobs class. </summary>
+        /// <summary> Initializes a new instance of Blobs. </summary>
         /// <param name="blobPrefix"> . </param>
         /// <param name="blob"> . </param>
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
-        public static Blobs Blobs(IReadOnlyList<BlobPrefix> blobPrefix = default, IReadOnlyList<Blob> blob = default)
+        public static Blobs Blobs(IEnumerable<BlobPrefix> blobPrefix = null, IEnumerable<Blob> blob = null)
         {
             blobPrefix ??= new List<BlobPrefix>();
             blob ??= new List<Blob>();
-            return new Blobs(blobPrefix, blob);
+
+            return new Blobs(blobPrefix?.ToList(), blob?.ToList());
         }
 
-        /// <summary> Initializes new instance of BlobPrefix class. </summary>
+        /// <summary> Initializes a new instance of BlobPrefix. </summary>
         /// <param name="name"> . </param>
         /// <returns> A new <see cref="Models.BlobPrefix"/> instance for mocking. </returns>
-        public static BlobPrefix BlobPrefix(string name = default)
+        public static BlobPrefix BlobPrefix(string name = null)
         {
             return new BlobPrefix(name);
         }
 
-        /// <summary> Initializes new instance of Blob class. </summary>
+        /// <summary> Initializes a new instance of Blob. </summary>
         /// <param name="name"> . </param>
         /// <param name="deleted"> . </param>
         /// <param name="snapshot"> . </param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         /// <returns> A new <see cref="Models.Blob"/> instance for mocking. </returns>
-        public static Blob Blob(string name = default, bool deleted = default, string snapshot = default, BlobProperties properties = default, IReadOnlyDictionary<string, string> metadata = default)
+        public static Blob Blob(string name = null, bool deleted = default, string snapshot = null, BlobProperties properties = null, IReadOnlyDictionary<string, string> metadata = null)
         {
             metadata ??= new Dictionary<string, string>();
+
             return new Blob(name, deleted, snapshot, properties, metadata);
         }
 
-        /// <summary> Initializes new instance of BlobProperties class. </summary>
+        /// <summary> Initializes a new instance of BlobProperties. </summary>
         /// <param name="lastModified"> . </param>
         /// <param name="etag"> . </param>
         /// <param name="contentLength"> Size in bytes. </param>
@@ -129,24 +134,24 @@ namespace xml_service
         /// <param name="accessTierInferred"> . </param>
         /// <param name="archiveStatus"> . </param>
         /// <returns> A new <see cref="Models.BlobProperties"/> instance for mocking. </returns>
-        public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = default, long? contentLength = default, string contentType = default, string contentEncoding = default, string contentLanguage = default, string contentMD5 = default, string contentDisposition = default, string cacheControl = default, int? blobSequenceNumber = default, BlobType? blobType = default, LeaseStatusType? leaseStatus = default, LeaseStateType? leaseState = default, LeaseDurationType? leaseDuration = default, string copyId = default, CopyStatusType? copyStatus = default, string copySource = default, string copyProgress = default, DateTimeOffset? copyCompletionTime = default, string copyStatusDescription = default, bool? serverEncrypted = default, bool? incrementalCopy = default, string destinationSnapshot = default, DateTimeOffset? deletedTime = default, int? remainingRetentionDays = default, AccessTier? accessTier = default, bool? accessTierInferred = default, ArchiveStatus? archiveStatus = default)
+        public static BlobProperties BlobProperties(DateTimeOffset lastModified = default, string etag = null, long? contentLength = null, string contentType = null, string contentEncoding = null, string contentLanguage = null, string contentMD5 = null, string contentDisposition = null, string cacheControl = null, int? blobSequenceNumber = null, BlobType? blobType = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, string copyId = null, CopyStatusType? copyStatus = null, string copySource = null, string copyProgress = null, DateTimeOffset? copyCompletionTime = null, string copyStatusDescription = null, bool? serverEncrypted = null, bool? incrementalCopy = null, string destinationSnapshot = null, DateTimeOffset? deletedTime = null, int? remainingRetentionDays = null, AccessTier? accessTier = null, bool? accessTierInferred = null, ArchiveStatus? archiveStatus = null)
         {
             return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus);
         }
 
-        /// <summary> Initializes new instance of JsonOutput class. </summary>
+        /// <summary> Initializes a new instance of JsonOutput. </summary>
         /// <param name="id"> . </param>
         /// <returns> A new <see cref="Models.JsonOutput"/> instance for mocking. </returns>
-        public static JsonOutput JsonOutput(int? id = default)
+        public static JsonOutput JsonOutput(int? id = null)
         {
             return new JsonOutput(id);
         }
 
-        /// <summary> Initializes new instance of ObjectWithXMsTextProperty class. </summary>
+        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
         /// <param name="language"> Returned value should be &apos;english&apos;. </param>
         /// <param name="content"> Returned value should be &apos;I am text&apos;. </param>
         /// <returns> A new <see cref="Models.ObjectWithXMsTextProperty"/> instance for mocking. </returns>
-        public static ObjectWithXMsTextProperty ObjectWithXMsTextProperty(string language = default, string content = default)
+        public static ObjectWithXMsTextProperty ObjectWithXMsTextProperty(string language = null, string content = null)
         {
             return new ObjectWithXMsTextProperty(language, content);
         }

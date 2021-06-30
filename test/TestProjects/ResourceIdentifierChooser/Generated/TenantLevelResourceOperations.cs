@@ -33,8 +33,7 @@ namespace ResourceIdentifierChooser
         protected internal TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            Id.TryGetSubscriptionId(out var subscriptionId);
-            _restClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            _restClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/TenantLevelResources";
@@ -76,7 +75,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
@@ -84,7 +83,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);

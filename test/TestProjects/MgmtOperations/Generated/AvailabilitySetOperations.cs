@@ -114,7 +114,7 @@ namespace MgmtOperations
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
@@ -122,7 +122,7 @@ namespace MgmtOperations
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -504,7 +504,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IEnumerable<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -516,7 +516,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -530,7 +530,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IEnumerable<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -542,7 +542,7 @@ namespace MgmtOperations
             try
             {
                 var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -651,7 +651,7 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets a list of AvailabilitySetChild in the AvailabilitySet. </summary>
+        /// <summary> Gets a list of AvailabilitySetChildren in the AvailabilitySet. </summary>
         /// <returns> An object representing collection of AvailabilitySetChildren and their operations over a AvailabilitySet. </returns>
         public AvailabilitySetChildContainer GetAvailabilitySetChildren()
         {

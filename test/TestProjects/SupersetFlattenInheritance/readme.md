@@ -15,4 +15,6 @@ input-file: $(this-folder)/AzureResource.json
 namespace: SupersetFlattenInheritance
 operation-group-to-resource:
    NonResourceModel1s: NonResource
+operation-group-to-parent:
+   NonResourceModel1s: resourceGroups
 ```

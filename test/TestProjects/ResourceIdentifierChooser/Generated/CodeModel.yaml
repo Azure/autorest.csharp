@@ -1293,7 +1293,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:
@@ -1389,7 +1388,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:
@@ -2055,7 +2053,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:
@@ -2151,7 +2148,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:
@@ -2226,7 +2222,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:
@@ -2322,7 +2317,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_51
-          - *ref_52
         requests:
           - !Request 
             parameters:

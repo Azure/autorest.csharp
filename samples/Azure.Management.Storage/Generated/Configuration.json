@@ -18,15 +18,15 @@
   },
   "OperationGroupToResource": {
     "Operations": "NonResource",
-    "Skus": "NonResource",
-    "Usages": "NonResource",
-    "PrivateLinkResources": "NonResource",
     "StorageAccounts": "StorageAccount"
   },
   "OperationGroupToParent": {
+    "Operations": "tenant",
+    "Skus": "subscriptions",
     "BlobContainers": "Microsoft.Storage/storageAccounts",
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
-    "StorageAccounts": "resourceGroups"
+    "StorageAccounts": "resourceGroups",
+    "PrivateLinkResources": "Microsoft.Storage/storageAccounts"
   }
 }

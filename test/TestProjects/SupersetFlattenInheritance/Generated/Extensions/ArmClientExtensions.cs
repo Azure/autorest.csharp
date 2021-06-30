@@ -7,7 +7,7 @@
 
 namespace SupersetFlattenInheritance
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
+    /// <summary> A class to add extension methods to ArmClient. </summary>
     public static partial class ArmClientExtensions
     {
     }
