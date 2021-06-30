@@ -424,8 +424,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pathParamsLength = GetPathParameters(clientMethod).Length;
             if (pathParamsLength > 0)
             {
-                var isTenantParent = operationGroup.IsTenantParent(context);
-                if (pathParamsLength > 1 && !isTenantParent)
+                var isAncestorTenant = operationGroup.IsAncestorTenant(context);
+                if (pathParamsLength > 1 && !isAncestorTenant)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
@@ -433,7 +433,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
 
-                if (!isTenantParent)
+                if (!isAncestorTenant)
                     paramNameList.Reverse();
             }
 

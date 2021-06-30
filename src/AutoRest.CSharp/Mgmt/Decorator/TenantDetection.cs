@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        public static bool IsTenantParent(this OperationGroup operationGroup, BuildContext context)
+        public static bool IsAncestorTenant(this OperationGroup operationGroup, BuildContext context)
         {
             while (operationGroup.ParentOperationGroup(context) != null)
             {
