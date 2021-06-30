@@ -530,6 +530,108 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        internal HttpMessage CreateListItemsRequest(string resourceGroupName, string anotherName, string childName, string expand)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/anotherParents/", false);
+            uri.AppendPath(anotherName, true);
+            uri.AppendPath("/children/", false);
+            uri.AppendPath(childName, true);
+            uri.AppendPath("/items", false);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json, text/json");
+            return message;
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="anotherName"> The name of the parent. </param>
+        /// <param name="childName"> The name of the parent. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="childName"/> is null. </exception>
+        public async Task<Response<ItemListResult>> ListItemsAsync(string resourceGroupName, string anotherName, string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var message = CreateListItemsRequest(resourceGroupName, anotherName, childName, expand);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ItemListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ItemListResult.DeserializeItemListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="anotherName"> The name of the parent. </param>
+        /// <param name="childName"> The name of the parent. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, or <paramref name="childName"/> is null. </exception>
+        public Response<ItemListResult> ListItems(string resourceGroupName, string anotherName, string childName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var message = CreateListItemsRequest(resourceGroupName, anotherName, childName, expand);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ItemListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ItemListResult.DeserializeItemListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string anotherName, string expand)
         {
             var message = _pipeline.CreateMessage();

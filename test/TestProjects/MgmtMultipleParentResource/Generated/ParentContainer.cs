@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -324,6 +325,44 @@ namespace MgmtMultipleParentResource
                 var filters = new ResourceFilterCollection(ParentOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<ItemData>>> ListItemsAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.ListItems");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListItemsAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new Parent(Parent, data)).ToArray() as IReadOnlyList<ItemData>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<ItemData>> ListItems(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.ListItems");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListItems(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new Parent(Parent, data)).ToArray() as IReadOnlyList<ItemData>, response.GetRawResponse());
             }
             catch (Exception e)
             {

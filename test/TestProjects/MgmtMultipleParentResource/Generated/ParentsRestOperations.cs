@@ -470,6 +470,96 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        internal HttpMessage CreateListItemsRequest(string resourceGroupName, string parentName, string expand)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/parents/", false);
+            uri.AppendPath(parentName, true);
+            uri.AppendPath("/items", false);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json, text/json");
+            return message;
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The name of the parent. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public async Task<Response<ItemListResult>> ListItemsAsync(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateListItemsRequest(resourceGroupName, parentName, expand);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ItemListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ItemListResult.DeserializeItemListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> The operation to get the run command. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The name of the parent. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public Response<ItemListResult> ListItems(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateListItemsRequest(resourceGroupName, parentName, expand);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ItemListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ItemListResult.DeserializeItemListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string expand)
         {
             var message = _pipeline.CreateMessage();

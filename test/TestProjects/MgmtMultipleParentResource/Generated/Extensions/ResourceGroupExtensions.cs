@@ -31,5 +31,15 @@ namespace MgmtMultipleParentResource
             return new ParentContainer(resourceGroup);
         }
         #endregion
+
+        #region Items
+        /// <summary> Gets an object representing a ItemContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ItemContainer" /> object. </returns>
+        public static ItemContainer GetItems(this ResourceGroupOperations resourceGroup)
+        {
+            return new ItemContainer(resourceGroup);
+        }
+        #endregion
     }
 }
