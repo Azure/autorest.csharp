@@ -209,11 +209,10 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all shares. </summary>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<FileShare> List(string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public Pageable<FileShare> List(string filter = null, CancellationToken cancellationToken = default)
         {
             Page<FileShare> FirstPageFunc(int? pageSizeHint)
             {
@@ -249,11 +248,10 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all shares. </summary>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of shares that can be included in the list. </param>
         /// <param name="filter"> Optional. When specified, only share names starting with the filter will be listed. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<FileShare> ListAsync(string maxpagesize = null, string filter = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<FileShare> ListAsync(string filter = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<FileShare>> FirstPageFunc(int? pageSizeHint)
             {

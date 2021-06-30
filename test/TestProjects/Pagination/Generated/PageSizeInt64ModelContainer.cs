@@ -208,10 +208,9 @@ namespace Pagination
             }
         }
 
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeInt64Model" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PageSizeInt64Model> List(long? maxpagesize = null, CancellationToken cancellationToken = default)
+        public Pageable<PageSizeInt64Model> List(CancellationToken cancellationToken = default)
         {
             Page<PageSizeInt64Model> FirstPageFunc(int? pageSizeHint)
             {
@@ -246,10 +245,9 @@ namespace Pagination
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeInt64Model" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PageSizeInt64Model> ListAsync(long? maxpagesize = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<PageSizeInt64Model> ListAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<PageSizeInt64Model>> FirstPageFunc(int? pageSizeHint)
             {
