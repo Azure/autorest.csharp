@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -96,7 +97,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            _writer.Line($"public new {typeof(ResourceGroupResourceIdentifier)} Id => base.Id as {typeof(ResourceGroupResourceIdentifier)};");
+            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_context);
+            _writer.Line($"public new {idType} Id => base.Id as {idType};");
         }
 
         private void WriteResourceOperations()

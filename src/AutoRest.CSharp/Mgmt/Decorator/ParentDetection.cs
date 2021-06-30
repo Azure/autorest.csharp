@@ -7,13 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+
+        private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
 
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
@@ -27,6 +31,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             _valueCache.TryAdd(operationGroup, result);
+            return result;
+        }
+
+        // Get the parent operation group. If the parent is resource group, subscription or tenant, it will return null.
+        public static OperationGroup? ParentOperationGroup(this OperationGroup operationGroup, BuildContext context)
+        {
+            OperationGroup? result = null;
+            if (_parentCache.TryGetValue(operationGroup, out result))
+                return result;
+            var config = context.Configuration.MgmtConfiguration;
+            var parentResourceType = operationGroup.ParentResourceType(config);
+
+            foreach (var opGroup in context.CodeModel.OperationGroups)
+            {
+                if (opGroup.ResourceType(config).Equals(parentResourceType))
+                {
+                    result = opGroup;
+                    break;
+                }
+            }
+            _parentCache.TryAdd(operationGroup, result);
             return result;
         }
 

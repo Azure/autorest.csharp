@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var newParentType = operationGroup == null || !parentType.IsGenericType
                 ? parentType
-                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType, originalType.Context.Configuration.MgmtConfiguration));
+                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType.Context));
             return CSharpType.FromSystemType(originalType.Context, newParentType);
         }
 

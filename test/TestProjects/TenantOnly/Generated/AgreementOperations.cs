@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Agreement>
+    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AgreementsRestOperations _restClient { get; }
@@ -30,10 +30,10 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AgreementOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AgreementOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";

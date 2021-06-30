@@ -424,8 +424,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pathParamsLength = GetPathParameters(clientMethod).Length;
             if (pathParamsLength > 0)
             {
-                var isTenantParent = IsTenantParent(operationGroup, context);
-                if (pathParamsLength > 1 && !isTenantParent)
+                var isAncestorTenant = operationGroup.IsAncestorTenant(context);
+                if (pathParamsLength > 1 && !isAncestorTenant)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
@@ -433,46 +433,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
 
-                if (!isTenantParent)
+                if (!isAncestorTenant)
                     paramNameList.Reverse();
             }
 
             return paramNameList.ToArray();
         }
 
-        private bool IsTenantParent(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            while (!IsTerminalState(operationGroup, context))
-            {
-                var operationGroupTest = ParentOperationGroup(operationGroup, context);
-                if (operationGroupTest != null)
-                    operationGroup = operationGroupTest;
-            }
 
-            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
-        }
 
         private static bool IsTerminalState(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
-            return ParentOperationGroup(operationGroup, context) == null;
-        }
-
-        private static OperationGroup? ParentOperationGroup(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            var config = context.Configuration.MgmtConfiguration;
-            var parentResourceType = operationGroup.ParentResourceType(config);
-            OperationGroup? parentOperationGroup = null;
-
-            foreach (var opGroup in context.CodeModel.OperationGroups)
-            {
-                if (opGroup.ResourceType(context.Configuration.MgmtConfiguration).Equals(parentResourceType))
-                {
-                    parentOperationGroup = opGroup;
-                    break;
-                }
-            }
-
-            return parentOperationGroup;
+            return operationGroup.ParentOperationGroup(context) == null;
         }
 
         // This method builds the path parameters names
@@ -492,7 +464,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else if (paramLength == 1)
             {
-                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
+                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
                     BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
                 else
@@ -504,7 +476,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 paramNames.Add($"{name}.Name");
                 paramLength--;
 
-                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
+                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
                     BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
                 else

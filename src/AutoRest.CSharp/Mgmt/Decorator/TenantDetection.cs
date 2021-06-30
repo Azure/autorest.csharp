@@ -4,6 +4,7 @@
 using System.Collections.Concurrent;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -21,6 +22,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             result = IsTenantOnly(operationGroup, config);
             _valueCache.TryAdd(operationGroup, result);
             return result;
+        }
+
+        public static bool IsAncestorTenant(this OperationGroup operationGroup, BuildContext context)
+        {
+            while (operationGroup.ParentOperationGroup(context) != null)
+            {
+                operationGroup = operationGroup.ParentOperationGroup(context)!;
+            }
+
+            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
         }
 
         private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)

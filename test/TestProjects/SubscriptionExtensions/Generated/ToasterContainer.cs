@@ -37,7 +37,7 @@ namespace SubscriptionExtensions
         private ToastersRestOperations _restClient => new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+        public new SubscriptionResourceIdentifier Id => base.Id as SubscriptionResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
