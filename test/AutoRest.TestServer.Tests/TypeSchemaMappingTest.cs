@@ -261,6 +261,12 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
+        public void ModelFactoryPublicMethods()
+        {
+            TypeAsserts.TypeOnlyDeclaredThesePublicMethods(typeof(MainModelFactory), nameof(ModelWithGuidProperty), nameof(ModelWithAbstractModel));
+        }
+
+        [Test]
         public void TypesAreSkipped()
         {
             TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "ModelToBeSkipped");

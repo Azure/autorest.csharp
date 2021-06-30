@@ -65,58 +65,90 @@ namespace AutoRest.CSharp.Utilities
         [return: NotNullIfNotNull("name")]
         public static string ToVariableName(this string name) => ToCleanName(name, camelCase: false);
 
-        public static IEnumerable<(string Text, bool IsLiteral)> GetPathParts(string? path)
+        public static GetPathPartsEnumerator GetPathParts(string? path) => new GetPathPartsEnumerator(path);
+
+        public ref struct GetPathPartsEnumerator
         {
-            if (path == null)
+            private ReadOnlySpan<char> _path;
+            public Part Current { get; private set; }
+
+            public GetPathPartsEnumerator(ReadOnlySpan<char> path)
             {
-                yield break;
+                _path = path;
+                Current = default;
             }
 
-            var index = 0;
-            var currentPart = new StringBuilder();
-            var innerPart = new StringBuilder();
-            while (index < path.Length)
+            public GetPathPartsEnumerator GetEnumerator() => this;
+
+            public bool MoveNext()
             {
-                if (path[index] == '{')
+                var span = _path;
+                if (span.Length == 0)
                 {
-                    var innerIndex = index + 1;
-                    while (innerIndex < path.Length)
-                    {
-                        if (path[innerIndex] == '}')
-                        {
-                            if (currentPart.Length > 0)
-                            {
-                                yield return (currentPart.ToString(), true);
-                                currentPart.Clear();
-                            }
-
-                            yield return (innerPart.ToString(), false);
-                            innerPart.Clear();
-
-                            break;
-                        }
-
-                        innerPart.Append(path[innerIndex]);
-                        innerIndex++;
-                    }
-
-                    if (innerPart.Length > 0)
-                    {
-                        currentPart.Append('{');
-                        currentPart.Append(innerPart);
-                    }
-                    index = innerIndex + 1;
-                    continue;
+                    return false;
                 }
-                currentPart.Append(path[index]);
-                index++;
+
+                var separatorIndex = span.IndexOfAny('{', '}');
+
+                if (separatorIndex == -1)
+                {
+                    Current = new Part(span, true);
+                    _path = ReadOnlySpan<char>.Empty;
+                    return true;
+                }
+
+                var separator = span[separatorIndex];
+                // Handle {{ and }} escape sequences
+                if (separatorIndex + 1 < span.Length && span[separatorIndex + 1] == separator)
+                {
+                    Current = new Part(span.Slice(0, separatorIndex + 1), true);
+                    _path = span.Slice(separatorIndex + 2);
+                    return true;
+                }
+
+                var isLiteral = separator == '{';
+
+                // Skip empty literals
+                if (isLiteral && separatorIndex == 0 && span.Length > 1)
+                {
+                    separatorIndex = span.IndexOf('}');
+                    if (separatorIndex == -1)
+                    {
+                        Current = new Part(span.Slice(1), true);
+                        _path = ReadOnlySpan<char>.Empty;
+                        return true;
+                    }
+
+                    Current = new Part(span.Slice(1, separatorIndex - 1), false);
+                }
+                else
+                {
+                    Current = new Part(span.Slice(0, separatorIndex), isLiteral);
+                }
+
+                _path = span.Slice(separatorIndex + 1);
+                return true;
             }
 
-            if (currentPart.Length > 0)
+            public readonly ref struct Part
             {
-                yield return (currentPart.ToString(), true);
+                public Part(ReadOnlySpan<char> span, bool isLiteral)
+                {
+                    Span = span;
+                    IsLiteral = isLiteral;
+                }
+
+                public ReadOnlySpan<char> Span { get; }
+                public bool IsLiteral { get; }
+
+                public void Deconstruct(out ReadOnlySpan<char> span, out bool isLiteral)
+                {
+                    span = Span;
+                    isLiteral = IsLiteral;
+                }
             }
         }
+
 
         public static bool IsCSharpKeyword(string? name)
         {

@@ -46,7 +46,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration)
+        /// <summary>
+        /// This function builds an enumerable of <see cref="ClientMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
+        /// </summary>
+        /// <param name="operationGroup">The OperationGroup to build methods from</param>
+        /// <param name="restClient">The corresponding RestClient to the operation group</param>
+        /// <param name="declaration">The type declaration options</param>
+        /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
+        /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration,
+            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -57,8 +66,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 foreach (var request in operation.Requests)
                 {
-                    var name = operation.CSharpName();
                     RestClientMethod startMethod = restClient.GetOperationMethod(request);
+                    var name = nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? operation.CSharpName();
 
                     yield return new ClientMethod(
                         name,
@@ -70,7 +79,16 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        /// <summary>
+        /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
+        /// </summary>
+        /// <param name="operationGroup">The OperationGroup to build methods from</param>
+        /// <param name="restClient">The corresponding RestClient to the operation group</param>
+        /// <param name="declaration">The type declaration options</param>
+        /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
+        /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
+        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration,
+            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -90,11 +108,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
+                    var name = nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name;
+
                     yield return new PagingMethod(
                         method,
                         nextPageMethod,
-                        method.Name,
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        name,
+                        new Diagnostic($"{Declaration.Name}.{name}"),
                         new PagingResponseInfo(paging, objectResponseBody.Type));
                 }
             }

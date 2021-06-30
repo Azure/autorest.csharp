@@ -1,0 +1,46 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtListOnly",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "FakeBars": "Microsoft.Fake/fakes/fakeBars",
+    "ResponseNotCalledValues": "Microsoft.Fake/fakes/ResponseNotCalledValues",
+    "ResponseNotCalledValueNoPages": "Microsoft.Fake/fakes/responseNotCalledValueNoPages",
+    "FakeFeatures": "Microsoft.Fake/fakesFeatures",
+    "FakeNonPageableFeatures": "Microsoft.Fake/fakesNonPageableFeatures",
+    "ApiKeys": "Microsoft.Fake/apiKeys",
+    "ChildWithPosts": "Microsoft.Fake/fakes/childWithPost",
+    "Usages": "Microsoft.Fake/locations/usages",
+    "NonPageableUsages": "Microsoft.Fake/locations/nonPageableUsages",
+    "ResourceGroupFeatures": "Microsoft.Fake/locations/resourceGroupFeatures",
+    "ResourceGroupNonPageableFeatures": "Microsoft.Fake/locations/resourceGroupNonPageableFeatures",
+    "Keys": "Microsoft.Fake/publishers/versions/getKeys"
+  },
+  "OperationGroupToResource": {
+    "ApiKeys": "NonResource",
+    "ChildWithPosts": "NonResource",
+    "Keys": "NonResource"
+  },
+  "OperationGroupToParent": {
+    "FakeBars": "Microsoft.Fake/fakes",
+    "ResponseNotCalledValues": "Microsoft.Fake/fakes",
+    "ResponseNotCalledValueNoPages": "Microsoft.Fake/fakes",
+    "FakeFeatures": "subscriptions",
+    "FakeNonPageableFeatures": "subscriptions",
+    "ApiKeys": "subscriptions",
+    "ChildWithPosts": "Microsoft.Fake/fakes",
+    "Usages": "subscriptions",
+    "NonPageableUsages": "subscriptions",
+    "ResourceGroupFeatures": "resourceGroups",
+    "ResourceGroupNonPageableFeatures": "resourceGroups",
+    "Keys": "resourceGroups"
+  }
+}

@@ -13,20 +13,21 @@ namespace model_flattening
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestResourceFlatteningTestServiceModelFactory
     {
-        /// <summary> Initializes new instance of Resource class. </summary>
+        /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
         /// <returns> A new <see cref="Models.Resource"/> instance for mocking. </returns>
-        public static Resource Resource(string id = default, string type = default, IDictionary<string, string> tags = default, string location = default, string name = default)
+        public static Resource Resource(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null)
         {
             tags ??= new Dictionary<string, string>();
+
             return new Resource(id, type, tags, location, name);
         }
 
-        /// <summary> Initializes new instance of FlattenedProduct class. </summary>
+        /// <summary> Initializes a new instance of FlattenedProduct. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -37,16 +38,17 @@ namespace model_flattening
         /// <param name="provisioningStateValues"> . </param>
         /// <param name="provisioningState"> . </param>
         /// <returns> A new <see cref="Models.FlattenedProduct"/> instance for mocking. </returns>
-        public static FlattenedProduct FlattenedProduct(string id = default, string type = default, IDictionary<string, string> tags = default, string location = default, string name = default, string pName = default, string typePropertiesType = default, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = default, string provisioningState = default)
+        public static FlattenedProduct FlattenedProduct(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string pName = null, string typePropertiesType = null, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = null, string provisioningState = null)
         {
             tags ??= new Dictionary<string, string>();
+
             return new FlattenedProduct(id, type, tags, location, name, pName, typePropertiesType, provisioningStateValues, provisioningState);
         }
 
-        /// <summary> Initializes new instance of ProductWrapper class. </summary>
+        /// <summary> Initializes a new instance of ProductWrapper. </summary>
         /// <param name="value"> the product value. </param>
         /// <returns> A new <see cref="Models.ProductWrapper"/> instance for mocking. </returns>
-        public static ProductWrapper ProductWrapper(string value = default)
+        public static ProductWrapper ProductWrapper(string value = null)
         {
             return new ProductWrapper(value);
         }

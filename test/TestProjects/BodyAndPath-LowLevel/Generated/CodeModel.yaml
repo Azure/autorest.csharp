@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_3
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,8 +21,40 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      language: !Languages 
+        default:
+          name: Post1ItemsItem
+          description: ''
+      protocol: !Protocols {}
+  sealedChoices:
+    - !SealedChoiceSchema &ref_9
+      choices:
+        - !ChoiceValue 
+          value: application/json
+          language:
+            default:
+              name: ApplicationJson
+              description: Content Type 'application/json'
+        - !ChoiceValue 
+          value: application/octet-stream
+          language:
+            default:
+              name: ApplicationOctetStream
+              description: Content Type 'application/octet-stream'
+      type: sealed-choice
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ContentType
+          description: Content type for upload
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_3
+    - !ConstantSchema &ref_4
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -33,15 +65,38 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   any:
-    - !AnySchema &ref_4
+    - !AnySchema &ref_5
       type: any
       language: !Languages 
         default:
           name: any
           description: Anything
       protocol: !Protocols {}
+  binaries:
+    - !BinarySchema &ref_10
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      language: !Languages 
+        default:
+          name: binary
+          description: ''
+      protocol: !Protocols {}
+  arrays:
+    - !ArraySchema &ref_8
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ArrayOfPost1ItemsItem
+          description: Array of Post1ItemsItem
+      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_1
+  - !Parameter &ref_2
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -66,9 +121,9 @@ operationGroups:
           - !ApiVersion 
             version: 2014-04-01-preview
         parameters:
-          - *ref_1
-          - !Parameter &ref_6
-            schema: *ref_2
+          - *ref_2
+          - !Parameter &ref_7
+            schema: *ref_3
             implementation: Method
             required: true
             language: !Languages 
@@ -83,7 +138,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_3
+                schema: *ref_4
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -95,8 +150,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_5
-                schema: *ref_4
+              - !Parameter &ref_6
+                schema: *ref_5
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -108,7 +163,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_5
+              - *ref_6
             language: !Languages 
               default:
                 name: ''
@@ -122,7 +177,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_6
+          - *ref_7
         responses:
           - !Response 
             language: !Languages 
@@ -136,6 +191,101 @@ operationGroups:
         language: !Languages 
           default:
             name: Create
+            description: Resets products.
+            summary: Create products
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2014-04-01-preview
+        parameters:
+          - *ref_2
+          - !Parameter &ref_13
+            schema: *ref_3
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: itemNameStream
+                description: item name.
+                serializedName: itemNameStream
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_14
+            schema: *ref_8
+            implementation: Method
+            language: !Languages 
+              default:
+                name: excluded
+                description: Excluded connection Ids.
+                serializedName: excluded
+            protocol: !Protocols 
+              http: !HttpParameter 
+                explode: true
+                in: query
+                style: form
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter &ref_11
+                schema: *ref_9
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_12
+                schema: *ref_10
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The payload body.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_11
+              - *ref_12
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /{itemNameStream}
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/json
+                  - application/octet-stream
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_13
+          - *ref_14
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: ok
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateStream
             description: Resets products.
             summary: Create products
         protocol: !Protocols {}

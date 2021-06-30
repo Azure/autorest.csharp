@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
             {
                 baseSerializationCtor = objectType.Constructors.Last();
-                serializationConstructorParameters.AddRange(baseSerializationCtor.Parameters);
+                serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
             }
 
             foreach (var property in Properties)
@@ -142,7 +142,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                BuilderHelpers.CreateMemberDeclaration(Type.Name, Type, "internal", null, _typeFactory),
+                Type.Name,
+                "internal",
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -167,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             ObjectTypeConstructor? baseCtor = GetBaseCtor();
             if (baseCtor is not null)
-                defaultCtorParameters.AddRange(baseCtor.Parameters);
+                defaultCtorParameters.AddRange(baseCtor.Signature.Parameters);
 
             foreach (var property in Properties)
             {
@@ -244,13 +245,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                BuilderHelpers.CreateMemberDeclaration(
-                    Type.Name,
-                    Type,
-                    // inputs have public ctor by default
-                    _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
-                    null,
-                    _typeFactory),
+                Type.Name,
+                _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
@@ -271,9 +267,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             // Skip serialization ctor if they are the same
-            if (!InitializationConstructor.Parameters
+            if (!InitializationConstructor.Signature.Parameters
                 .Select(p => p.Type)
-                .SequenceEqual(SerializationConstructor!.Parameters.Select(p => p.Type)))
+                .SequenceEqual(SerializationConstructor!.Signature.Parameters.Select(p => p.Type)))
             {
                 yield return SerializationConstructor;
             }
