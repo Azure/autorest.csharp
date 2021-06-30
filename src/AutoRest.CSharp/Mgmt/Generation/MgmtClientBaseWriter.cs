@@ -13,6 +13,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -197,20 +198,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    if (PagingMethod.IsPageSizeParameter(parameter.Parameter))
+                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
-                        // [TODO] print to verbose level: Console.Error.WriteLine($"[INFO]: Pagination size parameter '{parameter.Parameter.Name}' is found");
                         // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                        // Add type conversion, because page size parameter could be of various compatible types
-                        if (Type.GetTypeCode(parameter.Parameter.Type.FrameworkType) == TypeCode.String)
+                        if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
                         {
-                            writer.AppendRaw($"Convert.ToString(pageSizeHint), ");
+                            writer.AppendRaw($"pageSizeHint, ");
                         }
                         else
                         {
-                            // all the other types should be numeric, and implicit type conversion can cover
-                            // see https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions
-                            writer.AppendRaw($"pageSizeHint, ");
+                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                            writer.Append($"{parameter.Parameter.Name}, ");
                         }
                     }
                     else

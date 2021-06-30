@@ -9,12 +9,39 @@ namespace AutoRest.CSharp.Output.Models.Requests.Tests
 {
     public class PagingMethodTests
     {
+        [TestCase("maxpagesize", ExpectedResult = true)]
+        [TestCase("max_page_size", ExpectedResult = true)]
+        [TestCase("pagesize", ExpectedResult = true)]
+        [TestCase("page_size", ExpectedResult = true)]
+        [TestCase("pageSize", ExpectedResult = true)]
+        [TestCase("pageSizeInDestination", ExpectedResult = false)]
+        [TestCase("page_size_of_container", ExpectedResult = false)]
+        [TestCase("max_page_size_result", ExpectedResult = false)]
+        public bool ValidateIsPageSizeName(string name)
+        {
+            return PagingMethod.IsPageSizeName(name);
+        }
+
+        [TestCase(typeof(float), ExpectedResult = true)]
+        [TestCase(typeof(double), ExpectedResult = true)]
+        [TestCase(typeof(decimal), ExpectedResult = true)]
+        [TestCase(typeof(int), ExpectedResult = true)]
+        [TestCase(typeof(long), ExpectedResult = true)]
+        [TestCase(typeof(short), ExpectedResult = false)]
+        [TestCase(typeof(string), ExpectedResult = false)]
+        [TestCase(typeof(bool), ExpectedResult = false)]
+        [TestCase(typeof(object), ExpectedResult = false)]
+        public bool ValidateIsPageSizeType(Type type)
+        {
+            return PagingMethod.IsPageSizeType(type);
+        }
+
         [TestCase("maxpagesize", typeof(float), ExpectedResult = true)]
         [TestCase("pagesize", typeof(decimal), ExpectedResult = true)]
         [TestCase("PageSize", typeof(double), ExpectedResult = true)]
         [TestCase("max_page_size", typeof(int), ExpectedResult = true)]
-        [TestCase("pageSize", typeof(string), ExpectedResult = true)]
         [TestCase("page_size", typeof(long), ExpectedResult = true)]
+        [TestCase("pageSize", typeof(string), ExpectedResult = false)]
         [TestCase("pageSize", typeof(short), ExpectedResult = false)]
         [TestCase("maxpagesize", typeof(bool), ExpectedResult = false)]
         [TestCase("maxpagesize", typeof(object), ExpectedResult = false)]
