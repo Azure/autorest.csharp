@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             {
                                 writer.Line($"#region {resource.Type.Name}");
                                 var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                                WriteGetResourceContainerMethod(writer, resourceContainer);
+                                WriteGetResourceContainerMethod(writer, resourceContainer!);
                                 writer.LineRaw("#endregion");
                             }
                         }

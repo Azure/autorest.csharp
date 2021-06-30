@@ -120,14 +120,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return result;
         }
 
-        public ResourceContainer GetResourceContainer(OperationGroup operationGroup)
+        public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
         {
-            ResourceContainer? result;
-            if (!EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))
             {
-                result = EnsureResourceContainers()[ResourceType.Tuple][operationGroup];
+                return result;
             }
-            return result;
+            if (EnsureResourceContainers()[ResourceType.Tuple].TryGetValue(operationGroup, out result))
+            {
+                return result;
+            }
+
+            return null;
         }
 
         internal ResourceData? GetResourceDataFromSchema(string schemaName)
