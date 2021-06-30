@@ -173,8 +173,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true);
                 WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false);
 
-                var nonPathParameters = GetNonPathParameters(resourceOperation.GetMethod.RestClientMethod);
-                if (nonPathParameters.Length > 0)
+                var nonPathParameters = resourceOperation.GetMethod.RestClientMethod.NonPathParameters;
+                if (nonPathParameters.Count > 0)
                 {
                     // write get method
                     WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
@@ -291,7 +291,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteChildPagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod)
         {
             writer.Line();
-            Parameter[] nonPathParameters = GetNonPathParameters(pagingMethod.Method);
+            var nonPathParameters = pagingMethod.Method.NonPathParameters;
 
             writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
             foreach (var param in nonPathParameters)
@@ -329,7 +329,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
         {
             writer.Line();
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod.RestClientMethod);
+            var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
             if (isInheritedMethod)
             {
                 writer.WriteXmlDocumentationInheritDoc();
@@ -510,7 +510,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 Diagnostic diagnostic = new Diagnostic($"{ resourceOperation.Type.Name}.StartAddTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
+                    var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
                     var resourceVar = new CodeWriterDeclaration("resource");
                     writer.Line($"var {resourceVar:D} = GetResource();");
                     var patchable = new CodeWriterDeclaration("patchable");
@@ -614,7 +614,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartSetTags", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
+                    var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
                     var patchable = new CodeWriterDeclaration("patchable");
                     if (clientMethod.Request.HttpMethod == RequestMethod.Put)
                     {
@@ -715,7 +715,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartRemoveTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
+                    var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
                     var resourceVar = new CodeWriterDeclaration("resource");
                     writer.Line($"var {resourceVar:D} = GetResource();");
                     var patchable = new CodeWriterDeclaration("patchable");
@@ -780,7 +780,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
+            var nonPathParameters = clientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
@@ -853,7 +853,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
+            var nonPathParameters = clientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);

@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -34,5 +36,31 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public CSharpType? ReturnType { get; }
         public string Accessibility { get; }
         public Operation? Operation { get; }
+
+        public List<Parameter> NonPathParameters
+        {
+            get
+            {
+                var pathSegments = this.Request.PathParameterSegments;
+
+                return this.Parameters.Where(parameter => !pathSegments.Any(
+                    pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
+                    pathSegment.Value.Reference.Name == parameter.Name)
+                ).ToList();
+            }
+        }
+
+        public List<Parameter> PathParameters
+        {
+            get
+            {
+                var pathSegments = this.Request.PathParameterSegments;
+
+                return this.Parameters.Where(parameter => pathSegments.Any(
+                    pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
+                    pathSegment.Value.Reference.Name == parameter.Name)
+                ).ToList();
+            }
+        }
     }
 }

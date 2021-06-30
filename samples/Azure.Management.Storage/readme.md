@@ -47,4 +47,11 @@ directive:
   - from: swagger-document
     where: $.definitions.ListContainerItems.properties.value.items["$ref"]
     transform: return "#/definitions/BlobContainer"
+    # overwrite "type" of "maxpagesize"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers"].get.parameters[4].type
+    transform: return "integer"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares"].get.parameters[4].type
+    transform: return "integer"
 ```

@@ -13,6 +13,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -89,10 +90,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var methodName = CreateMethodName("List", async);
             writer.Line();
-            Parameter[] nonPathParameters = GetNonPathParameters(listMethod.Method);
-
             writer.WriteXmlDocumentationSummary(listMethod.Method.Description);
-            foreach (var param in nonPathParameters)
+
+            var nonPathDomainParameters = listMethod.NonPathDomainParameters;
+            foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
@@ -103,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var returnType = resourceType.WrapPageable(async);
 
             writer.Append($"public {returnType} {methodName}(");
-            foreach (var param in nonPathParameters)
+            foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteParameter(param);
             }
@@ -197,7 +198,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    writer.Append($"{parameter.Parameter.Name}, ");
+                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
+                    {
+                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                        if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
+                        {
+                            writer.AppendRaw($"pageSizeHint, ");
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                            writer.Append($"{parameter.Parameter.Name}, ");
+                        }
+                    }
+                    else
+                    {
+                        writer.Append($"{parameter.Parameter.Name}, ");
+                    }
                 }
                 else
                 {
@@ -330,7 +347,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.WriteXmlDocumentationSummary(restClientMethod.Description);
 
-            Parameter[] nonPathParameters = GetNonPathParameters(restClientMethod);
+            var nonPathParameters = restClientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
@@ -409,7 +426,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             var paramNames = GetPathParametersName(clientMethod, operationGroup, context).ToList();
-            var nonPathParams = GetNonPathParameters(clientMethod);
+            var nonPathParams = clientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParams)
             {
                 paramNames.Add(parameter.Name);
@@ -421,7 +438,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected string[] GetPathParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             List<string> paramNameList = new List<string>();
-            var pathParamsLength = GetPathParameters(clientMethod).Length;
+            var pathParamsLength = clientMethod.PathParameters.Count;
             if (pathParamsLength > 0)
             {
                 var isAncestorTenant = operationGroup.IsAncestorTenant(context);
