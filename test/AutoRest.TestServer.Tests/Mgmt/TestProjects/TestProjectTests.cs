@@ -405,27 +405,31 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listByNameMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}ByName", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameMethodInfo);
-                    Assert.AreEqual(4, listByNameMethodInfo.GetParameters().Length);
+                    Assert.AreEqual(5, listByNameMethodInfo.GetParameters().Length);
                     var listByNameParam1 = TypeAsserts.HasParameter(listByNameMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listByNameParam1.ParameterType);
                     var listByNameParam2 = TypeAsserts.HasParameter(listByNameMethodInfo, "filter");
                     Assert.AreEqual(typeof(string), listByNameParam2.ParameterType);
-                    var listByNameParam3 = TypeAsserts.HasParameter(listByNameMethodInfo, "top");
-                    Assert.AreEqual(typeof(int?), listByNameParam3.ParameterType);
-                    var listByNameParam4 = TypeAsserts.HasParameter(listByNameMethodInfo, "cancellationToken");
-                    Assert.AreEqual(typeof(CancellationToken), listByNameParam4.ParameterType);
+                    var listByNameParam3 = TypeAsserts.HasParameter(listByNameMethodInfo, "expand");
+                    Assert.AreEqual(typeof(string), listByNameParam3.ParameterType);
+                    var listByNameParam4 = TypeAsserts.HasParameter(listByNameMethodInfo, "top");
+                    Assert.AreEqual(typeof(int?), listByNameParam4.ParameterType);
+                    var listByNameParam5 = TypeAsserts.HasParameter(listByNameMethodInfo, "cancellationToken");
+                    Assert.AreEqual(typeof(CancellationToken), listByNameParam5.ParameterType);
 
                     var listByNameAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}ByNameAsync", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameAsyncMethodInfo);
-                    Assert.AreEqual(4, listByNameAsyncMethodInfo.GetParameters().Length);
+                    Assert.AreEqual(5, listByNameAsyncMethodInfo.GetParameters().Length);
                     var listByNameAsyncParam1 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listByNameAsyncParam1.ParameterType);
                     var listByNameAsyncParam2 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "filter");
                     Assert.AreEqual(typeof(string), listByNameAsyncParam2.ParameterType);
-                    var listByNameAsyncParam3 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "top");
-                    Assert.AreEqual(typeof(int?), listByNameAsyncParam3.ParameterType);
-                    var listByNameAsyncParam4 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "cancellationToken");
-                    Assert.AreEqual(typeof(CancellationToken), listByNameAsyncParam4.ParameterType);
+                    var listByNameAsyncParam3 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "expand");
+                    Assert.AreEqual(typeof(string), listByNameAsyncParam3.ParameterType);
+                    var listByNameAsyncParam4 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "top");
+                    Assert.AreEqual(typeof(int?), listByNameAsyncParam4.ParameterType);
+                    var listByNameAsyncParam5 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "cancellationToken");
+                    Assert.AreEqual(typeof(CancellationToken), listByNameAsyncParam5.ParameterType);
                 }
             }
         }
