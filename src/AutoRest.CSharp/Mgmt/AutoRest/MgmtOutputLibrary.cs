@@ -239,18 +239,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
                 var resourceOperation = new ResourceOperation(operationGroup, _context, childOperationGroups);
                 // validate to ensure that all the resource operations here have unique names
-                ValidateUniqueName(_resourceOperations, resourceOperation);
+                EnsureUniqueName(_resourceOperations, resourceOperation);
                 _resourceOperations[resourceType].Add(operationGroup, resourceOperation);
             }
 
             return _resourceOperations;
         }
 
-        private static void ValidateUniqueName<T, V>(IDictionary<ResourceType, V> map, T value) where T : ResourceOperation where V : IDictionary<OperationGroup, T>
+        private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : ResourceOperation where V : IDictionary<OperationGroup, T>
         {
             // we need to iterate over the existing items (including Default resource type and Tuple resource type)
             // to see if there are already any resource operations are returning the same resource as this new one
-            foreach (var pair in map.SelectMany(p => p.Value))
+            foreach (var pair in mapToSearchIn.SelectMany(p => p.Value))
             {
                 var existing = pair.Value;
                 if (value.Type.Name.Equals(existing.Type.Name))
@@ -277,7 +277,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
                     var resourceContainer = new ResourceContainer(operationGroup, _context);
                     // validate to ensure that all the resource container here have unique names
-                    ValidateUniqueName(_resourceContainers, resourceContainer);
+                    EnsureUniqueName(_resourceContainers, resourceContainer);
                     _resourceContainers[resourceType].Add(operationGroup, resourceContainer);
                 }
             }
@@ -501,7 +501,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 ResourceTypes.Add(operationGroup.ResourceType(_mgmtConfiguration));
 
-                // TODO better support for extension resources
                 string? parent;
                 if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
                 {
