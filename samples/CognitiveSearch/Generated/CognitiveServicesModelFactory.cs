@@ -8,9 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CognitiveSearch.Models;
 
-namespace CognitiveSearch
+namespace CognitiveSearch.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class CognitiveServicesModelFactory
@@ -229,9 +228,9 @@ namespace CognitiveSearch
         /// <summary> Initializes a new instance of ListIndexesResult. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         /// <returns> A new <see cref="Models.ListIndexesResult"/> instance for mocking. </returns>
-        public static ListIndexesResult ListIndexesResult(IEnumerable<Models.Index> indexes = null)
+        public static ListIndexesResult ListIndexesResult(IEnumerable<Index> indexes = null)
         {
-            indexes ??= new List<Models.Index>();
+            indexes ??= new List<Index>();
 
             return new ListIndexesResult(indexes?.ToList());
         }

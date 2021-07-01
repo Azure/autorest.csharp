@@ -8,9 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using xml_service.Models;
 
-namespace xml_service
+namespace xml_service.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory

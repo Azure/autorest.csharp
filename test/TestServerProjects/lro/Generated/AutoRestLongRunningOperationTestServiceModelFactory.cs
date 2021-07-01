@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using lro.Models;
 
-namespace lro
+namespace lro.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestLongRunningOperationTestServiceModelFactory
