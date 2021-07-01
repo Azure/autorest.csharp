@@ -7,9 +7,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using CognitiveServices.TextAnalytics.Models;
 
-namespace CognitiveServices.TextAnalytics
+namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory

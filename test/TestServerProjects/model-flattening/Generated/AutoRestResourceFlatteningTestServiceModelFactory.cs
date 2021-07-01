@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using model_flattening.Models;
 
-namespace model_flattening
+namespace model_flattening.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestResourceFlatteningTestServiceModelFactory

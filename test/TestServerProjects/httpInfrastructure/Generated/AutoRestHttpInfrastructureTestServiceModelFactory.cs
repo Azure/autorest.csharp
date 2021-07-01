@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using httpInfrastructure.Models;
-
-namespace httpInfrastructure
+namespace httpInfrastructure.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestHttpInfrastructureTestServiceModelFactory
