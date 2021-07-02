@@ -8,9 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.AI.FormRecognizer.Models;
 
-namespace Azure.AI.FormRecognizer
+namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureAIFormRecognizerModelFactory
@@ -18,7 +17,7 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
         /// <param name="code"> . </param>
         /// <param name="message"> . </param>
-        /// <returns> A new <see cref="Models.ErrorInformation"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
         public static ErrorInformation ErrorInformation(string code = null, string message = null)
         {
             return new ErrorInformation(code, message);
@@ -28,7 +27,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <param name="keys"> Keys extracted by the custom model. </param>
         /// <param name="trainResult"> Custom model training result. </param>
-        /// <returns> A new <see cref="Models.Model"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.Model"/> instance for mocking. </returns>
         public static Model Model(ModelInfo modelInfo = null, KeysResult keys = null, TrainResult trainResult = null)
         {
             return new Model(modelInfo, keys, trainResult);
@@ -39,7 +38,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="status"> Status of the model. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
-        /// <returns> A new <see cref="Models.ModelInfo"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.ModelInfo"/> instance for mocking. </returns>
         public static ModelInfo ModelInfo(Guid modelId = default, ModelStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default)
         {
             return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
@@ -47,7 +46,7 @@ namespace Azure.AI.FormRecognizer
 
         /// <summary> Initializes a new instance of KeysResult. </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
-        /// <returns> A new <see cref="Models.KeysResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
         {
             clusters ??= new Dictionary<string, IList<string>>();
@@ -60,7 +59,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
         /// <param name="errors"> Errors returned during the training operation. </param>
-        /// <returns> A new <see cref="Models.TrainResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.TrainResult"/> instance for mocking. </returns>
         public static TrainResult TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments = null, IEnumerable<FormFieldsReport> fields = null, float? averageModelAccuracy = null, IEnumerable<ErrorInformation> errors = null)
         {
             trainingDocuments ??= new List<TrainingDocumentInfo>();
@@ -75,7 +74,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
-        /// <returns> A new <see cref="Models.TrainingDocumentInfo"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.TrainingDocumentInfo"/> instance for mocking. </returns>
         public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = null, int pages = default, IEnumerable<ErrorInformation> errors = null, TrainStatus status = default)
         {
             errors ??= new List<ErrorInformation>();
@@ -86,7 +85,7 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Initializes a new instance of FormFieldsReport. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
-        /// <returns> A new <see cref="Models.FormFieldsReport"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
         public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
         {
             return new FormFieldsReport(fieldName, accuracy);
@@ -97,7 +96,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <param name="analyzeResult"> Results of the analyze operation. </param>
-        /// <returns> A new <see cref="Models.AnalyzeOperationResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeOperationResult"/> instance for mocking. </returns>
         public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, AnalyzeResult analyzeResult = null)
         {
             return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
@@ -109,7 +108,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
-        /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeResult"/> instance for mocking. </returns>
         public static AnalyzeResult AnalyzeResult(string version = null, IEnumerable<ReadResult> readResults = null, IEnumerable<PageResult> pageResults = null, IEnumerable<DocumentResult> documentResults = null, IEnumerable<ErrorInformation> errors = null)
         {
             readResults ??= new List<ReadResult>();
@@ -128,7 +127,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="unit"> The unit used by the width, height and boundingBox properties. For images, the unit is &quot;pixel&quot;. For PDF, the unit is &quot;inch&quot;. </param>
         /// <param name="language"> The detected language on the page overall. </param>
         /// <param name="lines"> When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order. </param>
-        /// <returns> A new <see cref="Models.ReadResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.ReadResult"/> instance for mocking. </returns>
         public static ReadResult ReadResult(int page = default, float angle = default, float width = default, float height = default, LengthUnit unit = default, Language? language = null, IEnumerable<TextLine> lines = null)
         {
             lines ??= new List<TextLine>();
@@ -141,7 +140,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
         /// <param name="words"> List of words in the text line. </param>
-        /// <returns> A new <see cref="Models.TextLine"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.TextLine"/> instance for mocking. </returns>
         public static TextLine TextLine(string text = null, IEnumerable<float> boundingBox = null, Language? language = null, IEnumerable<TextWord> words = null)
         {
             boundingBox ??= new List<float>();
@@ -154,7 +153,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
         /// <param name="confidence"> Confidence value. </param>
-        /// <returns> A new <see cref="Models.TextWord"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.TextWord"/> instance for mocking. </returns>
         public static TextWord TextWord(string text = null, IEnumerable<float> boundingBox = null, float? confidence = null)
         {
             boundingBox ??= new List<float>();
@@ -167,10 +166,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
         /// <param name="tables"> List of data tables extracted from the page. </param>
-        /// <returns> A new <see cref="Models.PageResult"/> instance for mocking. </returns>
-        public static PageResult PageResult(int page = default, int? clusterId = null, IEnumerable<Models.KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
+        /// <returns> A new <see cref="FormRecognizer.Models.PageResult"/> instance for mocking. </returns>
+        public static PageResult PageResult(int page = default, int? clusterId = null, IEnumerable<KeyValuePair> keyValuePairs = null, IEnumerable<DataTable> tables = null)
         {
-            keyValuePairs ??= new List<Models.KeyValuePair>();
+            keyValuePairs ??= new List<KeyValuePair>();
             tables ??= new List<DataTable>();
 
             return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
@@ -181,17 +180,17 @@ namespace Azure.AI.FormRecognizer
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
         /// <param name="confidence"> Confidence value. </param>
-        /// <returns> A new <see cref="Models.KeyValuePair"/> instance for mocking. </returns>
-        public static Models.KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
+        /// <returns> A new <see cref="FormRecognizer.Models.KeyValuePair"/> instance for mocking. </returns>
+        public static KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
         {
-            return new Models.KeyValuePair(label, key, value, confidence);
+            return new KeyValuePair(label, key, value, confidence);
         }
 
         /// <summary> Initializes a new instance of KeyValueElement. </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
-        /// <returns> A new <see cref="Models.KeyValueElement"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.KeyValueElement"/> instance for mocking. </returns>
         public static KeyValueElement KeyValueElement(string text = null, IEnumerable<float> boundingBox = null, IEnumerable<string> elements = null)
         {
             boundingBox ??= new List<float>();
@@ -204,7 +203,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
-        /// <returns> A new <see cref="Models.DataTable"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.DataTable"/> instance for mocking. </returns>
         public static DataTable DataTable(int rows = default, int columns = default, IEnumerable<DataTableCell> cells = null)
         {
             cells ??= new List<DataTableCell>();
@@ -223,7 +222,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this table cell. </param>
         /// <param name="isHeader"> Is the current cell a header cell?. </param>
         /// <param name="isFooter"> Is the current cell a footer cell?. </param>
-        /// <returns> A new <see cref="Models.DataTableCell"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.DataTableCell"/> instance for mocking. </returns>
         public static DataTableCell DataTableCell(int rowIndex = default, int columnIndex = default, int? rowSpan = null, int? columnSpan = null, string text = null, IEnumerable<float> boundingBox = null, float confidence = default, IEnumerable<string> elements = null, bool? isHeader = null, bool? isFooter = null)
         {
             boundingBox ??= new List<float>();
@@ -236,7 +235,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
-        /// <returns> A new <see cref="Models.DocumentResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.DocumentResult"/> instance for mocking. </returns>
         public static DocumentResult DocumentResult(string docType = null, IEnumerable<int> pageRange = null, IReadOnlyDictionary<string, FieldValue> fields = null)
         {
             pageRange ??= new List<int>();
@@ -260,7 +259,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="confidence"> Confidence score. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
         /// <param name="page"> The 1-based page number in the input document. </param>
-        /// <returns> A new <see cref="Models.FieldValue"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.FieldValue"/> instance for mocking. </returns>
         public static FieldValue FieldValue(FieldValueType type = default, string valueString = null, DateTimeOffset? valueDate = null, TimeSpan? valueTime = null, string valuePhoneNumber = null, float? valueNumber = null, int? valueInteger = null, IEnumerable<FieldValue> valueArray = null, IReadOnlyDictionary<string, FieldValue> valueObject = null, string text = null, IEnumerable<float> boundingBox = null, float? confidence = null, IEnumerable<string> elements = null, int? page = null)
         {
             valueArray ??= new List<FieldValue>();
@@ -276,7 +275,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="createdDateTime"> Date and time (UTC) when the copy operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
         /// <param name="copyResult"> Results of the copy operation. </param>
-        /// <returns> A new <see cref="Models.CopyOperationResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.CopyOperationResult"/> instance for mocking. </returns>
         public static CopyOperationResult CopyOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, CopyResult copyResult = null)
         {
             return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
@@ -285,7 +284,7 @@ namespace Azure.AI.FormRecognizer
         /// <summary> Initializes a new instance of CopyResult. </summary>
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
-        /// <returns> A new <see cref="Models.CopyResult"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.CopyResult"/> instance for mocking. </returns>
         public static CopyResult CopyResult(Guid modelId = default, IEnumerable<ErrorInformation> errors = null)
         {
             errors ??= new List<ErrorInformation>();
@@ -297,19 +296,19 @@ namespace Azure.AI.FormRecognizer
         /// <param name="summary"> Summary of all trained custom models. </param>
         /// <param name="modelList"> Collection of trained custom models. </param>
         /// <param name="nextLink"> Link to the next page of custom models. </param>
-        /// <returns> A new <see cref="Models.Models"/> instance for mocking. </returns>
-        public static Models.Models Models(ModelsSummary summary = null, IEnumerable<ModelInfo> modelList = null, string nextLink = null)
+        /// <returns> A new <see cref="FormRecognizer.Models.Models"/> instance for mocking. </returns>
+        public static Models Models(ModelsSummary summary = null, IEnumerable<ModelInfo> modelList = null, string nextLink = null)
         {
             modelList ??= new List<ModelInfo>();
 
-            return new Models.Models(summary, modelList?.ToList(), nextLink);
+            return new Models(summary, modelList?.ToList(), nextLink);
         }
 
         /// <summary> Initializes a new instance of ModelsSummary. </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
-        /// <returns> A new <see cref="Models.ModelsSummary"/> instance for mocking. </returns>
+        /// <returns> A new <see cref="FormRecognizer.Models.ModelsSummary"/> instance for mocking. </returns>
         public static ModelsSummary ModelsSummary(int count = default, int limit = default, DateTimeOffset lastUpdatedDateTime = default)
         {
             return new ModelsSummary(count, limit, lastUpdatedDateTime);

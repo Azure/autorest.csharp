@@ -44,10 +44,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
         }
 
-        public string GetDefaultNamespace(Schema schema, BuildContext context)
+        public string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
         {
             var result = context.DefaultNamespace;
-            if (schema.Extensions?.Namespace is string namespaceExtension)
+            if (namespaceExtension != default)
             {
                 result = namespaceExtension;
             }

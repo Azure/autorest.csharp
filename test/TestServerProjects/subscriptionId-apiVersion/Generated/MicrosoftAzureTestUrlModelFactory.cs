@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using subscriptionId_apiVersion.Models;
-
-namespace subscriptionId_apiVersion
+namespace subscriptionId_apiVersion.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class MicrosoftAzureTestUrlModelFactory

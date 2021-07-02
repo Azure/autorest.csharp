@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
 
-            DefaultNamespace = GetDefaultNamespace(objectSchema, context);
+            DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute

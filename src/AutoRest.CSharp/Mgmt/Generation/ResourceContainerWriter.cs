@@ -298,37 +298,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+            _writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
-            CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResource));
-            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResourceExpanded));
+            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
-                });
-            }
-        }
-
-        private void WriteListAsGenericResourceAsync()
-        {
-            var methodName = CreateMethodName("ListAsGenericResource", true);
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
-            _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{"ListAsGenericResource"}"), ClientDiagnosticsField, writer =>
-                {
-                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
-                    _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(ResourceListOperations)}.ListAtContextAsync({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
                 });
             }
         }

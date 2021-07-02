@@ -7,9 +7,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Network.Management.Interface.Models;
 
-namespace Azure.Network.Management.Interface
+namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureNetworkManagementInterfaceModelFactory

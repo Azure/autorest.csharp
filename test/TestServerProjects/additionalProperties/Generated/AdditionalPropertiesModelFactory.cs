@@ -6,9 +6,8 @@
 #nullable disable
 
 using System.Collections.Generic;
-using additionalProperties.Models;
 
-namespace additionalProperties
+namespace additionalProperties.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AdditionalPropertiesModelFactory

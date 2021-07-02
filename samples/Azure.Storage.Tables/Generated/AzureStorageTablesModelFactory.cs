@@ -8,9 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Storage.Tables.Models;
 
-namespace Azure.Storage.Tables
+namespace Azure.Storage.Tables.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureStorageTablesModelFactory

@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using custom_baseUrl_paging.Models;
-
-namespace custom_baseUrl_paging
+namespace custom_baseUrl_paging.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestParameterizedHostTestPagingModelFactory

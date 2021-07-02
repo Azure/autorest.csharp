@@ -129,17 +129,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
+            writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
-            var responseType = typeof(GenericResource).WrapPageable(async);
-            using (writer.Scope($"public static {responseType} {CreateMethodName($"List{resourceOperation.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
+            var responseType = typeof(GenericResourceExpanded).WrapPageable(async);
+            using (writer.Scope($"public static {responseType} {CreateMethodName($"List{resourceOperation.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 var filters = new CodeWriterDeclaration("filters");
                 writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resourceOperation.Type}.ResourceType);");
                 writer.Line($"{filters}.SubstringFilter = filter;");
-                writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}(subscription, {filters}, top, cancellationToken);");
+                writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
             }
         }
 

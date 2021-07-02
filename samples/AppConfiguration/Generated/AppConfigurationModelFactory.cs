@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using AppConfiguration.Models;
-
-namespace AppConfiguration
+namespace AppConfiguration.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class AppConfigurationModelFactory

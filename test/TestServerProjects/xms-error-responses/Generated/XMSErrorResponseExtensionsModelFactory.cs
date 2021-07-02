@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using xms_error_responses.Models;
-
-namespace xms_error_responses
+namespace xms_error_responses.Models
 {
     /// <summary> Model factory for read-only models. </summary>
     public static partial class XMSErrorResponseExtensionsModelFactory
