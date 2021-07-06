@@ -725,7 +725,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
+            CSharpType responseType = lroObjectType.WrapAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
             foreach (Parameter parameter in nonPathParameters)
