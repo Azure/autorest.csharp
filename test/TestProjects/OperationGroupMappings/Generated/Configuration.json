@@ -13,11 +13,9 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "AvailabilitySets": "Microsoft.Compute/availabilitySets",
-    "Operations": "Microsoft.Compute/operations",
     "Usage": "Microsoft.Compute/locations/usages"
   },
   "OperationGroupToResource": {
-    "Operations": "RestApi",
     "AvailabilitySets": "AvailabilitySet"
   },
   "OperationGroupToParent": {

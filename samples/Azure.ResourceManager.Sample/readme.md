@@ -11,7 +11,6 @@ model-namespace: false
 public-clients: false
 head-as-boolean: false
 operation-group-to-resource-type:
-   Operations: Microsoft.Compute/operations
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
    VirtualMachineImages: Microsoft.Compute/locations/publishers/vmimage
    Usage: Microsoft.Compute/locations/usages
@@ -19,14 +18,12 @@ operation-group-to-resource-type:
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
-   Operations: NonResource
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
    VirtualMachineImages: NonResource
    VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: NonResource
 operation-group-to-parent:
-   Operations: tenant
    Usage: subscriptions
    LogAnalytics: subscriptions
    VirtualMachineExtensionImages: subscriptions
@@ -48,9 +45,6 @@ directive:
   - rename-model:
       from: SshPublicKeyResource
       to: SshPublicKey
-  - rename-model:
-      from: ComputeOperationValue
-      to: RestApi
   - rename-model:
       from: RollingUpgradeStatusInfo
       to: VirtualMachineScaleSetRollingUpgrade

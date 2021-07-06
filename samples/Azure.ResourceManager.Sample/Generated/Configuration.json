@@ -11,7 +11,6 @@
   "model-namespace": false,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
-    "Operations": "Microsoft.Compute/operations",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
     "VirtualMachineImages": "Microsoft.Compute/locations/publishers/vmimage",
     "Usage": "Microsoft.Compute/locations/usages",
@@ -20,7 +19,6 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
-    "Operations": "NonResource",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "NonResource",
     "VirtualMachineSizes": "NonResource",
@@ -28,7 +26,6 @@
     "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
-    "Operations": "tenant",
     "Usage": "subscriptions",
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "subscriptions",
