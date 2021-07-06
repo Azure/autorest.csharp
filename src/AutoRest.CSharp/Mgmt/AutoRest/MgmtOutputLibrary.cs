@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
+            RemoveOperations(codeModel);
             _codeModel = codeModel;
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -64,11 +65,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
-            RestApiOperationGroup = GetRestApiOperationGroup();
             DecorateOperationGroup();
         }
 
-        public OperationGroup? RestApiOperationGroup { get; }
+        private void RemoveOperations(CodeModel codeModel)
+        {
+            var operations = codeModel.OperationGroups.FirstOrDefault(o => o.Key == "Operations");
+            if (operations != null)
+                codeModel.OperationGroups.Remove(operations);
+        }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 

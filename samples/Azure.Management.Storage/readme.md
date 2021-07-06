@@ -16,15 +16,12 @@ modelerfour:
   lenient-model-deduplication: true
 
 operation-group-to-resource-type:
-  Operations: Microsoft.Storage/operations
   Skus: Microsoft.Storage/skus
   Usages: Microsoft.Storage/locations/usages
   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-  Operations: NonResource
   StorageAccounts: StorageAccount
 operation-group-to-parent:
-  Operations: tenant
   Skus: subscriptions
   BlobContainers: Microsoft.Storage/storageAccounts
   FileShares: Microsoft.Storage/storageAccounts
@@ -32,9 +29,6 @@ operation-group-to-parent:
   StorageAccounts: resourceGroups
   PrivateLinkResources: Microsoft.Storage/storageAccounts
 directive:
-  - rename-model:
-      from: Operation
-      to: RestApi
   - rename-model:
       from: BlobServiceProperties
       to: BlobService
