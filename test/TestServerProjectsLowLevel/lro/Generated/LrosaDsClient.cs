@@ -107,7 +107,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutNonRetry400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -116,32 +116,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry400");
         }
 
         /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
@@ -201,7 +208,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutNonRetry400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutNonRetry400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -210,32 +217,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry400");
         }
 
         /// <summary> Create Request for <see cref="PutNonRetry400"/> and <see cref="PutNonRetry400Async"/> operations. </summary>
@@ -313,7 +327,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutNonRetry201Creating400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -322,32 +336,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry201Creating400");
         }
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
@@ -407,7 +428,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutNonRetry201Creating400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutNonRetry201Creating400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -416,32 +437,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry201Creating400");
         }
 
         /// <summary> Create Request for <see cref="PutNonRetry201Creating400"/> and <see cref="PutNonRetry201Creating400Async"/> operations. </summary>
@@ -519,7 +547,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutNonRetry201Creating400InvalidJsonAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -528,32 +556,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry201Creating400InvalidJson");
         }
 
         /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
@@ -613,7 +648,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutNonRetry201Creating400InvalidJson(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -622,32 +657,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutNonRetry201Creating400InvalidJson");
         }
 
         /// <summary> Create Request for <see cref="PutNonRetry201Creating400InvalidJson"/> and <see cref="PutNonRetry201Creating400InvalidJsonAsync"/> operations. </summary>
@@ -725,7 +767,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -734,31 +776,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetry400");
         }
 
         /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -818,7 +867,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -827,31 +876,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetry400");
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetry400"/> and <see cref="PutAsyncRelativeRetry400Async"/> operations. </summary>
@@ -875,7 +931,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteNonRetry400Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteNonRetry400Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -884,37 +940,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteNonRetry400");
         }
 
         /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response DeleteNonRetry400(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteNonRetry400(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -923,31 +986,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteNonRetry400");
         }
 
         /// <summary> Create Request for <see cref="DeleteNonRetry400"/> and <see cref="DeleteNonRetry400Async"/> operations. </summary>
@@ -968,7 +1038,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete202NonRetry400Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete202NonRetry400Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -977,37 +1047,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete202NonRetry400");
         }
 
         /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Delete202NonRetry400(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete202NonRetry400(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1016,31 +1093,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete202NonRetry400");
         }
 
         /// <summary> Create Request for <see cref="Delete202NonRetry400"/> and <see cref="Delete202NonRetry400Async"/> operations. </summary>
@@ -1061,7 +1145,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteAsyncRelativeRetry400Async(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetry400Async(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1070,37 +1154,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetry400");
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response DeleteAsyncRelativeRetry400(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetry400(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1109,31 +1200,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetry400");
         }
 
         /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetry400"/> and <see cref="DeleteAsyncRelativeRetry400Async"/> operations. </summary>
@@ -1208,7 +1306,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostNonRetry400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostNonRetry400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1217,31 +1315,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostNonRetry400");
         }
 
         /// <summary> Long running post request, service returns a 400 with no error body. </summary>
@@ -1301,7 +1406,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostNonRetry400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostNonRetry400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1310,31 +1415,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostNonRetry400");
         }
 
         /// <summary> Create Request for <see cref="PostNonRetry400"/> and <see cref="PostNonRetry400Async"/> operations. </summary>
@@ -1412,7 +1524,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post202NonRetry400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202NonRetry400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1421,31 +1533,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202NonRetry400");
         }
 
         /// <summary> Long running post request, service returns a 202 with a location header. </summary>
@@ -1505,7 +1624,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Post202NonRetry400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202NonRetry400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1514,31 +1633,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202NonRetry400");
         }
 
         /// <summary> Create Request for <see cref="Post202NonRetry400"/> and <see cref="Post202NonRetry400Async"/> operations. </summary>
@@ -1616,7 +1742,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetry400Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1625,31 +1751,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetry400");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -1709,7 +1842,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRelativeRetry400(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1718,31 +1851,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetry400");
         }
 
         /// <summary> Create Request for <see cref="PostAsyncRelativeRetry400"/> and <see cref="PostAsyncRelativeRetry400Async"/> operations. </summary>
@@ -1820,7 +1960,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutError201NoProvisioningStatePayloadAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1829,32 +1969,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutError201NoProvisioningStatePayload");
         }
 
         /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
@@ -1914,7 +2061,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutError201NoProvisioningStatePayload(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -1923,32 +2070,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 201:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 201:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutError201NoProvisioningStatePayload");
         }
 
         /// <summary> Create Request for <see cref="PutError201NoProvisioningStatePayload"/> and <see cref="PutError201NoProvisioningStatePayloadAsync"/> operations. </summary>
@@ -2026,7 +2180,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRelativeRetryNoStatusAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2035,31 +2189,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryNoStatus");
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2119,7 +2280,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRelativeRetryNoStatus(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2128,31 +2289,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryNoStatus");
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetryNoStatus"/> and <see cref="PutAsyncRelativeRetryNoStatusAsync"/> operations. </summary>
@@ -2230,7 +2398,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRelativeRetryNoStatusPayloadAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2239,31 +2407,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2323,7 +2498,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRelativeRetryNoStatusPayload(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2332,31 +2507,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetryNoStatusPayload"/> and <see cref="PutAsyncRelativeRetryNoStatusPayloadAsync"/> operations. </summary>
@@ -2380,7 +2562,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete204SucceededAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete204SucceededAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2389,37 +2571,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 204:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 204:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete204Succeeded");
         }
 
         /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Delete204Succeeded(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete204Succeeded(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2428,31 +2617,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 204:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 204:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete204Succeeded");
         }
 
         /// <summary> Create Request for <see cref="Delete204Succeeded"/> and <see cref="Delete204SucceededAsync"/> operations. </summary>
@@ -2473,7 +2669,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteAsyncRelativeRetryNoStatusAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryNoStatusAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2482,37 +2678,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response DeleteAsyncRelativeRetryNoStatus(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryNoStatus(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2521,31 +2724,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
         }
 
         /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetryNoStatus"/> and <see cref="DeleteAsyncRelativeRetryNoStatusAsync"/> operations. </summary>
@@ -2620,7 +2830,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post202NoLocationAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202NoLocationAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2629,31 +2839,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202NoLocation");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
@@ -2713,7 +2930,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Post202NoLocation(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202NoLocation(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2722,31 +2939,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202NoLocation");
         }
 
         /// <summary> Create Request for <see cref="Post202NoLocation"/> and <see cref="Post202NoLocationAsync"/> operations. </summary>
@@ -2824,7 +3048,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostAsyncRelativeRetryNoPayloadAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryNoPayloadAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2833,31 +3057,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryNoPayload");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -2917,7 +3148,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostAsyncRelativeRetryNoPayload(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryNoPayload(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -2926,31 +3157,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryNoPayload");
         }
 
         /// <summary> Create Request for <see cref="PostAsyncRelativeRetryNoPayload"/> and <see cref="PostAsyncRelativeRetryNoPayloadAsync"/> operations. </summary>
@@ -3028,7 +3266,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put200InvalidJsonAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3037,32 +3275,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 204:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 204:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Put200InvalidJson");
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
@@ -3122,7 +3367,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Put200InvalidJson(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put200InvalidJson(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3131,32 +3376,39 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                        case 204:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                            case 204:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Put200InvalidJson");
         }
 
         /// <summary> Create Request for <see cref="Put200InvalidJson"/> and <see cref="Put200InvalidJsonAsync"/> operations. </summary>
@@ -3234,7 +3486,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3243,31 +3495,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -3327,7 +3586,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3336,31 +3595,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetryInvalidHeader"/> and <see cref="PutAsyncRelativeRetryInvalidHeaderAsync"/> operations. </summary>
@@ -3438,7 +3704,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3447,31 +3713,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -3531,7 +3804,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3540,31 +3813,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 200:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 200:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetryInvalidJsonPolling"/> and <see cref="PutAsyncRelativeRetryInvalidJsonPollingAsync"/> operations. </summary>
@@ -3588,7 +3868,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Delete202RetryInvalidHeaderAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Delete202RetryInvalidHeaderAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3597,37 +3877,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete202RetryInvalidHeader");
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Delete202RetryInvalidHeader(RequestOptions options = null)
+        public virtual Operation<BinaryData> Delete202RetryInvalidHeader(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3636,31 +3923,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Delete202RetryInvalidHeader");
         }
 
         /// <summary> Create Request for <see cref="Delete202RetryInvalidHeader"/> and <see cref="Delete202RetryInvalidHeaderAsync"/> operations. </summary>
@@ -3681,7 +3975,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteAsyncRelativeRetryInvalidHeaderAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidHeaderAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3690,37 +3984,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response DeleteAsyncRelativeRetryInvalidHeader(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidHeader(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3729,31 +4030,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetryInvalidHeader"/> and <see cref="DeleteAsyncRelativeRetryInvalidHeaderAsync"/> operations. </summary>
@@ -3774,7 +4082,7 @@ namespace lro_LowLevel
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3783,37 +4091,44 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response DeleteAsyncRelativeRetryInvalidJsonPolling(RequestOptions options = null)
+        public virtual Operation<BinaryData> DeleteAsyncRelativeRetryInvalidJsonPolling(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3822,31 +4137,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetryInvalidJsonPolling"/> and <see cref="DeleteAsyncRelativeRetryInvalidJsonPollingAsync"/> operations. </summary>
@@ -3921,7 +4243,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post202RetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202RetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -3930,31 +4252,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202RetryInvalidHeader");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
@@ -4014,7 +4343,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Post202RetryInvalidHeader(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202RetryInvalidHeader(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -4023,31 +4352,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.Post202RetryInvalidHeader");
         }
 
         /// <summary> Create Request for <see cref="Post202RetryInvalidHeader"/> and <see cref="Post202RetryInvalidHeaderAsync"/> operations. </summary>
@@ -4125,7 +4461,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidHeaderAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -4134,31 +4470,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
@@ -4218,7 +4561,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidHeader(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -4227,31 +4570,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
         }
 
         /// <summary> Create Request for <see cref="PostAsyncRelativeRetryInvalidHeader"/> and <see cref="PostAsyncRelativeRetryInvalidHeaderAsync"/> operations. </summary>
@@ -4329,7 +4679,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRelativeRetryInvalidJsonPollingAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -4338,31 +4688,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -4422,7 +4779,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRelativeRetryInvalidJsonPolling(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -4431,31 +4788,38 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
         }
 
         /// <summary> Create Request for <see cref="PostAsyncRelativeRetryInvalidJsonPolling"/> and <see cref="PostAsyncRelativeRetryInvalidJsonPollingAsync"/> operations. </summary>

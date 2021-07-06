@@ -53,9 +53,171 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
+            if (clientMethod.Operation.IsLongRunning)
+            {
+                WriteLongRunningOperationClientMethod(writer, clientMethod, async);
+            }
+            else
+            {
+                WriteNormalClientMethod(writer, clientMethod, async);
+            }
+        }
+
+        private void WriteLongRunningOperationClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
+        {
+            WriteClientMethodDecleration(writer, clientMethod, async);
+
+            var finalStateVia = clientMethod.Operation.LongRunningFinalStateVia switch
+            {
+                "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
+                "location" => OperationFinalStateVia.Location,
+                "original-uri" => OperationFinalStateVia.OriginalUri,
+                null => OperationFinalStateVia.Location,
+                _ => throw new ArgumentException($"Unknown final-state-via value: {clientMethod.Operation.LongRunningFinalStateVia}")
+            };
+
+            using (writer.Scope())
+            {
+                writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
+
+                writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+
+                foreach (var parameter in clientMethod.Parameters)
+                {
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($");");
+                writer.Line();
+
+                using (writer.Scope($"if (options.PerCallPolicy != null)"))
+                {
+                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
+                }
+
+                writer.Line();
+
+                using (writer.Scope($"{(async ? "async Task<Response>" : "Response")} BeginOperation()"))
+                {
+                    var scopeVariable = new CodeWriterDeclaration("scope");
+                    writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
+
+                    writer.Line($"{scopeVariable}.Start();");
+
+                    using (writer.Scope($"try"))
+                    {
+                        if (async)
+                        {
+                            writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
+                        }
+                        else
+                        {
+                            writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
+                        }
+
+                        using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
+                        {
+                            WriteStatusCodeSwitch(writer, clientMethod, async);
+                        }
+                        using (writer.Scope($"else"))
+                        {
+                            writer.Line($"return message.Response;");
+                        }
+                    }
+
+                    using (writer.Scope($"catch ({typeof(Exception)} e)"))
+                    {
+                        writer.Line($"{scopeVariable}.Failed(e);");
+                        writer.Line($"throw;");
+                    }
+                }
+                writer.Line();
+
+                if (async)
+                {
+                    writer.Line($"var response = await BeginOperation().ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"var response = BeginOperation();");
+                }
+
+                writer.Line($"return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostics.ScopeName:L});");
+            }
+
+            writer.Line();
+        }
+
+        private void WriteNormalClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
+        {
+            WriteClientMethodDecleration(writer, clientMethod, async);
+
+            using (writer.Scope())
+            {
+                writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
+
+                writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+
+                foreach (var parameter in clientMethod.Parameters)
+                {
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($");");
+                writer.Line();
+
+                using (writer.Scope($"if (options.PerCallPolicy != null)"))
+                {
+                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
+                }
+
+                var scopeVariable = new CodeWriterDeclaration("scope");
+                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
+
+                writer.Line($"{scopeVariable}.Start();");
+
+                using (writer.Scope($"try"))
+                {
+                    if (async)
+                    {
+                        writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
+                    }
+
+                    using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
+                    {
+                        WriteStatusCodeSwitch(writer, clientMethod, async);
+                    }
+                    using (writer.Scope($"else"))
+                    {
+                        writer.Line($"return message.Response;");
+                    }
+                }
+
+                using (writer.Scope($"catch ({typeof(Exception)} e)"))
+                {
+                    writer.Line($"{scopeVariable}.Failed(e);");
+                    writer.Line($"throw;");
+                }
+            }
+
+            writer.Line();
+        }
+
+        private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
+        {
             var parameters = clientMethod.Parameters;
 
-            var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
+            var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
+            {
+                (false, false) => typeof(Response),
+                (false, true) => typeof(Operation<BinaryData>),
+                (true, false) => typeof(Task<Response>),
+                (true, true) => typeof(Task<Operation<BinaryData>>),
+            });
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
@@ -112,60 +274,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Line($")");
             writer.Line($"#pragma warning restore AZC0002");
-
-            using (writer.Scope())
-            {
-                writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
-
-                writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
-
-                foreach (var parameter in clientMethod.Parameters)
-                {
-                     writer.Append($"{parameter.Name:I}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Append($");");
-                writer.Line();
-
-                using (writer.Scope($"if (options.PerCallPolicy != null)"))
-                {
-                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
-                }
-
-                var scopeVariable = new CodeWriterDeclaration("scope");
-                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
-
-                writer.Line($"{scopeVariable}.Start();");
-
-                using (writer.Scope($"try"))
-                {
-                    if (async)
-                    {
-                        writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
-                    }
-                    else
-                    {
-                        writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
-                    }
-
-                    using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
-                    {
-                        WriteStatusCodeSwitch(writer, clientMethod, async);
-                    }
-                    using (writer.Scope($"else"))
-                    {
-                        writer.Line($"return message.Response;");
-                    }
-                }
-
-                using (writer.Scope($"catch ({typeof(Exception)} e)"))
-                {
-                    writer.Line($"{scopeVariable}.Failed(e);");
-                    writer.Line($"throw;");
-                }
-            }
-
-            writer.Line();
         }
 
         private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async)

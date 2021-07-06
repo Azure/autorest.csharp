@@ -266,7 +266,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> StartTranslationAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -275,31 +275,38 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
-            scope.Start();
-            try
+
+            async Task<Response> BeginOperation()
             {
-                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = await BeginOperation().ConfigureAwait(false);
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
         }
 
         /// <summary>
@@ -514,7 +521,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response StartTranslation(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -523,31 +530,38 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
-            scope.Start();
-            try
+
+            Response BeginOperation()
             {
-                Pipeline.Send(message, options.CancellationToken);
-                if (options.StatusOption == ResponseStatusOption.Default)
+                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+                scope.Start();
+                try
                 {
-                    switch (message.Response.Status)
+                    Pipeline.Send(message, options.CancellationToken);
+                    if (options.StatusOption == ResponseStatusOption.Default)
                     {
-                        case 202:
-                            return message.Response;
-                        default:
-                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        switch (message.Response.Status)
+                        {
+                            case 202:
+                                return message.Response;
+                            default:
+                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                        }
+                    }
+                    else
+                    {
+                        return message.Response;
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    return message.Response;
+                    scope.Failed(e);
+                    throw;
                 }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+
+            var response = BeginOperation();
+            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
         }
 
         /// <summary> Create Request for <see cref="StartTranslation"/> and <see cref="StartTranslationAsync"/> operations. </summary>
