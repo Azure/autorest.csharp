@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<SshPublicKeysDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDelete");
             scope.Start();
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Delete an SSH public key. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public SshPublicKeysDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDelete");
             scope.Start();

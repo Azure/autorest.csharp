@@ -171,7 +171,7 @@ namespace MgmtListOnly
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();
@@ -189,7 +189,7 @@ namespace MgmtListOnly
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();

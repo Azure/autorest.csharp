@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineScaleSetVMExtensionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public VirtualMachineScaleSetVMExtensionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();

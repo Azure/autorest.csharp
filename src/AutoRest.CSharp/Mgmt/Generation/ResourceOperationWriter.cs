@@ -722,13 +722,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            CSharpType? returnType = GetLROReturnType(clientMethod, context);
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = returnType != null ?
-                lroObjectType : typeof(Azure.Operation);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
             foreach (Parameter parameter in nonPathParameters)

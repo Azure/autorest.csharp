@@ -127,7 +127,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<ObjectReplicationPoliciesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.StartDelete");
             scope.Start();
@@ -145,7 +145,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public ObjectReplicationPoliciesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.StartDelete");
             scope.Start();

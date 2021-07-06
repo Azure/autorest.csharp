@@ -127,7 +127,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<PrivateEndpointConnectionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
             scope.Start();
@@ -145,7 +145,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public PrivateEndpointConnectionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
             scope.Start();
