@@ -11,17 +11,14 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
-    "Operations": "Microsoft.Storage/operations",
     "Skus": "Microsoft.Storage/skus",
     "Usages": "Microsoft.Storage/locations/usages",
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources"
   },
   "OperationGroupToResource": {
-    "Operations": "NonResource",
     "StorageAccounts": "StorageAccount"
   },
   "OperationGroupToParent": {
-    "Operations": "tenant",
     "Skus": "subscriptions",
     "BlobContainers": "Microsoft.Storage/storageAccounts",
     "FileShares": "Microsoft.Storage/storageAccounts",

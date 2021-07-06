@@ -1034,7 +1034,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: RestApiOrigin
+          name: ComputeOperationValueOrigin
           description: The origin of the compute operation.
       protocol: !Protocols {}
     - !StringSchema &ref_6
@@ -1044,7 +1044,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: RestApiName
+          name: ComputeOperationValueName
           description: The name of the compute operation.
       protocol: !Protocols {}
     - !StringSchema &ref_7
@@ -5740,7 +5740,7 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: RestApi
+                  name: ComputeOperationValue
                   description: Describes the properties of a Compute Operation value.
                   namespace: ''
               protocol: !Protocols {}
