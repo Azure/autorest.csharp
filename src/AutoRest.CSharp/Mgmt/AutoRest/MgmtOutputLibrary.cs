@@ -70,9 +70,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void RemoveOperations(CodeModel codeModel)
         {
-            var operations = codeModel.OperationGroups.FirstOrDefault(o => o.Key == "Operations");
+            var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
             if (operations != null)
+            {
+                var listModel = operations.Operations.First(o => o.Language.Default.Name == "List").Responses.First().ResponseSchema as ObjectSchema;
+                if (listModel != null)
+                {
+                    var itemModel = listModel.Properties.First(p => p.SerializedName == "value").Schema as ArraySchema;
+                    if (itemModel != null)
+                    {
+                        codeModel.Schemas.Objects.Remove(itemModel.ElementType as ObjectSchema);
+                    }
+                    codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
+                }
                 codeModel.OperationGroups.Remove(operations);
+            }
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
