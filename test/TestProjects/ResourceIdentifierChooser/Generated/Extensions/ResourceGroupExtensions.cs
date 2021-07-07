@@ -12,7 +12,7 @@ namespace ResourceIdentifierChooser
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ResourceGroupResources
+        #region ResourceGroupResource
         /// <summary> Gets an object representing a ResourceGroupResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceGroupResourceContainer" /> object. </returns>
@@ -22,7 +22,7 @@ namespace ResourceIdentifierChooser
         }
         #endregion
 
-        #region SubRes3Resources
+        #region SubRes3Resource
         /// <summary> Gets an object representing a SubRes3ResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubRes3ResourceContainer" /> object. </returns>
@@ -32,7 +32,7 @@ namespace ResourceIdentifierChooser
         }
         #endregion
 
-        #region WritableSubRes3Resources
+        #region WritableSubRes3Resource
         /// <summary> Gets an object representing a WritableSubRes3ResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WritableSubRes3ResourceContainer" /> object. </returns>
@@ -42,7 +42,7 @@ namespace ResourceIdentifierChooser
         }
         #endregion
 
-        #region ResourceLevels
+        #region ResourceLevel
         /// <summary> Gets an object representing a ResourceLevelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceLevelContainer" /> object. </returns>
@@ -52,7 +52,7 @@ namespace ResourceIdentifierChooser
         }
         #endregion
 
-        #region ModelDatas
+        #region ModelData
         /// <summary> Gets an object representing a ModelDataContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ModelDataContainer" /> object. </returns>
