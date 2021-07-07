@@ -457,7 +457,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var operation = new CodeWriterDeclaration("operation");
                     writer.Append($"var originalTags = ");
                     if (async)
                     {
@@ -470,28 +469,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     }
                     writer.Line($";");
                     writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Append($"var originalResponse = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{RestClientField}.{CreateMethodName("Get", async)}(Id.ResourceGroupName, Id.Name, cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, originalResponse.Value), originalResponse.GetRawResponse());");
+                    WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
                 writer.Line();
             }
@@ -501,9 +479,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             WriteSetTags(writer, resourceOperation, clientMethod, context, true);
             WriteSetTags(writer, resourceOperation, clientMethod, context, false);
-
-            WriteStartSetTags(writer, resourceOperation, clientMethod, context, true);
-            WriteStartSetTags(writer, resourceOperation, clientMethod, context, false);
         }
 
         private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
@@ -520,79 +495,38 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    var operation = new CodeWriterDeclaration("operation");
-                    writer.Append($"var {operation:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{CreateMethodName("StartSetTags", async)}(tags, cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{operation}.{CreateMethodName("WaitForCompletion", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                });
-                writer.Line();
-            }
-        }
-
-        private void WriteStartSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-            writer.Line();
-            writer.WriteXmlDocumentationSummary("Replace the tags on the resource with the given set.");
-            writer.WriteXmlDocumentationParameter("tags", "The set of tags to use as replacement.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
-            writer.WriteXmlDocumentation("remarks", "<see href=\"https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning\">Details on long running operation object.</see>");
-
-            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            var responseType = lroObjectType.WrapAsync(async);
-
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartSetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
-            using (writer.Scope())
-            {
                 using (writer.Scope($"if (tags == null)"))
                 {
-                    writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(tags));");
+                    writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(tags)}} provided cannot be null.\", nameof(tags));");
                 }
                 writer.Line();
 
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartSetTags", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
-                    var patchable = new CodeWriterDeclaration("patchable");
-                    if (clientMethod.Request.HttpMethod == RequestMethod.Put)
+                    if (async)
                     {
-                        writer.Line($"Id.TryGetLocation(out LocationData locationData);");
+                        writer.Append($"await ");
                     }
-                    writer.Append($"var {patchable:D} = new {updateParameterType}(");
-                    if (clientMethod.Request.HttpMethod == RequestMethod.Put)
+                    writer.Append($"TagResourceOperations.{CreateMethodName("Delete", async)}(cancellationToken)");
+                    if (async)
                     {
-                        writer.Append($"locationData");
+                        writer.Append($".ConfigureAwait(false)");
                     }
-                    writer.Line($");");
-                    writer.Line($"{patchable}.Tags.ReplaceWith(tags);");
-
-                    WriteTaggableMethodRestCall(writer, resourceOperation, clientMethod, context, lroObjectType, async);
+                    writer.Line($";");
+                    writer.Append($"var originalTags  = ");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+                    writer.Append($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken)");
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+                    writer.Line($";");
+                    writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
+                    WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
                 writer.Line();
             }
@@ -602,9 +536,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             WriteRemoveTag(writer, resourceOperation, clientMethod, context, true);
             WriteRemoveTag(writer, resourceOperation, clientMethod, context, false);
-
-            WriteStartRemoveTag(writer, resourceOperation, clientMethod, context, true);
-            WriteStartRemoveTag(writer, resourceOperation, clientMethod, context, false);
         }
 
         private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
@@ -621,112 +552,77 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.RemoveTag", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
                 {
-                    var operation = new CodeWriterDeclaration("operation");
-                    writer.Append($"var {operation:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{CreateMethodName("StartRemoveTag", async)}(key, cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{operation}.{CreateMethodName("WaitForCompletion", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                });
-                writer.Line();
-            }
-        }
-
-        private void WriteStartRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-            writer.Line();
-            writer.WriteXmlDocumentationSummary("Removes a tag by key from the resource.");
-            writer.WriteXmlDocumentationParameter("key", "The key of the tag to remove.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
-            writer.WriteXmlDocumentation("remarks", "<see href=\"https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning\">Details on long running operation object.</see>");
-
-            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = lroObjectType.WrapAsync(async);
-
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartRemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
-            using (writer.Scope())
-            {
-                using (writer.Scope($"if (key == null)"))
-                {
-                    writer.Line($"throw new {typeof(ArgumentNullException)}(nameof(key));");
+                    writer.Line($"throw new {typeof(ArgumentNullException)}($\"{{nameof(key)}} provided cannot be null or a whitespace.\", nameof(key));");
                 }
                 writer.Line();
 
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartRemoveTag", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.RemoveTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
-                    var resourceVar = new CodeWriterDeclaration("resource");
-                    writer.Line($"var {resourceVar:D} = GetResource();");
-                    var patchable = new CodeWriterDeclaration("patchable");
-                    if (clientMethod.Request.HttpMethod == RequestMethod.Put)
+                    writer.Append($"var originalTags = ");
+                    if (async)
                     {
-                        writer.Line($"Id.TryGetLocation(out LocationData locationData);");
+                        writer.Append($"await ");
                     }
-                    writer.Append($"var {patchable:D} = new {updateParameterType}(");
-                    if (clientMethod.Request.HttpMethod == RequestMethod.Put)
+                    writer.Append($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken)");
+                    if (async)
                     {
-                        writer.Append($"locationData");
+                        writer.Append($".ConfigureAwait(false)");
                     }
-                    writer.Line($");");
-                    writer.Line($"{patchable}.Tags.ReplaceWith({resourceVar}.Data.Tags);");
-                    writer.Line($"{patchable}.Tags.Remove(key);");
-
-                    WriteTaggableMethodRestCall(writer, resourceOperation, clientMethod, context, lroObjectType, async);
+                    writer.Line($";");
+                    writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
+                    WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
                 writer.Line();
             }
         }
 
-        private void WriteTaggableMethodRestCall(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, CSharpType lroObjectType, bool async)
+        private void WriteTaggableCommonMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
-            var pathParamNames = GetPathParametersName(clientMethod, resourceOperation.OperationGroup, context);
-            var response = new CodeWriterDeclaration("response");
-            writer.Append($"var {response:D} = ");
             if (async)
             {
                 writer.Append($"await ");
             }
-
-            writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            foreach (string paramNames in pathParamNames)
-            {
-                writer.Append($"{paramNames:I}, ");
-            }
-            writer.Append($"patchable, cancellationToken)");
+            writer.Append($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken)");
             if (async)
             {
                 writer.Append($".ConfigureAwait(false)");
             }
             writer.Line($";");
+            writer.Append($"var originalResponse = ");
+            if (async)
+            {
+                writer.Append($"await ");
+            }
+#pragma warning disable CS8602
+            var pathParamNames = GetPathParametersName(resourceOperation.GetMethod.RestClientMethod, resource.OperationGroup, context).ToList();
+#pragma warning restore CS8602
+            writer.Append($"{RestClientField}.{CreateMethodName(resourceOperation.GetMethod.Name, async)}( ");
+            foreach (string paramNames in pathParamNames)
+            {
+                writer.Append($"{paramNames:I}, ");
+            }
+            foreach (Parameter parameter in resourceOperation.GetMethod.RestClientMethod.NonPathParameters)
+            {
+                if (parameter.Name == "expand")
+                {
+                    writer.Append($"null, ");
+                }
+                else
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+            }
+            writer.Append($"cancellationToken)");
 
-            var parameters = pathParamNames.ToList();
-            parameters.Add("patchable");
-            WriteStartLROResponse(writer, clientMethod, context, response, parameters.ToArray());
+            if (async)
+            {
+                writer.Append($".ConfigureAwait(false)");
+            }
+            writer.Line($";");
+            writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
