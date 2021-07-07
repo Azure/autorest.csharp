@@ -67,10 +67,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, MgmtObjectType mgmtObjectType, Type typeToChange)
+        private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, Type replacementType)
         {
             return new ObjectTypeProperty(
-                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, typeToChange.Name, CSharpType.FromSystemType(mgmtObjectType.Context, typeToChange)),
+                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, replacementType.Name, CSharpType.FromSystemType(typeToReplace.Context, replacementType)),
                     originalType.Description,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty
