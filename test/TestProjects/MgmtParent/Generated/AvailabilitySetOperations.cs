@@ -168,12 +168,20 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag added. </returns>
         public async Task<Response<AvailabilitySet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = await StartAddTagAsync(key, value, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -189,74 +197,20 @@ namespace MgmtParent
         /// <returns> The updated resource with the tag added. </returns>
         public Response<AvailabilitySet> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = StartAddTag(key, value, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<AvailabilitySetsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsUpdateOperation(this, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public AvailabilitySetsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
