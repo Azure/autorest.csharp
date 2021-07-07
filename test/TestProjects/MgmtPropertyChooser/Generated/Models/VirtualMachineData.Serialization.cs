@@ -27,6 +27,26 @@ namespace MgmtPropertyChooser
                 writer.WritePropertyName("identity");
                 JsonSerializer.Serialize(writer, ResourceIdentity);
             }
+            if (Optional.IsDefined(IdentityWithRenamedProperty))
+            {
+                writer.WritePropertyName("identityWithRenamedProperty");
+                writer.WriteObjectValue(IdentityWithRenamedProperty);
+            }
+            if (Optional.IsDefined(IdentityWithDifferentPropertyType))
+            {
+                writer.WritePropertyName("identityWithDifferentPropertyType");
+                writer.WriteObjectValue(IdentityWithDifferentPropertyType);
+            }
+            if (Optional.IsDefined(IdentityWithNoUserIdentity))
+            {
+                writer.WritePropertyName("identityWithNoUserIdentity");
+                writer.WriteObjectValue(IdentityWithNoUserIdentity);
+            }
+            if (Optional.IsDefined(IdentityWithNoSystemIdentity))
+            {
+                writer.WritePropertyName("identityWithNoSystemIdentity");
+                writer.WriteObjectValue(IdentityWithNoSystemIdentity);
+            }
             if (Optional.IsCollectionDefined(Zones))
             {
                 writer.WritePropertyName("zones");
@@ -68,6 +88,10 @@ namespace MgmtPropertyChooser
             Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ResourceIdentity> identity = default;
+            Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
+            Optional<IdentityWithDifferentPropertyType> identityWithDifferentPropertyType = default;
+            Optional<IdentityWithNoUserIdentity> identityWithNoUserIdentity = default;
+            Optional<IdentityWithNoSystemIdentity> identityWithNoSystemIdentity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
@@ -113,6 +137,46 @@ namespace MgmtPropertyChooser
                         continue;
                     }
                     identity = JsonSerializer.Deserialize<ResourceIdentity>(property.Value.ToString());
+                    continue;
+                }
+                if (property.NameEquals("identityWithRenamedProperty"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identityWithRenamedProperty = IdentityWithRenamedProperty.DeserializeIdentityWithRenamedProperty(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("identityWithDifferentPropertyType"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identityWithDifferentPropertyType = IdentityWithDifferentPropertyType.DeserializeIdentityWithDifferentPropertyType(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("identityWithNoUserIdentity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identityWithNoUserIdentity = IdentityWithNoUserIdentity.DeserializeIdentityWithNoUserIdentity(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("identityWithNoSystemIdentity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identityWithNoSystemIdentity = IdentityWithNoSystemIdentity.DeserializeIdentityWithNoSystemIdentity(property.Value);
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -193,7 +257,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, location, tags, plan.Value, Optional.ToList(resources), identity, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, location, tags, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

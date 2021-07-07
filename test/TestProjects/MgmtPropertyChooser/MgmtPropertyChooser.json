@@ -278,6 +278,22 @@
                     "$ref": "#/definitions/VirtualMachineIdentity",
                     "description": "The identity of the virtual machine, if configured."
                 },
+                "identityWithRenamedProperty": {
+                    "$ref": "#/definitions/IdentityWithRenamedProperty",
+                    "description": "The identity of the virtual machine, if configured."
+                },
+                "identityWithDifferentPropertyType": {
+                    "$ref": "#/definitions/IdentityWithDifferentPropertyType",
+                    "description": "The identity of the virtual machine, if configured."
+                },
+                "identityWithNoUserIdentity": {
+                    "$ref": "#/definitions/IdentityWithNoUserIdentity",
+                    "description": "The identity of the virtual machine, if configured."
+                },
+                "identityWithNoSystemIdentity": {
+                    "$ref": "#/definitions/IdentityWithNoSystemIdentity",
+                    "description": "The identity of the virtual machine, if configured."
+                },
                 "zones": {
                     "type": "array",
                     "items": {
@@ -440,6 +456,169 @@
                 }
             },
             "description": "Describes the properties of a Virtual Machine Extension."
+        },
+        "IdentityWithRenamedProperty": {
+            "properties": {
+                "testPrincipalId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
+                },
+                "tenantId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "SystemAssigned, UserAssigned",
+                        "None"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ResourceIdentityType",
+                        "modelAsString": false
+                    }
+                },
+                "userAssignedIdentities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "principalId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The principal id of user assigned identity."
+                            },
+                            "clientId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The client id of user assigned identity."
+                            }
+                        }
+                    },
+                    "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+                }
+            },
+            "description": "Identity for the virtual machine."
+        },
+        "IdentityWithDifferentPropertyType": {
+            "properties": {
+                "principalId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
+                },
+                "tenantId": {
+                    "readOnly": true,
+                    "type": "integer",
+                    "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "SystemAssigned, UserAssigned",
+                        "None"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ResourceIdentityType",
+                        "modelAsString": false
+                    }
+                },
+                "userAssignedIdentities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "principalId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The principal id of user assigned identity."
+                            },
+                            "clientId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The client id of user assigned identity."
+                            }
+                        }
+                    },
+                    "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+                }
+            },
+            "description": "Identity for the virtual machine."
+        },
+        "IdentityWithNoUserIdentity": {
+            "properties": {
+                "principalId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
+                },
+                "tenantId": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "SystemAssigned, UserAssigned",
+                        "None"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ResourceIdentityType",
+                        "modelAsString": false
+                    }
+                }
+            },
+            "description": "Identity for the virtual machine."
+        },
+        "IdentityWithNoSystemIdentity": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "SystemAssigned, UserAssigned",
+                        "None"
+                    ],
+                    "x-ms-enum": {
+                        "name": "ResourceIdentityType",
+                        "modelAsString": false
+                    }
+                },
+                "userAssignedIdentities": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                            "principalId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The principal id of user assigned identity."
+                            },
+                            "clientId": {
+                                "readOnly": true,
+                                "type": "string",
+                                "description": "The client id of user assigned identity."
+                            }
+                        }
+                    },
+                    "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+                }
+            },
+            "description": "Identity for the virtual machine."
         },
         "VirtualMachineIdentity": {
             "properties": {
