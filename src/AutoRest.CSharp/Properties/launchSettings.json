@@ -252,6 +252,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtParent\\Generated"
     },
+    "MgmtPropertyChooser": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPropertyChooser\\Generated"
+    },
     "MgmtSingleton": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingleton\\Generated"
