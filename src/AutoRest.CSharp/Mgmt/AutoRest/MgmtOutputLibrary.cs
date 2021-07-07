@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
+            RemoveOperations(codeModel);
             _codeModel = codeModel;
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -64,11 +65,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
-            RestApiOperationGroup = GetRestApiOperationGroup();
             DecorateOperationGroup();
         }
 
-        public OperationGroup? RestApiOperationGroup { get; }
+        private void RemoveOperations(CodeModel codeModel)
+        {
+            var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
+            if (operations != null)
+            {
+                var listModel = operations.Operations.First(o => o.Language.Default.Name == "List").Responses.First().ResponseSchema as ObjectSchema;
+                if (listModel != null)
+                {
+                    var itemModel = listModel.Properties.First(p => p.SerializedName == "value").Schema as ArraySchema;
+                    if (itemModel != null)
+                    {
+                        codeModel.Schemas.Objects.Remove(itemModel.ElementType as ObjectSchema);
+                    }
+                    codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
+                }
+                codeModel.OperationGroups.Remove(operations);
+            }
+        }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 
@@ -237,10 +254,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
                 var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
-                _resourceOperations[resourceType].Add(operationGroup, new ResourceOperation(operationGroup, _context, childOperationGroups));
+                var resourceOperation = new ResourceOperation(operationGroup, _context, childOperationGroups);
+                // validate to ensure that all the resource operations here have unique names
+                EnsureUniqueName(_resourceOperations, resourceOperation);
+                _resourceOperations[resourceType].Add(operationGroup, resourceOperation);
             }
 
             return _resourceOperations;
+        }
+
+        private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : ResourceOperation where V : IDictionary<OperationGroup, T>
+        {
+            // we need to iterate over the existing items (including Default resource type and Tuple resource type)
+            // to see if there are already any resource operations are returning the same resource as this new one
+            foreach (var pair in mapToSearchIn.SelectMany(p => p.Value))
+            {
+                var existing = pair.Value;
+                if (value.Type.Name.Equals(existing.Type.Name))
+                {
+                    throw new Exception($"Operation Group {existing.OperationGroup.Key} and {value.OperationGroup.Key} return the same resource {existing.ResourceName}, please consider mark these operation groups as extension resource in the `operation-group-is-extension` section");
+                }
+            }
         }
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>> EnsureResourceContainers()
@@ -258,7 +292,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (!operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                 {
                     var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
-                    _resourceContainers[resourceType].Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                    var resourceContainer = new ResourceContainer(operationGroup, _context);
+                    // validate to ensure that all the resource container here have unique names
+                    EnsureUniqueName(_resourceContainers, resourceContainer);
+                    _resourceContainers[resourceType].Add(operationGroup, resourceContainer);
                 }
             }
 
@@ -481,7 +518,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 ResourceTypes.Add(operationGroup.ResourceType(_mgmtConfiguration));
 
-                // TODO better support for extension resources
                 string? parent;
                 if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
                 {

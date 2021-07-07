@@ -16,8 +16,8 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtension. </summary>
-    public partial class VirtualMachineExtensionVirtualMachineScaleSetsOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtension>
+    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionVirtualMachineScaleSets. </summary>
+    public partial class VirtualMachineExtensionVirtualMachineScaleSetsOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtensionVirtualMachineScaleSets>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachineScaleSetVMExtensionsRestOperations _restClient { get; }
@@ -40,14 +40,14 @@ namespace Azure.ResourceManager.Sample
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<VirtualMachineExtension>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtensionVirtualMachineScaleSets>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSets(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -57,14 +57,14 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <inheritdoc />
-        public override Response<VirtualMachineExtension> Get(CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionVirtualMachineScaleSets> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSets(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -76,14 +76,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the VMSS VM extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<VirtualMachineExtension>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSets>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSets(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -95,14 +95,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the VMSS VM extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<VirtualMachineExtension> Get(string expand, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSets> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSets(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -204,7 +204,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<VirtualMachineExtension>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSets>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.AddTag");
             scope.Start();
@@ -225,7 +225,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<VirtualMachineExtension> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSets> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.AddTag");
             scope.Start();
@@ -307,7 +307,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<VirtualMachineExtension>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSets>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.SetTags");
             scope.Start();
@@ -327,7 +327,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<VirtualMachineExtension> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSets> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.SetTags");
             scope.Start();
@@ -403,7 +403,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<VirtualMachineExtension>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSets>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.RemoveTag");
             scope.Start();
@@ -423,7 +423,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<VirtualMachineExtension> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSets> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsOperations.RemoveTag");
             scope.Start();

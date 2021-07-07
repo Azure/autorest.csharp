@@ -23,7 +23,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
-            var armClientExtensionsWriter = new ArmClientExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
@@ -126,18 +125,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var subscriptionExtensionsCodeWriter = new CodeWriter();
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
             project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
-
-            var armClientExtensionsCodeWriter = new CodeWriter();
-            armClientExtensionsWriter.WriteExtension(armClientExtensionsCodeWriter, context);
-            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Tenant]}.cs", armClientExtensionsCodeWriter.ToString());
-
-            if (context.Library.RestApiOperationGroup != null)
-            {
-                var codeWriter = new CodeWriter();
-                var restApiWriter = new RestApiWriter();
-                restApiWriter.Write(codeWriter, context.Library.RestApiOperationGroup, context);
-                project.AddGeneratedFile($"RestApiContainer.cs", codeWriter.ToString());
-            }
         }
     }
 }
