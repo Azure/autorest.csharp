@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure.Core;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -22,7 +23,22 @@ namespace AutoRest.CSharp.Input
     {
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.
         public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
-        public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+        public OperationFinalStateVia LongRunningFinalStateVia
+        {
+            get
+            {
+                var finalStateVia = Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+                return finalStateVia switch
+                {
+                    "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
+                    "location" => OperationFinalStateVia.Location,
+                    "original-uri" => OperationFinalStateVia.OriginalUri,
+                    null => OperationFinalStateVia.Location,
+                    _ => throw new ArgumentException($"Unknown final-state-via value: {finalStateVia}"),
+                };
+            }
+        }
+
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse

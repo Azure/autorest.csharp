@@ -275,38 +275,31 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -530,38 +523,31 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StartTranslation"/> and <see cref="StartTranslationAsync"/> operations. </summary>

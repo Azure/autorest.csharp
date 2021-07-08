@@ -116,39 +116,32 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                            case 201:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                        case 201:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -217,39 +210,32 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Put201CreatingSucceeded200");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                            case 201:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                        case 201:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Put201CreatingSucceeded200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="Put201CreatingSucceeded200"/> and <see cref="Put201CreatingSucceeded200Async"/> operations. </summary>
@@ -336,38 +322,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -436,38 +415,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PutAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PutAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutAsyncRelativeRetrySucceeded"/> and <see cref="PutAsyncRelativeRetrySucceededAsync"/> operations. </summary>
@@ -500,39 +472,32 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -547,39 +512,32 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 200:
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 200:
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DeleteProvisioning202Accepted200Succeeded"/> and <see cref="DeleteProvisioning202Accepted200SucceededAsync"/> operations. </summary>
@@ -609,38 +567,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
@@ -655,38 +606,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Delete202Retry200");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Delete202Retry200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="Delete202Retry200"/> and <see cref="Delete202Retry200Async"/> operations. </summary>
@@ -716,38 +660,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -762,38 +699,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.DeleteAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetrySucceeded"/> and <see cref="DeleteAsyncRelativeRetrySucceededAsync"/> operations. </summary>
@@ -877,38 +807,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
@@ -977,38 +900,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.Post202Retry200");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.Post202Retry200");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="Post202Retry200"/> and <see cref="Post202Retry200Async"/> operations. </summary>
@@ -1095,38 +1011,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            async Task<Response> BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = await BeginOperation().ConfigureAwait(false);
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
@@ -1195,38 +1104,31 @@ namespace lro_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
-
-            Response BeginOperation()
+            using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            scope.Start();
+            try
             {
-                using var scope = _clientDiagnostics.CreateScope("LRORetrysClient.PostAsyncRelativeRetrySucceeded");
-                scope.Start();
-                try
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
-                    Pipeline.Send(message, options.CancellationToken);
-                    if (options.StatusOption == ResponseStatusOption.Default)
+                    switch (message.Response.Status)
                     {
-                        switch (message.Response.Status)
-                        {
-                            case 202:
-                                return message.Response;
-                            default:
-                                throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-                        }
-                    }
-                    else
-                    {
-                        return message.Response;
+                        case 202:
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
-                catch (Exception e)
+                else
                 {
-                    scope.Failed(e);
-                    throw;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
                 }
             }
-
-            var response = BeginOperation();
-            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location, "LRORetrysClient.PostAsyncRelativeRetrySucceeded");
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="PostAsyncRelativeRetrySucceeded"/> and <see cref="PostAsyncRelativeRetrySucceededAsync"/> operations. </summary>
