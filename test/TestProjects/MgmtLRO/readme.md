@@ -20,10 +20,8 @@ namespace: MgmtLRO
 #     ResourceGroupFeatures: Microsoft.Fake/locations/resourceGroupFeatures
 #     ResourceGroupNonPageableFeatures: Microsoft.Fake/locations/resourceGroupNonPageableFeatures
 #     Keys: Microsoft.Fake/publishers/versions/getKeys
-# operation-group-to-resource:
-#     ApiKeys: NonResource
-#     ChildWithPosts: NonResource
-#     Keys: NonResource
+operation-group-to-resource:
+  Bars: Bar
 # operation-group-to-parent:
 #     FakeBars: Microsoft.Fake/fakes
 #     ResponseNotCalledValues: Microsoft.Fake/fakes

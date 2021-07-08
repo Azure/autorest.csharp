@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtLRO.Models
 {
-    public partial class FakeData : IUtf8JsonSerializable
+    public partial class BarData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -35,9 +35,9 @@ namespace MgmtLRO.Models
             writer.WriteEndObject();
         }
 
-        internal static FakeData DeserializeFakeData(JsonElement element)
+        internal static BarData DeserializeBarData(JsonElement element)
         {
-            Optional<FakeProperties> properties = default;
+            Optional<BarProperties> properties = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
@@ -52,7 +52,7 @@ namespace MgmtLRO.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    properties = FakeProperties.DeserializeFakeProperties(property.Value);
+                    properties = BarProperties.DeserializeBarProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -86,7 +86,7 @@ namespace MgmtLRO.Models
                     continue;
                 }
             }
-            return new FakeData(id, name, type, location, tags, properties.Value);
+            return new BarData(id, name, type, location, tags, properties.Value);
         }
     }
 }

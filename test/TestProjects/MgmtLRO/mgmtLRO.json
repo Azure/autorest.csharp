@@ -310,14 +310,152 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}": {
+            "put": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_DoSomething",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Delete",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "201": {
+                        "description": "Accepted"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
         }
     },
     "definitions": {
         "Fake": {
             "properties": {
-                "bar": {
-                    "type": "string",
-                    "description": "specifies the bar"
+                "properties": {
+                    "$ref": "#/definitions/FakeProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "Bar": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/BarProperties"
                 }
             },
             "allOf": [
@@ -370,6 +508,17 @@
                     "type": "integer",
                     "format": "int32",
                     "description": "Fault Domain count."
+                }
+            },
+            "description": "The instance view of a resource."
+        },
+        "BarProperties": {
+            "type": "object",
+            "properties": {
+                "buzz": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Update Domain count."
                 }
             },
             "description": "The instance view of a resource."
