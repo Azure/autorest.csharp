@@ -606,7 +606,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
             foreach (Parameter parameter in resourceOperation.GetMethod.RestClientMethod.NonPathParameters)
             {
-                if (parameter.Name == "expand")
+                if (parameter.Name == "expand" || parameter.Name == "includeColocationStatus")
                 {
                     writer.Append($"null, ");
                 }
