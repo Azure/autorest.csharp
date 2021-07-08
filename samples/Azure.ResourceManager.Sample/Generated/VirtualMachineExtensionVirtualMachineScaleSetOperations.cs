@@ -13,42 +13,41 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using MgmtMultipleParentResource.Models;
 
-namespace MgmtMultipleParentResource
+namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the operations that can be performed over a specific ChildBodySubParents. </summary>
-    public partial class ChildBodySubParentsOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ChildBodySubParents>
+    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionVirtualMachineScaleSet. </summary>
+    public partial class VirtualMachineExtensionVirtualMachineScaleSetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtensionVirtualMachineScaleSet>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private ChildrenRestOperations _restClient { get; }
+        private VirtualMachineScaleSetVMExtensionsRestOperations _restClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParentsOperations"/> class for mocking. </summary>
-        protected ChildBodySubParentsOperations()
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionVirtualMachineScaleSetOperations"/> class for mocking. </summary>
+        protected VirtualMachineExtensionVirtualMachineScaleSetOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="ChildBodySubParentsOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionVirtualMachineScaleSetOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ChildBodySubParentsOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionVirtualMachineScaleSetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new VirtualMachineScaleSetVMExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/parents/subParents/children";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/extensions";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<ChildBodySubParents>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParents(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -58,14 +57,14 @@ namespace MgmtMultipleParentResource
         }
 
         /// <inheritdoc />
-        public override Response<ChildBodySubParents> Get(CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionVirtualMachineScaleSet> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new ChildBodySubParents(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -74,17 +73,17 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the VMSS VM extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ChildBodySubParents>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Get");
             scope.Start();
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodySubParents(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -93,17 +92,17 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to get the VMSS VM run command. </summary>
+        /// <summary> The operation to get the VMSS VM extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ChildBodySubParents> Get(string expand, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSet> Get(string expand, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Get");
             scope.Start();
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return Response.FromValue(new ChildBodySubParents(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionVirtualMachineScaleSet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,11 +127,11 @@ namespace MgmtMultipleParentResource
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Delete");
             scope.Start();
             try
             {
@@ -146,11 +145,11 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.Delete");
             scope.Start();
             try
             {
@@ -164,16 +163,16 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new ChildrenDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -182,16 +181,16 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Operation StartDelete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
-                return new ChildrenDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -205,9 +204,9 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<ChildBodySubParents>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.AddTag");
             scope.Start();
             try
             {
@@ -226,9 +225,9 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<ChildBodySubParents> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSet> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.AddTag");
             scope.Start();
             try
             {
@@ -248,23 +247,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<ChildrenUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineScaleSetVMExtensionsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -279,23 +278,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public ChildrenUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
+        public VirtualMachineScaleSetVMExtensionsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -308,9 +307,9 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<ChildBodySubParents>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.SetTags");
             scope.Start();
             try
             {
@@ -328,9 +327,9 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<ChildBodySubParents> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSet> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.SetTags");
             scope.Start();
             try
             {
@@ -349,21 +348,21 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<ChildrenUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineScaleSetVMExtensionsUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -377,21 +376,21 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public ChildrenUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public VirtualMachineScaleSetVMExtensionsUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -404,9 +403,9 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<ChildBodySubParents>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -424,9 +423,9 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<ChildBodySubParents> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionVirtualMachineScaleSet> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -445,23 +444,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<ChildrenUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineScaleSetVMExtensionsUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -475,23 +474,23 @@ namespace MgmtMultipleParentResource
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public ChildrenUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
+        public VirtualMachineScaleSetVMExtensionsUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentsOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new ChildBodyUpdate();
+                var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new ChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

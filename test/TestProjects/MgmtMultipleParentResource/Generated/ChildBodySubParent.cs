@@ -12,13 +12,13 @@ using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A Class representing a ChildBodyAnotherParents along with the instance operations that can be performed on it. </summary>
-    public class ChildBodyAnotherParents : ChildBodyAnotherParentsOperations
+    /// <summary> A Class representing a ChildBodySubParent along with the instance operations that can be performed on it. </summary>
+    public class ChildBodySubParent : ChildBodySubParentOperations
     {
-        /// <summary> Initializes a new instance of the <see cref = "ChildBodyAnotherParents"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ChildBodySubParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ChildBodyAnotherParents(ResourceOperationsBase options, ChildBodyData resource) : base(options, resource.Id)
+        internal ChildBodySubParent(ResourceOperationsBase options, ChildBodyData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
@@ -27,13 +27,13 @@ namespace MgmtMultipleParentResource
         public ChildBodyData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override ChildBodyAnotherParents GetResource(CancellationToken cancellation = default)
+        protected override ChildBodySubParent GetResource(CancellationToken cancellation = default)
         {
             return this;
         }
 
         /// <inheritdoc />
-        protected override Task<ChildBodyAnotherParents> GetResourceAsync(CancellationToken cancellation = default)
+        protected override Task<ChildBodySubParent> GetResourceAsync(CancellationToken cancellation = default)
         {
             return Task.FromResult(this);
         }
