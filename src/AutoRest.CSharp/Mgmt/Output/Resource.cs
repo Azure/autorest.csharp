@@ -7,6 +7,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -21,8 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             string parentValue = "";
             if (isExtension)
             {
-                var parentArr = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Split('/');
-                parentValue = FirstCharToUpper(parentArr.Last());
+                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
+                parentValue = parentOperationGroup!.Key.ToSingular(false);
             }
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue;
             Description = BuilderHelpers.EscapeXmlDescription(
