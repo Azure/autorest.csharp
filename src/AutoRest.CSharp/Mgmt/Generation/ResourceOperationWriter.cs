@@ -606,13 +606,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
             foreach (Parameter parameter in resourceOperation.GetMethod.RestClientMethod.NonPathParameters)
             {
-                if (parameter.Name == "expand" || parameter.Name == "includeColocationStatus")
+                if (parameter.ValidateNotNull)
                 {
-                    writer.Append($"null, ");
+                    writer.Append($"{parameter.Name}, ");
                 }
                 else
                 {
-                    writer.Append($"{parameter.Name}, ");
+                    writer.Append($"null, ");
                 }
             }
             writer.Append($"cancellationToken)");
