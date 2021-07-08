@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+        internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
         protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
 
@@ -48,11 +48,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            List<ObjectTypeProperty> objTypeProperties = new List<ObjectTypeProperty>();
             var parentProperties = GetParentPropertyNames();
             foreach (var property in base.BuildProperties())
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
-                    yield return property;
+                {
+                    var propertyType = CreatePropertyType(property);
+                    yield return propertyType;
+                }
             }
         }
 
@@ -65,6 +69,21 @@ namespace AutoRest.CSharp.Mgmt.Output
                     yield return CreateProperty(property);
                 }
             }
+        }
+
+        private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
+        {
+            ObjectTypeProperty propertyType = objectTypeProperty;
+            var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
+            if (typeToReplace != null)
+            {
+                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties);
+                if (match != null)
+                {
+                    propertyType = match;
+                }
+            }
+            return propertyType;
         }
 
         protected override CSharpType? CreateInheritedType()
