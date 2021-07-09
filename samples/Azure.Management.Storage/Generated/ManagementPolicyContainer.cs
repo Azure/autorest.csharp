@@ -44,22 +44,24 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public Response<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                return StartCreateOrUpdate(managementPolicyName, properties, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(managementPolicyName, properties, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -68,22 +70,23 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(managementPolicyName, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(managementPolicyName, properties, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -93,23 +96,24 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public ManagementPoliciesCreateOrUpdateOperation StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, managementPolicyName, properties, cancellationToken: cancellationToken);
-                return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, managementPolicyName, properties, cancellationToken);
+                return new ManagementPoliciesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -118,23 +122,24 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the managementpolicy to the specified storage account. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public async Task<ManagementPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, properties, cancellationToken).ConfigureAwait(false);
+                return new ManagementPoliciesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {

@@ -43,26 +43,27 @@ namespace SupersetFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a WritableSubResourceModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<WritableSubResourceModel1> CreateOrUpdate(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<WritableSubResourceModel1> Put(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.CreateOrUpdate");
+            if (writableSubResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.Put");
             scope.Start();
             try
             {
-                if (writableSubResourceModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(writableSubResourceModel1SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(writableSubResourceModel1SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubResourceModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<WritableSubResourceModel1>> CreateOrUpdateAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<WritableSubResourceModel1>> PutAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.CreateOrUpdate");
+            if (writableSubResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.Put");
             scope.Start();
             try
             {
-                if (writableSubResourceModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(writableSubResourceModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubResourceModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public WritableSubResourceModel1SPutOperation StartCreateOrUpdate(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public WritableSubResourceModel1SPutOperation StartPut(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartCreateOrUpdate");
+            if (writableSubResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartPut");
             scope.Start();
             try
             {
-                if (writableSubResourceModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken: cancellationToken);
-                return new WritableSubResourceModel1SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken);
+                return new WritableSubResourceModel1SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubResourceModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<WritableSubResourceModel1SPutOperation> StartCreateOrUpdateAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<WritableSubResourceModel1SPutOperation> StartPutAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartCreateOrUpdate");
+            if (writableSubResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartPut");
             scope.Start();
             try
             {
-                if (writableSubResourceModel1SName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubResourceModel1SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new WritableSubResourceModel1SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new WritableSubResourceModel1SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

@@ -45,26 +45,27 @@ namespace Pagination
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a PageSizeInt32Model. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt32Model to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<PageSizeInt32Model> CreateOrUpdate(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<PageSizeInt32Model> Put(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(name, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(name, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +74,26 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeInt32Model. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt32Model to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<PageSizeInt32Model>> CreateOrUpdateAsync(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<PageSizeInt32Model>> PutAsync(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +103,27 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeInt32Model. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt32Model to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public PageSizeInt32ModelsPutOperation StartCreateOrUpdate(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public PageSizeInt32ModelsPutOperation StartPut(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken);
-                return new PageSizeInt32ModelsPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                return new PageSizeInt32ModelsPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -131,27 +132,27 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeInt32Model. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt32Model to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<PageSizeInt32ModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<PageSizeInt32ModelsPutOperation> StartPutAsync(string name, PageSizeInt32ModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PageSizeInt32ModelsPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                return new PageSizeInt32ModelsPutOperation(Parent, response);
             }
             catch (Exception e)
             {

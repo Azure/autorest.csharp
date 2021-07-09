@@ -45,26 +45,28 @@ namespace MgmtLRO
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a Fake. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public Response<Fake> CreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(fakeName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(fakeName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Fake. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<Fake>> CreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(fakeName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(fakeName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Fake. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public FakesCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, fakeName, parameters, cancellationToken: cancellationToken);
-                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, fakeName, parameters, cancellationToken);
+                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Fake. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
         public async Task<FakesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (fakeName == null)
-                {
-                    throw new ArgumentNullException(nameof(fakeName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, fakeName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
+                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
             }
             catch (Exception e)
             {

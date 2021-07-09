@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a TenantLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TenantLevelResource> CreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<TenantLevelResource> Put(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
+            if (tenantLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Put");
             scope.Start();
             try
             {
-                if (tenantLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(tenantLevelResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a TenantLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TenantLevelResource>> CreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<TenantLevelResource>> PutAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
+            if (tenantLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Put");
             scope.Start();
             try
             {
-                if (tenantLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(tenantLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a TenantLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public TenantLevelResourcesPutOperation StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public TenantLevelResourcesPutOperation StartPut(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
+            if (tenantLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (tenantLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken);
-                return new TenantLevelResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(tenantLevelResourcesName, parameters, cancellationToken);
+                return new TenantLevelResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a TenantLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<TenantLevelResourcesPutOperation> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<TenantLevelResourcesPutOperation> StartPutAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
+            if (tenantLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (tenantLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new TenantLevelResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(tenantLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new TenantLevelResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

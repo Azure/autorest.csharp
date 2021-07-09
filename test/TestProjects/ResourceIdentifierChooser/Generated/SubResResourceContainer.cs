@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a SubResResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubResResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubResResource> CreateOrUpdate(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<SubResResource> Put(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.CreateOrUpdate");
+            if (subResResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subResResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.Put");
             scope.Start();
             try
             {
-                if (subResResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(subResResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(subResResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubResResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubResResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubResResource>> CreateOrUpdateAsync(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SubResResource>> PutAsync(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.CreateOrUpdate");
+            if (subResResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subResResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.Put");
             scope.Start();
             try
             {
-                if (subResResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(subResResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(subResResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubResResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubResResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubResResourcesPutOperation StartCreateOrUpdate(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public SubResResourcesPutOperation StartPut(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.StartCreateOrUpdate");
+            if (subResResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subResResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (subResResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.Name, subResResourcesName, parameters, cancellationToken: cancellationToken);
-                return new SubResResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.Name, subResResourcesName, parameters, cancellationToken);
+                return new SubResResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubResResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubResResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubResResourcesPutOperation> StartCreateOrUpdateAsync(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<SubResResourcesPutOperation> StartPutAsync(string subResResourcesName, SubResResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.StartCreateOrUpdate");
+            if (subResResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subResResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubResResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (subResResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.Name, subResResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SubResResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.Name, subResResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new SubResResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

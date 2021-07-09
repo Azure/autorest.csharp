@@ -43,26 +43,27 @@ namespace SupersetFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceModel2> CreateOrUpdate(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<ResourceModel2> Put(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.CreateOrUpdate");
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.Put");
             scope.Start();
             try
             {
-                if (resourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(resourceModel2SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(resourceModel2SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceModel2>> CreateOrUpdateAsync(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ResourceModel2>> PutAsync(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.CreateOrUpdate");
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.Put");
             scope.Start();
             try
             {
-                if (resourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(resourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ResourceModel2SPutOperation StartCreateOrUpdate(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public ResourceModel2SPutOperation StartPut(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.StartCreateOrUpdate");
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (resourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken: cancellationToken);
-                return new ResourceModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken);
+                return new ResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ResourceModel2SPutOperation> StartCreateOrUpdateAsync(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<ResourceModel2SPutOperation> StartPutAsync(string resourceModel2SName, ResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.StartCreateOrUpdate");
+            if (resourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (resourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ResourceModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, resourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new ResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

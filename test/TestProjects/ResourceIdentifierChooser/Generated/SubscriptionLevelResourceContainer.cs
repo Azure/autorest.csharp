@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubscriptionLevelResource> CreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<SubscriptionLevelResource> Put(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
+            if (subscriptionLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Put");
             scope.Start();
             try
             {
-                if (subscriptionLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(subscriptionLevelResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubscriptionLevelResource>> CreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SubscriptionLevelResource>> PutAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
+            if (subscriptionLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Put");
             scope.Start();
             try
             {
-                if (subscriptionLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(subscriptionLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubscriptionLevelResourcesPutOperation StartCreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public SubscriptionLevelResourcesPutOperation StartPut(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
+            if (subscriptionLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (subscriptionLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken);
-                return new SubscriptionLevelResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken);
+                return new SubscriptionLevelResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubscriptionLevelResourcesPutOperation> StartCreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<SubscriptionLevelResourcesPutOperation> StartPutAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
+            if (subscriptionLevelResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (subscriptionLevelResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SubscriptionLevelResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new SubscriptionLevelResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

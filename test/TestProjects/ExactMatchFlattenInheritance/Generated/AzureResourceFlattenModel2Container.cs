@@ -43,26 +43,27 @@ namespace ExactMatchFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a AzureResourceFlattenModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<AzureResourceFlattenModel2> CreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<AzureResourceFlattenModel2> Put(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(name, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(name, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a AzureResourceFlattenModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<AzureResourceFlattenModel2>> CreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AzureResourceFlattenModel2>> PutAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a AzureResourceFlattenModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public AzureResourceFlattenModel2SPutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public AzureResourceFlattenModel2SPutOperation StartPut(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a AzureResourceFlattenModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<AzureResourceFlattenModel2SPutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<AzureResourceFlattenModel2SPutOperation> StartPutAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

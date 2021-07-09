@@ -44,26 +44,28 @@ namespace Azure.ResourceManager.Sample
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a SshPublicKey. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SshPublicKey> CreateOrUpdate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<SshPublicKey> Create(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdate");
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Create");
             scope.Start();
             try
             {
-                if (sshPublicKeyName == null)
-                {
-                    throw new ArgumentNullException(nameof(sshPublicKeyName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(sshPublicKeyName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreate(sshPublicKeyName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -72,26 +74,27 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a SshPublicKey. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SshPublicKey>> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SshPublicKey>> CreateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdate");
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Create");
             scope.Start();
             try
             {
-                if (sshPublicKeyName == null)
-                {
-                    throw new ArgumentNullException(nameof(sshPublicKeyName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateAsync(sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -101,27 +104,28 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a SshPublicKey. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SshPublicKeysCreateOperation StartCreateOrUpdate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public SshPublicKeysCreateOperation StartCreate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdate");
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreate");
             scope.Start();
             try
             {
-                if (sshPublicKeyName == null)
-                {
-                    throw new ArgumentNullException(nameof(sshPublicKeyName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken);
-                return new SshPublicKeysCreateOperation(Parent, originalResponse);
+                var response = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken);
+                return new SshPublicKeysCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -130,27 +134,28 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a SshPublicKey. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new SSH public key resource. </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SshPublicKeysCreateOperation> StartCreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<SshPublicKeysCreateOperation> StartCreateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdate");
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreate");
             scope.Start();
             try
             {
-                if (sshPublicKeyName == null)
-                {
-                    throw new ArgumentNullException(nameof(sshPublicKeyName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SshPublicKeysCreateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
+                return new SshPublicKeysCreateOperation(Parent, response);
             }
             catch (Exception e)
             {

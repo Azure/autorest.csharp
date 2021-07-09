@@ -44,41 +44,43 @@ namespace MgmtParent
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
         public Response<VirtualMachineExtensionImage> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -87,41 +89,42 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
         public async Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -131,42 +134,43 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
         public VirtualMachineExtensionImagesCreateOrUpdateOperation StartCreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken: cancellationToken);
-                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = _restClient.CreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -175,42 +179,43 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <summary> Gets a virtual machine extension image. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
         public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (location == null)
-                {
-                    throw new ArgumentNullException(nameof(location));
-                }
-                if (publisherName == null)
-                {
-                    throw new ArgumentNullException(nameof(publisherName));
-                }
-                if (type == null)
-                {
-                    throw new ArgumentNullException(nameof(type));
-                }
-                if (version == null)
-                {
-                    throw new ArgumentNullException(nameof(version));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {

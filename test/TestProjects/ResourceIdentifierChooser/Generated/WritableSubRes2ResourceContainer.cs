@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a WritableSubRes2Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes2Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<WritableSubRes2Resource> CreateOrUpdate(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes2ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<WritableSubRes2Resource> Put(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.CreateOrUpdate");
+            if (writableSubRes2ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.Put");
             scope.Start();
             try
             {
-                if (writableSubRes2ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(writableSubRes2ResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(writableSubRes2ResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes2Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes2Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<WritableSubRes2Resource>> CreateOrUpdateAsync(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes2ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<WritableSubRes2Resource>> PutAsync(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.CreateOrUpdate");
+            if (writableSubRes2ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.Put");
             scope.Start();
             try
             {
-                if (writableSubRes2ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(writableSubRes2ResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(writableSubRes2ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes2Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes2Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public WritableSubRes2ResourcesPutOperation StartCreateOrUpdate(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes2ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public WritableSubRes2ResourcesPutOperation StartPut(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.StartCreateOrUpdate");
+            if (writableSubRes2ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (writableSubRes2ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(writableSubRes2ResourcesName, parameters, cancellationToken: cancellationToken);
-                return new WritableSubRes2ResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(writableSubRes2ResourcesName, parameters, cancellationToken);
+                return new WritableSubRes2ResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes2Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes2Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<WritableSubRes2ResourcesPutOperation> StartCreateOrUpdateAsync(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes2ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<WritableSubRes2ResourcesPutOperation> StartPutAsync(string writableSubRes2ResourcesName, WritableSubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.StartCreateOrUpdate");
+            if (writableSubRes2ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.StartPut");
             scope.Start();
             try
             {
-                if (writableSubRes2ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes2ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(writableSubRes2ResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new WritableSubRes2ResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(writableSubRes2ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new WritableSubRes2ResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

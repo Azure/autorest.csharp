@@ -43,22 +43,23 @@ namespace ExactMatchFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<CustomModel2> CreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public Response<CustomModel2> Put(string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                return StartCreateOrUpdate(name, foo, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(name, foo, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -67,22 +68,22 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<CustomModel2>> CreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async Task<Response<CustomModel2>> PutAsync(string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(name, foo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(name, foo, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -92,23 +93,23 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public CustomModel2SPutOperation StartCreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public CustomModel2SPutOperation StartPut(string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, name, foo, cancellationToken: cancellationToken);
-                return new CustomModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, name, foo, cancellationToken);
+                return new CustomModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -117,23 +118,23 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<CustomModel2SPutOperation> StartCreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        public async Task<CustomModel2SPutOperation> StartPutAsync(string name, string foo = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new CustomModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
+                return new CustomModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

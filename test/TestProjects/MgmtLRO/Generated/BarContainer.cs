@@ -44,26 +44,28 @@ namespace MgmtLRO
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a Bar. Please note some properties can be set only during creation. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<Bar> CreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
+        public Response DoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoSomething");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                return StartCreateOrUpdate(barName, body, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartDoSomething(barName, body, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -72,27 +74,28 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Bar. Please note some properties can be set only during creation. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<Bar>> CreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
+        public async Task<Response> DoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoSomething");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(barName, body, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var operation = await StartDoSomethingAsync(barName, body, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -101,27 +104,28 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Bar. Please note some properties can be set only during creation. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public BarsDoSomethingOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
+        public Operation StartDoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDoSomething");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var originalResponse = _restClient.DoSomething(Id.ResourceGroupName, barName, body, cancellationToken: cancellationToken);
-                return new BarsDoSomethingOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, originalResponse);
+                var response = _restClient.DoSomething(Id.ResourceGroupName, barName, body, cancellationToken);
+                return new BarsDoSomethingOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -130,27 +134,28 @@ namespace MgmtLRO
             }
         }
 
-        /// <summary> The operation to create or update a Bar. Please note some properties can be set only during creation. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<BarsDoSomethingOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
+        public async Task<Operation> StartDoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDoSomething");
             scope.Start();
             try
             {
-                if (barName == null)
-                {
-                    throw new ArgumentNullException(nameof(barName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var originalResponse = await _restClient.DoSomethingAsync(Id.ResourceGroupName, barName, body, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new BarsDoSomethingOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, originalResponse);
+                var response = await _restClient.DoSomethingAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
+                return new BarsDoSomethingOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {

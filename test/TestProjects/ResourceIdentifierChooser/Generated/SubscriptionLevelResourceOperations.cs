@@ -153,7 +153,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await _restClient.PutAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = _restClient.Put(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -254,7 +254,7 @@ namespace ResourceIdentifierChooser
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await _restClient.PutAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -283,7 +283,7 @@ namespace ResourceIdentifierChooser
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = _restClient.Put(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -354,7 +354,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await _restClient.PutAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -385,7 +385,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new SubscriptionLevelResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = _restClient.Put(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new SubscriptionLevelResourcesPutOperation(this, response);
             }
             catch (Exception e)

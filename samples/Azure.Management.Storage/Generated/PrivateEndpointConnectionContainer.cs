@@ -44,26 +44,28 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="properties"> The private endpoint connection properties. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<PrivateEndpointConnection> CreateOrUpdate(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
+        public Response<PrivateEndpointConnection> Put(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Put");
             scope.Start();
             try
             {
-                if (privateEndpointConnectionName == null)
-                {
-                    throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                return StartCreateOrUpdate(privateEndpointConnectionName, properties, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(privateEndpointConnectionName, properties, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -72,26 +74,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="properties"> The private endpoint connection properties. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<PrivateEndpointConnection>> CreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
+        public async Task<Response<PrivateEndpointConnection>> PutAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Put");
             scope.Start();
             try
             {
-                if (privateEndpointConnectionName == null)
-                {
-                    throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(privateEndpointConnectionName, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -101,27 +104,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="properties"> The private endpoint connection properties. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public PrivateEndpointConnectionsPutOperation StartCreateOrUpdate(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
+        public PrivateEndpointConnectionsPutOperation StartPut(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartPut");
             scope.Start();
             try
             {
-                if (privateEndpointConnectionName == null)
-                {
-                    throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken: cancellationToken);
-                return new PrivateEndpointConnectionsPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken);
+                return new PrivateEndpointConnectionsPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -130,27 +134,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
+        /// <summary> Update the state of specified private endpoint connection associated with the storage account. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="properties"> The private endpoint connection properties. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<PrivateEndpointConnectionsPutOperation> StartCreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
+        public async Task<PrivateEndpointConnectionsPutOperation> StartPutAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
+            if (privateEndpointConnectionName == null)
+            {
+                throw new ArgumentNullException(nameof(privateEndpointConnectionName));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartPut");
             scope.Start();
             try
             {
-                if (privateEndpointConnectionName == null)
-                {
-                    throw new ArgumentNullException(nameof(privateEndpointConnectionName));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PrivateEndpointConnectionsPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
+                return new PrivateEndpointConnectionsPutOperation(Parent, response);
             }
             catch (Exception e)
             {
