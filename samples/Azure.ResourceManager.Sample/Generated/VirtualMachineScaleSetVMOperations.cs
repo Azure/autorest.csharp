@@ -220,7 +220,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineScaleSetVMData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
@@ -252,7 +252,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineScaleSetVMData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
@@ -421,7 +421,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineScaleSetVMData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
@@ -452,7 +452,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineScaleSetVMData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);

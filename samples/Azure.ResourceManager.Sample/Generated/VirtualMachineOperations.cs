@@ -224,7 +224,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
@@ -255,7 +255,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
@@ -421,7 +421,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
@@ -451,7 +451,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var resource = GetResource();
+                var resource = Get();
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
