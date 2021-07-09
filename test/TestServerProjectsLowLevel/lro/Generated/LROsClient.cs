@@ -238,7 +238,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200Succeeded"/> and <see cref="Put200SucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut200SucceededRequest(RequestContent content, RequestOptions options = null)
@@ -442,7 +441,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201Succeeded"/> and <see cref="Put201SucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut201SucceededRequest(RequestContent content, RequestOptions options = null)
@@ -540,7 +538,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202List"/> and <see cref="Post202ListAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost202ListRequest(RequestOptions options = null)
         {
@@ -741,7 +738,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200SucceededNoState"/> and <see cref="Put200SucceededNoStateAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut200SucceededNoStateRequest(RequestContent content, RequestOptions options = null)
@@ -945,7 +941,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put202Retry200"/> and <see cref="Put202Retry200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut202Retry200Request(RequestContent content, RequestOptions options = null)
@@ -1151,7 +1146,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingSucceeded200"/> and <see cref="Put201CreatingSucceeded200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestOptions options = null)
@@ -1355,7 +1349,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200UpdatingSucceeded204"/> and <see cref="Put200UpdatingSucceeded204Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut200UpdatingSucceeded204Request(RequestContent content, RequestOptions options = null)
@@ -1561,7 +1554,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingFailed200"/> and <see cref="Put201CreatingFailed200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut201CreatingFailed200Request(RequestContent content, RequestOptions options = null)
@@ -1765,7 +1757,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200Acceptedcanceled200"/> and <see cref="Put200Acceptedcanceled200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut200Acceptedcanceled200Request(RequestContent content, RequestOptions options = null)
@@ -1969,7 +1960,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNoHeaderInRetry"/> and <see cref="PutNoHeaderInRetryAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutNoHeaderInRetryRequest(RequestContent content, RequestOptions options = null)
@@ -2173,7 +2163,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRetrySucceeded"/> and <see cref="PutAsyncRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -2377,7 +2366,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoRetrySucceeded"/> and <see cref="PutAsyncNoRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncNoRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -2581,7 +2569,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRetryFailed"/> and <see cref="PutAsyncRetryFailedAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncRetryFailedRequest(RequestContent content, RequestOptions options = null)
@@ -2785,7 +2772,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoRetrycanceled"/> and <see cref="PutAsyncNoRetrycanceledAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncNoRetrycanceledRequest(RequestContent content, RequestOptions options = null)
@@ -2989,7 +2975,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoHeaderInRetry"/> and <see cref="PutAsyncNoHeaderInRetryAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncNoHeaderInRetryRequest(RequestContent content, RequestOptions options = null)
@@ -3133,7 +3118,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNonResource"/> and <see cref="PutNonResourceAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutNonResourceRequest(RequestContent content, RequestOptions options = null)
@@ -3277,7 +3261,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNonResource"/> and <see cref="PutAsyncNonResourceAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncNonResourceRequest(RequestContent content, RequestOptions options = null)
@@ -3433,7 +3416,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutSubResource"/> and <see cref="PutSubResourceAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutSubResourceRequest(RequestContent content, RequestOptions options = null)
@@ -3589,7 +3571,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncSubResource"/> and <see cref="PutAsyncSubResourceAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncSubResourceRequest(RequestContent content, RequestOptions options = null)
@@ -3687,7 +3668,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202Accepted200Succeeded"/> and <see cref="DeleteProvisioning202Accepted200SucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest(RequestOptions options = null)
         {
@@ -3782,7 +3762,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202DeletingFailed200"/> and <see cref="DeleteProvisioning202DeletingFailed200Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteProvisioning202DeletingFailed200Request(RequestOptions options = null)
         {
@@ -3877,7 +3856,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202Deletingcanceled200"/> and <see cref="DeleteProvisioning202Deletingcanceled200Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteProvisioning202Deletingcanceled200Request(RequestOptions options = null)
         {
@@ -3970,7 +3948,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete204Succeeded"/> and <see cref="Delete204SucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete204SucceededRequest(RequestOptions options = null)
         {
@@ -4065,7 +4042,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202Retry200"/> and <see cref="Delete202Retry200Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete202Retry200Request(RequestOptions options = null)
         {
@@ -4160,7 +4136,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202NoRetry204"/> and <see cref="Delete202NoRetry204Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete202NoRetry204Request(RequestOptions options = null)
         {
@@ -4255,7 +4230,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteNoHeaderInRetry"/> and <see cref="DeleteNoHeaderInRetryAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteNoHeaderInRetryRequest(RequestOptions options = null)
         {
@@ -4350,7 +4324,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncNoHeaderInRetry"/> and <see cref="DeleteAsyncNoHeaderInRetryAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncNoHeaderInRetryRequest(RequestOptions options = null)
         {
@@ -4443,7 +4416,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetrySucceeded"/> and <see cref="DeleteAsyncRetrySucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncRetrySucceededRequest(RequestOptions options = null)
         {
@@ -4536,7 +4508,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncNoRetrySucceeded"/> and <see cref="DeleteAsyncNoRetrySucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncNoRetrySucceededRequest(RequestOptions options = null)
         {
@@ -4629,7 +4600,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetryFailed"/> and <see cref="DeleteAsyncRetryFailedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncRetryFailedRequest(RequestOptions options = null)
         {
@@ -4722,7 +4692,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetrycanceled"/> and <see cref="DeleteAsyncRetrycanceledAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncRetrycanceledRequest(RequestOptions options = null)
         {
@@ -4817,7 +4786,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post200WithPayload"/> and <see cref="Post200WithPayloadAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost200WithPayloadRequest(RequestOptions options = null)
         {
@@ -5018,7 +4986,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202Retry200"/> and <see cref="Post202Retry200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost202Retry200Request(RequestContent content, RequestOptions options = null)
@@ -5222,7 +5189,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202NoRetry204"/> and <see cref="Post202NoRetry204Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost202NoRetry204Request(RequestContent content, RequestOptions options = null)
@@ -5318,7 +5284,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalLocationGet"/> and <see cref="PostDoubleHeadersFinalLocationGetAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostDoubleHeadersFinalLocationGetRequest(RequestOptions options = null)
         {
@@ -5411,7 +5376,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalAzureHeaderGet"/> and <see cref="PostDoubleHeadersFinalAzureHeaderGetAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetRequest(RequestOptions options = null)
         {
@@ -5504,7 +5468,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalAzureHeaderGetDefault"/> and <see cref="PostDoubleHeadersFinalAzureHeaderGetDefaultAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(RequestOptions options = null)
         {
@@ -5707,7 +5670,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetrySucceeded"/> and <see cref="PostAsyncRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -5913,7 +5875,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncNoRetrySucceeded"/> and <see cref="PostAsyncNoRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncNoRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -6117,7 +6078,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetryFailed"/> and <see cref="PostAsyncRetryFailedAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncRetryFailedRequest(RequestContent content, RequestOptions options = null)
@@ -6321,7 +6281,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetrycanceled"/> and <see cref="PostAsyncRetrycanceledAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncRetrycanceledRequest(RequestContent content, RequestOptions options = null)

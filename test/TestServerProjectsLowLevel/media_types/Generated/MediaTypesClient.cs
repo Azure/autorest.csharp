@@ -132,7 +132,6 @@ namespace media_types_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="AnalyzeBody"/> and <see cref="AnalyzeBodyAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="options"> The request options. </param>
@@ -147,6 +146,137 @@ namespace media_types_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listheader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listheader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> File source path. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            options ??= new RequestOptions();
+            HttpMessage message = CreateAnalyzeBodyRequest(content, options);
+            if (options.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listheader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listheader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> File source path. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response AnalyzeBody(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            options ??= new RequestOptions();
+            HttpMessage message = CreateAnalyzeBodyRequest(content, options);
+            if (options.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content, RequestOptions options = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/mediatypes/analyze", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
@@ -231,7 +361,6 @@ namespace media_types_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ContentTypeWithEncoding"/> and <see cref="ContentTypeWithEncodingAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateContentTypeWithEncodingRequest(RequestContent content, RequestOptions options = null)

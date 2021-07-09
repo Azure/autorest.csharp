@@ -128,7 +128,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetInt"/> and <see cref="GetIntAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetIntRequest(RequestOptions options = null)
         {
@@ -269,7 +268,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutInt"/> and <see cref="PutIntAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutIntRequest(RequestContent content, RequestOptions options = null)
@@ -365,7 +363,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetLong"/> and <see cref="GetLongAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetLongRequest(RequestOptions options = null)
         {
@@ -506,7 +503,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutLong"/> and <see cref="PutLongAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutLongRequest(RequestContent content, RequestOptions options = null)
@@ -602,7 +598,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetFloat"/> and <see cref="GetFloatAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetFloatRequest(RequestOptions options = null)
         {
@@ -743,7 +738,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutFloat"/> and <see cref="PutFloatAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutFloatRequest(RequestContent content, RequestOptions options = null)
@@ -839,7 +833,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDouble"/> and <see cref="GetDoubleAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetDoubleRequest(RequestOptions options = null)
         {
@@ -980,7 +973,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutDouble"/> and <see cref="PutDoubleAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutDoubleRequest(RequestContent content, RequestOptions options = null)
@@ -1076,7 +1068,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBool"/> and <see cref="GetBoolAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBoolRequest(RequestOptions options = null)
         {
@@ -1217,7 +1208,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutBool"/> and <see cref="PutBoolAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutBoolRequest(RequestContent content, RequestOptions options = null)
@@ -1313,7 +1303,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetString"/> and <see cref="GetStringAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetStringRequest(RequestOptions options = null)
         {
@@ -1466,7 +1455,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutString"/> and <see cref="PutStringAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutStringRequest(RequestContent content, RequestOptions options = null)
@@ -1562,7 +1550,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDate"/> and <see cref="GetDateAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetDateRequest(RequestOptions options = null)
         {
@@ -1703,7 +1690,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutDate"/> and <see cref="PutDateAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutDateRequest(RequestContent content, RequestOptions options = null)
@@ -1799,7 +1785,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDateTime"/> and <see cref="GetDateTimeAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetDateTimeRequest(RequestOptions options = null)
         {
@@ -1940,7 +1925,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutDateTime"/> and <see cref="PutDateTimeAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutDateTimeRequest(RequestContent content, RequestOptions options = null)
@@ -2036,7 +2020,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDateTimeRfc1123"/> and <see cref="GetDateTimeRfc1123Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetDateTimeRfc1123Request(RequestOptions options = null)
         {
@@ -2177,7 +2160,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutDateTimeRfc1123"/> and <see cref="PutDateTimeRfc1123Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content, RequestOptions options = null)
@@ -2273,7 +2255,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDuration"/> and <see cref="GetDurationAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetDurationRequest(RequestOptions options = null)
         {
@@ -2402,7 +2383,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutDuration"/> and <see cref="PutDurationAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutDurationRequest(RequestContent content, RequestOptions options = null)
@@ -2498,7 +2478,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetByte"/> and <see cref="GetByteAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetByteRequest(RequestOptions options = null)
         {
@@ -2627,7 +2606,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutByte"/> and <see cref="PutByteAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutByteRequest(RequestContent content, RequestOptions options = null)

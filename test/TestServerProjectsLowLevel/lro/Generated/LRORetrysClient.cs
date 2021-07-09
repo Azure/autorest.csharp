@@ -238,7 +238,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingSucceeded200"/> and <see cref="Put201CreatingSucceeded200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestOptions options = null)
@@ -442,7 +441,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRelativeRetrySucceeded"/> and <see cref="PutAsyncRelativeRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncRelativeRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -540,7 +538,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202Accepted200Succeeded"/> and <see cref="DeleteProvisioning202Accepted200SucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest(RequestOptions options = null)
         {
@@ -633,7 +630,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202Retry200"/> and <see cref="Delete202Retry200Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete202Retry200Request(RequestOptions options = null)
         {
@@ -726,7 +722,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRelativeRetrySucceeded"/> and <see cref="DeleteAsyncRelativeRetrySucceededAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDeleteAsyncRelativeRetrySucceededRequest(RequestOptions options = null)
         {
@@ -927,7 +922,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202Retry200"/> and <see cref="Post202Retry200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost202Retry200Request(RequestContent content, RequestOptions options = null)
@@ -1131,7 +1125,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRelativeRetrySucceeded"/> and <see cref="PostAsyncRelativeRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncRelativeRetrySucceededRequest(RequestContent content, RequestOptions options = null)

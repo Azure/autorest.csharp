@@ -124,7 +124,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head400"/> and <see cref="Head400Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead400Request(RequestOptions options = null)
         {
@@ -213,7 +212,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get400"/> and <see cref="Get400Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet400Request(RequestOptions options = null)
         {
@@ -302,7 +300,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options400"/> and <see cref="Options400Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOptions400Request(RequestOptions options = null)
         {
@@ -393,7 +390,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put400"/> and <see cref="Put400Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut400Request(RequestContent content, RequestOptions options = null)
@@ -487,7 +483,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch400"/> and <see cref="Patch400Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch400Request(RequestContent content, RequestOptions options = null)
@@ -581,7 +576,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post400"/> and <see cref="Post400Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost400Request(RequestContent content, RequestOptions options = null)
@@ -675,7 +669,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete400"/> and <see cref="Delete400Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete400Request(RequestContent content, RequestOptions options = null)
@@ -767,7 +760,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head401"/> and <see cref="Head401Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead401Request(RequestOptions options = null)
         {
@@ -856,7 +848,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get402"/> and <see cref="Get402Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet402Request(RequestOptions options = null)
         {
@@ -945,7 +936,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options403"/> and <see cref="Options403Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOptions403Request(RequestOptions options = null)
         {
@@ -1034,7 +1024,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get403"/> and <see cref="Get403Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet403Request(RequestOptions options = null)
         {
@@ -1125,7 +1114,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put404"/> and <see cref="Put404Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut404Request(RequestContent content, RequestOptions options = null)
@@ -1219,7 +1207,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch405"/> and <see cref="Patch405Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch405Request(RequestContent content, RequestOptions options = null)
@@ -1313,7 +1300,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post406"/> and <see cref="Post406Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost406Request(RequestContent content, RequestOptions options = null)
@@ -1407,7 +1393,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete407"/> and <see cref="Delete407Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete407Request(RequestContent content, RequestOptions options = null)
@@ -1501,7 +1486,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put409"/> and <see cref="Put409Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut409Request(RequestContent content, RequestOptions options = null)
@@ -1593,7 +1577,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head410"/> and <see cref="Head410Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead410Request(RequestOptions options = null)
         {
@@ -1682,7 +1665,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get411"/> and <see cref="Get411Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet411Request(RequestOptions options = null)
         {
@@ -1771,7 +1753,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options412"/> and <see cref="Options412Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOptions412Request(RequestOptions options = null)
         {
@@ -1860,7 +1841,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get412"/> and <see cref="Get412Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet412Request(RequestOptions options = null)
         {
@@ -1951,7 +1931,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put413"/> and <see cref="Put413Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut413Request(RequestContent content, RequestOptions options = null)
@@ -2045,7 +2024,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch414"/> and <see cref="Patch414Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch414Request(RequestContent content, RequestOptions options = null)
@@ -2139,7 +2117,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post415"/> and <see cref="Post415Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost415Request(RequestContent content, RequestOptions options = null)
@@ -2231,7 +2208,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get416"/> and <see cref="Get416Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet416Request(RequestOptions options = null)
         {
@@ -2322,7 +2298,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete417"/> and <see cref="Delete417Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete417Request(RequestContent content, RequestOptions options = null)
@@ -2414,7 +2389,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head429"/> and <see cref="Head429Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead429Request(RequestOptions options = null)
         {

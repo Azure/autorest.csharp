@@ -130,7 +130,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamExistingKey"/> and <see cref="ParamExistingKeyAsync"/> operations. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestOptions options = null)
@@ -225,7 +224,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseExistingKey"/> and <see cref="ResponseExistingKeyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseExistingKeyRequest(RequestOptions options = null)
         {
@@ -320,7 +318,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamProtectedKey"/> and <see cref="ParamProtectedKeyAsync"/> operations. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestOptions options = null)
@@ -414,7 +411,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseProtectedKey"/> and <see cref="ResponseProtectedKeyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseProtectedKeyRequest(RequestOptions options = null)
         {
@@ -511,7 +507,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamInteger"/> and <see cref="ParamIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
         /// <param name="options"> The request options. </param>
@@ -610,7 +605,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseInteger"/> and <see cref="ResponseIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseIntegerRequest(string scenario, RequestOptions options = null)
@@ -709,7 +703,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamLong"/> and <see cref="ParamLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
         /// <param name="options"> The request options. </param>
@@ -808,7 +801,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseLong"/> and <see cref="ResponseLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseLongRequest(string scenario, RequestOptions options = null)
@@ -907,7 +899,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamFloat"/> and <see cref="ParamFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         /// <param name="options"> The request options. </param>
@@ -1006,7 +997,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseFloat"/> and <see cref="ResponseFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseFloatRequest(string scenario, RequestOptions options = null)
@@ -1105,7 +1095,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamDouble"/> and <see cref="ParamDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         /// <param name="options"> The request options. </param>
@@ -1204,7 +1193,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseDouble"/> and <see cref="ResponseDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseDoubleRequest(string scenario, RequestOptions options = null)
@@ -1303,7 +1291,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamBool"/> and <see cref="ParamBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
         /// <param name="options"> The request options. </param>
@@ -1402,7 +1389,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseBool"/> and <see cref="ResponseBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseBoolRequest(string scenario, RequestOptions options = null)
@@ -1501,7 +1487,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamString"/> and <see cref="ParamStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -1603,7 +1588,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseString"/> and <see cref="ResponseStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseStringRequest(string scenario, RequestOptions options = null)
@@ -1702,7 +1686,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamDate"/> and <see cref="ParamDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -1801,7 +1784,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseDate"/> and <see cref="ResponseDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseDateRequest(string scenario, RequestOptions options = null)
@@ -1900,7 +1882,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamDatetime"/> and <see cref="ParamDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -1999,7 +1980,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseDatetime"/> and <see cref="ResponseDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseDatetimeRequest(string scenario, RequestOptions options = null)
@@ -2098,7 +2078,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamDatetimeRfc1123"/> and <see cref="ParamDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -2200,7 +2179,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseDatetimeRfc1123"/> and <see cref="ResponseDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestOptions options = null)
@@ -2299,7 +2277,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamDuration"/> and <see cref="ParamDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -2398,7 +2375,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseDuration"/> and <see cref="ResponseDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseDurationRequest(string scenario, RequestOptions options = null)
@@ -2497,7 +2473,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamByte"/> and <see cref="ParamByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         /// <param name="options"> The request options. </param>
@@ -2596,7 +2571,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseByte"/> and <see cref="ResponseByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseByteRequest(string scenario, RequestOptions options = null)
@@ -2695,7 +2669,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ParamEnum"/> and <see cref="ParamEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         /// <param name="options"> The request options. </param>
@@ -2797,7 +2770,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ResponseEnum"/> and <see cref="ResponseEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateResponseEnumRequest(string scenario, RequestOptions options = null)
@@ -2892,7 +2864,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="CustomRequestId"/> and <see cref="CustomRequestIdAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateCustomRequestIdRequest(RequestOptions options = null)
         {

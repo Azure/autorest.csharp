@@ -129,7 +129,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBooleanTrueRequest(RequestOptions options = null)
         {
@@ -223,7 +222,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBooleanFalseRequest(RequestOptions options = null)
         {
@@ -319,7 +317,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanNull"/> and <see cref="GetBooleanNullAsync"/> operations. </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery = null, RequestOptions options = null)
@@ -417,7 +414,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetIntOneMillionRequest(RequestOptions options = null)
         {
@@ -511,7 +507,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetIntNegativeOneMillionRequest(RequestOptions options = null)
         {
@@ -607,7 +602,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntNull"/> and <see cref="GetIntNullAsync"/> operations. </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetIntNullRequest(int? intQuery = null, RequestOptions options = null)
@@ -705,7 +699,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetTenBillionRequest(RequestOptions options = null)
         {
@@ -799,7 +792,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNegativeTenBillionRequest(RequestOptions options = null)
         {
@@ -895,7 +887,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetLongNull"/> and <see cref="GetLongNullAsync"/> operations. </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetLongNullRequest(long? longQuery = null, RequestOptions options = null)
@@ -993,7 +984,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateFloatScientificPositiveRequest(RequestOptions options = null)
         {
@@ -1087,7 +1077,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateFloatScientificNegativeRequest(RequestOptions options = null)
         {
@@ -1183,7 +1172,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatNull"/> and <see cref="FloatNullAsync"/> operations. </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateFloatNullRequest(float? floatQuery = null, RequestOptions options = null)
@@ -1281,7 +1269,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDoubleDecimalPositiveRequest(RequestOptions options = null)
         {
@@ -1375,7 +1362,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDoubleDecimalNegativeRequest(RequestOptions options = null)
         {
@@ -1471,7 +1457,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleNull"/> and <see cref="DoubleNullAsync"/> operations. </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDoubleNullRequest(double? doubleQuery = null, RequestOptions options = null)
@@ -1569,7 +1554,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateStringUnicodeRequest(RequestOptions options = null)
         {
@@ -1663,7 +1647,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateStringUrlEncodedRequest(RequestOptions options = null)
         {
@@ -1757,7 +1740,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateStringEmptyRequest(RequestOptions options = null)
         {
@@ -1853,7 +1835,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateStringNullRequest(string stringQuery = null, RequestOptions options = null)
@@ -1953,7 +1934,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateEnumValidRequest(string enumQuery = null, RequestOptions options = null)
@@ -2053,7 +2033,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateEnumNullRequest(string enumQuery = null, RequestOptions options = null)
@@ -2153,7 +2132,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery = null, RequestOptions options = null)
@@ -2251,7 +2229,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateByteEmptyRequest(RequestOptions options = null)
         {
@@ -2347,7 +2324,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateByteNullRequest(byte[] byteQuery = null, RequestOptions options = null)
@@ -2445,7 +2421,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDateValidRequest(RequestOptions options = null)
         {
@@ -2541,7 +2516,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery = null, RequestOptions options = null)
@@ -2639,7 +2613,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDateTimeValidRequest(RequestOptions options = null)
         {
@@ -2735,7 +2708,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
@@ -2835,7 +2807,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvValid"/> and <see cref="ArrayStringCsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -2935,7 +2906,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvNull"/> and <see cref="ArrayStringCsvNullAsync"/> operations. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -3035,7 +3005,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvEmpty"/> and <see cref="ArrayStringCsvEmptyAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -3135,7 +3104,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringNoCollectionFormatEmpty"/> and <see cref="ArrayStringNoCollectionFormatEmptyAsync"/> operations. </summary>
         /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -3235,7 +3203,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringSsvValid"/> and <see cref="ArrayStringSsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -3335,7 +3302,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringTsvValid"/> and <see cref="ArrayStringTsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
@@ -3435,7 +3401,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringPipesValid"/> and <see cref="ArrayStringPipesValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)

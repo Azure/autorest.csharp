@@ -128,7 +128,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNullRequest(RequestOptions options = null)
         {
@@ -223,7 +222,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNull"/> and <see cref="PutNullAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutNullRequest(RequestContent content, RequestOptions options = null)
@@ -319,7 +317,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetEmptyRequest(RequestOptions options = null)
         {
@@ -414,7 +411,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutEmptyRequest(RequestContent content, RequestOptions options = null)
@@ -510,7 +506,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetMbcs"/> and <see cref="GetMbcsAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetMbcsRequest(RequestOptions options = null)
         {
@@ -605,7 +600,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutMbcs"/> and <see cref="PutMbcsAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutMbcsRequest(RequestContent content, RequestOptions options = null)
@@ -701,7 +695,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetWhitespace"/> and <see cref="GetWhitespaceAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetWhitespaceRequest(RequestOptions options = null)
         {
@@ -796,7 +789,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutWhitespace"/> and <see cref="PutWhitespaceAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutWhitespaceRequest(RequestContent content, RequestOptions options = null)
@@ -892,7 +884,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNotProvidedRequest(RequestOptions options = null)
         {
@@ -985,7 +976,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBase64Encoded"/> and <see cref="GetBase64EncodedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBase64EncodedRequest(RequestOptions options = null)
         {
@@ -1078,7 +1068,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBase64UrlEncoded"/> and <see cref="GetBase64UrlEncodedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetBase64UrlEncodedRequest(RequestOptions options = null)
         {
@@ -1173,7 +1162,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutBase64UrlEncoded"/> and <see cref="PutBase64UrlEncodedAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content, RequestOptions options = null)
@@ -1269,7 +1257,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNullBase64UrlEncoded"/> and <see cref="GetNullBase64UrlEncodedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestOptions options = null)
         {

@@ -128,7 +128,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNotExpandable"/> and <see cref="GetNotExpandableAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNotExpandableRequest(RequestOptions options = null)
         {
@@ -223,7 +222,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNotExpandable"/> and <see cref="PutNotExpandableAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutNotExpandableRequest(RequestContent content, RequestOptions options = null)
@@ -319,7 +317,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetReferenced"/> and <see cref="GetReferencedAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetReferencedRequest(RequestOptions options = null)
         {
@@ -414,7 +411,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutReferenced"/> and <see cref="PutReferencedAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutReferencedRequest(RequestContent content, RequestOptions options = null)
@@ -510,7 +506,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetReferencedConstant"/> and <see cref="GetReferencedConstantAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetReferencedConstantRequest(RequestOptions options = null)
         {
@@ -651,7 +646,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutReferencedConstant"/> and <see cref="PutReferencedConstantAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutReferencedConstantRequest(RequestContent content, RequestOptions options = null)

@@ -128,7 +128,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetValidRequest(RequestOptions options = null)
         {
@@ -269,7 +268,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutValidRequest(RequestContent content, RequestOptions options = null)

@@ -126,7 +126,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetValidRequest(RequestOptions options = null)
         {

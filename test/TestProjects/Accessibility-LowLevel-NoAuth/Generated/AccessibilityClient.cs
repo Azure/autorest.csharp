@@ -119,7 +119,6 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        /// <summary> Create Request for <see cref="Operation"/> and <see cref="OperationAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOperationRequest(RequestContent content, RequestOptions options = null)
@@ -214,7 +213,6 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        /// <summary> Create Request for <see cref="OperationInternal"/> and <see cref="OperationInternalAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOperationInternalRequest(RequestContent content, RequestOptions options = null)

@@ -506,7 +506,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="StartTranslation"/> and <see cref="StartTranslationAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateStartTranslationRequest(RequestContent content, RequestOptions options = null)
@@ -703,7 +702,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTranslationsStatus"/> and <see cref="GetTranslationsStatusAsync"/> operations. </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -859,7 +857,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentStatus"/> and <see cref="GetDocumentStatusAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="options"> The request options. </param>
@@ -966,7 +963,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTranslationStatus"/> and <see cref="GetTranslationStatusAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetTranslationStatusRequest(Guid id, RequestOptions options = null)
@@ -1076,7 +1072,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="CancelTranslation"/> and <see cref="CancelTranslationAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateCancelTranslationRequest(Guid id, RequestOptions options = null)
@@ -1268,7 +1263,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentsStatus"/> and <see cref="GetDocumentsStatusAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1429,7 +1423,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedDocumentFormats"/> and <see cref="GetSupportedDocumentFormatsAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetSupportedDocumentFormatsRequest(RequestOptions options = null)
         {
@@ -1529,7 +1522,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedGlossaryFormats"/> and <see cref="GetSupportedGlossaryFormatsAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetSupportedGlossaryFormatsRequest(RequestOptions options = null)
         {
@@ -1623,7 +1615,6 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Create Request for <see cref="GetSupportedStorageSources"/> and <see cref="GetSupportedStorageSourcesAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetSupportedStorageSourcesRequest(RequestOptions options = null)
         {

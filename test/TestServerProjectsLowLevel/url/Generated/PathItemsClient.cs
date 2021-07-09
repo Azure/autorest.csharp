@@ -146,7 +146,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetAllWithValues"/> and <see cref="GetAllWithValuesAsync"/> operations. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
@@ -269,7 +268,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetGlobalQueryNull"/> and <see cref="GetGlobalQueryNullAsync"/> operations. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
@@ -392,7 +390,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetGlobalAndLocalQueryNull"/> and <see cref="GetGlobalAndLocalQueryNullAsync"/> operations. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
@@ -515,7 +512,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetLocalPathItemQueryNull"/> and <see cref="GetLocalPathItemQueryNullAsync"/> operations. </summary>
         /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>

@@ -133,7 +133,6 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetEmptyRequest(string accountName, RequestOptions options = null)

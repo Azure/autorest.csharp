@@ -130,7 +130,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head300"/> and <see cref="Head300Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead300Request(RequestOptions options = null)
         {
@@ -227,7 +226,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get300"/> and <see cref="Get300Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet300Request(RequestOptions options = null)
         {
@@ -322,7 +320,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head301"/> and <see cref="Head301Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead301Request(RequestOptions options = null)
         {
@@ -417,7 +414,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get301"/> and <see cref="Get301Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet301Request(RequestOptions options = null)
         {
@@ -512,7 +508,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put301"/> and <see cref="Put301Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut301Request(RequestContent content, RequestOptions options = null)
@@ -610,7 +605,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head302"/> and <see cref="Head302Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead302Request(RequestOptions options = null)
         {
@@ -705,7 +699,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get302"/> and <see cref="Get302Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet302Request(RequestOptions options = null)
         {
@@ -800,7 +793,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch302"/> and <see cref="Patch302Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch302Request(RequestContent content, RequestOptions options = null)
@@ -900,7 +892,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post303"/> and <see cref="Post303Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost303Request(RequestContent content, RequestOptions options = null)
@@ -998,7 +989,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head307"/> and <see cref="Head307Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead307Request(RequestOptions options = null)
         {
@@ -1093,7 +1083,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get307"/> and <see cref="Get307Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet307Request(RequestOptions options = null)
         {
@@ -1188,7 +1177,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options307"/> and <see cref="Options307Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOptions307Request(RequestOptions options = null)
         {
@@ -1285,7 +1273,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put307"/> and <see cref="Put307Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut307Request(RequestContent content, RequestOptions options = null)
@@ -1385,7 +1372,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch307"/> and <see cref="Patch307Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch307Request(RequestContent content, RequestOptions options = null)
@@ -1485,7 +1471,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post307"/> and <see cref="Post307Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost307Request(RequestContent content, RequestOptions options = null)
@@ -1585,7 +1570,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete307"/> and <see cref="Delete307Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete307Request(RequestContent content, RequestOptions options = null)

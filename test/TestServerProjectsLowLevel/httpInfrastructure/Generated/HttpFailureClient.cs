@@ -128,7 +128,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmptyError"/> and <see cref="GetEmptyErrorAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetEmptyErrorRequest(RequestOptions options = null)
         {
@@ -221,7 +220,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNoModelError"/> and <see cref="GetNoModelErrorAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNoModelErrorRequest(RequestOptions options = null)
         {
@@ -314,7 +312,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNoModelEmpty"/> and <see cref="GetNoModelEmptyAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetNoModelEmptyRequest(RequestOptions options = null)
         {

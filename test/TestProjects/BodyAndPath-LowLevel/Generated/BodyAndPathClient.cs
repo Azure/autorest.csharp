@@ -133,7 +133,6 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Create"/> and <see cref="CreateAsync"/> operations. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -238,7 +237,6 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="CreateStream"/> and <see cref="CreateStreamAsync"/> operations. </summary>
         /// <param name="itemNameStream"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. </param>

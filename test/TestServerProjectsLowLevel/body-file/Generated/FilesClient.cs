@@ -128,7 +128,6 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetFile"/> and <see cref="GetFileAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetFileRequest(RequestOptions options = null)
         {
@@ -221,7 +220,6 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetFileLarge"/> and <see cref="GetFileLargeAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetFileLargeRequest(RequestOptions options = null)
         {
@@ -314,7 +312,6 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmptyFile"/> and <see cref="GetEmptyFileAsync"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGetEmptyFileRequest(RequestOptions options = null)
         {

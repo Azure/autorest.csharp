@@ -236,7 +236,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRetrySucceeded"/> and <see cref="PutAsyncRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)
@@ -442,7 +441,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingSucceeded200"/> and <see cref="Put201CreatingSucceeded200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestOptions options = null)
@@ -646,7 +644,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202Retry200"/> and <see cref="Post202Retry200Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost202Retry200Request(RequestContent content, RequestOptions options = null)
@@ -850,7 +847,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetrySucceeded"/> and <see cref="PostAsyncRetrySucceededAsync"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)

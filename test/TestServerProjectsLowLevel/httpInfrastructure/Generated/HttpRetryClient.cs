@@ -128,7 +128,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head408"/> and <see cref="Head408Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead408Request(RequestOptions options = null)
         {
@@ -223,7 +222,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put500"/> and <see cref="Put500Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut500Request(RequestContent content, RequestOptions options = null)
@@ -321,7 +319,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch500"/> and <see cref="Patch500Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch500Request(RequestContent content, RequestOptions options = null)
@@ -417,7 +414,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get502"/> and <see cref="Get502Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet502Request(RequestOptions options = null)
         {
@@ -510,7 +506,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options502"/> and <see cref="Options502Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateOptions502Request(RequestOptions options = null)
         {
@@ -605,7 +600,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post503"/> and <see cref="Post503Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost503Request(RequestContent content, RequestOptions options = null)
@@ -703,7 +697,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete503"/> and <see cref="Delete503Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete503Request(RequestContent content, RequestOptions options = null)
@@ -801,7 +794,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put504"/> and <see cref="Put504Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePut504Request(RequestContent content, RequestOptions options = null)
@@ -899,7 +891,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch504"/> and <see cref="Patch504Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePatch504Request(RequestContent content, RequestOptions options = null)

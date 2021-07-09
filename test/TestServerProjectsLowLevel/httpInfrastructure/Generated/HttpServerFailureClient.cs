@@ -124,7 +124,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head501"/> and <see cref="Head501Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateHead501Request(RequestOptions options = null)
         {
@@ -213,7 +212,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get501"/> and <see cref="Get501Async"/> operations. </summary>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateGet501Request(RequestOptions options = null)
         {
@@ -304,7 +302,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post505"/> and <see cref="Post505Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreatePost505Request(RequestContent content, RequestOptions options = null)
@@ -398,7 +395,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete505"/> and <see cref="Delete505Async"/> operations. </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
         private HttpMessage CreateDelete505Request(RequestContent content, RequestOptions options = null)
