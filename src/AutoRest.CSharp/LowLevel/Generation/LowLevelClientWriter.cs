@@ -31,7 +31,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client, context);
                     WriteClientCtors(writer, client, context);
 
-                    foreach (var clientMethod in client.Methods)
+                    // TODO(ellismg): The `OfType` here is unfortunate, but `Methods` contains a mix of `LowLevelClientMethods` and `RestClientMethods`
+                    // the later is for the next page operations that we synthesize for some pageables.  This should be cleaned up.
+                    foreach (var clientMethod in client.Methods.OfType<LowLevelClientMethod>())
                     {
                         WriteClientMethod(writer, clientMethod, true);
                         WriteClientMethod(writer, clientMethod, false);
@@ -43,7 +45,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
             foreach (Parameter parameter in clientMethod.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
