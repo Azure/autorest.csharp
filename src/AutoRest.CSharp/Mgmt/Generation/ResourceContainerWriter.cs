@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 string baseClass = GetBaseType();
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
-                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, "ResourceOperationsBase", "parent");
+                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, "OperationsBase", "parent");
                     WriteFields(_writer, _restClient!);
                     WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
@@ -165,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
+                    _writer.Append($"this, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
@@ -174,7 +174,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 else
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty},");
+                    _writer.Append($"this,");
                     _writer.Line($"originalResponse);");
                 }
             });
@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
+                    _writer.Append($"this, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 else
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty},");
+                    _writer.Append($"this,");
                     _writer.Line($"originalResponse);");
                 }
             });
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw(", ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken);");
-                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
+                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, response.Value), response.GetRawResponse());");
             }, isOverride: false);
 
             _writer.Line();
@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw(", ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
+                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(this, response.Value), response.GetRawResponse());");
             }, isOverride: false);
         }
 
@@ -283,8 +283,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (_resourceContainer.ListMethod != null)
             {
-                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
-                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
+                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}(this, value))");
+                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}(this, value))");
             }
 
             WriteListAsGenericResource(async: false);

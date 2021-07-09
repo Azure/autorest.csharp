@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal ProximityPlacementGroupsCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<ProximityPlacementGroupData> response)
+        internal ProximityPlacementGroupsCreateOrUpdateOperation(OperationsBase operationsBase, Response<ProximityPlacementGroupData> response)
         {
             _operation = new OperationOrResponseInternals<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(operationsBase, response.Value), response.GetRawResponse()));
         }

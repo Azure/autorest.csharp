@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHost"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DedicatedHost(ResourceOperationsBase options, DedicatedHostData resource) : base(options, resource.Id)
+        internal DedicatedHost(OperationsBase options, DedicatedHostData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

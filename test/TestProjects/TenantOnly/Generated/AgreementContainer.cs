@@ -25,7 +25,7 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of AgreementContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AgreementContainer(ResourceOperationsBase parent) : base(parent)
+        internal AgreementContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -59,7 +59,7 @@ namespace TenantOnly
                 }
 
                 var response = _restClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
-                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -84,7 +84,7 @@ namespace TenantOnly
                 }
 
                 var response = await _restClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

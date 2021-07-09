@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         baseConstructor = " : base(options)";
                     }
 
-                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
+                    using (writer.Scope($"internal {cs.Name}({typeof(OperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");
                     }

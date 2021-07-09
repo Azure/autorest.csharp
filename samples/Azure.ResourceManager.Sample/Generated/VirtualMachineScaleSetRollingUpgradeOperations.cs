@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetRollingUpgradeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal VirtualMachineScaleSetRollingUpgradeOperations(ResourceOperationsBase options) : base(options)
+        protected internal VirtualMachineScaleSetRollingUpgradeOperations(OperationsBase options) : base(options)
         {
         }
 
