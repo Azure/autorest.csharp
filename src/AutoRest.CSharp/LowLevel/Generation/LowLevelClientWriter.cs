@@ -55,25 +55,18 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             WriteClientMethodDecleration(writer, clientMethod, async);
 
+            FormattableString returnExpression = $"return message.Response;";
+
             if (clientMethod.Operation.IsLongRunning)
             {
                 var finalStateVia = clientMethod.Operation.LongRunningFinalStateVia;
+                returnExpression = $"return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostics.ScopeName:L});";
+            }
 
-                WriteClientMethodBody(writer, clientMethod, async, (writer) =>
-                {
-                    writer.Line($"return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, {typeof(OperationFinalStateVia)}.{finalStateVia}, {clientMethod.Diagnostics.ScopeName:L});");
-                });
-            }
-            else
-            {
-                WriteClientMethodBody(writer, clientMethod, async, (writer) =>
-                {
-                    writer.Line($"return message.Response;");
-                });
-            }
+            WriteClientMethodBody(writer, clientMethod, async, returnExpression);
         }
 
-        private void WriteClientMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, bool async, Action<CodeWriter> returnWriter)
+        private void WriteClientMethodBody(CodeWriter writer, LowLevelClientMethod clientMethod, bool async, FormattableString returnExpression)
         {
             using (writer.Scope())
             {
@@ -112,11 +105,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
                     {
-                        WriteStatusCodeSwitch(writer, clientMethod, async, returnWriter);
+                        WriteStatusCodeSwitch(writer, clientMethod, async, returnExpression);
                     }
                     using (writer.Scope($"else"))
                     {
-                        returnWriter(writer);
+                        writer.Line(returnExpression);
                     }
                 }
 
@@ -199,7 +192,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"#pragma warning restore AZC0002");
         }
 
-        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, Action<CodeWriter> returnWriter)
+        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, FormattableString returnExpression)
         {
             using (writer.Scope($"switch (message.Response.Status)"))
             {
@@ -219,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
                         }
                     }
-                    returnWriter(writer);
+                    writer.Line(returnExpression);
                 }
 
                 writer.Line($"default:");
