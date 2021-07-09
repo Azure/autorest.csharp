@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string ContextProperty => "";
         protected const string BaseUriField = "BaseUri";
 
+        /// <summary>
+        /// ClassName is the name of the class which this writer is writing
+        /// </summary>
+        protected abstract string TypeNameOfThis { get; }
+
         protected void WriteUsings(CodeWriter writer)
         {
             writer.UseNamespace(typeof(Task).Namespace!);
@@ -52,18 +58,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, string typeOfThis, string contextArgumentType, string parentArguments)
+        protected void WriteContainerCtors(CodeWriter writer, string contextArgumentType, string parentArguments)
         {
             // write protected default constructor
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
-            using (writer.Scope($"protected {typeOfThis}()"))
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");
+            using (writer.Scope($"protected {TypeNameOfThis}()"))
             { }
 
             // write "parent resource" constructor
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {typeOfThis} class.");
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
             writer.WriteXmlDocumentationParameter("parent", "The resource representing the parent resource.");
-            using (writer.Scope($"internal {typeOfThis}({contextArgumentType} parent) : base({parentArguments})"))
+            using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
             }
@@ -302,37 +308,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return parameterMapping;
         }
 
-        protected virtual void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru by
-            // making the last string-like mandatory parameter (typically the resource name) pass-through
-            if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    lastString.IsPassThru = true;
-                    parentNameStack.Pop();
-                }
-            }
-        }
+        protected abstract void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack);
 
-        protected virtual bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            bool passThru = false;
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-            {
-                valueExpression = "Id.ResourceGroupName";
-            }
-            else
-            {
-                // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                parentNameStack.Push($"Id{dotParent}.Name");
-                dotParent += ".Parent";
-            }
-
-            return passThru;
-        }
+        protected abstract bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression);
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
@@ -519,5 +497,201 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
         }
+
+        protected CSharpType GetLROObjectType(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        {
+            return clientMethod.Operation!.IsLongRunning
+                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
+                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
+        }
+
+        protected CSharpType? GetLROReturnType(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        {
+            Debug.Assert(clientMethod.Operation != null);
+
+            CSharpType? returnType = null;
+            if (clientMethod.Operation.IsLongRunning)
+            {
+                LongRunningOperation operation = context.Library.GetLongRunningOperation(clientMethod.Operation);
+                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(operation);
+                returnType = longRunningOperation.WrapperType != null ? longRunningOperation.WrapperType : longRunningOperation.ResultType;
+            }
+            else
+            {
+                NonLongRunningOperation nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
+                returnType = nonLongRunningOperation.ResultType;
+            }
+
+            return returnType;
+        }
+
+        protected MgmtLongRunningOperation AsMgmtOperation(LongRunningOperation operation)
+        {
+            var mgmtOperation = operation as MgmtLongRunningOperation;
+            Debug.Assert(mgmtOperation != null);
+            return mgmtOperation;
+        }
+
+        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        {
+            Debug.Assert(clientMethod.Operation != null);
+            writer.Line();
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+
+            var parameterMapping = BuildParameterMapping(clientMethod);
+            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            foreach (var parameter in passThruParameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
+
+            CSharpType? returnType = GetLROReturnType(clientMethod, context);
+            CSharpType responseType = returnType != null ?
+                new CSharpType(typeof(Response<>), returnType) :
+                typeof(Response);
+            responseType = responseType.WrapAsync(async);
+
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
+            foreach (var parameter in passThruParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(passThruParameters.ToArray());
+
+                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
+                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                {
+                    var operation = new CodeWriterDeclaration("operation");
+                    writer.Append($"var {operation:D} = ");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+                    writer.Append($"{CreateMethodName($"Start{clientMethod.Name}", async)}(");
+                    WriteArguments(writer, parameterMapping.Where(p => p.IsPassThru));
+                    writer.Append($"cancellationToken)");
+
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+                    writer.Line($";");
+                    writer.Append($"return ");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+
+                    var waitForCompletionMethod = returnType == null && async ?
+                    "WaitForCompletionResponse" :
+                    "WaitForCompletion";
+                    writer.Append($"{operation}.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken)");
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+                    writer.Line($";");
+                });
+                writer.Line();
+            }
+        }
+
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        {
+            Debug.Assert(clientMethod.Operation != null);
+            writer.Line();
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+
+            var parameterMapping = BuildParameterMapping(clientMethod);
+            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            foreach (var parameter in passThruParameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
+
+            CSharpType? returnType = GetLROReturnType(clientMethod, context);
+            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
+                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
+                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
+            CSharpType responseType = returnType != null ?
+                lroObjectType : typeof(Azure.Operation);
+            responseType = responseType.WrapAsync(async);
+
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
+            foreach (var parameter in passThruParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(passThruParameters.ToArray());
+
+                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.Start{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
+                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                {
+                    var response = new CodeWriterDeclaration("response");
+                    writer.Append($"var {response:D} = ");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
+                    WriteArguments(writer, parameterMapping);
+                    writer.Append($"cancellationToken)");
+
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+                    writer.Line($";");
+
+                    WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
+                });
+                writer.Line();
+            }
+        }
+
+        protected void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping)
+        {
+            Debug.Assert(clientMethod.Operation != null);
+
+            writer.Append($"return new {lroObjectType}(");
+
+            if (clientMethod.Operation.IsLongRunning)
+            {
+                var longRunningOperation = AsMgmtOperation(context.Library.GetLongRunningOperation(clientMethod.Operation));
+                if (longRunningOperation.WrapperType != null)
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+                WriteArguments(writer, parameterMapping);
+                writer.RemoveTrailingComma();
+                writer.Append($").Request, ");
+            }
+            else
+            {
+                var nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
+                if (nonLongRunningOperation.ResultType != null)
+                {
+                    writer.Append($"{ContextProperty}, ");
+                }
+            }
+            writer.Append($"{response});");
+        }
+
     }
 }

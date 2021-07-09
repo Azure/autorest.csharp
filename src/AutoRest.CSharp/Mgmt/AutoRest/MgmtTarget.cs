@@ -49,8 +49,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                var resourceOperationWriter = new ResourceOperationWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context);
+                new ResourceOperationWriter(codeWriter, resourceOperation, context).WriteClient();
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
@@ -104,8 +103,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                var resourceOperationWriter = new TupleResourceOperationWriter();
-                resourceOperationWriter.WriteClient(codeWriter, tupleResourceOperation, context);
+                var resourceOperationWriter = new TupleResourceOperationWriter(codeWriter, tupleResourceOperation, context);
+                resourceOperationWriter.WriteClient();
 
                 project.AddGeneratedFile($"{tupleResourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
