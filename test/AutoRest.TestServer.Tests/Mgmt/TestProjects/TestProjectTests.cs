@@ -85,8 +85,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("AddTag")]
         [TestCase("AddTagAsync")]
-        [TestCase("StartAddTag")]
-        [TestCase("StartAddTagAsync")]
         public void ValidateAddTagMethod(string methodName)
         {
             foreach (var type in FindAllOperations())
@@ -112,8 +110,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("SetTags")]
         [TestCase("SetTagsAsync")]
-        [TestCase("StartSetTags")]
-        [TestCase("StartSetTagsAsync")]
         public void ValidateSetTagsMethod(string methodName)
         {
             foreach (var type in FindAllOperations())
@@ -137,8 +133,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("RemoveTag")]
         [TestCase("RemoveTagAsync")]
-        [TestCase("StartRemoveTag")]
-        [TestCase("StartRemoveTagAsync")]
         public void ValidateRemoveTagMethod(string methodName)
         {
             foreach (var type in FindAllOperations())
