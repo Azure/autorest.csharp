@@ -512,7 +512,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 {
                     var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
                     var resourceVar = new CodeWriterDeclaration("resource");
-                    writer.Line($"var {resourceVar:D} = GetResource();");
+                    writer.Line($"var {resourceVar:D} = Get();");
                     var patchable = new CodeWriterDeclaration("patchable");
                     if (clientMethod.Request.HttpMethod == RequestMethod.Put)
                     {
@@ -717,7 +717,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 {
                     var updateParameterType = clientMethod.NonPathParameters.FirstOrDefault().Type;
                     var resourceVar = new CodeWriterDeclaration("resource");
-                    writer.Line($"var {resourceVar:D} = GetResource();");
+                    writer.Line($"var {resourceVar:D} = Get();");
                     var patchable = new CodeWriterDeclaration("patchable");
                     if (clientMethod.Request.HttpMethod == RequestMethod.Put)
                     {
