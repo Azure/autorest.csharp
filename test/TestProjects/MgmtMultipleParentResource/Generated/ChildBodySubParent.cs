@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
@@ -25,17 +23,5 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Gets or sets the ChildBodyData. </summary>
         public ChildBodyData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ChildBodySubParent GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ChildBodySubParent> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

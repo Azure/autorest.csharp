@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -24,17 +22,5 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Gets or sets the TenantLevelResourceData. </summary>
         public TenantLevelResourceData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override TenantLevelResource GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<TenantLevelResource> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

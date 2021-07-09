@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using Pagination.Models;
 
@@ -25,17 +23,5 @@ namespace Pagination
 
         /// <summary> Gets or sets the PageSizeStringModelData. </summary>
         public PageSizeStringModelData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override PageSizeStringModel GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<PageSizeStringModel> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

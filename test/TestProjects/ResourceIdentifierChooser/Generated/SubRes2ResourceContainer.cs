@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubRes2Resource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubRes2Resource> CreateOrUpdate(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubRes2Resource> CreateOrUpdate(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubRes2Resource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubRes2Resource>> CreateOrUpdateAsync(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubRes2Resource>> CreateOrUpdateAsync(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubRes2Resource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubRes2ResourcesPutOperation StartCreateOrUpdate(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual SubRes2ResourcesPutOperation StartCreateOrUpdate(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubRes2Resource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubRes2ResourcesPutOperation> StartCreateOrUpdateAsync(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SubRes2ResourcesPutOperation> StartCreateOrUpdateAsync(string subRes2ResourcesName, SubRes2ResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubRes2Resource> Get(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<SubRes2Resource> Get(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubRes2Resource>> GetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubRes2Resource>> GetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(subRes2ResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubRes2Resource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subRes2ResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual SubRes2Resource TryGet(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (subRes2ResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subRes2ResourcesName));
+                }
+
+                return Get(subRes2ResourcesName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subRes2ResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<SubRes2Resource> TryGetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (subRes2ResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subRes2ResourcesName));
+                }
+
+                return await GetAsync(subRes2ResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subRes2ResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (subRes2ResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subRes2ResourcesName));
+                }
+
+                return TryGet(subRes2ResourcesName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subRes2ResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (subRes2ResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subRes2ResourcesName));
+                }
+
+                return await TryGetAsync(subRes2ResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {
