@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
@@ -106,7 +106,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public FileSharesCreateOperation StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual FileSharesCreateOperation StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
@@ -135,7 +135,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<FileSharesCreateOperation> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async virtual Task<FileSharesCreateOperation> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
@@ -163,7 +163,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<FileShare> Get(string shareName, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> Get(string shareName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Get");
             scope.Start();
@@ -187,7 +187,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Get");
             scope.Start();
@@ -200,6 +200,106 @@ namespace Azure.Management.Storage
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileShare(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual FileShare TryGet(string shareName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
+                return Get(shareName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<FileShare> TryGetAsync(string shareName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
+                return await GetAsync(shareName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string shareName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
+                return TryGet(shareName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string shareName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
+                return await TryGetAsync(shareName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

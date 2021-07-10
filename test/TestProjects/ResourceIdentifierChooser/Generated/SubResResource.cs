@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -24,17 +22,5 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Gets or sets the SubResResourceData. </summary>
         public SubResResourceData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override SubResResource GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<SubResResource> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

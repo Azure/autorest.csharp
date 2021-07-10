@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace MgmtPropertyChooser
@@ -24,17 +22,5 @@ namespace MgmtPropertyChooser
 
         /// <summary> Gets or sets the VirtualMachineData. </summary>
         public VirtualMachineData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override VirtualMachine GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<VirtualMachine> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

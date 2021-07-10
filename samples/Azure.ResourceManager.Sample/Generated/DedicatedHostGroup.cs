@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -24,17 +22,5 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets or sets the DedicatedHostGroupData. </summary>
         public DedicatedHostGroupData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override DedicatedHostGroup GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<DedicatedHostGroup> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

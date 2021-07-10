@@ -49,7 +49,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<Parent> CreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
+        public virtual Response<Parent> CreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CreateOrUpdate");
             scope.Start();
@@ -77,7 +77,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<Parent>> CreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Parent>> CreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CreateOrUpdate");
             scope.Start();
@@ -106,7 +106,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ParentsCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
+        public virtual ParentsCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartCreateOrUpdate");
             scope.Start();
@@ -135,7 +135,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartCreateOrUpdate");
             scope.Start();
@@ -164,7 +164,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<Parent> Get(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<Parent> Get(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.Get");
             scope.Start();
@@ -189,7 +189,7 @@ namespace MgmtMultipleParentResource
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<Parent>> GetAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Parent>> GetAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.Get");
             scope.Start();
@@ -202,6 +202,110 @@ namespace MgmtMultipleParentResource
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, parentName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Parent(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual Parent TryGet(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return Get(parentName, expand, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<Parent> TryGetAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return await GetAsync(parentName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return TryGet(parentName, expand, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string parentName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return await TryGetAsync(parentName, expand, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

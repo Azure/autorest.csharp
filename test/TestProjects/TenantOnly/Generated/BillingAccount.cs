@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
@@ -24,17 +22,5 @@ namespace TenantOnly
 
         /// <summary> Gets or sets the BillingAccountData. </summary>
         public BillingAccountData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override BillingAccount GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<BillingAccount> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

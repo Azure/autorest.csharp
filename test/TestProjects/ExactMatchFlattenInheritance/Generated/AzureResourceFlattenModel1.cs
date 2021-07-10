@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
@@ -24,17 +22,5 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets or sets the AzureResourceFlattenModel1Data. </summary>
         public AzureResourceFlattenModel1Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override AzureResourceFlattenModel1 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<AzureResourceFlattenModel1> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

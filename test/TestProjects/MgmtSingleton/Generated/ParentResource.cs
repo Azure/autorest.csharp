@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
@@ -24,17 +22,5 @@ namespace MgmtSingleton
 
         /// <summary> Gets or sets the ParentResourceData. </summary>
         public ParentResourceData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ParentResource GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ParentResource> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

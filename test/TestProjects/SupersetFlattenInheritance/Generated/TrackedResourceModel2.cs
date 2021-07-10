@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace SupersetFlattenInheritance
@@ -24,17 +22,5 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets or sets the TrackedResourceModel2Data. </summary>
         public TrackedResourceModel2Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override TrackedResourceModel2 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<TrackedResourceModel2> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

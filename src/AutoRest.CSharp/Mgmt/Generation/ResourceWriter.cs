@@ -48,30 +48,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"public {resourceDataObject.Type} Data");
                     writer.Append($"{{ get; private set; }}");
                     writer.Line();
-
-                    // Only write GetResource if it is NOT singleton.
-                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
-                    {
-                        // protected override GetResource
-                        writer.Line();
-                        writer.WriteXmlDocumentationInheritDoc();
-                        using (writer.Scope(
-                            $"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)")
-                        )
-                        {
-                            writer.LineRaw("return this;");
-                        }
-
-                        // protected override GetResourceAsync
-                        writer.Line();
-                        writer.WriteXmlDocumentationInheritDoc();
-                        using (writer.Scope(
-                            $"protected override {typeof(Task)}<{cs.Name}> GetResourceAsync({typeof(CancellationToken)} cancellation = default)")
-                        )
-                        {
-                            writer.Line($"return {typeof(Task)}.FromResult(this);");
-                        }
-                    }
                 }
             }
         }

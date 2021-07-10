@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using SubscriptionExtensions.Models;
 
@@ -25,17 +23,5 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets or sets the ToasterData. </summary>
         public ToasterData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override Toaster GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<Toaster> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

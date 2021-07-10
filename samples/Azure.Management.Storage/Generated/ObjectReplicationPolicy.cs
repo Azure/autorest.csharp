@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
@@ -25,17 +23,5 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets or sets the ObjectReplicationPolicyData. </summary>
         public ObjectReplicationPolicyData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ObjectReplicationPolicy GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ObjectReplicationPolicy> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

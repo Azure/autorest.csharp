@@ -47,7 +47,7 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TrackedResourceModel2> CreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel2> CreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TrackedResourceModel2>> CreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TrackedResourceModel2>> CreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public TrackedResourceModel2SPutOperation StartCreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual TrackedResourceModel2SPutOperation StartCreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace SupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<TrackedResourceModel2SPutOperation> StartCreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TrackedResourceModel2SPutOperation> StartCreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TrackedResourceModel2> Get(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel2> Get(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TrackedResourceModel2>> GetAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TrackedResourceModel2>> GetAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace SupersetFlattenInheritance
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, trackedResourceModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TrackedResourceModel2(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual TrackedResourceModel2 TryGet(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (trackedResourceModel2SName == null)
+                {
+                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                }
+
+                return Get(trackedResourceModel2SName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<TrackedResourceModel2> TryGetAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (trackedResourceModel2SName == null)
+                {
+                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                }
+
+                return await GetAsync(trackedResourceModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (trackedResourceModel2SName == null)
+                {
+                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                }
+
+                return TryGet(trackedResourceModel2SName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="trackedResourceModel2SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (trackedResourceModel2SName == null)
+                {
+                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+                }
+
+                return await TryGetAsync(trackedResourceModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

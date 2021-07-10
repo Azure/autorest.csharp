@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace SupersetFlattenInheritance
@@ -24,17 +22,5 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Gets or sets the WritableSubResourceModel1Data. </summary>
         public WritableSubResourceModel1Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override WritableSubResourceModel1 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<WritableSubResourceModel1> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TenantLevelResource> CreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<TenantLevelResource> CreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TenantLevelResource>> CreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TenantLevelResource>> CreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public TenantLevelResourcesPutOperation StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantLevelResourcesPutOperation StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<TenantLevelResourcesPutOperation> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantLevelResourcesPutOperation> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TenantLevelResource> Get(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<TenantLevelResource> Get(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TenantLevelResource>> GetAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TenantLevelResource>> GetAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(tenantLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new TenantLevelResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual TenantLevelResource TryGet(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (tenantLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+                }
+
+                return Get(tenantLevelResourcesName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<TenantLevelResource> TryGetAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (tenantLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+                }
+
+                return await GetAsync(tenantLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (tenantLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+                }
+
+                return TryGet(tenantLevelResourcesName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="tenantLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (tenantLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(tenantLevelResourcesName));
+                }
+
+                return await TryGetAsync(tenantLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

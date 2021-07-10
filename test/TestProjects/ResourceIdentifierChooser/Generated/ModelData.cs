@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -24,17 +22,5 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Gets or sets the ModelDataData. </summary>
         public ModelDataData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ModelData GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ModelData> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

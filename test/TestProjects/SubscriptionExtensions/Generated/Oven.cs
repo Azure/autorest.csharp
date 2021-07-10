@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using SubscriptionExtensions.Models;
 
@@ -25,17 +23,5 @@ namespace SubscriptionExtensions
 
         /// <summary> Gets or sets the OvenData. </summary>
         public OvenData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override Oven GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<Oven> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

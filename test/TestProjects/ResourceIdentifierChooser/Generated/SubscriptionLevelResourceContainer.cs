@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubscriptionLevelResource> CreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionLevelResource> CreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubscriptionLevelResource>> CreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionLevelResource>> CreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubscriptionLevelResourcesPutOperation StartCreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual SubscriptionLevelResourcesPutOperation StartCreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubscriptionLevelResourcesPutOperation> StartCreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionLevelResourcesPutOperation> StartCreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubscriptionLevelResource> Get(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionLevelResource> Get(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubscriptionLevelResource>> GetAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionLevelResource>> GetAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(Id.Name, subscriptionLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubscriptionLevelResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual SubscriptionLevelResource TryGet(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                return Get(subscriptionLevelResourcesName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<SubscriptionLevelResource> TryGetAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                return await GetAsync(subscriptionLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                return TryGet(subscriptionLevelResourcesName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                return await TryGetAsync(subscriptionLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

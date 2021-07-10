@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -24,17 +22,5 @@ namespace MgmtParent
 
         /// <summary> Gets or sets the AvailabilitySetData. </summary>
         public AvailabilitySetData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override AvailabilitySet GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<AvailabilitySet> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

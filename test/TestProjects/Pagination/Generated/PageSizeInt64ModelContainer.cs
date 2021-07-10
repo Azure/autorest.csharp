@@ -49,7 +49,7 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<PageSizeInt64Model> CreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeInt64Model> CreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.CreateOrUpdate");
             scope.Start();
@@ -77,7 +77,7 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<PageSizeInt64Model>> CreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeInt64Model>> CreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.CreateOrUpdate");
             scope.Start();
@@ -106,7 +106,7 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public PageSizeInt64ModelsPutOperation StartCreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeInt64ModelsPutOperation StartCreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -135,7 +135,7 @@ namespace Pagination
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<PageSizeInt64ModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeInt64ModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -163,7 +163,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<PageSizeInt64Model> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeInt64Model> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.Get");
             scope.Start();
@@ -187,7 +187,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<PageSizeInt64Model>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeInt64Model>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.Get");
             scope.Start();
@@ -200,6 +200,106 @@ namespace Pagination
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeInt64Model(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual PageSizeInt64Model TryGet(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return Get(name, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<PageSizeInt64Model> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await GetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return TryGet(name, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await TryGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {
