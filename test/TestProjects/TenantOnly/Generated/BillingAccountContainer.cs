@@ -120,7 +120,7 @@ namespace TenantOnly
                 }
 
                 var originalResponse = _restClient.Update(billingAccountName, parameters, cancellationToken: cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
+                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -149,7 +149,7 @@ namespace TenantOnly
                 }
 
                 var originalResponse = await _restClient.UpdateAsync(billingAccountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
+                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -174,7 +174,7 @@ namespace TenantOnly
                 }
 
                 var response = _restClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace TenantOnly
                 }
 
                 var response = await _restClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

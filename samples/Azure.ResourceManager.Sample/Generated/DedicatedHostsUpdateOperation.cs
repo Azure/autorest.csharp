@@ -21,14 +21,14 @@ namespace Azure.ResourceManager.Sample
     {
         private readonly OperationInternals<DedicatedHost> _operation;
 
-        private readonly OperationsBase _operationBase;
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of DedicatedHostsUpdateOperation for mocking. </summary>
         protected DedicatedHostsUpdateOperation()
         {
         }
 
-        internal DedicatedHostsUpdateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal DedicatedHostsUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<DedicatedHost>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsUpdateOperation");
             _operationBase = operationsBase;

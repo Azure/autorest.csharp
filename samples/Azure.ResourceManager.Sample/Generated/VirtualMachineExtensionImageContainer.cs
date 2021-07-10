@@ -26,10 +26,13 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineExtensionImageContainer(OperationsBase parent) : base(parent)
+        internal VirtualMachineExtensionImageContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
+
+        /// <summary> Get the parent resource of this container. </summary>
+        protected new ResourceOperationsBase Parent { get { return base.Parent as ResourceOperationsBase; } }
 
         private readonly ClientDiagnostics _clientDiagnostics;
 
@@ -74,7 +77,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(location, publisherName, type, version, cancellationToken: cancellationToken);
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -113,7 +116,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

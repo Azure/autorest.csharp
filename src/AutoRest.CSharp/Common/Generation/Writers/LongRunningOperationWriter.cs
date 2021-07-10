@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -16,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LongRunningOperationWriter
     {
-        public void Write(CodeWriter writer, LongRunningOperation operation)
+        public void Write(CodeWriter writer, LongRunningOperation operation, BuildContext? context = null)
         {
             var responseVariable = "response";
             var pagingResponse = operation.PagingResponse;
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.Scope())
                 {
-                    WriteFields(writer, operation, pagingResponse, helperType);
+                    WriteFields(writer, operation, pagingResponse, helperType, context);
 
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name} for mocking.");
@@ -48,7 +49,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line();
 
-                    WriteConstructor(writer, operation, pagingResponse, cs, helperType);
+                    WriteConstructor(writer, operation, pagingResponse, cs, helperType, context);
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
@@ -132,7 +133,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return operation.ResultType != null ? new CSharpType(typeof(OperationInternals<>), operation.ResultType) : new CSharpType(typeof(OperationInternals));
         }
 
-        protected virtual void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
+        protected virtual void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType, BuildContext? context = null)
         {
             writer.Line($"private readonly {helperType} _operation;");
 
@@ -142,7 +143,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        protected virtual void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType)
+        protected virtual void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType lroType, CSharpType helperType, BuildContext? context = null)
         {
             writer.Append($"internal {lroType.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 

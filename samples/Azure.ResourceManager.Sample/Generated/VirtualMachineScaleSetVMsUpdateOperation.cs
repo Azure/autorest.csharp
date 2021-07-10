@@ -21,14 +21,14 @@ namespace Azure.ResourceManager.Sample
     {
         private readonly OperationInternals<VirtualMachineScaleSetVM> _operation;
 
-        private readonly OperationsBase _operationBase;
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMsUpdateOperation for mocking. </summary>
         protected VirtualMachineScaleSetVMsUpdateOperation()
         {
         }
 
-        internal VirtualMachineScaleSetVMsUpdateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachineScaleSetVMsUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<VirtualMachineScaleSetVM>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMsUpdateOperation");
             _operationBase = operationsBase;

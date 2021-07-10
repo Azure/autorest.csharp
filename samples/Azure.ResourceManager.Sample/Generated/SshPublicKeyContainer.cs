@@ -26,10 +26,13 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of SshPublicKeyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SshPublicKeyContainer(OperationsBase parent) : base(parent)
+        internal SshPublicKeyContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
+
+        /// <summary> Get the parent resource of this container. </summary>
+        protected new ResourceOperationsBase Parent { get { return base.Parent as ResourceOperationsBase; } }
 
         private readonly ClientDiagnostics _clientDiagnostics;
 
@@ -121,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken);
-                return new SshPublicKeysCreateOperation(this, originalResponse);
+                return new SshPublicKeysCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -150,7 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SshPublicKeysCreateOperation(this, originalResponse);
+                return new SshPublicKeysCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -174,7 +177,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
-                return Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKey(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +201,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SshPublicKey(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SshPublicKey(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,7 +222,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _restClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -234,7 +237,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = _restClient.ListByResourceGroupNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -257,7 +260,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _restClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -272,7 +275,7 @@ namespace Azure.ResourceManager.Sample
                 try
                 {
                     var response = await _restClient.ListByResourceGroupNextPageAsync(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(this, value)), response.Value.NextLink, response.GetRawResponse());
+                    return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

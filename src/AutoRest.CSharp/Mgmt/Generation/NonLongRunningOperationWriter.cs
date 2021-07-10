@@ -6,7 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
@@ -20,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="operation"></param>
-        public static void Write(CodeWriter writer, NonLongRunningOperation operation)
+        public static void Write(CodeWriter writer, NonLongRunningOperation operation, BuildContext context)
         {
             var responseVariable = "response";
 
@@ -52,7 +54,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.ResultDataType != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            writer.Append($"{typeof(OperationsBase)} operationsBase, ");
+                            var isTenantResource = (operation.ResultType?.Implementation as Resource)?.OperationGroup.IsTenantResource(context.Configuration.MgmtConfiguration) == true;
+                            var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                            writer.Append($"{optionType} operationsBase, ");
                             writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
                         }
                         else

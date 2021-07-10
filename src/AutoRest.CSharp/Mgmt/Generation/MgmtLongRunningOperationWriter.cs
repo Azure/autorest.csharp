@@ -7,8 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -45,8 +47,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation.WrapperType != null ? new CSharpType(typeof(Response<>), mgmtOperation.WrapperType) : base.GetValueTaskType(operation);
         }
 
-        protected override void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
+        protected override void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType, BuildContext? context)
         {
+            Debug.Assert(context != null);
             base.WriteFields(writer, operation, pagingResponse, helperType);
 
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
@@ -54,18 +57,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 writer.Line();
-                writer.Line($"private readonly {typeof(OperationsBase)} {_operationBaseField};");
+                var isTenantResource = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsTenantResource(context.Configuration.MgmtConfiguration) == true;
+                var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                writer.Line($"private readonly {optionType} {_operationBaseField};");
             }
         }
 
-        protected override void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType cs, CSharpType helperType)
+        protected override void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType cs, CSharpType helperType, BuildContext? context)
         {
+            Debug.Assert(context != null);
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
             if (mgmtOperation.WrapperType != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                writer.Append($"internal {cs.Name}({typeof(OperationsBase)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+                var isTenantResource = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsTenantResource(context.Configuration.MgmtConfiguration) == true;
+                var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                writer.Append($"internal {cs.Name}({optionType} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)
                 {

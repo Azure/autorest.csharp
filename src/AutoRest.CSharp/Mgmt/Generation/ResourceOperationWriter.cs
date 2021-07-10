@@ -140,7 +140,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
+            var isTenantResource = resourceOperation.OperationGroup.IsTenantResource(context.Configuration.MgmtConfiguration);
+            var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+            using (writer.Scope($"protected internal {typeOfThis}({optionType} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
                 {
