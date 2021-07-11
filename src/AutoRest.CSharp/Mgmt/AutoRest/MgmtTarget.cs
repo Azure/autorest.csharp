@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
+            var nonLongRunningOperationWriter = new NonLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.NonLongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                NonLongRunningOperationWriter.Write(codeWriter, operation);
+                nonLongRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }

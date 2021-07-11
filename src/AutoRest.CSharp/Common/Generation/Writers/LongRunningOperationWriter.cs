@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         protected virtual void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType? interfaceType)
         {
-            if (operation.ResultType != null)
+            if (operation.ResultType != null && interfaceType != null)
             {
                 using (writer.Scope($"{operation.ResultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
                 {
