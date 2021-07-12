@@ -45,26 +45,28 @@ namespace MgmtMultipleParentResource
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a SubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<SubParent> CreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
+        public Response<SubParent> CreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (instanceId == null)
-                {
-                    throw new ArgumentNullException(nameof(instanceId));
-                }
-                if (subBody == null)
-                {
-                    throw new ArgumentNullException(nameof(subBody));
-                }
-
-                return StartCreateOrUpdate(instanceId, subBody, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(instanceId, subBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a SubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<SubParent>> CreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
+        public async Task<Response<SubParent>> CreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (instanceId == null)
-                {
-                    throw new ArgumentNullException(nameof(instanceId));
-                }
-                if (subBody == null)
-                {
-                    throw new ArgumentNullException(nameof(subBody));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(instanceId, subBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(instanceId, subBody, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a SubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual SubParentsCreateOrUpdateOperation StartCreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
+        public SubParentsCreateOrUpdateOperation StartCreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (instanceId == null)
-                {
-                    throw new ArgumentNullException(nameof(instanceId));
-                }
-                if (subBody == null)
-                {
-                    throw new ArgumentNullException(nameof(subBody));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken: cancellationToken);
-                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken);
+                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a SubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<SubParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
+        public async Task<SubParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (instanceId == null)
-                {
-                    throw new ArgumentNullException(nameof(instanceId));
-                }
-                if (subBody == null)
-                {
-                    throw new ArgumentNullException(nameof(subBody));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken).ConfigureAwait(false);
+                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
             }
             catch (Exception e)
             {
@@ -164,7 +169,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<SubParent> Get(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public Response<SubParent> Get(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.Get");
             scope.Start();
@@ -189,7 +194,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<SubParent>> GetAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParent>> GetAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.Get");
             scope.Start();
@@ -214,7 +219,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual SubParent TryGet(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public SubParent TryGet(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.TryGet");
             scope.Start();
@@ -242,7 +247,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<SubParent> TryGetAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<SubParent> TryGetAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.TryGet");
             scope.Start();
@@ -270,7 +275,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public bool DoesExist(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.DoesExist");
             scope.Start();
@@ -294,7 +299,7 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentContainer.DoesExist");
             scope.Start();

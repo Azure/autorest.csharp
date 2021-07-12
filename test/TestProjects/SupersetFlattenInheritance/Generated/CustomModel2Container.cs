@@ -43,26 +43,27 @@ namespace SupersetFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<CustomModel2> CreateOrUpdate(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<CustomModel2> Put(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
             scope.Start();
             try
             {
-                if (customModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(customModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(customModel2SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(customModel2SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<CustomModel2>> CreateOrUpdateAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<CustomModel2>> PutAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
             scope.Start();
             try
             {
-                if (customModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(customModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(customModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual CustomModel2SPutOperation StartCreateOrUpdate(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public CustomModel2SPutOperation StartPut(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (customModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(customModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, customModel2SName, parameters, cancellationToken: cancellationToken);
-                return new CustomModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, customModel2SName, parameters, cancellationToken);
+                return new CustomModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a CustomModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="parameters"> The CustomModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<CustomModel2SPutOperation> StartCreateOrUpdateAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<CustomModel2SPutOperation> StartPutAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
+            if (customModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(customModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
             scope.Start();
             try
             {
-                if (customModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(customModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, customModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new CustomModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new CustomModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -161,7 +162,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<CustomModel2> Get(string customModel2SName, CancellationToken cancellationToken = default)
+        public Response<CustomModel2> Get(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Get");
             scope.Start();
@@ -185,7 +186,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<CustomModel2>> GetAsync(string customModel2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<CustomModel2>> GetAsync(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Get");
             scope.Start();
@@ -209,7 +210,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual CustomModel2 TryGet(string customModel2SName, CancellationToken cancellationToken = default)
+        public CustomModel2 TryGet(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.TryGet");
             scope.Start();
@@ -236,7 +237,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<CustomModel2> TryGetAsync(string customModel2SName, CancellationToken cancellationToken = default)
+        public async Task<CustomModel2> TryGetAsync(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.TryGet");
             scope.Start();
@@ -263,7 +264,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string customModel2SName, CancellationToken cancellationToken = default)
+        public bool DoesExist(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.DoesExist");
             scope.Start();
@@ -286,7 +287,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string customModel2SName, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.DoesExist");
             scope.Start();

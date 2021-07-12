@@ -44,26 +44,28 @@ namespace Azure.ResourceManager.Sample
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a DedicatedHostGroup. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(hostGroupName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -72,26 +74,27 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DedicatedHostGroup. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -101,27 +104,28 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DedicatedHostGroup. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual DedicatedHostGroupsCreateOrUpdateOperation StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
+        public DedicatedHostGroupsCreateOrUpdateOperation StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken);
-                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -130,27 +134,28 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DedicatedHostGroup. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<DedicatedHostGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<DedicatedHostGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (hostGroupName == null)
-                {
-                    throw new ArgumentNullException(nameof(hostGroupName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -162,7 +167,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Get");
             scope.Start();
@@ -186,7 +191,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Get");
             scope.Start();
@@ -210,7 +215,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual DedicatedHostGroup TryGet(string hostGroupName, CancellationToken cancellationToken = default)
+        public DedicatedHostGroup TryGet(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.TryGet");
             scope.Start();
@@ -237,7 +242,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<DedicatedHostGroup> TryGetAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<DedicatedHostGroup> TryGetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.TryGet");
             scope.Start();
@@ -264,7 +269,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string hostGroupName, CancellationToken cancellationToken = default)
+        public bool DoesExist(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.DoesExist");
             scope.Start();
@@ -287,7 +292,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.DoesExist");
             scope.Start();

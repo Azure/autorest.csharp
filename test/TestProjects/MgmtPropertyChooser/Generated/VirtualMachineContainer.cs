@@ -43,26 +43,28 @@ namespace MgmtPropertyChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a VirtualMachine. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<VirtualMachine> CreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<VirtualMachine> CreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(vmName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +73,27 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachine. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<VirtualMachine>> CreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<VirtualMachine>> CreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +103,28 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachine. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual VirtualMachinesCreateOrUpdateOperation StartCreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
+        public VirtualMachinesCreateOrUpdateOperation StartCreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-                return new VirtualMachinesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken);
+                return new VirtualMachinesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -129,27 +133,28 @@ namespace MgmtPropertyChooser
             }
         }
 
-        /// <summary> The operation to create or update a VirtualMachine. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<VirtualMachinesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<VirtualMachinesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (vmName == null)
-                {
-                    throw new ArgumentNullException(nameof(vmName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachinesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -161,7 +166,7 @@ namespace MgmtPropertyChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Get");
             scope.Start();
@@ -185,7 +190,7 @@ namespace MgmtPropertyChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Get");
             scope.Start();
@@ -209,7 +214,7 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual VirtualMachine TryGet(string vmName, CancellationToken cancellationToken = default)
+        public VirtualMachine TryGet(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.TryGet");
             scope.Start();
@@ -236,7 +241,7 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<VirtualMachine> TryGetAsync(string vmName, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachine> TryGetAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.TryGet");
             scope.Start();
@@ -263,7 +268,7 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string vmName, CancellationToken cancellationToken = default)
+        public bool DoesExist(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.DoesExist");
             scope.Start();
@@ -286,7 +291,7 @@ namespace MgmtPropertyChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string vmName, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.DoesExist");
             scope.Start();

@@ -45,26 +45,28 @@ namespace MgmtMultipleParentResource
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a AnotherParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<AnotherParent> CreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
+        public Response<AnotherParent> CreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-                if (anotherBody == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherBody));
-                }
-
-                return StartCreateOrUpdate(anotherName, anotherBody, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(anotherName, anotherBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a AnotherParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<AnotherParent>> CreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
+        public async Task<Response<AnotherParent>> CreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-                if (anotherBody == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherBody));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(anotherName, anotherBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(anotherName, anotherBody, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a AnotherParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual AnotherParentsCreateOrUpdateOperation StartCreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
+        public AnotherParentsCreateOrUpdateOperation StartCreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-                if (anotherBody == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherBody));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken: cancellationToken);
-                return new AnotherParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken);
+                return new AnotherParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a AnotherParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the run command. </summary>
         /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<AnotherParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
+        public async Task<AnotherParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (anotherName == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherName));
-                }
-                if (anotherBody == null)
-                {
-                    throw new ArgumentNullException(nameof(anotherBody));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new AnotherParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, anotherName, anotherBody, cancellationToken).ConfigureAwait(false);
+                return new AnotherParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, anotherName, anotherBody).Request, response);
             }
             catch (Exception e)
             {
@@ -164,7 +169,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<AnotherParent> Get(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<AnotherParent> Get(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.Get");
             scope.Start();
@@ -189,7 +194,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<AnotherParent>> GetAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AnotherParent>> GetAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.Get");
             scope.Start();
@@ -214,7 +219,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual AnotherParent TryGet(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public AnotherParent TryGet(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.TryGet");
             scope.Start();
@@ -242,7 +247,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<AnotherParent> TryGetAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<AnotherParent> TryGetAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.TryGet");
             scope.Start();
@@ -270,7 +275,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public bool DoesExist(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.DoesExist");
             scope.Start();
@@ -294,7 +299,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.DoesExist");
             scope.Start();

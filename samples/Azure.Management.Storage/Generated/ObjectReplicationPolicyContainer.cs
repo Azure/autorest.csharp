@@ -45,26 +45,28 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ObjectReplicationPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update the object replication policy of the storage account. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
+        public Response<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (objectReplicationPolicyId == null)
-                {
-                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                return StartCreateOrUpdate(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(objectReplicationPolicyId, properties, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ObjectReplicationPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update the object replication policy of the storage account. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
+        public async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (objectReplicationPolicyId == null)
-                {
-                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ObjectReplicationPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update the object replication policy of the storage account. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual ObjectReplicationPoliciesCreateOrUpdateOperation StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
+        public ObjectReplicationPoliciesCreateOrUpdateOperation StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (objectReplicationPolicyId == null)
-                {
-                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken);
-                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken);
+                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a ObjectReplicationPolicy. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update the object replication policy of the storage account. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<ObjectReplicationPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
+        public async Task<ObjectReplicationPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (objectReplicationPolicyId == null)
-                {
-                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
-                }
-                if (properties == null)
-                {
-                    throw new ArgumentNullException(nameof(properties));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken).ConfigureAwait(false);
+                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -163,7 +168,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<ObjectReplicationPolicy> Get(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicy> Get(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Get");
             scope.Start();
@@ -187,7 +192,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Get");
             scope.Start();
@@ -211,7 +216,7 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual ObjectReplicationPolicy TryGet(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public ObjectReplicationPolicy TryGet(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.TryGet");
             scope.Start();
@@ -238,7 +243,7 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<ObjectReplicationPolicy> TryGetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<ObjectReplicationPolicy> TryGetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.TryGet");
             scope.Start();
@@ -265,7 +270,7 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public bool DoesExist(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.DoesExist");
             scope.Start();
@@ -288,7 +293,7 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.DoesExist");
             scope.Start();

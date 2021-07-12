@@ -109,7 +109,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public Operation StartDoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
+        public BarsDoSomethingOperation StartDoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -139,7 +139,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async Task<Operation> StartDoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async Task<BarsDoSomethingOperation> StartDoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -204,6 +204,106 @@ namespace MgmtLRO
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public Bar TryGet(string barName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (barName == null)
+                {
+                    throw new ArgumentNullException(nameof(barName));
+                }
+
+                return Get(barName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<Bar> TryGetAsync(string barName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (barName == null)
+                {
+                    throw new ArgumentNullException(nameof(barName));
+                }
+
+                return await GetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public bool DoesExist(string barName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (barName == null)
+                {
+                    throw new ArgumentNullException(nameof(barName));
+                }
+
+                return TryGet(barName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<bool> DoesExistAsync(string barName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (barName == null)
+                {
+                    throw new ArgumentNullException(nameof(barName));
+                }
+
+                return await TryGetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

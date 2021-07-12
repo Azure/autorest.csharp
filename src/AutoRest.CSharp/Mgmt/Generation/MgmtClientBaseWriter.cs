@@ -621,13 +621,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
-            CSharpType? returnType = GetLROReturnType(clientMethod, context);
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = returnType != null ?
-                lroObjectType : typeof(Azure.Operation);
-            responseType = responseType.WrapAsync(async);
+            CSharpType responseType = lroObjectType.WrapAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
             foreach (var parameter in passThruParameters)

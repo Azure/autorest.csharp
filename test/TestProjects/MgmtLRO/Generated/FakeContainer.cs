@@ -215,6 +215,110 @@ namespace MgmtLRO
             }
         }
 
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public Fake TryGet(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (fakeName == null)
+                {
+                    throw new ArgumentNullException(nameof(fakeName));
+                }
+
+                return Get(fakeName, expand, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<Fake> TryGetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (fakeName == null)
+                {
+                    throw new ArgumentNullException(nameof(fakeName));
+                }
+
+                return await GetAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public bool DoesExist(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (fakeName == null)
+                {
+                    throw new ArgumentNullException(nameof(fakeName));
+                }
+
+                return TryGet(fakeName, expand, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<bool> DoesExistAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (fakeName == null)
+                {
+                    throw new ArgumentNullException(nameof(fakeName));
+                }
+
+                return await TryGetAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Filters the list of Fake for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>

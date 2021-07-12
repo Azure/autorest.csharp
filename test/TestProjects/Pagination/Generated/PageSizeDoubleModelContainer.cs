@@ -45,26 +45,27 @@ namespace Pagination
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a PageSizeDoubleModel. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<PageSizeDoubleModel> CreateOrUpdate(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<PageSizeDoubleModel> Put(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(name, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartPut(name, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +74,26 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeDoubleModel. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<PageSizeDoubleModel>> CreateOrUpdateAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<PageSizeDoubleModel>> PutAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.CreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Put");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +103,27 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeDoubleModel. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual PageSizeDoubleModelsPutOperation StartCreateOrUpdate(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public PageSizeDoubleModelsPutOperation StartPut(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken);
-                return new PageSizeDoubleModelsPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
+                return new PageSizeDoubleModelsPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -131,27 +132,27 @@ namespace Pagination
             }
         }
 
-        /// <summary> The operation to create or update a PageSizeDoubleModel. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<PageSizeDoubleModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<PageSizeDoubleModelsPutOperation> StartPutAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartCreateOrUpdate");
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartPut");
             scope.Start();
             try
             {
-                if (name == null)
-                {
-                    throw new ArgumentNullException(nameof(name));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PageSizeDoubleModelsPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
+                return new PageSizeDoubleModelsPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -163,7 +164,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<PageSizeDoubleModel> Get(string name, CancellationToken cancellationToken = default)
+        public Response<PageSizeDoubleModel> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Get");
             scope.Start();
@@ -187,7 +188,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<PageSizeDoubleModel>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDoubleModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Get");
             scope.Start();
@@ -211,7 +212,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual PageSizeDoubleModel TryGet(string name, CancellationToken cancellationToken = default)
+        public PageSizeDoubleModel TryGet(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.TryGet");
             scope.Start();
@@ -238,7 +239,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<PageSizeDoubleModel> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        public async Task<PageSizeDoubleModel> TryGetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.TryGet");
             scope.Start();
@@ -265,7 +266,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        public bool DoesExist(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.DoesExist");
             scope.Start();
@@ -288,7 +289,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        public async Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.DoesExist");
             scope.Start();

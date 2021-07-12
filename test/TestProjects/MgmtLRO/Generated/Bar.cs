@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtLRO.Models;
 
@@ -25,17 +23,5 @@ namespace MgmtLRO
 
         /// <summary> Gets or sets the BarData. </summary>
         public BarData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override Bar GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<Bar> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }
