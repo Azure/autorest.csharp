@@ -127,7 +127,7 @@ namespace MgmtParent
 
         /// <summary> Delete a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<DedicatedHostGroupsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDelete");
             scope.Start();
@@ -145,7 +145,7 @@ namespace MgmtParent
 
         /// <summary> Delete a dedicated host group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public DedicatedHostGroupsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDelete");
             scope.Start();

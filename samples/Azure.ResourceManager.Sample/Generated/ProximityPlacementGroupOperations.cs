@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Delete a proximity placement group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<ProximityPlacementGroupsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.StartDelete");
             scope.Start();
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Delete a proximity placement group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public ProximityPlacementGroupsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.StartDelete");
             scope.Start();

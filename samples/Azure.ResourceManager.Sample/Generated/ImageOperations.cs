@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Deletes an Image. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<ImagesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDelete");
             scope.Start();
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Deletes an Image. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public ImagesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDelete");
             scope.Start();

@@ -165,7 +165,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<ParentsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentOperations.StartDelete");
             scope.Start();
@@ -183,7 +183,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public ParentsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentOperations.StartDelete");
             scope.Start();
