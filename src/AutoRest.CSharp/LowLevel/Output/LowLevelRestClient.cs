@@ -124,11 +124,10 @@ namespace AutoRest.CSharp.Output.Models
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
-                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, schemaDocumentation, diagnostic);
+                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation, schemaDocumentation, diagnostic);
                 }
             }
         }
-
         private LowLevelClientMethod.SchemaDocumentation[]? GetSchemaDocumentationsForParameter(RequestParameter parameter)
         {
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
