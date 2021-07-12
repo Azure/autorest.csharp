@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -24,17 +22,5 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets or sets the SshPublicKeyData. </summary>
         public SshPublicKeyData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override SshPublicKey GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<SshPublicKey> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

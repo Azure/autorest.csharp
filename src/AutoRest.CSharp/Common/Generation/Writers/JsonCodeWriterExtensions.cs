@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -210,9 +212,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     switch (valueSerialization.Type.Implementation)
                     {
-                        case ObjectType _:
-                            writer.Line($"{writerName}.WriteObjectValue({name});");
-                            return;
+                        case ObjectType objectType:
+                            {
+                                var systemObjectType = objectType as SystemObjectType;
+                                if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
+                                {
+                                    writer.Append($"JsonSerializer.Serialize(writer, {name});");
+                                }
+                                else
+                                {
+                                    writer.Line($"{writerName}.WriteObjectValue({name});");
+                                }
+                                return;
+                            }
 
                         case EnumType clientEnum:
                             writer.Append($"{writerName}.WriteStringValue({name}")
@@ -572,13 +584,28 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw(")");
         }
 
+        private static bool IsCustomJsonConverterAdded(SystemObjectType systemObjectType)
+        {
+            return systemObjectType.GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute));
+        }
+
         public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, CodeWriterDelegate element)
         {
             switch (implementation)
             {
                 case ObjectType objectType:
-                    writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
+                    {
+                        var systemObjectType = objectType as SystemObjectType;
+                        if (systemObjectType != null && IsCustomJsonConverterAdded(systemObjectType))
+                        {
+                            writer.Append($"JsonSerializer.Deserialize<{implementation.Type}>({element}.ToString())");
+                        }
+                        else
+                        {
+                            writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
+                        }
                     break;
+                    }
 
                 case EnumType clientEnum:
                     writer.AppendEnumFromString(

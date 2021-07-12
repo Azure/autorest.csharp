@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<FileSharesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
             scope.Start();
@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public FileSharesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
             scope.Start();

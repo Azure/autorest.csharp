@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtListOnly.Models;
 
@@ -25,17 +23,5 @@ namespace MgmtListOnly
 
         /// <summary> Gets or sets the FakeData. </summary>
         public FakeData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override Fake GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<Fake> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

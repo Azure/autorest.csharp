@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
@@ -24,17 +22,5 @@ namespace SupersetInheritance
 
         /// <summary> Gets or sets the SupersetModel4Data. </summary>
         public SupersetModel4Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override SupersetModel4 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<SupersetModel4> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

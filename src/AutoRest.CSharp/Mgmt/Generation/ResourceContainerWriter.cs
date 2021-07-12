@@ -114,9 +114,83 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (_resourceContainer.GetMethod != null)
             {
                 WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod);
+                WriteTryGetVariants(_resourceContainer.GetMethod.RestClientMethod);
+                WriteDoesExistVariants(_resourceContainer.GetMethod.RestClientMethod);
             }
 
             WriteListVariants();
+        }
+
+        private void WriteDoesExistVariants(RestClientMethod getMethod)
+        {
+            var parameterMapping = BuildParameterMapping(getMethod);
+
+            var methodName = "Get";
+            var scopeName = methodName;
+
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
+            WriteContainerMethodScope(false, $"bool", "DoesExist", passThruParameters, writer =>
+            {
+                _writer.Append($"return TryGet(");
+                foreach (var parameter in passThruParameters)
+                {
+                    _writer.AppendRaw(parameter.Name);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken) != null;");
+            }, isOverride: false);
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
+            WriteContainerMethodScope(true, $"{typeof(Task)}<bool>", "DoesExist", passThruParameters, writer =>
+            {
+                _writer.Append($"return await TryGetAsync(");
+                foreach (var parameter in passThruParameters)
+                {
+                    _writer.AppendRaw(parameter.Name);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false) != null;");
+            }, isOverride: false);
+        }
+
+        private void WriteTryGetVariants(RestClientMethod getMethod)
+        {
+            var parameterMapping = BuildParameterMapping(getMethod);
+
+            var methodName = "Get";
+            var scopeName = methodName;
+
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
+            WriteContainerMethodScope(false, $"{_resource.Type.Name}", "TryGet", passThruParameters, writer =>
+            {
+                _writer.Append($"return Get(");
+                foreach (var parameter in passThruParameters)
+                {
+                    _writer.AppendRaw(parameter.Name);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).Value;");
+            }, isOverride: false, catch404: true);
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{_resource.Type.Name}>", "TryGet", passThruParameters, writer =>
+            {
+                _writer.Append($"return await GetAsync(");
+                foreach (var parameter in passThruParameters)
+                {
+                    _writer.AppendRaw(parameter.Name);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+            }, isOverride: false, catch404: true);
         }
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod)
@@ -137,7 +211,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="parameters">Must not contain cancellationToken.</param>
         /// <param name="inner">Main logic of the method writer.</param>
         /// <param name="isOverride"></param>
-        private void WriteContainerMethodScope(bool isAsync, FormattableString returnType, string syncMethodName, IEnumerable<Parameter> parameters, CodeWriterDelegate inner, bool isOverride = false)
+        private void WriteContainerMethodScope(bool isAsync, FormattableString returnType, string syncMethodName, IEnumerable<Parameter> parameters, CodeWriterDelegate inner, bool isOverride = false, bool catch404 = false)
         {
             if (isOverride)
             {
@@ -162,7 +236,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteParameterNullChecks(parameters.ToList());
                 inner(_writer);
-            });
+            }, catch404);
         }
 
         private void WriteGetVariants(RestClientMethod method)

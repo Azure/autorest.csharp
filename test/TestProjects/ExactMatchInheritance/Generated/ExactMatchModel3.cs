@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
@@ -24,17 +22,5 @@ namespace ExactMatchInheritance
 
         /// <summary> Gets or sets the ExactMatchModel3Data. </summary>
         public ExactMatchModel3Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ExactMatchModel3 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ExactMatchModel3> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

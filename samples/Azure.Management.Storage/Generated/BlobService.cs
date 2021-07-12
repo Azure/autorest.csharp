@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
@@ -25,17 +23,5 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets or sets the BlobServiceData. </summary>
         public BlobServiceData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override BlobService GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<BlobService> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

@@ -45,28 +45,26 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<FileService> SetServiceProperties(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual Response<FileService> CreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartSetServiceProperties(accountName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -75,27 +73,26 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FileService>> SetServicePropertiesAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<Response<FileService>> CreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartSetServicePropertiesAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,28 +102,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public FileServicesSetServicePropertiesOperation StartSetServiceProperties(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual FileServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartSetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken);
-                return new FileServicesSetServicePropertiesOperation(Parent, response);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
+                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -135,28 +131,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
+        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<FileServicesSetServicePropertiesOperation> StartSetServicePropertiesAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<FileServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
-            if (accountName == null)
-            {
-                throw new ArgumentNullException(nameof(accountName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartSetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FileServicesSetServicePropertiesOperation(Parent, response);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -168,7 +163,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<FileService> Get(string accountName, CancellationToken cancellationToken = default)
+        public virtual Response<FileService> Get(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
             scope.Start();
@@ -192,7 +187,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<FileService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
             scope.Start();
@@ -205,6 +200,106 @@ namespace Azure.Management.Storage
 
                 var response = await _restClient.GetServicePropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileService(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual FileService TryGet(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                return Get(accountName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<FileService> TryGetAsync(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                return await GetAsync(accountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                return TryGet(accountName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                return await TryGetAsync(accountName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

@@ -43,23 +43,22 @@ namespace ExactMatchFlattenInheritance
 
         // Container level operations.
 
+        /// <summary> The operation to create or update a AzureResourceFlattenModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Response<AzureResourceFlattenModel5> Put(string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual Response<AzureResourceFlattenModel5> CreateOrUpdate(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, foo, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return StartCreateOrUpdate(name, foo, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -68,22 +67,22 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// <summary> The operation to create or update a AzureResourceFlattenModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel5>> PutAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<Response<AzureResourceFlattenModel5>> CreateOrUpdateAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, foo, cancellationToken).ConfigureAwait(false);
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(name, foo, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -93,23 +92,23 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// <summary> The operation to create or update a AzureResourceFlattenModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public AzureResourceFlattenModel5SPutOperation StartPut(string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual AzureResourceFlattenModel5SPutOperation StartCreateOrUpdate(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _restClient.Put(Id.ResourceGroupName, name, foo, cancellationToken);
-                return new AzureResourceFlattenModel5SPutOperation(Parent, response);
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, name, foo, cancellationToken: cancellationToken);
+                return new AzureResourceFlattenModel5SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -118,23 +117,23 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// <summary> The operation to create or update a AzureResourceFlattenModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<AzureResourceFlattenModel5SPutOperation> StartPutAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<AzureResourceFlattenModel5SPutOperation> StartCreateOrUpdateAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _restClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                return new AzureResourceFlattenModel5SPutOperation(Parent, response);
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new AzureResourceFlattenModel5SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -146,7 +145,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<AzureResourceFlattenModel5> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel5> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Get");
             scope.Start();
@@ -170,7 +169,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<AzureResourceFlattenModel5>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AzureResourceFlattenModel5>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Get");
             scope.Start();
@@ -183,6 +182,106 @@ namespace ExactMatchFlattenInheritance
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AzureResourceFlattenModel5(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual AzureResourceFlattenModel5 TryGet(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return Get(name, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<AzureResourceFlattenModel5> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await GetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return TryGet(name, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await TryGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

@@ -19,7 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (System.Type parentType in ReferenceClassFinder.ReferenceClassCollection)
             {
-                if (IsEqual(parentType, properties))
+                List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+                if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
                     return GetCSharpType(operationGroup, childType, parentType);
                 }
@@ -47,71 +48,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return CSharpType.FromSystemType(originalType.Context, newParentType);
         }
 
-        private static bool IsEqual(System.Type parentType, ObjectTypeProperty[] properties)
-        {
-            var childProperties = properties.ToList();
-            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-
-            if (parentProperties.Count != childProperties.Count)
-                return false;
-
-            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
-            foreach (var parentProperty in parentProperties)
-            {
-                parentDict.Add(parentProperty.Name, parentProperty);
-            }
-
-            foreach (var childProperty in childProperties)
-            {
-                if (!DoesPropertyExistInParent(childProperty, parentDict))
-                    return false;
-            }
-
-            return true;
-        }
-
-        private static bool DoesPropertyExistInParent(ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict)
-        {
-            PropertyInfo? parentProperty;
-            CSharpType childPropertyType = childProperty.Declaration.Type;
-
-            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
-                return false;
-
-            if (parentProperty.PropertyType.IsGenericType)
-            {
-                if (!childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
-                    return false;
-            }
-            else if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
-                IsAssignable(parentProperty.PropertyType, childPropertyType))
-            {
-                if (childProperty.IsReadOnly != (parentProperty.GetSetMethod() == null))
-                    return false;
-            }
-            else if (!(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Tells if <paramref name="childPropertyType" /> can be assigned to <paramref name="parentPropertyType" />
-        /// by checking if there's an implicit type convertor in <paramref name="parentPropertyType" />.
-        /// Todo: should we check childPropertyType as well since an implicit can be defined in either classes?
-        /// </summary>
-        /// <param name="parentPropertyType">The type to be assigned to.</param>
-        /// <param name="childPropertyType">The type to assign.</param>
-        /// <returns></returns>
-        private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
-        {
-            return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
-                m.ReturnType == parentPropertyType &&
-                m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
-        }
-
         private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
         {
             var childProperties = properties.ToList();
@@ -132,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (parentProperties.Count == matchCount)
                     break;
 
-                if (DoesPropertyExistInParent(childProperty, parentDict))
+                if (PropertyMatchDetection.DoesPropertyExistInParent(childProperty, parentDict))
                     matchCount++;
             }
 

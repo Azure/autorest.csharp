@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -24,17 +22,5 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets or sets the VirtualMachineExtensionData. </summary>
         public VirtualMachineExtensionData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override VirtualMachineExtensionVirtualMachineScaleSet GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<VirtualMachineExtensionVirtualMachineScaleSet> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtOperations.Models;
 
@@ -25,17 +23,5 @@ namespace MgmtOperations
 
         /// <summary> Gets or sets the AvailabilitySetGrandChildData. </summary>
         public AvailabilitySetGrandChildData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override AvailabilitySetGrandChild GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<AvailabilitySetGrandChild> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

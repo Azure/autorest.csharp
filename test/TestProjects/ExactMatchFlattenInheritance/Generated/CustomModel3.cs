@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
@@ -24,17 +22,5 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Gets or sets the CustomModel3Data. </summary>
         public CustomModel3Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override CustomModel3 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<CustomModel3> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

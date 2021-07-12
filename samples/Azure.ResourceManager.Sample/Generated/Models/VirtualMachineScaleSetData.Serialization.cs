@@ -27,10 +27,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("plan");
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(Identity))
+            if (Optional.IsDefined(ResourceIdentity))
             {
                 writer.WritePropertyName("identity");
-                writer.WriteObjectValue(Identity);
+                JsonSerializer.Serialize(writer, ResourceIdentity);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample
         {
             Optional<Sku> sku = default;
             Optional<Plan> plan = default;
-            Optional<VirtualMachineScaleSetIdentity> identity = default;
+            Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
@@ -172,7 +172,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    identity = VirtualMachineScaleSetIdentity.DeserializeVirtualMachineScaleSetIdentity(property.Value);
+                    identity = JsonSerializer.Deserialize<ResourceIdentity>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("zones"))
@@ -363,7 +363,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, location, tags, sku.Value, plan.Value, identity.Value, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup.Value, hostGroup.Value, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id, name, type, location, tags, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup.Value, hostGroup.Value, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

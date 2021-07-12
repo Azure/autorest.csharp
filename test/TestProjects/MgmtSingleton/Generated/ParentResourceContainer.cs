@@ -44,27 +44,26 @@ namespace MgmtSingleton
 
         // Container level operations.
 
+        /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartCreateOrUpdate(parentName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                return StartCreateOrUpdate(parentName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +72,26 @@ namespace MgmtSingleton
             }
         }
 
+        /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartCreateOrUpdateAsync(parentName, parameters, cancellationToken).ConfigureAwait(false);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(parentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +101,27 @@ namespace MgmtSingleton
             }
         }
 
+        /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, parameters, cancellationToken);
-                return new ParentResourcesCreateOrUpdateOperation(Parent, response);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, parameters, cancellationToken: cancellationToken);
+                return new ParentResourcesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -131,27 +130,27 @@ namespace MgmtSingleton
             }
         }
 
+        /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new ParentResourcesCreateOrUpdateOperation(Parent, response);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new ParentResourcesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -163,7 +162,7 @@ namespace MgmtSingleton
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
+        public virtual Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
@@ -187,7 +186,7 @@ namespace MgmtSingleton
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
@@ -200,6 +199,106 @@ namespace MgmtSingleton
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual ParentResource TryGet(string parentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return Get(parentName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<ParentResource> TryGetAsync(string parentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return await GetAsync(parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string parentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return TryGet(parentName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string parentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                return await TryGetAsync(parentName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

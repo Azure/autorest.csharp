@@ -45,28 +45,26 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public Response<EncryptionScope> Put(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual Response<EncryptionScope> CreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            if (encryptionScopeName == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScopeName));
-            }
-            if (encryptionScope == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScope));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(encryptionScopeName, encryptionScope, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                return StartCreateOrUpdate(encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -75,27 +73,26 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<Response<EncryptionScope>> PutAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<Response<EncryptionScope>> CreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            if (encryptionScopeName == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScopeName));
-            }
-            if (encryptionScope == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScope));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,28 +102,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public EncryptionScopesPutOperation StartPut(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual EncryptionScopesPutOperation StartCreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            if (encryptionScopeName == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScopeName));
-            }
-            if (encryptionScope == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScope));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = _restClient.Put(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken);
-                return new EncryptionScopesPutOperation(Parent, response);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken);
+                return new EncryptionScopesPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -135,28 +131,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request. </summary>
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<EncryptionScopesPutOperation> StartPutAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<EncryptionScopesPutOperation> StartCreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            if (encryptionScopeName == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScopeName));
-            }
-            if (encryptionScope == null)
-            {
-                throw new ArgumentNullException(nameof(encryptionScope));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var response = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
-                return new EncryptionScopesPutOperation(Parent, response);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new EncryptionScopesPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -168,7 +163,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<EncryptionScope> Get(string encryptionScopeName, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScope> Get(string encryptionScopeName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Get");
             scope.Start();
@@ -192,7 +187,7 @@ namespace Azure.Management.Storage
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<EncryptionScope>> GetAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<EncryptionScope>> GetAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Get");
             scope.Start();
@@ -205,6 +200,106 @@ namespace Azure.Management.Storage
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new EncryptionScope(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual EncryptionScope TryGet(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
+                return Get(encryptionScopeName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<EncryptionScope> TryGetAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
+                return await GetAsync(encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
+                return TryGet(encryptionScopeName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
+                return await TryGetAsync(encryptionScopeName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {
