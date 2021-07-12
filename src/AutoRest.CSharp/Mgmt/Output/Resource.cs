@@ -23,10 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (isExtension)
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
-                if (parentOperationGroup != null)
-                {
-                    parentValue = parentOperationGroup.Key.ToSingular(false);
-                }
+                parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
             }
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue;
             Description = BuilderHelpers.EscapeXmlDescription(
