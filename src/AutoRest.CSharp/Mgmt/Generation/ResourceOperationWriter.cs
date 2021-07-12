@@ -158,7 +158,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
         {
             writer.Line();
+            writer.WriteXmlDocumentationSummary($"Gets the resource type for the operation group");
             writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
+            writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
