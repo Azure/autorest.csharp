@@ -39,7 +39,7 @@ namespace ResourceIdentifierChooser
         {
             Optional<string> @new = default;
             IDictionary<string, string> tags = default;
-            LocationData location = default;
+            Location location = default;
             TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

@@ -15,7 +15,7 @@ namespace MgmtPropertyChooser
     {
         /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineExtension(LocationData location) : base(location)
+        public VirtualMachineExtension(Location location) : base(location)
         {
         }
 
@@ -34,7 +34,7 @@ namespace MgmtPropertyChooser
         /// <param name="settings"> Json formatted public settings for the extension. </param>
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal VirtualMachineExtension(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState) : base(id, name, type, location, tags)
+        internal VirtualMachineExtension(TenantResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState) : base(id, name, type, location, tags)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
