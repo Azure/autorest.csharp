@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element)
         {
             IDictionary<string, string> tags = default;
-            LocationData location = default;
+            Location location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

@@ -62,8 +62,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(WritableSubResourceModel2Data), new string[] { "id", "foo" }, new Type[] { typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
         [TestCase(typeof(ResourceModel1Data), new string[] { "id", "name", "type", "foo"}, new Type[] { typeof(string), typeof(string), typeof(string), typeof(string) })]
-        [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
-        [TestCase(typeof(TrackedResourceModel2Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(TrackedResourceModel1Data), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(TrackedResourceModel2Data), new string[] { "location" }, new Type[] { typeof(Location) })]
         [TestCase(typeof(NonResourceModel1), new string[] { "foo", "bar" }, new Type[] { typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

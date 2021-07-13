@@ -5,6 +5,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -24,8 +25,8 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public LowLevelClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, SchemaDocumentation[]? schemaDocumentations, Diagnostic diagnostics) :
-            base (name, description, returnType, request, parameters, responses, headerModel, bufferResponse, accessibility)
+        public LowLevelClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, SchemaDocumentation[]? schemaDocumentations, Diagnostic diagnostics) :
+            base (name, description, returnType, request, parameters, responses, headerModel, bufferResponse, accessibility, operation)
         {
             Diagnostics = diagnostics;
             SchemaDocumentations = schemaDocumentations;

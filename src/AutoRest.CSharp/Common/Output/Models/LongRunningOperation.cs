@@ -22,14 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             Debug.Assert(operation.IsLongRunning);
 
             DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
-            FinalStateVia = operation.LongRunningFinalStateVia switch
-            {
-                "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
-                "location" => OperationFinalStateVia.Location,
-                "original-uri" => OperationFinalStateVia.OriginalUri,
-                null => OperationFinalStateVia.Location,
-                _ => throw new ArgumentException($"Unknown final-state-via value: {operation.LongRunningFinalStateVia}")
-            };
+            FinalStateVia = operation.LongRunningFinalStateVia;
 
             var finalResponse = operation.LongRunningFinalResponse;
             Schema? finalResponseSchema = finalResponse.ResponseSchema;

@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineExtensionData DeserializeVirtualMachineExtensionData(JsonElement element)
         {
             IDictionary<string, string> tags = default;
-            LocationData location = default;
+            Location location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

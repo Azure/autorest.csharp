@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
     {
         /// <summary> Initializes a new instance of SubscriptionLevelResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public SubscriptionLevelResourceData(LocationData location) : base(location)
+        public SubscriptionLevelResourceData(Location location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace ResourceIdentifierChooser
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal SubscriptionLevelResourceData(SubscriptionResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal SubscriptionLevelResourceData(SubscriptionResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }
