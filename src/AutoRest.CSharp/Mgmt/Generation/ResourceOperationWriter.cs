@@ -160,7 +160,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Gets the resource type for the operation group");
             writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
-            writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
+            writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
