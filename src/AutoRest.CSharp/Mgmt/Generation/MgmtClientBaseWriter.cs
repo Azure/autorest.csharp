@@ -377,6 +377,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (isListFunction)
                     {
+                        // first we need to determine that is this function listing the resource itself?
                         if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                         {
                             var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
