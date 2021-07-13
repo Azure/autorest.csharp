@@ -76,5 +76,15 @@ namespace AutoRest.TestServer.Tests.Mgmt
             var segments = ProviderSegmentDetection.GetProviderSegments(path);
             Assert.AreEqual(0, segments.Count);
         }
+
+        [Test]
+        public void ValidateScopeResource()
+        {
+            string path = "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
+            var segments = ProviderSegmentDetection.GetProviderSegments(path);
+            path = "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}";
+            var segmentsB = ProviderSegmentDetection.GetProviderSegments(path);
+            Assert.AreEqual(0, segments.Count);
+        }
     }
 }

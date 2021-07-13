@@ -9,16 +9,16 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Resources.Sample
 {
-    /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    public static partial class ResourceGroupExtensions
+    /// <summary> A class to add extension methods to ManagementGroup. </summary>
+    public static partial class ManagementGroupExtensions
     {
         #region DeploymentExtended
         /// <summary> Gets an object representing a DeploymentExtendedContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="DeploymentExtendedContainer" /> object. </returns>
-        public static DeploymentExtendedContainer GetDeploymentExtendeds(this ResourceGroupOperations resourceGroup)
+        public static DeploymentExtendedContainer GetDeploymentExtendedContainer(this ManagementGroupOperations managementGroup)
         {
-            return new DeploymentExtendedContainer(resourceGroup);
+            return new DeploymentExtendedContainer(managementGroup);
         }
         #endregion
     }

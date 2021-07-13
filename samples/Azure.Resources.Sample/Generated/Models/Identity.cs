@@ -5,32 +5,27 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.Core;
+
 namespace Azure.Resources.Sample
 {
     /// <summary> Identity for the resource. </summary>
-    public partial class Identity
+    internal partial class Identity
     {
         /// <summary> Initializes a new instance of Identity. </summary>
-        public Identity()
+        internal Identity()
         {
+            UserAssignedIdentities = new ChangeTrackingDictionary<string, IdentityUserAssignedIdentitiesValue>();
         }
 
-        /// <summary> Initializes a new instance of Identity. </summary>
-        /// <param name="principalId"> The principal ID of the resource identity. </param>
-        /// <param name="tenantId"> The tenant ID of the resource identity. </param>
-        /// <param name="type"> The identity type. This is the only required field when adding a system assigned identity to a resource. </param>
-        internal Identity(string principalId, string tenantId, ResourceIdentityType? type)
-        {
-            PrincipalId = principalId;
-            TenantId = tenantId;
-            Type = type;
-        }
-
-        /// <summary> The principal ID of the resource identity. </summary>
+        /// <summary> The principal ID of resource identity. </summary>
         public string PrincipalId { get; }
-        /// <summary> The tenant ID of the resource identity. </summary>
+        /// <summary> The tenant ID of resource. </summary>
         public string TenantId { get; }
-        /// <summary> The identity type. This is the only required field when adding a system assigned identity to a resource. </summary>
-        public ResourceIdentityType? Type { get; set; }
+        /// <summary> The identity type. </summary>
+        public ResourceIdentityType? Type { get; }
+        /// <summary> The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </summary>
+        public IReadOnlyDictionary<string, IdentityUserAssignedIdentitiesValue> UserAssignedIdentities { get; }
     }
 }

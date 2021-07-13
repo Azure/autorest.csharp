@@ -36,8 +36,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         baseConstructor = " : base(options)";
                     }
-                    var isTenantResource = resource.OperationGroup.IsTenantResource(context.Configuration.MgmtConfiguration);
-                    var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                    var isParentTenant = resource.OperationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
+                    var optionType = isParentTenant ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
                     using (writer.Scope($"internal {cs.Name}({optionType} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");
@@ -50,8 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"{{ get; private set; }}");
                     writer.Line();
 
-                    // Only write GetResource if it is NOT singleton.
-                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                    // Only write GetResource if it is NEITHER singleton NOR scope resource.
+                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration) && !resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration))
                     {
                         // protected override GetResource
                         writer.Line();

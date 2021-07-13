@@ -54,9 +54,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             CodeModelValidator.Validate(codeModel);
             RemoveOperations(codeModel);
+            _mgmtConfiguration = context.Configuration.MgmtConfiguration;
+            UpdateSubscriptionIdForScopeResource(codeModel);
             _codeModel = codeModel;
             _context = context;
-            _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
@@ -84,6 +85,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
                 }
                 codeModel.OperationGroups.Remove(operations);
+            }
+        }
+
+        private void UpdateSubscriptionIdForScopeResource(CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                if (operationGroup.IsScopeResource(_mgmtConfiguration))
+                {
+                    var subscriptionParameters = operationGroup.Operations
+                        .SelectMany(op => op.Parameters)
+                        .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
+
+                    foreach (var param in subscriptionParameters)
+                    {
+                        param.Implementation = ImplementationLocation.Method;
+                    }
+                }
             }
         }
 

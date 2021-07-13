@@ -62,5 +62,11 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 ).ToList();
             }
         }
+
+        public bool IsByIdMethod()
+        {
+            var request = this.Operation?.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
+            return request != null && this.Parameters.Count() > 0 && $"/{{{this.Parameters[0].Name}}}".Equals(((HttpRequest)request.Protocol.Http!).Path);
+        }
     }
 }

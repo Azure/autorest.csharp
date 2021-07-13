@@ -47,6 +47,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 }
                             }
                         }
+                        else if (resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration))
+                        {
+                            foreach (var container in context.Library.ResourceContainers)
+                            {
+                                if (container.ResourceName == resource.Type.Name)
+                                {
+                                    writer.Line($"#region {resource.Type.Name}");
+                                    WriteGetScopeContainers(writer, resource, container);
+                                    writer.LineRaw("#endregion");
+                                    writer.Line();
+                                }
+                            }
+                        }
                     }
 
                     // write the standalone list operations with the parent of a subscription
@@ -82,9 +95,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} resourceGroup)"))
+            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} {ExtensionOperationVariableName})"))
             {
-                writer.Line($"return new {container.Type.Name}(resourceGroup);");
+                writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
+            }
+        }
+
+        private void WriteGetScopeContainers(CodeWriter writer, Resource armResource, ResourceContainer container)
+        {
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
+            writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} {ExtensionOperationVariableName})"))
+            {
+                writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 

@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Subscriptions = "subscriptions";
         public const string ResourceGroups = "resourceGroups";
         public const string Tenant = "tenant";
+        public const string ManagementGroups = "managementGroups";
         public const string Locations = "locations";
 
         public static readonly Dictionary<string, string> TypeToExtensionName = new Dictionary<string, string>()
@@ -23,6 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             { Subscriptions , "SubscriptionExtensions" },
             { ResourceGroups , "ResourceGroupExtensions" },
             { Tenant , "ArmClientExtensions" },
+            { ManagementGroups , "ManagementGroupExtensions" },
         };
 
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();

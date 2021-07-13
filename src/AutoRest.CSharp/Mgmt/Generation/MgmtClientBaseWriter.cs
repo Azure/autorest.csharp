@@ -289,6 +289,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             MakeResourceNameParamPassThrough(method, parameterMapping, parentNameStack);
+            MakeByIdParamPassThrough(method, parameterMapping, parentNameStack);
 
             // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
             foreach (var parameter in parameterMapping)
@@ -317,6 +318,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected virtual void MakeByIdParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            var request = method.Operation?.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
+            if (method.IsByIdMethod())
+            {
+                var firstString = parameterMapping.FirstOrDefault(parameter => parameter.Parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase));
+                if (firstString?.Parameter != null)
+                {
+                    firstString.IsPassThru = true;
+                    firstString.Parameter = firstString.Parameter with { Type = typeof(ResourceIdentifier) };
+                }
+            }
+        }
+
         protected virtual bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
@@ -326,8 +341,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                parentNameStack.Push($"Id{dotParent}.Name");
+                // container.Id is the ID of parent resource, so the first name should just be `Id.Name` except when it's the scope parameter in /{scope} paths
+                var parentName = parameter.Name.Equals("scope", StringComparison.InvariantCultureIgnoreCase) ? $"Id{dotParent}" : $"Id{dotParent}.Name";
+                parentNameStack.Push($"{parentName}");
                 dotParent += ".Parent";
             }
 
@@ -442,14 +458,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (pathParamsLength > 0)
             {
                 var isAncestorTenant = operationGroup.IsAncestorTenant(context);
+                var isScope = operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration);
                 if (pathParamsLength > 1 && !isAncestorTenant)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
+                else if (isScope && pathParamsLength == 1)
+                {
+                    if (clientMethod.IsByIdMethod())
+                    {
+                        paramNameList.Add("Id");
+                        return paramNameList.ToArray();
+                    }
+                }
 
-                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
-
+                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
                 if (!isAncestorTenant)
                     paramNameList.Reverse();
             }
@@ -465,7 +489,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // This method builds the path parameters names
-        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, RestClientMethod clientMethod)
         {
             if (IsTerminalState(operationGroup, context) && paramLength == 1)
             {
@@ -483,21 +507,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
             }
             else
             {
+                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 name = $"{name}.Parent";
-                paramNames.Add($"{name}.Name");
+                if (parentOperationGroup == null && clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/{scope}"))
+                {
+                    paramNames.Add($"{name}");
+                }
+                else
+                {
+                    paramNames.Add($"{name}.Name");
+                }
                 paramLength--;
 
-                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
             }
         }
 

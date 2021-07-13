@@ -57,8 +57,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 writer.Line();
-                var isTenantResource = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsTenantResource(context.Configuration.MgmtConfiguration) == true;
-                var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                var isParentTenant = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration) == true;
+                var optionType = isParentTenant ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
                 writer.Line($"private readonly {optionType} {_operationBaseField};");
             }
         }
@@ -71,8 +71,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                var isTenantResource = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsTenantResource(context.Configuration.MgmtConfiguration) == true;
-                var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+                var isParentTenant = (operation.ResultType?.Implementation as MgmtObjectType)?.OperationGroup?.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration) == true;
+                var optionType = isParentTenant ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
                 writer.Append($"internal {cs.Name}({optionType} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)

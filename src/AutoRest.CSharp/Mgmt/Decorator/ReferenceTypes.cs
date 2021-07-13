@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return frameworkType.IsSubclassOf(typeof(ResourceIdentifier)) ||
                 frameworkType == typeof(ResourceType) ||
-                frameworkType == typeof(LocationData) ||
+                // frameworkType == typeof(LocationData) ||
                 frameworkType == typeof(ResourceIdentifier);
         }
     }

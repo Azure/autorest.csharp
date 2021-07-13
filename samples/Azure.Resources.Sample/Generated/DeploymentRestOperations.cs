@@ -17,27 +17,27 @@ namespace Azure.Resources.Sample
 {
     internal partial class DeploymentRestOperations
     {
-        private string subscriptionId;
         private Uri endpoint;
+        private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
         /// <summary> Initializes a new instance of DeploymentRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public DeploymentRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public DeploymentRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2021-04-01")
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             endpoint ??= new Uri("https://management.azure.com");
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
-            this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;
+            this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -55,7 +55,7 @@ namespace Azure.Resources.Sample
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/operations/", false);
             uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -151,7 +151,7 @@ namespace Azure.Resources.Sample
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -234,7 +234,7 @@ namespace Azure.Resources.Sample
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/operations/", false);
             uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -318,7 +318,7 @@ namespace Azure.Resources.Sample
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -393,7 +393,7 @@ namespace Azure.Resources.Sample
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/operations/", false);
             uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -489,7 +489,7 @@ namespace Azure.Resources.Sample
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -561,7 +561,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateGetAtSubscriptionScopeRequest(string deploymentName, string operationId)
+        internal Core.HttpMessage CreateGetAtSubscriptionScopeRequest(string deploymentName, string operationId, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -574,7 +574,7 @@ namespace Azure.Resources.Sample
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/operations/", false);
             uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -583,9 +583,10 @@ namespace Azure.Resources.Sample
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="operationId"> The ID of the operation to get. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="operationId"/> is null. </exception>
-        public async Task<Response<DeploymentOperationData>> GetAtSubscriptionScopeAsync(string deploymentName, string operationId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/>, <paramref name="operationId"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationData>> GetAtSubscriptionScopeAsync(string deploymentName, string operationId, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -595,8 +596,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateGetAtSubscriptionScopeRequest(deploymentName, operationId);
+            using var message = CreateGetAtSubscriptionScopeRequest(deploymentName, operationId, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -615,9 +620,10 @@ namespace Azure.Resources.Sample
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="operationId"> The ID of the operation to get. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="operationId"/> is null. </exception>
-        public Response<DeploymentOperationData> GetAtSubscriptionScope(string deploymentName, string operationId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/>, <paramref name="operationId"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationData> GetAtSubscriptionScope(string deploymentName, string operationId, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
@@ -627,8 +633,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateGetAtSubscriptionScopeRequest(deploymentName, operationId);
+            using var message = CreateGetAtSubscriptionScopeRequest(deploymentName, operationId, subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -644,7 +654,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListAtSubscriptionScopeRequest(string deploymentName, int? top)
+        internal Core.HttpMessage CreateListAtSubscriptionScopeRequest(string deploymentName, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -660,7 +670,7 @@ namespace Azure.Resources.Sample
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -668,17 +678,22 @@ namespace Azure.Resources.Sample
 
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public async Task<Response<DeploymentOperationsListResult>> ListAtSubscriptionScopeAsync(string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationsListResult>> ListAtSubscriptionScopeAsync(string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionScopeRequest(deploymentName, top);
+            using var message = CreateListAtSubscriptionScopeRequest(deploymentName, subscriptionId, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -696,17 +711,22 @@ namespace Azure.Resources.Sample
 
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
-        public Response<DeploymentOperationsListResult> ListAtSubscriptionScope(string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationsListResult> ListAtSubscriptionScope(string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (deploymentName == null)
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionScopeRequest(deploymentName, top);
+            using var message = CreateListAtSubscriptionScopeRequest(deploymentName, subscriptionId, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -722,7 +742,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateGetAtResourceGroupScopeRequest(string resourceGroupName, string deploymentName, string operationId)
+        internal Core.HttpMessage CreateGetRequest(string resourceGroupName, string deploymentName, string operationId, string subscriptionId)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -737,7 +757,7 @@ namespace Azure.Resources.Sample
             uri.AppendPath(deploymentName, true);
             uri.AppendPath("/operations/", false);
             uri.AppendPath(operationId, true);
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -747,9 +767,10 @@ namespace Azure.Resources.Sample
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="operationId"> The ID of the operation to get. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="operationId"/> is null. </exception>
-        public async Task<Response<DeploymentOperationData>> GetAtResourceGroupScopeAsync(string resourceGroupName, string deploymentName, string operationId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, <paramref name="operationId"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationData>> GetAsync(string resourceGroupName, string deploymentName, string operationId, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -763,8 +784,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateGetAtResourceGroupScopeRequest(resourceGroupName, deploymentName, operationId);
+            using var message = CreateGetRequest(resourceGroupName, deploymentName, operationId, subscriptionId);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -784,9 +809,10 @@ namespace Azure.Resources.Sample
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="operationId"> The ID of the operation to get. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="operationId"/> is null. </exception>
-        public Response<DeploymentOperationData> GetAtResourceGroupScope(string resourceGroupName, string deploymentName, string operationId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, <paramref name="operationId"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationData> Get(string resourceGroupName, string deploymentName, string operationId, string subscriptionId, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -800,8 +826,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(operationId));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateGetAtResourceGroupScopeRequest(resourceGroupName, deploymentName, operationId);
+            using var message = CreateGetRequest(resourceGroupName, deploymentName, operationId, subscriptionId);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -817,7 +847,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListRequest(string resourceGroupName, string deploymentName, int? top)
+        internal Core.HttpMessage CreateListRequest(string resourceGroupName, string deploymentName, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -835,7 +865,7 @@ namespace Azure.Resources.Sample
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", "2021-04-01", true);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -844,10 +874,11 @@ namespace Azure.Resources.Sample
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is null. </exception>
-        public async Task<Response<DeploymentOperationsListResult>> ListAsync(string resourceGroupName, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationsListResult>> ListAsync(string resourceGroupName, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -857,8 +888,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListRequest(resourceGroupName, deploymentName, top);
+            using var message = CreateListRequest(resourceGroupName, deploymentName, subscriptionId, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -877,10 +912,11 @@ namespace Azure.Resources.Sample
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is null. </exception>
-        public Response<DeploymentOperationsListResult> List(string resourceGroupName, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationsListResult> List(string resourceGroupName, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -890,8 +926,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListRequest(resourceGroupName, deploymentName, top);
+            using var message = CreateListRequest(resourceGroupName, deploymentName, subscriptionId, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1164,7 +1204,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListAtSubscriptionScopeNextPageRequest(string nextLink, string deploymentName, int? top)
+        internal Core.HttpMessage CreateListAtSubscriptionScopeNextPageRequest(string nextLink, string deploymentName, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1180,10 +1220,11 @@ namespace Azure.Resources.Sample
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="deploymentName"/> is null. </exception>
-        public async Task<Response<DeploymentOperationsListResult>> ListAtSubscriptionScopeNextPageAsync(string nextLink, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationsListResult>> ListAtSubscriptionScopeNextPageAsync(string nextLink, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1193,8 +1234,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionScopeNextPageRequest(nextLink, deploymentName, top);
+            using var message = CreateListAtSubscriptionScopeNextPageRequest(nextLink, deploymentName, subscriptionId, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1213,10 +1258,11 @@ namespace Azure.Resources.Sample
         /// <summary> Gets all deployments operations for a deployment. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="deploymentName"/> is null. </exception>
-        public Response<DeploymentOperationsListResult> ListAtSubscriptionScopeNextPage(string nextLink, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationsListResult> ListAtSubscriptionScopeNextPage(string nextLink, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1226,8 +1272,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListAtSubscriptionScopeNextPageRequest(nextLink, deploymentName, top);
+            using var message = CreateListAtSubscriptionScopeNextPageRequest(nextLink, deploymentName, subscriptionId, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1243,7 +1293,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string deploymentName, int? top)
+        internal Core.HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string deploymentName, string subscriptionId, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1260,10 +1310,11 @@ namespace Azure.Resources.Sample
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="deploymentName"/> is null. </exception>
-        public async Task<Response<DeploymentOperationsListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public async Task<Response<DeploymentOperationsListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1277,8 +1328,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, deploymentName, top);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, deploymentName, subscriptionId, top);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1298,10 +1353,11 @@ namespace Azure.Resources.Sample
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="deploymentName"/> is null. </exception>
-        public Response<DeploymentOperationsListResult> ListNextPage(string nextLink, string resourceGroupName, string deploymentName, int? top = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="subscriptionId"/> is null. </exception>
+        public Response<DeploymentOperationsListResult> ListNextPage(string nextLink, string resourceGroupName, string deploymentName, string subscriptionId, int? top = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1315,8 +1371,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(deploymentName));
             }
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, deploymentName, top);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, deploymentName, subscriptionId, top);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

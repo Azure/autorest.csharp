@@ -140,8 +140,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            var isTenantResource = resourceOperation.OperationGroup.IsTenantResource(context.Configuration.MgmtConfiguration);
-            var optionType = isTenantResource ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
+            var isParentTenant = resourceOperation.OperationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
+            var optionType = isParentTenant ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
             using (writer.Scope($"protected internal {typeOfThis}({optionType} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
@@ -184,8 +184,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
                 clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
-                WriteListAvailableLocationsMethod(writer, true);
-                WriteListAvailableLocationsMethod(writer, false);
+                // WriteListAvailableLocationsMethod(writer, true);
+                // WriteListAvailableLocationsMethod(writer, false);
             }
 
             if (_isDeletableResource)
@@ -409,25 +409,25 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
+        // private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
+        // {
+        //     writer.Line();
+        //     writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
+        //     writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+        //     writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
 
-            var responseType = new CSharpType(typeof(IEnumerable<LocationData>)).WrapAsync(async);
+        //     var responseType = new CSharpType(typeof(IEnumerable<LocationData>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
-                if (async)
-                {
-                    writer.Append($".ConfigureAwait(false)");
-                }
-                writer.Append($";");
-            }
-        }
+        //     using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+        //     {
+        //         writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
+        //         if (async)
+        //         {
+        //             writer.Append($".ConfigureAwait(false)");
+        //         }
+        //         writer.Append($";");
+        //     }
+        // }
 
         private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
         {
@@ -940,7 +940,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             else
             {
                 NonLongRunningOperation nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
-                if (nonLongRunningOperation.ResultType != null)
+                if (nonLongRunningOperation.ResultType != null && !nonLongRunningOperation.ResultType.Name.EndsWith("Data"))
                 {
                     writer.Append($"this, ");
                 }

@@ -125,6 +125,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var subscriptionExtensionsCodeWriter = new CodeWriter();
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
             project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
+
+            //TODO: should just check if the managementgroup is in one of the paths
+            if (context.Library.ResourceContainers.Any(c => c.OperationGroup.IsScopeResource(configuration.MgmtConfiguration)))
+            {
+                var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                managementGroupExtensionsWriter.WriteExtension(managementGroupExtensionsCodeWriter, context);
+                project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
+            }
         }
     }
 }

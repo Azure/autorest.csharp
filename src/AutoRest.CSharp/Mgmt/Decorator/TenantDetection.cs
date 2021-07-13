@@ -31,7 +31,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 operationGroup = operationGroup.ParentOperationGroup(context)!;
             }
 
-            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
+            // This does not check readme config on purpose.
+            return operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration) == TenantDetection.TenantName;
+           //return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
+        }
+
+        public static bool IsParentResourceTypeTenant(this OperationGroup operationGroup, MgmtConfiguration config)
+        {
+            // This considers the parent configuration in readme.
+            return operationGroup.ParentResourceType(config) == TenantDetection.TenantName;
         }
 
         private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)

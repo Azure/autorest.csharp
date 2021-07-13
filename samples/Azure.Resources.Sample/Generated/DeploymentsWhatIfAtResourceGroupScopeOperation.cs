@@ -16,18 +16,18 @@ using Azure.Core.Pipeline;
 namespace Azure.Resources.Sample
 {
     /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
-    public partial class DeploymentsWhatIfOperation : Operation<WhatIfOperationResult>, IOperationSource<WhatIfOperationResult>
+    public partial class DeploymentsWhatIfAtResourceGroupScopeOperation : Operation<WhatIfOperationResult>, IOperationSource<WhatIfOperationResult>
     {
         private readonly OperationInternals<WhatIfOperationResult> _operation;
 
-        /// <summary> Initializes a new instance of DeploymentsWhatIfOperation for mocking. </summary>
-        protected DeploymentsWhatIfOperation()
+        /// <summary> Initializes a new instance of DeploymentsWhatIfAtResourceGroupScopeOperation for mocking. </summary>
+        protected DeploymentsWhatIfAtResourceGroupScopeOperation()
         {
         }
 
-        internal DeploymentsWhatIfOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal DeploymentsWhatIfAtResourceGroupScopeOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<WhatIfOperationResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentsWhatIfOperation");
+            _operation = new OperationInternals<WhatIfOperationResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentsWhatIfAtResourceGroupScopeOperation");
         }
 
         /// <inheritdoc />

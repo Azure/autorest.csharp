@@ -11,8 +11,8 @@ input-file:
     - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2021-04-01/resources.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2021-01-01/subscriptions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+    # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+    # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
@@ -122,13 +122,46 @@ directive:
   - remove-operation: Features_Get
   - remove-operation: Features_Register
   - remove-operation: Features_Unregister
-
+  # These methods can be replaced by using other methods in the same operation group, remove for Preview.
+  - remove-operation: PolicyAssignments_DeleteById
+  - remove-operation: PolicyAssignments_CreateById
+  - remove-operation: PolicyAssignments_GetById
+  # The input of CreateOrUpdateAtTenantScope/CreateOrUpdateAtManagementGroupScope is using ScopedDeployment, slightly different from the Deployment used by CreateOrUpdateAtScope/CreateOrUpdateAtSubscriptionScope/CreateOrUpdate(AtResourceGroupScope). The only difference is that location property is required in ScopeDeployment. Let's just use the general AtScope methods for Preview.
+  - remove-operation: Deployments_DeleteAtTenantScope
+  - remove-operation: Deployments_CheckExistenceAtTenantScope
+  - remove-operation: Deployments_CreateOrUpdateAtTenantScope
+  - remove-operation: Deployments_GetAtTenantScope
+  - remove-operation: Deployments_CancelAtTenantScope
+  - remove-operation: Deployments_ValidateAtTenantScope
+  - remove-operation: Deployments_ExportTemplateAtTenantScope
+  - remove-operation: Deployments_ListAtTenantScope
+  - remove-operation: Deployments_DeleteAtManagementGroupScope
+  - remove-operation: Deployments_CheckExistenceAtManagementGroupScope
+  - remove-operation: Deployments_CreateOrUpdateAtManagementGroupScope
+  - remove-operation: Deployments_GetAtManagementGroupScope
+  - remove-operation: Deployments_CancelAtManagementGroupScope
+  - remove-operation: Deployments_ValidateAtManagementGroupScope
+  - remove-operation: Deployments_ExportTemplateAtManagementGroupScope
+  - remove-operation: Deployments_ListAtManagementGroupScope
+  - remove-operation: Deployments_DeleteAtSubscriptionScope
+  - remove-operation: Deployments_CheckExistenceAtSubscriptionScope
+  - remove-operation: Deployments_CreateOrUpdateAtSubscriptionScope
+  - remove-operation: Deployments_GetAtSubscriptionScope
+  - remove-operation: Deployments_CancelAtSubscriptionScope
+  - remove-operation: Deployments_ValidateAtSubscriptionScope
+  - remove-operation: Deployments_ExportTemplateAtSubscriptionScope
+  - remove-operation: Deployments_ListAtSubscriptionScope
+  - remove-operation: Deployments_Delete
+  - remove-operation: Deployments_CheckExistence
+  - remove-operation: Deployments_CreateOrUpdate
+  - remove-operation: Deployments_Get
+  - remove-operation: Deployments_Cancel
+  - remove-operation: Deployments_Validate
+  - remove-operation: Deployments_ExportTemplate
+  - remove-operation: Deployments_ListByResourceGroup
   - rename-operation:
-      from: Deployments_Get
-      to: Deployments_GetAtResourceGroupScope
-  - rename-operation:
-      from: DeploymentOperations_Get
-      to: DeploymentOperations_GetAtResourceGroupScope
+      from: Deployments_WhatIf
+      to: Deployments_WhatIfAtResourceGroupScope
 ```
 
 ## Swagger workarounds

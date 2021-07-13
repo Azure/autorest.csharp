@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,7 +45,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtScopeAsync(Id.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtScopeAsync(Id.Parent.Name, Id.Parent.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +62,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtScope(Id.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtScope(Id.Parent.Name, Id.Parent.Parent, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -71,22 +70,6 @@ namespace Azure.Resources.Sample
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
-        {
-            return ListAvailableLocations(ResourceType, cancellationToken);
         }
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -96,7 +79,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtTenantScopeAsync(Id.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtTenantScopeAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -114,7 +97,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtTenantScope(Id.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtTenantScope(Id.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -132,7 +115,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtManagementGroupScopeAsync(Id.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtManagementGroupScopeAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -150,7 +133,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtManagementGroupScope(Id.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtManagementGroupScope(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -168,7 +151,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtSubscriptionScopeAsync(Id.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtSubscriptionScopeAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -186,7 +169,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtSubscriptionScope(Id.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtSubscriptionScope(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -198,13 +181,13 @@ namespace Azure.Resources.Sample
 
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DeploymentOperationData>> GetAtResourceGroupScopeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DeploymentOperationData>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtResourceGroupScopeAsync(Id.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -216,13 +199,13 @@ namespace Azure.Resources.Sample
 
         /// <summary> Gets a deployments operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperationData> GetAtResourceGroupScope(CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentOperationData> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.Get");
             scope.Start();
             try
             {
-                var response = _restClient.GetAtResourceGroupScope(Id.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
