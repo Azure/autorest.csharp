@@ -32,8 +32,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SupersetModel1Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(SupersetModel3), new string[] { }, new Type[] { })]
-        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
-        [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(Location) })]
+        [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(Location) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

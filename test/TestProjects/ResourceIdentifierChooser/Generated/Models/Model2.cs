@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
     {
         /// <summary> Initializes a new instance of Model2. </summary>
         /// <param name="location"> The location. </param>
-        public Model2(LocationData location) : base(location)
+        public Model2(Location location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace ResourceIdentifierChooser
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="mango"> Fruit. </param>
-        internal Model2(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string mango) : base(id, name, type, location, tags)
+        internal Model2(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string mango) : base(id, name, type, location, tags)
         {
             Mango = mango;
         }

@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel2), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel3Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel4), new string[] { }, new Type[] { })]
-        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(Location) })]
         [TestCase(typeof(ExactMatchModel6), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel7), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel8), new string[] { }, new Type[] { })]

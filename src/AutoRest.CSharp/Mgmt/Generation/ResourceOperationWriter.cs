@@ -414,7 +414,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
 
-            var responseType = new CSharpType(typeof(IEnumerable<LocationData>)).WrapAsync(async);
+            var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
             using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {

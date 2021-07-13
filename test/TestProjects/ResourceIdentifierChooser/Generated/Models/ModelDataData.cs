@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
     {
         /// <summary> Initializes a new instance of ModelDataData. </summary>
         /// <param name="location"> The location. </param>
-        public ModelDataData(LocationData location) : base(location)
+        public ModelDataData(Location location) : base(location)
         {
         }
 
@@ -28,7 +28,7 @@ namespace ResourceIdentifierChooser
         /// <param name="mango"> Fruit. </param>
         /// <param name="strawberry"> Fruit. </param>
         /// <param name="cherry"> Fruit. </param>
-        internal ModelDataData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string mango, string strawberry, string cherry) : base(id, name, type, location, tags, mango, strawberry)
+        internal ModelDataData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string mango, string strawberry, string cherry) : base(id, name, type, location, tags, mango, strawberry)
         {
             Cherry = cherry;
         }

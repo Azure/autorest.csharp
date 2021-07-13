@@ -15,7 +15,7 @@ namespace MgmtOperations.Models
     {
         /// <summary> Initializes a new instance of AvailabilitySetChildData. </summary>
         /// <param name="location"> The location. </param>
-        public AvailabilitySetChildData(LocationData location) : base(location)
+        public AvailabilitySetChildData(Location location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MgmtOperations.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetChildData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal AvailabilitySetChildData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }
