@@ -36,7 +36,9 @@ namespace TenantOnly
             _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
