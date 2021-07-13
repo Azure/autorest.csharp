@@ -31,11 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // 2. some operations belong to non-resource
                 if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
                 {
-                    var resourceDataType = resourceData.Type;
-                    if (resultType.Name.Equals(resourceDataType.Name))
-                    {
-                        return true;
-                    }
+                    return resultType.Name.Equals(resourceData.Type.Name);
                 }
             }
             return false;
