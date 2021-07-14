@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
         /// <param name="location"> The location. </param>
-        public ImageData(LocationData location) : base(location)
+        public ImageData(Location location) : base(location)
         {
         }
 
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, location, tags)
+        internal ImageData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, location, tags)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;

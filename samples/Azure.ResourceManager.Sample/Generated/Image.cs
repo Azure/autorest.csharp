@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -17,24 +15,12 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "Image"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Image(ResourceOperationsBase options, ImageData resource) : base(options, resource.Id)
+        internal Image(OperationsBase options, ImageData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the ImageData. </summary>
         public ImageData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override Image GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<Image> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

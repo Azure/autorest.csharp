@@ -30,13 +30,15 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
@@ -76,7 +78,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -84,7 +86,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -130,7 +132,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesDeleteOperation> StartDeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDelete");
             scope.Start();
@@ -149,7 +151,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public VirtualMachinesDeleteOperation StartDelete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDelete");
             scope.Start();
@@ -172,12 +174,20 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag added. </returns>
         public async Task<Response<VirtualMachine>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = await StartAddTagAsync(key, value, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,74 +203,20 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag added. </returns>
         public Response<VirtualMachine> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = StartAddTag(key, value, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<VirtualMachinesUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public VirtualMachinesUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -275,12 +231,21 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tags replaced. </returns>
         public async Task<Response<VirtualMachine>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.SetTags");
             scope.Start();
             try
             {
-                var operation = await StartSetTagsAsync(tags, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -295,68 +260,21 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tags replaced. </returns>
         public Response<VirtualMachine> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.SetTags");
             scope.Start();
             try
             {
-                var operation = StartSetTags(tags, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Replace the tags on the resource with the given set. </summary>
-        /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tags replaced. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<VirtualMachinesUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-        {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartSetTags");
-            scope.Start();
-            try
-            {
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(tags);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Replace the tags on the resource with the given set. </summary>
-        /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tags replaced. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public VirtualMachinesUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-        {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartSetTags");
-            scope.Start();
-            try
-            {
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(tags);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                TagResourceOperations.Delete(cancellationToken);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -371,12 +289,20 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag removed. </returns>
         public async Task<Response<VirtualMachine>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.RemoveTag");
             scope.Start();
             try
             {
-                var operation = await StartRemoveTagAsync(key, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -391,72 +317,20 @@ namespace Azure.ResourceManager.Sample
         /// <returns> The updated resource with the tag removed. </returns>
         public Response<VirtualMachine> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.RemoveTag");
             scope.Start();
             try
             {
-                var operation = StartRemoveTag(key, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Removes a tag by key from the resource. </summary>
-        /// <param name="key"> The key of the tag to remove. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag removed. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<VirtualMachinesUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRemoveTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags.Remove(key);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Removes a tag by key from the resource. </summary>
-        /// <param name="key"> The key of the tag to remove. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag removed. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public VirtualMachinesUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRemoveTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new VirtualMachineUpdate();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags.Remove(key);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -748,7 +622,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesConvertToManagedDisksOperation> StartConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartConvertToManagedDisks");
             scope.Start();
@@ -766,7 +640,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartConvertToManagedDisks(CancellationToken cancellationToken = default)
+        public VirtualMachinesConvertToManagedDisksOperation StartConvertToManagedDisks(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartConvertToManagedDisks");
             scope.Start();
@@ -820,7 +694,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeallocateAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesDeallocateOperation> StartDeallocateAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDeallocate");
             scope.Start();
@@ -838,7 +712,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDeallocate(CancellationToken cancellationToken = default)
+        public VirtualMachinesDeallocateOperation StartDeallocate(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDeallocate");
             scope.Start();
@@ -895,7 +769,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartPowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesPowerOffOperation> StartPowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPowerOff");
             scope.Start();
@@ -914,7 +788,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartPowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public VirtualMachinesPowerOffOperation StartPowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPowerOff");
             scope.Start();
@@ -968,7 +842,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartReapplyAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesReapplyOperation> StartReapplyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReapply");
             scope.Start();
@@ -986,7 +860,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartReapply(CancellationToken cancellationToken = default)
+        public VirtualMachinesReapplyOperation StartReapply(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReapply");
             scope.Start();
@@ -1040,7 +914,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartRestartAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesRestartOperation> StartRestartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRestart");
             scope.Start();
@@ -1058,7 +932,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartRestart(CancellationToken cancellationToken = default)
+        public VirtualMachinesRestartOperation StartRestart(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRestart");
             scope.Start();
@@ -1112,7 +986,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartStartAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesStartOperation> StartStartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartStart");
             scope.Start();
@@ -1130,7 +1004,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartStart(CancellationToken cancellationToken = default)
+        public VirtualMachinesStartOperation StartStart(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartStart");
             scope.Start();
@@ -1184,7 +1058,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartRedeployAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesRedeployOperation> StartRedeployAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRedeploy");
             scope.Start();
@@ -1202,7 +1076,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartRedeploy(CancellationToken cancellationToken = default)
+        public VirtualMachinesRedeployOperation StartRedeploy(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRedeploy");
             scope.Start();
@@ -1259,7 +1133,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesReimageOperation> StartReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReimage");
             scope.Start();
@@ -1278,7 +1152,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartReimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public VirtualMachinesReimageOperation StartReimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReimage");
             scope.Start();
@@ -1332,7 +1206,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartPerformMaintenanceAsync(CancellationToken cancellationToken = default)
+        public async Task<VirtualMachinesPerformMaintenanceOperation> StartPerformMaintenanceAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPerformMaintenance");
             scope.Start();
@@ -1350,7 +1224,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartPerformMaintenance(CancellationToken cancellationToken = default)
+        public VirtualMachinesPerformMaintenanceOperation StartPerformMaintenance(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPerformMaintenance");
             scope.Start();

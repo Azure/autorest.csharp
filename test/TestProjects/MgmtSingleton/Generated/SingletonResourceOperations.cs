@@ -21,11 +21,13 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal SingletonResourceOperations(ResourceOperationsBase options) : base(options)
+        protected internal SingletonResourceOperations(OperationsBase options) : base(options)
         {
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources/singletonResources";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
     }
 }

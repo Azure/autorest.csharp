@@ -25,7 +25,7 @@ namespace MgmtOperations
         {
         }
 
-        internal AvailabilitySetGrandChildCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<AvailabilitySetGrandChildData> response)
+        internal AvailabilitySetGrandChildCreateOrUpdateOperation(OperationsBase operationsBase, Response<AvailabilitySetGrandChildData> response)
         {
             _operation = new OperationOrResponseInternals<AvailabilitySetGrandChild>(Response.FromValue(new AvailabilitySetGrandChild(operationsBase, response.Value), response.GetRawResponse()));
         }

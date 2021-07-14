@@ -23,7 +23,7 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        internal AzureResourceFlattenModel4SPutOperation(ResourceOperationsBase operationsBase, Response<AzureResourceFlattenModel4Data> response)
+        internal AzureResourceFlattenModel4SPutOperation(OperationsBase operationsBase, Response<AzureResourceFlattenModel4Data> response)
         {
             _operation = new OperationOrResponseInternals<AzureResourceFlattenModel4>(Response.FromValue(new AzureResourceFlattenModel4(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtMultipleParentResource.Models;
 
@@ -18,24 +16,12 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "ChildBodyAnotherParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ChildBodyAnotherParent(ResourceOperationsBase options, ChildBodyData resource) : base(options, resource.Id)
+        internal ChildBodyAnotherParent(OperationsBase options, ChildBodyData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the ChildBodyData. </summary>
         public ChildBodyData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ChildBodyAnotherParent GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ChildBodyAnotherParent> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

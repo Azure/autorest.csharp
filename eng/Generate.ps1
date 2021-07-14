@@ -95,7 +95,7 @@ $testNamesLowLevel =
     'header',
     'httpInfrastructure',
     'media_types',
-    #'lro',
+    'lro',
     #'paging',
     'url-multi-collectionFormat',
     'url';

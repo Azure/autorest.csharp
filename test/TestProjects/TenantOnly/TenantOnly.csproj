@@ -11,12 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210712.2" /> -->
-    <ProjectReference Include="../../../../azure-sdk-for-net/sdk/resourcemanager/Azure.ResourceManager.Core/src/Azure.ResourceManager.Core.csproj" />
+    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210713.2" />
   </ItemGroup>
 
-  <!-- <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.16.0" />
-  </ItemGroup> -->
+  </ItemGroup>
 
 </Project>

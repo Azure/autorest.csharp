@@ -24,6 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (isExtension && !isScope)
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
+                // if we cannot find a parent operation group, we just give up and append nothing.
+                // this case will only happen when resource's parent is tenant, subscriptions, or resourceGroups
                 parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
             }
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue;

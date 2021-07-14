@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of WritableSubResResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal WritableSubResResourceContainer(ResourceOperationsBase parent) : base(parent)
+        internal WritableSubResResourceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<WritableSubResResource> CreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResResource> CreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<WritableSubResResource>> CreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WritableSubResResource>> CreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public WritableSubResResourcesPutOperation StartCreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual WritableSubResResourcesPutOperation StartCreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<WritableSubResResourcesPutOperation> StartCreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<WritableSubResResourcesPutOperation> StartCreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<WritableSubResResource> Get(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResResource> Get(string writableSubResResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubResResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<WritableSubResResource>> GetAsync(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WritableSubResResource>> GetAsync(string writableSubResResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(Id.Name, writableSubResResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new WritableSubResResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="writableSubResResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual WritableSubResResource TryGet(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (writableSubResResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(writableSubResResourcesName));
+                }
+
+                return Get(writableSubResResourcesName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="writableSubResResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<WritableSubResResource> TryGetAsync(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (writableSubResResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(writableSubResResourcesName));
+                }
+
+                return await GetAsync(writableSubResResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="writableSubResResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (writableSubResResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(writableSubResResourcesName));
+                }
+
+                return TryGet(writableSubResResourcesName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="writableSubResResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string writableSubResResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (writableSubResResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(writableSubResResourcesName));
+                }
+
+                return await TryGetAsync(writableSubResResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

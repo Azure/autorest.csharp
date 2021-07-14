@@ -54,9 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.ResultDataType != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            var isParentTenant = (operation.ResultType?.Implementation as Resource)?.OperationGroup?.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration) == true;
-                            var optionType = isParentTenant ? typeof(OperationsBase) : typeof(ResourceOperationsBase);
-                            writer.Append($"{optionType} operationsBase, ");
+                            writer.Append($"{typeof(OperationsBase)} operationsBase, ");
                             writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
                         }
                         else

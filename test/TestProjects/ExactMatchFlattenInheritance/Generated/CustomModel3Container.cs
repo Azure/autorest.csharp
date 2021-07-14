@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of CustomModel3Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal CustomModel3Container(ResourceOperationsBase parent) : base(parent)
+        internal CustomModel3Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -47,7 +47,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<CustomModel3> CreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel3> CreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<CustomModel3>> CreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel3>> CreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public CustomModel3SPutOperation StartCreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual CustomModel3SPutOperation StartCreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<CustomModel3SPutOperation> StartCreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel3SPutOperation> StartCreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<CustomModel3> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel3> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<CustomModel3>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel3>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ExactMatchFlattenInheritance
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new CustomModel3(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual CustomModel3 TryGet(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return Get(name, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<CustomModel3> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.TryGet");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await GetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return TryGet(name, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.DoesExist");
+            scope.Start();
+            try
+            {
+                if (name == null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+
+                return await TryGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

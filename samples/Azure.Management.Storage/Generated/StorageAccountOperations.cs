@@ -32,14 +32,16 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal StorageAccountOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
@@ -117,7 +119,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -125,7 +127,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -168,7 +170,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<StorageAccountsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
             scope.Start();
@@ -186,7 +188,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
+        public StorageAccountsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
             scope.Start();
@@ -209,12 +211,20 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tag added. </returns>
         public async Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = await StartAddTagAsync(key, value, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,74 +240,20 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tag added. </returns>
         public Response<StorageAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTag");
             scope.Start();
             try
             {
-                var operation = StartAddTag(key, value, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<StorageAccountsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsUpdateOperation(this, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Add a tag to the current resource. </summary>
-        /// <param name="key"> The key for the tag. </param>
-        /// <param name="value"> The value for the tag. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag added. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public StorageAccountsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags[key] = value;
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new StorageAccountsUpdateOperation(this, response);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -312,12 +268,21 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tags replaced. </returns>
         public async Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTags");
             scope.Start();
             try
             {
-                var operation = await StartSetTagsAsync(tags, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -332,68 +297,21 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tags replaced. </returns>
         public Response<StorageAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTags");
             scope.Start();
             try
             {
-                var operation = StartSetTags(tags, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Replace the tags on the resource with the given set. </summary>
-        /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tags replaced. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<StorageAccountsUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-        {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTags");
-            scope.Start();
-            try
-            {
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(tags);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsUpdateOperation(this, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Replace the tags on the resource with the given set. </summary>
-        /// <param name="tags"> The set of tags to use as replacement. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tags replaced. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public StorageAccountsUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
-        {
-            if (tags == null)
-            {
-                throw new ArgumentNullException(nameof(tags));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTags");
-            scope.Start();
-            try
-            {
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(tags);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new StorageAccountsUpdateOperation(this, response);
+                TagResourceOperations.Delete(cancellationToken);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -408,12 +326,20 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tag removed. </returns>
         public async Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTag");
             scope.Start();
             try
             {
-                var operation = await StartRemoveTagAsync(key, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -428,72 +354,20 @@ namespace Azure.Management.Storage
         /// <returns> The updated resource with the tag removed. </returns>
         public Response<StorageAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTag");
             scope.Start();
             try
             {
-                var operation = StartRemoveTag(key, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Removes a tag by key from the resource. </summary>
-        /// <param name="key"> The key of the tag to remove. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag removed. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<StorageAccountsUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags.Remove(key);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsUpdateOperation(this, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Removes a tag by key from the resource. </summary>
-        /// <param name="key"> The key of the tag to remove. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> The updated resource with the tag removed. </returns>
-        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public StorageAccountsUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
-        {
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTag");
-            scope.Start();
-            try
-            {
-                var resource = GetResource();
-                var patchable = new StorageAccountUpdateParameters();
-                patchable.Tags.ReplaceWith(resource.Data.Tags);
-                patchable.Tags.Remove(key);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new StorageAccountsUpdateOperation(this, response);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                return Response.FromValue(new StorageAccount(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -505,7 +379,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Models.CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -530,7 +404,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
-        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        public virtual Response<Models.CheckNameAvailabilityResult> CheckNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -711,7 +585,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartFailoverAsync(CancellationToken cancellationToken = default)
+        public async Task<StorageAccountsFailoverOperation> StartFailoverAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
             scope.Start();
@@ -729,7 +603,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartFailover(CancellationToken cancellationToken = default)
+        public StorageAccountsFailoverOperation StartFailover(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
             scope.Start();

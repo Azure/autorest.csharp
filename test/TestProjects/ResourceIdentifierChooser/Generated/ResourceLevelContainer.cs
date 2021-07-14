@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of ResourceLevelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ResourceLevelContainer(ResourceOperationsBase parent) : base(parent)
+        internal ResourceLevelContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceLevel> CreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceLevel> CreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceLevel>> CreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceLevel>> CreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ResourceLevelsPutOperation StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceLevelsPutOperation StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ResourceLevelsPutOperation> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceLevelsPutOperation> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceLevel> Get(string resourceLevelsName, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceLevel> Get(string resourceLevelsName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceLevel>> GetAsync(string resourceLevelsName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceLevel>> GetAsync(string resourceLevelsName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, resourceLevelsName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResourceLevel(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual ResourceLevel TryGet(string resourceLevelsName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+
+                return Get(resourceLevelsName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<ResourceLevel> TryGetAsync(string resourceLevelsName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+
+                return await GetAsync(resourceLevelsName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string resourceLevelsName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+
+                return TryGet(resourceLevelsName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string resourceLevelsName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+
+                return await TryGetAsync(resourceLevelsName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

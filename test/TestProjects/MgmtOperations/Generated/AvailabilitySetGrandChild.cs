@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using MgmtOperations.Models;
 
@@ -18,24 +16,12 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChild"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AvailabilitySetGrandChild(ResourceOperationsBase options, AvailabilitySetGrandChildData resource) : base(options, resource.Id)
+        internal AvailabilitySetGrandChild(OperationsBase options, AvailabilitySetGrandChildData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the AvailabilitySetGrandChildData. </summary>
         public AvailabilitySetGrandChildData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override AvailabilitySetGrandChild GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<AvailabilitySetGrandChild> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

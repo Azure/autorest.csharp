@@ -15,7 +15,7 @@ namespace MgmtListOnly.Models
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>
-        public FakeData(LocationData location) : base(location)
+        public FakeData(Location location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MgmtListOnly.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal FakeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal FakeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

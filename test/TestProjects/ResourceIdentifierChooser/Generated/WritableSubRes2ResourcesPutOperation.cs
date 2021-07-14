@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal WritableSubRes2ResourcesPutOperation(ResourceOperationsBase operationsBase, Response<WritableSubRes2ResourceData> response)
+        internal WritableSubRes2ResourcesPutOperation(OperationsBase operationsBase, Response<WritableSubRes2ResourceData> response)
         {
             _operation = new OperationOrResponseInternals<WritableSubRes2Resource>(Response.FromValue(new WritableSubRes2Resource(operationsBase, response.Value), response.GetRawResponse()));
         }

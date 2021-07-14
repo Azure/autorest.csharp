@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -17,24 +15,12 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "WritableSubResResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal WritableSubResResource(ResourceOperationsBase options, WritableSubResResourceData resource) : base(options, resource.Id)
+        internal WritableSubResResource(OperationsBase options, WritableSubResResourceData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the WritableSubResResourceData. </summary>
         public WritableSubResResourceData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override WritableSubResResource GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<WritableSubResResource> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

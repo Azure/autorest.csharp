@@ -15,7 +15,7 @@ namespace SupersetInheritance
     {
         /// <summary> Initializes a new instance of SupersetModel5. </summary>
         /// <param name="location"> The location. </param>
-        public SupersetModel5(LocationData location) : base(location)
+        public SupersetModel5(Location location) : base(location)
         {
         }
 
@@ -27,7 +27,7 @@ namespace SupersetInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
         /// <param name="foo"> . </param>
-        internal SupersetModel5(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new, string foo) : base(id, name, type, location, tags, @new)
+        internal SupersetModel5(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new, string foo) : base(id, name, type, location, tags, @new)
         {
             Foo = foo;
         }

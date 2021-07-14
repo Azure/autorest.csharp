@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal ResourceGroupResourcesPutOperation(ResourceOperationsBase operationsBase, Response<ResourceGroupResourceData> response)
+        internal ResourceGroupResourcesPutOperation(OperationsBase operationsBase, Response<ResourceGroupResourceData> response)
         {
             _operation = new OperationOrResponseInternals<ResourceGroupResource>(Response.FromValue(new ResourceGroupResource(operationsBase, response.Value), response.GetRawResponse()));
         }

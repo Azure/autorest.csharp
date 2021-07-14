@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
 
-        protected void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, CodeWriterDelegate inner)
+        protected void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, CodeWriterDelegate inner, bool catch404 = false)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
 
@@ -60,7 +60,13 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             {
                 inner(writer);
             }
-
+            if (catch404)
+            {
+                using (writer.Scope($"catch ({typeof(RequestFailedException)} e) when (e.Status == 404)"))
+                {
+                    writer.Line($"return null;");
+                }
+            }
             using (writer.Scope($"catch ({typeof(Exception)} e)"))
             {
                 writer.Line($"{scopeVariable}.Failed(e);");

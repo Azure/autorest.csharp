@@ -51,7 +51,7 @@ namespace ResourceIdentifierChooser
             Optional<string> strawberry = default;
             Optional<string> mango = default;
             IDictionary<string, string> tags = default;
-            LocationData location = default;
+            Location location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

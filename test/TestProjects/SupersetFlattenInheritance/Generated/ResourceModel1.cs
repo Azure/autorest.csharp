@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace SupersetFlattenInheritance
@@ -17,24 +15,12 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ResourceModel1(ResourceOperationsBase options, ResourceModel1Data resource) : base(options, resource.Id)
+        internal ResourceModel1(OperationsBase options, ResourceModel1Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the ResourceModel1Data. </summary>
         public ResourceModel1Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ResourceModel1 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ResourceModel1> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 using Pagination.Models;
 
@@ -18,24 +16,12 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeFloatModel(ResourceOperationsBase options, PageSizeFloatModelData resource) : base(options, resource.Id)
+        internal PageSizeFloatModel(OperationsBase options, PageSizeFloatModelData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the PageSizeFloatModelData. </summary>
         public PageSizeFloatModelData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override PageSizeFloatModel GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<PageSizeFloatModel> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

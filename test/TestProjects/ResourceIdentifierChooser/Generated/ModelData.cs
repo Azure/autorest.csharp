@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -17,24 +15,12 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "ModelData"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ModelData(ResourceOperationsBase options, ModelDataData resource) : base(options, resource.Id)
+        internal ModelData(OperationsBase options, ModelDataData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the ModelDataData. </summary>
         public ModelDataData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override ModelData GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<ModelData> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

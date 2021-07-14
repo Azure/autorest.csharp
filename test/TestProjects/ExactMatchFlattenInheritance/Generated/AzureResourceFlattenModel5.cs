@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
@@ -17,24 +15,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel5"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel5(ResourceOperationsBase options, AzureResourceFlattenModel5Data resource) : base(options, resource.Id)
+        internal AzureResourceFlattenModel5(OperationsBase options, AzureResourceFlattenModel5Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the AzureResourceFlattenModel5Data. </summary>
         public AzureResourceFlattenModel5Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override AzureResourceFlattenModel5 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<AzureResourceFlattenModel5> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

@@ -26,7 +26,7 @@ namespace MgmtParent
 
         /// <summary> Initializes a new instance of DedicatedHostContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DedicatedHostContainer(ResourceOperationsBase parent) : base(parent)
+        internal DedicatedHostContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -48,7 +48,7 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<DedicatedHost> CreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHost> CreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdate");
             scope.Start();
@@ -76,7 +76,7 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<DedicatedHost>> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DedicatedHost>> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdate");
             scope.Start();
@@ -105,7 +105,7 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public DedicatedHostsCreateOrUpdateOperation StartCreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostsCreateOrUpdateOperation StartCreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdate");
             scope.Start();
@@ -134,7 +134,7 @@ namespace MgmtParent
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<DedicatedHostsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdate");
             scope.Start();
@@ -162,7 +162,7 @@ namespace MgmtParent
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace MgmtParent
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
             scope.Start();
@@ -199,6 +199,106 @@ namespace MgmtParent
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual DedicatedHost TryGet(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                return Get(hostName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<DedicatedHost> TryGetAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                return await GetAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                return TryGet(hostName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
+                return await TryGetAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

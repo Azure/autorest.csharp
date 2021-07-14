@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of ResourceGroupResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ResourceGroupResourceContainer(ResourceOperationsBase parent) : base(parent)
+        internal ResourceGroupResourceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceGroupResource> CreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceGroupResource> CreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -75,7 +75,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceGroupResource>> CreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceGroupResource>> CreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
@@ -104,7 +104,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ResourceGroupResourcesPutOperation StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceGroupResourcesPutOperation StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ResourceGroupResourcesPutOperation> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceGroupResourcesPutOperation> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();
@@ -185,7 +185,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();
@@ -198,6 +198,106 @@ namespace ResourceIdentifierChooser
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, resourceGroupResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResourceGroupResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual ResourceGroupResource TryGet(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                return Get(resourceGroupResourcesName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<ResourceGroupResource> TryGetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                return await GetAsync(resourceGroupResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                return TryGet(resourceGroupResourcesName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                return await TryGetAsync(resourceGroupResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

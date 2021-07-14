@@ -5,6 +5,7 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -25,12 +26,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
                 && (httpRequest.Method == HttpMethod.Put || httpRequest.Method == HttpMethod.Patch))
             {
-                // need to check result type is [Resource]Data because
-                // some PUT operation returns differently and we don't want to wrap that with [Resource]
-                var resourceDataType = context.Library.GetResourceData(operationGroup).Type;
-                if (resultType.Name.Equals(resourceDataType.Name))
+                // need to check result type is [Resource]Data because:
+                // 1. some PUT operation returns differently and we don't want to wrap that with [Resource]
+                // 2. some operations belong to non-resource
+                if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
                 {
-                    return true;
+                    return resultType.Name.Equals(resourceData.Type.Name);
                 }
             }
             return false;

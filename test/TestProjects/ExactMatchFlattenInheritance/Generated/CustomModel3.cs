@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
@@ -17,24 +15,12 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal CustomModel3(ResourceOperationsBase options, CustomModel3Data resource) : base(options, resource.Id)
+        internal CustomModel3(OperationsBase options, CustomModel3Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the CustomModel3Data. </summary>
         public CustomModel3Data Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override CustomModel3 GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<CustomModel3> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
-        }
     }
 }

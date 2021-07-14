@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineExtensionImageContainer(ResourceOperationsBase parent) : base(parent)
+        internal VirtualMachineExtensionImageContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<VirtualMachineExtensionImage> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionImage> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.Get");
             scope.Start();
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<VirtualMachineExtensionImage>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtensionImage>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.Get");
             scope.Start();
@@ -117,6 +117,166 @@ namespace Azure.ResourceManager.Sample
 
                 var response = await _restClient.GetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual VirtualMachineExtensionImage TryGet(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
+                return Get(location, publisherName, type, version, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<VirtualMachineExtensionImage> TryGetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
+                return await GetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
+                return TryGet(location, publisherName, type, version, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
+                return await TryGetAsync(location, publisherName, type, version, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {
