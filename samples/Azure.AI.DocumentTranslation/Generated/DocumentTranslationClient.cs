@@ -248,7 +248,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStartTranslationRequest(content, options);
+            HttpMessage message = CreateStartTranslationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -474,7 +474,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStartTranslationRequest(content, options);
+            HttpMessage message = CreateStartTranslationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -507,8 +507,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStartTranslationRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateStartTranslationRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -581,7 +580,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -670,7 +669,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -728,8 +727,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTranslationsStatusRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        private HttpMessage CreateGetTranslationsStatusRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -784,7 +782,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
+            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -825,7 +823,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
+            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -859,8 +857,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId, RequestOptions options = null)
+        private HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -888,7 +885,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationStatusRequest(id, options);
+            HttpMessage message = CreateGetTranslationStatusRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -931,7 +928,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationStatusRequest(id, options);
+            HttpMessage message = CreateGetTranslationStatusRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -964,8 +961,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTranslationStatusRequest(Guid id, RequestOptions options = null)
+        private HttpMessage CreateGetTranslationStatusRequest(Guid id)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -994,7 +990,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCancelTranslationRequest(id, options);
+            HttpMessage message = CreateCancelTranslationRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1040,7 +1036,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCancelTranslationRequest(id, options);
+            HttpMessage message = CreateCancelTranslationRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1073,8 +1069,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCancelTranslationRequest(Guid id, RequestOptions options = null)
+        private HttpMessage CreateCancelTranslationRequest(Guid id)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1144,7 +1139,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1231,7 +1226,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
+            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1290,8 +1285,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions options = null)
+        private HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1349,7 +1343,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
+            HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1391,7 +1385,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
+            HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1423,8 +1417,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedDocumentFormatsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedDocumentFormatsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1448,7 +1441,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
+            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1490,7 +1483,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
+            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1522,8 +1515,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedGlossaryFormatsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedGlossaryFormatsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1544,7 +1536,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
+            HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1583,7 +1575,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
+            HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1615,8 +1607,7 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetSupportedStorageSourcesRequest(RequestOptions options = null)
+        private HttpMessage CreateGetSupportedStorageSourcesRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

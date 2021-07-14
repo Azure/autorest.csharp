@@ -57,7 +57,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -132,8 +132,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -153,7 +152,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -194,7 +193,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -228,8 +227,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -249,7 +247,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -290,7 +288,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -324,8 +322,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -345,7 +342,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -386,7 +383,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -420,8 +417,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -441,7 +437,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -482,7 +478,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -516,8 +512,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -537,7 +532,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -577,7 +572,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -610,8 +605,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -631,7 +625,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -671,7 +665,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -704,8 +698,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -725,7 +718,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -765,7 +758,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -798,8 +791,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -819,7 +811,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -860,7 +852,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -894,8 +886,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -915,7 +906,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -956,7 +947,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -990,8 +981,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1011,7 +1001,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1052,7 +1042,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1086,8 +1076,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1107,7 +1096,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1148,7 +1137,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1182,8 +1171,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1203,7 +1191,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1243,7 +1231,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1276,8 +1264,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError202NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError202NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1297,7 +1284,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1337,7 +1324,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1370,8 +1357,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError204NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError204NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1391,7 +1377,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1431,7 +1417,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1464,8 +1450,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultError400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultError400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1485,7 +1470,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1525,7 +1510,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1558,8 +1543,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1578,7 +1562,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1618,7 +1602,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1651,8 +1635,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1671,7 +1654,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1711,7 +1694,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1744,8 +1727,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1764,7 +1746,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1804,7 +1786,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1837,8 +1819,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1857,7 +1838,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            HttpMessage message = CreateGetDefaultModelA200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1896,7 +1877,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            HttpMessage message = CreateGetDefaultModelA200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1928,8 +1909,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA200ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1949,7 +1929,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            HttpMessage message = CreateGetDefaultModelA200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1988,7 +1968,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            HttpMessage message = CreateGetDefaultModelA200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2020,8 +2000,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA200NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2041,7 +2020,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            HttpMessage message = CreateGetDefaultModelA400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2080,7 +2059,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            HttpMessage message = CreateGetDefaultModelA400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2112,8 +2091,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2133,7 +2111,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            HttpMessage message = CreateGetDefaultModelA400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2172,7 +2150,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            HttpMessage message = CreateGetDefaultModelA400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2204,8 +2182,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultModelA400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultModelA400NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2225,7 +2202,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            HttpMessage message = CreateGetDefaultNone200InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2264,7 +2241,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            HttpMessage message = CreateGetDefaultNone200InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2296,8 +2273,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone200InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone200InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2316,7 +2292,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            HttpMessage message = CreateGetDefaultNone200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2355,7 +2331,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            HttpMessage message = CreateGetDefaultNone200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2387,8 +2363,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone200NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2407,7 +2382,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            HttpMessage message = CreateGetDefaultNone400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2446,7 +2421,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            HttpMessage message = CreateGetDefaultNone400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2478,8 +2453,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone400InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2498,7 +2472,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            HttpMessage message = CreateGetDefaultNone400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2537,7 +2511,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            HttpMessage message = CreateGetDefaultNone400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2569,8 +2543,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDefaultNone400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDefaultNone400NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2589,7 +2562,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            HttpMessage message = CreateGet200ModelA200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2628,7 +2601,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            HttpMessage message = CreateGet200ModelA200NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2660,8 +2633,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2681,7 +2653,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2720,7 +2692,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA200ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2752,8 +2724,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2773,7 +2744,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            HttpMessage message = CreateGet200ModelA200InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2812,7 +2783,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            HttpMessage message = CreateGet200ModelA200InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2844,8 +2815,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA200InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA200InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2865,7 +2835,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            HttpMessage message = CreateGet200ModelA400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2904,7 +2874,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            HttpMessage message = CreateGet200ModelA400NoneRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2936,8 +2906,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400NoneRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400NoneRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2957,7 +2926,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2996,7 +2965,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA400ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3028,8 +2997,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3049,7 +3017,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            HttpMessage message = CreateGet200ModelA400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3088,7 +3056,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            HttpMessage message = CreateGet200ModelA400InvalidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3120,8 +3088,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA400InvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA400InvalidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3141,7 +3108,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA202ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3180,7 +3147,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            HttpMessage message = CreateGet200ModelA202ValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3212,8 +3179,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200ModelA202ValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGet200ModelA202ValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

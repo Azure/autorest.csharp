@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content, options);
+            HttpMessage message = CreateCreateRequest(itemName, content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -101,7 +101,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content, options);
+            HttpMessage message = CreateCreateRequest(itemName, content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -135,8 +135,7 @@ namespace BodyAndPath_LowLevel
 
         /// <param name="itemName"> item name. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateCreateRequest(string itemName, RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -162,7 +161,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -205,7 +204,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -241,8 +240,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="excluded"> Excluded connection Ids. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestOptions options = null)
+        private HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

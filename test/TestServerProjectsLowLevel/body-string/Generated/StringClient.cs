@@ -57,7 +57,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNullRequest(options);
+            HttpMessage message = CreateGetNullRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNullRequest(options);
+            HttpMessage message = CreateGetNullRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -128,8 +128,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNullRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNullRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -150,7 +149,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNullRequest(content, options);
+            HttpMessage message = CreatePutNullRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -190,7 +189,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNullRequest(content, options);
+            HttpMessage message = CreatePutNullRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -223,8 +222,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNullRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNullRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -246,7 +244,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(options);
+            HttpMessage message = CreateGetEmptyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -285,7 +283,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(options);
+            HttpMessage message = CreateGetEmptyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -317,8 +315,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -339,7 +336,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutEmptyRequest(content, options);
+            HttpMessage message = CreatePutEmptyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -379,7 +376,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutEmptyRequest(content, options);
+            HttpMessage message = CreatePutEmptyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -412,8 +409,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutEmptyRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutEmptyRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -435,7 +431,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetMbcsRequest(options);
+            HttpMessage message = CreateGetMbcsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -474,7 +470,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetMbcsRequest(options);
+            HttpMessage message = CreateGetMbcsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -506,8 +502,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetMbcsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetMbcsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -528,7 +523,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutMbcsRequest(content, options);
+            HttpMessage message = CreatePutMbcsRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -568,7 +563,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutMbcsRequest(content, options);
+            HttpMessage message = CreatePutMbcsRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -601,8 +596,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutMbcsRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutMbcsRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -624,7 +618,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetWhitespaceRequest(options);
+            HttpMessage message = CreateGetWhitespaceRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -663,7 +657,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetWhitespaceRequest(options);
+            HttpMessage message = CreateGetWhitespaceRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -695,8 +689,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetWhitespaceRequest(RequestOptions options = null)
+        private HttpMessage CreateGetWhitespaceRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -717,7 +710,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutWhitespaceRequest(content, options);
+            HttpMessage message = CreatePutWhitespaceRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -757,7 +750,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutWhitespaceRequest(content, options);
+            HttpMessage message = CreatePutWhitespaceRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -790,8 +783,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutWhitespaceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutWhitespaceRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -813,7 +805,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNotProvidedRequest(options);
+            HttpMessage message = CreateGetNotProvidedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -852,7 +844,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNotProvidedRequest(options);
+            HttpMessage message = CreateGetNotProvidedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -884,8 +876,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNotProvidedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNotProvidedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -905,7 +896,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBase64EncodedRequest(options);
+            HttpMessage message = CreateGetBase64EncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -944,7 +935,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBase64EncodedRequest(options);
+            HttpMessage message = CreateGetBase64EncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -976,8 +967,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBase64EncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBase64EncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -997,7 +987,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBase64UrlEncodedRequest(options);
+            HttpMessage message = CreateGetBase64UrlEncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1036,7 +1026,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBase64UrlEncodedRequest(options);
+            HttpMessage message = CreateGetBase64UrlEncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1068,8 +1058,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBase64UrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBase64UrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1090,7 +1079,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutBase64UrlEncodedRequest(content, options);
+            HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1130,7 +1119,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutBase64UrlEncodedRequest(content, options);
+            HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1163,8 +1152,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1186,7 +1174,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNullBase64UrlEncodedRequest(options);
+            HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1225,7 +1213,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNullBase64UrlEncodedRequest(options);
+            HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1257,8 +1245,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNullBase64UrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

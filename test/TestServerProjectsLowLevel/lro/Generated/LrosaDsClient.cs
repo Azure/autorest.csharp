@@ -111,7 +111,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry400Request(content, options);
+            HttpMessage message = CreatePutNonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -205,7 +205,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry400Request(content, options);
+            HttpMessage message = CreatePutNonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -239,8 +239,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNonRetry400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNonRetry400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -316,7 +315,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry201Creating400Request(content, options);
+            HttpMessage message = CreatePutNonRetry201Creating400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -410,7 +409,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry201Creating400Request(content, options);
+            HttpMessage message = CreatePutNonRetry201Creating400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -444,8 +443,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNonRetry201Creating400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -521,7 +519,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, options);
+            HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -615,7 +613,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content, options);
+            HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -649,8 +647,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNonRetry201Creating400InvalidJsonRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -726,7 +723,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -819,7 +816,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetry400Request(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -852,8 +849,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRelativeRetry400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -875,7 +871,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteNonRetry400Request(options);
+            HttpMessage message = CreateDeleteNonRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -914,7 +910,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteNonRetry400Request(options);
+            HttpMessage message = CreateDeleteNonRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -946,8 +942,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteNonRetry400Request(RequestOptions options = null)
+        private HttpMessage CreateDeleteNonRetry400Request()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -967,7 +962,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202NonRetry400Request(options);
+            HttpMessage message = CreateDelete202NonRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1006,7 +1001,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202NonRetry400Request(options);
+            HttpMessage message = CreateDelete202NonRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1038,8 +1033,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete202NonRetry400Request(RequestOptions options = null)
+        private HttpMessage CreateDelete202NonRetry400Request()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1059,7 +1053,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1098,7 +1092,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetry400Request(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1130,8 +1124,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRelativeRetry400Request(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRelativeRetry400Request()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1205,7 +1198,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostNonRetry400Request(content, options);
+            HttpMessage message = CreatePostNonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1298,7 +1291,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostNonRetry400Request(content, options);
+            HttpMessage message = CreatePostNonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1331,8 +1324,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostNonRetry400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostNonRetry400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1408,7 +1400,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202NonRetry400Request(content, options);
+            HttpMessage message = CreatePost202NonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1501,7 +1493,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202NonRetry400Request(content, options);
+            HttpMessage message = CreatePost202NonRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1534,8 +1526,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202NonRetry400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202NonRetry400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1611,7 +1602,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1704,7 +1695,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetry400Request(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1737,8 +1728,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRelativeRetry400Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1814,7 +1804,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, options);
+            HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1908,7 +1898,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content, options);
+            HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1942,8 +1932,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutError201NoProvisioningStatePayloadRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2019,7 +2008,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2112,7 +2101,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2145,8 +2134,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRelativeRetryNoStatusRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2222,7 +2210,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2315,7 +2303,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2348,8 +2336,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRelativeRetryNoStatusPayloadRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2371,7 +2358,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete204SucceededRequest(options);
+            HttpMessage message = CreateDelete204SucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2410,7 +2397,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete204SucceededRequest(options);
+            HttpMessage message = CreateDelete204SucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2442,8 +2429,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete204SucceededRequest(RequestOptions options = null)
+        private HttpMessage CreateDelete204SucceededRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2463,7 +2449,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2502,7 +2488,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2534,8 +2520,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRelativeRetryNoStatusRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2609,7 +2594,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202NoLocationRequest(content, options);
+            HttpMessage message = CreatePost202NoLocationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2702,7 +2687,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202NoLocationRequest(content, options);
+            HttpMessage message = CreatePost202NoLocationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2735,8 +2720,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202NoLocationRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202NoLocationRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2812,7 +2796,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2905,7 +2889,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2938,8 +2922,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRelativeRetryNoPayloadRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3015,7 +2998,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePut200InvalidJsonRequest(content, options);
+            HttpMessage message = CreatePut200InvalidJsonRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3109,7 +3092,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePut200InvalidJsonRequest(content, options);
+            HttpMessage message = CreatePut200InvalidJsonRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3143,8 +3126,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200InvalidJsonRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200InvalidJsonRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3220,7 +3202,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3313,7 +3295,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3346,8 +3328,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3423,7 +3404,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3516,7 +3497,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content, options);
+            HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3549,8 +3530,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3572,7 +3552,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(options);
+            HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3611,7 +3591,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202RetryInvalidHeaderRequest(options);
+            HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3643,8 +3623,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete202RetryInvalidHeaderRequest(RequestOptions options = null)
+        private HttpMessage CreateDelete202RetryInvalidHeaderRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3664,7 +3643,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3703,7 +3682,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3735,8 +3714,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRelativeRetryInvalidHeaderRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3756,7 +3734,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3795,7 +3773,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(options);
+            HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3827,8 +3805,7 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -3902,7 +3879,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3995,7 +3972,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -4028,8 +4005,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202RetryInvalidHeaderRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -4105,7 +4081,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -4198,7 +4174,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -4231,8 +4207,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRelativeRetryInvalidHeaderRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -4308,7 +4283,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -4401,7 +4376,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content, options);
+            HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -4434,8 +4409,7 @@ namespace lro_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

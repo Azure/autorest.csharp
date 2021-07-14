@@ -48,7 +48,7 @@ namespace Accessibility_LowLevel_NoAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(content, options);
+            HttpMessage message = CreateOperationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -87,7 +87,7 @@ namespace Accessibility_LowLevel_NoAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(content, options);
+            HttpMessage message = CreateOperationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -120,8 +120,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateOperationRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -142,7 +141,7 @@ namespace Accessibility_LowLevel_NoAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(content, options);
+            HttpMessage message = CreateOperationInternalRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -181,7 +180,7 @@ namespace Accessibility_LowLevel_NoAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(content, options);
+            HttpMessage message = CreateOperationInternalRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -214,8 +213,7 @@ namespace Accessibility_LowLevel_NoAuth
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationInternalRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateOperationInternalRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

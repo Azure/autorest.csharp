@@ -56,7 +56,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
+            HttpMessage message = CreateGetValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -94,7 +94,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
+            HttpMessage message = CreateGetValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -126,8 +126,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

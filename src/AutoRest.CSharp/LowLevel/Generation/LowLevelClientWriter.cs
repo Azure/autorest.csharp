@@ -164,6 +164,8 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
+            writer.WriteXmlDocumentationParameter("options", "The request options.");
+
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -174,8 +176,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             {
                 writer.WriteParameter(parameter);
             }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
+            writer.Line($"{typeof(RequestOptions)} options = null)");
             writer.Line($"#pragma warning restore AZC0002");
         }
 

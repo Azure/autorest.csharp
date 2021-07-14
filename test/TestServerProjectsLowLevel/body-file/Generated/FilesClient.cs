@@ -57,7 +57,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetFileRequest(options);
+            HttpMessage message = CreateGetFileRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetFileRequest(options);
+            HttpMessage message = CreateGetFileRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -128,8 +128,7 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetFileRequest(RequestOptions options = null)
+        private HttpMessage CreateGetFileRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -149,7 +148,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetFileLargeRequest(options);
+            HttpMessage message = CreateGetFileLargeRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -188,7 +187,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetFileLargeRequest(options);
+            HttpMessage message = CreateGetFileLargeRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -220,8 +219,7 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetFileLargeRequest(RequestOptions options = null)
+        private HttpMessage CreateGetFileLargeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -241,7 +239,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyFileRequest(options);
+            HttpMessage message = CreateGetEmptyFileRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -280,7 +278,7 @@ namespace body_file_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyFileRequest(options);
+            HttpMessage message = CreateGetEmptyFileRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -312,8 +310,7 @@ namespace body_file_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyFileRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyFileRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

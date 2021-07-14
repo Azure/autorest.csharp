@@ -57,7 +57,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyErrorRequest(options);
+            HttpMessage message = CreateGetEmptyErrorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyErrorRequest(options);
+            HttpMessage message = CreateGetEmptyErrorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -128,8 +128,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyErrorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyErrorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -149,7 +148,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNoModelErrorRequest(options);
+            HttpMessage message = CreateGetNoModelErrorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -188,7 +187,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNoModelErrorRequest(options);
+            HttpMessage message = CreateGetNoModelErrorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -220,8 +219,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNoModelErrorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNoModelErrorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -241,7 +239,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNoModelEmptyRequest(options);
+            HttpMessage message = CreateGetNoModelEmptyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -280,7 +278,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNoModelEmptyRequest(options);
+            HttpMessage message = CreateGetNoModelEmptyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -312,8 +310,7 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNoModelEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNoModelEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

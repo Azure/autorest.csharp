@@ -59,7 +59,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -100,7 +100,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -134,8 +134,7 @@ namespace media_types_LowLevel
 
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="contentType"> Upload file type. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content, ContentType contentType, RequestOptions options = null)
+        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content, ContentType contentType)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -175,7 +174,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -232,7 +231,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, options);
+            HttpMessage message = CreateAnalyzeBodyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -265,8 +264,7 @@ namespace media_types_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateAnalyzeBodyRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -289,7 +287,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
+            HttpMessage message = CreateContentTypeWithEncodingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -329,7 +327,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
+            HttpMessage message = CreateContentTypeWithEncodingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -362,8 +360,7 @@ namespace media_types_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateContentTypeWithEncodingRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateContentTypeWithEncodingRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

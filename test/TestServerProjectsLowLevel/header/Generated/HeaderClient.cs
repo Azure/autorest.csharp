@@ -58,7 +58,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            HttpMessage message = CreateParamExistingKeyRequest(userAgent);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -98,7 +98,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            HttpMessage message = CreateParamExistingKeyRequest(userAgent);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -131,8 +131,7 @@ namespace header_LowLevel
         }
 
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestOptions options = null)
+        private HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -153,7 +152,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            HttpMessage message = CreateResponseExistingKeyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -192,7 +191,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            HttpMessage message = CreateResponseExistingKeyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -224,8 +223,7 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseExistingKeyRequest(RequestOptions options = null)
+        private HttpMessage CreateResponseExistingKeyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -246,7 +244,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            HttpMessage message = CreateParamProtectedKeyRequest(contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -286,7 +284,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            HttpMessage message = CreateParamProtectedKeyRequest(contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -319,8 +317,7 @@ namespace header_LowLevel
         }
 
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestOptions options = null)
+        private HttpMessage CreateParamProtectedKeyRequest(string contentType)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -340,7 +337,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            HttpMessage message = CreateResponseProtectedKeyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -379,7 +376,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            HttpMessage message = CreateResponseProtectedKeyRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -411,8 +408,7 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseProtectedKeyRequest(RequestOptions options = null)
+        private HttpMessage CreateResponseProtectedKeyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -434,7 +430,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            HttpMessage message = CreateParamIntegerRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -475,7 +471,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            HttpMessage message = CreateParamIntegerRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -509,8 +505,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestOptions options = null)
+        private HttpMessage CreateParamIntegerRequest(string scenario, int value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -533,7 +528,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            HttpMessage message = CreateResponseIntegerRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -573,7 +568,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            HttpMessage message = CreateResponseIntegerRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -606,8 +601,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseIntegerRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseIntegerRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -630,7 +624,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            HttpMessage message = CreateParamLongRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -671,7 +665,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            HttpMessage message = CreateParamLongRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -705,8 +699,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamLongRequest(string scenario, long value, RequestOptions options = null)
+        private HttpMessage CreateParamLongRequest(string scenario, long value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -729,7 +722,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            HttpMessage message = CreateResponseLongRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -769,7 +762,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            HttpMessage message = CreateResponseLongRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -802,8 +795,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseLongRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseLongRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -826,7 +818,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            HttpMessage message = CreateParamFloatRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -867,7 +859,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            HttpMessage message = CreateParamFloatRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -901,8 +893,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamFloatRequest(string scenario, float value, RequestOptions options = null)
+        private HttpMessage CreateParamFloatRequest(string scenario, float value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -925,7 +916,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            HttpMessage message = CreateResponseFloatRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -965,7 +956,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            HttpMessage message = CreateResponseFloatRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -998,8 +989,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseFloatRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseFloatRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1022,7 +1012,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            HttpMessage message = CreateParamDoubleRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1063,7 +1053,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            HttpMessage message = CreateParamDoubleRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1097,8 +1087,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestOptions options = null)
+        private HttpMessage CreateParamDoubleRequest(string scenario, double value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1121,7 +1110,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            HttpMessage message = CreateResponseDoubleRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1161,7 +1150,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            HttpMessage message = CreateResponseDoubleRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1194,8 +1183,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseDoubleRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseDoubleRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1218,7 +1206,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            HttpMessage message = CreateParamBoolRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1259,7 +1247,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            HttpMessage message = CreateParamBoolRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1293,8 +1281,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestOptions options = null)
+        private HttpMessage CreateParamBoolRequest(string scenario, bool value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1317,7 +1304,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            HttpMessage message = CreateResponseBoolRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1357,7 +1344,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            HttpMessage message = CreateResponseBoolRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1390,8 +1377,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseBoolRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseBoolRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1414,7 +1400,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            HttpMessage message = CreateParamStringRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1455,7 +1441,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            HttpMessage message = CreateParamStringRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1489,8 +1475,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamStringRequest(string scenario, string value = null, RequestOptions options = null)
+        private HttpMessage CreateParamStringRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1516,7 +1501,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            HttpMessage message = CreateResponseStringRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1556,7 +1541,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            HttpMessage message = CreateResponseStringRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1589,8 +1574,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseStringRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseStringRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1613,7 +1597,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            HttpMessage message = CreateParamDateRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1654,7 +1638,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            HttpMessage message = CreateParamDateRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1688,8 +1672,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestOptions options = null)
+        private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1712,7 +1695,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            HttpMessage message = CreateResponseDateRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1752,7 +1735,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            HttpMessage message = CreateResponseDateRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1785,8 +1768,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseDateRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseDateRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1809,7 +1791,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            HttpMessage message = CreateParamDatetimeRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1850,7 +1832,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            HttpMessage message = CreateParamDatetimeRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1884,8 +1866,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestOptions options = null)
+        private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1908,7 +1889,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            HttpMessage message = CreateResponseDatetimeRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1948,7 +1929,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            HttpMessage message = CreateResponseDatetimeRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1981,8 +1962,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseDatetimeRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2005,7 +1985,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2046,7 +2026,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2080,8 +2060,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
+        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2107,7 +2086,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2147,7 +2126,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2180,8 +2159,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2204,7 +2182,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            HttpMessage message = CreateParamDurationRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2245,7 +2223,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            HttpMessage message = CreateParamDurationRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2279,8 +2257,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestOptions options = null)
+        private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2303,7 +2280,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            HttpMessage message = CreateResponseDurationRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2343,7 +2320,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            HttpMessage message = CreateResponseDurationRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2376,8 +2353,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseDurationRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseDurationRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2400,7 +2376,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            HttpMessage message = CreateParamByteRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2441,7 +2417,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            HttpMessage message = CreateParamByteRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2475,8 +2451,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestOptions options = null)
+        private HttpMessage CreateParamByteRequest(string scenario, byte[] value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2499,7 +2474,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            HttpMessage message = CreateResponseByteRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2539,7 +2514,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            HttpMessage message = CreateResponseByteRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2572,8 +2547,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseByteRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseByteRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2596,7 +2570,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            HttpMessage message = CreateParamEnumRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2637,7 +2611,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            HttpMessage message = CreateParamEnumRequest(scenario, value);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2671,8 +2645,7 @@ namespace header_LowLevel
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateParamEnumRequest(string scenario, string value = null, RequestOptions options = null)
+        private HttpMessage CreateParamEnumRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2698,7 +2671,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            HttpMessage message = CreateResponseEnumRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2738,7 +2711,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            HttpMessage message = CreateResponseEnumRequest(scenario);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2771,8 +2744,7 @@ namespace header_LowLevel
         }
 
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateResponseEnumRequest(string scenario, RequestOptions options = null)
+        private HttpMessage CreateResponseEnumRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2793,7 +2765,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(options);
+            HttpMessage message = CreateCustomRequestIdRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2832,7 +2804,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(options);
+            HttpMessage message = CreateCustomRequestIdRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2864,8 +2836,7 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCustomRequestIdRequest(RequestOptions options = null)
+        private HttpMessage CreateCustomRequestIdRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

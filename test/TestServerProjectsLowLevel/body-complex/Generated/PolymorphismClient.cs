@@ -57,7 +57,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
+            HttpMessage message = CreateGetValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
+            HttpMessage message = CreateGetValidRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -128,8 +128,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -185,7 +184,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutValidRequest(content, options);
+            HttpMessage message = CreatePutValidRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -260,7 +259,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutValidRequest(content, options);
+            HttpMessage message = CreatePutValidRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -293,8 +292,7 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutValidRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutValidRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -316,7 +314,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDotSyntaxRequest(options);
+            HttpMessage message = CreateGetDotSyntaxRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -355,7 +353,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDotSyntaxRequest(options);
+            HttpMessage message = CreateGetDotSyntaxRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -387,8 +385,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetDotSyntaxRequest(RequestOptions options = null)
+        private HttpMessage CreateGetDotSyntaxRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -408,7 +405,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComposedWithDiscriminatorRequest(options);
+            HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -447,7 +444,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComposedWithDiscriminatorRequest(options);
+            HttpMessage message = CreateGetComposedWithDiscriminatorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -479,8 +476,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetComposedWithDiscriminatorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetComposedWithDiscriminatorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -500,7 +496,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(options);
+            HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -539,7 +535,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(options);
+            HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -571,8 +567,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetComposedWithoutDiscriminatorRequest(RequestOptions options = null)
+        private HttpMessage CreateGetComposedWithoutDiscriminatorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -592,7 +587,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComplicatedRequest(options);
+            HttpMessage message = CreateGetComplicatedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -631,7 +626,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetComplicatedRequest(options);
+            HttpMessage message = CreateGetComplicatedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -663,8 +658,7 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetComplicatedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetComplicatedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -765,7 +759,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutComplicatedRequest(content, options);
+            HttpMessage message = CreatePutComplicatedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -885,7 +879,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutComplicatedRequest(content, options);
+            HttpMessage message = CreatePutComplicatedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -918,8 +912,7 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutComplicatedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutComplicatedRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1022,7 +1015,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutMissingDiscriminatorRequest(content, options);
+            HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1142,7 +1135,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutMissingDiscriminatorRequest(content, options);
+            HttpMessage message = CreatePutMissingDiscriminatorRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1175,8 +1168,7 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutMissingDiscriminatorRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1234,7 +1226,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutValidMissingRequiredRequest(content, options);
+            HttpMessage message = CreatePutValidMissingRequiredRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1309,7 +1301,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutValidMissingRequiredRequest(content, options);
+            HttpMessage message = CreatePutValidMissingRequiredRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1342,8 +1334,7 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutValidMissingRequiredRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

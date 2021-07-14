@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParamaters);
                     var accessibility = operation.Accessibility ?? "public";
-                    RestClientMethod method = Builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
+                    RestClientMethod method = Builder.BuildMethod(operation, httpRequest, requestParameters, null, accessibility);
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
@@ -110,11 +110,6 @@ namespace AutoRest.CSharp.Output.Models
                             }
                         }
                     }
-
-                    // Inject the RequestOptions
-                    CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
-                    Parameter options = new Parameter ("options", "The request options", requestType, new Constant(null, requestType), true);
-                    parameters.Insert (parameters.Count, options);
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, requestHeaders, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");

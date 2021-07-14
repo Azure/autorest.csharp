@@ -57,7 +57,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNotExpandableRequest(options);
+            HttpMessage message = CreateGetNotExpandableRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNotExpandableRequest(options);
+            HttpMessage message = CreateGetNotExpandableRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -128,8 +128,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNotExpandableRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNotExpandableRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -150,7 +149,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNotExpandableRequest(content, options);
+            HttpMessage message = CreatePutNotExpandableRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -190,7 +189,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutNotExpandableRequest(content, options);
+            HttpMessage message = CreatePutNotExpandableRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -223,8 +222,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNotExpandableRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNotExpandableRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -246,7 +244,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetReferencedRequest(options);
+            HttpMessage message = CreateGetReferencedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -285,7 +283,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetReferencedRequest(options);
+            HttpMessage message = CreateGetReferencedRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -317,8 +315,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetReferencedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetReferencedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -339,7 +336,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutReferencedRequest(content, options);
+            HttpMessage message = CreatePutReferencedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -379,7 +376,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutReferencedRequest(content, options);
+            HttpMessage message = CreatePutReferencedRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -412,8 +409,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutReferencedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutReferencedRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -435,7 +431,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetReferencedConstantRequest(options);
+            HttpMessage message = CreateGetReferencedConstantRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -474,7 +470,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetReferencedConstantRequest(options);
+            HttpMessage message = CreateGetReferencedConstantRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -506,8 +502,7 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetReferencedConstantRequest(RequestOptions options = null)
+        private HttpMessage CreateGetReferencedConstantRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -551,7 +546,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutReferencedConstantRequest(content, options);
+            HttpMessage message = CreatePutReferencedConstantRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -614,7 +609,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutReferencedConstantRequest(content, options);
+            HttpMessage message = CreatePutReferencedConstantRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -647,8 +642,7 @@ namespace body_string_LowLevel
         }
 
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutReferencedConstantRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutReferencedConstantRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

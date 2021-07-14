@@ -71,7 +71,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -114,7 +114,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -150,8 +150,7 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -193,7 +192,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -236,7 +235,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -272,8 +271,7 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -315,7 +313,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -358,7 +356,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -394,8 +392,7 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -437,7 +434,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -480,7 +477,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, options);
+            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -516,8 +513,7 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

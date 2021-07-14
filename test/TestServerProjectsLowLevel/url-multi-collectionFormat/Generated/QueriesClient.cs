@@ -59,7 +59,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -99,7 +99,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -132,8 +132,7 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -158,7 +157,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -198,7 +197,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -231,8 +230,7 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -257,7 +255,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -297,7 +295,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, options);
+            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -330,8 +328,7 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

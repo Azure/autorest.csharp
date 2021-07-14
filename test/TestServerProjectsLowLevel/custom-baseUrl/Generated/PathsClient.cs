@@ -61,7 +61,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            HttpMessage message = CreateGetEmptyRequest(accountName);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -101,7 +101,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            HttpMessage message = CreateGetEmptyRequest(accountName);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -134,8 +134,7 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyRequest(string accountName, RequestOptions options = null)
+        private HttpMessage CreateGetEmptyRequest(string accountName)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
