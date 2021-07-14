@@ -16,7 +16,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "Parent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Parent(ResourceOperationsBase options, ParentData resource) : base(options, resource.Id)
+        internal Parent(OperationsBase options, ParentData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

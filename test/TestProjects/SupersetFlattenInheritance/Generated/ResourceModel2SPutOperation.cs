@@ -23,7 +23,7 @@ namespace SupersetFlattenInheritance
         {
         }
 
-        internal ResourceModel2SPutOperation(ResourceOperationsBase operationsBase, Response<ResourceModel2Data> response)
+        internal ResourceModel2SPutOperation(OperationsBase operationsBase, Response<ResourceModel2Data> response)
         {
             _operation = new OperationOrResponseInternals<ResourceModel2>(Response.FromValue(new ResourceModel2(operationsBase, response.Value), response.GetRawResponse()));
         }

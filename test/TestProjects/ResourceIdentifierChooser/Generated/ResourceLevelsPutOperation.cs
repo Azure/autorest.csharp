@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal ResourceLevelsPutOperation(ResourceOperationsBase operationsBase, Response<ResourceLevelData> response)
+        internal ResourceLevelsPutOperation(OperationsBase operationsBase, Response<ResourceLevelData> response)
         {
             _operation = new OperationOrResponseInternals<ResourceLevel>(Response.FromValue(new ResourceLevel(operationsBase, response.Value), response.GetRawResponse()));
         }

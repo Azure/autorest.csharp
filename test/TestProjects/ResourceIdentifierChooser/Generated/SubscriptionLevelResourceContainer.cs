@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of SubscriptionLevelResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubscriptionLevelResourceContainer(ResourceOperationsBase parent) : base(parent)
+        internal SubscriptionLevelResourceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

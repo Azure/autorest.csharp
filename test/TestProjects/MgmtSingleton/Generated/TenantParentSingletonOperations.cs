@@ -21,7 +21,7 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentSingletonOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal TenantParentSingletonOperations(ResourceOperationsBase options) : base(options)
+        protected internal TenantParentSingletonOperations(OperationsBase options) : base(options)
         {
         }
 

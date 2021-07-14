@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of FileShareContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FileShareContainer(ResourceOperationsBase parent) : base(parent)
+        internal FileShareContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

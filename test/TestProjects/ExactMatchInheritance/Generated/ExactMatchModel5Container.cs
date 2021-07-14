@@ -25,7 +25,7 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of ExactMatchModel5Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ExactMatchModel5Container(ResourceOperationsBase parent) : base(parent)
+        internal ExactMatchModel5Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

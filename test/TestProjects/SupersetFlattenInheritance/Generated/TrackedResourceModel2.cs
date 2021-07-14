@@ -15,7 +15,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal TrackedResourceModel2(ResourceOperationsBase options, TrackedResourceModel2Data resource) : base(options, resource.Id)
+        internal TrackedResourceModel2(OperationsBase options, TrackedResourceModel2Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

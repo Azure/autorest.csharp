@@ -30,7 +30,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref="TenantLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected internal TenantLevelResourceOperations(OperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, BaseUri);

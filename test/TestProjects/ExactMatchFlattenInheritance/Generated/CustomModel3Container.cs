@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of CustomModel3Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal CustomModel3Container(ResourceOperationsBase parent) : base(parent)
+        internal CustomModel3Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

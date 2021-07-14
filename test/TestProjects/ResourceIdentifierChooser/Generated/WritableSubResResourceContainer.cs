@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of WritableSubResResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal WritableSubResResourceContainer(ResourceOperationsBase parent) : base(parent)
+        internal WritableSubResResourceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

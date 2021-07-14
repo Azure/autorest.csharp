@@ -24,7 +24,7 @@ namespace Pagination
         {
         }
 
-        internal PageSizeInt64ModelsPutOperation(ResourceOperationsBase operationsBase, Response<PageSizeInt64ModelData> response)
+        internal PageSizeInt64ModelsPutOperation(OperationsBase operationsBase, Response<PageSizeInt64ModelData> response)
         {
             _operation = new OperationOrResponseInternals<PageSizeInt64Model>(Response.FromValue(new PageSizeInt64Model(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
         }
 
-        internal SubscriptionParentSingletonCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<SubscriptionParentSingletonData> response)
+        internal SubscriptionParentSingletonCreateOrUpdateOperation(OperationsBase operationsBase, Response<SubscriptionParentSingletonData> response)
         {
             _operation = new OperationOrResponseInternals<SubscriptionParentSingleton>(Response.FromValue(new SubscriptionParentSingleton(operationsBase, response.Value), response.GetRawResponse()));
         }

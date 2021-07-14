@@ -24,7 +24,7 @@ namespace Pagination
         {
         }
 
-        internal PageSizeFloatModelsPutOperation(ResourceOperationsBase operationsBase, Response<PageSizeFloatModelData> response)
+        internal PageSizeFloatModelsPutOperation(OperationsBase operationsBase, Response<PageSizeFloatModelData> response)
         {
             _operation = new OperationOrResponseInternals<PageSizeFloatModel>(Response.FromValue(new PageSizeFloatModel(operationsBase, response.Value), response.GetRawResponse()));
         }
