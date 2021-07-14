@@ -245,6 +245,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
             }
 
+            // 1. Listing myself at parent scope -> on the container named list
+            // 2. Listing myself at accesstor scope -> extension method if accestor is not in this RP, or follow #3
+            // 3. Listing children (might be resource or not) -> on the operations
+
             // write rest of the methods
             foreach (var clientMethod in resourceOperation.Methods)
             {
