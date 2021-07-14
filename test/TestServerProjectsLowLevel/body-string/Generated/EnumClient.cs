@@ -221,7 +221,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutNotExpandableRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -408,7 +407,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutReferencedRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -641,7 +639,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutReferencedConstantRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

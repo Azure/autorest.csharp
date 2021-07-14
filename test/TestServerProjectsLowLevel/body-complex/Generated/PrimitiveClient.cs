@@ -267,7 +267,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutIntRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -500,7 +499,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutLongRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -733,7 +731,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutFloatRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -966,7 +963,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutDoubleRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1199,7 +1195,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutBoolRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1444,7 +1439,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutStringRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1677,7 +1671,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutDateRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1910,7 +1903,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutDateTimeRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -2143,7 +2135,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -2364,7 +2355,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutDurationRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -2585,7 +2575,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutByteRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

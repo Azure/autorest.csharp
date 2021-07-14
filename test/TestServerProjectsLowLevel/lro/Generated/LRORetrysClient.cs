@@ -238,7 +238,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -440,7 +439,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutAsyncRelativeRetrySucceededRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -917,7 +915,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost202Retry200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1119,7 +1116,6 @@ namespace lro_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePostAsyncRelativeRetrySucceededRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

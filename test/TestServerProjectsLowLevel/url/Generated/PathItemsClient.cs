@@ -146,10 +146,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         private HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -267,10 +263,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
-        /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
         private HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -388,10 +380,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
-        /// <param name="localStringQuery"> should contain null value. </param>
         private HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -509,10 +497,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="pathItemStringPath"> A string value &apos;pathItemStringPath&apos; that appears in the path. </param>
-        /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
-        /// <param name="pathItemStringQuery"> should contain value null. </param>
-        /// <param name="localStringQuery"> should contain value null. </param>
         private HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
         {
             var message = Pipeline.CreateMessage();

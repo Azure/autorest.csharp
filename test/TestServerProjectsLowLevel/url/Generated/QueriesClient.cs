@@ -315,7 +315,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="boolQuery"> null boolean value. </param>
         private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -597,7 +596,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="intQuery"> null integer value. </param>
         private HttpMessage CreateGetIntNullRequest(int? intQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -879,7 +877,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="longQuery"> null 64 bit integer value. </param>
         private HttpMessage CreateGetLongNullRequest(long? longQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -1161,7 +1158,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="floatQuery"> null numeric value. </param>
         private HttpMessage CreateFloatNullRequest(float? floatQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -1443,7 +1439,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="doubleQuery"> null numeric value. </param>
         private HttpMessage CreateDoubleNullRequest(double? doubleQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -1817,7 +1812,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="stringQuery"> null string value. </param>
         private HttpMessage CreateStringNullRequest(string stringQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -1915,7 +1909,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         private HttpMessage CreateEnumValidRequest(string enumQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2013,7 +2006,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="enumQuery"> null string value. </param>
         private HttpMessage CreateEnumNullRequest(string enumQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2111,7 +2103,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2301,7 +2292,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         private HttpMessage CreateByteNullRequest(byte[] byteQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2491,7 +2481,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2681,7 +2670,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2779,7 +2767,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2877,7 +2864,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2975,7 +2961,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -3073,7 +3058,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
         private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -3171,7 +3155,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -3269,7 +3252,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -3367,7 +3349,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();

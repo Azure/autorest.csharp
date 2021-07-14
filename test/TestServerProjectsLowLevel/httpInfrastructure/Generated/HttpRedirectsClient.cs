@@ -504,7 +504,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut301Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -786,7 +785,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch302Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -884,7 +882,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost303Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1261,7 +1258,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut307Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1359,7 +1355,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch307Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1457,7 +1452,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost307Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1555,7 +1549,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateDelete307Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

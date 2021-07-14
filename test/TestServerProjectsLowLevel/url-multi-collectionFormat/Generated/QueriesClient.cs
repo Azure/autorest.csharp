@@ -131,7 +131,6 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         private HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -229,7 +228,6 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         private HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
@@ -327,7 +325,6 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         private HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();

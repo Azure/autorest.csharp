@@ -221,7 +221,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut500Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -317,7 +316,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch500Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -595,7 +593,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost503Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -691,7 +688,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateDelete503Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -787,7 +783,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut504Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -883,7 +878,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch504Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

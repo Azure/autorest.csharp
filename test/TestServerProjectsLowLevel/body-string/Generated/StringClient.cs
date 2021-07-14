@@ -221,7 +221,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutNullRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -408,7 +407,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutEmptyRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -595,7 +593,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutMbcsRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -782,7 +779,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutWhitespaceRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1151,7 +1147,6 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

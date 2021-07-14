@@ -1419,7 +1419,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="stringPath"> null string value. </param>
         private HttpMessage CreateStringNullRequest(string stringPath)
         {
             var message = Pipeline.CreateMessage();
@@ -1514,7 +1513,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="enumPath"> send the value green. </param>
         private HttpMessage CreateEnumValidRequest(string enumPath)
         {
             var message = Pipeline.CreateMessage();
@@ -1609,7 +1607,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="enumPath"> send null should throw. </param>
         private HttpMessage CreateEnumNullRequest(string enumPath)
         {
             var message = Pipeline.CreateMessage();
@@ -1704,7 +1701,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         private HttpMessage CreateByteMultiByteRequest(byte[] bytePath)
         {
             var message = Pipeline.CreateMessage();
@@ -1891,7 +1887,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="bytePath"> null as byte array (should throw). </param>
         private HttpMessage CreateByteNullRequest(byte[] bytePath)
         {
             var message = Pipeline.CreateMessage();
@@ -2078,7 +2073,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="datePath"> null as date (should throw). </param>
         private HttpMessage CreateDateNullRequest(DateTimeOffset datePath)
         {
             var message = Pipeline.CreateMessage();
@@ -2265,7 +2259,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="dateTimePath"> null as date-time. </param>
         private HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
         {
             var message = Pipeline.CreateMessage();
@@ -2360,7 +2353,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="base64UrlPath"> base64url encoded value. </param>
         private HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath)
         {
             var message = Pipeline.CreateMessage();
@@ -2455,7 +2447,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         private HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
         {
             var message = Pipeline.CreateMessage();
@@ -2550,7 +2541,6 @@ namespace url_LowLevel
             }
         }
 
-        /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         private HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
         {
             var message = Pipeline.CreateMessage();

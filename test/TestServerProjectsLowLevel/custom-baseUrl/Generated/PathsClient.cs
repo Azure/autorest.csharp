@@ -133,7 +133,6 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        /// <param name="accountName"> Account Name. </param>
         private HttpMessage CreateGetEmptyRequest(string accountName)
         {
             var message = Pipeline.CreateMessage();

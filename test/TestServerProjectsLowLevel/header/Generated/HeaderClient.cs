@@ -130,7 +130,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
         private HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
             var message = Pipeline.CreateMessage();
@@ -316,7 +315,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
         private HttpMessage CreateParamProtectedKeyRequest(string contentType)
         {
             var message = Pipeline.CreateMessage();
@@ -503,8 +501,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 1 or -2. </param>
         private HttpMessage CreateParamIntegerRequest(string scenario, int value)
         {
             var message = Pipeline.CreateMessage();
@@ -600,7 +596,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         private HttpMessage CreateResponseIntegerRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -697,8 +692,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 105 or -2. </param>
         private HttpMessage CreateParamLongRequest(string scenario, long value)
         {
             var message = Pipeline.CreateMessage();
@@ -794,7 +787,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         private HttpMessage CreateResponseLongRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -891,8 +883,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
         private HttpMessage CreateParamFloatRequest(string scenario, float value)
         {
             var message = Pipeline.CreateMessage();
@@ -988,7 +978,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         private HttpMessage CreateResponseFloatRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -1085,8 +1074,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
         private HttpMessage CreateParamDoubleRequest(string scenario, double value)
         {
             var message = Pipeline.CreateMessage();
@@ -1182,7 +1169,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         private HttpMessage CreateResponseDoubleRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -1279,8 +1265,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="value"> Send a post request with header values true or false. </param>
         private HttpMessage CreateParamBoolRequest(string scenario, bool value)
         {
             var message = Pipeline.CreateMessage();
@@ -1376,7 +1360,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         private HttpMessage CreateResponseBoolRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -1473,8 +1456,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
         private HttpMessage CreateParamStringRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
@@ -1573,7 +1554,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         private HttpMessage CreateResponseStringRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -1670,8 +1650,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
         private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
@@ -1767,7 +1745,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         private HttpMessage CreateResponseDateRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -1864,8 +1841,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
         private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
@@ -1961,7 +1936,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         private HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -2058,8 +2032,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
         private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2158,7 +2130,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -2255,8 +2226,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
         private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
         {
             var message = Pipeline.CreateMessage();
@@ -2352,7 +2321,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         private HttpMessage CreateResponseDurationRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -2449,8 +2417,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
         private HttpMessage CreateParamByteRequest(string scenario, byte[] value)
         {
             var message = Pipeline.CreateMessage();
@@ -2546,7 +2512,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         private HttpMessage CreateResponseByteRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
@@ -2643,8 +2608,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
         private HttpMessage CreateParamEnumRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
@@ -2743,7 +2706,6 @@ namespace header_LowLevel
             }
         }
 
-        /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         private HttpMessage CreateResponseEnumRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();

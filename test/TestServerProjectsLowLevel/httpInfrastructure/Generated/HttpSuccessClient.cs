@@ -403,7 +403,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -499,7 +498,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -595,7 +593,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -691,7 +688,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateDelete200Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -787,7 +783,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut201Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -883,7 +878,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost201Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -979,7 +973,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut202Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1075,7 +1068,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch202Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1171,7 +1163,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost202Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1267,7 +1258,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateDelete202Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1454,7 +1444,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePut204Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1550,7 +1539,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePatch204Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1646,7 +1634,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePost204Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -1742,7 +1729,6 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateDelete204Request(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

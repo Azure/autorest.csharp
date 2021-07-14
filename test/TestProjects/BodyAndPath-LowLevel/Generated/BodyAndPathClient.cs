@@ -133,8 +133,6 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <param name="itemName"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateCreateRequest(string itemName, RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -236,10 +234,6 @@ namespace BodyAndPath_LowLevel
             }
         }
 
-        /// <param name="itemNameStream"> item name. </param>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="excluded"> Excluded connection Ids. </param>
         private HttpMessage CreateCreateStreamRequest(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null)
         {
             var message = Pipeline.CreateMessage();

@@ -119,7 +119,6 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateOperationRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -212,7 +211,6 @@ namespace Accessibility_LowLevel_NoAuth
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreateOperationInternalRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();

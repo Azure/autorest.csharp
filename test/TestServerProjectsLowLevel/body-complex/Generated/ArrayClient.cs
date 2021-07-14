@@ -255,7 +255,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutValidRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
@@ -476,7 +475,6 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <param name="content"> The content to send as the body of the request. </param>
         private HttpMessage CreatePutEmptyRequest(RequestContent content)
         {
             var message = Pipeline.CreateMessage();
