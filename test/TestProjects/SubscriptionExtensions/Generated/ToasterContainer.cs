@@ -26,7 +26,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Initializes a new instance of ToasterContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ToasterContainer(ResourceOperationsBase parent) : base(parent)
+        internal ToasterContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

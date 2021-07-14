@@ -25,7 +25,7 @@ namespace MgmtListOnly
         {
         }
 
-        internal FakesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<FakeData> response)
+        internal FakesCreateOrUpdateOperation(OperationsBase operationsBase, Response<FakeData> response)
         {
             _operation = new OperationOrResponseInternals<Fake>(Response.FromValue(new Fake(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -15,7 +15,7 @@ namespace MgmtPropertyChooser
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachine"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachine(ResourceOperationsBase options, VirtualMachineData resource) : base(options, resource.Id)
+        internal VirtualMachine(OperationsBase options, VirtualMachineData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

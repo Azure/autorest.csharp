@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of ObjectReplicationPolicyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ObjectReplicationPolicyContainer(ResourceOperationsBase parent) : base(parent)
+        internal ObjectReplicationPolicyContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

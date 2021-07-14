@@ -27,7 +27,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Initializes a new instance of SubParentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubParentContainer(ResourceOperationsBase parent) : base(parent)
+        internal SubParentContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

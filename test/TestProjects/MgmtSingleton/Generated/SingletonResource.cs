@@ -15,7 +15,7 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonResource(ResourceOperationsBase options, SingletonResourceData resource) : base(options)
+        internal SingletonResource(OperationsBase options, SingletonResourceData resource) : base(options)
         {
             Data = resource;
         }

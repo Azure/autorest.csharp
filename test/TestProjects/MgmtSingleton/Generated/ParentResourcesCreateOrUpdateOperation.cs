@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
         }
 
-        internal ParentResourcesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<ParentResourceData> response)
+        internal ParentResourcesCreateOrUpdateOperation(OperationsBase operationsBase, Response<ParentResourceData> response)
         {
             _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(operationsBase, response.Value), response.GetRawResponse()));
         }

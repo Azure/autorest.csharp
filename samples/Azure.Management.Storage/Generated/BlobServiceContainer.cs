@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of BlobServiceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BlobServiceContainer(ResourceOperationsBase parent) : base(parent)
+        internal BlobServiceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

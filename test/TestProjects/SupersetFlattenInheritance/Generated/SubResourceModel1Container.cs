@@ -25,7 +25,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of SubResourceModel1Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubResourceModel1Container(ResourceOperationsBase parent) : base(parent)
+        internal SubResourceModel1Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

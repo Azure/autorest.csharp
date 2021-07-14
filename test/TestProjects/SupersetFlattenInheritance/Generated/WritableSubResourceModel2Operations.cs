@@ -30,7 +30,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal WritableSubResourceModel2Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal WritableSubResourceModel2Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new WritableSubResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

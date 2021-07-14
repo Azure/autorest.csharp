@@ -16,7 +16,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref = "Toaster"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Toaster(ResourceOperationsBase options, ToasterData resource) : base(options, resource.Id)
+        internal Toaster(OperationsBase options, ToasterData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

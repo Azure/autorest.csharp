@@ -16,7 +16,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "EncryptionScope"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal EncryptionScope(ResourceOperationsBase options, EncryptionScopeData resource) : base(options, resource.Id)
+        internal EncryptionScope(OperationsBase options, EncryptionScopeData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

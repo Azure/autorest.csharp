@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 writer.Line();
-                writer.Line($"private readonly {typeof(ResourceOperationsBase)} {_operationBaseField};");
+                writer.Line($"private readonly {typeof(OperationsBase)} {_operationBaseField};");
             }
         }
 
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                writer.Append($"internal {cs.Name}({typeof(ResourceOperationsBase)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+                writer.Append($"internal {cs.Name}({typeof(OperationsBase)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)
                 {

@@ -30,7 +30,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal FileServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal FileServiceOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

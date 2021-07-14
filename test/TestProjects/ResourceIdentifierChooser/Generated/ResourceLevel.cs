@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "ResourceLevel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ResourceLevel(ResourceOperationsBase options, ResourceLevelData resource) : base(options, resource.Id)
+        internal ResourceLevel(OperationsBase options, ResourceLevelData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

@@ -24,7 +24,7 @@ namespace MgmtParent
         {
         }
 
-        internal VirtualMachineExtensionImagesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<VirtualMachineExtensionImageData> response)
+        internal VirtualMachineExtensionImagesCreateOrUpdateOperation(OperationsBase operationsBase, Response<VirtualMachineExtensionImageData> response)
         {
             _operation = new OperationOrResponseInternals<VirtualMachineExtensionImage>(Response.FromValue(new VirtualMachineExtensionImage(operationsBase, response.Value), response.GetRawResponse()));
         }

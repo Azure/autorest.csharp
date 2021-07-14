@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal ModelDatasPutOperation(ResourceOperationsBase operationsBase, Response<ModelDataData> response)
+        internal ModelDatasPutOperation(OperationsBase operationsBase, Response<ModelDataData> response)
         {
             _operation = new OperationOrResponseInternals<ModelData>(Response.FromValue(new ModelData(operationsBase, response.Value), response.GetRawResponse()));
         }

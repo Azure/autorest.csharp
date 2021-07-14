@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of EncryptionScopeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal EncryptionScopeContainer(ResourceOperationsBase parent) : base(parent)
+        internal EncryptionScopeContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -26,7 +26,7 @@ namespace MgmtOperations
 
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AvailabilitySetGrandChildContainer(ResourceOperationsBase parent) : base(parent)
+        internal AvailabilitySetGrandChildContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
