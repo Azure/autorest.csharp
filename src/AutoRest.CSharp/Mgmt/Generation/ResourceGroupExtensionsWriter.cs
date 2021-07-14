@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected override string Description => "A class to add extension methods to ResourceGroup.";
 
-        protected override string ExtensionClassType => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups];
+        protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups];
 
         protected override string ExtensionOperationVariableName => "resourceGroup";
 
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Namespace(context.DefaultNamespace))
             {
                 writer.WriteXmlDocumentationSummary(Description);
-                using (writer.Scope($"{Accessibility} static partial class {ExtensionClassType}"))
+                using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
