@@ -537,7 +537,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, bool isVirtual = false)
+        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, 
+            bool isVirtual = false, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -548,7 +549,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             foreach (var parameter in passThruParameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
@@ -560,7 +561,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(methodName ?? clientMethod.Name, async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -609,7 +610,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, bool isVirtual = false)
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, 
+            bool isVirtual = false, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -631,7 +633,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{methodName ?? clientMethod.Name}", async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
