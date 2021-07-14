@@ -36,7 +36,9 @@ namespace ResourceIdentifierChooser
             _restClient = new ResourceLevelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Network/ResourceLevels";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

@@ -36,7 +36,9 @@ namespace Azure.ResourceManager.Sample
             _restClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

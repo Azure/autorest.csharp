@@ -36,7 +36,9 @@ namespace SupersetInheritance
             _restClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel4s";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

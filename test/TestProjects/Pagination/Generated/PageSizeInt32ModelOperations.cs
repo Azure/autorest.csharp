@@ -36,7 +36,9 @@ namespace Pagination
             _restClient = new PageSizeInt32ModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeInt32Model";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

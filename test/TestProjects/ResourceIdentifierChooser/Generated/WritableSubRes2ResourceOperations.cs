@@ -36,7 +36,9 @@ namespace ResourceIdentifierChooser
             _restClient = new WritableSubRes2ResourcesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/WritableSubRes2Resources";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
