@@ -7,7 +7,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarContainer", "StartDoSomething", "BarsDoSomethingOperation")]
+        [TestCase("BarContainer", "StartCreateOrUpdate", "BarsDoSomethingOperation")]
         [TestCase("FakeContainer", "StartCreateOrUpdate", "FakesCreateOrUpdateOperation")]
         public void ValidateLongRunningOperationFunctionInContainer(string className, string functionName, string returnTypeName)
         {
