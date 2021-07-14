@@ -122,6 +122,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected internal string VirtualKeyword(bool isVirtual)
+        {
+            return isVirtual ? "virtual" : string.Empty;
+        }
+
         protected internal string AsyncKeyword(bool async)
         {
             return async ? "async" : string.Empty;
@@ -532,7 +537,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, bool isVirtual = false)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -555,7 +560,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -604,7 +609,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, bool isVirtual = false)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -626,7 +631,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
