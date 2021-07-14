@@ -45,7 +45,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtScopeAsync(Id.Parent.Name, Id.Parent.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtScopeAsync(Id.Parent.Parent, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,151 +62,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtScope(Id.Parent.Name, Id.Parent.Parent, Id.Name, cancellationToken);
+                var response = _restClient.GetAtScope(Id.Parent.Parent, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DeploymentOperationData>> GetAtTenantScopeAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtTenantScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAtTenantScopeAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperationData> GetAtTenantScope(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtTenantScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetAtTenantScope(Id.Parent.Name, Id.Name, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DeploymentOperationData>> GetAtManagementGroupScopeAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAtManagementGroupScopeAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperationData> GetAtManagementGroupScope(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetAtManagementGroupScope(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DeploymentOperationData>> GetAtSubscriptionScopeAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAtSubscriptionScopeAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperationData> GetAtSubscriptionScope(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.GetAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetAtSubscriptionScope(Id.Parent.Name, Id.Parent.Parent.Name, Id.Name, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DeploymentOperationData>> GetAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a deployments operation. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperationData> Get(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Get(Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Name, cancellationToken);
-                return response;
             }
             catch (Exception e)
             {

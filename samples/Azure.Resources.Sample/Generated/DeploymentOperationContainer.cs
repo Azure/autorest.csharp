@@ -103,11 +103,11 @@ namespace Azure.Resources.Sample
         {
             Page<DeploymentOperation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.ListAtScope");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, top, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtScope(Id.Parent.Name, Id, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -118,11 +118,11 @@ namespace Azure.Resources.Sample
             }
             Page<DeploymentOperation> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.ListAtScope");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, top, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtScopeNextPage(nextLink, Id.Parent.Name, Id, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -142,11 +142,11 @@ namespace Azure.Resources.Sample
         {
             async Task<Page<DeploymentOperation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.ListAtScope");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtScopeAsync(Id.Parent.Name, Id, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -157,11 +157,11 @@ namespace Azure.Resources.Sample
             }
             async Task<Page<DeploymentOperation>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.ListAtScope");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtScopeNextPageAsync(nextLink, Id.Parent.Name, Id, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

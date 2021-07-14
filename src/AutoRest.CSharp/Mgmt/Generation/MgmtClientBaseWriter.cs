@@ -458,19 +458,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (pathParamsLength > 0)
             {
                 var isAncestorTenant = operationGroup.IsAncestorTenant(context);
-                var isScope = operationGroup.IsScopeResource(context.Configuration.MgmtConfiguration);
+                var isAncestorScope = operationGroup.IsAncestorScope();
                 if (pathParamsLength > 1 && !isAncestorTenant)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
-                else if (isScope && pathParamsLength == 1)
+                else if (pathParamsLength == 1 && clientMethod.IsByIdMethod())
                 {
-                    if (clientMethod.IsByIdMethod())
-                    {
-                        paramNameList.Add("Id");
-                        return paramNameList.ToArray();
-                    }
+                    paramNameList.Add("Id");
+                    return paramNameList.ToArray();
                 }
 
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
@@ -500,7 +497,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     paramLength--;
                     return;
                 }
-                paramNames.Add(GetParentValue(operationGroup, context));
+                paramNames.Add(GetParentValue(operationGroup, context, name, clientMethod));
                 paramLength--;
             }
             else if (paramLength == 1)
@@ -515,14 +512,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 name = $"{name}.Parent";
-                if (parentOperationGroup == null && clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/{scope}"))
-                {
-                    paramNames.Add($"{name}");
-                }
-                else
-                {
-                    paramNames.Add($"{name}.Name");
-                }
+                paramNames.Add($"{name}.Name");
                 paramLength--;
 
                 if (parentOperationGroup != null)
@@ -532,7 +522,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string name, RestClientMethod clientMethod)
         {
             var parentResourceType = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
 
@@ -545,7 +535,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 case ResourceTypeBuilder.Locations:
                     return "Id.Location";
                 case ResourceTypeBuilder.Tenant:
-                    return "Id.Name";
+                    if (operationGroup.IsAncestorScope())
+                    {
+                        // An operation group with /{scope} paths may also have paths in tenant/management group/subscription/resource group level. We need to consider all cases.
+                        if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
+                        {
+                            return $"{name}.Parent";
+                        }
+                        // TODO: a better way to determine it's a tenant level operation
+                        else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return $"{name}.Name";
+                        }
+                        else
+                        {
+                            return $"{name}.Parent.Name";
+                        }
+                    }
+                    else
+                    {
+                        return $"{name}.Name";
+                    }
                 default:
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
