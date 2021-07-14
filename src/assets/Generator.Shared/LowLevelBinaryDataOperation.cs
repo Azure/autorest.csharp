@@ -55,5 +55,4 @@ namespace Azure.Core
 
         ValueTask<BinaryData> IOperationSource<BinaryData>.CreateResultAsync(Response response, CancellationToken cancellationToken) => new ValueTask<BinaryData>(response.Content);
     }
-
 }
