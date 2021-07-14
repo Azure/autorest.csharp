@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample
             Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

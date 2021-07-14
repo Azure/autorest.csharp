@@ -44,7 +44,7 @@ namespace ResourceIdentifierChooser
         {
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

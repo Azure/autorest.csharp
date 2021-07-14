@@ -45,7 +45,7 @@ namespace SupersetInheritance
             Optional<string> foo = default;
             Optional<string> @new = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

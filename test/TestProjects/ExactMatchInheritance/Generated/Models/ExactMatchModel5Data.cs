@@ -15,7 +15,7 @@ namespace ExactMatchInheritance
     {
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         /// <param name="location"> The location. </param>
-        public ExactMatchModel5Data(Location location) : base(location)
+        public ExactMatchModel5Data(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace ExactMatchInheritance
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal ExactMatchModel5Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal ExactMatchModel5Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }

@@ -15,7 +15,7 @@ namespace SubscriptionExtensions.Models
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
-        public ToasterData(Location location) : base(location)
+        public ToasterData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace SubscriptionExtensions.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal ToasterData(SubscriptionResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
+        internal ToasterData(SubscriptionResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }

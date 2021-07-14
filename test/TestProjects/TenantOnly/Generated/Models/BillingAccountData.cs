@@ -15,7 +15,7 @@ namespace TenantOnly
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
         /// <param name="location"> The location. </param>
-        public BillingAccountData(Location location) : base(location)
+        public BillingAccountData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace TenantOnly
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> . </param>
-        internal BillingAccountData(TenantResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal BillingAccountData(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

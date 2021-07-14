@@ -15,7 +15,7 @@ namespace SupersetFlattenInheritance
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="location"> The location. </param>
-        public TrackedResourceModel1Data(Location location) : base(location)
+        public TrackedResourceModel1Data(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace SupersetFlattenInheritance
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="foo"> . </param>
-        internal TrackedResourceModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
+        internal TrackedResourceModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }

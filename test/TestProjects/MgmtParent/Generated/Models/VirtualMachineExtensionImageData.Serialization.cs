@@ -39,7 +39,7 @@ namespace MgmtParent
         {
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             SubscriptionResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

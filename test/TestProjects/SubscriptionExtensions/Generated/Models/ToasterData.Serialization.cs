@@ -39,7 +39,7 @@ namespace SubscriptionExtensions.Models
         {
             Optional<string> foo = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             SubscriptionResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

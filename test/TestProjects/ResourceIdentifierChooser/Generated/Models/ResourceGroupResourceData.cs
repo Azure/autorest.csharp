@@ -16,7 +16,7 @@ namespace ResourceIdentifierChooser
     {
         /// <summary> Initializes a new instance of ResourceGroupResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public ResourceGroupResourceData(Location location) : base(location)
+        public ResourceGroupResourceData(LocationData location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
@@ -28,7 +28,7 @@ namespace ResourceIdentifierChooser
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="zones"> The virtual machine zones. </param>
-        internal ResourceGroupResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, IList<string> zones) : base(id, name, type, location, tags)
+        internal ResourceGroupResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, IList<string> zones) : base(id, name, type, location, tags)
         {
             Zones = zones;
         }

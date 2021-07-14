@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample
         {
             Sku sku = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

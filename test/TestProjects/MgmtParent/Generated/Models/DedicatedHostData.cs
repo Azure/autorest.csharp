@@ -15,7 +15,7 @@ namespace MgmtParent
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="location"> The location. </param>
-        public DedicatedHostData(Location location) : base(location)
+        public DedicatedHostData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MgmtParent
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
+        internal DedicatedHostData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }

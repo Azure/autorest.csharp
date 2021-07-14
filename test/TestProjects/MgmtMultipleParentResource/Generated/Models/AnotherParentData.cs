@@ -15,7 +15,7 @@ namespace MgmtMultipleParentResource.Models
     {
         /// <summary> Initializes a new instance of AnotherParentData. </summary>
         /// <param name="location"> The location. </param>
-        public AnotherParentData(Location location) : base(location)
+        public AnotherParentData(LocationData location) : base(location)
         {
         }
 
@@ -32,7 +32,7 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal AnotherParentData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, location, tags)
+        internal AnotherParentData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, location, tags)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

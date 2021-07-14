@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
     {
         /// <summary> Initializes a new instance of TenantLevelResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public TenantLevelResourceData(Location location) : base(location)
+        public TenantLevelResourceData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace ResourceIdentifierChooser
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal TenantLevelResourceData(TenantResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal TenantLevelResourceData(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }

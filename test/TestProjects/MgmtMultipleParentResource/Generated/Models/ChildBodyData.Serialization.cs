@@ -66,7 +66,7 @@ namespace MgmtMultipleParentResource.Models
         internal static ChildBodyData DeserializeChildBodyData(JsonElement element)
         {
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

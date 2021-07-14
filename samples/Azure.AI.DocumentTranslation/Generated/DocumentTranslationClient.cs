@@ -266,7 +266,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Operation<BinaryData>> StartTranslationAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Response> StartTranslationAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -285,14 +285,14 @@ namespace Azure.AI.DocumentTranslation
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                            return message.Response;
                         default:
                             throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                    return message.Response;
                 }
             }
             catch (Exception e)
@@ -514,7 +514,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Operation<BinaryData> StartTranslation(RequestContent content, RequestOptions options = null)
+        public virtual Response StartTranslation(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -533,14 +533,14 @@ namespace Azure.AI.DocumentTranslation
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                            return message.Response;
                         default:
                             throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
                 else
                 {
-                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "DocumentTranslationClient.StartTranslation");
+                    return message.Response;
                 }
             }
             catch (Exception e)

@@ -15,7 +15,7 @@ namespace MgmtParent
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineExtensionImageData(Location location) : base(location)
+        public VirtualMachineExtensionImageData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MgmtParent
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachineExtensionImageData(SubscriptionResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal VirtualMachineExtensionImageData(SubscriptionResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

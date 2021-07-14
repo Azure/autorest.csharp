@@ -45,7 +45,7 @@ namespace MgmtListOnly.Models
             Optional<string> foo = default;
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

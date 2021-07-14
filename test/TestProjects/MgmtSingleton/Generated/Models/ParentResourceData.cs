@@ -15,7 +15,7 @@ namespace MgmtSingleton
     {
         /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public ParentResourceData(Location location) : base(location)
+        public ParentResourceData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MgmtSingleton
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal ParentResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal ParentResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }

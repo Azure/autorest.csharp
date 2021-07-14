@@ -70,7 +70,7 @@ namespace Azure.Management.Storage.Models
             Optional<Kind> kind = default;
             Optional<Identity> identity = default;
             IDictionary<string, string> tags = default;
-            Location location = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

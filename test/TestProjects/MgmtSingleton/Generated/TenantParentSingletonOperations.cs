@@ -25,9 +25,7 @@ namespace MgmtSingleton
         {
         }
 
-        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/TenantParentSingleton/default";
-        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
     }
 }

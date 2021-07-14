@@ -15,7 +15,7 @@ namespace SubscriptionExtensions.Models
     {
         /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="location"> The location. </param>
-        public OvenData(Location location) : base(location)
+        public OvenData(LocationData location) : base(location)
         {
         }
 
@@ -26,7 +26,7 @@ namespace SubscriptionExtensions.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal OvenData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal OvenData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }
