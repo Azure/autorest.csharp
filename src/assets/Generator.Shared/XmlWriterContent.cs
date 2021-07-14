@@ -14,7 +14,7 @@ namespace Azure.Core
     internal class XmlWriterContent : RequestContent
     {
         private readonly MemoryStream _stream;
-        private readonly RequestContent _content;
+        internal readonly RequestContent _content;
 
         public XmlWriterContent()
         {
@@ -46,8 +46,8 @@ namespace Azure.Core
 
         public override void Dispose()
         {
-            _content.Dispose();
             XmlWriter.Dispose();
+            _content.Dispose();
             _stream.Dispose();
         }
     }
