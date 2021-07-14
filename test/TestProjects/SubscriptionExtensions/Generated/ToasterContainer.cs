@@ -31,6 +31,9 @@ namespace SubscriptionExtensions
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
 
+        /// <summary> Get the parent resource of this container. </summary>
+        protected new ResourceOperationsBase Parent { get { return base.Parent as ResourceOperationsBase; } }
+
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>

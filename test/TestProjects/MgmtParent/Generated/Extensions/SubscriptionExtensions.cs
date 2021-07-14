@@ -149,6 +149,7 @@ namespace MgmtParent
         #region VirtualMachineExtensionImage
         /// <summary> Gets an object representing a VirtualMachineExtensionImageContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageContainer" /> object. </returns>
         public static VirtualMachineExtensionImageContainer GetVirtualMachineExtensionImageContainer(this SubscriptionOperations subscription)
         {
             return new VirtualMachineExtensionImageContainer(subscription);

@@ -54,7 +54,7 @@ namespace Azure.Resources.Sample
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<DeploymentExtended> CreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentExtended> CreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.CreateOrUpdate");
             scope.Start();
@@ -82,7 +82,7 @@ namespace Azure.Resources.Sample
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<DeploymentExtended>> CreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentExtended>> CreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.CreateOrUpdate");
             scope.Start();
@@ -111,7 +111,7 @@ namespace Azure.Resources.Sample
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public DeploymentsCreateOrUpdateAtScopeOperation StartCreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual DeploymentsCreateOrUpdateAtScopeOperation StartCreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.StartCreateOrUpdate");
             scope.Start();
@@ -140,7 +140,7 @@ namespace Azure.Resources.Sample
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<DeploymentsCreateOrUpdateAtScopeOperation> StartCreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsCreateOrUpdateAtScopeOperation> StartCreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace Azure.Resources.Sample
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<DeploymentExtended> Get(string deploymentName, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentExtended> Get(string deploymentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.Get");
             scope.Start();
@@ -192,7 +192,7 @@ namespace Azure.Resources.Sample
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<DeploymentExtended>> GetAsync(string deploymentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentExtended>> GetAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.Get");
             scope.Start();
@@ -205,6 +205,106 @@ namespace Azure.Resources.Sample
 
                 var response = await _restClient.GetAtScopeAsync(Id, deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual DeploymentExtended TryGet(string deploymentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (deploymentName == null)
+                {
+                    throw new ArgumentNullException(nameof(deploymentName));
+                }
+
+                return Get(deploymentName, cancellationToken: cancellationToken).Value;
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<DeploymentExtended> TryGetAsync(string deploymentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.TryGet");
+            scope.Start();
+            try
+            {
+                if (deploymentName == null)
+                {
+                    throw new ArgumentNullException(nameof(deploymentName));
+                }
+
+                return await GetAsync(deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+            }
+            catch (RequestFailedException e) when (e.Status == 404)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public virtual bool DoesExist(string deploymentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (deploymentName == null)
+                {
+                    throw new ArgumentNullException(nameof(deploymentName));
+                }
+
+                return TryGet(deploymentName, cancellationToken: cancellationToken) != null;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async virtual Task<bool> DoesExistAsync(string deploymentName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.DoesExist");
+            scope.Start();
+            try
+            {
+                if (deploymentName == null)
+                {
+                    throw new ArgumentNullException(nameof(deploymentName));
+                }
+
+                return await TryGetAsync(deploymentName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
             }
             catch (Exception e)
             {

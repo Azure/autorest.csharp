@@ -29,13 +29,15 @@ namespace Azure.Resources.Sample
         /// <summary> Initializes a new instance of the <see cref="DeploymentOperationOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal DeploymentOperationOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected internal DeploymentOperationOperations(OperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
+        /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Resources/deployments/operations";
+        /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

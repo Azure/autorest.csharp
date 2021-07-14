@@ -409,25 +409,25 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        // private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
-        // {
-        //     writer.Line();
-        //     writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-        //     writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-        //     writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
+        private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
+        {
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-        //     using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
-        //     {
-        //         writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
-        //         if (async)
-        //         {
-        //             writer.Append($".ConfigureAwait(false)");
-        //         }
-        //         writer.Append($";");
-        //     }
-        // }
+            using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
+                if (async)
+                {
+                    writer.Append($".ConfigureAwait(false)");
+                }
+                writer.Append($";");
+            }
+        }
 
         private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
         {

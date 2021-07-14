@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,7 +47,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Parent.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -65,7 +64,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Parent.Name, null, cancellationToken);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -84,7 +83,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Parent.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -103,7 +102,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Parent.Name, expand, cancellationToken);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -111,22 +110,6 @@ namespace TenantOnly
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
-        {
-            return ListAvailableLocations(ResourceType, cancellationToken);
         }
     }
 }

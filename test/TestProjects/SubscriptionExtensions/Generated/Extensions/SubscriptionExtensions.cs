@@ -22,6 +22,7 @@ namespace SubscriptionExtensions
         #region Toaster
         /// <summary> Gets an object representing a ToasterContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ToasterContainer" /> object. </returns>
         public static ToasterContainer GetToasterContainer(this SubscriptionOperations subscription)
         {
             return new ToasterContainer(subscription);
