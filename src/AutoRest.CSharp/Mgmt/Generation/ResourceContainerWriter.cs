@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 string baseClass = GetBaseType();
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
-                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, "ResourceOperationsBase", "parent");
+                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, "OperationsBase", "parent");
                     WriteFields(_writer, _restClient!);
                     WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());

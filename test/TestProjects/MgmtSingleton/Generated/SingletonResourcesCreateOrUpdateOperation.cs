@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
         }
 
-        internal SingletonResourcesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<SingletonResourceData> response)
+        internal SingletonResourcesCreateOrUpdateOperation(OperationsBase operationsBase, Response<SingletonResourceData> response)
         {
             _operation = new OperationOrResponseInternals<SingletonResource>(Response.FromValue(new SingletonResource(operationsBase, response.Value), response.GetRawResponse()));
         }

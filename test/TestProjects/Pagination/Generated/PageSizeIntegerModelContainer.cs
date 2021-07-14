@@ -27,7 +27,7 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of PageSizeIntegerModelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PageSizeIntegerModelContainer(ResourceOperationsBase parent) : base(parent)
+        internal PageSizeIntegerModelContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal FileSharesUpdateOperation(ResourceOperationsBase operationsBase, Response<FileShareData> response)
+        internal FileSharesUpdateOperation(OperationsBase operationsBase, Response<FileShareData> response)
         {
             _operation = new OperationOrResponseInternals<FileShare>(Response.FromValue(new FileShare(operationsBase, response.Value), response.GetRawResponse()));
         }

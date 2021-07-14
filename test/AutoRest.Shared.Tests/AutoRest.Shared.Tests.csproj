@@ -12,7 +12,7 @@
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210712.2" />
+    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210713.2" />
   </ItemGroup>
 
   <ItemGroup>

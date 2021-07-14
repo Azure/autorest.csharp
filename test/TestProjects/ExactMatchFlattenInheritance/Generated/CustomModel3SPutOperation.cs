@@ -23,7 +23,7 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        internal CustomModel3SPutOperation(ResourceOperationsBase operationsBase, Response<CustomModel3Data> response)
+        internal CustomModel3SPutOperation(OperationsBase operationsBase, Response<CustomModel3Data> response)
         {
             _operation = new OperationOrResponseInternals<CustomModel3>(Response.FromValue(new CustomModel3(operationsBase, response.Value), response.GetRawResponse()));
         }

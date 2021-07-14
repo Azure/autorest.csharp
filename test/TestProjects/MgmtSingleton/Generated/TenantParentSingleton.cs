@@ -15,7 +15,7 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal TenantParentSingleton(ResourceOperationsBase options, TenantParentSingletonData resource) : base(options)
+        internal TenantParentSingleton(OperationsBase options, TenantParentSingletonData resource) : base(options)
         {
             Data = resource;
         }

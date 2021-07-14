@@ -15,7 +15,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ExactMatchModel3(ResourceOperationsBase options, ExactMatchModel3Data resource) : base(options, resource.Id)
+        internal ExactMatchModel3(OperationsBase options, ExactMatchModel3Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ProximityPlacementGroupContainer(ResourceOperationsBase parent) : base(parent)
+        internal ProximityPlacementGroupContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

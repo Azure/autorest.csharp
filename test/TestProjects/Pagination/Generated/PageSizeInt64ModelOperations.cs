@@ -30,7 +30,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeInt64ModelOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PageSizeInt64ModelOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal PageSizeInt64ModelOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeInt64ModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
