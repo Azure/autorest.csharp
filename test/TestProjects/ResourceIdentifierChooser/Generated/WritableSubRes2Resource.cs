@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "WritableSubRes2Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal WritableSubRes2Resource(ResourceOperationsBase options, WritableSubRes2ResourceData resource) : base(options, resource.Id)
+        internal WritableSubRes2Resource(OperationsBase options, WritableSubRes2ResourceData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

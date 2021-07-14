@@ -16,7 +16,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChild"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AvailabilitySetChild(ResourceOperationsBase options, AvailabilitySetChildData resource) : base(options, resource.Id)
+        internal AvailabilitySetChild(OperationsBase options, AvailabilitySetChildData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

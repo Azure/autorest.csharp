@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "ModelData"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ModelData(ResourceOperationsBase options, ModelDataData resource) : base(options, resource.Id)
+        internal ModelData(OperationsBase options, ModelDataData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

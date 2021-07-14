@@ -30,7 +30,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref="WritableSubRes3ResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal WritableSubRes3ResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal WritableSubRes3ResourceOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new WritableSubRes3ResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

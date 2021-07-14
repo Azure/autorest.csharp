@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of SubRes3ResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubRes3ResourceContainer(ResourceOperationsBase parent) : base(parent)
+        internal SubRes3ResourceContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

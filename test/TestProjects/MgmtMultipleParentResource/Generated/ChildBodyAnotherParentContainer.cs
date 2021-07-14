@@ -27,7 +27,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Initializes a new instance of ChildBodyAnotherParentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ChildBodyAnotherParentContainer(ResourceOperationsBase parent) : base(parent)
+        internal ChildBodyAnotherParentContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

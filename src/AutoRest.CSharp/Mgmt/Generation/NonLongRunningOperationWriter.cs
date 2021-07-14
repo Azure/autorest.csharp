@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.ResultDataType != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            writer.Append($"{typeof(ResourceOperationsBase)} operationsBase, ");
+                            writer.Append($"{typeof(OperationsBase)} operationsBase, ");
                             writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
                         }
                         else

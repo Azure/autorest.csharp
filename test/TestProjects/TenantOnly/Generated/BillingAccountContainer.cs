@@ -25,7 +25,7 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of BillingAccountContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BillingAccountContainer(ResourceOperationsBase parent) : base(parent)
+        internal BillingAccountContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

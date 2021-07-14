@@ -15,7 +15,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal CustomModel3(ResourceOperationsBase options, CustomModel3Data resource) : base(options, resource.Id)
+        internal CustomModel3(OperationsBase options, CustomModel3Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

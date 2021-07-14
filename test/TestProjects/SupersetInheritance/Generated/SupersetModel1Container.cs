@@ -25,7 +25,7 @@ namespace SupersetInheritance
 
         /// <summary> Initializes a new instance of SupersetModel1Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SupersetModel1Container(ResourceOperationsBase parent) : base(parent)
+        internal SupersetModel1Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

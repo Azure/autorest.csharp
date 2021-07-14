@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal EncryptionScopesPutOperation(ResourceOperationsBase operationsBase, Response<EncryptionScopeData> response)
+        internal EncryptionScopesPutOperation(OperationsBase operationsBase, Response<EncryptionScopeData> response)
         {
             _operation = new OperationOrResponseInternals<EncryptionScope>(Response.FromValue(new EncryptionScope(operationsBase, response.Value), response.GetRawResponse()));
         }

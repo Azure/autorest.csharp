@@ -27,7 +27,7 @@ namespace MgmtListOnly
 
         /// <summary> Initializes a new instance of FakeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FakeContainer(ResourceOperationsBase parent) : base(parent)
+        internal FakeContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
         }
 
-        internal TenantParentSingletonCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<TenantParentSingletonData> response)
+        internal TenantParentSingletonCreateOrUpdateOperation(OperationsBase operationsBase, Response<TenantParentSingletonData> response)
         {
             _operation = new OperationOrResponseInternals<TenantParentSingleton>(Response.FromValue(new TenantParentSingleton(operationsBase, response.Value), response.GetRawResponse()));
         }

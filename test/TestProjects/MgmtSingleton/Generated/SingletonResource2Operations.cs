@@ -21,7 +21,7 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal SingletonResource2Operations(ResourceOperationsBase options) : base(options)
+        protected internal SingletonResource2Operations(OperationsBase options) : base(options)
         {
         }
 

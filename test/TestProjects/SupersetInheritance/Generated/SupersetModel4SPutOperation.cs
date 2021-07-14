@@ -23,7 +23,7 @@ namespace SupersetInheritance
         {
         }
 
-        internal SupersetModel4SPutOperation(ResourceOperationsBase operationsBase, Response<SupersetModel4Data> response)
+        internal SupersetModel4SPutOperation(OperationsBase operationsBase, Response<SupersetModel4Data> response)
         {
             _operation = new OperationOrResponseInternals<SupersetModel4>(Response.FromValue(new SupersetModel4(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal StorageAccountsUpdateOperation(ResourceOperationsBase operationsBase, Response<StorageAccountData> response)
+        internal StorageAccountsUpdateOperation(OperationsBase operationsBase, Response<StorageAccountData> response)
         {
             _operation = new OperationOrResponseInternals<StorageAccount>(Response.FromValue(new StorageAccount(operationsBase, response.Value), response.GetRawResponse()));
         }

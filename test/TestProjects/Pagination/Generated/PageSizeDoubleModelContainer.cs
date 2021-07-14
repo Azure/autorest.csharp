@@ -27,7 +27,7 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of PageSizeDoubleModelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PageSizeDoubleModelContainer(ResourceOperationsBase parent) : base(parent)
+        internal PageSizeDoubleModelContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

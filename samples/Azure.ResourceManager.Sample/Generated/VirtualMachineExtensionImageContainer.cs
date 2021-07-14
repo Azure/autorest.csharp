@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineExtensionImageContainer(ResourceOperationsBase parent) : base(parent)
+        internal VirtualMachineExtensionImageContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

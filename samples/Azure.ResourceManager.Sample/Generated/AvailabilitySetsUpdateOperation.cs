@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal AvailabilitySetsUpdateOperation(ResourceOperationsBase operationsBase, Response<AvailabilitySetData> response)
+        internal AvailabilitySetsUpdateOperation(OperationsBase operationsBase, Response<AvailabilitySetData> response)
         {
             _operation = new OperationOrResponseInternals<AvailabilitySet>(Response.FromValue(new AvailabilitySet(operationsBase, response.Value), response.GetRawResponse()));
         }

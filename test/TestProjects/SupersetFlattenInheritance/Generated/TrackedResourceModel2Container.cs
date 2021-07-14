@@ -25,7 +25,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of TrackedResourceModel2Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal TrackedResourceModel2Container(ResourceOperationsBase parent) : base(parent)
+        internal TrackedResourceModel2Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

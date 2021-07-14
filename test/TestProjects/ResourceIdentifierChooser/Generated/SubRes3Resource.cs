@@ -15,7 +15,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Initializes a new instance of the <see cref = "SubRes3Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubRes3Resource(ResourceOperationsBase options, SubRes3ResourceData resource) : base(options, resource.Id)
+        internal SubRes3Resource(OperationsBase options, SubRes3ResourceData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

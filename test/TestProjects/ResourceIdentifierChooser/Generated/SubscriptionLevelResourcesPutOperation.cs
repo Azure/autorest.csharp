@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal SubscriptionLevelResourcesPutOperation(ResourceOperationsBase operationsBase, Response<SubscriptionLevelResourceData> response)
+        internal SubscriptionLevelResourcesPutOperation(OperationsBase operationsBase, Response<SubscriptionLevelResourceData> response)
         {
             _operation = new OperationOrResponseInternals<SubscriptionLevelResource>(Response.FromValue(new SubscriptionLevelResource(operationsBase, response.Value), response.GetRawResponse()));
         }

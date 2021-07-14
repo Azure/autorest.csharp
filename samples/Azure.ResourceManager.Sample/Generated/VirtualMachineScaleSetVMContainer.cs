@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineScaleSetVMContainer(ResourceOperationsBase parent) : base(parent)
+        internal VirtualMachineScaleSetVMContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

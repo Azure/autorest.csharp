@@ -23,7 +23,7 @@ namespace ResourceIdentifierChooser
         {
         }
 
-        internal TenantLevelResourcesPutOperation(ResourceOperationsBase operationsBase, Response<TenantLevelResourceData> response)
+        internal TenantLevelResourcesPutOperation(OperationsBase operationsBase, Response<TenantLevelResourceData> response)
         {
             _operation = new OperationOrResponseInternals<TenantLevelResource>(Response.FromValue(new TenantLevelResource(operationsBase, response.Value), response.GetRawResponse()));
         }

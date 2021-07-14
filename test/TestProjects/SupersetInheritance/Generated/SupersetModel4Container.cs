@@ -25,7 +25,7 @@ namespace SupersetInheritance
 
         /// <summary> Initializes a new instance of SupersetModel4Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SupersetModel4Container(ResourceOperationsBase parent) : base(parent)
+        internal SupersetModel4Container(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -30,7 +30,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel5Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AzureResourceFlattenModel5Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AzureResourceFlattenModel5Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

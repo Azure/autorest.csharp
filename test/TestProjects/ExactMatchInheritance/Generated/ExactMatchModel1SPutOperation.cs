@@ -23,7 +23,7 @@ namespace ExactMatchInheritance
         {
         }
 
-        internal ExactMatchModel1SPutOperation(ResourceOperationsBase operationsBase, Response<ExactMatchModel1Data> response)
+        internal ExactMatchModel1SPutOperation(OperationsBase operationsBase, Response<ExactMatchModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<ExactMatchModel1>(Response.FromValue(new ExactMatchModel1(operationsBase, response.Value), response.GetRawResponse()));
         }
