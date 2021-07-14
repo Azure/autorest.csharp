@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubRes3Resource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<SubRes3Resource> Put(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubRes3Resource> CreateOrUpdate(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subRes3ResourcesName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(subRes3ResourcesName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(subRes3ResourcesName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubRes3Resource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SubRes3Resource>> PutAsync(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubRes3Resource>> CreateOrUpdateAsync(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subRes3ResourcesName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(subRes3ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(subRes3ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubRes3Resource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public SubRes3ResourcesPutOperation StartPut(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual SubRes3ResourcesPutOperation StartCreateOrUpdate(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subRes3ResourcesName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubRes3Resource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<SubRes3ResourcesPutOperation> StartPutAsync(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SubRes3ResourcesPutOperation> StartCreateOrUpdateAsync(string subRes3ResourcesName, SubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subRes3ResourcesName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SubRes3ResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

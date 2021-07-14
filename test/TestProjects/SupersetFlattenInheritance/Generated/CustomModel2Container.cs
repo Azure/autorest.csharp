@@ -47,7 +47,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<CustomModel2> Put(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel2> CreateOrUpdate(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (customModel2SName == null)
             {
@@ -58,11 +58,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(customModel2SName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(customModel2SName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<CustomModel2>> PutAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel2>> CreateOrUpdateAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (customModel2SName == null)
             {
@@ -87,11 +87,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(customModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public CustomModel2SPutOperation StartPut(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual CustomModel2SPutOperation StartCreateOrUpdate(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (customModel2SName == null)
             {
@@ -116,7 +116,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<CustomModel2SPutOperation> StartPutAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel2SPutOperation> StartCreateOrUpdateAsync(string customModel2SName, CustomModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (customModel2SName == null)
             {
@@ -145,7 +145,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

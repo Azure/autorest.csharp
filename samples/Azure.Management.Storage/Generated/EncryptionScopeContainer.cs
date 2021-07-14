@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public Response<EncryptionScope> Put(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScope> CreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -61,11 +61,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(encryptionScope));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(encryptionScopeName, encryptionScope, cancellationToken);
+                var operation = StartCreateOrUpdate(encryptionScopeName, encryptionScope, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<Response<EncryptionScope>> PutAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<EncryptionScope>> CreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(encryptionScope));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(encryptionScopeName, encryptionScope, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public EncryptionScopesPutOperation StartPut(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual EncryptionScopesPutOperation StartCreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(encryptionScope));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScopeName"/> or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<EncryptionScopesPutOperation> StartPutAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async virtual Task<EncryptionScopesPutOperation> StartCreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScopeName == null)
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(encryptionScope));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

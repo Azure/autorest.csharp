@@ -49,7 +49,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<Toaster> CreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Toaster> CreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -79,7 +79,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Toaster>> CreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Toaster>> CreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -109,7 +109,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public ToastersCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public virtual ToastersCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -139,7 +139,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ToastersCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ToastersCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {

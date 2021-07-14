@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceLevelsName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ResourceLevel> Put(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceLevel> CreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceLevelsName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(resourceLevelsName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceLevelsName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ResourceLevel>> PutAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceLevel>> CreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceLevelsName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(resourceLevelsName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(resourceLevelsName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceLevelsName"/> or <paramref name="parameters"/> is null. </exception>
-        public ResourceLevelsPutOperation StartPut(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceLevelsPutOperation StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceLevelsName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceLevelsName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ResourceLevelsPutOperation> StartPutAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceLevelsPutOperation> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceLevelsName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

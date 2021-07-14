@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public Response<BlobContainer> Create(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual Response<BlobContainer> CreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -61,11 +61,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartCreate(containerName, blobContainer, cancellationToken);
+                var operation = StartCreateOrUpdate(containerName, blobContainer, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public async Task<Response<BlobContainer>> CreateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BlobContainer>> CreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartCreateAsync(containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public BlobContainersCreateOperation StartCreate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual BlobContainersCreateOperation StartCreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
-        public async Task<BlobContainersCreateOperation> StartCreateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async virtual Task<BlobContainersCreateOperation> StartCreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (containerName == null)
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(blobContainer));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

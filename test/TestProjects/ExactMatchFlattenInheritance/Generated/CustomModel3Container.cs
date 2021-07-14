@@ -47,7 +47,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<CustomModel3> Put(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel3> CreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -58,11 +58,11 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<CustomModel3>> PutAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel3>> CreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -87,11 +87,11 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public CustomModel3SPutOperation StartPut(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual CustomModel3SPutOperation StartCreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -116,7 +116,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The CustomModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<CustomModel3SPutOperation> StartPutAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel3SPutOperation> StartCreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -145,7 +145,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

@@ -107,7 +107,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -126,14 +126,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 200:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
                         default:
                             throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
                 }
             }
             catch (Exception e)
@@ -200,7 +200,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PutAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -219,14 +219,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 200:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
                         default:
                             throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PutAsyncRetrySucceeded");
                 }
             }
             catch (Exception e)
@@ -311,7 +311,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Put201CreatingSucceeded200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -331,14 +331,14 @@ namespace lro_LowLevel
                     {
                         case 200:
                         case 201:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
                         default:
                             throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
                 }
             }
             catch (Exception e)
@@ -405,7 +405,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Put201CreatingSucceeded200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Put201CreatingSucceeded200(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -425,14 +425,14 @@ namespace lro_LowLevel
                     {
                         case 200:
                         case 201:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
                         default:
                             throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Put201CreatingSucceeded200");
                 }
             }
             catch (Exception e)
@@ -517,7 +517,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> Post202Retry200Async(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> Post202Retry200Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -536,14 +536,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
                         default:
                             throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
                 }
             }
             catch (Exception e)
@@ -610,7 +610,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Post202Retry200(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> Post202Retry200(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -629,14 +629,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
                         default:
                             throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.Post202Retry200");
                 }
             }
             catch (Exception e)
@@ -721,7 +721,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PostAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
+        public virtual async Task<Operation<BinaryData>> PostAsyncRetrySucceededAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -740,14 +740,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
                         default:
                             throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
                 }
             }
             catch (Exception e)
@@ -814,7 +814,7 @@ namespace lro_LowLevel
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PostAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
+        public virtual Operation<BinaryData> PostAsyncRetrySucceeded(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
@@ -833,14 +833,14 @@ namespace lro_LowLevel
                     switch (message.Response.Status)
                     {
                         case 202:
-                            return message.Response;
+                            return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
                         default:
                             throw _clientDiagnostics.CreateRequestFailedException(message.Response);
                     }
                 }
                 else
                 {
-                    return message.Response;
+                    return new LowLevelBinaryDataOperation(_clientDiagnostics, Pipeline, message.Request, message.Response, OperationFinalStateVia.Location, "LROsCustomHeaderClient.PostAsyncRetrySucceeded");
                 }
             }
             catch (Exception e)

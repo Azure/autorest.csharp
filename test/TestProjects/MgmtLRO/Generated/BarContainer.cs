@@ -49,7 +49,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public Response DoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual Response CreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -60,11 +60,11 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoSomething");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartDoSomething(barName, body, cancellationToken);
+                var operation = StartCreateOrUpdate(barName, body, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async Task<Response> DoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<Response> CreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -90,11 +90,11 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoSomething");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartDoSomethingAsync(barName, body, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(barName, body, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public BarsDoSomethingOperation StartDoSomething(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarsDoSomethingOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -120,7 +120,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDoSomething");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -139,7 +139,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async Task<BarsDoSomethingOperation> StartDoSomethingAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarsDoSomethingOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -150,7 +150,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDoSomething");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

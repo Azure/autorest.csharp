@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<WritableSubResResource> Put(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResResource> CreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResResourcesName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(writableSubResResourcesName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(writableSubResResourcesName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<WritableSubResResource>> PutAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WritableSubResResource>> CreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResResourcesName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(writableSubResResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(writableSubResResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public WritableSubResResourcesPutOperation StartPut(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual WritableSubResResourcesPutOperation StartCreateOrUpdate(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResResourcesName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The WritableSubResResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<WritableSubResResourcesPutOperation> StartPutAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<WritableSubResResourcesPutOperation> StartCreateOrUpdateAsync(string writableSubResResourcesName, WritableSubResResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResResourcesName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

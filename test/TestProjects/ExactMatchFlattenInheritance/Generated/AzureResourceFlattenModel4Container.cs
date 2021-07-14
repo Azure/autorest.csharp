@@ -47,7 +47,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<AzureResourceFlattenModel4> Put(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel4> CreateOrUpdate(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -58,11 +58,11 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel4>> PutAsync(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AzureResourceFlattenModel4>> CreateOrUpdateAsync(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -87,11 +87,11 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public AzureResourceFlattenModel4SPutOperation StartPut(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public virtual AzureResourceFlattenModel4SPutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -116,7 +116,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<AzureResourceFlattenModel4SPutOperation> StartPutAsync(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AzureResourceFlattenModel4SPutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -145,7 +145,7 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

@@ -47,7 +47,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<WritableSubResourceModel1> Put(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<WritableSubResourceModel1> CreateOrUpdate(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResourceModel1SName == null)
             {
@@ -58,11 +58,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(writableSubResourceModel1SName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(writableSubResourceModel1SName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<WritableSubResourceModel1>> PutAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WritableSubResourceModel1>> CreateOrUpdateAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResourceModel1SName == null)
             {
@@ -87,11 +87,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(writableSubResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public WritableSubResourceModel1SPutOperation StartPut(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual WritableSubResourceModel1SPutOperation StartCreateOrUpdate(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResourceModel1SName == null)
             {
@@ -116,7 +116,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<WritableSubResourceModel1SPutOperation> StartPutAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<WritableSubResourceModel1SPutOperation> StartCreateOrUpdateAsync(string writableSubResourceModel1SName, WritableSubResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (writableSubResourceModel1SName == null)
             {
@@ -145,7 +145,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("WritableSubResourceModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

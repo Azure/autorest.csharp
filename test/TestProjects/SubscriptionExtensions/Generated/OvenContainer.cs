@@ -50,7 +50,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
@@ -80,7 +80,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
@@ -110,7 +110,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public OvensCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public virtual OvensCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
@@ -140,7 +140,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<OvensCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<OvensCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {

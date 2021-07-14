@@ -536,10 +536,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, 
+        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
             bool isVirtual = false, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
+
+            methodName = methodName ?? clientMethod.Name;
+
             writer.Line();
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
@@ -560,7 +563,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(methodName ?? clientMethod.Name, async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -571,7 +574,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(passThruParameters.ToArray());
 
-                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
@@ -580,7 +583,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Append($"await ");
                     }
-                    writer.Append($"{CreateMethodName($"Start{clientMethod.Name}", async)}(");
+                    writer.Append($"{CreateMethodName($"Start{methodName}", async)}(");
                     WriteArguments(writer, parameterMapping.Where(p => p.IsPassThru));
                     writer.Append($"cancellationToken)");
 
@@ -609,10 +612,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, 
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
             bool isVirtual = false, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
+
+            methodName = methodName ?? clientMethod.Name;
+
             writer.Line();
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
@@ -632,7 +638,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{methodName ?? clientMethod.Name}", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{methodName}", async)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -642,7 +648,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(passThruParameters.ToArray());
 
-                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.Start{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.Start{methodName}", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");

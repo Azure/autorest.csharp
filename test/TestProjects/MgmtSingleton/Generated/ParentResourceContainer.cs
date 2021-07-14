@@ -48,7 +48,7 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -77,7 +77,7 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -106,7 +106,7 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -135,7 +135,7 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {

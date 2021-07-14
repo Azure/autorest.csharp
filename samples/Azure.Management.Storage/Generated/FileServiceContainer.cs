@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<FileService> SetServiceProperties(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<FileService> CreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -61,11 +61,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartSetServiceProperties(accountName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(accountName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FileService>> SetServicePropertiesAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileService>> CreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.SetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartSetServicePropertiesAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public FileServicesSetServicePropertiesOperation StartSetServiceProperties(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public virtual FileServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartSetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<FileServicesSetServicePropertiesOperation> StartSetServicePropertiesAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FileServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartSetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

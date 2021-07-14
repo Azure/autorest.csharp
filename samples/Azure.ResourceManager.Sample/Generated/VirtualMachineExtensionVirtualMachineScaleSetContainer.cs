@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public Response<VirtualMachineExtensionVirtualMachineScaleSet> CreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionVirtualMachineScaleSet> CreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> CreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtensionVirtualMachineScaleSet>> CreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> or <paramref name="extensionParameters"/> is null. </exception>
-        public async Task<VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             if (vmExtensionName == null)
             {

@@ -47,18 +47,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Response<AzureResourceFlattenModel5> Put(string name, int? foo = null, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel5> CreateOrUpdate(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, foo, cancellationToken);
+                var operation = StartCreateOrUpdate(name, foo, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -72,18 +72,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModel5>> PutAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AzureResourceFlattenModel5>> CreateOrUpdateAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, foo, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, foo, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -97,14 +97,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public AzureResourceFlattenModel5SPutOperation StartPut(string name, int? foo = null, CancellationToken cancellationToken = default)
+        public virtual AzureResourceFlattenModel5SPutOperation StartCreateOrUpdate(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -122,14 +122,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<AzureResourceFlattenModel5SPutOperation> StartPutAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
+        public async virtual Task<AzureResourceFlattenModel5SPutOperation> StartCreateOrUpdateAsync(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

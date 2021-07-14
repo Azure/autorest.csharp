@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelDatasName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ModelData> Put(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ModelData> CreateOrUpdate(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             if (modelDatasName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(modelDatasName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(modelDatasName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelDatasName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ModelData>> PutAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ModelData>> CreateOrUpdateAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             if (modelDatasName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(modelDatasName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(modelDatasName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelDatasName"/> or <paramref name="parameters"/> is null. </exception>
-        public ModelDatasPutOperation StartPut(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public virtual ModelDatasPutOperation StartCreateOrUpdate(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             if (modelDatasName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelDatasName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ModelDatasPutOperation> StartPutAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ModelDatasPutOperation> StartCreateOrUpdateAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             if (modelDatasName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

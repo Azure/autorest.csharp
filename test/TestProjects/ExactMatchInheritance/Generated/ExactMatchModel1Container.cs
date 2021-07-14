@@ -47,7 +47,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel1> Put(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel1> CreateOrUpdate(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
@@ -58,11 +58,11 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(exactMatchModel1SName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(exactMatchModel1SName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel1>> PutAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExactMatchModel1>> CreateOrUpdateAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
@@ -87,11 +87,11 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(exactMatchModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public ExactMatchModel1SPutOperation StartPut(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ExactMatchModel1SPutOperation StartCreateOrUpdate(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
@@ -116,7 +116,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ExactMatchModel1SPutOperation> StartPutAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ExactMatchModel1SPutOperation> StartCreateOrUpdateAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (exactMatchModel1SName == null)
             {
@@ -145,7 +145,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

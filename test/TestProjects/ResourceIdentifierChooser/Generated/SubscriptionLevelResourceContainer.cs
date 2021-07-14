@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<SubscriptionLevelResource> Put(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SubscriptionLevelResource> CreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionLevelResourcesName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(subscriptionLevelResourcesName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SubscriptionLevelResource>> PutAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubscriptionLevelResource>> CreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionLevelResourcesName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(subscriptionLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(subscriptionLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public SubscriptionLevelResourcesPutOperation StartPut(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual SubscriptionLevelResourcesPutOperation StartCreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionLevelResourcesName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<SubscriptionLevelResourcesPutOperation> StartPutAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionLevelResourcesPutOperation> StartCreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (subscriptionLevelResourcesName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

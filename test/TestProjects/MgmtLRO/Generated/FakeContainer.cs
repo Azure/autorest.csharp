@@ -50,7 +50,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<Fake> CreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> CreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -80,7 +80,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Fake>> CreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> CreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -110,7 +110,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public FakesCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual FakesCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -140,7 +140,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<FakesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {

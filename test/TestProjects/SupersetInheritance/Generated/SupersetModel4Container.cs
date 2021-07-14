@@ -47,7 +47,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel4> Put(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SupersetModel4> CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -58,11 +58,11 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(supersetModel4SName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(supersetModel4SName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel4>> PutAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SupersetModel4>> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -87,11 +87,11 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public SupersetModel4SPutOperation StartPut(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public virtual SupersetModel4SPutOperation StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -116,7 +116,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<SupersetModel4SPutOperation> StartPutAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel4SPutOperation> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -145,7 +145,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

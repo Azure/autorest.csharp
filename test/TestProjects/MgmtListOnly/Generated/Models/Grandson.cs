@@ -15,7 +15,7 @@ namespace MgmtListOnly.Models
     {
         /// <summary> Initializes a new instance of Grandson. </summary>
         /// <param name="location"> The location. </param>
-        public Grandson(LocationData location) : base(location)
+        public Grandson(Location location) : base(location)
         {
         }
 
@@ -27,7 +27,7 @@ namespace MgmtListOnly.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
         /// <param name="foo"> . </param>
-        internal Grandson(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar, string foo) : base(id, name, type, location, tags, bar)
+        internal Grandson(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar, string foo) : base(id, name, type, location, tags, bar)
         {
             Foo = foo;
         }

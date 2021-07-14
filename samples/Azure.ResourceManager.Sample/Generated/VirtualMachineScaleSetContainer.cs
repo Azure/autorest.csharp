@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<VirtualMachineScaleSet> CreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineScaleSet> CreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSet>> CreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineScaleSet>> CreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public VirtualMachineScaleSetsCreateOrUpdateOperation StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetsCreateOrUpdateOperation StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<VirtualMachineScaleSetsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             if (vmScaleSetName == null)
             {

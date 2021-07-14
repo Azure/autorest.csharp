@@ -49,7 +49,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<PageSizeDoubleModel> Put(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeDoubleModel> CreateOrUpdate(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -60,11 +60,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<PageSizeDoubleModel>> PutAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeDoubleModel>> CreateOrUpdateAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -89,11 +89,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -107,7 +107,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public PageSizeDoubleModelsPutOperation StartPut(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeDoubleModelsPutOperation StartCreateOrUpdate(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -118,7 +118,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -136,7 +136,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDoubleModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<PageSizeDoubleModelsPutOperation> StartPutAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeDoubleModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeDoubleModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -147,7 +147,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

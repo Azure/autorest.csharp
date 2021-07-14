@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<StorageAccount> Create(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> CreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -61,11 +61,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartCreate(accountName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(accountName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<StorageAccount>> CreateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartCreateAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public StorageAccountsCreateOperation StartCreate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual StorageAccountsCreateOperation StartCreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<StorageAccountsCreateOperation> StartCreateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountsCreateOperation> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (accountName == null)
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

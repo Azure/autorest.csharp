@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public Response<PrivateEndpointConnection> Put(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public virtual Response<PrivateEndpointConnection> CreateOrUpdate(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {
@@ -60,11 +60,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(privateEndpointConnectionName, properties, cancellationToken);
+                var operation = StartCreateOrUpdate(privateEndpointConnectionName, properties, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public async Task<Response<PrivateEndpointConnection>> PutAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PrivateEndpointConnection>> CreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {
@@ -90,11 +90,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(privateEndpointConnectionName, properties, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public PrivateEndpointConnectionsPutOperation StartPut(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public virtual PrivateEndpointConnectionsPutOperation StartCreateOrUpdate(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {
@@ -120,7 +120,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -139,7 +139,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The private endpoint connection properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="privateEndpointConnectionName"/> or <paramref name="properties"/> is null. </exception>
-        public async Task<PrivateEndpointConnectionsPutOperation> StartPutAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<PrivateEndpointConnectionsPutOperation> StartCreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpointConnectionData properties, CancellationToken cancellationToken = default)
         {
             if (privateEndpointConnectionName == null)
             {
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

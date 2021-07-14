@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ProximityPlacementGroup> CreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroup> CreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroup>> CreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ProximityPlacementGroup>> CreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public ProximityPlacementGroupsCreateOrUpdateOperation StartCreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual ProximityPlacementGroupsCreateOrUpdateOperation StartCreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ProximityPlacementGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ProximityPlacementGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (proximityPlacementGroupName == null)
             {

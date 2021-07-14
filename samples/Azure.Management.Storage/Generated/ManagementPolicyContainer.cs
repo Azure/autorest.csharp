@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public Response<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual Response<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -75,7 +75,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -101,7 +101,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public ManagementPoliciesCreateOrUpdateOperation StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual ManagementPoliciesCreateOrUpdateOperation StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -127,7 +127,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<ManagementPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {

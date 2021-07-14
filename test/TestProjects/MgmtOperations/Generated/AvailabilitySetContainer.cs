@@ -49,7 +49,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySet> CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AvailabilitySet> CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -79,7 +79,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -109,7 +109,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public AvailabilitySetsCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetsCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -139,7 +139,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<AvailabilitySetsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {

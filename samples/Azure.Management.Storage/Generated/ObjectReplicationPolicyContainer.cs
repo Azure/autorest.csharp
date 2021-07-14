@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
-        public Response<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual Response<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
-        public async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
-        public ObjectReplicationPoliciesCreateOrUpdateOperation StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public virtual ObjectReplicationPoliciesCreateOrUpdateOperation StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> or <paramref name="properties"/> is null. </exception>
-        public async Task<ObjectReplicationPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public async virtual Task<ObjectReplicationPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (objectReplicationPolicyId == null)
             {

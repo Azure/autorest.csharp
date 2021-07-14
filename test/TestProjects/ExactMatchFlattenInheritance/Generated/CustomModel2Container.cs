@@ -47,18 +47,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> The CustomModel2Foo to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Response<CustomModel2> Put(string name, string foo = null, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel2> CreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, foo, cancellationToken);
+                var operation = StartCreateOrUpdate(name, foo, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -72,18 +72,18 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> The CustomModel2Foo to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<Response<CustomModel2>> PutAsync(string name, string foo = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel2>> CreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, foo, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, foo, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -97,14 +97,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> The CustomModel2Foo to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public CustomModel2SPutOperation StartPut(string name, string foo = null, CancellationToken cancellationToken = default)
+        public virtual CustomModel2SPutOperation StartCreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -122,14 +122,14 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> The CustomModel2Foo to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async Task<CustomModel2SPutOperation> StartPutAsync(string name, string foo = null, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel2SPutOperation> StartCreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

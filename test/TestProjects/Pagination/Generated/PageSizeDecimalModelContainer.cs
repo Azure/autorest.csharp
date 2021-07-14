@@ -49,7 +49,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<PageSizeDecimalModel> Put(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeDecimalModel> CreateOrUpdate(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -60,11 +60,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(name, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<PageSizeDecimalModel>> PutAsync(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeDecimalModel>> CreateOrUpdateAsync(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -89,11 +89,11 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(name, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -107,7 +107,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public PageSizeDecimalModelsPutOperation StartPut(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeDecimalModelsPutOperation StartCreateOrUpdate(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -118,7 +118,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -136,7 +136,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeDecimalModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<PageSizeDecimalModelsPutOperation> StartPutAsync(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeDecimalModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeDecimalModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -147,7 +147,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

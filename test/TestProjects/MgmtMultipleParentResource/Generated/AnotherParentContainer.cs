@@ -50,7 +50,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public Response<AnotherParent> CreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual Response<AnotherParent> CreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
@@ -80,7 +80,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public async Task<Response<AnotherParent>> CreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AnotherParent>> CreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
@@ -110,7 +110,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public AnotherParentsCreateOrUpdateOperation StartCreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public virtual AnotherParentsCreateOrUpdateOperation StartCreateOrUpdate(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {
@@ -140,7 +140,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> or <paramref name="anotherBody"/> is null. </exception>
-        public async Task<AnotherParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string anotherName, AnotherParentData anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherName == null)
             {

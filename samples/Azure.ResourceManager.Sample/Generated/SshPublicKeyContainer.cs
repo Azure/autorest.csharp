@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<SshPublicKey> Create(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<SshPublicKey> CreateOrUpdate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -60,11 +60,11 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartCreate(sshPublicKeyName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(sshPublicKeyName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SshPublicKey>> CreateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SshPublicKey>> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -90,11 +90,11 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartCreateAsync(sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(sshPublicKeyName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public SshPublicKeysCreateOperation StartCreate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        public virtual SshPublicKeysCreateOperation StartCreateOrUpdate(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<SshPublicKeysCreateOperation> StartCreateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SshPublicKeysCreateOperation> StartCreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

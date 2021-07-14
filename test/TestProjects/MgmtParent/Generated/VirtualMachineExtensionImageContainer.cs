@@ -52,7 +52,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<VirtualMachineExtensionImage> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtensionImage> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -97,7 +97,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -142,7 +142,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public VirtualMachineExtensionImagesCreateOrUpdateOperation StartCreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineExtensionImagesCreateOrUpdateOperation StartCreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -187,7 +187,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {

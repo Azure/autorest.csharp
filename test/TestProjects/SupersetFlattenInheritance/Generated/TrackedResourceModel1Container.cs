@@ -47,7 +47,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<TrackedResourceModel1> Put(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel1> CreateOrUpdate(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -58,11 +58,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(trackedResourceModel1SName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(trackedResourceModel1SName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<TrackedResourceModel1>> PutAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TrackedResourceModel1>> CreateOrUpdateAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -87,11 +87,11 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.Put");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(trackedResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(trackedResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public TrackedResourceModel1SPutOperation StartPut(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual TrackedResourceModel1SPutOperation StartCreateOrUpdate(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -116,7 +116,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<TrackedResourceModel1SPutOperation> StartPutAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TrackedResourceModel1SPutOperation> StartCreateOrUpdateAsync(string trackedResourceModel1SName, TrackedResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel1SName == null)
             {
@@ -145,7 +145,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {

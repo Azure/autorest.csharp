@@ -49,7 +49,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySetGrandChild> CreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<AvailabilitySetGrandChild> CreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
@@ -79,7 +79,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySetGrandChild>> CreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AvailabilitySetGrandChild>> CreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
@@ -109,7 +109,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public AvailabilitySetGrandChildCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetGrandChildCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {
@@ -139,7 +139,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<AvailabilitySetGrandChildCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetGrandChildCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
             if (availabilitySetGrandChildName == null)
             {

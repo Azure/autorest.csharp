@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<ResourceGroupResource> Put(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceGroupResource> CreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupResourcesName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(resourceGroupResourcesName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(resourceGroupResourcesName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ResourceGroupResource>> PutAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceGroupResource>> CreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupResourcesName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(resourceGroupResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(resourceGroupResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public ResourceGroupResourcesPutOperation StartPut(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceGroupResourcesPutOperation StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupResourcesName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ResourceGroupResourcesPutOperation> StartPutAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceGroupResourcesPutOperation> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupResourcesName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

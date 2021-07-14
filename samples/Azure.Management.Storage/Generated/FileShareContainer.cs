@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public Response<FileShare> Create(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -61,11 +61,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartCreate(shareName, fileShare, cancellationToken);
+                var operation = StartCreateOrUpdate(shareName, fileShare, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public async Task<Response<FileShare>> CreateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -91,11 +91,11 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Create");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartCreateAsync(shareName, fileShare, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(shareName, fileShare, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public FileSharesCreateOperation StartCreate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual FileSharesCreateOperation StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -121,7 +121,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> or <paramref name="fileShare"/> is null. </exception>
-        public async Task<FileSharesCreateOperation> StartCreateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async virtual Task<FileSharesCreateOperation> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (shareName == null)
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(fileShare));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreate");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {

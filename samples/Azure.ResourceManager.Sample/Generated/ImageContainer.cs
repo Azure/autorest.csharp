@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             if (imageName == null)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             if (imageName == null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public ImagesCreateOrUpdateOperation StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public virtual ImagesCreateOrUpdateOperation StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             if (imageName == null)
             {
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<ImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             if (imageName == null)
             {

@@ -47,7 +47,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response<TenantLevelResource> Put(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual Response<TenantLevelResource> CreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantLevelResourcesName == null)
             {
@@ -58,11 +58,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = StartPut(tenantLevelResourcesName, parameters, cancellationToken);
+                var operation = StartCreateOrUpdate(tenantLevelResourcesName, parameters, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<TenantLevelResource>> PutAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TenantLevelResource>> CreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantLevelResourcesName == null)
             {
@@ -87,11 +87,11 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Put");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                var operation = await StartPutAsync(tenantLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(tenantLevelResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,7 +105,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public TenantLevelResourcesPutOperation StartPut(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantLevelResourcesPutOperation StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantLevelResourcesName == null)
             {
@@ -116,7 +116,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
@@ -134,7 +134,7 @@ namespace ResourceIdentifierChooser
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantLevelResourcesName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<TenantLevelResourcesPutOperation> StartPutAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantLevelResourcesPutOperation> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantLevelResourcesName == null)
             {
@@ -145,7 +145,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartPut");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
