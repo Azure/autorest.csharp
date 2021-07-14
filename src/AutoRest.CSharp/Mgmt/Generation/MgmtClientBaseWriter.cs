@@ -41,7 +41,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteUsings(CodeWriter writer)
         {
             writer.UseNamespace(typeof(Task).Namespace!);
-            writer.UseNamespace("System.Linq");
         }
 
         protected void WriteFields(CodeWriter writer, RestClient restClient)
@@ -377,9 +376,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (isListFunction)
                     {
-                        // first we need to determine that is this function listing the resource itself?
-                        if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
+                        // first we need to validate that is this function listing this resource itself, or list something else
+                        var elementType = bodyType!.Arguments.First();
+                        if (context.Library.TryGetArmResource(operationGroup, out var resource)
+                            && resource.Type.EqualsByName(elementType))
                         {
+                            writer.UseNamespace("System.Linq");
+
                             var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
                             writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
                         }
