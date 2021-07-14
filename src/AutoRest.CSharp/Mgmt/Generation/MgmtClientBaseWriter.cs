@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, string contextArgumentType, string parentArguments)
+        protected void WriteContainerCtors(CodeWriter writer, Type contextArgumentType, string parentArguments)
         {
             // write protected default constructor
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");

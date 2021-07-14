@@ -26,7 +26,7 @@ namespace MgmtLRO
 
         /// <summary> Initializes a new instance of BarContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BarContainer(ResourceOperationsBase parent) : base(parent)
+        internal BarContainer(OperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
