@@ -184,8 +184,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
                 clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
-                // WriteListAvailableLocationsMethod(writer, true);
-                // WriteListAvailableLocationsMethod(writer, false);
+                WriteListAvailableLocationsMethod(writer, true);
+                WriteListAvailableLocationsMethod(writer, false);
             }
 
             if (_isDeletableResource)
