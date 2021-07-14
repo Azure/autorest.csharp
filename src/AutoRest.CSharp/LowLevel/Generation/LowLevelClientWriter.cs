@@ -32,7 +32,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientCtors(writer, client, context);
 
                     // TODO(ellismg): The `OfType` here is unfortunate, but `Methods` contains a mix of `LowLevelClientMethods` and `RestClientMethods`
-                    // the later is for the next page operations that we synthesize for some pageables.  This should be cleaned up.
+                    // the later is for the next page operations that we synthesize for some pageables.  This should be cleaned up as part of pagable
+                    // support in azure/autorest.csharp#1329
                     foreach (var clientMethod in client.Methods.OfType<LowLevelClientMethod>())
                     {
                         WriteClientMethod(writer, clientMethod, true);
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "private");
         }
 
         private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
@@ -93,11 +94,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await {PipelineProperty:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
+                        writer.Line($"{PipelineProperty:I}.Send(message, options.CancellationToken);");
                     }
 
                     using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
@@ -213,7 +214,8 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private const string PipelineField = "Pipeline";
+        private const string PipelineProperty = "Pipeline";
+        private const string PipelineField = "_pipeline";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
         private const string APIVersionField = "apiVersion";
@@ -227,8 +229,9 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
-            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
-            writer.AppendRaw("{ get; }\n");
+            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
+            writer.LineRaw("{ get => _pipeline; }");
+            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
 
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
@@ -273,7 +276,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             }
         }
 
-        private void WriteEmptyConstructor (CodeWriter writer, LowLevelRestClient client)
+        private void WriteEmptyConstructor(CodeWriter writer, LowLevelRestClient client)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
@@ -282,7 +285,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             writer.Line();
         }
 
-        private CSharpType? GetCredentialType (SecurityScheme scheme)
+        private CSharpType? GetCredentialType(SecurityScheme scheme)
         {
             switch (scheme)
             {
@@ -297,7 +300,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             }
         }
 
-        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
+        private void WriteConstructor(CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
         {
             var ctorParams = client.GetConstructorParameters(GetCredentialType (securityScheme));
 
@@ -318,7 +321,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks (ctorParams);
+                writer.WriteParameterNullChecks(ctorParams);
                 writer.Line();
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");

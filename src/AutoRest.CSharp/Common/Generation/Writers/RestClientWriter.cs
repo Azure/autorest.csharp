@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation (writer, clientMethod, lowLevel: false, "internal");
+            RequestWriterHelpers.WriteRequestCreation (writer, clientMethod, "internal");
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

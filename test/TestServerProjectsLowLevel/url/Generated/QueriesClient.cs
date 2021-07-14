@@ -18,7 +18,8 @@ namespace url_LowLevel
     public partial class QueriesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -46,7 +47,7 @@ namespace url_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -131,7 +132,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetBooleanTrueRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -223,7 +224,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetBooleanFalseRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -315,9 +316,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery = null)
+        private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -412,7 +413,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetIntOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -504,7 +505,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -596,9 +597,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetIntNullRequest(int? intQuery = null)
+        private HttpMessage CreateGetIntNullRequest(int? intQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -693,7 +694,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -785,7 +786,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateGetNegativeTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -877,9 +878,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateGetLongNullRequest(long? longQuery = null)
+        private HttpMessage CreateGetLongNullRequest(long? longQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -974,7 +975,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateFloatScientificPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1066,7 +1067,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateFloatScientificNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1158,9 +1159,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateFloatNullRequest(float? floatQuery = null)
+        private HttpMessage CreateFloatNullRequest(float? floatQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1255,7 +1256,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateDoubleDecimalPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1347,7 +1348,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateDoubleDecimalNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1439,9 +1440,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDoubleNullRequest(double? doubleQuery = null)
+        private HttpMessage CreateDoubleNullRequest(double? doubleQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1536,7 +1537,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateStringUnicodeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1628,7 +1629,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateStringUrlEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1720,7 +1721,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateStringEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1812,9 +1813,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateStringNullRequest(string stringQuery = null)
+        private HttpMessage CreateStringNullRequest(string stringQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1909,9 +1910,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateEnumValidRequest(string enumQuery = null)
+        private HttpMessage CreateEnumValidRequest(string enumQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2006,9 +2007,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateEnumNullRequest(string enumQuery = null)
+        private HttpMessage CreateEnumNullRequest(string enumQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2103,9 +2104,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery = null)
+        private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2200,7 +2201,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateByteEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2292,9 +2293,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateByteNullRequest(byte[] byteQuery = null)
+        private HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2389,7 +2390,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateDateValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2481,9 +2482,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery = null)
+        private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2578,7 +2579,7 @@ namespace url_LowLevel
 
         private HttpMessage CreateDateTimeValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2670,9 +2671,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null)
+        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2767,9 +2768,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2864,9 +2865,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2961,9 +2962,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3058,9 +3059,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3155,9 +3156,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3252,9 +3253,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3349,9 +3350,9 @@ namespace url_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

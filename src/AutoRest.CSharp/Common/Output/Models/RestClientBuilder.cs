@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public RestClientBuilder (OperationGroup operationGroup, BuildContext context)
+        public RestClientBuilder(OperationGroup operationGroup, BuildContext context)
         {
             _serializationBuilder = new SerializationBuilder ();
             _context = context;

@@ -17,7 +17,8 @@ namespace header_LowLevel
     public partial class HeaderClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace header_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -132,7 +133,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamExistingKeyRequest(string userAgent)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -224,7 +225,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseExistingKeyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -317,7 +318,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamProtectedKeyRequest(string contentType)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -408,7 +409,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseProtectedKeyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -503,7 +504,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamIntegerRequest(string scenario, int value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -598,7 +599,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseIntegerRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -694,7 +695,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamLongRequest(string scenario, long value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -789,7 +790,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseLongRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -885,7 +886,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamFloatRequest(string scenario, float value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -980,7 +981,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseFloatRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1076,7 +1077,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamDoubleRequest(string scenario, double value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1171,7 +1172,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseDoubleRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1267,7 +1268,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamBoolRequest(string scenario, bool value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1362,7 +1363,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseBoolRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1456,9 +1457,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamStringRequest(string scenario, string value = null)
+        private HttpMessage CreateParamStringRequest(string scenario, string value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1556,7 +1557,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseStringRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1652,7 +1653,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1747,7 +1748,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseDateRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1843,7 +1844,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1938,7 +1939,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseDatetimeRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2032,9 +2033,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null)
+        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2132,7 +2133,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2228,7 +2229,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2323,7 +2324,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseDurationRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2419,7 +2420,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateParamByteRequest(string scenario, byte[] value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2514,7 +2515,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseByteRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2608,9 +2609,9 @@ namespace header_LowLevel
             }
         }
 
-        private HttpMessage CreateParamEnumRequest(string scenario, string value = null)
+        private HttpMessage CreateParamEnumRequest(string scenario, string value)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2708,7 +2709,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateResponseEnumRequest(string scenario)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2800,7 +2801,7 @@ namespace header_LowLevel
 
         private HttpMessage CreateCustomRequestIdRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();

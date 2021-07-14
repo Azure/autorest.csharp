@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class MultipleResponsesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -134,7 +135,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model204NoModelDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -229,7 +230,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model204NoModelDefaultError204ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -324,7 +325,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model204NoModelDefaultError201InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -419,7 +420,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model204NoModelDefaultError202NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -514,7 +515,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model204NoModelDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -607,7 +608,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model201ModelDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -700,7 +701,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model201ModelDefaultError201ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -793,7 +794,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200Model201ModelDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -888,7 +889,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -983,7 +984,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1078,7 +1079,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1173,7 +1174,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1266,7 +1267,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultError202NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1359,7 +1360,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultError204NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1452,7 +1453,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultError400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1545,7 +1546,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultNone202InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1637,7 +1638,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultNone204NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1729,7 +1730,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultNone400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1821,7 +1822,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet202None204NoneDefaultNone400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1911,7 +1912,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultModelA200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2002,7 +2003,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultModelA200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2093,7 +2094,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultModelA400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2184,7 +2185,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultModelA400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2275,7 +2276,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultNone200InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2365,7 +2366,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultNone200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2455,7 +2456,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultNone400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2545,7 +2546,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGetDefaultNone400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2635,7 +2636,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA200NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2726,7 +2727,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA200ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2817,7 +2818,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA200InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2908,7 +2909,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA400NoneRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2999,7 +3000,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA400ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3090,7 +3091,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA400InvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3181,7 +3182,7 @@ namespace httpInfrastructure_LowLevel
 
         private HttpMessage CreateGet200ModelA202ValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

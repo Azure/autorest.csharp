@@ -18,7 +18,8 @@ namespace url_multi_collectionFormat_LowLevel
     public partial class QueriesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -46,7 +47,7 @@ namespace url_multi_collectionFormat_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -131,9 +132,9 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -228,9 +229,9 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -325,9 +326,9 @@ namespace url_multi_collectionFormat_LowLevel
             }
         }
 
-        private HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null)
+        private HttpMessage CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

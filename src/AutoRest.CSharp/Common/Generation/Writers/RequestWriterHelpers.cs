@@ -18,9 +18,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        private static string GetPipeline (bool lowLevel) => lowLevel ? "Pipeline" : "_pipeline";
-
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel, string methodAccessibility)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -29,14 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"{methodAccessibility} {typeof(HttpMessage)} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
-                if (lowLevel)
-                {
-                    writer.WriteParameter(clientParameter);
-                }
-                else
-                {
-                    writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
-                }
+                writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
@@ -46,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
+                writer.Line($"var {message:D} = _pipeline.CreateMessage();");
                 writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;
