@@ -21,5 +21,5 @@ DownloadAll $files $baseUrl $downloadPath
 $files = 'ClientContext.cs'
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/feature/mgmt-track2/common/ManagementCoreShared/'
+$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/common/ManagementCoreShared/'
 DownloadAll $files $baseUrl $downloadPath
