@@ -6,7 +6,9 @@ The [AutoRest](https://github.com/Azure/autorest) tool generates client librarie
 
 ### Usage
 #### Test on Local
-- Clone this repo
+- Clone this repo with `git submodule update --init`
+- if you alredy cloned and want to load the submodules run `git submodule update --init`
+
 - Modify docker-compose.yml to
 ```yaml
 version: "3"
