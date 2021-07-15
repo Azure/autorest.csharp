@@ -14,7 +14,7 @@ namespace Azure.Core
     internal class XmlWriterContent : RequestContent
     {
         private readonly MemoryStream _stream;
-        internal readonly RequestContent _content;
+        private readonly RequestContent _content;
 
         public XmlWriterContent()
         {
