@@ -66,3 +66,5 @@ RUN dotnet build
 COPY README.md /app/README.md
 
 RUN mkdir -p /output
+
+CMD ["/app/build/create-project.sh"]
