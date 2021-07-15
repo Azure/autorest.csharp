@@ -146,7 +146,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Lists all fakes features in subscription. </summary>
@@ -204,7 +204,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> List API keys. </summary>
@@ -384,7 +384,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> List Usages. </summary>
