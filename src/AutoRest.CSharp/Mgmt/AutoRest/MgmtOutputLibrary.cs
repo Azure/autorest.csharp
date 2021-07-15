@@ -177,6 +177,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <returns>The <see cref="Resource" /> object associated with the operation group.</returns>
         public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
 
+        public bool TryGetArmResource(OperationGroup operationGroup, [MaybeNullWhen(false)] out Resource resource)
+        {
+            return EnsureArmResource().TryGetValue(operationGroup, out resource);
+        }
+
         /// <summary>
         /// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
         /// </summary>
