@@ -6,7 +6,7 @@ function Invoke($command)
 {
     Write-Host "> $command"
     pushd $repoRoot
-    if ($IsLinux)
+    if ($IsLinux -or $IsMacOs)
     {
         sh -c "$command 2>&1"
     }
