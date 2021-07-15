@@ -164,7 +164,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<PageSizeDecimalModel> Get(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeDecimalModel> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.Get");
             scope.Start();
@@ -188,7 +188,7 @@ namespace Pagination
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<PageSizeDecimalModel>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeDecimalModel>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.Get");
             scope.Start();
@@ -212,7 +212,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public PageSizeDecimalModel TryGet(string name, CancellationToken cancellationToken = default)
+        public virtual PageSizeDecimalModel TryGet(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.TryGet");
             scope.Start();
@@ -239,7 +239,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<PageSizeDecimalModel> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeDecimalModel> TryGetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.TryGet");
             scope.Start();
@@ -266,7 +266,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string name, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.DoesExist");
             scope.Start();
@@ -289,7 +289,7 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDecimalModelContainer.DoesExist");
             scope.Start();

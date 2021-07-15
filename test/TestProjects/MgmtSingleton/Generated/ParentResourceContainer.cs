@@ -163,7 +163,7 @@ namespace MgmtSingleton
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
+        public virtual Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
@@ -187,7 +187,7 @@ namespace MgmtSingleton
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
@@ -211,7 +211,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ParentResource TryGet(string parentName, CancellationToken cancellationToken = default)
+        public virtual ParentResource TryGet(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
             scope.Start();
@@ -238,7 +238,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ParentResource> TryGetAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentResource> TryGetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
             scope.Start();
@@ -265,7 +265,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string parentName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
             scope.Start();
@@ -288,7 +288,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
             scope.Start();

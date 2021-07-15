@@ -162,7 +162,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubResourceModel1> Get(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<SubResourceModel1> Get(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubResourceModel1>> GetAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubResourceModel1>> GetAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.Get");
             scope.Start();
@@ -210,7 +210,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubResourceModel1 TryGet(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual SubResourceModel1 TryGet(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.TryGet");
             scope.Start();
@@ -237,7 +237,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubResourceModel1> TryGetAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<SubResourceModel1> TryGetAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.TryGet");
             scope.Start();
@@ -264,7 +264,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.DoesExist");
             scope.Start();
@@ -287,7 +287,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Container.DoesExist");
             scope.Start();

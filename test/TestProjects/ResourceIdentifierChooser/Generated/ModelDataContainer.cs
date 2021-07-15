@@ -162,7 +162,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ModelData> Get(string modelDatasName, CancellationToken cancellationToken = default)
+        public virtual Response<ModelData> Get(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ModelData>> GetAsync(string modelDatasName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ModelData>> GetAsync(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Get");
             scope.Start();
@@ -210,7 +210,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ModelData TryGet(string modelDatasName, CancellationToken cancellationToken = default)
+        public virtual ModelData TryGet(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.TryGet");
             scope.Start();
@@ -237,7 +237,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ModelData> TryGetAsync(string modelDatasName, CancellationToken cancellationToken = default)
+        public async virtual Task<ModelData> TryGetAsync(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.TryGet");
             scope.Start();
@@ -264,7 +264,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string modelDatasName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.DoesExist");
             scope.Start();
@@ -287,7 +287,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string modelDatasName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string modelDatasName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.DoesExist");
             scope.Start();

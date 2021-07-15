@@ -162,7 +162,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<SubRes2Resource> Get(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<SubRes2Resource> Get(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<SubRes2Resource>> GetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubRes2Resource>> GetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.Get");
             scope.Start();
@@ -210,7 +210,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public SubRes2Resource TryGet(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public virtual SubRes2Resource TryGet(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.TryGet");
             scope.Start();
@@ -237,7 +237,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<SubRes2Resource> TryGetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<SubRes2Resource> TryGetAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.TryGet");
             scope.Start();
@@ -264,7 +264,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.DoesExist");
             scope.Start();
@@ -287,7 +287,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string subRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubRes2ResourceContainer.DoesExist");
             scope.Start();

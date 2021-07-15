@@ -162,7 +162,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();
@@ -210,7 +210,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ResourceGroupResource TryGet(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public virtual ResourceGroupResource TryGet(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.TryGet");
             scope.Start();
@@ -237,7 +237,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ResourceGroupResource> TryGetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceGroupResource> TryGetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.TryGet");
             scope.Start();
@@ -264,7 +264,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.DoesExist");
             scope.Start();
@@ -287,7 +287,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.DoesExist");
             scope.Start();

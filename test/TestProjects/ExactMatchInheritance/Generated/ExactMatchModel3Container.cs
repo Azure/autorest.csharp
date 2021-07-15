@@ -162,7 +162,7 @@ namespace ExactMatchInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<ExactMatchModel3> Get(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public virtual Response<ExactMatchModel3> Get(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.Get");
             scope.Start();
@@ -186,7 +186,7 @@ namespace ExactMatchInheritance
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<ExactMatchModel3>> GetAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExactMatchModel3>> GetAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.Get");
             scope.Start();
@@ -210,7 +210,7 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public ExactMatchModel3 TryGet(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public virtual ExactMatchModel3 TryGet(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.TryGet");
             scope.Start();
@@ -237,7 +237,7 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<ExactMatchModel3> TryGetAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public async virtual Task<ExactMatchModel3> TryGetAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.TryGet");
             scope.Start();
@@ -264,7 +264,7 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.DoesExist");
             scope.Start();
@@ -287,7 +287,7 @@ namespace ExactMatchInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.DoesExist");
             scope.Start();

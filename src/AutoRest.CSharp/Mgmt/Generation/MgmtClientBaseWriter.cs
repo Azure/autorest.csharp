@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected internal string OverrideKeyword(bool isInheritedMethod, bool isVirtual = false)
         {
-            return isInheritedMethod ? "override" : (isVirtual ? "virtual" : string.Empty);
+            return isInheritedMethod ? "override" : VirtualKeyword(isVirtual);
         }
 
         /// <summary>

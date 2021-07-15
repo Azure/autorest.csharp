@@ -167,7 +167,7 @@ namespace MgmtLRO
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<Bar> Get(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<Bar> Get(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.Get");
             scope.Start();
@@ -191,7 +191,7 @@ namespace MgmtLRO
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<Bar>> GetAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Bar>> GetAsync(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.Get");
             scope.Start();
@@ -215,7 +215,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Bar TryGet(string barName, CancellationToken cancellationToken = default)
+        public virtual Bar TryGet(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
             scope.Start();
@@ -242,7 +242,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Bar> TryGetAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Bar> TryGetAsync(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
             scope.Start();
@@ -269,7 +269,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string barName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
             scope.Start();
@@ -292,7 +292,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
             scope.Start();
