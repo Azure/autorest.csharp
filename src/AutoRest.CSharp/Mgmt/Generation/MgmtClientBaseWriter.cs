@@ -136,9 +136,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return async ? "await" : string.Empty;
         }
 
-        protected internal string OverrideKeyword(bool isInheritedMethod)
+        protected internal string OverrideKeyword(bool isInheritedMethod, bool isVirtual = false)
         {
-            return isInheritedMethod ? "override" : string.Empty;
+            return isInheritedMethod ? "override" : (isVirtual ? "virtual" : string.Empty);
         }
 
         /// <summary>

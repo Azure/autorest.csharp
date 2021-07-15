@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string cancellationTokenParameter = "cancellationToken";
             _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""CancellationToken.None"" />.");
 
-            _writer.Append($"public {AsyncKeyword(isAsync)} {OverrideKeyword(isOverride)} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
+            _writer.Append($"public {AsyncKeyword(isAsync)} {(isOverride ? "override " : "virtual ")} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
             foreach (var parameter in parameters)
             {
                 _writer.WriteParameter(parameter);
