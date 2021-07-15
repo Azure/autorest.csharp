@@ -169,7 +169,7 @@ namespace MgmtListMethods
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public Response<TheExtension> Get(string resourceName, CancellationToken cancellationToken = default)
+        public virtual Response<TheExtension> Get(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.Get");
             scope.Start();
@@ -193,7 +193,7 @@ namespace MgmtListMethods
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<Response<TheExtension>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TheExtension>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.Get");
             scope.Start();
@@ -217,7 +217,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public TheExtension TryGet(string resourceName, CancellationToken cancellationToken = default)
+        public virtual TheExtension TryGet(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.TryGet");
             scope.Start();
@@ -244,7 +244,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<TheExtension> TryGetAsync(string resourceName, CancellationToken cancellationToken = default)
+        public async virtual Task<TheExtension> TryGetAsync(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.TryGet");
             scope.Start();
@@ -271,7 +271,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public bool DoesExist(string resourceName, CancellationToken cancellationToken = default)
+        public virtual bool DoesExist(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.DoesExist");
             scope.Start();
@@ -294,7 +294,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async Task<bool> DoesExistAsync(string resourceName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> DoesExistAsync(string resourceName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.DoesExist");
             scope.Start();
