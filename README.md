@@ -5,9 +5,7 @@ This is the autorest extension for agoda which uses the roundrobin client.
 The [AutoRest](https://github.com/Azure/autorest) tool generates client libraries for accessing RESTful web services.
 ## Usage
 
-you should either put your swagger in the path ./input/swagger.json OR pass teh option variable SPEC_FILE
-- if you alredy cloned and want to load the submodules run `git submodule update --init`
-
+you should either put your swagger in the path ./input/swagger.json OR pass the option variable SPEC_FILE
 
 SPEC_FILE can be a Url or a path, if it is a Url it will downlaoded, if its  path it must be a path raltive to the working folder (e.g. ./input/anotherswagger.json) , or rooted in the /src mount (e.g. /src/input/anotherswagger.json)
 
@@ -34,7 +32,8 @@ reg-hk.agodadev.io/library/autorest-gen:latest
 * Required
 
 #### Test on Local
-- Clone this repo
+- Clone this repo with `git clone --recursive`
+  -- if you alraedy cloned and want to load the submodules run `git submodule update --init`
 - Modify docker-compose.yml as the detail inside
 - run docker-compose up --build
 - check the result at the location you set in the volume
