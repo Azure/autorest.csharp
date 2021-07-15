@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                mgmtLongRunningOperationWriter.Write(codeWriter, operation, context);
+                mgmtLongRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }

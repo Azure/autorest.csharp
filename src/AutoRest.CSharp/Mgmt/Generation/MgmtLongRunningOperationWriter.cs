@@ -47,9 +47,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation.WrapperType != null ? new CSharpType(typeof(Response<>), mgmtOperation.WrapperType) : base.GetValueTaskType(operation);
         }
 
-        protected override void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType, BuildContext? context)
+        protected override void WriteFields(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType helperType)
         {
-            Debug.Assert(context != null);
             base.WriteFields(writer, operation, pagingResponse, helperType);
 
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
@@ -61,9 +60,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType cs, CSharpType helperType, BuildContext? context)
+        protected override void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType cs, CSharpType helperType)
         {
-            Debug.Assert(context != null);
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
             if (mgmtOperation.WrapperType != null)
