@@ -55,7 +55,7 @@ namespace ResourceRename
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Creates a new SSH public key resource. </summary>
@@ -121,7 +121,7 @@ namespace ResourceRename
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Delete an SSH public key. </summary>
@@ -185,7 +185,7 @@ namespace ResourceRename
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Retrieves information about an SSH public key. </summary>

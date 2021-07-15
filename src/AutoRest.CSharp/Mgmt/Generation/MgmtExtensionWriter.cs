@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line($";");
                     });
                 }
-                writer.Append($");");
+                writer.Append($"){(async? ".ConfigureAwait(false)":"")};");
             }
 
             writer.Line();

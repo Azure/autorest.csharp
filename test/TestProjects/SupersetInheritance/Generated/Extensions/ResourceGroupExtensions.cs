@@ -77,7 +77,7 @@ namespace SupersetInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -144,7 +144,7 @@ namespace SupersetInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -219,7 +219,7 @@ namespace SupersetInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -286,7 +286,7 @@ namespace SupersetInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
