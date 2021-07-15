@@ -9,8 +9,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using azure_parameter_grouping.Models;
 using Azure.Core.Pipeline;
+using azure_parameter_grouping.Models;
 
 namespace azure_parameter_grouping
 {
