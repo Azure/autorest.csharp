@@ -248,6 +248,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtListOnly\\Generated"
     },
+    "MgmtLRO": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtLRO\\Generated"
+    },
     "MgmtMultipleParentResource": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtMultipleParentResource\\Generated"

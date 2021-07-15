@@ -28,73 +28,84 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceOperationWriter : MgmtClientBaseWriter
     {
-        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
-
-        protected override string ContextProperty => "this";
-
+        private CodeWriter _writer;
+        private ResourceOperation _resourceOperation;
+        private BuildContext<MgmtOutputLibrary> _context;
         private bool _inheritResourceOperationsBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
-        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
+        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
+
+        protected override string ContextProperty => "this";
+
+        protected CSharpType TypeOfThis => _resourceOperation.Type;
+        protected override string TypeNameOfThis => TypeOfThis.Name;
+
+        public ResourceOperationWriter(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            var config = context.Configuration.MgmtConfiguration;
-            var cs = resourceOperation.Type;
-            var @namespace = cs.Namespace;
-            var isSingleton = resourceOperation.OperationGroup.IsSingletonResource(config);
+            _writer = writer;
+            _resourceOperation = resourceOperation;
+            _context = context;
+        }
+
+        public void WriteClient()
+        {
+            var config = _context.Configuration.MgmtConfiguration;
+            var isSingleton = _resourceOperation.OperationGroup.IsSingletonResource(config);
             var baseClass = isSingleton ? typeof(SingletonOperationsBase) : typeof(ResourceOperationsBase);
 
-            WriteUsings(writer);
+            WriteUsings(_writer);
 
-            using (writer.Namespace(@namespace))
+            using (_writer.Namespace(TypeOfThis.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(resourceOperation.Description);
+                _writer.WriteXmlDocumentationSummary(_resourceOperation.Description);
 
-                var operationGroup = resourceOperation.OperationGroup;
-                var resource = context.Library.GetArmResource(operationGroup);
-                var resourceData = context.Library.GetResourceData(operationGroup);
-                writer.Append($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name}: ");
+                var operationGroup = _resourceOperation.OperationGroup;
+                var resource = _context.Library.GetArmResource(operationGroup);
+                var resourceData = _context.Library.GetResourceData(operationGroup);
+                _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
-                _inheritResourceOperationsBase = resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { resourceOperation.ResourceIdentifierType, resource.Type };
+                _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
+                CSharpType[] arguments = { _resourceOperation.ResourceIdentifierType, resource.Type };
                 CSharpType type = new CSharpType(baseClass, arguments);
-                writer.Append($"{type}, ");
+                _writer.Append($"{type}, ");
 
-                if (resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
+                if (_resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
-                CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), resourceOperation.ResourceIdentifierType);
+                CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), _resourceOperation.ResourceIdentifierType);
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
                 {
                     _isITaggableResource = true;
                 }
 
-                var httpMethodsMap = resourceOperation.OperationGroup.OperationHttpMethodMapping();
+                var httpMethodsMap = _resourceOperation.OperationGroup.OperationHttpMethodMapping();
                 httpMethodsMap.TryGetValue(HttpMethod.Delete, out var deleteMethods);
                 if (deleteMethods != null && deleteMethods.Count > 0)
                 {
                     _isDeletableResource = true;
                 }
-                writer.RemoveTrailingCharacter();
+                _writer.RemoveTrailingCharacter();
 
-                using (writer.Scope())
+                using (_writer.Scope())
                 {
                     if (!isSingleton)
                     {
-                        WriteClientFields(writer, resourceOperation.RestClient, false);
-                        WriteChildRestClients(writer, resourceOperation, context);
+                        WriteClientFields(_writer, _resourceOperation.RestClient, false);
+                        WriteChildRestClients(_writer, _resourceOperation, _context);
                     }
-                    WriteClientCtors(writer, resourceOperation, context, isSingleton);
-                    WriteClientProperties(writer, resourceOperation, context.Configuration.MgmtConfiguration);
+                    WriteClientCtors(_writer, _resourceOperation, _context, isSingleton);
+                    WriteClientProperties(_writer, _resourceOperation, _context.Configuration.MgmtConfiguration);
                     // TODO Write singleton operations
                     if (!isSingleton)
                     {
-                        WriteClientMethods(writer, resourceOperation, resource, resourceData, context);
+                        WriteClientMethods(_writer, _resourceOperation, resource, resourceData, _context);
                     }
                     else
                     {
-                        WriteChildSingletonGetOperationMethods(writer, resourceOperation, context);
+                        WriteChildSingletonGetOperationMethods(_writer, _resourceOperation, _context);
                     }
                 }
             }
@@ -192,11 +203,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).FirstOrDefault();
                 // write delete method
-                WriteFirstLROMethod(writer, deleteMethod, resourceOperation, context, true);
-                WriteFirstLROMethod(writer, deleteMethod, resourceOperation, context, false);
+                WriteFirstLROMethod(writer, deleteMethod, context, true);
+                WriteFirstLROMethod(writer, deleteMethod, context, false);
 
-                WriteStartLROMethod(writer, deleteMethod, resourceOperation, context, true);
-                WriteStartLROMethod(writer, deleteMethod, resourceOperation, context, false);
+                WriteStartLROMethod(writer, deleteMethod, context, true);
+                WriteStartLROMethod(writer, deleteMethod, context, false);
                 clientMethodsList.Add(deleteMethod);
             }
 
@@ -206,6 +217,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (updateMethods == null || updateMethods.Count() == 0)
                 {
                     updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Put);
+                    // TODO -- not all the PUT operations can be used for update tags
                 }
 
                 RestClientMethod? updateMethod = null;
@@ -232,6 +244,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     clientMethodsList.Add(updateMethod);
                 }
             }
+
+            // 1. Listing myself at parent scope -> on the container named list
+            // 2. Listing myself at ancestor scope -> extension method if the ancestor is not in this RP, or follow #3 by listing myself as the children of the ancestor in the operations of the ancestor
+            // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
             foreach (var clientMethod in resourceOperation.Methods)
@@ -629,207 +645,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteFirstLROMethod(writer, clientMethod, resourceOperation, context, true);
-            WriteFirstLROMethod(writer, clientMethod, resourceOperation, context, false);
+            WriteFirstLROMethod(writer, clientMethod, context, true);
+            WriteFirstLROMethod(writer, clientMethod, context, false);
 
-            WriteStartLROMethod(writer, clientMethod, resourceOperation, context, true);
-            WriteStartLROMethod(writer, clientMethod, resourceOperation, context, false);
-        }
-
-        private void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-            writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
-
-            var nonPathParameters = clientMethod.NonPathParameters;
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
-
-            CSharpType? returnType = GetLROReturnType(clientMethod, context);
-            CSharpType responseType = returnType != null ?
-                new CSharpType(typeof(Response<>), returnType) :
-                typeof(Response);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
-
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(nonPathParameters);
-
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    var operation = new CodeWriterDeclaration("operation");
-                    writer.Append($"var {operation:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{CreateMethodName($"Start{clientMethod.Name}", async)}(");
-                    foreach (Parameter parameter in nonPathParameters)
-                    {
-                        writer.Append($"{parameter.Name:I}, ");
-                    }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-
-                    var waitForCompletionMethod = returnType == null && async ?
-                    "WaitForCompletionResponse" :
-                    "WaitForCompletion";
-                    writer.Append($"{operation}.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                });
-                writer.Line();
-            }
-        }
-
-        private void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-            writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
-
-            var nonPathParameters = clientMethod.NonPathParameters;
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
-
-            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = lroObjectType.WrapAsync(async);
-
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(nonPathParameters);
-
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.Start{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    var response = new CodeWriterDeclaration("response");
-                    var parameterNames = GetParametersName(clientMethod, resourceOperation.OperationGroup, context);
-                    writer.Append($"var {response:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-                    foreach (string paramNames in parameterNames)
-                    {
-                        writer.Append($"{paramNames:I}, ");
-                    }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-
-                    WriteStartLROResponse(writer, clientMethod, context, response, parameterNames);
-                });
-                writer.Line();
-            }
-        }
-
-        private void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, string[] parameterNames)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-
-            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-
-            writer.Append($"return new {lroObjectType}(");
-
-            if (clientMethod.Operation.IsLongRunning)
-            {
-                LongRunningOperation operation = context.Library.GetLongRunningOperation(clientMethod.Operation);
-                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(operation);
-                if (longRunningOperation.WrapperType != null)
-                {
-                    writer.Append($"this, ");
-                }
-                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
-                foreach (string paramNames in parameterNames)
-                {
-                    writer.Append($"{paramNames:I}, ");
-                }
-                writer.RemoveTrailingComma();
-                writer.Append($").Request, ");
-            }
-            else
-            {
-                NonLongRunningOperation nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
-                if (nonLongRunningOperation.ResultType != null)
-                {
-                    writer.Append($"this, ");
-                }
-            }
-            writer.Append($"{response});");
-        }
-
-        private CSharpType? GetLROReturnType(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-
-            CSharpType? returnType = null;
-            if (clientMethod.Operation.IsLongRunning)
-            {
-                LongRunningOperation operation = context.Library.GetLongRunningOperation(clientMethod.Operation);
-                MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(operation);
-                returnType = longRunningOperation.WrapperType != null ? longRunningOperation.WrapperType : longRunningOperation.ResultType;
-            }
-            else
-            {
-                NonLongRunningOperation nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
-                returnType = nonLongRunningOperation.ResultType;
-            }
-
-            return returnType;
-        }
-
-        private MgmtLongRunningOperation AsMgmtOperation(LongRunningOperation operation)
-        {
-            var mgmtOperation = operation as MgmtLongRunningOperation;
-            Debug.Assert(mgmtOperation != null);
-            return mgmtOperation;
+            WriteStartLROMethod(writer, clientMethod, context, true);
+            WriteStartLROMethod(writer, clientMethod, context, false);
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)
@@ -852,6 +672,31 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     writer.Line();
                 }
             }
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // operations.Id is the ID of the resource itself, therefore we do not need to make the resource name pass through
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            bool passThru = false;
+            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+            {
+                valueExpression = "Id.ResourceGroupName";
+            }
+            else if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+            {
+                valueExpression = "Id.SubscriptionId";
+            }
+            else
+            {
+                parentNameStack.Push($"Id{dotParent}.Name");
+                dotParent += ".Parent";
+            }
+
+            return passThru;
         }
     }
 }

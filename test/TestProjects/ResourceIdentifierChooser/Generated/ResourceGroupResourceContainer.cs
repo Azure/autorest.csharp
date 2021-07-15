@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ResourceGroupResource. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<ResourceGroupResource> CreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (resourceGroupResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(resourceGroupResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a ResourceGroupResource. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ResourceGroupResource>> CreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (resourceGroupResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(resourceGroupResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a ResourceGroupResource. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ResourceGroupResourcesPutOperation StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (resourceGroupResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, resourceGroupResourcesName, parameters, cancellationToken: cancellationToken);
-                return new ResourceGroupResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, resourceGroupResourcesName, parameters, cancellationToken);
+                return new ResourceGroupResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a ResourceGroupResource. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ResourceGroupResourcesPutOperation> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (resourceGroupResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ResourceGroupResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, resourceGroupResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new ResourceGroupResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

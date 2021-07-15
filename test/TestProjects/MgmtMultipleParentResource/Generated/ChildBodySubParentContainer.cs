@@ -45,26 +45,28 @@ namespace MgmtMultipleParentResource
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ChildBodySubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public virtual Response<ChildBodySubParent> CreateOrUpdate(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (childName == null)
-                {
-                    throw new ArgumentNullException(nameof(childName));
-                }
-                if (childBody == null)
-                {
-                    throw new ArgumentNullException(nameof(childBody));
-                }
-
-                return StartCreateOrUpdate(childName, childBody, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(childName, childBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBodySubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public async virtual Task<Response<ChildBodySubParent>> CreateOrUpdateAsync(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (childName == null)
-                {
-                    throw new ArgumentNullException(nameof(childName));
-                }
-                if (childBody == null)
-                {
-                    throw new ArgumentNullException(nameof(childBody));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(childName, childBody, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(childName, childBody, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBodySubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public virtual ChildrenCreateOrUpdateOperation StartCreateOrUpdate(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (childName == null)
-                {
-                    throw new ArgumentNullException(nameof(childName));
-                }
-                if (childBody == null)
-                {
-                    throw new ArgumentNullException(nameof(childBody));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken: cancellationToken);
-                return new ChildrenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken);
+                return new ChildrenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a ChildBodySubParent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="childName"> The name of the virtual machine run command. </param>
         /// <param name="childBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
         public async virtual Task<ChildrenCreateOrUpdateOperation> StartCreateOrUpdateAsync(string childName, ChildBodyData childBody, CancellationToken cancellationToken = default)
         {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (childName == null)
-                {
-                    throw new ArgumentNullException(nameof(childName));
-                }
-                if (childBody == null)
-                {
-                    throw new ArgumentNullException(nameof(childBody));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ChildrenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody, cancellationToken).ConfigureAwait(false);
+                return new ChildrenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, childBody).Request, response);
             }
             catch (Exception e)
             {

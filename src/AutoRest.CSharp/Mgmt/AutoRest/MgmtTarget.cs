@@ -49,8 +49,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                var resourceOperationWriter = new ResourceOperationWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context);
+                var operationWriter = new ResourceOperationWriter(codeWriter, resourceOperation, context);
+                operationWriter.WriteClient();
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
@@ -58,7 +58,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
-                new ResourceContainerWriter(codeWriter, resourceContainer, context).WriteContainer();
+                var containerWriter = new ResourceContainerWriter(codeWriter, resourceContainer, context);
+                containerWriter.WriteContainer();
 
                 project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
@@ -104,8 +105,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                var resourceOperationWriter = new TupleResourceOperationWriter();
-                resourceOperationWriter.WriteClient(codeWriter, tupleResourceOperation, context);
+                var resourceOperationWriter = new TupleResourceOperationWriter(codeWriter, tupleResourceOperation, context);
+                resourceOperationWriter.WriteClient();
 
                 project.AddGeneratedFile($"{tupleResourceOperation.Type.Name}.cs", codeWriter.ToString());
             }

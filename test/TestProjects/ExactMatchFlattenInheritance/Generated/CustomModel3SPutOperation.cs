@@ -14,6 +14,7 @@ using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
 {
+    /// <summary> Create or update an CustomModel3. </summary>
     public partial class CustomModel3SPutOperation : Operation<CustomModel3>
     {
         private readonly OperationOrResponseInternals<CustomModel3> _operation;

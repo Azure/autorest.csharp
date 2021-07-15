@@ -45,26 +45,28 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<FileService> CreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (accountName == null)
-                {
-                    throw new ArgumentNullException(nameof(accountName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(accountName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -73,26 +75,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<FileService>> CreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (accountName == null)
-                {
-                    throw new ArgumentNullException(nameof(accountName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,27 +105,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual FileServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (accountName == null)
-                {
-                    throw new ArgumentNullException(nameof(accountName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
-                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
+                var response = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken);
+                return new FileServicesSetServicePropertiesOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -131,27 +135,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
+        /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<FileServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (accountName == null)
-                {
-                    throw new ArgumentNullException(nameof(accountName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
+                var response = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken).ConfigureAwait(false);
+                return new FileServicesSetServicePropertiesOperation(Parent, response);
             }
             catch (Exception e)
             {
