@@ -39,6 +39,7 @@
                     "AzureResourceFlattenModel1s"
                 ],
                 "operationId": "AzureResourceFlattenModel1s_Put",
+                "description": "Create or update an AzureResourceFlattenModel1.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -81,6 +82,7 @@
                     "AzureResourceFlattenModel1s"
                 ],
                 "operationId": "AzureResourceFlattenModel1s_Get",
+                "description": "Get an AzureResourceFlattenModel1.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -118,6 +120,7 @@
                     "AzureResourceFlattenModel2s"
                 ],
                 "operationId": "AzureResourceFlattenModel2s_Put",
+                "description": "Create or update an AzureResourceFlattenModel2.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -160,6 +163,7 @@
                     "AzureResourceFlattenModel2s"
                 ],
                 "operationId": "AzureResourceFlattenModel2s_Get",
+                "description": "Get an AzureResourceFlattenModel2.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -197,6 +201,7 @@
                     "AzureResourceFlattenModel3s"
                 ],
                 "operationId": "AzureResourceFlattenModel3s_Put",
+                "description": "Create or update an AzureResourceFlattenModel3.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -239,6 +244,7 @@
                     "AzureResourceFlattenModel3s"
                 ],
                 "operationId": "AzureResourceFlattenModel3s_Get",
+                "description": "Get an AzureResourceFlattenModel3.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -276,6 +282,7 @@
                     "AzureResourceFlattenModel4s"
                 ],
                 "operationId": "AzureResourceFlattenModel4s_Put",
+                "description": "Create or update an AzureResourceFlattenModel4.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -318,6 +325,7 @@
                     "AzureResourceFlattenModel4s"
                 ],
                 "operationId": "AzureResourceFlattenModel4s_Get",
+                "description": "Get an AzureResourceFlattenModel4.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -355,6 +363,7 @@
                     "AzureResourceFlattenModel5s"
                 ],
                 "operationId": "AzureResourceFlattenModel5s_Put",
+                "description": "Create or update an AzureResourceFlattenModel5.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -397,6 +406,7 @@
                     "AzureResourceFlattenModel5s"
                 ],
                 "operationId": "AzureResourceFlattenModel5s_Get",
+                "description": "Get an AzureResourceFlattenModel5.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -434,6 +444,7 @@
                     "CustomModel2s"
                 ],
                 "operationId": "CustomModel2s_Put",
+                "description": "Create or update an CustomModel2.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -476,6 +487,7 @@
                     "CustomModel2s"
                 ],
                 "operationId": "CustomModel2s_Get",
+                "description": "Get an CustomModel2.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -513,6 +525,7 @@
                     "CustomModel3s"
                 ],
                 "operationId": "CustomModel3s_Put",
+                "description": "Create or update an CustomModel3.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -555,6 +568,7 @@
                     "CustomModel3s"
                 ],
                 "operationId": "CustomModel3s_Get",
+                "description": "Get an CustomModel3.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",

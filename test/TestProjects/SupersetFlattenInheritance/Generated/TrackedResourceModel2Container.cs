@@ -43,26 +43,27 @@ namespace SupersetFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a TrackedResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<TrackedResourceModel2> CreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (trackedResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(trackedResourceModel2SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(trackedResourceModel2SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a TrackedResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<TrackedResourceModel2>> CreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (trackedResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(trackedResourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a TrackedResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual TrackedResourceModel2SPutOperation StartCreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (trackedResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken: cancellationToken);
-                return new TrackedResourceModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
+                return new TrackedResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a TrackedResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<TrackedResourceModel2SPutOperation> StartCreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (trackedResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(trackedResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (trackedResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(trackedResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new TrackedResourceModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new TrackedResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

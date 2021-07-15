@@ -76,6 +76,7 @@ namespace ExactMatchFlattenInheritance
             return message;
         }
 
+        /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
@@ -108,6 +109,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// <summary> Create or update an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
@@ -159,6 +161,7 @@ namespace ExactMatchFlattenInheritance
             return message;
         }
 
+        /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -190,6 +193,7 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
+        /// <summary> Get an AzureResourceFlattenModel5. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

@@ -43,26 +43,27 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a WritableSubRes3Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes3Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<WritableSubRes3Resource> CreateOrUpdate(string writableSubRes3ResourcesName, WritableSubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (writableSubRes3ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (writableSubRes3ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(writableSubRes3ResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(writableSubRes3ResourcesName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -71,26 +72,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes3Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes3Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<WritableSubRes3Resource>> CreateOrUpdateAsync(string writableSubRes3ResourcesName, WritableSubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (writableSubRes3ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (writableSubRes3ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(writableSubRes3ResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(writableSubRes3ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -100,27 +101,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes3Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes3Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual WritableSubRes3ResourcesPutOperation StartCreateOrUpdate(string writableSubRes3ResourcesName, WritableSubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (writableSubRes3ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (writableSubRes3ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, writableSubRes3ResourcesName, parameters, cancellationToken: cancellationToken);
-                return new WritableSubRes3ResourcesPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, writableSubRes3ResourcesName, parameters, cancellationToken);
+                return new WritableSubRes3ResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -129,27 +130,27 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> The operation to create or update a WritableSubRes3Resource. Please note some properties can be set only during creation. </summary>
         /// <param name="writableSubRes3ResourcesName"> The String to use. </param>
         /// <param name="parameters"> The WritableSubRes3Resource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="writableSubRes3ResourcesName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<WritableSubRes3ResourcesPutOperation> StartCreateOrUpdateAsync(string writableSubRes3ResourcesName, WritableSubRes3ResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (writableSubRes3ResourcesName == null)
+            {
+                throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes3ResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (writableSubRes3ResourcesName == null)
-                {
-                    throw new ArgumentNullException(nameof(writableSubRes3ResourcesName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, writableSubRes3ResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new WritableSubRes3ResourcesPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, writableSubRes3ResourcesName, parameters, cancellationToken).ConfigureAwait(false);
+                return new WritableSubRes3ResourcesPutOperation(Parent, response);
             }
             catch (Exception e)
             {

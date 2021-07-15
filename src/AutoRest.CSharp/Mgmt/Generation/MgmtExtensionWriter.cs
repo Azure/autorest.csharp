@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected abstract string Description { get; }
         protected virtual string Accessibility => "public";
-        protected abstract string ExtensionClassType { get; }
         protected abstract string ExtensionOperationVariableName { get; }
         protected abstract Type ExtensionOperationVariableType { get; }
 
@@ -182,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
                     WritePagingOperationBody(writer, pagingMethod, pageType, restOperations.ActualName,
-                        new Diagnostic($"{ExtensionClassType}.{pagingMethod.Name}"), clientDiagnostics.ActualName,
+                        new Diagnostic($"{TypeNameOfThis}.{pagingMethod.Name}"), clientDiagnostics.ActualName,
                             converter, async);
                 }
                 writer.Append($");");
