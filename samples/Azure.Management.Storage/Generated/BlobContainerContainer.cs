@@ -48,26 +48,28 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a BlobContainer. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         public virtual Response<BlobContainer> CreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-                if (blobContainer == null)
-                {
-                    throw new ArgumentNullException(nameof(blobContainer));
-                }
-
-                return StartCreateOrUpdate(containerName, blobContainer, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(containerName, blobContainer, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -76,26 +78,27 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a BlobContainer. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         public async virtual Task<Response<BlobContainer>> CreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-                if (blobContainer == null)
-                {
-                    throw new ArgumentNullException(nameof(blobContainer));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,27 +108,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a BlobContainer. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         public virtual BlobContainersCreateOperation StartCreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-                if (blobContainer == null)
-                {
-                    throw new ArgumentNullException(nameof(blobContainer));
-                }
-
-                var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken);
-                return new BlobContainersCreateOperation(Parent, originalResponse);
+                var response = _restClient.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken);
+                return new BlobContainersCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -134,27 +138,28 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> The operation to create or update a BlobContainer. Please note some properties can be set only during creation. </summary>
+        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="containerName"/> or <paramref name="blobContainer"/> is null. </exception>
         public async virtual Task<BlobContainersCreateOperation> StartCreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
+            if (containerName == null)
+            {
+                throw new ArgumentNullException(nameof(containerName));
+            }
+            if (blobContainer == null)
+            {
+                throw new ArgumentNullException(nameof(blobContainer));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (containerName == null)
-                {
-                    throw new ArgumentNullException(nameof(containerName));
-                }
-                if (blobContainer == null)
-                {
-                    throw new ArgumentNullException(nameof(blobContainer));
-                }
-
-                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new BlobContainersCreateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken).ConfigureAwait(false);
+                return new BlobContainersCreateOperation(Parent, response);
             }
             catch (Exception e)
             {

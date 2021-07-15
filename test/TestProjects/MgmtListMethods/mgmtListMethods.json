@@ -1,0 +1,1373 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ManagementOperations",
+        "description": "Management Operations",
+        "version": "2020-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}": {
+            "put": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_CreateOrUpdate",
+                "description": "Create or update an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Fake"
+                        },
+                        "description": "Parameters supplied to the Create Availability Set operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Fake"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_Update",
+                "description": "Update an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FakeUpdate"
+                        },
+                        "description": "Parameters supplied to the Update Availability Set operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Fake"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_Delete",
+                "description": "Delete an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "$expand",
+                        "description": "May be used to expand the participants.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Fake"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes": {
+            "get": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_List",
+                "description": "Lists all fakes in a resource group.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "requiredParam",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "name": "optionalParam",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The expand expression to apply on the operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/FakeListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}": {
+            "put": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_CreateOrUpdate",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Update",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BarUpdate"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Delete",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars": {
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_List",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BarsListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/oneResources/{resourceName}": {
+            "put": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_CreateOrUpdate",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_Update",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TheExtensionUpdate"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_Delete",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/oneResources": {
+            "get": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_List",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtensionsListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/oneResources/{resourceName}/usages": {
+            "get": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_ListUsages",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UsagesListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/oneResources/{resourceName}/features": {
+            "get": {
+                "tags": [
+                    "OneResources"
+                ],
+                "operationId": "OneResources_ListFeatures",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/FeaturesListResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/secondResources/{resourceName}": {
+            "put": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_CreateOrUpdate",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_Update",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TheExtensionUpdate"
+                        },
+                        "description": "The body parameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_Delete",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtension"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/secondResources": {
+            "get": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_List",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TheExtensionsListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/secondResources/{resourceName}/usages": {
+            "get": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_ListUsages",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UsagesListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/secondResources/{resourceName}/features": {
+            "get": {
+                "tags": [
+                    "SecondResources"
+                ],
+                "operationId": "SecondResources_ListFeatures",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/FeaturesListResult"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Fake": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/FakeProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "FakeUpdate": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/FakeProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
+        },
+        "FakeProperties": {
+            "properties": {
+                "platformUpdateDomainCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Update Domain count."
+                },
+                "platformFaultDomainCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Fault Domain count."
+                }
+            },
+            "description": "The instance view of a resource."
+        },
+        "FakeListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Fake"
+                    },
+                    "description": "The list of fakes"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set operation response."
+        },
+        "Bar": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/BarProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "BarUpdate": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/BarProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
+        },
+        "BarProperties": {
+            "properties": {
+                "foo": {
+                    "type": "string",
+                    "description": "Update Domain count."
+                },
+                "bar": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Fault Domain count."
+                }
+            },
+            "description": "The instance view of a resource."
+        },
+        "BarsListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Bar"
+                    },
+                    "description": "The list of fakes child"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set Child operation response."
+        },
+        "TheExtension": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/TheExtensionProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "TheExtensionUpdate": {
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/TheExtensionProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
+        },
+        "TheExtensionProperties": {
+            "properties": {
+                "foo": {
+                    "type": "string",
+                    "description": "Update Domain count."
+                },
+                "bar": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Fault Domain count."
+                }
+            },
+            "description": "The instance view of a resource."
+        },
+        "TheExtensionsListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TheExtension"
+                    },
+                    "description": "The list of fakes child"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set Child operation response."
+        },
+        "UpdateResource": {
+            "description": "The Update Resource model definition.",
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            }
+        },
+        "UsagesListResult": {
+            "description": "The result of list usages",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Usage"
+                    },
+                    "description": "Usage"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL for getting next page result"
+                }
+            }
+        },
+        "Usage": {
+            "properties": {
+                "foobar": {
+                    "type": "string",
+                    "description": "specifies foobar"
+                }
+            }
+        },
+        "FeaturesListResult": {
+            "description": "The result of list usages",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Feature"
+                    },
+                    "description": "Usage"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL for getting next page result"
+                }
+            }
+        },
+        "Feature": {
+            "properties": {
+                "featureID": {
+                    "type": "string",
+                    "description": "specifies foobar"
+                }
+            }
+        },
+        "Resource": {
+            "description": "The Resource model definition.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id"
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Resource location"
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "x-ms-azure-resource": true
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    }
+}

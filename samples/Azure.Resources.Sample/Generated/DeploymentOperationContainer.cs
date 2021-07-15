@@ -31,9 +31,6 @@ namespace Azure.Resources.Sample
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
 
-        /// <summary> Get the parent resource of this container. </summary>
-        protected new ResourceOperationsBase Parent { get { return base.Parent as ResourceOperationsBase; } }
-
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
@@ -61,7 +58,7 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                var response = _restClient.GetAtScope(Id.Parent.Name, Id, operationId, cancellationToken: cancellationToken);
+                var response = _restClient.GetAtScope(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken);
                 return Response.FromValue(new DeploymentOperation(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -85,7 +82,7 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                var response = await _restClient.GetAtScopeAsync(Id.Parent.Name, Id, operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtScopeAsync(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentOperation(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -207,7 +204,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAtScope(Id.Parent.Name, Id, top, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtScope(Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -222,7 +219,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAtScopeNextPage(nextLink, Id.Parent.Name, Id, top, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtScopeNextPage(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -246,7 +243,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAtScopeAsync(Id.Parent.Name, Id, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtScopeAsync(Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -261,7 +258,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAtScopeNextPageAsync(nextLink, Id.Parent.Name, Id, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtScopeNextPageAsync(nextLink, Id.Parent, Id.Name, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DeploymentOperation(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

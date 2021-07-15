@@ -2,10 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 
@@ -14,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
         protected override string Description => "A class to add extension methods to ManagementGroup.";
-        protected override string ExtensionClassType => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups];
+        protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups];
         protected override string ExtensionOperationVariableName => "managementGroup";
 
         protected override Type ExtensionOperationVariableType => typeof(ManagementGroupOperations);
@@ -25,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(Description);
-                using (writer.Scope($"{Accessibility} static partial class {ExtensionClassType}"))
+                using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
@@ -53,6 +56,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            return true;
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
         }
     }
 }

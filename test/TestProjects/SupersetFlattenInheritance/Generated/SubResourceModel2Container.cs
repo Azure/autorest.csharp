@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,26 +45,27 @@ namespace SupersetFlattenInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a SubResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<SubResourceModel2> CreateOrUpdate(string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (subResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(subResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (subResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(subResourceModel2SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(subResourceModel2SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -74,26 +74,26 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a SubResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<SubResourceModel2>> CreateOrUpdateAsync(string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (subResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(subResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (subResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(subResourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -103,27 +103,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a SubResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual SubResourceModel2SPutOperation StartCreateOrUpdate(string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (subResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(subResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (subResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken: cancellationToken);
-                return new SubResourceModel2SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken);
+                return new SubResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -132,27 +132,27 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> The operation to create or update a SubResourceModel2. Please note some properties can be set only during creation. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SubResourceModel2 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<SubResourceModel2SPutOperation> StartCreateOrUpdateAsync(string subResourceModel2SName, SubResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
+            if (subResourceModel2SName == null)
+            {
+                throw new ArgumentNullException(nameof(subResourceModel2SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (subResourceModel2SName == null)
-                {
-                    throw new ArgumentNullException(nameof(subResourceModel2SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new SubResourceModel2SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, subResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new SubResourceModel2SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

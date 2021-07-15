@@ -14,6 +14,7 @@ using Azure.ResourceManager.Core;
 
 namespace ExactMatchFlattenInheritance
 {
+    /// <summary> Create or update an AzureResourceFlattenModel1. </summary>
     public partial class AzureResourceFlattenModel1SPutOperation : Operation<AzureResourceFlattenModel1>
     {
         private readonly OperationOrResponseInternals<AzureResourceFlattenModel1> _operation;

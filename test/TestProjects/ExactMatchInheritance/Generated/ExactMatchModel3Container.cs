@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,26 +45,27 @@ namespace ExactMatchInheritance
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a ExactMatchModel3. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<ExactMatchModel3> CreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (exactMatchModel3SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel3SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -74,26 +74,26 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ExactMatchModel3. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<ExactMatchModel3>> CreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (exactMatchModel3SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel3SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -103,27 +103,27 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ExactMatchModel3. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual ExactMatchModel3SPutOperation StartCreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (exactMatchModel3SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel3SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken: cancellationToken);
-                return new ExactMatchModel3SPutOperation(Parent, originalResponse);
+                var response = _restClient.Put(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken);
+                return new ExactMatchModel3SPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -132,27 +132,27 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <summary> The operation to create or update a ExactMatchModel3. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<ExactMatchModel3SPutOperation> StartCreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (exactMatchModel3SName == null)
-                {
-                    throw new ArgumentNullException(nameof(exactMatchModel3SName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ExactMatchModel3SPutOperation(Parent, originalResponse);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                return new ExactMatchModel3SPutOperation(Parent, response);
             }
             catch (Exception e)
             {

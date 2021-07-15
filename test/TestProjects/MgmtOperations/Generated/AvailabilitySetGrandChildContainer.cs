@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -47,26 +46,28 @@ namespace MgmtOperations
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a AvailabilitySetGrandChild. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<AvailabilitySetGrandChild> CreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(availabilitySetGrandChildName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(availabilitySetGrandChildName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -75,26 +76,27 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> The operation to create or update a AvailabilitySetGrandChild. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<AvailabilitySetGrandChild>> CreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(availabilitySetGrandChildName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(availabilitySetGrandChildName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -104,27 +106,28 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> The operation to create or update a AvailabilitySetGrandChild. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual AvailabilitySetGrandChildCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken: cancellationToken);
-                return new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken);
+                return new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,27 +136,28 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> The operation to create or update a AvailabilitySetGrandChild. Please note some properties can be set only during creation. </summary>
+        /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<AvailabilitySetGrandChildCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetGrandChildName, AvailabilitySetGrandChildData parameters, CancellationToken cancellationToken = default)
         {
+            if (availabilitySetGrandChildName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (availabilitySetGrandChildName == null)
-                {
-                    throw new ArgumentNullException(nameof(availabilitySetGrandChildName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, parameters, cancellationToken).ConfigureAwait(false);
+                return new AvailabilitySetGrandChildCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {

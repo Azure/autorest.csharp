@@ -50,26 +50,28 @@ namespace Azure.Resources.Sample
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a DeploymentExtended. Please note some properties can be set only during creation. </summary>
+        /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual Response<DeploymentExtended> CreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                return StartCreateOrUpdate(deploymentName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(deploymentName, parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -78,26 +80,27 @@ namespace Azure.Resources.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DeploymentExtended. Please note some properties can be set only during creation. </summary>
+        /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<Response<DeploymentExtended>> CreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(deploymentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(deploymentName, parameters, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -107,27 +110,28 @@ namespace Azure.Resources.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DeploymentExtended. Please note some properties can be set only during creation. </summary>
+        /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public virtual DeploymentsCreateOrUpdateAtScopeOperation StartCreateOrUpdate(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken: cancellationToken);
-                return new DeploymentsCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, originalResponse);
+                var response = _restClient.CreateOrUpdateAtScope(Id, deploymentName, parameters, cancellationToken);
+                return new DeploymentsCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -136,27 +140,28 @@ namespace Azure.Resources.Sample
             }
         }
 
-        /// <summary> The operation to create or update a DeploymentExtended. Please note some properties can be set only during creation. </summary>
+        /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="parameters"> Additional parameters supplied to the operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="parameters"/> is null. </exception>
         public async virtual Task<DeploymentsCreateOrUpdateAtScopeOperation> StartCreateOrUpdateAsync(string deploymentName, Deployment parameters, CancellationToken cancellationToken = default)
         {
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (deploymentName == null)
-                {
-                    throw new ArgumentNullException(nameof(deploymentName));
-                }
-                if (parameters == null)
-                {
-                    throw new ArgumentNullException(nameof(parameters));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new DeploymentsCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAtScopeAsync(Id, deploymentName, parameters, cancellationToken).ConfigureAwait(false);
+                return new DeploymentsCreateOrUpdateAtScopeOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateAtScopeRequest(Id, deploymentName, parameters).Request, response);
             }
             catch (Exception e)
             {

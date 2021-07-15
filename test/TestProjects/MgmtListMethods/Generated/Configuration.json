@@ -1,0 +1,25 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtListMethods",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "OneResources": "Microsoft.Fake/oneResources",
+    "SecondResources": "Microsoft.Fake/fakes/secondResources"
+  },
+  "OperationGroupToParent": {
+    "OneResources": "resourceGroups",
+    "SecondResources": "Microsoft.Fake/fakes"
+  },
+  "OperationGroupIsExtension": [
+    "OneResources",
+    "SecondResources"
+  ]
+}

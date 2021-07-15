@@ -48,26 +48,28 @@ namespace MgmtMultipleParentResource
 
         // Container level operations.
 
-        /// <summary> The operation to create or update a Parent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
         public virtual Response<Parent> CreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                return StartCreateOrUpdate(parentName, body, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                var operation = StartCreateOrUpdate(parentName, body, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -76,26 +78,27 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a Parent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
         public async virtual Task<Response<Parent>> CreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var operation = await StartCreateOrUpdateAsync(parentName, body, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(parentName, body, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -105,27 +108,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a Parent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
         public virtual ParentsCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, body, cancellationToken: cancellationToken);
-                return new ParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, parentName, body).Request, originalResponse);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, body, cancellationToken);
+                return new ParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, parentName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -134,27 +138,28 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> The operation to create or update a Parent. Please note some properties can be set only during creation. </summary>
+        /// <summary> The operation to create or update the VMSS VM run command. </summary>
         /// <param name="parentName"> The name of the VM scale set. </param>
         /// <param name="body"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="body"/> is null. </exception>
         public async virtual Task<ParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentData body, CancellationToken cancellationToken = default)
         {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                if (parentName == null)
-                {
-                    throw new ArgumentNullException(nameof(parentName));
-                }
-                if (body == null)
-                {
-                    throw new ArgumentNullException(nameof(body));
-                }
-
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, body, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new ParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, parentName, body).Request, originalResponse);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, body, cancellationToken).ConfigureAwait(false);
+                return new ParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, parentName, body).Request, response);
             }
             catch (Exception e)
             {
