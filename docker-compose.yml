@@ -10,7 +10,7 @@ services:
     ### you can change .nupkg to .zip to view generated .dll file inside the package
     # volumes:
     #   - /Users/ranantawat/Documents/GenTest2:/app/output
-      # - /Users/ranantawat/Documents/Input:/app/input
+    #   - /Users/ranantawat/Documents/Input:/app/input
     #   - C:/New folder/input:/app/input
     #   - C:/fx:/app/fx
     environment: 
