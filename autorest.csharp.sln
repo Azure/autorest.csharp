@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autorest.common", "autorest.common\src\autorest.common.csproj", "{9E857E16-1000-2000-3000-CFA9D292D0B6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autorest.csharp", "src\autorest.csharp.csproj", "{9E857E16-C008-4202-8799-CFA9D292D0B6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "autorest.csharp.test", "test\autorest.csharp.test.csproj", "{98180E61-2D1D-4864-90A2-7B675F82E9D8}"
