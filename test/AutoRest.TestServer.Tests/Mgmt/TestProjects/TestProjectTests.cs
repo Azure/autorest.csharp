@@ -157,8 +157,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private Type GetResourceDataByOperations(Type resourceOperations)
         {
             var resourceName = resourceOperations.Name.Remove(resourceOperations.Name.LastIndexOf("Operations"));
-            var resourceData = Assembly.GetExecutingAssembly().GetType($"{_projectName}.Models.{resourceName}Data");
-            return resourceData != null ? resourceData : Assembly.GetExecutingAssembly().GetType($"{_projectName}.{resourceName}Data");
+            // the name of resource data is not just simply appending a `Data` after the resource name
+            // we have the special cases like extension resource, in this case, we may have multiple resources with different name, but the same resource data
+            // therefore here we are finding the type of the resource, and get the type of its `Data` property
+            var resourceType = FindAllResources().First(t => t.Name == resourceName);
+            var resourceData = resourceType.GetProperty("Data")?.PropertyType;
+            return resourceData;
         }
 
         [Test]
