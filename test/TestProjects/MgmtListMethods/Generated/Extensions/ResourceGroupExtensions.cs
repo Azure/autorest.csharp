@@ -12,7 +12,7 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Fakes
+        #region Fake
         /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
@@ -22,7 +22,7 @@ namespace MgmtListMethods
         }
         #endregion
 
-        #region Bars
+        #region Bar
         /// <summary> Gets an object representing a BarContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="BarContainer" /> object. </returns>
@@ -32,7 +32,7 @@ namespace MgmtListMethods
         }
         #endregion
 
-        #region TheExtensions
+        #region TheExtension
         /// <summary> Gets an object representing a TheExtensionContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="TheExtensionContainer" /> object. </returns>

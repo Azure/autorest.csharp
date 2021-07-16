@@ -12,7 +12,7 @@ namespace ExactMatchInheritance
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ExactMatchModel1s
+        #region ExactMatchModel1
         /// <summary> Gets an object representing a ExactMatchModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel1Container" /> object. </returns>
@@ -22,7 +22,7 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region ExactMatchModel3s
+        #region ExactMatchModel3
         /// <summary> Gets an object representing a ExactMatchModel3Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel3Container" /> object. </returns>
@@ -32,7 +32,7 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region ExactMatchModel5s
+        #region ExactMatchModel5
         /// <summary> Gets an object representing a ExactMatchModel5Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel5Container" /> object. </returns>
