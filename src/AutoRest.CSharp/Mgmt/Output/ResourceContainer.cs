@@ -37,10 +37,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod
         && m.RestClientMethod != GetRestClientMethod(ListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.RestClientMethod));
 
-        public IEnumerable<PagingMethod> RemainingPagingMethods => PagingMethods.Where(m => m.Method != CreateMethod && !IsPutMethod(m.Method)
+        public IEnumerable<PagingMethod> RemainingPagingMethods => PagingMethods.Where(m => m.Method != CreateMethod
         && m.Method != GetRestClientMethod(ListMethod) && m.Method != GetRestClientMethod(SubscriptionExtensionsListMethod) && m.Method != GetRestClientMethod(LocationsListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.Method));
 
         public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
