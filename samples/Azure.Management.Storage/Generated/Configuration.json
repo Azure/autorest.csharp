@@ -25,5 +25,9 @@
     "Usages": "subscriptions",
     "StorageAccounts": "resourceGroups",
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts"
-  }
+  },
+  "SingletonResource": [
+    "BlobService",
+    "FileService"
+  ]
 }

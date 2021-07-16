@@ -250,14 +250,31 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
+            var resourceContainer = context.Library.GetResourceContainer(resourceOperation.OperationGroup);
             foreach (var clientMethod in resourceOperation.Methods)
             {
+                var isMethodExistInContainer = false;
+                if (resourceContainer != null)
+                {
+                    isMethodExistInContainer = clientMethod.RestClientMethod == resourceContainer.CreateMethod ||
+                        resourceContainer.RemainingMethods.Any(m => m == clientMethod) ||
+                        clientMethod.RestClientMethod == resourceOperation.GetRestClientMethod(resourceContainer.ListMethod);
+                }
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod) &&
-                    clientMethod.RestClientMethod.Request.HttpMethod != RequestMethod.Put &&
-                    !clientMethod.Name.StartsWith("List"))
+                    !isMethodExistInContainer)
                 {
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                }
+            }
+
+            // write paging methods
+            foreach (var listMethod in resourceOperation.ResourceOperationsListMethods)
+            {
+                if (listMethod.PagingMethod != null)
+                {
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, false, listMethod.PagingMethod, RestClientField);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, true, listMethod.PagingMethod, RestClientField);
                 }
             }
 
@@ -272,16 +289,24 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
-                    WriteChildPagingMethod(writer, pair.Key, false, pagingMethod);
-                    WriteChildPagingMethod(writer, pair.Key, true, pagingMethod);
+                    WritePagingMethod(writer, pair.Key, false, pagingMethod, GetRestClientName(pair.Key));
+                    WritePagingMethod(writer, pair.Key, true, pagingMethod, GetRestClientName(pair.Key));
                 }
             }
 
             // write rest of the LRO methods
             foreach (var clientMethod in resourceOperation.RestClient.Methods)
             {
+                var isMethodExistInContainer = false;
+                if (resourceContainer != null)
+                {
+                    isMethodExistInContainer = clientMethod == resourceContainer.CreateMethod ||
+                        resourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
+                        clientMethod == resourceOperation.GetRestClientMethod(resourceContainer.ListMethod);
+                }
                 if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
-                    !clientMethodsList.Contains(clientMethod) && clientMethod.Request.HttpMethod != RequestMethod.Put)
+                    !clientMethodsList.Contains(clientMethod) &&
+                    !isMethodExistInContainer)
                 {
                     WriteLRO(writer, clientMethod, resourceOperation, context);
                 }
@@ -306,7 +331,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteChildPagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod)
+        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod, string restClientName)
         {
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
@@ -334,7 +359,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, itemType, GetRestClientName(operationGroup), pagingMethod.Diagnostics,
+                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, pagingMethod.Diagnostics,
                     ClientDiagnosticsField, $"", async);
             }
         }

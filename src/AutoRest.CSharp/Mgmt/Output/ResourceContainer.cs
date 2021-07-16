@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -26,8 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string SubscriptionCommentName = "Subscription";
         private const string TenantCommentName = "Tenant";
 
-        private RestClientMethod? _putMethod;
-        private PagingMethod? _listMethod;
+        private RestClientMethod? _createMethod;
+        private ResourceListMethod? _listMethod;
         private ClientMethod? _getMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -36,24 +37,51 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != PutMethod && m.RestClientMethod != ListMethod?.Method);
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
+        && m.RestClientMethod != GetRestClientMethod(ListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.RestClientMethod));
 
-        public RestClientMethod? PutMethod => _putMethod ??= GetPutMethod();
+        public IEnumerable<PagingMethod> RemainingPagingMethods => PagingMethods.Where(m => m.Method != CreateMethod && !IsPutMethod(m.Method)
+        && m.Method != GetRestClientMethod(ListMethod) && m.Method != GetRestClientMethod(SubscriptionExtensionsListMethod) && m.Method != GetRestClientMethod(LocationsListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.Method));
 
-        public PagingMethod? ListMethod => _listMethod ??= FindListPagingMethod();
+        public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
+
+        public ResourceListMethod? ListMethod => _listMethod ??= FindListMethod();
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
 
-        private PagingMethod? FindListPagingMethod()
+        private ResourceListMethod? FindListMethod()
         {
-            return PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
+            var listMethods = GetListMethods(true, true);
+            foreach (var listMethod in listMethods)
+            {
+                var restClientMethod = GetRestClientMethod(listMethod);
+                var pathSegments = restClientMethod?.Request.PathSegments;
+
+                // resourceGroups scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/resourceGroups/"))
+                {
+
+                    return listMethod;
+                }
+            }
+
+            return null;
         }
 
-        private RestClientMethod? GetPutMethod()
+        private RestClientMethod? GetCreateMethod()
         {
-            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+            return RestClient.Methods.FirstOrDefault(m => IsCreateResourceMethod(m));
+        }
+
+        private bool IsPutMethod(RestClientMethod method)
+        {
+            return method.Request.HttpMethod.Equals(RequestMethod.Put);
+        }
+
+        private bool IsCreateResourceMethod(RestClientMethod method)
+        {
+            return method.Request.HttpMethod.Equals(RequestMethod.Put) &&
+                (method.Name.Equals("CreateOrUpdate") || method.Name.Equals("Create") || method.Name.Equals("Put"));
         }
 
         protected override string SuffixValue => _suffixValue;

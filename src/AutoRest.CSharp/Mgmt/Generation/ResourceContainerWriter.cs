@@ -86,6 +86,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        private void WriteRemainingPagingMethods()
+        {
+            _writer.Line();
+            foreach (var pagingMethod in _resourceContainer.RemainingPagingMethods)
+            {
+                WriteList(_writer, false, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                WriteList(_writer, true, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+            }
+        }
+
         protected virtual string GetBaseType()
         {
             return _resourceContainer.GetMethod != null
@@ -106,9 +116,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.LineRaw($"// Container level operations.");
 
-            if (_resourceContainer.PutMethod != null)
+            if (_resourceContainer.CreateMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod);
             }
 
             if (_resourceContainer.GetMethod != null)
@@ -279,12 +289,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            if (_resourceContainer.ListMethod != null)
+            if (_resourceContainer.ListMethod != null && _resourceContainer.ListMethod.PagingMethod != null)
             {
-                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
             }
 
+            if (_resourceContainer.ListMethod != null && _resourceContainer.ListMethod.ClientMethod != null)
+            {
+                var clientMethod = _resourceContainer.ListMethod.ClientMethod;
+                _writer.Line();
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+            }
+
+            WriteRemainingPagingMethods();
             WriteListAsGenericResource(async: false);
             WriteListAsGenericResource(async: true);
         }

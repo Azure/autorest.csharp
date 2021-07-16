@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
+        protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, string methodName, FormattableString converter, bool async)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType.Name}.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var responseType = pageType.WrapPageable(async);
 
-            writer.Append($"public static {responseType} {CreateMethodName(pagingMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
                     WritePagingOperationBody(writer, pagingMethod, pageType, restOperations.ActualName,
-                        new Diagnostic($"{TypeNameOfThis}.{pagingMethod.Name}"), clientDiagnostics.ActualName,
+                        new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName,
                             converter, async);
                 }
                 writer.Append($");");

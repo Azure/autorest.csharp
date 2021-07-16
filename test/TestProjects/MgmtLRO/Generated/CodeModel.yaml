@@ -1281,7 +1281,7 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: DoSomething
+            name: Create
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 

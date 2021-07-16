@@ -258,6 +258,41 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes": {
+            "get": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_ListBySubscription",
+                "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "statusOnly",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "statusOnly=true enables fetching run time status of all Virtual Machines in the subscription."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/FakeListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}": {
             "put": {
                 "tags": [

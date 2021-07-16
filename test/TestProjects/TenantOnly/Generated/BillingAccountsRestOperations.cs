@@ -117,7 +117,7 @@ namespace TenantOnly
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string billingAccountName, BillingAccountData parameters)
+        internal HttpMessage CreateCreateRequest(string billingAccountName, BillingAccountData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -141,7 +141,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -152,7 +152,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(billingAccountName, parameters);
+            using var message = CreateCreateRequest(billingAccountName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -169,7 +169,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public Response Create(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -180,7 +180,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateUpdateRequest(billingAccountName, parameters);
+            using var message = CreateCreateRequest(billingAccountName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

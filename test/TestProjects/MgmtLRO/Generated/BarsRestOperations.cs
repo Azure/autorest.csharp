@@ -50,7 +50,7 @@ namespace MgmtLRO
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateDoSomethingRequest(string resourceGroupName, string barName, BarData body)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string barName, BarData body)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -78,7 +78,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="barName"/>, or <paramref name="body"/> is null. </exception>
-        public async Task<Response> DoSomethingAsync(string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -93,7 +93,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateDoSomethingRequest(resourceGroupName, barName, body);
+            using var message = CreateCreateRequest(resourceGroupName, barName, body);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -111,7 +111,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="barName"/>, or <paramref name="body"/> is null. </exception>
-        public Response DoSomething(string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
+        public Response Create(string resourceGroupName, string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -126,7 +126,7 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var message = CreateDoSomethingRequest(resourceGroupName, barName, body);
+            using var message = CreateCreateRequest(resourceGroupName, barName, body);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
