@@ -180,7 +180,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Lists all features in a resource group. </summary>
@@ -259,7 +259,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Publish a key. </summary>
@@ -335,7 +335,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Get all the published keys. </summary>

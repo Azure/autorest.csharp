@@ -157,7 +157,7 @@ namespace SupersetFlattenInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -224,7 +224,7 @@ namespace SupersetFlattenInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>

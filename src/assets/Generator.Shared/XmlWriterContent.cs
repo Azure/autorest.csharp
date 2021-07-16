@@ -46,8 +46,8 @@ namespace Azure.Core
 
         public override void Dispose()
         {
-            _content.Dispose();
             XmlWriter.Dispose();
+            _content.Dispose();
             _stream.Dispose();
         }
     }

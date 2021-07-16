@@ -39,13 +39,5 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultAccessibility => "public";
 
         public string Description { get; }
-
-        private static string FirstCharToUpper(string input) =>
-        input switch
-        {
-            null => throw new ArgumentNullException(nameof(input)),
-            "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
-            _ => input.First().ToString().ToUpper() + input.Substring(1)
-        };
     }
 }

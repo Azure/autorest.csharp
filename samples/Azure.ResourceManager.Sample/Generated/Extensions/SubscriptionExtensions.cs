@@ -838,7 +838,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a virtual machine image. </summary>
@@ -940,7 +940,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
@@ -1027,7 +1027,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
@@ -1096,7 +1096,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
@@ -1170,7 +1170,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>

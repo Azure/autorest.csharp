@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -44,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // first we try to get the resource data - this could be a resource
             if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
             {
-                if (AreTypesEqual(valueProperty.ValueType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                if (valueProperty.ValueType.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
                 {
                     return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true);
                 }
@@ -58,30 +59,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
                 p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
-        }
-
-        /// <summary>
-        /// Check whether two CSharpType instances equal or not
-        /// This is not the same as left.Equals(right) because this function only checks the names
-        /// </summary>
-        /// <param name="left"></param>
-        /// <param name="right"></param>
-        /// <returns></returns>
-        private static bool AreTypesEqual(CSharpType left, CSharpType right)
-        {
-            if (left.Name != right.Name)
-                return false;
-
-            if (left.Arguments.Length != right.Arguments.Length)
-                return false;
-
-            for (int i = 0; i < left.Arguments.Length; i++)
-            {
-                if (left.Arguments[i].Name != right.Arguments[i].Name)
-                    return false;
-            }
-
-            return true;
         }
 
         /// <summary>

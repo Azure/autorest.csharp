@@ -79,6 +79,18 @@ namespace AutoRest.CSharp.Input
                 return Responses.First();
             }
         }
+
+
+        public ServiceResponse? GetResponseByCode(StatusCodes code)
+        {
+            return Responses.FirstOrDefault(response => response.Protocol.Http is HttpResponse httpResponse &&
+                httpResponse.StatusCodes.Any(c=> c == code));
+
+        }
+        public ServiceResponse? GetSuccessfulQueryResponse()
+        {
+            return GetResponseByCode(StatusCodes._200);
+        }
     }
 
     internal partial class DictionaryOfAny
