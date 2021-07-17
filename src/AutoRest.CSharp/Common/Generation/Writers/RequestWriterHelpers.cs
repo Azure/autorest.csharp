@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -290,7 +291,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             methodName ??= segment.IsRaw ? "AppendRaw" : "AppendPath";
             writer.Append($"{uri}.{methodName}(");
-            WriteConstantOrParameter(writer, segment.Value, enumAsString: !segment.IsRaw);
+            WriteConstantOrParameter(writer, segment.Value, enumAsString: !segment.IsRaw || TypeFactory.IsExtendableEnum(segment.Value.Type));
             WriteSerializationFormat(writer, segment.Format);
             writer.Line($", {segment.Escape:L});");
         }
