@@ -81,11 +81,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(restClient.Parameters);
-
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
-                    writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
+                    writer.WriteVariableAssignmentWithNullCheck($"this.{clientParameter.Name}", clientParameter);
                 }
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");

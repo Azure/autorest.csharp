@@ -116,32 +116,54 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+                writer.WriteVariableAssignmentWithNullCheck(parameter.Name, parameter);
+            }
+
+            writer.Line();
+        }
+
+        public static void WriteVariableAssignmentWithNullCheck(this CodeWriter writer, string variableName, Parameter parameter)
+        {
+            // Temporary check to minimize amount of changes in existing generated code
+            var assignToSelf = parameter.Name == variableName;
+            if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+            {
+                var defaultValue = parameter.DefaultValue.Value;
+                writer
+                    .AppendIf($"{variableName:I} ??= ", assignToSelf)
+                    .AppendIf($"{variableName:I} = {parameter.Name:I} ?? ", !assignToSelf);
+                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
                 {
-                    var defaultValue = parameter.DefaultValue.Value;
-                    writer.Append($"{parameter.Name} ??= ");
-                    if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsStruct(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
-                    {
-                        WriteConstant(writer, defaultValue);
-                    }
-                    else
-                    {
-                        writer.Append($"new {parameter.Type}(");
-                        WriteConstant(writer, parameter.DefaultValue.Value);
-                        writer.Append($")");
-                    }
-                    writer.Line($";");
+                    WriteConstant(writer, defaultValue);
                 }
-                else if (CanWriteNullCheck(parameter))
+                else
+                {
+                    writer.Append($"new {parameter.Type}(");
+                    WriteConstant(writer, parameter.DefaultValue.Value);
+                    writer.Append($")");
+                }
+
+                writer.Line($";");
+            }
+            else if (CanWriteNullCheck(parameter))
+            {
+                // Temporary check to minimize amount of changes in existing generated code
+                if (assignToSelf)
                 {
                     using (writer.Scope($"if ({parameter.Name:I} == null)"))
                     {
                         writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
                     }
                 }
+                else
+                {
+                    writer.Line($"{variableName:I} = {parameter.Name:I} ?? throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
+                }
             }
-
-            writer.Line();
+            else if (!assignToSelf)
+            {
+                writer.Line($"{variableName:I} = {parameter.Name:I};");
+            }
         }
 
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
