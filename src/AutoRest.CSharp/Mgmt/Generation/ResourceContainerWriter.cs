@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             //     WriteCreateByIdVariants(_resourceContainer.PutByIdMethod);
             // }
 
-            if (_resourceContainer.GetByIdMethod != null)
+            if (_resourceContainer.GetByIdMethod != null && _resourceContainer.GetMethod?.RestClientMethod != _resourceContainer.GetByIdMethod)
             {
                 WriteGetByIdVariants(_resourceContainer.GetByIdMethod);
             }
@@ -380,7 +380,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemName = pagingMethods[0].PagingResponse.ItemProperty.Declaration.Name;
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
             var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            var listAtScopeMethod = pagingMethods.FirstOrDefault(m => m.Method.Name.Equals("ListAtScope", StringComparison.InvariantCultureIgnoreCase));
+            var listAtScopeMethod = pagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase) && m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true);
             if (listAtScopeMethod != null)
             {
                 writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(isNextPageFunc ? listAtScopeMethod.NextPageMethod!.Name : listAtScopeMethod.Method.Name, async)}(");

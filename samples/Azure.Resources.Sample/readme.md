@@ -13,9 +13,8 @@ input-file:
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
-    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
-    
-    # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
+    # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
+    - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/links.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
     # - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/91ac14531f0d05b3d6fcf4a817ea0defde59fe63/specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
@@ -52,7 +51,7 @@ operation-group-to-parent:
   PolicySetDefinitions: tenant
   PolicyExemptions: tenant
   DeploymentScripts: resourceGroups
-  ManagementLocks: resourceGroups
+  ManagementLocks: tenant
   ResourceLinks: tenant
 directive:
   - from: swagger-document
@@ -171,6 +170,17 @@ directive:
   - remove-operation: DeploymentOperations_ListAtSubscriptionScope
   - remove-operation: DeploymentOperations_Get
   - remove-operation: DeploymentOperations_List
+
+  - remove-operation: ManagementLocks_CreateOrUpdateAtResourceGroupLevel
+  - remove-operation: ManagementLocks_CreateOrUpdateAtResourceLevel
+  - remove-operation: ManagementLocks_CreateOrUpdateAtSubscriptionLevel
+  - remove-operation: ManagementLocks_DeleteAtResourceGroupLevel
+  - remove-operation: ManagementLocks_DeleteAtResourceLevel
+  - remove-operation: ManagementLocks_DeleteAtSubscriptionLevel
+  - remove-operation: ManagementLocks_GetAtResourceGroupLevel
+  - remove-operation: ManagementLocks_GetAtResourceLevel
+  - remove-operation: ManagementLocks_GetAtSubscriptionLevel
+
   - rename-operation:
       from: Deployments_WhatIf
       to: Deployments_WhatIfAtResourceGroupScope

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private RestClientMethod? GetPutMethod()
         {
-            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
         }
 
         private RestClientMethod? GetPutByIdMethod()

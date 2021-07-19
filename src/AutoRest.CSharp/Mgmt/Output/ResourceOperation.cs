@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return restClientMethod.Name;
         }
 
-        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name && m.RestClientMethod.Parameters.Length > 0 && m.RestClientMethod.Parameters[0].Name.Equals("scope")) ?? Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
 
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
