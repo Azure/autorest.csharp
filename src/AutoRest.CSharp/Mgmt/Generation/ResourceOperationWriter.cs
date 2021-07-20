@@ -251,17 +251,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             // write rest of the methods
             var resourceContainer = context.Library.GetResourceContainer(resourceOperation.OperationGroup);
-            foreach (var clientMethod in resourceOperation.Methods)
+            foreach (var clientMethod in resourceOperation.ResourceOperationsClientMethods)
             {
-                var isMethodExistInContainer = false;
-                if (resourceContainer != null)
-                {
-                    isMethodExistInContainer = clientMethod.RestClientMethod == resourceContainer.CreateMethod ||
-                        resourceContainer.RemainingMethods.Any(m => m == clientMethod) ||
-                        resourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod);
-                }
-                if (!clientMethodsList.Contains(clientMethod.RestClientMethod) &&
-                    !isMethodExistInContainer)
+                if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
@@ -295,18 +287,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
 
             // write rest of the LRO methods
-            foreach (var clientMethod in resourceOperation.RestClient.Methods)
+            foreach (var clientMethod in resourceOperation.ResourceOperationsLROMethods)
             {
-                var isMethodExistInContainer = false;
-                if (resourceContainer != null)
-                {
-                    isMethodExistInContainer = clientMethod == resourceContainer.CreateMethod ||
-                        resourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
-                        resourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod);
-                }
-                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
-                    !clientMethodsList.Contains(clientMethod) &&
-                    !isMethodExistInContainer)
+                if (!clientMethodsList.Contains(clientMethod))
                 {
                     WriteLRO(writer, clientMethod, resourceOperation, context);
                 }

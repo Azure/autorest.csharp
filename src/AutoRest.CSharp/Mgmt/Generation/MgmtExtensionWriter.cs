@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
+        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
         {
             (var bodyType, bool isResourceList) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
             // write the signature of this function
-            writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClientName}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
-                    WriteDiagnosticScope(writer, clientMethod.Diagnostics, clientDiagnostics.ActualName, writer =>
+                    WriteDiagnosticScope(writer, new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName, writer =>
                     {
                         writer.Append($"var response = {AwaitKeyword(async)} ");
 
@@ -127,7 +127,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         if (isResourceList)
                         {
-                            writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
+                            // first we need to validate that is this function listing this resource itself, or list something else
+                            var elementType = bodyType!.Arguments.First();
+                            if (context.Library.TryGetArmResource(operationGroup, out var resource)
+                                && resource.Type.EqualsByName(elementType))
+                            {
+                                writer.UseNamespace("System.Linq");
+
+                                var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}(subscription, data)).ToArray()";
+                                writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
+                            }
+                            else
+                            {
+                                writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
+                            }
                         }
                         else
                         {

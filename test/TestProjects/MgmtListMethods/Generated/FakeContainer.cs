@@ -399,6 +399,82 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<Fake> List(CancellationToken cancellationToken = default)
+        {
+            Page<Fake> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListByLocation(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Fake> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListByLocationNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<Fake> ListAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListByLocationAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Fake>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListByLocationNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
         /// <summary> Filters the list of Fake for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>

@@ -12,7 +12,7 @@ using System.Linq;
 namespace MgmtListMethods.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
-    internal partial class FakeListResult
+    public partial class FakeListResult
     {
         /// <summary> Initializes a new instance of FakeListResult. </summary>
         /// <param name="value"> The list of fakes. </param>

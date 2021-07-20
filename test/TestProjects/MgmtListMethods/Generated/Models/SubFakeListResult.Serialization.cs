@@ -11,20 +11,20 @@ using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
-    public partial class FakeListResult
+    internal partial class SubFakeListResult
     {
-        internal static FakeListResult DeserializeFakeListResult(JsonElement element)
+        internal static SubFakeListResult DeserializeSubFakeListResult(JsonElement element)
         {
-            IReadOnlyList<FakeData> value = default;
+            IReadOnlyList<SubFakeData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<FakeData> array = new List<FakeData>();
+                    List<SubFakeData> array = new List<SubFakeData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(FakeData.DeserializeFakeData(item));
+                        array.Add(SubFakeData.DeserializeSubFakeData(item));
                     }
                     value = array;
                     continue;
@@ -35,7 +35,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new FakeListResult(value, nextLink.Value);
+            return new SubFakeListResult(value, nextLink.Value);
         }
     }
 }

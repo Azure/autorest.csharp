@@ -558,6 +558,162 @@ namespace MgmtListMethods
             }
         }
 
+        internal HttpMessage CreateListByLocationsRequest(string location)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
+            uri.AppendPath(location, true);
+            uri.AppendPath("/fakes", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public async Task<Response<FakeListResult>> ListByLocationsAsync(string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationsRequest(location);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public Response<FakeListResult> ListByLocations(string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationsRequest(location);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateListByLocationRequest(string resourceGroupName, string location)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
+            uri.AppendPath(location, true);
+            uri.AppendPath("/fakes", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
+        public async Task<Response<FakeListResult>> ListByLocationAsync(string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationRequest(resourceGroupName, location);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
+        public Response<FakeListResult> ListByLocation(string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationRequest(resourceGroupName, location);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string requiredParam, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
@@ -701,6 +857,93 @@ namespace MgmtListMethods
             }
 
             using var message = CreateListBySubscriptionNextPageRequest(nextLink, statusOnly);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string resourceGroupName, string location)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendRawNextLink(nextLink, false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
+        public async Task<Response<FakeListResult>> ListByLocationNextPageAsync(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationNextPageRequest(nextLink, resourceGroupName, location);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        FakeListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="nextLink"> The URL to the next page of results. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
+        public Response<FakeListResult> ListByLocationNextPage(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        {
+            if (nextLink == null)
+            {
+                throw new ArgumentNullException(nameof(nextLink));
+            }
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            using var message = CreateListByLocationNextPageRequest(nextLink, resourceGroupName, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

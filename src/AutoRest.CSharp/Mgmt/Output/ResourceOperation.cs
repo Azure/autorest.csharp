@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -54,6 +53,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public Resource Resource => _context.Library.GetArmResource(OperationGroup);
 
+        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
+
         public string ResourceName => Resource.Type.Name;
 
         protected virtual string SuffixValue => OperationsSuffixValue;
@@ -71,6 +72,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(_context);
 
         public IEnumerable<ClientMethod> Methods => _methods ??= GetMethodsInScope();
+
+        public IEnumerable<ClientMethod> ResourceOperationsClientMethods => GetResourceOperationsClientMethods();
+
+        public IEnumerable<RestClientMethod> ResourceOperationsLROMethods => GetResourceOperationsLROMethods();
 
         public IDictionary<OperationGroup, MgmtNonResourceOperation> ChildOperations => _childOperations;
 
@@ -91,6 +96,53 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
             return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
+        }
+
+        private IEnumerable<ClientMethod> GetResourceOperationsClientMethods()
+        {
+            var clientMethods = new List<ClientMethod>();
+            foreach (var clientMethod in Methods)
+            {
+                var isMethodAlreadyExist = false;
+                if (ResourceContainer != null)
+                {
+                    isMethodAlreadyExist = clientMethod.RestClientMethod == ResourceContainer.CreateMethod ||
+                        ResourceContainer.RemainingMethods.Any(m => m == clientMethod) ||
+                        ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
+                        SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
+                }
+                if (!isMethodAlreadyExist)
+                {
+                    clientMethods.Add(clientMethod);
+                }
+            }
+
+            return clientMethods;
+        }
+
+        private IEnumerable<RestClientMethod> GetResourceOperationsLROMethods()
+        {
+            var clientMethods = new List<RestClientMethod>();
+            foreach (var clientMethod in RestClient.Methods)
+            {
+                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning)
+                {
+                    var isMethodExistInContainer = false;
+                    if (ResourceContainer != null)
+                    {
+                        isMethodExistInContainer = clientMethod == ResourceContainer.CreateMethod ||
+                            ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
+                            ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
+                            SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));
+                    }
+                    if (!isMethodExistInContainer)
+                    {
+                        clientMethods.Add(clientMethod);
+                    }
+                }
+            }
+
+            return clientMethods;
         }
 
         private IEnumerable<ResourceListMethod> GetResourceOperationsListMethod()
@@ -114,12 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            if (subscriptionExtensionsListMethods.Count > 0)
-            {
-                return subscriptionExtensionsListMethods;
-            }
-
-            return null;
+            return subscriptionExtensionsListMethods;
         }
 
         private IEnumerable<ResourceListMethod>? GetResourceGroupExtensionsListMethods()
@@ -138,12 +185,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            if (resourceGroupExtensionsListMethod.Count > 0)
-            {
-                return resourceGroupExtensionsListMethod;
-            }
-
-            return null;
+            return resourceGroupExtensionsListMethod;
         }
 
         private IEnumerable<ResourceListMethod>? GetTenantExtensionsListMethods()
@@ -164,12 +206,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            if (tenantExtensionListMethods.Count > 0)
-            {
-                return tenantExtensionListMethods;
-            }
-
-            return null;
+            return tenantExtensionListMethods;
         }
 
         private IEnumerable<ResourceListMethod>? GetManagementGroupExtensionsListMethods()
@@ -188,18 +225,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            if (managementGroupExtensionsListMethod.Count > 0)
-            {
-                return managementGroupExtensionsListMethod;
-            }
-
-            return null;
+            return managementGroupExtensionsListMethod;
         }
 
         protected IEnumerable<ResourceListMethod> GetListMethods(bool parentExistsInPathParam, bool returnTypeIsResourceData)
         {
             List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
-
+            var test = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
             foreach (var pagingMethod in PagingMethods)
             {
                 if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, pagingMethod.Method))
@@ -224,7 +256,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             bool isParentExistsInPathParams = false;
             bool isReturnTypeResourceData = false;
 
-            isParentExistsInPathParams = IsParentExistsInPathParamaters(OperationGroup, clientMethod);
+            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+            isParentExistsInPathParams = MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+
             var resourceData = _context.Library.GetResourceData(OperationGroup);
             var returnType = clientMethod.ReturnType;
             if (returnType != null && !returnType.IsFrameworkType)
@@ -243,45 +277,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return false;
-        }
-
-        private bool IsParentExistsInPathParamaters(OperationGroup operationGroup, RestClientMethod clientMethod)
-        {
-            var isParentExistsInPathParams = false;
-            if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
-            {
-                var parentResourceType = operationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-                // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
-                var fullPath = httpRequest.Path;
-
-                // This will replace -
-                // "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children" with
-                // "/subscriptions/resourceGroups/providers/Microsoft.Compute/parents/subParents/children" in order to find the parent
-                var path = Regex.Replace(fullPath, @"\{[a-zA-Z]+\}\/", "");
-                var isParentFound = path.IndexOf(parentResourceType);
-                if (isParentFound != -1)
-                {
-                    // Parent is found, now check if the parent exists in path parameters
-                    var parentArr = parentResourceType.Split('/');
-                    var fullPathArr = fullPath.Split('/');
-                    foreach (var parentSegment in parentArr)
-                    {
-                        var index = Array.IndexOf(fullPathArr, parentSegment);
-                        if (index + 1 < fullPathArr.Length && fullPathArr[index + 1].StartsWith('{'))
-                        {
-                            char[] charsToTrim = { '{', '}' };
-                            var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
-                            isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
-                            if (isParentExistsInPathParams)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return isParentExistsInPathParams;
         }
 
         public Diagnostic GetDiagnostic(RestClientMethod method)

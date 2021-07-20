@@ -60,15 +60,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                                 foreach (var listMethod in resourceOperation.SubscriptionExtensionsListMethods)
                                 {
+                                    var methodName = "";
+                                    var count = resourceOperation.SubscriptionExtensionsListMethods.Count();
+
                                     if (listMethod.PagingMethod != null)
                                     {
-                                        var methodName = "";
-
-                                        if (resourceOperation.SubscriptionExtensionsListMethods.Count() == 1)
+                                        if (count == 1)
                                         {
                                             methodName = $"List{resource.Type.Name.ToPlural()}";
                                         }
-                                        else if (listMethod.PagingMethod.Name == "ListAll" || listMethod.PagingMethod.Name == "ListBySubscription")
+                                        else if (count > 1 && (listMethod.PagingMethod.Name == "ListAll" || listMethod.PagingMethod.Name == "ListBySubscription"))
                                         {
                                             methodName = $"List{resource.Type.Name.ToPlural()}";
                                         }
@@ -79,6 +80,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                         WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, true);
                                         WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, false);
                                     }
+
+                                    if (listMethod.ClientMethod != null)
+                                    {
+                                        if (count == 1)
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                        }
+                                        else if (count > 1 && (listMethod.ClientMethod.Name == "ListAll" || listMethod.ClientMethod.Name == "ListBySubscription"))
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                        }
+                                        else
+                                        {
+                                            methodName = listMethod.ClientMethod.Name;
+                                        }
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient.Type.Name);
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, false, resourceOperation.RestClient.Type.Name);
+                                    }
+
                                 }
 
                                 WriteListResourceByNameMethod(writer, resourceOperation, true);
@@ -106,8 +126,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, true, mgmtExtensionOperation.RestClient.Type.Name);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient.Type.Name);
                         }
 
                         writer.LineRaw("#endregion");

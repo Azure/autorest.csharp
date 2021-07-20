@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -113,6 +114,70 @@ namespace MgmtListMethods
                     }
                 }
                 return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static async Task<Response<IReadOnlyList<Fake>>> ListByLocationsAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetFakesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocations");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.ListByLocationsAsync(location, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(data => new Fake(subscription, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Response<IReadOnlyList<Fake>> ListByLocations(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetFakesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocations");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.ListByLocations(location, cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(data => new Fake(subscription, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
         }

@@ -296,11 +296,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
                     }
                 }
+            }
 
-                // WriteRemainingPagingMethods();
                 WriteListAsGenericResource(async: false);
                 WriteListAsGenericResource(async: true);
-            }
         }
 
         private void WriteListAsGenericResource(bool async)

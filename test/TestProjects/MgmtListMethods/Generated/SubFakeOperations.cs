@@ -15,40 +15,40 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the operations that can be performed over a specific Fake. </summary>
-    public partial class FakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Fake>
+    /// <summary> A class representing the operations that can be performed over a specific SubFake. </summary>
+    public partial class SubFakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubFake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private FakesRestOperations _restClient { get; }
+        private SubFakesRestOperations _restClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="FakeOperations"/> class for mocking. </summary>
-        protected FakeOperations()
+        /// <summary> Initializes a new instance of the <see cref="SubFakeOperations"/> class for mocking. </summary>
+        protected SubFakeOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="FakeOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal FakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal SubFakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SubFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes";
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/subFakes";
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<Fake>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<SubFake>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -58,52 +58,14 @@ namespace MgmtListMethods
         }
 
         /// <inheritdoc />
-        public override Response<Fake> Get(CancellationToken cancellationToken = default)
+        public override Response<SubFake> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Fake>> GetAsync(string expand, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="expand"> May be used to expand the participants. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Fake> Get(string expand, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
+                var response = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -128,11 +90,11 @@ namespace MgmtListMethods
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Delete an fake. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Delete");
             scope.Start();
             try
             {
@@ -146,11 +108,11 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Delete an fake. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Delete");
             scope.Start();
             try
             {
@@ -164,16 +126,16 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Delete an fake. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async Task<SubFakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.StartDelete");
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new FakesDeleteOperation(response);
+                var response = await _restClient.DeleteAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new SubFakesDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -182,16 +144,16 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Delete an fake. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public SubFakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.StartDelete");
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new FakesDeleteOperation(response);
+                var response = _restClient.Delete(Id.Parent.Name, Id.Name, cancellationToken);
+                return new SubFakesDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -205,22 +167,22 @@ namespace MgmtListMethods
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<Fake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<SubFake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.AddTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -234,22 +196,22 @@ namespace MgmtListMethods
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<Fake> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<SubFake> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.AddTag");
             scope.Start();
             try
             {
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -262,14 +224,14 @@ namespace MgmtListMethods
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<Fake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<SubFake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.SetTags");
             scope.Start();
             try
             {
@@ -277,8 +239,8 @@ namespace MgmtListMethods
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -291,14 +253,14 @@ namespace MgmtListMethods
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<Fake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<SubFake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.SetTags");
             scope.Start();
             try
             {
@@ -306,8 +268,8 @@ namespace MgmtListMethods
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -320,22 +282,22 @@ namespace MgmtListMethods
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<Fake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<SubFake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -348,42 +310,28 @@ namespace MgmtListMethods
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<Fake> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<SubFake> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.RemoveTag");
             scope.Start();
             try
             {
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                var originalResponse = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(new SubFake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Gets a list of SubFakes in the Fake. </summary>
-        /// <returns> An object representing collection of SubFakes and their operations over a Fake. </returns>
-        public SubFakeContainer GetSubFakes()
-        {
-            return new SubFakeContainer(this);
-        }
-
-        /// <summary> Gets a list of TheExtensionFakes in the Fake. </summary>
-        /// <returns> An object representing collection of TheExtensionFakes and their operations over a Fake. </returns>
-        public TheExtensionFakeContainer GetTheExtensionFakes()
-        {
-            return new TheExtensionFakeContainer(this);
         }
     }
 }
