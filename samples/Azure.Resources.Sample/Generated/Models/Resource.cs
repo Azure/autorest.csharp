@@ -11,20 +11,30 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Resources.Sample
 {
-    /// <summary> Specified resource. </summary>
-    internal partial class Resource : Resource<TenantResourceIdentifier>
+    /// <summary> Resource information. </summary>
+    public partial class Resource : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of Resource. </summary>
-        internal Resource()
+        public Resource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal Resource(ResourceGroupResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
+        {
+            Location = location;
+            Tags = tags;
+        }
+
         /// <summary> Resource location. </summary>
-        public string Location { get; }
-        /// <summary> Resource extended location. </summary>
-        public ExtendedLocation ExtendedLocation { get; }
+        public string Location { get; set; }
         /// <summary> Resource tags. </summary>
-        public IReadOnlyDictionary<string, string> Tags { get; }
+        public IDictionary<string, string> Tags { get; }
     }
 }

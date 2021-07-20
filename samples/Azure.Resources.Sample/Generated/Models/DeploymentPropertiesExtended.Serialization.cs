@@ -142,7 +142,7 @@ namespace Azure.Resources.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    mode = property.Value.GetString().ToDeploymentMode();
+                    mode = new DeploymentMode(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("debugSetting"))

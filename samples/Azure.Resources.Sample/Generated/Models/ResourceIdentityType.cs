@@ -8,7 +8,7 @@
 namespace Azure.Resources.Sample
 {
     /// <summary> The identity type. </summary>
-    internal enum ResourceIdentityType
+    public enum ResourceIdentityType
     {
         /// <summary> SystemAssigned. </summary>
         SystemAssigned,

@@ -5,27 +5,37 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace Azure.Resources.Sample
 {
     /// <summary> Resource information. </summary>
-    internal partial class GenericResource : Resource
+    public partial class GenericResource : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of GenericResource. </summary>
-        internal GenericResource()
+        /// <param name="location"> The location. </param>
+        public GenericResource(Location location) : base(location)
         {
         }
 
-        /// <summary> The plan of the resource. </summary>
-        public Plan Plan { get; }
-        /// <summary> The resource properties. </summary>
-        public object Properties { get; }
-        /// <summary> The kind of the resource. </summary>
-        public string Kind { get; }
+        /// <summary> Initializes a new instance of GenericResource. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="managedBy"> ID of the resource that manages this resource. </param>
+        /// <param name="sku"> The SKU of the resource. </param>
+        internal GenericResource(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string managedBy, Sku sku) : base(id, name, type, location, tags)
+        {
+            ManagedBy = managedBy;
+            Sku = sku;
+        }
+
         /// <summary> ID of the resource that manages this resource. </summary>
-        public string ManagedBy { get; }
+        public string ManagedBy { get; set; }
         /// <summary> The SKU of the resource. </summary>
-        public Sku Sku { get; }
-        /// <summary> The identity of the resource. </summary>
-        public Identity Identity { get; }
+        public Sku Sku { get; set; }
     }
 }

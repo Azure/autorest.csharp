@@ -21,5 +21,45 @@ namespace Azure.Resources.Sample
             return new DeploymentExtendedContainer(managementGroup);
         }
         #endregion
+
+        #region PolicyAssignment
+        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
+        public static PolicyAssignmentContainer GetPolicyAssignmentContainer(this ManagementGroupOperations managementGroup)
+        {
+            return new PolicyAssignmentContainer(managementGroup);
+        }
+        #endregion
+
+        #region PolicyExemption
+        /// <summary> Gets an object representing a PolicyExemptionContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyExemptionContainer" /> object. </returns>
+        public static PolicyExemptionContainer GetPolicyExemptionContainer(this ManagementGroupOperations managementGroup)
+        {
+            return new PolicyExemptionContainer(managementGroup);
+        }
+        #endregion
+
+        #region ManagementLockObject
+        /// <summary> Gets an object representing a ManagementLockObjectContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ManagementLockObjectContainer" /> object. </returns>
+        public static ManagementLockObjectContainer GetManagementLockObjectContainer(this ManagementGroupOperations managementGroup)
+        {
+            return new ManagementLockObjectContainer(managementGroup);
+        }
+        #endregion
+
+        #region ResourceLink
+        /// <summary> Gets an object representing a ResourceLinkContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ResourceLinkContainer" /> object. </returns>
+        public static ResourceLinkContainer GetResourceLinkContainer(this ManagementGroupOperations managementGroup)
+        {
+            return new ResourceLinkContainer(managementGroup);
+        }
+        #endregion
     }
 }

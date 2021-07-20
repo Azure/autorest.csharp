@@ -14,7 +14,8 @@
     "DeploymentOperations": "Microsoft.Resources/deployments/operations",
     "ResourceLinks": "Microsoft.Resources/links",
     "Deployments": "Microsoft.Resources/deployments",
-    "DataPolicyManifests": "Microsoft.Authorization/dataPolicyManifests"
+    "DataPolicyManifests": "Microsoft.Authorization/dataPolicyManifests",
+    "DeploymentScriptLogs": "Microsoft.Resources/deploymentScripts/logs"
   },
   "OperationGroupToResource": {
     "DeploymentOperations": "DeploymentOperation",
@@ -22,7 +23,8 @@
     "Deployments": "DeploymentExtended",
     "DeploymentScripts": "DeploymentScript",
     "ApplicationDefinitions": "ApplicationDefinition",
-    "DataPolicyManifests": "DataPolicyManifest"
+    "DataPolicyManifests": "DataPolicyManifest",
+    "DeploymentScriptLogs": "ScriptLog"
   },
   "OperationGroupToParent": {
     "Deployments": "tenant",
@@ -31,7 +33,7 @@
     "PolicySetDefinitions": "tenant",
     "PolicyExemptions": "tenant",
     "DeploymentScripts": "resourceGroups",
-    "ManagementLocks": "resourceGroups",
+    "ManagementLocks": "tenant",
     "ResourceLinks": "tenant"
   }
 }

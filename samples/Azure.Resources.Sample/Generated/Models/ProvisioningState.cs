@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace Azure.Resources.Sample
 {
-    /// <summary> Denotes the state of provisioning. </summary>
+    /// <summary> Provisioning status of the managed application. </summary>
     public readonly partial struct ProvisioningState : IEquatable<ProvisioningState>
     {
         private readonly string _value;

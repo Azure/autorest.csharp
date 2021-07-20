@@ -21,5 +21,85 @@ namespace Azure.Resources.Sample
             return new DeploymentExtendedContainer(resourceGroup);
         }
         #endregion
+
+        #region PolicyAssignment
+        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
+        public static PolicyAssignmentContainer GetPolicyAssignments(this ResourceGroupOperations resourceGroup)
+        {
+            return new PolicyAssignmentContainer(resourceGroup);
+        }
+        #endregion
+
+        #region PolicyExemption
+        /// <summary> Gets an object representing a PolicyExemptionContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="PolicyExemptionContainer" /> object. </returns>
+        public static PolicyExemptionContainer GetPolicyExemptions(this ResourceGroupOperations resourceGroup)
+        {
+            return new PolicyExemptionContainer(resourceGroup);
+        }
+        #endregion
+
+        #region DeploymentScripts
+        /// <summary> Gets an object representing a DeploymentScriptContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="DeploymentScriptContainer" /> object. </returns>
+        public static DeploymentScriptContainer GetDeploymentScripts(this ResourceGroupOperations resourceGroup)
+        {
+            return new DeploymentScriptContainer(resourceGroup);
+        }
+        #endregion
+
+        #region ManagementLockObject
+        /// <summary> Gets an object representing a ManagementLockObjectContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ManagementLockObjectContainer" /> object. </returns>
+        public static ManagementLockObjectContainer GetManagementLockObjects(this ResourceGroupOperations resourceGroup)
+        {
+            return new ManagementLockObjectContainer(resourceGroup);
+        }
+        #endregion
+
+        #region ResourceLink
+        /// <summary> Gets an object representing a ResourceLinkContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ResourceLinkContainer" /> object. </returns>
+        public static ResourceLinkContainer GetResourceLinks(this ResourceGroupOperations resourceGroup)
+        {
+            return new ResourceLinkContainer(resourceGroup);
+        }
+        #endregion
+
+        #region Applications
+        /// <summary> Gets an object representing a ApplicationContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ApplicationContainer" /> object. </returns>
+        public static ApplicationContainer GetApplications(this ResourceGroupOperations resourceGroup)
+        {
+            return new ApplicationContainer(resourceGroup);
+        }
+        #endregion
+
+        #region ApplicationDefinitions
+        /// <summary> Gets an object representing a ApplicationDefinitionContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ApplicationDefinitionContainer" /> object. </returns>
+        public static ApplicationDefinitionContainer GetApplicationDefinitions(this ResourceGroupOperations resourceGroup)
+        {
+            return new ApplicationDefinitionContainer(resourceGroup);
+        }
+        #endregion
+
+        #region JitRequestDefinitions
+        /// <summary> Gets an object representing a JitRequestDefinitionContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="JitRequestDefinitionContainer" /> object. </returns>
+        public static JitRequestDefinitionContainer GetJitRequestDefinitions(this ResourceGroupOperations resourceGroup)
+        {
+            return new JitRequestDefinitionContainer(resourceGroup);
+        }
+        #endregion
     }
 }

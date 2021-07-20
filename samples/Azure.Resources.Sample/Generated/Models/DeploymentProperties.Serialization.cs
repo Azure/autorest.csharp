@@ -36,7 +36,7 @@ namespace Azure.Resources.Sample
                 writer.WriteObjectValue(ParametersLink);
             }
             writer.WritePropertyName("mode");
-            writer.WriteStringValue(Mode.ToSerialString());
+            writer.WriteStringValue(Mode.ToString());
             if (Optional.IsDefined(DebugSetting))
             {
                 writer.WritePropertyName("debugSetting");
