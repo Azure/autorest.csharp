@@ -12,6 +12,10 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a VirtualMachineExtensionImage along with the instance operations that can be performed on it. </summary>
     public class VirtualMachineExtensionImage : VirtualMachineExtensionImageOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class for mocking. </summary>
+        internal VirtualMachineExtensionImage() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

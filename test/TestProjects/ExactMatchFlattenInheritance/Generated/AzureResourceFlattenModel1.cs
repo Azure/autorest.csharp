@@ -12,6 +12,10 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A Class representing a AzureResourceFlattenModel1 along with the instance operations that can be performed on it. </summary>
     public class AzureResourceFlattenModel1 : AzureResourceFlattenModel1Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1"/> class for mocking. </summary>
+        internal AzureResourceFlattenModel1() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

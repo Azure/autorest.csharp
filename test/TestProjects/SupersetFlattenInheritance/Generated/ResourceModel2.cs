@@ -12,6 +12,10 @@ namespace SupersetFlattenInheritance
     /// <summary> A Class representing a ResourceModel2 along with the instance operations that can be performed on it. </summary>
     public class ResourceModel2 : ResourceModel2Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ResourceModel2"/> class for mocking. </summary>
+        internal ResourceModel2() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

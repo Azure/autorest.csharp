@@ -12,6 +12,10 @@ namespace SupersetFlattenInheritance
     /// <summary> A Class representing a CustomModel2 along with the instance operations that can be performed on it. </summary>
     public class CustomModel2 : CustomModel2Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "CustomModel2"/> class for mocking. </summary>
+        internal CustomModel2()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "CustomModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

@@ -13,6 +13,10 @@ namespace MgmtOperations
     /// <summary> A Class representing a AvailabilitySetChild along with the instance operations that can be performed on it. </summary>
     public class AvailabilitySetChild : AvailabilitySetChildOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChild"/> class for mocking. </summary>
+        internal AvailabilitySetChild() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChild"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

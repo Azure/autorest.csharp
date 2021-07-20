@@ -12,6 +12,10 @@ namespace ExactMatchInheritance
     /// <summary> A Class representing a ExactMatchModel1 along with the instance operations that can be performed on it. </summary>
     public class ExactMatchModel1 : ExactMatchModel1Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1"/> class for mocking. </summary>
+        internal ExactMatchModel1() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

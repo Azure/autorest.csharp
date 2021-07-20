@@ -12,6 +12,10 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a WritableSubRes3Resource along with the instance operations that can be performed on it. </summary>
     public class WritableSubRes3Resource : WritableSubRes3ResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "WritableSubRes3Resource"/> class for mocking. </summary>
+        internal WritableSubRes3Resource() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "WritableSubRes3Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

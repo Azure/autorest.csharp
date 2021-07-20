@@ -12,6 +12,10 @@ namespace MgmtSingleton
     /// <summary> A Class representing a ParentResource along with the instance operations that can be performed on it. </summary>
     public class ParentResource : ParentResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class for mocking. </summary>
+        internal ParentResource() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

@@ -13,6 +13,10 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeDecimalModel along with the instance operations that can be performed on it. </summary>
     public class PageSizeDecimalModel : PageSizeDecimalModelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class for mocking. </summary>
+        internal PageSizeDecimalModel() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

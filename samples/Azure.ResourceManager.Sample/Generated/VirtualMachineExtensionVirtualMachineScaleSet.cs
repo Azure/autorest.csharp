@@ -12,6 +12,10 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a VirtualMachineExtensionVirtualMachineScaleSet along with the instance operations that can be performed on it. </summary>
     public class VirtualMachineExtensionVirtualMachineScaleSet : VirtualMachineExtensionVirtualMachineScaleSetOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionVirtualMachineScaleSet"/> class for mocking. </summary>
+        internal VirtualMachineExtensionVirtualMachineScaleSet() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionVirtualMachineScaleSet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

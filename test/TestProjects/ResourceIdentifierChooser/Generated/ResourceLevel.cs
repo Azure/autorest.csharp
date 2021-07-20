@@ -12,6 +12,10 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a ResourceLevel along with the instance operations that can be performed on it. </summary>
     public class ResourceLevel : ResourceLevelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ResourceLevel"/> class for mocking. </summary>
+        internal ResourceLevel() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "ResourceLevel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

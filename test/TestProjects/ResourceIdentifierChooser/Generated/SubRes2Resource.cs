@@ -12,6 +12,10 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a SubRes2Resource along with the instance operations that can be performed on it. </summary>
     public class SubRes2Resource : SubRes2ResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SubRes2Resource"/> class for mocking. </summary>
+        internal SubRes2Resource() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "SubRes2Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

@@ -13,6 +13,10 @@ namespace MgmtMultipleParentResource
     /// <summary> A Class representing a SubParent along with the instance operations that can be performed on it. </summary>
     public class SubParent : SubParentOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class for mocking. </summary>
+        internal SubParent() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

@@ -13,6 +13,10 @@ namespace Azure.Management.Storage
     /// <summary> A Class representing a FileService along with the instance operations that can be performed on it. </summary>
     public class FileService : FileServiceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "FileService"/> class for mocking. </summary>
+        internal FileService() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "FileService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

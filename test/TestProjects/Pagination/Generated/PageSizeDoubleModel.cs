@@ -13,6 +13,10 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeDoubleModel along with the instance operations that can be performed on it. </summary>
     public class PageSizeDoubleModel : PageSizeDoubleModelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class for mocking. </summary>
+        internal PageSizeDoubleModel() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

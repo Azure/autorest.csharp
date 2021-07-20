@@ -12,6 +12,10 @@ namespace MgmtSingleton
     /// <summary> A Class representing a TenantParentSingleton along with the instance operations that can be performed on it. </summary>
     public class TenantParentSingleton : TenantParentSingletonOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class for mocking. </summary>
+        internal TenantParentSingleton() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

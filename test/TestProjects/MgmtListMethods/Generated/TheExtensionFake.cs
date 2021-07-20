@@ -13,6 +13,10 @@ namespace MgmtListMethods
     /// <summary> A Class representing a TheExtensionFake along with the instance operations that can be performed on it. </summary>
     public class TheExtensionFake : TheExtensionFakeOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "TheExtensionFake"/> class for mocking. </summary>
+        internal TheExtensionFake() : base()
+        {
+        }
         /// <summary> Initializes a new instance of the <see cref = "TheExtensionFake"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
