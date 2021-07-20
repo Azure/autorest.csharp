@@ -231,7 +231,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected IEnumerable<ResourceListMethod> GetListMethods(bool parentExistsInPathParam, bool returnTypeIsResourceData)
         {
             List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
-            var test = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
             foreach (var pagingMethod in PagingMethods)
             {
                 if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, pagingMethod.Method))
