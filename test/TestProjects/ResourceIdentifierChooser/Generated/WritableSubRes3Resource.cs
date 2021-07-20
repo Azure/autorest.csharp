@@ -16,6 +16,7 @@ namespace ResourceIdentifierChooser
         internal WritableSubRes3Resource() : base()
         {
         }
+
         /// <summary> Initializes a new instance of the <see cref = "WritableSubRes3Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

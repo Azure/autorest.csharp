@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     var baseConstructor = _resourceData.IsResource() ? $" : base()" : string.Empty;
                     using (_writer.Scope($"internal {cs.Name}(){baseConstructor}"))
                     { }
+                    _writer.Line();
 
                     // internal constructor
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");

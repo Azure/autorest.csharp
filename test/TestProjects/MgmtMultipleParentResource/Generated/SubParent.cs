@@ -17,6 +17,7 @@ namespace MgmtMultipleParentResource
         internal SubParent() : base()
         {
         }
+
         /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>

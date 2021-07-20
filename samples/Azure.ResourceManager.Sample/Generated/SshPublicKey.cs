@@ -16,6 +16,7 @@ namespace Azure.ResourceManager.Sample
         internal SshPublicKey() : base()
         {
         }
+
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKey"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
