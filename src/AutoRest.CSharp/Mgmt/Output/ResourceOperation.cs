@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -31,9 +32,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
         private IEnumerable<ResourceListMethod>? _resourceOperationsListMethods;
-        private ResourceListMethod? _subscriptionExtensionsListMethod;
-        private ResourceListMethod? _tenantListMethod;
-        private ResourceListMethod? _locationsListMethod;
+        private IEnumerable<ResourceListMethod>? _subscriptionExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _resourceGroupExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _tenantExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _managementGroupExtensionsListMethods;
 
         private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
 
@@ -76,11 +78,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ResourceListMethod> ResourceOperationsListMethods => _resourceOperationsListMethods ??= GetResourceOperationsListMethod();
 
-        public ResourceListMethod? SubscriptionExtensionsListMethod => _subscriptionExtensionsListMethod ??= GetSubscriptionExtensionsListMethod();
+        public IEnumerable<ResourceListMethod>? SubscriptionExtensionsListMethods => _subscriptionExtensionsListMethods ??= GetSubscriptionExtensionsListMethods();
 
-        public ResourceListMethod? TenantListMethod => _tenantListMethod ??= GetTenantListMethod();
+        public IEnumerable<ResourceListMethod>? ResourceGroupExtensionsListMethods => _resourceGroupExtensionsListMethods ??= GetResourceGroupExtensionsListMethods();
 
-        public ResourceListMethod? LocationsListMethod => _locationsListMethod ??= GetLocationsListMethod();
+        public IEnumerable<ResourceListMethod>? TenantExtensionsListMethods => _tenantExtensionsListMethods ??= GetTenantExtensionsListMethods();
+
+        public IEnumerable<ResourceListMethod>? ManagementGroupExtensionListMethods => _managementGroupExtensionsListMethods ??= GetManagementGroupExtensionsListMethods();
 
         public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
 
@@ -94,94 +98,99 @@ namespace AutoRest.CSharp.Mgmt.Output
             return GetListMethods(true, false);
         }
 
-        private ResourceListMethod? GetSubscriptionExtensionsListMethod()
+        private IEnumerable<ResourceListMethod>? GetSubscriptionExtensionsListMethods()
         {
             var listMethods = GetListMethods(false, true);
+            var subscriptionExtensionsListMethods = new List<ResourceListMethod>();
+
             foreach (var listMethod in listMethods)
             {
-                var restClientMethod = GetRestClientMethod(listMethod);
-                var pathSegments = restClientMethod?.Request.PathSegments;
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
-                // subscriptions scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/subscriptions/") &&
-                    !pathSegments.Any(p => p.Value.IsConstant && (p.Value.Constant.Value?.ToString() == "/resourceGroups/" || p.Value.Constant.Value?.ToString() == "/providers/Microsoft.Compute/locations/")))
+                // Subscriptions scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/"))
                 {
-                    return listMethod;
+                    subscriptionExtensionsListMethods.Add(listMethod);
                 }
+            }
+
+            if (subscriptionExtensionsListMethods.Count > 0)
+            {
+                return subscriptionExtensionsListMethods;
             }
 
             return null;
         }
 
-        private ResourceListMethod? GetLocationsListMethod()
+        private IEnumerable<ResourceListMethod>? GetResourceGroupExtensionsListMethods()
         {
             var listMethods = GetListMethods(false, true);
+            var resourceGroupExtensionsListMethod = new List<ResourceListMethod>();
+
             foreach (var listMethod in listMethods)
             {
-                var restClientMethod = GetRestClientMethod(listMethod);
-                var pathSegments = restClientMethod?.Request.PathSegments;
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
-                // locations scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/subscriptions/") &&
-                    pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/providers/Microsoft.Compute/locations/") &&
-                    !pathSegments.Any(p => p.Value.IsConstant && (p.Value.Constant.Value?.ToString() == "/resourceGroups/")))
+                // Resource group scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
                 {
-                    return listMethod;
+                    resourceGroupExtensionsListMethod.Add(listMethod);
                 }
+            }
+
+            if (resourceGroupExtensionsListMethod.Count > 0)
+            {
+                return resourceGroupExtensionsListMethod;
             }
 
             return null;
         }
 
-        private ResourceListMethod? GetResourceGroupsListMethod()
+        private IEnumerable<ResourceListMethod>? GetTenantExtensionsListMethods()
         {
             var listMethods = GetListMethods(false, true);
+            var tenantExtensionListMethods = new List<ResourceListMethod>();
+
             foreach (var listMethod in listMethods)
             {
-                var restClientMethod = GetRestClientMethod(listMethod);
-                var pathSegments = restClientMethod?.Request.PathSegments;
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
-                // resourceGroups scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/resourceGroups/"))
+                // Tenant scope
+                if (!pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") &&
+                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/") &&
+                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
                 {
-                    return listMethod;
+                    tenantExtensionListMethods.Add(listMethod);
                 }
+            }
+
+            if (tenantExtensionListMethods.Count > 0)
+            {
+                return tenantExtensionListMethods;
             }
 
             return null;
         }
 
-        private ResourceListMethod? GetTenantListMethod()
+        private IEnumerable<ResourceListMethod>? GetManagementGroupExtensionsListMethods()
         {
             var listMethods = GetListMethods(false, true);
+            var managementGroupExtensionsListMethod = new List<ResourceListMethod>();
+
             foreach (var listMethod in listMethods)
             {
-                var restClientMethod = GetRestClientMethod(listMethod);
-                var pathSegments = restClientMethod?.Request.PathSegments;
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
-                // tenant scope
-                if (!pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/subscriptions/") &&
-                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/resourceGroups/"))
+                // Management Group scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
                 {
-                    return listMethod;
+                    managementGroupExtensionsListMethod.Add(listMethod);
                 }
             }
 
-            return null;
-        }
-
-        public RestClientMethod? GetRestClientMethod(ResourceListMethod? listMethod)
-        {
-            if (listMethod != null)
+            if (managementGroupExtensionsListMethod.Count > 0)
             {
-                if (listMethod.PagingMethod != null)
-                {
-                    return listMethod.PagingMethod.Method;
-                }
-                else if (listMethod.ClientMethod != null)
-                {
-                    return listMethod.ClientMethod.RestClientMethod;
-                }
+                return managementGroupExtensionsListMethod;
             }
 
             return null;
@@ -190,13 +199,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected IEnumerable<ResourceListMethod> GetListMethods(bool parentExistsInPathParam, bool returnTypeIsResourceData)
         {
             List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
-            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
 
             foreach (var pagingMethod in PagingMethods)
             {
                 if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, pagingMethod.Method))
                 {
-                    listMethods.Add(new ResourceListMethod(pagingMethod, null));
+                    listMethods.Add(new ResourceListMethod(pagingMethod));
                 }
             }
 
@@ -204,7 +212,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, method.RestClientMethod))
                 {
-                    listMethods.Add(new ResourceListMethod(null, method));
+                    listMethods.Add(new ResourceListMethod(method));
                 }
             }
 
@@ -213,26 +221,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private bool IsValidListMethod(bool parentExistsInPathParam, bool returnTypeIsResourceData, RestClientMethod clientMethod)
         {
-            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
             bool isParentExistsInPathParams = false;
             bool isReturnTypeResourceData = false;
 
-            var parentParamName = "";
-            if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
-            {
-                var path = httpRequest.Path;
-                var parentIndex = path.IndexOf(parentResourceType);
-                if (parentIndex > 0)
-                {
-                    path = path.Substring(parentIndex + parentResourceType.Length);
-                    var pathArr = path.Split('/');
-                    char[] charsToTrim = { '{', '}' };
-                    parentParamName = pathArr[1].Trim(charsToTrim);
-
-                    isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
-                }
-            }
-
+            isParentExistsInPathParams = IsParentExistsInPathParamaters(OperationGroup, clientMethod);
             var resourceData = _context.Library.GetResourceData(OperationGroup);
             var returnType = clientMethod.ReturnType;
             if (returnType != null && !returnType.IsFrameworkType)
@@ -251,6 +243,45 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return false;
+        }
+
+        private bool IsParentExistsInPathParamaters(OperationGroup operationGroup, RestClientMethod clientMethod)
+        {
+            var isParentExistsInPathParams = false;
+            if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
+            {
+                var parentResourceType = operationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+                // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
+                var fullPath = httpRequest.Path;
+
+                // This will replace -
+                // "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children" with
+                // "/subscriptions/resourceGroups/providers/Microsoft.Compute/parents/subParents/children" in order to find the parent
+                var path = Regex.Replace(fullPath, @"\{[a-zA-Z]+\}\/", "");
+                var isParentFound = path.IndexOf(parentResourceType);
+                if (isParentFound != -1)
+                {
+                    // Parent is found, now check if the parent exists in path parameters
+                    var parentArr = parentResourceType.Split('/');
+                    var fullPathArr = fullPath.Split('/');
+                    foreach (var parentSegment in parentArr)
+                    {
+                        var index = Array.IndexOf(fullPathArr, parentSegment);
+                        if (index + 1 < fullPathArr.Length && fullPathArr[index + 1].StartsWith('{'))
+                        {
+                            char[] charsToTrim = { '{', '}' };
+                            var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
+                            isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
+                            if (isParentExistsInPathParams)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return isParentExistsInPathParams;
         }
 
         public Diagnostic GetDiagnostic(RestClientMethod method)
@@ -272,10 +303,29 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             public ClientMethod? ClientMethod { get; }
 
-            public ResourceListMethod(PagingMethod? pagingMethod = null, ClientMethod? clientMethod = null)
+            public ResourceListMethod(PagingMethod pagingMethod)
             {
                 PagingMethod = pagingMethod;
+                ClientMethod = null;
+            }
+            public ResourceListMethod(ClientMethod clientMethod)
+            {
+                PagingMethod = null;
                 ClientMethod = clientMethod;
+            }
+
+            public RestClientMethod? GetRestClientMethod()
+            {
+                if (PagingMethod != null)
+                {
+                    return PagingMethod.Method;
+                }
+                else if (ClientMethod != null)
+                {
+                    return ClientMethod.RestClientMethod;
+                }
+
+                return null;
             }
         }
     }

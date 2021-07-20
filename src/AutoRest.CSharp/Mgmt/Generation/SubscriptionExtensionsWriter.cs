@@ -53,14 +53,33 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                            if (resourceOperation.SubscriptionExtensionsListMethod != null && resourceOperation.SubscriptionExtensionsListMethod.PagingMethod != null)
+                            if (resourceOperation.SubscriptionExtensionsListMethods != null && resourceOperation.SubscriptionExtensionsListMethods.Count() > 0)
                             {
                                 writer.Line($"#region {resource.Type.Name}");
                                 WriteGetRestOperations(writer, resourceOperation.RestClient);
 
-                                var pagingMethod = resourceOperation.SubscriptionExtensionsListMethod.PagingMethod;
-                                WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, true);
-                                WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, false);
+                                foreach (var listMethod in resourceOperation.SubscriptionExtensionsListMethods)
+                                {
+                                    if (listMethod.PagingMethod != null)
+                                    {
+                                        var methodName = "";
+
+                                        if (resourceOperation.SubscriptionExtensionsListMethods.Count() == 1)
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                        }
+                                        else if (listMethod.PagingMethod.Name == "ListAll" || listMethod.PagingMethod.Name == "ListBySubscription")
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                        }
+                                        else
+                                        {
+                                            methodName = listMethod.PagingMethod.Name;
+                                        }
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, true);
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, false);
+                                    }
+                                }
 
                                 WriteListResourceByNameMethod(writer, resourceOperation, true);
                                 WriteListResourceByNameMethod(writer, resourceOperation, false);
@@ -110,9 +129,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
+        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, string methodName, bool async)
         {
-            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, $"List{resource.Type.Name.ToPlural()}",
+            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, methodName,
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 

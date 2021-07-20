@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string TenantCommentName = "Tenant";
 
         private RestClientMethod? _createMethod;
-        private ResourceListMethod? _listMethod;
+        private IEnumerable<ResourceListMethod>? _listMethods;
         private ClientMethod? _getMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -38,34 +38,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod
-        && m.RestClientMethod != GetRestClientMethod(ListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.RestClientMethod));
-
-        public IEnumerable<PagingMethod> RemainingPagingMethods => PagingMethods.Where(m => m.Method != CreateMethod
-        && m.Method != GetRestClientMethod(ListMethod) && m.Method != GetRestClientMethod(SubscriptionExtensionsListMethod) && m.Method != GetRestClientMethod(LocationsListMethod) && !ResourceOperationsListMethods.Any(r => GetRestClientMethod(r) == m.Method));
+        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceOperationsListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
 
         public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
 
-        public ResourceListMethod? ListMethod => _listMethod ??= FindListMethod();
+        public IEnumerable<ResourceListMethod>? ListMethods => _listMethods ??= FindContainerListMethods();
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
 
-        private ResourceListMethod? FindListMethod()
+        private IEnumerable<ResourceListMethod>? FindContainerListMethods()
         {
-            var listMethods = GetListMethods(true, true);
-            foreach (var listMethod in listMethods)
-            {
-                var restClientMethod = GetRestClientMethod(listMethod);
-                var pathSegments = restClientMethod?.Request.PathSegments;
-
-                // resourceGroups scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == "/resourceGroups/"))
-                {
-
-                    return listMethod;
-                }
-            }
-
-            return null;
+            return GetListMethods(true, true);
         }
 
         private RestClientMethod? GetCreateMethod()

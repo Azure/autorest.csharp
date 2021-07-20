@@ -258,7 +258,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 {
                     isMethodExistInContainer = clientMethod.RestClientMethod == resourceContainer.CreateMethod ||
                         resourceContainer.RemainingMethods.Any(m => m == clientMethod) ||
-                        clientMethod.RestClientMethod == resourceOperation.GetRestClientMethod(resourceContainer.ListMethod);
+                        resourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod);
                 }
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod) &&
                     !isMethodExistInContainer)
@@ -302,7 +302,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 {
                     isMethodExistInContainer = clientMethod == resourceContainer.CreateMethod ||
                         resourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
-                        clientMethod == resourceOperation.GetRestClientMethod(resourceContainer.ListMethod);
+                        resourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod);
                 }
                 if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
                     !clientMethodsList.Contains(clientMethod) &&
