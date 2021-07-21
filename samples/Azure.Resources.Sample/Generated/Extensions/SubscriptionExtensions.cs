@@ -29,26 +29,6 @@ namespace Azure.Resources.Sample
         }
         #endregion
 
-        #region PolicyAssignment
-        /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
-        public static PolicyAssignmentContainer GetPolicyAssignmentContainer(this SubscriptionOperations subscription)
-        {
-            return new PolicyAssignmentContainer(subscription);
-        }
-        #endregion
-
-        #region PolicyExemption
-        /// <summary> Gets an object representing a PolicyExemptionContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="PolicyExemptionContainer" /> object. </returns>
-        public static PolicyExemptionContainer GetPolicyExemptionContainer(this SubscriptionOperations subscription)
-        {
-            return new PolicyExemptionContainer(subscription);
-        }
-        #endregion
-
         #region DeploymentScript
         private static DeploymentScriptsRestOperations GetDeploymentScriptsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -171,26 +151,6 @@ namespace Azure.Resources.Sample
             ResourceFilterCollection filters = new(DeploymentScriptOperations.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
-        }
-        #endregion
-
-        #region ManagementLockObject
-        /// <summary> Gets an object representing a ManagementLockObjectContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ManagementLockObjectContainer" /> object. </returns>
-        public static ManagementLockObjectContainer GetManagementLockObjectContainer(this SubscriptionOperations subscription)
-        {
-            return new ManagementLockObjectContainer(subscription);
-        }
-        #endregion
-
-        #region ResourceLink
-        /// <summary> Gets an object representing a ResourceLinkContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceLinkContainer" /> object. </returns>
-        public static ResourceLinkContainer GetResourceLinkContainer(this SubscriptionOperations subscription)
-        {
-            return new ResourceLinkContainer(subscription);
         }
         #endregion
 
