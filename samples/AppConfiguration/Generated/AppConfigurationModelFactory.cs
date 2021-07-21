@@ -11,7 +11,7 @@ namespace AppConfiguration.Models
     public static partial class AppConfigurationModelFactory
     {
         /// <summary> Initializes a new instance of Key. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         /// <returns> A new <see cref="Models.Key"/> instance for mocking. </returns>
         public static Key Key(string name = null)
         {
@@ -19,7 +19,7 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> Initializes a new instance of Label. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         /// <returns> A new <see cref="Models.Label"/> instance for mocking. </returns>
         public static Label Label(string name = null)
         {

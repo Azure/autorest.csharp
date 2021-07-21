@@ -16,8 +16,8 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of SomeProperties. </summary>
-        /// <param name="someProperty"> . </param>
-        /// <param name="someOtherProperty"> . </param>
+        /// <param name="someProperty"></param>
+        /// <param name="someOtherProperty"></param>
         internal SomeProperties(string someProperty, string someOtherProperty)
         {
             SomeProperty = someProperty;

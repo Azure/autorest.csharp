@@ -25,7 +25,7 @@ namespace ResourceIdentifierChooser
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
-        /// <param name="new"> . </param>
+        /// <param name="new"></param>
         internal SubscriptionLevelResourceData(SubscriptionResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;

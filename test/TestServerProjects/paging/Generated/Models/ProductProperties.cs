@@ -16,8 +16,8 @@ namespace paging.Models
         }
 
         /// <summary> Initializes a new instance of ProductProperties. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         internal ProductProperties(int? id, string name)
         {
             Id = id;

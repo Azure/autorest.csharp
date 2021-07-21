@@ -17,9 +17,9 @@ namespace azure_special_properties.Models
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
-        /// <param name="status"> . </param>
-        /// <param name="constantId"> . </param>
-        /// <param name="message"> . </param>
+        /// <param name="status"></param>
+        /// <param name="constantId"></param>
+        /// <param name="message"></param>
         internal Error(int? status, int constantId, string message)
         {
             Status = status;

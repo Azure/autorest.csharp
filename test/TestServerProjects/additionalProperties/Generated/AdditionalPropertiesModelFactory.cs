@@ -13,9 +13,9 @@ namespace additionalProperties.Models
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of PetAPTrue. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
         public static PetAPTrue PetAPTrue(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
@@ -26,9 +26,9 @@ namespace additionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of PetAPObject. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
         public static PetAPObject PetAPObject(int id = default, string name = null, bool? status = null, IDictionary<string, object> additionalProperties = null)
@@ -39,9 +39,9 @@ namespace additionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
         public static PetAPString PetAPString(int id = default, string name = null, bool? status = null, IDictionary<string, string> additionalProperties = null)
@@ -52,9 +52,9 @@ namespace additionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of PetAPInProperties. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <returns> A new <see cref="Models.PetAPInProperties"/> instance for mocking. </returns>
         public static PetAPInProperties PetAPInProperties(int id = default, string name = null, bool? status = null, IDictionary<string, float> additionalProperties = null)

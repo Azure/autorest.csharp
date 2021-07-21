@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
+                _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
                 _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
                 if (_resourceContainer.GetMethod != null)
                 {
@@ -224,7 +224,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             const string cancellationTokenParameter = "cancellationToken";
-            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""CancellationToken.None"" />.");
+            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
 
             _writer.Append($"public {AsyncKeyword(isAsync)} {OverrideKeyword(isOverride, true)} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
             foreach (var parameter in parameters)
@@ -305,11 +305,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string syncMethodName = "ListAsGenericResource";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
-            _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            _writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
-            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");
+            _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
+            _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
+            _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
             CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResourceExpanded));
             using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))

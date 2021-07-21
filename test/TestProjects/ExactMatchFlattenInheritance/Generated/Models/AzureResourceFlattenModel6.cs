@@ -19,8 +19,8 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel6. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal AzureResourceFlattenModel6(string id, string name, string type) : base(id)
         {
             Name = name;

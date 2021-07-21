@@ -21,7 +21,7 @@ namespace SupersetInheritance
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="new"> . </param>
+        /// <param name="new"></param>
         internal SupersetModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;

@@ -20,8 +20,8 @@ namespace paging.Models
         }
 
         /// <summary> Initializes a new instance of ProductResultValueWithXMSClientName. </summary>
-        /// <param name="indexes"> . </param>
-        /// <param name="nextLink"> . </param>
+        /// <param name="indexes"></param>
+        /// <param name="nextLink"></param>
         internal ProductResultValueWithXMSClientName(IReadOnlyList<Product> indexes, string nextLink)
         {
             Indexes = indexes;

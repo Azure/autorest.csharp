@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models
         {
         }
 
-        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, string? returnDescription, Parameter[] parameters, MethodSignature? baseMethod = default)
+        public MethodSignature(string name, string? description, string modifiers, CSharpType? returnType, FormattableString? returnDescription, Parameter[] parameters, MethodSignature? baseMethod = default)
         {
             Name = name;
             Description = description;
@@ -28,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models
         public string? Description { get; }
         public string Modifiers { get; }
         public CSharpType? ReturnType { get; }
-        public string? ReturnDescription { get; }
+        public FormattableString? ReturnDescription { get; }
         public Parameter[] Parameters { get; }
         public MethodSignature? BaseMethod { get; }
     }

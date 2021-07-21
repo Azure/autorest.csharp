@@ -25,7 +25,7 @@ namespace SupersetFlattenInheritance
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
-        /// <param name="foo"> . </param>
+        /// <param name="foo"></param>
         internal TrackedResourceModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;

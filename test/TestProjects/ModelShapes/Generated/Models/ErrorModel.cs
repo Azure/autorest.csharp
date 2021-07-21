@@ -16,8 +16,8 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>
-        /// <param name="code"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="code"></param>
+        /// <param name="status"></param>
         internal ErrorModel(string code, string status)
         {
             Code = code;

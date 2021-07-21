@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteHeaderProperty(CodeWriter writer, ResponseHeader header)
         {
             var type = header.Type;
-            writer.WriteXmlDocumentationSummary(header.Description);
+            writer.WriteXmlDocumentationSummary($"{header.Description}");
             writer.Append($"public {type} {header.Name} => ");
             if (!type.IsFrameworkType && type.Implementation is EnumType enumType)
             {

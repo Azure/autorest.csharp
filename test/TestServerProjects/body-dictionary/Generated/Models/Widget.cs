@@ -16,8 +16,8 @@ namespace body_dictionary.Models
         }
 
         /// <summary> Initializes a new instance of Widget. </summary>
-        /// <param name="integer"> . </param>
-        /// <param name="string"> . </param>
+        /// <param name="integer"></param>
+        /// <param name="string"></param>
         internal Widget(int? integer, string @string)
         {
             Integer = integer;

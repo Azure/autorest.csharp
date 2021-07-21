@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary(_resourceOperation.Description);
+                _writer.WriteXmlDocumentationSummary($"{_resourceOperation.Description}");
 
                 var operationGroup = _resourceOperation.OperationGroup;
                 var resource = _context.Library.GetArmResource(operationGroup);
@@ -145,10 +145,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // write "resource + id" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+            writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             if (!isSingleton)
             {
-                writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+                writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
             using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
@@ -319,15 +319,15 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
 
-            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
             foreach (var param in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
 
             CSharpType itemType = pagingMethod.PagingResponse.ItemType;
-            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
+            FormattableString returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentationReturns(returnText);
 
             var returnType = itemType.WrapPageable(async);
@@ -362,12 +362,12 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
             else
             {
-                writer.WriteXmlDocumentationSummary(clientMethod.Description);
+                writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
                 foreach (Parameter parameter in nonPathParameters)
                 {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                 }
-                writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+                writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             }
             var responseType = resource.Type.WrapAsyncResponse(async);
             writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
@@ -437,8 +437,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"A collection of locations that may take multiple service requests to iterate over.");
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
@@ -462,11 +462,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Add a tag to the current resource.");
-            writer.WriteXmlDocumentationParameter("key", "The key for the tag.");
-            writer.WriteXmlDocumentationParameter("value", "The value for the tag.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
+            writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
+            writer.WriteXmlDocumentationParameter("key", $"The key for the tag.");
+            writer.WriteXmlDocumentationParameter("value", $"The value for the tag.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
@@ -510,10 +510,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Replace the tags on the resource with the given set.");
-            writer.WriteXmlDocumentationParameter("tags", "The set of tags to use as replacement.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
+            writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
+            writer.WriteXmlDocumentationParameter("tags", $"The set of tags to use as replacement.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tags replaced.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
@@ -567,10 +567,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Removes a tag by key from the resource.");
-            writer.WriteXmlDocumentationParameter("key", "The key of the tag to remove.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
+            writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
+            writer.WriteXmlDocumentationParameter("key", $"The key of the tag to remove.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);

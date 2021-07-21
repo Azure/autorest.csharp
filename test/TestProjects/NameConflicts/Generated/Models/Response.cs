@@ -16,7 +16,7 @@ namespace NameConflicts.Models
         }
 
         /// <summary> Initializes a new instance of Response. </summary>
-        /// <param name="property"> . </param>
+        /// <param name="property"></param>
         internal Response(string property)
         {
             Property = property;

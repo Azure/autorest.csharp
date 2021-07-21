@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     implementsTypes.Add(schema.Inherits);
                 }
 
-                writer.WriteXmlDocumentationSummary(schema.Description);
+                writer.WriteXmlDocumentationSummary($"{schema.Description}");
 
                 if (schema.IsStruct)
                 {
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var property in schema.Properties)
                     {
-                        writer.WriteXmlDocumentationSummary(property.Description);
+                        writer.WriteXmlDocumentationSummary($"{property.Description}");
 
                         CSharpType propertyType = property.Declaration.Type;
                         writer.Append($"{property.Declaration.Accessibility} {propertyType} {property.Declaration.Name:D}");
@@ -119,13 +119,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(schema.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(schema.Description);
+                writer.WriteXmlDocumentationSummary($"{schema.Description}");
 
                 using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}"))
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
-                        writer.WriteXmlDocumentationSummary(value.Description);
+                        writer.WriteXmlDocumentationSummary($"{value.Description}");
                         writer.Line($"{value.Declaration.Name},");
                     }
                     writer.RemoveTrailingComma();
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(schema.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(schema.Description);
+                writer.WriteXmlDocumentationSummary($"{schema.Description}");
 
                 var implementType = new CSharpType(typeof(IEquatable<>), cs);
                 using (writer.Scope($"{schema.Declaration.Accessibility} readonly partial struct {name}: {implementType}"))
@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var choice in schema.Values)
                     {
-                        writer.WriteXmlDocumentationSummary(choice.Description);
+                        writer.WriteXmlDocumentationSummary($"{choice.Description}");
                         var fieldName = GetValueFieldName(name, choice.Declaration.Name, schema.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }

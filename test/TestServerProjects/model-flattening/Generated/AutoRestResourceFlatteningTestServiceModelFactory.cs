@@ -32,10 +32,10 @@ namespace model_flattening.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="pName"> . </param>
-        /// <param name="typePropertiesType"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
-        /// <param name="provisioningState"> . </param>
+        /// <param name="pName"></param>
+        /// <param name="typePropertiesType"></param>
+        /// <param name="provisioningStateValues"></param>
+        /// <param name="provisioningState"></param>
         /// <returns> A new <see cref="Models.FlattenedProduct"/> instance for mocking. </returns>
         public static FlattenedProduct FlattenedProduct(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string pName = null, string typePropertiesType = null, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues = null, string provisioningState = null)
         {

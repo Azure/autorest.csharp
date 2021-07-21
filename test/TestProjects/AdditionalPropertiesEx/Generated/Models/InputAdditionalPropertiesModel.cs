@@ -14,7 +14,7 @@ namespace AdditionalPropertiesEx.Models
     public partial class InputAdditionalPropertiesModel
     {
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         public InputAdditionalPropertiesModel(int id)
         {
             Id = id;

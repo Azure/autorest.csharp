@@ -11,7 +11,7 @@ namespace httpInfrastructure.Models
     public static partial class AutoRestHttpInfrastructureTestServiceModelFactory
     {
         /// <summary> Initializes a new instance of MyException. </summary>
-        /// <param name="statusCode"> . </param>
+        /// <param name="statusCode"></param>
         /// <returns> A new <see cref="Models.MyException"/> instance for mocking. </returns>
         public static MyException MyException(string statusCode = null)
         {
@@ -19,8 +19,8 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of B. </summary>
-        /// <param name="statusCode"> . </param>
-        /// <param name="textStatusCode"> . </param>
+        /// <param name="statusCode"></param>
+        /// <param name="textStatusCode"></param>
         /// <returns> A new <see cref="Models.B"/> instance for mocking. </returns>
         public static B B(string statusCode = null, string textStatusCode = null)
         {
@@ -28,7 +28,7 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of C. </summary>
-        /// <param name="httpCode"> . </param>
+        /// <param name="httpCode"></param>
         /// <returns> A new <see cref="Models.C"/> instance for mocking. </returns>
         public static C C(string httpCode = null)
         {
@@ -36,7 +36,7 @@ namespace httpInfrastructure.Models
         }
 
         /// <summary> Initializes a new instance of D. </summary>
-        /// <param name="httpStatusCode"> . </param>
+        /// <param name="httpStatusCode"></param>
         /// <returns> A new <see cref="Models.D"/> instance for mocking. </returns>
         public static D D(string httpStatusCode = null)
         {

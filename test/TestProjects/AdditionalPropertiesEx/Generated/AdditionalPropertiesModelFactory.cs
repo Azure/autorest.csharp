@@ -13,7 +13,7 @@ namespace AdditionalPropertiesEx.Models
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)
@@ -24,7 +24,7 @@ namespace AdditionalPropertiesEx.Models
         }
 
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModelStruct. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = null)

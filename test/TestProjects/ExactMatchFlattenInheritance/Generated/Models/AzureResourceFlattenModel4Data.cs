@@ -17,9 +17,9 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel4Data. </summary>
         /// <param name="foo"> New property. </param>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal AzureResourceFlattenModel4Data(int? foo, int? id, string name, string type)
         {
             Foo = foo;

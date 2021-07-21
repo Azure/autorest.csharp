@@ -16,8 +16,8 @@ namespace multiple_inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Feline. </summary>
-        /// <param name="meows"> . </param>
-        /// <param name="hisses"> . </param>
+        /// <param name="meows"></param>
+        /// <param name="hisses"></param>
         internal Feline(bool? meows, bool? hisses)
         {
             Meows = meows;

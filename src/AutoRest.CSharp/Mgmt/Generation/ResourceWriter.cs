@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Namespace(cs.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary(_resource.Description);
+                _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
 
                 using (_writer.Scope($"{_resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
                 {
@@ -46,8 +46,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     // internal constructor
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
-                    _writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
-                    _writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
+                    _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
+                    _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
                     baseConstructor = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
                     if (!string.IsNullOrEmpty(baseConstructor) && _resource.OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
