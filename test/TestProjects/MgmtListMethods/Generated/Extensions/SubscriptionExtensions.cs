@@ -123,7 +123,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<Fake>>> ListByLocationsAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<Fake>>> ListFakesByLocationAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -134,11 +134,11 @@ namespace MgmtListMethods
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetFakesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocations");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = await restOperations.ListByLocationsAsync(location, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListByLocationAsync(location, cancellationToken).ConfigureAwait(false);
                     return Response.FromValue(response.Value.Value.Select(data => new Fake(subscription, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -155,7 +155,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<IReadOnlyList<Fake>> ListByLocations(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<Fake>> ListFakesByLocation(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -166,11 +166,11 @@ namespace MgmtListMethods
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetFakesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocations");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakesByLocation");
                 scope.Start();
                 try
                 {
-                    var response = restOperations.ListByLocations(location, cancellationToken);
+                    var response = restOperations.ListByLocation(location, cancellationToken);
                     return Response.FromValue(response.Value.Value.Select(data => new Fake(subscription, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
                 }
                 catch (Exception e)

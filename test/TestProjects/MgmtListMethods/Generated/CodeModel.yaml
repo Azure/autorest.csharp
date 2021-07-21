@@ -1763,7 +1763,7 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: ListByLocations
+            name: ListByLocation
             description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
         protocol: !Protocols {}
       - !Operation 
@@ -1846,7 +1846,7 @@ operationGroups:
             nextLinkName: nextLink
         language: !Languages 
           default:
-            name: ListByLocation
+            name: ListByLocations
             description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
             paging:
               nextLinkName: nextLink

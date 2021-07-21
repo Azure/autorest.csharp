@@ -406,11 +406,11 @@ namespace MgmtListMethods
         {
             Page<Fake> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListByLocation(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.ListByLocations(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -421,11 +421,11 @@ namespace MgmtListMethods
             }
             Page<Fake> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListByLocationNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.ListByLocationsNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -444,11 +444,11 @@ namespace MgmtListMethods
         {
             async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListByLocationAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListByLocationsAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -459,11 +459,11 @@ namespace MgmtListMethods
             }
             async Task<Page<Fake>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocation");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListByLocationNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListByLocationsNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

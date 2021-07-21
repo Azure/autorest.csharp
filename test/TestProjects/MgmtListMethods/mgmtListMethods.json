@@ -503,7 +503,7 @@
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "Fakes_ListByLocations",
+                "operationId": "Fakes_ListByLocation",
                 "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
                 "parameters": [
                     {
@@ -536,7 +536,7 @@
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "Fakes_ListByLocation",
+                "operationId": "Fakes_ListByLocations",
                 "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
                 "parameters": [
                     {

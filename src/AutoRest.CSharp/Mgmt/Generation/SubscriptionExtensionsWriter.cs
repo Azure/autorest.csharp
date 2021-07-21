@@ -60,41 +60,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                                 foreach (var listMethod in resourceOperation.SubscriptionExtensionsListMethods)
                                 {
-                                    var methodName = "";
+                                    var methodName = $"List{resource.Type.Name.ToPlural()}";
                                     var count = resourceOperation.SubscriptionExtensionsListMethods.Count();
-
                                     if (listMethod.PagingMethod != null)
                                     {
-                                        if (count == 1)
+                                        if (count > 1 && listMethod.PagingMethod.Name == "ListByLocation")
                                         {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
                                         }
-                                        else if (count > 1 && (listMethod.PagingMethod.Name == "ListAll" || listMethod.PagingMethod.Name == "ListBySubscription"))
-                                        {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}";
-                                        }
-                                        else
-                                        {
-                                            methodName = listMethod.PagingMethod.Name;
-                                        }
+
                                         WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, true);
                                         WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, false);
                                     }
 
                                     if (listMethod.ClientMethod != null)
                                     {
-                                        if (count == 1)
+                                        if (count > 1 && listMethod.ClientMethod.Name == "ListByLocation")
                                         {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}";
+                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
                                         }
-                                        else if (count > 1 && (listMethod.ClientMethod.Name == "ListAll" || listMethod.ClientMethod.Name == "ListBySubscription"))
-                                        {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}";
-                                        }
-                                        else
-                                        {
-                                            methodName = listMethod.ClientMethod.Name;
-                                        }
+
                                         WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient.Type.Name);
                                         WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, false, resourceOperation.RestClient.Type.Name);
                                     }

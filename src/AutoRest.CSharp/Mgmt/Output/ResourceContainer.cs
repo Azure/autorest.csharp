@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string TenantCommentName = "Tenant";
 
         private RestClientMethod? _createMethod;
-        private IEnumerable<ResourceListMethod>? _listMethods;
         private ClientMethod? _getMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -42,11 +41,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
 
-        public IEnumerable<ResourceListMethod>? ListMethods => _listMethods ??= FindContainerListMethods();
+        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods();
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
 
-        private IEnumerable<ResourceListMethod>? FindContainerListMethods()
+        private IEnumerable<ResourceListMethod> FindContainerListMethods()
         {
             return GetListMethods(true, true);
         }

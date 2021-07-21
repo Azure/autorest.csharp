@@ -279,27 +279,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            if (_resourceContainer.ListMethods != null)
+            foreach (var listMethod in _resourceContainer.ListMethods)
             {
-                foreach (var listMethod in _resourceContainer.ListMethods)
+                if (listMethod.PagingMethod != null)
                 {
-                    if (listMethod.PagingMethod != null)
-                    {
-                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                    }
+                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                }
 
-                    if (listMethod.ClientMethod != null)
-                    {
-                        _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
-                    }
+                if (listMethod.ClientMethod != null)
+                {
+                    _writer.Line();
+                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
                 }
             }
 
-                WriteListAsGenericResource(async: false);
-                WriteListAsGenericResource(async: true);
+            WriteListAsGenericResource(async: false);
+            WriteListAsGenericResource(async: true);
         }
 
         private void WriteListAsGenericResource(bool async)

@@ -543,7 +543,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<VirtualMachine> ListByLocationAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachine> ListVirtualMachinesByLocationAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -556,7 +556,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
                     scope.Start();
                     try
                     {
@@ -571,7 +571,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
                     scope.Start();
                     try
                     {
@@ -595,7 +595,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<VirtualMachine> ListByLocation(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachine> ListVirtualMachinesByLocation(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -608,7 +608,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
                     scope.Start();
                     try
                     {
@@ -623,7 +623,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
                     scope.Start();
                     try
                     {

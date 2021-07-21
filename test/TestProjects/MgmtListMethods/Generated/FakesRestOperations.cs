@@ -558,7 +558,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListByLocationsRequest(string location)
+        internal HttpMessage CreateListByLocationRequest(string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -580,14 +580,14 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationsAsync(string location, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeListResult>> ListByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationsRequest(location);
+            using var message = CreateListByLocationRequest(location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -607,14 +607,14 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocations(string location, CancellationToken cancellationToken = default)
+        public Response<FakeListResult> ListByLocation(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationsRequest(location);
+            using var message = CreateListByLocationRequest(location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -630,7 +630,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListByLocationRequest(string resourceGroupName, string location)
+        internal HttpMessage CreateListByLocationsRequest(string resourceGroupName, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -655,7 +655,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationAsync(string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeListResult>> ListByLocationsAsync(string resourceGroupName, string location, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -666,7 +666,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationRequest(resourceGroupName, location);
+            using var message = CreateListByLocationsRequest(resourceGroupName, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -687,7 +687,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocation(string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        public Response<FakeListResult> ListByLocations(string resourceGroupName, string location, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -698,7 +698,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationRequest(resourceGroupName, location);
+            using var message = CreateListByLocationsRequest(resourceGroupName, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -872,7 +872,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListByLocationNextPageRequest(string nextLink, string resourceGroupName, string location)
+        internal HttpMessage CreateListByLocationsNextPageRequest(string nextLink, string resourceGroupName, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -891,7 +891,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationNextPageAsync(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeListResult>> ListByLocationsNextPageAsync(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -906,7 +906,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationNextPageRequest(nextLink, resourceGroupName, location);
+            using var message = CreateListByLocationsNextPageRequest(nextLink, resourceGroupName, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -928,7 +928,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocationNextPage(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
+        public Response<FakeListResult> ListByLocationsNextPage(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -943,7 +943,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListByLocationNextPageRequest(nextLink, resourceGroupName, location);
+            using var message = CreateListByLocationsNextPageRequest(nextLink, resourceGroupName, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
