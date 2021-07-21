@@ -105,7 +105,7 @@ namespace body_complex
         ///             &apos;jawsize&apos;: 5
         ///           }
         ///         ]
-        ///       };.
+        ///       };
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
@@ -157,7 +157,7 @@ namespace body_complex
         ///             &apos;jawsize&apos;: 5
         ///           }
         ///         ]
-        ///       };.
+        ///       };
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
@@ -410,7 +410,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
@@ -455,7 +455,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValidMissingRequired(Fish complexBody, CancellationToken cancellationToken = default)

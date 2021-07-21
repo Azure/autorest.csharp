@@ -24,7 +24,7 @@ namespace OperationGroupMappings
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -76,7 +76,7 @@ namespace OperationGroupMappings
             );
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

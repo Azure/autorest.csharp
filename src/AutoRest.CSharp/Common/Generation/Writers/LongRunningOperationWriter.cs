@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(operation.Description);
+                writer.WriteXmlDocumentationSummary($"{operation.Description}");
                 var interfaceType = GetInterfaceType(operation);
                 var baseType = GetBaseType(operation);
                 var helperType = GetHelperType(operation);

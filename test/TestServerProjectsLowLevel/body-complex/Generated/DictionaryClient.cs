@@ -157,7 +157,7 @@ namespace body_complex_LowLevel
         ///     <term>defaultProgram</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -214,7 +214,7 @@ namespace body_complex_LowLevel
         ///     <term>defaultProgram</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -382,7 +382,7 @@ namespace body_complex_LowLevel
         ///     <term>defaultProgram</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -439,7 +439,7 @@ namespace body_complex_LowLevel
         ///     <term>defaultProgram</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         /// </list>
         /// </remarks>

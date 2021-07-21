@@ -36,7 +36,7 @@ namespace MgmtListOnly
             return new ResourceGroupFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the ResourceGroupFeatures for this ResourceGroupOperations. </summary>
+        /// <summary> Lists the ResourceGroupFeatures for this <see cref="ResourceGroupOperations" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -89,7 +89,7 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists the ResourceGroupFeatures for this ResourceGroupOperations. </summary>
+        /// <summary> Lists the ResourceGroupFeatures for this <see cref="ResourceGroupOperations" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>

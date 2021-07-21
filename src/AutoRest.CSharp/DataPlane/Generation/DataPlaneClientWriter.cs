@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(client.Description);
+                writer.WriteXmlDocumentationSummary($"{client.Description}");
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client.RestClient, true);
@@ -68,14 +68,14 @@ namespace AutoRest.CSharp.Generation.Writers
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
             var parameters = clientMethod.RestClientMethod.Parameters;
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             foreach (Parameter parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -148,9 +148,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                     foreach (Parameter parameter in ctorParams)
                     {
-                        writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                        writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                     }
-                    writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
+                    writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
 
                     writer.Append($"public {client.Type.Name:D}(");
                     foreach (Parameter parameter in ctorParams)
@@ -190,9 +190,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                     foreach (Parameter parameter in ctorParams)
                     {
-                        writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                        writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                     }
-                    writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
+                    writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
 
                     writer.Append($"public {client.Type.Name:D}(");
                     foreach (Parameter parameter in ctorParams)
@@ -239,11 +239,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter(PipelineVariable, "The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, $"The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter(PipelineVariable, $"The HTTP pipeline for sending and receiving REST requests and responses.");
             foreach (Parameter parameter in client.RestClient.Parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
             writer.Append($"internal {client.Type.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
@@ -276,14 +276,14 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var parameters = pagingMethod.Method.Parameters;
 
-            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
 
             foreach (Parameter parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
@@ -353,13 +353,13 @@ namespace AutoRest.CSharp.Generation.Writers
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
             Parameter[] parameters = originalMethod.Parameters;
 
-            writer.WriteXmlDocumentationSummary(originalMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{originalMethod.Description}");
 
             foreach (Parameter parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             string asyncText = async ? "async " : string.Empty;

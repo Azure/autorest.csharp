@@ -20,15 +20,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Namespace(cs.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(resource.Description);
+                writer.WriteXmlDocumentationSummary($"{resource.Description}");
                 var resourceDataObject = context.Library.GetResourceData(resource.OperationGroup);
 
                 using (writer.Scope($"{resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
                 {
                     // internal constructor
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
-                    writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
-                    writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
+                    writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
+                    writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
                     var resourceData = context.Library.GetResourceData(resource.OperationGroup);
                     var baseConstructor = resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;

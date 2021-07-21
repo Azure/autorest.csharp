@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var cs = client.Type;
             using (writer.Namespace(cs.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(client.Description);
+                writer.WriteXmlDocumentationSummary($"{client.Description}");
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client, context);
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
             foreach (Parameter parameter in clientMethod.Parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
@@ -135,47 +135,33 @@ namespace AutoRest.CSharp.Generation.Writers
                 (true, true) => typeof(Task<Operation<BinaryData>>),
             });
 
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             if (clientMethod.SchemaDocumentations != null)
             {
-                writer.LineRaw("/// <remarks>");
+                var schemas = clientMethod.SchemaDocumentations.Select(schemaDoc => (FormattableString)$@"
+Schema for <c>{schemaDoc.SchemaName}</c>:
+<list type=""table"">
+  <listheader>
+    <term>Name</term>
+    <term>Type</term>
+    <term>Required</term>
+    <term>Description</term>
+  </listheader>{schemaDoc.DocumentationRows.Select(row => (FormattableString)$@"
+  <item>
+    <term>{row.Name}</term>
+    <term>{row.Type}</term>
+    <term>{(row.Required ? "Yes" : "")}</term>
+    <term>{row.Description}</term>
+  </item>")}
+</list>");
 
-                foreach (var schemaDoc in clientMethod.SchemaDocumentations)
-                {
-                    writer.Line($"/// Schema for <c>{schemaDoc.SchemaName}</c>:");
-                    writer.LineRaw("/// <list type=\"table\">");
-                    writer.LineRaw("///   <listheader>");
-                    writer.LineRaw("///     <term>Name</term>");
-                    writer.LineRaw("///     <term>Type</term>");
-                    writer.LineRaw("///     <term>Required</term>");
-                    writer.LineRaw("///     <term>Description</term>");
-                    writer.LineRaw("///   </listheader>");
-                    foreach (var row in schemaDoc.DocumentationRows)
-                    {
-                        writer.LineRaw("///   <item>");
-                        writer.Line($"///     <term>{row.Name}</term>");
-                        writer.Line($"///     <term>{row.Type}</term>");
-                        writer.Line($"///     <term>{(row.Required ? "Yes" : "")}</term>");
-                        if (string.IsNullOrEmpty(row.Description))
-                        {
-                            writer.Line($"///    <term></term>");
-                        }
-                        else
-                        {
-                            writer.WriteDocumentationLines("    <term>", "</term>", row.Description);
-                        }
-                        writer.LineRaw("///   </item>");
-                    }
-                    writer.LineRaw("/// </list>");
-                }
-
-                writer.LineRaw("/// </remarks>");
+                writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
 
             foreach (var parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
             var methodName = CreateMethodName(clientMethod.Name, async);
@@ -242,7 +228,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
-            writer.WriteXmlDocumentationSummary("The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
@@ -320,9 +306,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
-            writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
+            writer.WriteXmlDocumentationParameter(OptionsVariable, $"The options for configuring the client.");
 
             var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             writer.Append($"public {client.Type.Name:D}(");
