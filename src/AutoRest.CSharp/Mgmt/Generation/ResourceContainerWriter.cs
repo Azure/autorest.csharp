@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string syncMethodName = "ListAsGenericResource";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type} for this resource group represented as generic resources.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
