@@ -13,7 +13,7 @@ namespace MgmtSingleton
     public class SingletonResource2 : SingletonResource2Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource2"/> class for mocking. </summary>
-        internal SingletonResource2() : base()
+        protected SingletonResource2() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the SingletonResource2Data. </summary>
-        public SingletonResource2Data Data { get; private set; }
+        public virtual SingletonResource2Data Data { get; private set; }
     }
 }

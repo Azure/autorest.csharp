@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class SubRes3Resource : SubRes3ResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SubRes3Resource"/> class for mocking. </summary>
-        internal SubRes3Resource() : base()
+        protected SubRes3Resource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the SubRes3ResourceData. </summary>
-        public SubRes3ResourceData Data { get; private set; }
+        public virtual SubRes3ResourceData Data { get; private set; }
     }
 }

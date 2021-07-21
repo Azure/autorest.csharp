@@ -13,7 +13,7 @@ namespace OperationGroupMappings
     public class AvailabilitySet : AvailabilitySetOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class for mocking. </summary>
-        internal AvailabilitySet() : base()
+        protected AvailabilitySet() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace OperationGroupMappings
         }
 
         /// <summary> Gets or sets the AvailabilitySetData. </summary>
-        public AvailabilitySetData Data { get; private set; }
+        public virtual AvailabilitySetData Data { get; private set; }
     }
 }

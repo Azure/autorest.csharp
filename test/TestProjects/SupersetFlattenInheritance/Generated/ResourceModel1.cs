@@ -13,7 +13,7 @@ namespace SupersetFlattenInheritance
     public class ResourceModel1 : ResourceModel1Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1"/> class for mocking. </summary>
-        internal ResourceModel1() : base()
+        protected ResourceModel1() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Gets or sets the ResourceModel1Data. </summary>
-        public ResourceModel1Data Data { get; private set; }
+        public virtual ResourceModel1Data Data { get; private set; }
     }
 }

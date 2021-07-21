@@ -13,7 +13,7 @@ namespace SupersetInheritance
     public class SupersetModel4 : SupersetModel4Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel4"/> class for mocking. </summary>
-        internal SupersetModel4() : base()
+        protected SupersetModel4() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace SupersetInheritance
         }
 
         /// <summary> Gets or sets the SupersetModel4Data. </summary>
-        public SupersetModel4Data Data { get; private set; }
+        public virtual SupersetModel4Data Data { get; private set; }
     }
 }

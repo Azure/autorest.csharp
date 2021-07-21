@@ -13,7 +13,7 @@ namespace MgmtSingleton
     public class TenantParentSingleton : TenantParentSingletonOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class for mocking. </summary>
-        internal TenantParentSingleton() : base()
+        protected TenantParentSingleton() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the TenantParentSingletonData. </summary>
-        public TenantParentSingletonData Data { get; private set; }
+        public virtual TenantParentSingletonData Data { get; private set; }
     }
 }

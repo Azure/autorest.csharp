@@ -13,7 +13,7 @@ namespace ExactMatchFlattenInheritance
     public class CustomModel3 : CustomModel3Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class for mocking. </summary>
-        internal CustomModel3() : base()
+        protected CustomModel3() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets or sets the CustomModel3Data. </summary>
-        public CustomModel3Data Data { get; private set; }
+        public virtual CustomModel3Data Data { get; private set; }
     }
 }

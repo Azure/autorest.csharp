@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample
     public class SshPublicKey : SshPublicKeyOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SshPublicKey"/> class for mocking. </summary>
-        internal SshPublicKey() : base()
+        protected SshPublicKey() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets or sets the SshPublicKeyData. </summary>
-        public SshPublicKeyData Data { get; private set; }
+        public virtual SshPublicKeyData Data { get; private set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SupersetFlattenInheritance
     public class TrackedResourceModel2 : TrackedResourceModel2Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel2"/> class for mocking. </summary>
-        internal TrackedResourceModel2() : base()
+        protected TrackedResourceModel2() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Gets or sets the TrackedResourceModel2Data. </summary>
-        public TrackedResourceModel2Data Data { get; private set; }
+        public virtual TrackedResourceModel2Data Data { get; private set; }
     }
 }

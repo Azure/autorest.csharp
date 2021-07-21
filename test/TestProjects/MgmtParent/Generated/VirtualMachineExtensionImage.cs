@@ -13,7 +13,7 @@ namespace MgmtParent
     public class VirtualMachineExtensionImage : VirtualMachineExtensionImageOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class for mocking. </summary>
-        internal VirtualMachineExtensionImage() : base()
+        protected VirtualMachineExtensionImage() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtParent
         }
 
         /// <summary> Gets or sets the VirtualMachineExtensionImageData. </summary>
-        public VirtualMachineExtensionImageData Data { get; private set; }
+        public virtual VirtualMachineExtensionImageData Data { get; private set; }
     }
 }

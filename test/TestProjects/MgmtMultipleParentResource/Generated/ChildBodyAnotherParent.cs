@@ -14,7 +14,7 @@ namespace MgmtMultipleParentResource
     public class ChildBodyAnotherParent : ChildBodyAnotherParentOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ChildBodyAnotherParent"/> class for mocking. </summary>
-        internal ChildBodyAnotherParent() : base()
+        protected ChildBodyAnotherParent() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Gets or sets the ChildBodyData. </summary>
-        public ChildBodyData Data { get; private set; }
+        public virtual ChildBodyData Data { get; private set; }
     }
 }

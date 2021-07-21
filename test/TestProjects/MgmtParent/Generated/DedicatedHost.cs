@@ -13,7 +13,7 @@ namespace MgmtParent
     public class DedicatedHost : DedicatedHostOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHost"/> class for mocking. </summary>
-        internal DedicatedHost() : base()
+        protected DedicatedHost() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtParent
         }
 
         /// <summary> Gets or sets the DedicatedHostData. </summary>
-        public DedicatedHostData Data { get; private set; }
+        public virtual DedicatedHostData Data { get; private set; }
     }
 }

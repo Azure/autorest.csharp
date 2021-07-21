@@ -13,7 +13,7 @@ namespace MgmtSingleton
     public class ParentResource : ParentResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class for mocking. </summary>
-        internal ParentResource() : base()
+        protected ParentResource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the ParentResourceData. </summary>
-        public ParentResourceData Data { get; private set; }
+        public virtual ParentResourceData Data { get; private set; }
     }
 }

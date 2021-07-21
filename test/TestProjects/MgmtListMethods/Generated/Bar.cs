@@ -14,7 +14,7 @@ namespace MgmtListMethods
     public class Bar : BarOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "Bar"/> class for mocking. </summary>
-        internal Bar() : base()
+        protected Bar() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets or sets the BarData. </summary>
-        public BarData Data { get; private set; }
+        public virtual BarData Data { get; private set; }
     }
 }

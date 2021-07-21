@@ -13,7 +13,7 @@ namespace MgmtSingleton
     public class SingletonResource : SingletonResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class for mocking. </summary>
-        internal SingletonResource() : base()
+        protected SingletonResource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the SingletonResourceData. </summary>
-        public SingletonResourceData Data { get; private set; }
+        public virtual SingletonResourceData Data { get; private set; }
     }
 }

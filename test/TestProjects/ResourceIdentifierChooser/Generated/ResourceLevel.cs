@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class ResourceLevel : ResourceLevelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ResourceLevel"/> class for mocking. </summary>
-        internal ResourceLevel() : base()
+        protected ResourceLevel() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the ResourceLevelData. </summary>
-        public ResourceLevelData Data { get; private set; }
+        public virtual ResourceLevelData Data { get; private set; }
     }
 }

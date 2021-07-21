@@ -13,7 +13,7 @@ namespace SupersetFlattenInheritance
     public class CustomModel2 : CustomModel2Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "CustomModel2"/> class for mocking. </summary>
-        internal CustomModel2()
+        protected CustomModel2()
         {
         }
 
@@ -26,6 +26,6 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Gets or sets the CustomModel2Data. </summary>
-        public CustomModel2Data Data { get; private set; }
+        public virtual CustomModel2Data Data { get; private set; }
     }
 }

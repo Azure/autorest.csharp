@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class EncryptionScope : EncryptionScopeOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "EncryptionScope"/> class for mocking. </summary>
-        internal EncryptionScope() : base()
+        protected EncryptionScope() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the EncryptionScopeData. </summary>
-        public EncryptionScopeData Data { get; private set; }
+        public virtual EncryptionScopeData Data { get; private set; }
     }
 }

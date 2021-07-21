@@ -14,7 +14,7 @@ namespace Pagination
     public class PageSizeDecimalModel : PageSizeDecimalModelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class for mocking. </summary>
-        internal PageSizeDecimalModel() : base()
+        protected PageSizeDecimalModel() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeDecimalModelData. </summary>
-        public PageSizeDecimalModelData Data { get; private set; }
+        public virtual PageSizeDecimalModelData Data { get; private set; }
     }
 }

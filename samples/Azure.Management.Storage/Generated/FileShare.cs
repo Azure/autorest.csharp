@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class FileShare : FileShareOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "FileShare"/> class for mocking. </summary>
-        internal FileShare() : base()
+        protected FileShare() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the FileShareData. </summary>
-        public FileShareData Data { get; private set; }
+        public virtual FileShareData Data { get; private set; }
     }
 }

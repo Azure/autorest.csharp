@@ -14,7 +14,7 @@ namespace Pagination
     public class PageSizeInt64Model : PageSizeInt64ModelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64Model"/> class for mocking. </summary>
-        internal PageSizeInt64Model() : base()
+        protected PageSizeInt64Model() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeInt64ModelData. </summary>
-        public PageSizeInt64ModelData Data { get; private set; }
+        public virtual PageSizeInt64ModelData Data { get; private set; }
     }
 }

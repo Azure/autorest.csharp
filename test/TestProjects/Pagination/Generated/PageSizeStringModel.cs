@@ -14,7 +14,7 @@ namespace Pagination
     public class PageSizeStringModel : PageSizeStringModelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "PageSizeStringModel"/> class for mocking. </summary>
-        internal PageSizeStringModel() : base()
+        protected PageSizeStringModel() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeStringModelData. </summary>
-        public PageSizeStringModelData Data { get; private set; }
+        public virtual PageSizeStringModelData Data { get; private set; }
     }
 }

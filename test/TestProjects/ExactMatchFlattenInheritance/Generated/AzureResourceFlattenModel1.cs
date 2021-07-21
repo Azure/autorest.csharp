@@ -13,7 +13,7 @@ namespace ExactMatchFlattenInheritance
     public class AzureResourceFlattenModel1 : AzureResourceFlattenModel1Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1"/> class for mocking. </summary>
-        internal AzureResourceFlattenModel1() : base()
+        protected AzureResourceFlattenModel1() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets or sets the AzureResourceFlattenModel1Data. </summary>
-        public AzureResourceFlattenModel1Data Data { get; private set; }
+        public virtual AzureResourceFlattenModel1Data Data { get; private set; }
     }
 }

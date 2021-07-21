@@ -14,7 +14,7 @@ namespace MgmtListMethods
     public class Fake : FakeOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "Fake"/> class for mocking. </summary>
-        internal Fake() : base()
+        protected Fake() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets or sets the FakeData. </summary>
-        public FakeData Data { get; private set; }
+        public virtual FakeData Data { get; private set; }
     }
 }

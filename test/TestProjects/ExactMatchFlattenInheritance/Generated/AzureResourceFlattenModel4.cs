@@ -13,7 +13,7 @@ namespace ExactMatchFlattenInheritance
     public class AzureResourceFlattenModel4 : AzureResourceFlattenModel4Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel4"/> class for mocking. </summary>
-        internal AzureResourceFlattenModel4()
+        protected AzureResourceFlattenModel4()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets or sets the AzureResourceFlattenModel4Data. </summary>
-        public AzureResourceFlattenModel4Data Data { get; private set; }
+        public virtual AzureResourceFlattenModel4Data Data { get; private set; }
     }
 }

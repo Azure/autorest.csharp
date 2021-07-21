@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class TenantLevelResource : TenantLevelResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "TenantLevelResource"/> class for mocking. </summary>
-        internal TenantLevelResource() : base()
+        protected TenantLevelResource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the TenantLevelResourceData. </summary>
-        public TenantLevelResourceData Data { get; private set; }
+        public virtual TenantLevelResourceData Data { get; private set; }
     }
 }

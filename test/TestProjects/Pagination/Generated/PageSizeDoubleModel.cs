@@ -14,7 +14,7 @@ namespace Pagination
     public class PageSizeDoubleModel : PageSizeDoubleModelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class for mocking. </summary>
-        internal PageSizeDoubleModel() : base()
+        protected PageSizeDoubleModel() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeDoubleModelData. </summary>
-        public PageSizeDoubleModelData Data { get; private set; }
+        public virtual PageSizeDoubleModelData Data { get; private set; }
     }
 }

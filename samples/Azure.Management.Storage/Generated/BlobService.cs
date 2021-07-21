@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class BlobService : BlobServiceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "BlobService"/> class for mocking. </summary>
-        internal BlobService() : base()
+        protected BlobService() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the BlobServiceData. </summary>
-        public BlobServiceData Data { get; private set; }
+        public virtual BlobServiceData Data { get; private set; }
     }
 }

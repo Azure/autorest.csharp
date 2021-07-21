@@ -14,7 +14,7 @@ namespace MgmtOperations
     public class AvailabilitySetGrandChild : AvailabilitySetGrandChildOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChild"/> class for mocking. </summary>
-        internal AvailabilitySetGrandChild() : base()
+        protected AvailabilitySetGrandChild() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtOperations
         }
 
         /// <summary> Gets or sets the AvailabilitySetGrandChildData. </summary>
-        public AvailabilitySetGrandChildData Data { get; private set; }
+        public virtual AvailabilitySetGrandChildData Data { get; private set; }
     }
 }

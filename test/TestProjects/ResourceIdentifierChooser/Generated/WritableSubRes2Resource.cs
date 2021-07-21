@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class WritableSubRes2Resource : WritableSubRes2ResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "WritableSubRes2Resource"/> class for mocking. </summary>
-        internal WritableSubRes2Resource() : base()
+        protected WritableSubRes2Resource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the WritableSubRes2ResourceData. </summary>
-        public WritableSubRes2ResourceData Data { get; private set; }
+        public virtual WritableSubRes2ResourceData Data { get; private set; }
     }
 }

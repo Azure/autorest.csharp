@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class ManagementPolicy : ManagementPolicyOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ManagementPolicy"/> class for mocking. </summary>
-        internal ManagementPolicy() : base()
+        protected ManagementPolicy() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the ManagementPolicyData. </summary>
-        public ManagementPolicyData Data { get; private set; }
+        public virtual ManagementPolicyData Data { get; private set; }
     }
 }

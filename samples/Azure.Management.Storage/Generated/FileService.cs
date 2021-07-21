@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class FileService : FileServiceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "FileService"/> class for mocking. </summary>
-        internal FileService() : base()
+        protected FileService() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the FileServiceData. </summary>
-        public FileServiceData Data { get; private set; }
+        public virtual FileServiceData Data { get; private set; }
     }
 }

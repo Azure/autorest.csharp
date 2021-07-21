@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class ModelData : ModelDataOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ModelData"/> class for mocking. </summary>
-        internal ModelData() : base()
+        protected ModelData() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the ModelDataData. </summary>
-        public ModelDataData Data { get; private set; }
+        public virtual ModelDataData Data { get; private set; }
     }
 }

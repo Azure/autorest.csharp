@@ -14,7 +14,7 @@ namespace Pagination
     public class PageSizeFloatModel : PageSizeFloatModelOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class for mocking. </summary>
-        internal PageSizeFloatModel() : base()
+        protected PageSizeFloatModel() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeFloatModelData. </summary>
-        public PageSizeFloatModelData Data { get; private set; }
+        public virtual PageSizeFloatModelData Data { get; private set; }
     }
 }

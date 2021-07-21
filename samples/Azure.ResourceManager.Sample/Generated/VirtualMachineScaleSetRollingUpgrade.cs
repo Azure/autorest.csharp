@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample
     public class VirtualMachineScaleSetRollingUpgrade : VirtualMachineScaleSetRollingUpgradeOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetRollingUpgrade"/> class for mocking. </summary>
-        internal VirtualMachineScaleSetRollingUpgrade() : base()
+        protected VirtualMachineScaleSetRollingUpgrade() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets or sets the VirtualMachineScaleSetRollingUpgradeData. </summary>
-        public VirtualMachineScaleSetRollingUpgradeData Data { get; private set; }
+        public virtual VirtualMachineScaleSetRollingUpgradeData Data { get; private set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SupersetFlattenInheritance
     public class WritableSubResourceModel1 : WritableSubResourceModel1Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "WritableSubResourceModel1"/> class for mocking. </summary>
-        internal WritableSubResourceModel1() : base()
+        protected WritableSubResourceModel1() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Gets or sets the WritableSubResourceModel1Data. </summary>
-        public WritableSubResourceModel1Data Data { get; private set; }
+        public virtual WritableSubResourceModel1Data Data { get; private set; }
     }
 }

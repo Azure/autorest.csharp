@@ -14,7 +14,7 @@ namespace SubscriptionExtensions
     public class Toaster : ToasterOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "Toaster"/> class for mocking. </summary>
-        internal Toaster() : base()
+        protected Toaster() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Gets or sets the ToasterData. </summary>
-        public ToasterData Data { get; private set; }
+        public virtual ToasterData Data { get; private set; }
     }
 }

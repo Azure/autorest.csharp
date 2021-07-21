@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // write an internal default constructor
                     _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class for mocking.");
                     var baseConstructor = _resourceData.IsResource() ? $" : base()" : string.Empty;
-                    using (_writer.Scope($"internal {cs.Name}(){baseConstructor}"))
+                    using (_writer.Scope($"protected {cs.Name}(){baseConstructor}"))
                     { }
                     _writer.Line();
 
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // write Data
                     _writer.Line();
                     _writer.WriteXmlDocumentationSummary($"Gets or sets the {_context.Library.GetResourceData(_resource.OperationGroup).Type.Name}.");
-                    _writer.Append($"public {_resourceData.Type} Data");
+                    _writer.Append($"public virtual {_resourceData.Type} Data");
                     _writer.Append($"{{ get; private set; }}");
                     _writer.Line();
                 }

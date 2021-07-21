@@ -13,7 +13,7 @@ namespace ExactMatchInheritance
     public class ExactMatchModel3 : ExactMatchModel3Operations
     {
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel3"/> class for mocking. </summary>
-        internal ExactMatchModel3() : base()
+        protected ExactMatchModel3() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Gets or sets the ExactMatchModel3Data. </summary>
-        public ExactMatchModel3Data Data { get; private set; }
+        public virtual ExactMatchModel3Data Data { get; private set; }
     }
 }

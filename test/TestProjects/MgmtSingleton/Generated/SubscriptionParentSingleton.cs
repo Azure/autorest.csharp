@@ -13,7 +13,7 @@ namespace MgmtSingleton
     public class SubscriptionParentSingleton : SubscriptionParentSingletonOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class for mocking. </summary>
-        internal SubscriptionParentSingleton() : base()
+        protected SubscriptionParentSingleton() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the SubscriptionParentSingletonData. </summary>
-        public SubscriptionParentSingletonData Data { get; private set; }
+        public virtual SubscriptionParentSingletonData Data { get; private set; }
     }
 }

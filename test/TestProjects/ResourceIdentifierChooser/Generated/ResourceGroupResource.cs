@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class ResourceGroupResource : ResourceGroupResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ResourceGroupResource"/> class for mocking. </summary>
-        internal ResourceGroupResource() : base()
+        protected ResourceGroupResource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the ResourceGroupResourceData. </summary>
-        public ResourceGroupResourceData Data { get; private set; }
+        public virtual ResourceGroupResourceData Data { get; private set; }
     }
 }

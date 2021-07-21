@@ -14,7 +14,7 @@ namespace SubscriptionExtensions
     public class Oven : OvenOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "Oven"/> class for mocking. </summary>
-        internal Oven() : base()
+        protected Oven() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Gets or sets the OvenData. </summary>
-        public OvenData Data { get; private set; }
+        public virtual OvenData Data { get; private set; }
     }
 }

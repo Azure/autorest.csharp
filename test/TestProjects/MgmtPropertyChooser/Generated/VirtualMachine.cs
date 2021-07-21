@@ -13,7 +13,7 @@ namespace MgmtPropertyChooser
     public class VirtualMachine : VirtualMachineOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachine"/> class for mocking. </summary>
-        internal VirtualMachine() : base()
+        protected VirtualMachine() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace MgmtPropertyChooser
         }
 
         /// <summary> Gets or sets the VirtualMachineData. </summary>
-        public VirtualMachineData Data { get; private set; }
+        public virtual VirtualMachineData Data { get; private set; }
     }
 }

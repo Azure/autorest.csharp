@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class BlobContainer : BlobContainerOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "BlobContainer"/> class for mocking. </summary>
-        internal BlobContainer() : base()
+        protected BlobContainer() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the BlobContainerData. </summary>
-        public BlobContainerData Data { get; private set; }
+        public virtual BlobContainerData Data { get; private set; }
     }
 }

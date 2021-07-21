@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class ObjectReplicationPolicy : ObjectReplicationPolicyOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "ObjectReplicationPolicy"/> class for mocking. </summary>
-        internal ObjectReplicationPolicy() : base()
+        protected ObjectReplicationPolicy() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the ObjectReplicationPolicyData. </summary>
-        public ObjectReplicationPolicyData Data { get; private set; }
+        public virtual ObjectReplicationPolicyData Data { get; private set; }
     }
 }

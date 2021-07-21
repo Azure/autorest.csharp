@@ -14,7 +14,7 @@ namespace MgmtMultipleParentResource
     public class SubParent : SubParentOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SubParent"/> class for mocking. </summary>
-        internal SubParent() : base()
+        protected SubParent() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Gets or sets the SubParentData. </summary>
-        public SubParentData Data { get; private set; }
+        public virtual SubParentData Data { get; private set; }
     }
 }

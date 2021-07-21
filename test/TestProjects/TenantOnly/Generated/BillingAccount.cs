@@ -13,7 +13,7 @@ namespace TenantOnly
     public class BillingAccount : BillingAccountOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "BillingAccount"/> class for mocking. </summary>
-        internal BillingAccount() : base()
+        protected BillingAccount() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace TenantOnly
         }
 
         /// <summary> Gets or sets the BillingAccountData. </summary>
-        public BillingAccountData Data { get; private set; }
+        public virtual BillingAccountData Data { get; private set; }
     }
 }

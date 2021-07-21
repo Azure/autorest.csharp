@@ -14,7 +14,7 @@ namespace MgmtMultipleParentResource
     public class AnotherParent : AnotherParentOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "AnotherParent"/> class for mocking. </summary>
-        internal AnotherParent() : base()
+        protected AnotherParent() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Gets or sets the AnotherParentData. </summary>
-        public AnotherParentData Data { get; private set; }
+        public virtual AnotherParentData Data { get; private set; }
     }
 }

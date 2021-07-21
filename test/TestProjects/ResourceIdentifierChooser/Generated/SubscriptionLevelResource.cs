@@ -13,7 +13,7 @@ namespace ResourceIdentifierChooser
     public class SubscriptionLevelResource : SubscriptionLevelResourceOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionLevelResource"/> class for mocking. </summary>
-        internal SubscriptionLevelResource() : base()
+        protected SubscriptionLevelResource() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the SubscriptionLevelResourceData. </summary>
-        public SubscriptionLevelResourceData Data { get; private set; }
+        public virtual SubscriptionLevelResourceData Data { get; private set; }
     }
 }

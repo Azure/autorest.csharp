@@ -14,7 +14,7 @@ namespace MgmtListMethods
     public class TheExtension : TheExtensionOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "TheExtension"/> class for mocking. </summary>
-        internal TheExtension() : base()
+        protected TheExtension() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets or sets the TheExtensionData. </summary>
-        public TheExtensionData Data { get; private set; }
+        public virtual TheExtensionData Data { get; private set; }
     }
 }

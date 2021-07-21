@@ -13,7 +13,7 @@ namespace TenantOnly
     public class Agreement : AgreementOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "Agreement"/> class for mocking. </summary>
-        internal Agreement() : base()
+        protected Agreement() : base()
         {
         }
 
@@ -26,6 +26,6 @@ namespace TenantOnly
         }
 
         /// <summary> Gets or sets the AgreementData. </summary>
-        public AgreementData Data { get; private set; }
+        public virtual AgreementData Data { get; private set; }
     }
 }

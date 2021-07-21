@@ -14,7 +14,7 @@ namespace Azure.Management.Storage
     public class StorageAccount : StorageAccountOperations
     {
         /// <summary> Initializes a new instance of the <see cref = "StorageAccount"/> class for mocking. </summary>
-        internal StorageAccount() : base()
+        protected StorageAccount() : base()
         {
         }
 
@@ -27,6 +27,6 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets or sets the StorageAccountData. </summary>
-        public StorageAccountData Data { get; private set; }
+        public virtual StorageAccountData Data { get; private set; }
     }
 }
