@@ -188,8 +188,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    // Insert " . " to match existing formatting
-                    InsertRaw(" . ", contentEnd);
                     Line();
                 }
 
@@ -445,18 +443,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private CodeWriter AppendRaw(ReadOnlySpan<char> span) => InsertRaw(span, _length);
 
-        private CodeWriter InsertRaw(ReadOnlySpan<char> span, int position)
+        private CodeWriter InsertRaw(ReadOnlySpan<char> span, int position, bool skipNewLineCheck = false)
         {
             Debug.Assert(0 <= position);
             Debug.Assert(position <= _length);
 
-            if (Environment.NewLine == "\r\n")
+            if (!skipNewLineCheck)
             {
-                var newLineSpan = Environment.NewLine.AsSpan();
+                var newLineSpan = "\r\n".AsSpan();
                 var newLineIndex = span.IndexOf(newLineSpan);
                 while (newLineIndex != -1)
                 {
-                    InsertRaw(span.Slice(0, newLineIndex), position);
+                    InsertRaw(span.Slice(0, newLineIndex), position, skipNewLineCheck: true);
                     position += newLineIndex;
                     span = span.Slice(newLineIndex + 1);
                     newLineIndex = span.IndexOf(newLineSpan);

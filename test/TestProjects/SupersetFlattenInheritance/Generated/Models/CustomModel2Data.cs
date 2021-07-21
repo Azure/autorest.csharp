@@ -16,8 +16,8 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of CustomModel2Data. </summary>
-        /// <param name="bar"> . </param>
-        /// <param name="foo"> . </param>
+        /// <param name="bar"></param>
+        /// <param name="foo"></param>
         internal CustomModel2Data(string bar, string foo)
         {
             Bar = bar;

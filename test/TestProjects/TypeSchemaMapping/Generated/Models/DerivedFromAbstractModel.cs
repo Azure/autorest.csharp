@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of DerivedFromAbstractModel. </summary>
-        /// <param name="discriminatorProperty"> . </param>
+        /// <param name="discriminatorProperty"></param>
         internal DerivedFromAbstractModel(string discriminatorProperty) : base(discriminatorProperty)
         {
             DiscriminatorProperty = discriminatorProperty ?? "DerivedFromAbstractModel";

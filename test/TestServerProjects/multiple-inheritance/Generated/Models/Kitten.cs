@@ -13,7 +13,7 @@ namespace multiple_inheritance.Models
     public partial class Kitten : Cat
     {
         /// <summary> Initializes a new instance of Kitten. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Kitten(string name) : base(name)
         {
@@ -24,11 +24,11 @@ namespace multiple_inheritance.Models
         }
 
         /// <summary> Initializes a new instance of Kitten. </summary>
-        /// <param name="name"> . </param>
-        /// <param name="likesMilk"> . </param>
-        /// <param name="meows"> . </param>
-        /// <param name="hisses"> . </param>
-        /// <param name="eatsMiceYet"> . </param>
+        /// <param name="name"></param>
+        /// <param name="likesMilk"></param>
+        /// <param name="meows"></param>
+        /// <param name="hisses"></param>
+        /// <param name="eatsMiceYet"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Kitten(string name, bool? likesMilk, bool? meows, bool? hisses, bool? eatsMiceYet) : base(name, likesMilk, meows, hisses)
         {

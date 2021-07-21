@@ -20,10 +20,10 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel10. </summary>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="id"> . </param>
-        /// <param name="location"> . </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="location"></param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         internal ExactMatchModel10(string name, string type, string id, string location, IDictionary<string, string> tags) : base(name, type)
         {

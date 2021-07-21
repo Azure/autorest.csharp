@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
@@ -16,10 +17,10 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly char[] _newLineChars = { '\r', '\n' };
 
-        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, FormattableString? cref = null)
-            => cref == null
+        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, CSharpType? crefType = null)
+            => crefType == null
                 ? writer.Line($"/// <inheritdoc />")
-                : writer.Line($"/// <inheritdoc cref=\"{cref}\"/>");
+                : writer.Line($"/// <inheritdoc cref=\"{crefType}\"/>");
 
         public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, FormattableString? text)
         {

@@ -13,13 +13,13 @@ namespace xml_service.Models
     public partial class ListBlobsResponse
     {
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
-        /// <param name="containerName"> . </param>
-        /// <param name="prefix"> . </param>
-        /// <param name="marker"> . </param>
-        /// <param name="maxResults"> . </param>
-        /// <param name="delimiter"> . </param>
-        /// <param name="blobs"> . </param>
-        /// <param name="nextMarker"> . </param>
+        /// <param name="containerName"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="blobs"></param>
+        /// <param name="nextMarker"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="containerName"/>, <paramref name="prefix"/>, <paramref name="marker"/>, <paramref name="delimiter"/>, <paramref name="blobs"/>, or <paramref name="nextMarker"/> is null. </exception>
         internal ListBlobsResponse(string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
@@ -58,14 +58,14 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
-        /// <param name="serviceEndpoint"> . </param>
-        /// <param name="containerName"> . </param>
-        /// <param name="prefix"> . </param>
-        /// <param name="marker"> . </param>
-        /// <param name="maxResults"> . </param>
-        /// <param name="delimiter"> . </param>
-        /// <param name="blobs"> . </param>
-        /// <param name="nextMarker"> . </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="containerName"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="delimiter"></param>
+        /// <param name="blobs"></param>
+        /// <param name="nextMarker"></param>
         internal ListBlobsResponse(string serviceEndpoint, string containerName, string prefix, string marker, int maxResults, string delimiter, Blobs blobs, string nextMarker)
         {
             ServiceEndpoint = serviceEndpoint;

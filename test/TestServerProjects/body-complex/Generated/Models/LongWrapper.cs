@@ -16,8 +16,8 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of LongWrapper. </summary>
-        /// <param name="field1"> . </param>
-        /// <param name="field2"> . </param>
+        /// <param name="field1"></param>
+        /// <param name="field2"></param>
         internal LongWrapper(long? field1, long? field2)
         {
             Field1 = field1;

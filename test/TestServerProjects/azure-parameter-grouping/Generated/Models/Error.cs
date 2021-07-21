@@ -16,8 +16,8 @@ namespace azure_parameter_grouping.Models
         }
 
         /// <summary> Initializes a new instance of Error. </summary>
-        /// <param name="status"> . </param>
-        /// <param name="message"> . </param>
+        /// <param name="status"></param>
+        /// <param name="message"></param>
         internal Error(int? status, string message)
         {
             Status = status;

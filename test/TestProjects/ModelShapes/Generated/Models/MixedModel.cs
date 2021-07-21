@@ -16,15 +16,15 @@ namespace ModelShapes.Models
     public partial class MixedModel
     {
         /// <summary> Initializes a new instance of MixedModel. </summary>
-        /// <param name="requiredString"> . </param>
-        /// <param name="requiredInt"> . </param>
-        /// <param name="requiredStringList"> . </param>
-        /// <param name="requiredIntList"> . </param>
-        /// <param name="requiredNullableString"> . </param>
-        /// <param name="requiredNullableInt"> . </param>
-        /// <param name="requiredNullableStringList"> . </param>
-        /// <param name="requiredNullableIntList"> . </param>
-        /// <param name="requiredReadonlyInt"> . </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredStringList"></param>
+        /// <param name="requiredIntList"></param>
+        /// <param name="requiredNullableString"></param>
+        /// <param name="requiredNullableInt"></param>
+        /// <param name="requiredNullableStringList"></param>
+        /// <param name="requiredNullableIntList"></param>
+        /// <param name="requiredReadonlyInt"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public MixedModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList, int requiredReadonlyInt)
         {
@@ -57,24 +57,24 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of MixedModel. </summary>
-        /// <param name="requiredString"> . </param>
-        /// <param name="requiredInt"> . </param>
-        /// <param name="requiredStringList"> . </param>
-        /// <param name="requiredIntList"> . </param>
-        /// <param name="nonRequiredString"> . </param>
-        /// <param name="nonRequiredInt"> . </param>
-        /// <param name="nonRequiredStringList"> . </param>
-        /// <param name="nonRequiredIntList"> . </param>
-        /// <param name="requiredNullableString"> . </param>
-        /// <param name="requiredNullableInt"> . </param>
-        /// <param name="requiredNullableStringList"> . </param>
-        /// <param name="requiredNullableIntList"> . </param>
-        /// <param name="nonRequiredNullableString"> . </param>
-        /// <param name="nonRequiredNullableInt"> . </param>
-        /// <param name="nonRequiredNullableStringList"> . </param>
-        /// <param name="nonRequiredNullableIntList"> . </param>
-        /// <param name="requiredReadonlyInt"> . </param>
-        /// <param name="nonRequiredReadonlyInt"> . </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredStringList"></param>
+        /// <param name="requiredIntList"></param>
+        /// <param name="nonRequiredString"></param>
+        /// <param name="nonRequiredInt"></param>
+        /// <param name="nonRequiredStringList"></param>
+        /// <param name="nonRequiredIntList"></param>
+        /// <param name="requiredNullableString"></param>
+        /// <param name="requiredNullableInt"></param>
+        /// <param name="requiredNullableStringList"></param>
+        /// <param name="requiredNullableIntList"></param>
+        /// <param name="nonRequiredNullableString"></param>
+        /// <param name="nonRequiredNullableInt"></param>
+        /// <param name="nonRequiredNullableStringList"></param>
+        /// <param name="nonRequiredNullableIntList"></param>
+        /// <param name="requiredReadonlyInt"></param>
+        /// <param name="nonRequiredReadonlyInt"></param>
         internal MixedModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt)
         {
             RequiredString = requiredString;

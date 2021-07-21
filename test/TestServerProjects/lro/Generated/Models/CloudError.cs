@@ -16,8 +16,8 @@ namespace lro.Models
         }
 
         /// <summary> Initializes a new instance of CloudError. </summary>
-        /// <param name="code"> . </param>
-        /// <param name="message"> . </param>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
         internal CloudError(int? code, string message)
         {
             Code = code;
