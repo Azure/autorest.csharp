@@ -303,10 +303,9 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> List resources at the specified scope. </summary>
-        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ResourceLink> List(string filter = null, CancellationToken cancellationToken = default)
+        public Pageable<ResourceLink> List(CancellationToken cancellationToken = default)
         {
             Page<ResourceLink> FirstPageFunc(int? pageSizeHint)
             {
@@ -314,7 +313,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAtSourceScope(Id, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtSourceScope(Id, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,7 +328,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAtSourceScopeNextPage(nextLink, Id, filter, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAtSourceScopeNextPage(nextLink, Id, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -342,10 +341,9 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> List resources at the specified scope. </summary>
-        /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="ResourceLink" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ResourceLink> ListAsync(string filter = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<ResourceLink> ListAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<ResourceLink>> FirstPageFunc(int? pageSizeHint)
             {
@@ -353,7 +351,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAtSourceScopeAsync(Id, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtSourceScopeAsync(Id, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -368,7 +366,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAtSourceScopeNextPageAsync(nextLink, Id, filter, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAtSourceScopeNextPageAsync(nextLink, Id, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new ResourceLink(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

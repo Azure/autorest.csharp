@@ -318,10 +318,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var methodName = CreateMethodName("List", async);
             writer.Line();
-            Parameter[] nonPathParameters = listMethods[0].Method.NonPathParameters.ToArray();
+            var mainListMethod = listMethods.FirstOrDefault(m => m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? listMethods[0];
+            var nonPathDomainParameters = mainListMethod.NonPathDomainParameters;
 
             writer.WriteXmlDocumentationSummary("List resources at the specified scope");
-            foreach (var param in nonPathParameters)
+            foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
@@ -332,7 +333,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var returnType = resourceType.WrapPageable(async);
 
             writer.Append($"public {returnType} {methodName}(");
-            foreach (var param in nonPathParameters)
+            foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteParameter(param);
             }
@@ -340,12 +341,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WriteScopePagingOperationBody(writer, listMethods, resourceType, RestClientField, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, converter, async, nonPathParameters);
+                WriteScopePagingOperationBody(writer, listMethods, resourceType, RestClientField, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, converter, async, nonPathDomainParameters);
             }
         }
 
         protected void WriteScopePagingOperationBody(CodeWriter writer, List<PagingMethod> pagingMethods, CSharpType resourceType,
-            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async, Parameter[] parameters)
+            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async, List<Parameter> parameters)
         {
             var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
             using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
@@ -357,11 +358,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 });
             }
 
+            var mainListMethod = pagingMethods.FirstOrDefault(m => m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? pagingMethods[0];
             var nextPageFunctionName = "null";
-            if (pagingMethods[0].NextPageMethod != null)
+            if (mainListMethod.NextPageMethod != null)
             {
                 nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethods[0].NextPageMethod!.Parameters;
+                var nextPageParameters = mainListMethod.NextPageMethod!.Parameters;
                 using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
@@ -373,11 +375,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
-        private void WriteScopePageFuncs(CodeWriter writer, List<PagingMethod> pagingMethods, string restClientName, FormattableString converter, bool async, Parameter[] parameters, bool isNextPageFunc)
+        private void WriteScopePageFuncs(CodeWriter writer, List<PagingMethod> pagingMethods, string restClientName, FormattableString converter, bool async, List<Parameter> parameters, bool isNextPageFunc)
         {
-            writer.WriteParameterNullChecks(new List<Parameter>{parameters[0]});
-            var nextLinkName = pagingMethods[0].PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethods[0].PagingResponse.ItemProperty.Declaration.Name;
+            var mainListMethod = pagingMethods.FirstOrDefault(m => m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? pagingMethods[0];
+            writer.WriteParameterNullChecks(parameters);
+            var nextLinkName = mainListMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+            var itemName = mainListMethod.PagingResponse.ItemProperty.Declaration.Name;
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
             var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
             var listAtScopeMethod = pagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase) && m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true);
@@ -397,7 +400,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                writer.Line($"Response<{pagingMethods[0].PagingResponse.ResponseType.Name}> response;");
+                writer.Line($"Response<{mainListMethod.PagingResponse.ResponseType.Name}> response;");
                 var listForManagementGroupMethod = pagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List") && m.Method.Name.EndsWith("ManagementGroup"));
                 if (listForManagementGroupMethod != null)
                 {
