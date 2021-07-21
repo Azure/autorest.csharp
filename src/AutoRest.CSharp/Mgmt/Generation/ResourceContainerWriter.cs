@@ -62,8 +62,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
-                string baseClass = GetBaseType();
-                using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : {baseClass}"))
+                _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
+                if (_resourceContainer.GetMethod != null)
+                {
+                    _writer.Line($"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type}, {_resourceData.Type}>");
+                }
+                else
+                {
+                    _writer.Line($"{typeof(ContainerBase)}");
+                }
+                using (_writer.Scope())
                 {
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     WriteFields(_writer, _restClient!);
@@ -84,13 +92,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
                 WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
-        }
-
-        protected virtual string GetBaseType()
-        {
-            return _resourceContainer.GetMethod != null
-                ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                : $"ContainerBase";
         }
 
         private void WriteIdProperty()
@@ -294,7 +295,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string syncMethodName = "ListAsGenericResource";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");

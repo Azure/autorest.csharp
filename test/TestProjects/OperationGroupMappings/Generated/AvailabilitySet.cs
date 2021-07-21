@@ -12,6 +12,11 @@ namespace OperationGroupMappings
     /// <summary> A Class representing a AvailabilitySet along with the instance operations that can be performed on it. </summary>
     public class AvailabilitySet : AvailabilitySetOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class for mocking. </summary>
+        protected AvailabilitySet() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace OperationGroupMappings
         }
 
         /// <summary> Gets or sets the AvailabilitySetData. </summary>
-        public AvailabilitySetData Data { get; private set; }
+        public virtual AvailabilitySetData Data { get; private set; }
     }
 }

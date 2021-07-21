@@ -12,6 +12,11 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a WritableSubRes2Resource along with the instance operations that can be performed on it. </summary>
     public class WritableSubRes2Resource : WritableSubRes2ResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "WritableSubRes2Resource"/> class for mocking. </summary>
+        protected WritableSubRes2Resource() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "WritableSubRes2Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the WritableSubRes2ResourceData. </summary>
-        public WritableSubRes2ResourceData Data { get; private set; }
+        public virtual WritableSubRes2ResourceData Data { get; private set; }
     }
 }

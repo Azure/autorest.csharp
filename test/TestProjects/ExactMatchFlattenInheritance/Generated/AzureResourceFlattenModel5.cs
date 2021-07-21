@@ -12,6 +12,11 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A Class representing a AzureResourceFlattenModel5 along with the instance operations that can be performed on it. </summary>
     public class AzureResourceFlattenModel5 : AzureResourceFlattenModel5Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel5"/> class for mocking. </summary>
+        protected AzureResourceFlattenModel5() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel5"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets or sets the AzureResourceFlattenModel5Data. </summary>
-        public AzureResourceFlattenModel5Data Data { get; private set; }
+        public virtual AzureResourceFlattenModel5Data Data { get; private set; }
     }
 }
