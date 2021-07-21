@@ -14,40 +14,58 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter
     {
-        public void WriteResource(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
+        private CodeWriter _writer;
+        private Resource _resource;
+        private BuildContext<MgmtOutputLibrary> _context;
+        private ResourceData _resourceData;
+
+        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
-            var cs = resource.Type;
+            _writer = writer;
+            _resource = resource;
+            _context = context;
+            _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
+        }
 
-            using (writer.Namespace(cs.Namespace))
+        public void WriteResource()
+        {
+            var cs = _resource.Type;
+
+            using (_writer.Namespace(cs.Namespace))
             {
-                writer.WriteXmlDocumentationSummary(resource.Description);
-                var resourceDataObject = context.Library.GetResourceData(resource.OperationGroup);
+                _writer.WriteXmlDocumentationSummary(_resource.Description);
 
-                using (writer.Scope($"{resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
+                using (_writer.Scope($"{_resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
                 {
+                    // write an internal default constructor
+                    _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class for mocking.");
+                    var baseConstructor = _resourceData.IsResource() ? $" : base()" : string.Empty;
+                    using (_writer.Scope($"protected {cs.Name}(){baseConstructor}"))
+                    { }
+                    _writer.Line();
+
                     // internal constructor
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
-                    writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
-                    writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
+                    _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
+                    _writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+                    _writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
-                    var resourceData = context.Library.GetResourceData(resource.OperationGroup);
-                    var baseConstructor = resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
-                    if (!string.IsNullOrEmpty(baseConstructor) && resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                    baseConstructor = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
+                    if (!string.IsNullOrEmpty(baseConstructor) && _resource.OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                     {
                         baseConstructor = " : base(options)";
                     }
 
-                    using (writer.Scope($"internal {cs.Name}({typeof(OperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
+                    using (_writer.Scope($"internal {cs.Name}({typeof(OperationsBase)} options, {_resourceData.Type} resource){baseConstructor}"))
                     {
-                        writer.LineRaw("Data = resource;");
+                        _writer.LineRaw("Data = resource;");
                     }
 
                     // write Data
-                    writer.Line();
-                    writer.WriteXmlDocumentationSummary($"Gets or sets the {context.Library.GetResourceData(resource.OperationGroup).Type.Name}.");
-                    writer.Append($"public {resourceDataObject.Type} Data");
-                    writer.Append($"{{ get; private set; }}");
-                    writer.Line();
+                    _writer.Line();
+                    _writer.WriteXmlDocumentationSummary($"Gets or sets the {_context.Library.GetResourceData(_resource.OperationGroup).Type.Name}.");
+                    _writer.Append($"public virtual {_resourceData.Type} Data");
+                    _writer.Append($"{{ get; private set; }}");
+                    _writer.Line();
                 }
             }
         }

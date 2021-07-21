@@ -13,6 +13,11 @@ namespace Pagination
     /// <summary> A Class representing a PageSizeFloatModel along with the instance operations that can be performed on it. </summary>
     public class PageSizeFloatModel : PageSizeFloatModelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class for mocking. </summary>
+        protected PageSizeFloatModel() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +27,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeFloatModelData. </summary>
-        public PageSizeFloatModelData Data { get; private set; }
+        public virtual PageSizeFloatModelData Data { get; private set; }
     }
 }

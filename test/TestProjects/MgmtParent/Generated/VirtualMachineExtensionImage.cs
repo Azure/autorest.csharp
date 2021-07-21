@@ -12,6 +12,11 @@ namespace MgmtParent
     /// <summary> A Class representing a VirtualMachineExtensionImage along with the instance operations that can be performed on it. </summary>
     public class VirtualMachineExtensionImage : VirtualMachineExtensionImageOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class for mocking. </summary>
+        protected VirtualMachineExtensionImage() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtensionImage"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace MgmtParent
         }
 
         /// <summary> Gets or sets the VirtualMachineExtensionImageData. </summary>
-        public VirtualMachineExtensionImageData Data { get; private set; }
+        public virtual VirtualMachineExtensionImageData Data { get; private set; }
     }
 }

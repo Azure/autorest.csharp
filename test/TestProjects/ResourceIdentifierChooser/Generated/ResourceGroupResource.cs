@@ -12,6 +12,11 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a ResourceGroupResource along with the instance operations that can be performed on it. </summary>
     public class ResourceGroupResource : ResourceGroupResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ResourceGroupResource"/> class for mocking. </summary>
+        protected ResourceGroupResource() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "ResourceGroupResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the ResourceGroupResourceData. </summary>
-        public ResourceGroupResourceData Data { get; private set; }
+        public virtual ResourceGroupResourceData Data { get; private set; }
     }
 }
