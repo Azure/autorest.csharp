@@ -742,7 +742,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // TODO: temporary workaround to deal with delete operations that return a data response
                 if (nonLongRunningOperation.ResultType != null && !nonLongRunningOperation.ResultType.Name.EndsWith("Data"))
                 {
-                    writer.Append($"this, ");
+                    writer.Append($"{ContextProperty}, ");
                 }
             }
             writer.Append($"{response});");

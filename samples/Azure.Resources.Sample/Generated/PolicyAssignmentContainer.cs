@@ -132,7 +132,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = _restClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                return new PolicyAssignmentsCreateOperation(this, response);
+                return new PolicyAssignmentsCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = await _restClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicyAssignmentsCreateOperation(this, response);
+                return new PolicyAssignmentsCreateOperation(Parent, response);
             }
             catch (Exception e)
             {

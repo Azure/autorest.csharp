@@ -132,7 +132,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = _restClient.CreateOrUpdate(Id, policyExemptionName, parameters, cancellationToken);
-                return new PolicyExemptionsCreateOrUpdateOperation(this, response);
+                return new PolicyExemptionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id, policyExemptionName, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicyExemptionsCreateOrUpdateOperation(this, response);
+                return new PolicyExemptionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {

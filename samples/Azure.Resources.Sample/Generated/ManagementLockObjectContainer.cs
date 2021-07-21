@@ -131,7 +131,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = _restClient.CreateOrUpdateByScope(Id, lockName, parameters, cancellationToken);
-                return new ManagementLocksCreateOrUpdateByScopeOperation(this, response);
+                return new ManagementLocksCreateOrUpdateByScopeOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -161,7 +161,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = await _restClient.CreateOrUpdateByScopeAsync(Id, lockName, parameters, cancellationToken).ConfigureAwait(false);
-                return new ManagementLocksCreateOrUpdateByScopeOperation(this, response);
+                return new ManagementLocksCreateOrUpdateByScopeOperation(Parent, response);
             }
             catch (Exception e)
             {

@@ -119,7 +119,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = _restClient.CreateOrUpdate(linkId, properties, cancellationToken);
-                return new ResourceLinksCreateOrUpdateOperation(this, response);
+                return new ResourceLinksCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -145,7 +145,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(linkId, properties, cancellationToken).ConfigureAwait(false);
-                return new ResourceLinksCreateOrUpdateOperation(this, response);
+                return new ResourceLinksCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {

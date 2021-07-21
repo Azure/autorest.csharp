@@ -125,7 +125,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, subscriptionId, parameters, cancellationToken);
-                return new PolicyDefinitionsCreateOrUpdateOperation(this, response);
+                return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -155,7 +155,7 @@ namespace Azure.Resources.Sample
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, subscriptionId, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicyDefinitionsCreateOrUpdateOperation(this, response);
+                return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
