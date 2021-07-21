@@ -186,13 +186,10 @@ directive:
   - remove-operation: Applications_CreateOrUpdateById
   - remove-operation: Applications_UpdateById
 
-#   - remove-operation: ApplicationDefinitions_GetById
-#   - remove-operation: ApplicationDefinitions_DeleteById
-#   - remove-operation: ApplicationDefinitions_CreateOrUpdateById
-  # TODO: this config is not working
   - from: managedapplications.json
-    where: $.x-ms-paths
+    where: $["x-ms-paths"]
     transform: delete $["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}?disambiguation_dummy"]
+    reason: The operations duplicate with the ones in /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}
 
   - rename-operation:
       from: Deployments_WhatIf

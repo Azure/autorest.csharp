@@ -11796,13 +11796,13 @@ schemas: !Schemas
     - *ref_351
     - *ref_375
     - *ref_376
-    - !ObjectSchema &ref_833
+    - !ObjectSchema &ref_826
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2019-07-01'
       properties:
-        - !Property &ref_835
+        - !Property &ref_828
           schema: *ref_377
           serializedName: tags
           language: !Languages 
@@ -11820,7 +11820,7 @@ schemas: !Schemas
           description: Information about JIT request.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_841
+    - !ObjectSchema &ref_834
       type: object
       apiVersions:
         - !ApiVersion 
@@ -12189,7 +12189,7 @@ schemas: !Schemas
     - *ref_393
     - *ref_394
     - *ref_395
-    - !ObjectSchema &ref_845
+    - !ObjectSchema &ref_838
       type: object
       apiVersions:
         - !ApiVersion 
@@ -27637,6 +27637,14 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ApplicationDefinitions
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: JitRequests
+    operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
@@ -27656,510 +27664,6 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_822
-            schema: *ref_795
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: applicationDefinitionName
-                description: The name of the managed application definition.
-                serializedName: applicationDefinitionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter 
-            schema: *ref_796
-            implementation: Method
-            origin: modelerfour:synthesized/api-version
-            required: true
-            language: !Languages 
-              default:
-                name: apiVersion
-                description: Api Version
-                serializedName: api-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_621
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_577
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_821
-          - *ref_822
-        responses:
-          - !SchemaResponse 
-            schema: *ref_335
-            language: !Languages 
-              default:
-                name: ''
-                description: OK - Returns the managed application definition.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_799
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            Get managed application definition:
-              parameters:
-                api-version: '2019-07-01'
-                applicationDefinitionName: myManagedApplicationDef
-                resourceGroupName: rg
-                subscriptionId: subid
-              responses:
-                '200':
-                  body:
-                    name: myManagedApplicationDef
-                    type: Microsoft.Solutions/applicationDefinitions
-                    id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
-                    location: East US 2
-                    managedBy: null
-                    properties:
-                      description: myManagedApplicationDef description
-                      artifacts:
-                        - name: CreateUiDefinition
-                          type: Custom
-                          uri: https://path/to/managedApplicationCreateUiDefinition.json
-                        - name: ApplicationResourceTemplate
-                          type: Template
-                          uri: https://path/to/mainTemplate.json
-                      authorizations:
-                        - principalId: validprincipalguid
-                          roleDefinitionId: validroleguid
-                      deploymentPolicy: null
-                      displayName: myManagedApplicationDef
-                      lockLevel: None
-                      lockingPolicy: null
-                      managementPolicy: null
-                      notificationPolicy: null
-                      packageFileUri: https://path/to/packagezipfile
-                      policies: []
-                    sku: null
-                    tags: null
-                  headers: {}
-        language: !Languages 
-          default:
-            name: GetById
-            description: Gets the managed application definition.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2019-07-01'
-        parameters:
-          - *ref_573
-          - !Parameter &ref_823
-            schema: *ref_794
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group. The name is case insensitive.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_824
-            schema: *ref_795
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: applicationDefinitionName
-                description: The name of the managed application definition.
-                serializedName: applicationDefinitionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter 
-            schema: *ref_796
-            implementation: Method
-            origin: modelerfour:synthesized/api-version
-            required: true
-            language: !Languages 
-              default:
-                name: apiVersion
-                description: Api Version
-                serializedName: api-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_621
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_577
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}
-                method: delete
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_823
-          - *ref_824
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '200'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Accepted - Returns this status until the asynchronous operation has completed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '202'
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: NoContent
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - '204'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_799
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            Get managed application definition:
-              parameters:
-                api-version: '2019-07-01'
-                applicationDefinitionName: myManagedApplicationDef
-                resourceGroupName: rg
-                subscriptionId: subid
-              responses:
-                '200': {}
-                '202': {}
-                '204': {}
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: DeleteById
-            description: Deletes the managed application definition.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2019-07-01'
-        parameters:
-          - *ref_573
-          - !Parameter &ref_826
-            schema: *ref_794
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group. The name is case insensitive.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_827
-            schema: *ref_795
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: applicationDefinitionName
-                description: The name of the managed application definition.
-                serializedName: applicationDefinitionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter 
-            schema: *ref_796
-            implementation: Method
-            origin: modelerfour:synthesized/api-version
-            required: true
-            language: !Languages 
-              default:
-                name: apiVersion
-                description: Api Version
-                serializedName: api-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_621
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_583
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_825
-                schema: *ref_335
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: Parameters supplied to the create or update a managed application definition.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_577
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_825
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_826
-          - *ref_827
-        responses:
-          - !SchemaResponse 
-            schema: *ref_335
-            language: !Languages 
-              default:
-                name: ''
-                description: OK - Returns information about the managed application definition, including provisioning status.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-          - !SchemaResponse 
-            schema: *ref_335
-            language: !Languages 
-              default:
-                name: ''
-                description: Created - Returns information about the managed application definition, including provisioning status.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_799
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            Create or update managed application definition:
-              parameters:
-                api-version: '2019-07-01'
-                applicationDefinitionName: myManagedApplicationDef
-                parameters:
-                  location: East US 2
-                  properties:
-                    description: myManagedApplicationDef description
-                    authorizations:
-                      - principalId: validprincipalguid
-                        roleDefinitionId: validroleguid
-                    displayName: myManagedApplicationDef
-                    lockLevel: None
-                    packageFileUri: https://path/to/packagezipfile
-                resourceGroupName: rg
-                subscriptionId: subid
-              responses:
-                '200':
-                  body:
-                    name: myManagedApplicationDef
-                    type: Microsoft.Solutions/applicationDefinitions
-                    id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
-                    location: East US 2
-                    managedBy: null
-                    properties:
-                      description: myManagedApplicationDef description
-                      artifacts:
-                        - name: CreateUiDefinition
-                          type: Custom
-                          uri: https://path/to/managedApplicationCreateUiDefinition.json
-                        - name: ApplicationResourceTemplate
-                          type: Template
-                          uri: https://path/to/mainTemplate.json
-                      authorizations:
-                        - principalId: validprincipalguid
-                          roleDefinitionId: validroleguid
-                      displayName: myManagedApplicationDef
-                      lockLevel: None
-                      packageFileUri: https://path/to/packagezipfile
-                    sku: null
-                    tags: null
-                  headers: {}
-                '201':
-                  body:
-                    name: myManagedApplicationDef
-                    type: Microsoft.Solutions/applicationDefinitions
-                    id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef
-                    location: East US 2
-                    managedBy: null
-                    properties:
-                      description: myManagedApplicationDef description
-                      artifacts:
-                        - name: CreateUiDefinition
-                          type: Custom
-                          uri: https://path/to/managedApplicationCreateUiDefinition.json
-                        - name: ApplicationResourceTemplate
-                          type: Template
-                          uri: https://path/to/mainTemplate.json
-                      authorizations:
-                        - principalId: validprincipalguid
-                          roleDefinitionId: validroleguid
-                      displayName: myManagedApplicationDef
-                      lockLevel: None
-                      packageFileUri: https://path/to/packagezipfile
-                    sku: null
-                    tags: null
-                  headers: {}
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: CreateOrUpdateById
-            description: Creates a new managed application definition.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: ApplicationDefinitions
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: JitRequests
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2019-07-01'
-        parameters:
-          - *ref_573
-          - !Parameter &ref_828
-            schema: *ref_794
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group. The name is case insensitive.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_829
             schema: *ref_16
             implementation: Method
             required: true
@@ -28212,8 +27716,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_828
-          - *ref_829
+          - *ref_821
+          - *ref_822
         responses:
           - !SchemaResponse 
             schema: *ref_351
@@ -28253,7 +27757,7 @@ operationGroups:
             version: '2019-07-01'
         parameters:
           - *ref_573
-          - !Parameter &ref_831
+          - !Parameter &ref_824
             schema: *ref_794
             implementation: Method
             required: true
@@ -28265,7 +27769,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_832
+          - !Parameter &ref_825
             schema: *ref_16
             implementation: Method
             required: true
@@ -28307,7 +27811,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_830
+              - !Parameter &ref_823
                 schema: *ref_351
                 implementation: Method
                 required: true
@@ -28333,7 +27837,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_830
+              - *ref_823
             language: !Languages 
               default:
                 name: ''
@@ -28347,8 +27851,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_831
-          - *ref_832
+          - *ref_824
+          - *ref_825
         responses:
           - !SchemaResponse 
             schema: *ref_351
@@ -28403,7 +27907,7 @@ operationGroups:
             version: '2019-07-01'
         parameters:
           - *ref_573
-          - !Parameter &ref_837
+          - !Parameter &ref_830
             schema: *ref_794
             implementation: Method
             required: true
@@ -28415,7 +27919,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_838
+          - !Parameter &ref_831
             schema: *ref_16
             implementation: Method
             required: true
@@ -28457,8 +27961,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_834
-                schema: *ref_833
+              - !Parameter &ref_827
+                schema: *ref_826
                 flattened: true
                 implementation: Method
                 required: true
@@ -28483,19 +27987,19 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !VirtualParameter &ref_836
+              - !VirtualParameter &ref_829
                 schema: *ref_377
                 implementation: Method
-                originalParameter: *ref_834
+                originalParameter: *ref_827
                 pathToProperty: []
-                targetProperty: *ref_835
+                targetProperty: *ref_828
                 language: !Languages 
                   default:
                     name: tags
                     description: Jit request tags
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_836
+              - *ref_829
             language: !Languages 
               default:
                 name: ''
@@ -28509,8 +28013,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_837
-          - *ref_838
+          - *ref_830
+          - *ref_831
         responses:
           - !SchemaResponse 
             schema: *ref_351
@@ -28550,7 +28054,7 @@ operationGroups:
             version: '2019-07-01'
         parameters:
           - *ref_573
-          - !Parameter &ref_839
+          - !Parameter &ref_832
             schema: *ref_794
             implementation: Method
             required: true
@@ -28562,7 +28066,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_840
+          - !Parameter &ref_833
             schema: *ref_16
             implementation: Method
             required: true
@@ -28615,8 +28119,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_839
-          - *ref_840
+          - *ref_832
+          - *ref_833
         responses:
           - !Response 
             language: !Languages 
@@ -28704,7 +28208,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_841
+            schema: *ref_834
             language: !Languages 
               default:
                 name: ''
@@ -28741,7 +28245,7 @@ operationGroups:
             version: '2019-07-01'
         parameters:
           - *ref_573
-          - !Parameter &ref_842
+          - !Parameter &ref_835
             schema: *ref_794
             implementation: Method
             required: true
@@ -28794,10 +28298,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_842
+          - *ref_835
         responses:
           - !SchemaResponse 
-            schema: *ref_841
+            schema: *ref_834
             language: !Languages 
               default:
                 name: ''
@@ -28842,7 +28346,7 @@ operationGroups:
             version: '2020-09-01'
         parameters:
           - *ref_573
-          - !Parameter &ref_843
+          - !Parameter &ref_836
             schema: *ref_648
             implementation: Method
             required: true
@@ -28894,7 +28398,7 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_843
+          - *ref_836
         responses:
           - !SchemaResponse 
             schema: *ref_396
@@ -28990,7 +28494,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_844
+          - !Parameter &ref_837
             schema: *ref_648
             implementation: Method
             extensions:
@@ -29032,10 +28536,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_844
+          - *ref_837
         responses:
           - !SchemaResponse 
-            schema: *ref_845
+            schema: *ref_838
             language: !Languages 
               default:
                 name: ''
