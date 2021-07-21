@@ -15,7 +15,7 @@ namespace xml_service.Models
     public partial class Container
     {
         /// <summary> Initializes a new instance of Container. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="properties"/> is null. </exception>
         internal Container(string name, ContainerProperties properties)
@@ -35,7 +35,7 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Container. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         /// <param name="properties"> Properties of a container. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         internal Container(string name, ContainerProperties properties, IReadOnlyDictionary<string, string> metadata)

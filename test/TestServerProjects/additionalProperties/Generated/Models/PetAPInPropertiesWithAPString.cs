@@ -15,8 +15,8 @@ namespace additionalProperties.Models
     public partial class PetAPInPropertiesWithAPString
     {
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="odataLocation"> . </param>
+        /// <param name="id"></param>
+        /// <param name="odataLocation"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="odataLocation"/> is null. </exception>
         public PetAPInPropertiesWithAPString(int id, string odataLocation)
         {
@@ -32,10 +32,10 @@ namespace additionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
-        /// <param name="odataLocation"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
+        /// <param name="odataLocation"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
         /// <param name="moreAdditionalProperties"> Additional Properties. </param>
         internal PetAPInPropertiesWithAPString(int id, string name, bool? status, string odataLocation, IDictionary<string, float> additionalProperties, IDictionary<string, string> moreAdditionalProperties)

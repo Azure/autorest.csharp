@@ -14,7 +14,7 @@ namespace AdditionalPropertiesEx.Models
     public partial class OutputAdditionalPropertiesModel
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         internal OutputAdditionalPropertiesModel(int id)
         {
             Id = id;
@@ -22,7 +22,7 @@ namespace AdditionalPropertiesEx.Models
         }
 
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal OutputAdditionalPropertiesModel(int id, IReadOnlyDictionary<string, string> additionalProperties)
         {

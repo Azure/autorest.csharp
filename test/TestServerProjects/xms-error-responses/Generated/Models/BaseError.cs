@@ -16,7 +16,7 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of BaseError. </summary>
-        /// <param name="someBaseProp"> . </param>
+        /// <param name="someBaseProp"></param>
         internal BaseError(string someBaseProp)
         {
             SomeBaseProp = someBaseProp;

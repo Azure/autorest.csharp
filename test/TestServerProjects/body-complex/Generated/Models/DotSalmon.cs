@@ -17,10 +17,10 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of DotSalmon. </summary>
-        /// <param name="fishType"> . </param>
-        /// <param name="species"> . </param>
-        /// <param name="location"> . </param>
-        /// <param name="iswild"> . </param>
+        /// <param name="fishType"></param>
+        /// <param name="species"></param>
+        /// <param name="location"></param>
+        /// <param name="iswild"></param>
         internal DotSalmon(string fishType, string species, string location, bool? iswild) : base(fishType, species)
         {
             Location = location;

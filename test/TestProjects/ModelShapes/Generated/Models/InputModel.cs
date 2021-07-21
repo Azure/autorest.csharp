@@ -16,14 +16,14 @@ namespace ModelShapes.Models
     public partial class InputModel
     {
         /// <summary> Initializes a new instance of InputModel. </summary>
-        /// <param name="requiredString"> . </param>
-        /// <param name="requiredInt"> . </param>
-        /// <param name="requiredStringList"> . </param>
-        /// <param name="requiredIntList"> . </param>
-        /// <param name="requiredNullableString"> . </param>
-        /// <param name="requiredNullableInt"> . </param>
-        /// <param name="requiredNullableStringList"> . </param>
-        /// <param name="requiredNullableIntList"> . </param>
+        /// <param name="requiredString"></param>
+        /// <param name="requiredInt"></param>
+        /// <param name="requiredStringList"></param>
+        /// <param name="requiredIntList"></param>
+        /// <param name="requiredNullableString"></param>
+        /// <param name="requiredNullableInt"></param>
+        /// <param name="requiredNullableStringList"></param>
+        /// <param name="requiredNullableIntList"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/>, or <paramref name="requiredIntList"/> is null. </exception>
         public InputModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
         {

@@ -19,8 +19,8 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of ExactMatchModel6. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal ExactMatchModel6(string id, string name, string type) : base(id)
         {
             Name = name;

@@ -16,7 +16,7 @@ namespace NameConflicts.Models
         }
 
         /// <summary> Initializes a new instance of Request. </summary>
-        /// <param name="property"> . </param>
+        /// <param name="property"></param>
         internal Request(string property)
         {
             Property = property;

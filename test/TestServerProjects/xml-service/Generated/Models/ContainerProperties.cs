@@ -13,8 +13,8 @@ namespace xml_service.Models
     public partial class ContainerProperties
     {
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        /// <param name="lastModified"> . </param>
-        /// <param name="etag"> . </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal ContainerProperties(DateTimeOffset lastModified, string etag)
         {
@@ -28,12 +28,12 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ContainerProperties. </summary>
-        /// <param name="lastModified"> . </param>
-        /// <param name="etag"> . </param>
-        /// <param name="leaseStatus"> . </param>
-        /// <param name="leaseState"> . </param>
-        /// <param name="leaseDuration"> . </param>
-        /// <param name="publicAccess"> . </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="publicAccess"></param>
         internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess)
         {
             LastModified = lastModified;

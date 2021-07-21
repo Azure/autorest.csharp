@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -65,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 methodParameters[i] = methodParameter;
             }
 
-            var returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
+            FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
             return new MethodSignature(ctor.Name, ctor.Description, "public static", modelType.Type, returnDescription, methodParameters);
 
             static Constant GetDefaultValue(CSharpType inputType, CSharpType implementationType, Constant? defaultValue)

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(Description);
+                writer.WriteXmlDocumentationSummary($"{Description}");
                 using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
@@ -126,12 +126,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a <see cref=\"{typeof(SubscriptionOperations)}\" /> represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
-            writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
+            writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
+            writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = typeof(GenericResourceExpanded).WrapPageable(async);

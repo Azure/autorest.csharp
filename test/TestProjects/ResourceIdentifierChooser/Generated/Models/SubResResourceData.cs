@@ -19,7 +19,7 @@ namespace ResourceIdentifierChooser
 
         /// <summary> Initializes a new instance of SubResResourceData. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="new"> . </param>
+        /// <param name="new"></param>
         internal SubResResourceData(string id, string @new) : base(id)
         {
             New = @new;

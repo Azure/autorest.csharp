@@ -16,9 +16,9 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of StringWrapper. </summary>
-        /// <param name="field"> . </param>
-        /// <param name="empty"> . </param>
-        /// <param name="nullProperty"> . </param>
+        /// <param name="field"></param>
+        /// <param name="empty"></param>
+        /// <param name="nullProperty"></param>
         internal StringWrapper(string field, string empty, string nullProperty)
         {
             Field = field;
