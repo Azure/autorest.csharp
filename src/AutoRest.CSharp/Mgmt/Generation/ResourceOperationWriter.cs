@@ -682,11 +682,12 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+            var isAncestorResourceTypeTenant = _resourceOperation.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";
             }
-            else if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+            else if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.SubscriptionId";
             }

@@ -54,10 +54,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             CodeModelValidator.Validate(codeModel);
             RemoveOperations(codeModel);
+            _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             UpdateSubscriptionIdForScopeResource(codeModel);
             _codeModel = codeModel;
-            _context = context;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var subscriptionParameters = operationGroup.Operations
                         .SelectMany(op => op.Parameters)
                         .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
-                if (operationGroup.IsAncestorScope() && subscriptionParameters.Count() > 0)
+                if (operationGroup.IsAncestorResourceTypeTenant(_context) && subscriptionParameters.Count() > 0)
                 {
                     // subscriptionParameters all reference to the same object, so we need a copy of it.
                     // We only need to change enum value of Implementation, ShallowCopy is enough.

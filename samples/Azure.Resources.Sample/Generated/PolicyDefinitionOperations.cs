@@ -47,7 +47,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return new PolicyDefinitionsDeleteOperation(response);
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.Parent.Name, Id.Name, cancellationToken);
                 return new PolicyDefinitionsDeleteOperation(response);
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAtManagementGroupAsync(Id.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -223,7 +223,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.DeleteAtManagementGroup(Id.Name, Id.Name, cancellationToken);
+                var response = _restClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -241,7 +241,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAtManagementGroupAsync(Id.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -259,7 +259,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetAtManagementGroup(Id.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)

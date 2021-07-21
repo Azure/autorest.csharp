@@ -67,8 +67,8 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
-            var isScope = _operationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration);
-            List<RequestParameter> parameters = (isScope ? operation.Parameters.OrderBy(p => !p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase)).ToList() : operation.Parameters).Concat(requestParameters).ToList();
+            var isAncestorResourceTypeTenant = _operationGroup.IsAncestorResourceTypeTenant(_context);
+            List<RequestParameter> parameters = (isAncestorResourceTypeTenant ? operation.Parameters.OrderBy(p => !p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase) && !p.Language.Default.Name.Equals("managementGroupId", StringComparison.InvariantCultureIgnoreCase)).ToList() : operation.Parameters).Concat(requestParameters).ToList();
             // Remove ignored headers
             parameters.RemoveAll(requestParameter =>
                 requestParameter.In == ParameterLocation.Header &&

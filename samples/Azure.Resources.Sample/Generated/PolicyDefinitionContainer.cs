@@ -34,7 +34,7 @@ namespace Azure.Resources.Sample
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private PolicyDefinitionsRestOperations _restClient => new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+        private PolicyDefinitionsRestOperations _restClient => new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
@@ -124,7 +124,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(policyDefinitionName, parameters, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.Name, policyDefinitionName, parameters, cancellationToken);
                 return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
@@ -154,7 +154,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                 return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
@@ -178,7 +178,7 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                var response = _restClient.Get(policyDefinitionName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                 return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -202,7 +202,7 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                var response = await _restClient.GetAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -325,7 +325,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(filter, top, cancellationToken: cancellationToken);
+                    var response = _restClient.List(Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -340,7 +340,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                    var response = _restClient.ListNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -365,7 +365,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -380,7 +380,7 @@ namespace Azure.Resources.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -453,7 +453,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -478,7 +478,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, Id.Name, parameters, cancellationToken);
+                var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Parent.Name, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)

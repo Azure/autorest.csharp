@@ -444,7 +444,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (pathParamsLength > 0)
             {
                 var isAncestorTenant = operationGroup.IsAncestorTenant(context);
-                var isAncestorScope = operationGroup.IsAncestorScope();
                 if (pathParamsLength > 1 && !isAncestorTenant)
                 {
                     paramNameList.Add("Id.Name");
@@ -521,28 +520,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 case ResourceTypeBuilder.Locations:
                     return "Id.Location";
                 case ResourceTypeBuilder.Tenant:
-                    if (operationGroup.IsAncestorScope())
+                    // An operation group with /{scope} paths may also have paths in tenant/management group/subscription/resource group level. We need to consider all cases.
+                    if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
                     {
-                        // An operation group with /{scope} paths may also have paths in tenant/management group/subscription/resource group level. We need to consider all cases.
-                        if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
-                        {
-                            return $"{name}.Parent";
-                        }
-                        // TODO: a better way to determine it's a tenant level operation
-                        else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            return $"{name}.Name";
-                        }
-                        else
-                        {
-                            return $"{name}.Parent.Name";
-                        }
+                        return $"{name}.Parent";
                     }
-                    else
+                    // TODO: a better way to determine it's a tenant level operation
+                    else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
                     {
                         return $"{name}.Name";
                     }
-                default:
+                    else
+                    {
+                        return $"{name}.Parent.Name";
+                    }
+            default:
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
         }

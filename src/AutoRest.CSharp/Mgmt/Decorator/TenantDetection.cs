@@ -36,6 +36,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
         }
 
+        public static bool IsAncestorResourceTypeTenant(this OperationGroup operationGroup, BuildContext context)
+        {
+            while (operationGroup.ParentOperationGroup(context) != null)
+            {
+                operationGroup = operationGroup.ParentOperationGroup(context)!;
+            }
+
+            return operationGroup.IsParentResourceTypeTenant(context.Configuration.MgmtConfiguration);
+        }
+
         public static bool IsParentResourceTypeTenant(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             // This considers the parent configuration in readme.

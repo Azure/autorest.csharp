@@ -687,8 +687,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.SubscriptionId, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, properties, location).Request, response);
+                var response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
             }
             catch (Exception e)
             {
@@ -713,8 +713,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.WhatIfAtSubscriptionScope(Id.SubscriptionId, Id.Name, properties, location, cancellationToken);
-                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.SubscriptionId, Id.Name, properties, location).Request, response);
+                var response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
             }
             catch (Exception e)
             {
@@ -791,8 +791,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.WhatIfAtResourceGroupScopeAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, location).Request, response);
+                var response = await _restClient.WhatIfAtResourceGroupScopeAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
             }
             catch (Exception e)
             {
@@ -817,8 +817,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.WhatIfAtResourceGroupScope(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, location, cancellationToken);
-                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, properties, location).Request, response);
+                var response = _restClient.WhatIfAtResourceGroupScope(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
             }
             catch (Exception e)
             {
