@@ -17,6 +17,7 @@ namespace Azure.Resources.Sample
 {
     internal partial class DeploymentScriptLogsRestOperations
     {
+        private string subscriptionId;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -24,17 +25,24 @@ namespace Azure.Resources.Sample
         /// <summary> Initializes a new instance of DeploymentScriptLogsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public DeploymentScriptLogsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public DeploymentScriptLogsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             endpoint ??= new Uri("https://management.azure.com");
 
+            this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal Core.HttpMessage CreateGetLogsRequest(string subscriptionId, string resourceGroupName, string scriptName)
+        internal Core.HttpMessage CreateGetLogsRequest(string resourceGroupName, string scriptName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -55,17 +63,12 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets deployment script logs for a given deployment script name. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="scriptName"> Name of the deployment script. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="scriptName"/> is null. </exception>
-        public async Task<Response<ScriptLogsList>> GetLogsAsync(string subscriptionId, string resourceGroupName, string scriptName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="scriptName"/> is null. </exception>
+        public async Task<Response<ScriptLogsList>> GetLogsAsync(string resourceGroupName, string scriptName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -75,7 +78,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(scriptName));
             }
 
-            using var message = CreateGetLogsRequest(subscriptionId, resourceGroupName, scriptName);
+            using var message = CreateGetLogsRequest(resourceGroupName, scriptName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -92,17 +95,12 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets deployment script logs for a given deployment script name. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="scriptName"> Name of the deployment script. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="scriptName"/> is null. </exception>
-        public Response<ScriptLogsList> GetLogs(string subscriptionId, string resourceGroupName, string scriptName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="scriptName"/> is null. </exception>
+        public Response<ScriptLogsList> GetLogs(string resourceGroupName, string scriptName, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -112,7 +110,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(scriptName));
             }
 
-            using var message = CreateGetLogsRequest(subscriptionId, resourceGroupName, scriptName);
+            using var message = CreateGetLogsRequest(resourceGroupName, scriptName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -128,7 +126,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateGetLogsDefaultRequest(string subscriptionId, string resourceGroupName, string scriptName, int? tail)
+        internal Core.HttpMessage CreateGetLogsDefaultRequest(string resourceGroupName, string scriptName, int? tail)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -153,18 +151,13 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets deployment script logs for a given deployment script name. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="scriptName"> Name of the deployment script. </param>
         /// <param name="tail"> The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If &apos;tail&apos; is not provided, all available logs are shown up to container instance log capacity of 4mb. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="scriptName"/> is null. </exception>
-        public async Task<Response<ScriptLogData>> GetLogsDefaultAsync(string subscriptionId, string resourceGroupName, string scriptName, int? tail = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="scriptName"/> is null. </exception>
+        public async Task<Response<ScriptLogData>> GetLogsDefaultAsync(string resourceGroupName, string scriptName, int? tail = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -174,7 +167,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(scriptName));
             }
 
-            using var message = CreateGetLogsDefaultRequest(subscriptionId, resourceGroupName, scriptName, tail);
+            using var message = CreateGetLogsDefaultRequest(resourceGroupName, scriptName, tail);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -191,18 +184,13 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets deployment script logs for a given deployment script name. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="scriptName"> Name of the deployment script. </param>
         /// <param name="tail"> The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If &apos;tail&apos; is not provided, all available logs are shown up to container instance log capacity of 4mb. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, or <paramref name="scriptName"/> is null. </exception>
-        public Response<ScriptLogData> GetLogsDefault(string subscriptionId, string resourceGroupName, string scriptName, int? tail = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="scriptName"/> is null. </exception>
+        public Response<ScriptLogData> GetLogsDefault(string resourceGroupName, string scriptName, int? tail = null, CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
@@ -212,7 +200,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(scriptName));
             }
 
-            using var message = CreateGetLogsDefaultRequest(subscriptionId, resourceGroupName, scriptName, tail);
+            using var message = CreateGetLogsDefaultRequest(resourceGroupName, scriptName, tail);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

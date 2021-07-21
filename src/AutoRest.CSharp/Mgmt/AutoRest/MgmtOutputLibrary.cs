@@ -92,15 +92,26 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationGroup in codeModel.OperationGroups)
             {
-                if (operationGroup.IsScopeResource(_mgmtConfiguration))
-                {
-                    var subscriptionParameters = operationGroup.Operations
+                var subscriptionParameters = operationGroup.Operations
                         .SelectMany(op => op.Parameters)
                         .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
-
-                    foreach (var param in subscriptionParameters)
+                if (operationGroup.IsAncestorScope() && subscriptionParameters.Count() > 0)
+                {
+                    // subscriptionParameters all reference to the same object, so we need a copy of it.
+                    // We only need to change enum value of Implementation, ShallowCopy is enough.
+                    var newSubParam = subscriptionParameters.First().ShallowCopy();
+                    newSubParam.Implementation = ImplementationLocation.Method;
+                    foreach (var op in operationGroup.Operations)
                     {
-                        param.Implementation = ImplementationLocation.Method;
+                        var newParams = op.Parameters.ToList();
+                        for (int i = 0; i < newParams.Count; i++)
+                        {
+                            if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                newParams[i] = newSubParam;
+                            }
+                        }
+                        op.Parameters = newParams;
                     }
                 }
             }

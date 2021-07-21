@@ -47,7 +47,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new PolicySetDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new PolicySetDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -134,7 +134,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.Name, Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return new PolicySetDefinitionsDeleteOperation(response);
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.Name, Id.SubscriptionId, cancellationToken);
+                var response = _restClient.Delete(Id.Name, cancellationToken);
                 return new PolicySetDefinitionsDeleteOperation(response);
             }
             catch (Exception e)

@@ -47,7 +47,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Application(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Application(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -134,8 +134,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                return new ApplicationsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, Id.SubscriptionId).Request, response);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new ApplicationsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -152,8 +152,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, Id.SubscriptionId, cancellationToken);
-                return new ApplicationsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, Id.SubscriptionId).Request, response);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return new ApplicationsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -189,7 +189,7 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -243,8 +243,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.RefreshPermissionsAsync(Id.ResourceGroupName, Id.Name, Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
-                return new ApplicationsRefreshPermissionsOperation(_clientDiagnostics, Pipeline, _restClient.CreateRefreshPermissionsRequest(Id.ResourceGroupName, Id.Name, Id.SubscriptionId).Request, response);
+                var response = await _restClient.RefreshPermissionsAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new ApplicationsRefreshPermissionsOperation(_clientDiagnostics, Pipeline, _restClient.CreateRefreshPermissionsRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -261,8 +261,8 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.RefreshPermissions(Id.ResourceGroupName, Id.Name, Id.SubscriptionId, cancellationToken);
-                return new ApplicationsRefreshPermissionsOperation(_clientDiagnostics, Pipeline, _restClient.CreateRefreshPermissionsRequest(Id.ResourceGroupName, Id.Name, Id.SubscriptionId).Request, response);
+                var response = _restClient.RefreshPermissions(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return new ApplicationsRefreshPermissionsOperation(_clientDiagnostics, Pipeline, _restClient.CreateRefreshPermissionsRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {

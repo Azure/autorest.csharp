@@ -18,6 +18,7 @@ namespace Azure.Resources.Sample
 {
     internal partial class JitRequestsRestOperations
     {
+        private string subscriptionId;
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
@@ -25,17 +26,24 @@ namespace Azure.Resources.Sample
         /// <summary> Initializes a new instance of JitRequestsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public JitRequestsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
+        public JitRequestsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             endpoint ??= new Uri("https://management.azure.com");
 
+            this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal Core.HttpMessage CreateGetRequest(string resourceGroupName, string jitRequestName, string subscriptionId)
+        internal Core.HttpMessage CreateGetRequest(string resourceGroupName, string jitRequestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -57,10 +65,9 @@ namespace Azure.Resources.Sample
         /// <summary> Gets the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<JitRequestDefinitionData>> GetAsync(string resourceGroupName, string jitRequestName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public async Task<Response<JitRequestDefinitionData>> GetAsync(string resourceGroupName, string jitRequestName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -70,12 +77,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateGetRequest(resourceGroupName, jitRequestName, subscriptionId);
+            using var message = CreateGetRequest(resourceGroupName, jitRequestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -94,10 +97,9 @@ namespace Azure.Resources.Sample
         /// <summary> Gets the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public Response<JitRequestDefinitionData> Get(string resourceGroupName, string jitRequestName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public Response<JitRequestDefinitionData> Get(string resourceGroupName, string jitRequestName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -107,12 +109,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateGetRequest(resourceGroupName, jitRequestName, subscriptionId);
+            using var message = CreateGetRequest(resourceGroupName, jitRequestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -128,7 +126,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string jitRequestName, string subscriptionId, JitRequestDefinitionData parameters)
+        internal Core.HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string jitRequestName, JitRequestDefinitionData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -154,11 +152,10 @@ namespace Azure.Resources.Sample
         /// <summary> Creates or updates the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="parameters"> Parameters supplied to the update JIT request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, <paramref name="subscriptionId"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string jitRequestName, string subscriptionId, JitRequestDefinitionData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string jitRequestName, JitRequestDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -168,16 +165,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, jitRequestName, subscriptionId, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, jitRequestName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -192,11 +185,10 @@ namespace Azure.Resources.Sample
         /// <summary> Creates or updates the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="parameters"> Parameters supplied to the update JIT request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, <paramref name="subscriptionId"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string jitRequestName, string subscriptionId, JitRequestDefinitionData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response CreateOrUpdate(string resourceGroupName, string jitRequestName, JitRequestDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -206,16 +198,12 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, jitRequestName, subscriptionId, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, jitRequestName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -227,7 +215,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateUpdateRequest(string resourceGroupName, string jitRequestName, string subscriptionId, IDictionary<string, string> tags)
+        internal Core.HttpMessage CreateUpdateRequest(string resourceGroupName, string jitRequestName, IDictionary<string, string> tags)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -262,11 +250,10 @@ namespace Azure.Resources.Sample
         /// <summary> Updates the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="tags"> Jit request tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<JitRequestDefinitionData>> UpdateAsync(string resourceGroupName, string jitRequestName, string subscriptionId, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public async Task<Response<JitRequestDefinitionData>> UpdateAsync(string resourceGroupName, string jitRequestName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -276,12 +263,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, jitRequestName, subscriptionId, tags);
+            using var message = CreateUpdateRequest(resourceGroupName, jitRequestName, tags);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -300,11 +283,10 @@ namespace Azure.Resources.Sample
         /// <summary> Updates the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="tags"> Jit request tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public Response<JitRequestDefinitionData> Update(string resourceGroupName, string jitRequestName, string subscriptionId, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public Response<JitRequestDefinitionData> Update(string resourceGroupName, string jitRequestName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -314,12 +296,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, jitRequestName, subscriptionId, tags);
+            using var message = CreateUpdateRequest(resourceGroupName, jitRequestName, tags);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -335,7 +313,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateDeleteRequest(string resourceGroupName, string jitRequestName, string subscriptionId)
+        internal Core.HttpMessage CreateDeleteRequest(string resourceGroupName, string jitRequestName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -357,10 +335,9 @@ namespace Azure.Resources.Sample
         /// <summary> Deletes the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string jitRequestName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string resourceGroupName, string jitRequestName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -370,12 +347,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateDeleteRequest(resourceGroupName, jitRequestName, subscriptionId);
+            using var message = CreateDeleteRequest(resourceGroupName, jitRequestName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -390,10 +363,9 @@ namespace Azure.Resources.Sample
         /// <summary> Deletes the JIT request. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="jitRequestName"> The name of the JIT request. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="jitRequestName"/>, or <paramref name="subscriptionId"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string jitRequestName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="jitRequestName"/> is null. </exception>
+        public Response Delete(string resourceGroupName, string jitRequestName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -403,12 +375,8 @@ namespace Azure.Resources.Sample
             {
                 throw new ArgumentNullException(nameof(jitRequestName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateDeleteRequest(resourceGroupName, jitRequestName, subscriptionId);
+            using var message = CreateDeleteRequest(resourceGroupName, jitRequestName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -420,7 +388,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListBySubscriptionRequest(string subscriptionId)
+        internal Core.HttpMessage CreateListBySubscriptionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -437,17 +405,10 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Retrieves all JIT requests within the subscription. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<JitRequestDefinitionListResult>> ListBySubscriptionAsync(string subscriptionId, CancellationToken cancellationToken = default)
+        public async Task<Response<JitRequestDefinitionListResult>> ListBySubscriptionAsync(CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-
-            using var message = CreateListBySubscriptionRequest(subscriptionId);
+            using var message = CreateListBySubscriptionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -464,17 +425,10 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Retrieves all JIT requests within the subscription. </summary>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
-        public Response<JitRequestDefinitionListResult> ListBySubscription(string subscriptionId, CancellationToken cancellationToken = default)
+        public Response<JitRequestDefinitionListResult> ListBySubscription(CancellationToken cancellationToken = default)
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-
-            using var message = CreateListBySubscriptionRequest(subscriptionId);
+            using var message = CreateListBySubscriptionRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -490,7 +444,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateListByResourceGroupRequest(string resourceGroupName, string subscriptionId)
+        internal Core.HttpMessage CreateListByResourceGroupRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -510,21 +464,16 @@ namespace Azure.Resources.Sample
 
         /// <summary> Retrieves all JIT requests within the resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subscriptionId"/> is null. </exception>
-        public async Task<Response<JitRequestDefinitionListResult>> ListByResourceGroupAsync(string resourceGroupName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<JitRequestDefinitionListResult>> ListByResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateListByResourceGroupRequest(resourceGroupName, subscriptionId);
+            using var message = CreateListByResourceGroupRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -542,21 +491,16 @@ namespace Azure.Resources.Sample
 
         /// <summary> Retrieves all JIT requests within the resource group. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
-        /// <param name="subscriptionId"> The Microsoft Azure subscription ID. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="subscriptionId"/> is null. </exception>
-        public Response<JitRequestDefinitionListResult> ListByResourceGroup(string resourceGroupName, string subscriptionId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<JitRequestDefinitionListResult> ListByResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
 
-            using var message = CreateListByResourceGroupRequest(resourceGroupName, subscriptionId);
+            using var message = CreateListByResourceGroupRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

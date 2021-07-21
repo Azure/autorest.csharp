@@ -118,6 +118,11 @@ namespace AutoRest.CSharp.Input
     internal partial class RequestParameter
     {
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+
+        public RequestParameter ShallowCopy()
+        {
+            return (RequestParameter)this.MemberwiseClone();
+        }
     }
 
     internal partial class HttpResponse
