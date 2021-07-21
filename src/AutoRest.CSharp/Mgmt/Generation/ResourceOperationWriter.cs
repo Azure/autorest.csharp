@@ -203,11 +203,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).FirstOrDefault();
                 // write delete method
-                WriteFirstLROMethod(writer, deleteMethod, context, true);
-                WriteFirstLROMethod(writer, deleteMethod, context, false);
+                WriteFirstLROMethod(writer, deleteMethod, context, true, true);
+                WriteFirstLROMethod(writer, deleteMethod, context, false, true);
 
-                WriteStartLROMethod(writer, deleteMethod, context, true);
-                WriteStartLROMethod(writer, deleteMethod, context, false);
+                WriteStartLROMethod(writer, deleteMethod, context, true, true);
+                WriteStartLROMethod(writer, deleteMethod, context, false, true);
                 clientMethodsList.Add(deleteMethod);
             }
 
@@ -370,7 +370,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             }
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod)} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
 
             if (!isInheritedMethod)
             {
@@ -442,7 +442,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)
@@ -471,7 +471,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -518,7 +518,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (tags == null)"))
@@ -575,7 +575,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -653,11 +653,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteFirstLROMethod(writer, clientMethod, context, true);
-            WriteFirstLROMethod(writer, clientMethod, context, false);
+            WriteFirstLROMethod(writer, clientMethod, context, true, true);
+            WriteFirstLROMethod(writer, clientMethod, context, false, true);
 
-            WriteStartLROMethod(writer, clientMethod, context, true);
-            WriteStartLROMethod(writer, clientMethod, context, false);
+            WriteStartLROMethod(writer, clientMethod, context, true, true);
+            WriteStartLROMethod(writer, clientMethod, context, false, true);
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)

@@ -12,6 +12,11 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A Class representing a CustomModel3 along with the instance operations that can be performed on it. </summary>
     public class CustomModel3 : CustomModel3Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class for mocking. </summary>
+        protected CustomModel3() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         /// <summary> Gets or sets the CustomModel3Data. </summary>
-        public CustomModel3Data Data { get; private set; }
+        public virtual CustomModel3Data Data { get; private set; }
     }
 }

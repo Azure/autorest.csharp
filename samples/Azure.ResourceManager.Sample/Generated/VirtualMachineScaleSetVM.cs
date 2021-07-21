@@ -12,6 +12,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a VirtualMachineScaleSetVM along with the instance operations that can be performed on it. </summary>
     public class VirtualMachineScaleSetVM : VirtualMachineScaleSetVMOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVM"/> class for mocking. </summary>
+        protected VirtualMachineScaleSetVM() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetVM"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets or sets the VirtualMachineScaleSetVMData. </summary>
-        public VirtualMachineScaleSetVMData Data { get; private set; }
+        public virtual VirtualMachineScaleSetVMData Data { get; private set; }
     }
 }

@@ -541,7 +541,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual = false, string? methodName = null)
+            bool isVirtual, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 

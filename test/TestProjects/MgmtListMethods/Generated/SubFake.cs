@@ -13,6 +13,11 @@ namespace MgmtListMethods
     /// <summary> A Class representing a SubFake along with the instance operations that can be performed on it. </summary>
     public class SubFake : SubFakeOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SubFake"/> class for mocking. </summary>
+        protected SubFake() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "SubFake"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +27,6 @@ namespace MgmtListMethods
         }
 
         /// <summary> Gets or sets the SubFakeData. </summary>
-        public SubFakeData Data { get; private set; }
+        public virtual SubFakeData Data { get; private set; }
     }
 }

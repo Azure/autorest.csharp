@@ -77,7 +77,7 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<BillingAccount>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();
@@ -96,7 +96,7 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<BillingAccount> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();
@@ -115,7 +115,7 @@ namespace TenantOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -123,7 +123,7 @@ namespace TenantOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -133,7 +133,7 @@ namespace TenantOnly
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -162,7 +162,7 @@ namespace TenantOnly
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<BillingAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -190,7 +190,7 @@ namespace TenantOnly
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -219,7 +219,7 @@ namespace TenantOnly
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<BillingAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -248,7 +248,7 @@ namespace TenantOnly
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -276,7 +276,7 @@ namespace TenantOnly
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<BillingAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {

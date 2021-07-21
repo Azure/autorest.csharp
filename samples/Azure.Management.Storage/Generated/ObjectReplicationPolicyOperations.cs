@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,14 +85,14 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.Delete");
             scope.Start();
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.Delete");
             scope.Start();
@@ -128,7 +128,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ObjectReplicationPoliciesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<ObjectReplicationPoliciesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.StartDelete");
             scope.Start();
@@ -146,7 +146,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ObjectReplicationPoliciesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual ObjectReplicationPoliciesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyOperations.StartDelete");
             scope.Start();

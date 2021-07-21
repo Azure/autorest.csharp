@@ -62,8 +62,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
-                string baseClass = GetBaseType();
-                using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : {baseClass}"))
+                _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
+                if (_resourceContainer.GetMethod != null)
+                {
+                    _writer.Line($"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type}, {_resourceData.Type}>");
+                }
+                else
+                {
+                    _writer.Line($"{typeof(ContainerBase)}");
+                }
+                using (_writer.Scope())
                 {
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     WriteFields(_writer, _restClient!);
@@ -84,13 +92,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
                 WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
-        }
-
-        protected virtual string GetBaseType()
-        {
-            return _resourceContainer.GetMethod != null
-                ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                : $"ContainerBase";
         }
 
         private void WriteIdProperty()
