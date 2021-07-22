@@ -20,8 +20,8 @@ namespace Pagination.Models
         }
 
         /// <summary> Initializes a new instance of PageSizeStringModelListResult. </summary>
-        /// <param name="value"> . </param>
-        /// <param name="nextLink"> . </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         internal PageSizeStringModelListResult(IReadOnlyList<PageSizeStringModelData> value, string nextLink)
         {
             Value = value;

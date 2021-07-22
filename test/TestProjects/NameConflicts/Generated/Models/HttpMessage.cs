@@ -16,7 +16,7 @@ namespace NameConflicts.Models
         }
 
         /// <summary> Initializes a new instance of HttpMessage. </summary>
-        /// <param name="property"> . </param>
+        /// <param name="property"></param>
         internal HttpMessage(string property)
         {
             Property = property;

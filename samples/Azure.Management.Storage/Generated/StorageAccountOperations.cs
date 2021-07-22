@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
             scope.Start();
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<StorageAccount> Get(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> Get(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
             scope.Start();
@@ -118,7 +118,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -126,14 +126,14 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Delete");
             scope.Start();
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Delete");
             scope.Start();
@@ -169,7 +169,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<StorageAccountsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
             scope.Start();
@@ -187,7 +187,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes a storage account in Microsoft Azure. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public StorageAccountsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual StorageAccountsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
             scope.Start();
@@ -208,7 +208,7 @@ namespace Azure.Management.Storage
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -237,7 +237,7 @@ namespace Azure.Management.Storage
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<StorageAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -265,7 +265,7 @@ namespace Azure.Management.Storage
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -294,7 +294,7 @@ namespace Azure.Management.Storage
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<StorageAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -323,7 +323,7 @@ namespace Azure.Management.Storage
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -351,7 +351,7 @@ namespace Azure.Management.Storage
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<StorageAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -548,7 +548,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> FailoverAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> FailoverAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Failover");
             scope.Start();
@@ -566,7 +566,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Failover(CancellationToken cancellationToken = default)
+        public virtual Response Failover(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Failover");
             scope.Start();
@@ -584,7 +584,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<StorageAccountsFailoverOperation> StartFailoverAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountsFailoverOperation> StartFailoverAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
             scope.Start();
@@ -602,7 +602,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public StorageAccountsFailoverOperation StartFailover(CancellationToken cancellationToken = default)
+        public virtual StorageAccountsFailoverOperation StartFailover(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
             scope.Start();
@@ -622,7 +622,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<BlobRestoreStatus>> RestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BlobRestoreStatus>> RestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -647,7 +647,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<BlobRestoreStatus> RestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public virtual Response<BlobRestoreStatus> RestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -672,7 +672,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<StorageAccountsRestoreBlobRangesOperation> StartRestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<StorageAccountsRestoreBlobRangesOperation> StartRestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -697,7 +697,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public StorageAccountsRestoreBlobRangesOperation StartRestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        public virtual StorageAccountsRestoreBlobRangesOperation StartRestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

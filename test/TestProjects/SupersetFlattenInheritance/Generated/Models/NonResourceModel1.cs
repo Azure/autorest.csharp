@@ -16,8 +16,8 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of NonResourceModel1. </summary>
-        /// <param name="bar"> . </param>
-        /// <param name="foo"> . </param>
+        /// <param name="bar"></param>
+        /// <param name="foo"></param>
         internal NonResourceModel1(string bar, string foo)
         {
             Bar = bar;

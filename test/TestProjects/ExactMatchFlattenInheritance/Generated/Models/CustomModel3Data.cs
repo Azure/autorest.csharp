@@ -17,9 +17,9 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of CustomModel3Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="foo"> . </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="foo"></param>
         internal CustomModel3Data(string id, string name, string type, string foo) : base(id, name, type)
         {
             Foo = foo;

@@ -95,7 +95,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
-            StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing the operations that can be performed over a specific {clientPrefix}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);

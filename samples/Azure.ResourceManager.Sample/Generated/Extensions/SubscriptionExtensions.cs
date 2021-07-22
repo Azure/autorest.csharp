@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
             return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the AvailabilitySets for this SubscriptionOperations. </summary>
+        /// <summary> Lists the AvailabilitySets for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the AvailabilitySets for this SubscriptionOperations. </summary>
+        /// <summary> Lists the AvailabilitySets for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySets for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySets for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -153,7 +153,7 @@ namespace Azure.ResourceManager.Sample
             return new ProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the ProximityPlacementGroups for this SubscriptionOperations. </summary>
+        /// <summary> Lists the ProximityPlacementGroups for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -198,7 +198,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the ProximityPlacementGroups for this SubscriptionOperations. </summary>
+        /// <summary> Lists the ProximityPlacementGroups for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -243,7 +243,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -257,7 +257,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroups for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -278,7 +278,7 @@ namespace Azure.ResourceManager.Sample
             return new DedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the DedicatedHostGroups for this SubscriptionOperations. </summary>
+        /// <summary> Lists the DedicatedHostGroups for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -323,7 +323,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the DedicatedHostGroups for this SubscriptionOperations. </summary>
+        /// <summary> Lists the DedicatedHostGroups for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -368,7 +368,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -382,7 +382,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroups for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -403,7 +403,7 @@ namespace Azure.ResourceManager.Sample
             return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the SshPublicKeys for this SubscriptionOperations. </summary>
+        /// <summary> Lists the SshPublicKeys for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -448,7 +448,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the SshPublicKeys for this SubscriptionOperations. </summary>
+        /// <summary> Lists the SshPublicKeys for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -493,7 +493,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeys for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -507,7 +507,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeys for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -538,7 +538,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachinesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachines for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachines for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -584,7 +584,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachines for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachines for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -630,7 +630,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachines for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -644,7 +644,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachines for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -665,7 +665,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachineScaleSets for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineScaleSets for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -710,7 +710,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachineScaleSets for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineScaleSets for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -755,7 +755,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -769,7 +769,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSets for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -839,7 +839,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a virtual machine image. </summary>
@@ -941,7 +941,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
@@ -1028,7 +1028,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
@@ -1097,7 +1097,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
@@ -1171,7 +1171,7 @@ namespace Azure.ResourceManager.Sample
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>
@@ -1224,7 +1224,7 @@ namespace Azure.ResourceManager.Sample
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1276,7 +1276,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1336,7 +1336,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachineSizes for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineSizes for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1373,7 +1373,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachineSizes for this SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineSizes for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

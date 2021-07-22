@@ -15,9 +15,9 @@ namespace xml_service.Models
     public partial class Blob
     {
         /// <summary> Initializes a new instance of Blob. </summary>
-        /// <param name="name"> . </param>
-        /// <param name="deleted"> . </param>
-        /// <param name="snapshot"> . </param>
+        /// <param name="name"></param>
+        /// <param name="deleted"></param>
+        /// <param name="snapshot"></param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="snapshot"/>, or <paramref name="properties"/> is null. </exception>
         internal Blob(string name, bool deleted, string snapshot, BlobProperties properties)
@@ -43,9 +43,9 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Blob. </summary>
-        /// <param name="name"> . </param>
-        /// <param name="deleted"> . </param>
-        /// <param name="snapshot"> . </param>
+        /// <param name="name"></param>
+        /// <param name="deleted"></param>
+        /// <param name="snapshot"></param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
         internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata)

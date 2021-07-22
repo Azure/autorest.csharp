@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
@@ -80,10 +79,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resource in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, resource, context);
+                var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
+                armResourceWriter.WriteResource();
 
-                var name = resource.Type.Name;
-                project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var operation in context.Library.LongRunningOperations)

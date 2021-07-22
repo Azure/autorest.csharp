@@ -21,8 +21,8 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
-        /// <param name="arrayOfEnum"> . </param>
-        /// <param name="arrayOfEnumCustomizedToNullable"> . </param>
+        /// <param name="arrayOfEnum"></param>
+        /// <param name="arrayOfEnumCustomizedToNullable"></param>
         internal ModelWithArrayOfEnum(IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum, IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable)
         {
             ArrayOfEnum = arrayOfEnum;

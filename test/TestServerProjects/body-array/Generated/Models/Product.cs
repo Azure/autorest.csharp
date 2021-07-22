@@ -16,8 +16,8 @@ namespace body_array.Models
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="integer"> . </param>
-        /// <param name="string"> . </param>
+        /// <param name="integer"></param>
+        /// <param name="string"></param>
         internal Product(int? integer, string @string)
         {
             Integer = integer;

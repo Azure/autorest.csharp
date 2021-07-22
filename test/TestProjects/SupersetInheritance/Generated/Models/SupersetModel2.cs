@@ -16,10 +16,10 @@ namespace SupersetInheritance
         }
 
         /// <summary> Initializes a new instance of SupersetModel2. </summary>
-        /// <param name="iD"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="new"> . </param>
+        /// <param name="iD"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="new"></param>
         internal SupersetModel2(string iD, string name, string type, string @new)
         {
             ID = iD;

@@ -26,22 +26,28 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool IsSingleton(OperationGroup operationGroup, MgmtConfiguration config)
         {
-            foreach (var operation in operationGroup.Operations)
+            if (operationGroup.TryGetResourceName(config, out var resourceName))
             {
-                // Check to see if any GET operation path ends with Singleton keywords
-                if (!operation.IsLongRunning
-                    && operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
-                    && httpRequest.Method == HttpMethod.Get
-                    && SingletonKeywords.Any(w => httpRequest.Path.EndsWith(w)))
+                foreach (var operation in operationGroup.Operations)
                 {
-                    return true;
+                    // Check to see if any GET operation path ends with Singleton keywords
+                    if (!operation.IsLongRunning
+                        && operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
+                        && httpRequest.Method == HttpMethod.Get
+                        // the returned data schema should be the type of the Resource of the operation group
+                        && operation.GetSuccessfulQueryResponse()?.ResponseSchema?.Name == resourceName
+                        && SingletonKeywords.Any(w => httpRequest.Path.EndsWith(w)))
+                    {
+                        return true;
+                    }
                 }
+
+                // if no match found, we get the resource schema name first
+                // and see if the operation group's resource has been set to singleton in config
+                return config.SingletonResource.Contains(resourceName);
             }
 
-            // if no match found, we get the resource schema name first
-            // and see if the operation group's resource has been set to singleton in config
-            return operationGroup.TryGetResourceName(config, out var resourceName)
-                && config.SingletonResource.Contains(resourceName);
+            return false;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="fooPropertiesFoo"> . </param>
+        /// <param name="fooPropertiesFoo"></param>
         /// <param name="idPropertiesId"> ID in CustomModel1. </param>
         internal AzureResourceFlattenModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, location, tags)
         {

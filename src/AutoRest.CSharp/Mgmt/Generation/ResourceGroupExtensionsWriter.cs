@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (writer.Namespace(context.DefaultNamespace))
             {
-                writer.WriteXmlDocumentationSummary(Description);
+                writer.WriteXmlDocumentationSummary($"{Description}");
                 using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             {
                                 if (container.ResourceName == resource.Type.Name)
                                 {
-                                    writer.Line($"#region {resource.Type.Name}s");
+                                    writer.Line($"#region {resource.Type.Name}");
                                     WriteGetContainers(writer, resource, container);
                                     writer.LineRaw("#endregion");
                                     writer.Line();

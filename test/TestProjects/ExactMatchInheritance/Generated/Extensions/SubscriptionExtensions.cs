@@ -62,7 +62,7 @@ namespace ExactMatchInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
@@ -152,7 +152,7 @@ namespace ExactMatchInheritance
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>

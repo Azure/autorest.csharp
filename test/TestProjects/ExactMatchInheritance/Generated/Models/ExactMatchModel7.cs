@@ -16,9 +16,9 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
-        /// <param name="iD"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="iD"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal ExactMatchModel7(string iD, string name, string type)
         {
             ID = iD;

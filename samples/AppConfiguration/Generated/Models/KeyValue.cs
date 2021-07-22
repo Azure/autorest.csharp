@@ -21,14 +21,14 @@ namespace AppConfiguration.Models
         }
 
         /// <summary> Initializes a new instance of KeyValue. </summary>
-        /// <param name="key"> . </param>
-        /// <param name="label"> . </param>
-        /// <param name="contentType"> . </param>
-        /// <param name="value"> . </param>
-        /// <param name="lastModified"> . </param>
+        /// <param name="key"></param>
+        /// <param name="label"></param>
+        /// <param name="contentType"></param>
+        /// <param name="value"></param>
+        /// <param name="lastModified"></param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
-        /// <param name="locked"> . </param>
-        /// <param name="etag"> . </param>
+        /// <param name="locked"></param>
+        /// <param name="etag"></param>
         internal KeyValue(string key, string label, string contentType, string value, DateTimeOffset? lastModified, IDictionary<string, string> tags, bool? locked, string etag)
         {
             Key = key;

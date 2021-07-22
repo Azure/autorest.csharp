@@ -12,6 +12,11 @@ namespace MgmtSingleton
     /// <summary> A Class representing a SingletonResource2 along with the instance operations that can be performed on it. </summary>
     public class SingletonResource2 : SingletonResource2Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SingletonResource2"/> class for mocking. </summary>
+        protected SingletonResource2() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace MgmtSingleton
         }
 
         /// <summary> Gets or sets the SingletonResource2Data. </summary>
-        public SingletonResource2Data Data { get; private set; }
+        public virtual SingletonResource2Data Data { get; private set; }
     }
 }

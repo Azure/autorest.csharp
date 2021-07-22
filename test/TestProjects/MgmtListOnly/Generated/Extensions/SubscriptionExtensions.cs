@@ -26,7 +26,7 @@ namespace MgmtListOnly
             return new FakeFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the FakeFeatures for this SubscriptionOperations. </summary>
+        /// <summary> Lists the FakeFeatures for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -71,7 +71,7 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists the FakeFeatures for this SubscriptionOperations. </summary>
+        /// <summary> Lists the FakeFeatures for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -146,7 +146,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Lists all fakes features in subscription. </summary>
@@ -204,7 +204,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> List API keys. </summary>
@@ -240,7 +240,7 @@ namespace MgmtListOnly
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand. </param>
@@ -293,7 +293,7 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand. </param>
@@ -384,7 +384,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> List Usages. </summary>

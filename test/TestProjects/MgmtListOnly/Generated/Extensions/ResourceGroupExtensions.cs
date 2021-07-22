@@ -20,7 +20,7 @@ namespace MgmtListOnly
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region Fakes
+        #region Fake
         /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
@@ -36,7 +36,7 @@ namespace MgmtListOnly
             return new ResourceGroupFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the ResourceGroupFeatures for this ResourceGroupOperations. </summary>
+        /// <summary> Lists the ResourceGroupFeatures for this <see cref="ResourceGroupOperations" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -89,7 +89,7 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists the ResourceGroupFeatures for this ResourceGroupOperations. </summary>
+        /// <summary> Lists the ResourceGroupFeatures for this <see cref="ResourceGroupOperations" />. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
@@ -180,7 +180,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Lists all features in a resource group. </summary>
@@ -259,7 +259,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Publish a key. </summary>
@@ -335,7 +335,7 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            );
+            ).ConfigureAwait(false);
         }
 
         /// <summary> Get all the published keys. </summary>

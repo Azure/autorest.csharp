@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(operation.Description);
+                writer.WriteXmlDocumentationSummary($"{operation.Description}");
                 var baseType = operation.ResultType != null ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Azure.Operation));
                 var valueTaskType = operation.ResultType != null ? new CSharpType(typeof(Response<>), operation.ResultType) : new CSharpType(typeof(Response));
                 var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
