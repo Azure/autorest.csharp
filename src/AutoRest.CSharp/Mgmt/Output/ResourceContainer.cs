@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -26,8 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string SubscriptionCommentName = "Subscription";
         private const string TenantCommentName = "Tenant";
 
-        private RestClientMethod? _putMethod;
-        private PagingMethod? _listMethod;
+        private RestClientMethod? _createMethod;
         private ClientMethod? _getMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -36,24 +36,34 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != PutMethod && m.RestClientMethod != ListMethod?.Method);
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod
+        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceOperationsListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
 
-        public RestClientMethod? PutMethod => _putMethod ??= GetPutMethod();
+        public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
 
-        public PagingMethod? ListMethod => _listMethod ??= FindListPagingMethod();
+        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods();
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
 
-        private PagingMethod? FindListPagingMethod()
+        private IEnumerable<ResourceListMethod> FindContainerListMethods()
         {
-            return PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
+            return GetListMethods(true, true);
         }
 
-        private RestClientMethod? GetPutMethod()
+        private RestClientMethod? GetCreateMethod()
         {
-            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+            return RestClient.Methods.FirstOrDefault(m => IsCreateResourceMethod(m));
+        }
+
+        private bool IsPutMethod(RestClientMethod method)
+        {
+            return method.Request.HttpMethod.Equals(RequestMethod.Put);
+        }
+
+        private bool IsCreateResourceMethod(RestClientMethod method)
+        {
+            return method.Request.HttpMethod.Equals(RequestMethod.Put) &&
+                (method.Name.Equals("CreateOrUpdate") || method.Name.Equals("Create") || method.Name.Equals("Put"));
         }
 
         protected override string SuffixValue => _suffixValue;

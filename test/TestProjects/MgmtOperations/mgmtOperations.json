@@ -214,6 +214,55 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/sharedkey": {
+            "put": {
+                "tags": [
+                    "AvailabilitySets"
+                ],
+                "operationId": "AvailabilitySets_TestSetSharedKey",
+                "description": "Testing description.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the availability set."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionSharedKey"
+                        },
+                        "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request successful. The operation returns the resulting ConnectionSharedKey resource.",
+                        "schema": {
+                            "$ref": "#/definitions/ConnectionSharedKey"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChild/{availabilitySetChildName}": {
             "get": {
                 "tags": [
@@ -668,7 +717,24 @@
                 "location"
             ],
             "x-ms-azure-resource": true
-        }
+        },
+        "ConnectionSharedKey": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "The virtual network connection shared key value."
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "#/definitions/Resource"
+              }
+            ],
+            "required": [
+              "value"
+            ],
+            "description": "Response for GetConnectionSharedKey API service call."
+          }
     },
     "parameters": {
         "SubscriptionIdParameter": {

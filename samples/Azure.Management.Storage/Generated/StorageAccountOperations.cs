@@ -424,6 +424,42 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<StorageAccountListKeysResult>> ListKeysAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<StorageAccountListKeysResult> ListKeys(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
         /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -465,6 +501,106 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.RegenerateKey(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(AccountSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ListAccountSasResponse> ListAccountSAS(AccountSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ListServiceSasResponse> ListServiceSAS(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -718,25 +854,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets a list of BlobServices in the StorageAccount. </summary>
-        /// <returns> An object representing collection of BlobServices and their operations over a StorageAccount. </returns>
-        public BlobServiceContainer GetBlobServices()
-        {
-            return new BlobServiceContainer(this);
-        }
-
         /// <summary> Gets a list of BlobContainers in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
         public BlobContainerContainer GetBlobContainers()
         {
             return new BlobContainerContainer(this);
-        }
-
-        /// <summary> Gets a list of FileServices in the StorageAccount. </summary>
-        /// <returns> An object representing collection of FileServices and their operations over a StorageAccount. </returns>
-        public FileServiceContainer GetFileServices()
-        {
-            return new FileServiceContainer(this);
         }
 
         /// <summary> Gets a list of FileShares in the StorageAccount. </summary>

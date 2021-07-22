@@ -107,9 +107,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.LineRaw($"// Container level operations.");
 
-            if (_resourceContainer.PutMethod != null)
+            if (_resourceContainer.CreateMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod);
             }
 
             if (_resourceContainer.GetMethod != null)
@@ -280,10 +280,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            if (_resourceContainer.ListMethod != null)
+            foreach (var listMethod in _resourceContainer.ListMethods)
             {
-                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                if (listMethod.PagingMethod != null)
+                {
+                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                }
+
+                if (listMethod.ClientMethod != null)
+                {
+                    _writer.Line();
+                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                }
             }
 
             WriteListAsGenericResource(async: false);

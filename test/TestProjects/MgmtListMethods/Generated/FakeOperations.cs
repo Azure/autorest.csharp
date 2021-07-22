@@ -372,6 +372,13 @@ namespace MgmtListMethods
             }
         }
 
+        /// <summary> Gets a list of SubFakes in the Fake. </summary>
+        /// <returns> An object representing collection of SubFakes and their operations over a Fake. </returns>
+        public SubFakeContainer GetSubFakes()
+        {
+            return new SubFakeContainer(this);
+        }
+
         /// <summary> Gets a list of TheExtensionFakes in the Fake. </summary>
         /// <returns> An object representing collection of TheExtensionFakes and their operations over a Fake. </returns>
         public TheExtensionFakeContainer GetTheExtensionFakes()

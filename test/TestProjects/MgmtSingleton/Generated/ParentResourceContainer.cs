@@ -308,6 +308,42 @@ namespace MgmtSingleton
             }
         }
 
+        /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<ParentResource>>> ListAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<ParentResource>> List(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
+            scope.Start();
+            try
+            {
+                var response = _restClient.List(Id.ResourceGroupName, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Filters the list of <see cref="ParentResource" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -346,42 +382,6 @@ namespace MgmtSingleton
                 var filters = new ResourceFilterCollection(ParentResourceOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Singleton Test Parent Example. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<ParentResource>>> ListAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Singleton Test Parent Example. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ParentResource>> List(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
-            scope.Start();
-            try
-            {
-                var response = _restClient.List(Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {

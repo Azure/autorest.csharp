@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace MgmtListMethods.Models
 {
-    internal partial class FakeListResult
+    public partial class FakeListResult
     {
         internal static FakeListResult DeserializeFakeListResult(JsonElement element)
         {

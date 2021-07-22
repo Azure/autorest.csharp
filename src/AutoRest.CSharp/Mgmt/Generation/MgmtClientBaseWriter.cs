@@ -86,13 +86,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, FormattableString converter)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string name, FormattableString converter)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
             // else we just call ListAsGenericResource to get the list then call Get on every resource
 
-            var methodName = CreateMethodName("List", async);
+            var methodName = CreateMethodName(name, async);
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
@@ -187,10 +187,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
+                    WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                     {
                         writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        BuildAndWriteParameters(writer, pagingMethod.NextPageMethod);
+                        BuildAndWriteParameters(writer, pagingMethod.Method);
                         writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
                         writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
                         writer.Append($"{converter}");

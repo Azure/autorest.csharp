@@ -15,18 +15,18 @@ using Azure.Core.Pipeline;
 namespace MgmtLRO
 {
     /// <summary> Retrieves information about an fake. </summary>
-    public partial class BarsDoSomethingOperation : Operation
+    public partial class BarsCreateOperation : Operation
     {
         private readonly OperationInternals _operation;
 
-        /// <summary> Initializes a new instance of BarsDoSomethingOperation for mocking. </summary>
-        protected BarsDoSomethingOperation()
+        /// <summary> Initializes a new instance of BarsCreateOperation for mocking. </summary>
+        protected BarsCreateOperation()
         {
         }
 
-        internal BarsDoSomethingOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BarsCreateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "BarsDoSomethingOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "BarsCreateOperation");
         }
 
         /// <inheritdoc />

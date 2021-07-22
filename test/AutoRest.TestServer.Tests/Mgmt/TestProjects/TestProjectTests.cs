@@ -203,7 +203,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.Name.Contains("Test") && t.Namespace == _projectName)
+                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.FullName.Contains("Test") && t.Namespace == _projectName)
                 {
                     // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
