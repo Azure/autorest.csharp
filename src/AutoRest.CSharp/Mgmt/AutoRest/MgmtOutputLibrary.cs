@@ -115,13 +115,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 RemoveSchemas(codeModel, operationGroup);
             }
-
-            // remove child operation groups
         }
 
         private void RemoveSchemas(CodeModel codeModel, OperationGroup operationGroup)
         {
-            List<Schema> schemasToOmit = new List<Schema>();
+            HashSet<Schema> schemasToOmit = new HashSet<Schema>();
             foreach (var operation in operationGroup.Operations)
             {
                 foreach (var response in operation.Responses)
@@ -132,11 +130,45 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         schemasToOmit.Add(schema);
                     }
                 }
+                //also look at body params
             }
+
+            Queue<Schema> sQueue = new Queue<Schema>(schemasToOmit);
+            while(sQueue.Count>0)
+            {
+                var cur = sQueue.Dequeue();
+                //foreach property
+                //if the property is another schema
+                //add it to the queue
+                //add it to the HashSet
+                //foreach baseType
+                //if the base is another schema
+                //add it to the queue
+                //add it to the hashset
+            }
+
+            HashSet<Schema> stillUsed = new HashSet<Schema>();
+            foreach(var schema in schemasToOmit)
+            {
+                //see if the schema is used by anything outside of the schemasToOmit
+                if (schema is ObjectSchema objSchema)
+                {
+                    if (objSchema.Children != null)
+                    {
+                        foreach (var child in objSchema.Children.All)
+                        {
+                            if (!schemasToOmit.Contains(child))
+                                stillUsed.Add(child);
+                        }
+                    }
+                    //do the same thing for parents
+                }
+            }
+
             foreach (var schema in schemasToOmit)
             {
-                codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
-                // remove children
+                if(!stillUsed.Contains(schema))
+                    codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
             }
         }
 
