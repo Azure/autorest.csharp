@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a DeploymentExtended along with the instance operations that can be performed on it. </summary>
     public class DeploymentExtended : DeploymentExtendedOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "DeploymentExtended"/> class for mocking. </summary>
+        protected DeploymentExtended() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "DeploymentExtended"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the DeploymentExtendedData. </summary>
-        public DeploymentExtendedData Data { get; private set; }
+        public virtual DeploymentExtendedData Data { get; private set; }
     }
 }

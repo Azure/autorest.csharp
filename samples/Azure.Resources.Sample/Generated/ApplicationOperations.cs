@@ -77,7 +77,7 @@ namespace Azure.Resources.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,14 +85,14 @@ namespace Azure.Resources.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> Deletes the managed application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.Delete");
             scope.Start();
@@ -110,7 +110,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Deletes the managed application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.Delete");
             scope.Start();
@@ -128,7 +128,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Deletes the managed application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ApplicationsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<ApplicationsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.StartDelete");
             scope.Start();
@@ -146,7 +146,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Deletes the managed application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ApplicationsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual ApplicationsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.StartDelete");
             scope.Start();
@@ -201,7 +201,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Refresh Permissions for application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> RefreshPermissionsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> RefreshPermissionsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.RefreshPermissions");
             scope.Start();
@@ -219,7 +219,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Refresh Permissions for application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response RefreshPermissions(CancellationToken cancellationToken = default)
+        public virtual Response RefreshPermissions(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.RefreshPermissions");
             scope.Start();
@@ -237,7 +237,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Refresh Permissions for application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ApplicationsRefreshPermissionsOperation> StartRefreshPermissionsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<ApplicationsRefreshPermissionsOperation> StartRefreshPermissionsAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.StartRefreshPermissions");
             scope.Start();
@@ -255,7 +255,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Refresh Permissions for application. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ApplicationsRefreshPermissionsOperation StartRefreshPermissions(CancellationToken cancellationToken = default)
+        public virtual ApplicationsRefreshPermissionsOperation StartRefreshPermissions(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ApplicationOperations.StartRefreshPermissions");
             scope.Start();

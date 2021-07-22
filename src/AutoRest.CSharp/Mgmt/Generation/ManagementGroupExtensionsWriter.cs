@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(Description);
+                writer.WriteXmlDocumentationSummary($"{Description}");
                 using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)

@@ -77,7 +77,7 @@ namespace Azure.Resources.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,14 +85,14 @@ namespace Azure.Resources.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAtScopeAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.DeleteAtScope");
             scope.Start();
@@ -110,7 +110,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response DeleteAtScope(CancellationToken cancellationToken = default)
+        public virtual Response DeleteAtScope(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.DeleteAtScope");
             scope.Start();
@@ -128,7 +128,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<DeploymentsDeleteAtScopeOperation> StartDeleteAtScopeAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsDeleteAtScopeOperation> StartDeleteAtScopeAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartDeleteAtScope");
             scope.Start();
@@ -146,7 +146,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public DeploymentsDeleteAtScopeOperation StartDeleteAtScope(CancellationToken cancellationToken = default)
+        public virtual DeploymentsDeleteAtScopeOperation StartDeleteAtScope(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartDeleteAtScope");
             scope.Start();
@@ -323,7 +323,7 @@ namespace Azure.Resources.Sample
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<DeploymentValidateResult>> ValidateAtScopeAsync(Deployment parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentValidateResult>> ValidateAtScopeAsync(Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -348,7 +348,7 @@ namespace Azure.Resources.Sample
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<DeploymentValidateResult> ValidateAtScope(Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentValidateResult> ValidateAtScope(Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -373,7 +373,7 @@ namespace Azure.Resources.Sample
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<DeploymentsValidateAtScopeOperation> StartValidateAtScopeAsync(Deployment parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsValidateAtScopeOperation> StartValidateAtScopeAsync(Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -398,7 +398,7 @@ namespace Azure.Resources.Sample
         /// <param name="parameters"> Parameters to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public DeploymentsValidateAtScopeOperation StartValidateAtScope(Deployment parameters, CancellationToken cancellationToken = default)
+        public virtual DeploymentsValidateAtScopeOperation StartValidateAtScope(Deployment parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -423,7 +423,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<Response<WhatIfOperationResult>> WhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -448,7 +448,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public Response<WhatIfOperationResult> WhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public virtual Response<WhatIfOperationResult> WhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -473,7 +473,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<DeploymentsWhatIfAtTenantScopeOperation> StartWhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsWhatIfAtTenantScopeOperation> StartWhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -498,7 +498,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public DeploymentsWhatIfAtTenantScopeOperation StartWhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public virtual DeploymentsWhatIfAtTenantScopeOperation StartWhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -523,7 +523,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<Response<WhatIfOperationResult>> WhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -548,7 +548,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public Response<WhatIfOperationResult> WhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public virtual Response<WhatIfOperationResult> WhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -573,7 +573,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<DeploymentsWhatIfAtManagementGroupScopeOperation> StartWhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsWhatIfAtManagementGroupScopeOperation> StartWhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -598,7 +598,7 @@ namespace Azure.Resources.Sample
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public DeploymentsWhatIfAtManagementGroupScopeOperation StartWhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
+        public virtual DeploymentsWhatIfAtManagementGroupScopeOperation StartWhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -624,7 +624,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<Response<WhatIfOperationResult>> WhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -650,7 +650,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public Response<WhatIfOperationResult> WhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual Response<WhatIfOperationResult> WhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -676,7 +676,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<DeploymentsWhatIfAtSubscriptionScopeOperation> StartWhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsWhatIfAtSubscriptionScopeOperation> StartWhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -702,7 +702,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public DeploymentsWhatIfAtSubscriptionScopeOperation StartWhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual DeploymentsWhatIfAtSubscriptionScopeOperation StartWhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -728,7 +728,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<Response<WhatIfOperationResult>> WhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -754,7 +754,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public Response<WhatIfOperationResult> WhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual Response<WhatIfOperationResult> WhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -780,7 +780,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async Task<DeploymentsWhatIfAtResourceGroupScopeOperation> StartWhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsWhatIfAtResourceGroupScopeOperation> StartWhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
@@ -806,7 +806,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public DeploymentsWhatIfAtResourceGroupScopeOperation StartWhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual DeploymentsWhatIfAtResourceGroupScopeOperation StartWhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {

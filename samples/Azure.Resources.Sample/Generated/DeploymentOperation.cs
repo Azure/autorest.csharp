@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a DeploymentOperation along with the instance operations that can be performed on it. </summary>
     public class DeploymentOperation : DeploymentOperationOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "DeploymentOperation"/> class for mocking. </summary>
+        protected DeploymentOperation() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "DeploymentOperation"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the DeploymentOperationData. </summary>
-        public DeploymentOperationData Data { get; private set; }
+        public virtual DeploymentOperationData Data { get; private set; }
     }
 }

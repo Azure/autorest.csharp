@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a ApplicationDefinition along with the instance operations that can be performed on it. </summary>
     public class ApplicationDefinition : ApplicationDefinitionOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ApplicationDefinition"/> class for mocking. </summary>
+        protected ApplicationDefinition() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "ApplicationDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the ApplicationDefinitionData. </summary>
-        public ApplicationDefinitionData Data { get; private set; }
+        public virtual ApplicationDefinitionData Data { get; private set; }
     }
 }

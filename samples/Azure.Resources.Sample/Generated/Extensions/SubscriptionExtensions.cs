@@ -35,7 +35,7 @@ namespace Azure.Resources.Sample
             return new DeploymentScriptsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the DeploymentScripts for this SubscriptionOperations. </summary>
+        /// <summary> Lists the DeploymentScripts for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -80,7 +80,7 @@ namespace Azure.Resources.Sample
             );
         }
 
-        /// <summary> Lists the DeploymentScripts for this SubscriptionOperations. </summary>
+        /// <summary> Lists the DeploymentScripts for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -125,7 +125,7 @@ namespace Azure.Resources.Sample
             );
         }
 
-        /// <summary> Filters the list of DeploymentScripts for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DeploymentScripts for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -139,7 +139,7 @@ namespace Azure.Resources.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of DeploymentScripts for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DeploymentScripts for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -160,7 +160,7 @@ namespace Azure.Resources.Sample
             return new ApplicationsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Applications for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Applications for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -205,7 +205,7 @@ namespace Azure.Resources.Sample
             );
         }
 
-        /// <summary> Lists the Applications for this SubscriptionOperations. </summary>
+        /// <summary> Lists the Applications for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -250,7 +250,7 @@ namespace Azure.Resources.Sample
             );
         }
 
-        /// <summary> Filters the list of Applications for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of Applications for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
@@ -264,7 +264,7 @@ namespace Azure.Resources.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of Applications for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of Applications for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>

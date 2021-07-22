@@ -22,7 +22,7 @@ namespace Azure.Resources.Sample
         }
         #endregion
 
-        #region DeploymentScripts
+        #region DeploymentScript
         /// <summary> Gets an object representing a DeploymentScriptContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="DeploymentScriptContainer" /> object. </returns>
@@ -32,7 +32,7 @@ namespace Azure.Resources.Sample
         }
         #endregion
 
-        #region Applications
+        #region Application
         /// <summary> Gets an object representing a ApplicationContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ApplicationContainer" /> object. </returns>
@@ -42,7 +42,7 @@ namespace Azure.Resources.Sample
         }
         #endregion
 
-        #region ApplicationDefinitions
+        #region ApplicationDefinition
         /// <summary> Gets an object representing a ApplicationDefinitionContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ApplicationDefinitionContainer" /> object. </returns>
@@ -52,7 +52,7 @@ namespace Azure.Resources.Sample
         }
         #endregion
 
-        #region JitRequestDefinitions
+        #region JitRequestDefinition
         /// <summary> Gets an object representing a JitRequestDefinitionContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="JitRequestDefinitionContainer" /> object. </returns>

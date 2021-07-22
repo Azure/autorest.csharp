@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a JitRequestDefinition along with the instance operations that can be performed on it. </summary>
     public class JitRequestDefinition : JitRequestDefinitionOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "JitRequestDefinition"/> class for mocking. </summary>
+        protected JitRequestDefinition() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "JitRequestDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the JitRequestDefinitionData. </summary>
-        public JitRequestDefinitionData Data { get; private set; }
+        public virtual JitRequestDefinitionData Data { get; private set; }
     }
 }

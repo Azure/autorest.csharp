@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
-            _writer.WriteXmlDocumentationParameter("identifier", "The input resource Id to check.");
+            _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
             _writer.Line($"protected override void Validate(ResourceIdentifier identifier)");
             using (_writer.Scope())
             {
@@ -322,14 +322,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var mainListMethod = listMethods.FirstOrDefault(m => m.Method.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? listMethods[0];
             var nonPathDomainParameters = mainListMethod.NonPathDomainParameters;
 
-            writer.WriteXmlDocumentationSummary("List resources at the specified scope");
+            writer.WriteXmlDocumentationSummary($"List resources at the specified scope");
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
-            writer.WriteXmlDocumentation("returns", returnText);
+            writer.WriteXmlDocumentation("returns", $"{returnText}");
 
             var returnType = resourceType.WrapPageable(async);
 

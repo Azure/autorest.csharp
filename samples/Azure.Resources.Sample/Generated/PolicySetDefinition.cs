@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a PolicySetDefinition along with the instance operations that can be performed on it. </summary>
     public class PolicySetDefinition : PolicySetDefinitionOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PolicySetDefinition"/> class for mocking. </summary>
+        protected PolicySetDefinition() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "PolicySetDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the PolicySetDefinitionData. </summary>
-        public PolicySetDefinitionData Data { get; private set; }
+        public virtual PolicySetDefinitionData Data { get; private set; }
     }
 }

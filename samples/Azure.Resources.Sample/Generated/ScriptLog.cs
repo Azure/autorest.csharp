@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a ScriptLog along with the instance operations that can be performed on it. </summary>
     public class ScriptLog : ScriptLogOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ScriptLog"/> class for mocking. </summary>
+        protected ScriptLog() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "ScriptLog"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the ScriptLogData. </summary>
-        public ScriptLogData Data { get; private set; }
+        public virtual ScriptLogData Data { get; private set; }
     }
 }

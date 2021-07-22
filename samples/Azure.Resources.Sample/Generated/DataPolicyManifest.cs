@@ -12,6 +12,11 @@ namespace Azure.Resources.Sample
     /// <summary> A Class representing a DataPolicyManifest along with the instance operations that can be performed on it. </summary>
     public class DataPolicyManifest : DataPolicyManifestOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "DataPolicyManifest"/> class for mocking. </summary>
+        protected DataPolicyManifest() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "DataPolicyManifest"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.Resources.Sample
         }
 
         /// <summary> Gets or sets the DataPolicyManifestData. </summary>
-        public DataPolicyManifestData Data { get; private set; }
+        public virtual DataPolicyManifestData Data { get; private set; }
     }
 }
