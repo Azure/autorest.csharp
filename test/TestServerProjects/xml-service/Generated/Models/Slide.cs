@@ -20,9 +20,9 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of Slide. </summary>
-        /// <param name="type"> . </param>
-        /// <param name="title"> . </param>
-        /// <param name="items"> . </param>
+        /// <param name="type"></param>
+        /// <param name="title"></param>
+        /// <param name="items"></param>
         internal Slide(string type, string title, IList<string> items)
         {
             Type = type;

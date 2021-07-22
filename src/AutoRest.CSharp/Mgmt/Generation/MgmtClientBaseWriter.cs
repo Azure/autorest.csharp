@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "parent resource" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
-            writer.WriteXmlDocumentationParameter("parent", "The resource representing the parent resource.");
+            writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
             using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
@@ -94,15 +94,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var methodName = CreateMethodName("List", async);
             writer.Line();
-            writer.WriteXmlDocumentationSummary(listMethod.Method.Description);
+            writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
             var nonPathDomainParameters = listMethod.NonPathDomainParameters;
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            FormattableString returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentation("returns", returnText);
 
             var returnType = resourceType.WrapPageable(async);
@@ -326,7 +326,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.WriteXmlDocumentationSummary(restClientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
 
             var nonPathParameters = restClientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParameters)
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
             var methodName = CreateMethodName(clientMethod.Name, async); // note clientMethod.Name not restClientMethod.Name
@@ -541,14 +541,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual = false, string? methodName = null)
+            bool isVirtual, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
             methodName = methodName ?? clientMethod.Name;
 
             writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
@@ -558,7 +558,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
             CSharpType? returnType = GetLROReturnType(clientMethod, context);
@@ -624,7 +624,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodName = methodName ?? clientMethod.Name;
 
             writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
@@ -634,7 +634,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning

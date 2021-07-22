@@ -12,6 +12,11 @@ namespace SupersetInheritance
     /// <summary> A Class representing a SupersetModel1 along with the instance operations that can be performed on it. </summary>
     public class SupersetModel1 : SupersetModel1Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SupersetModel1"/> class for mocking. </summary>
+        protected SupersetModel1() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "SupersetModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace SupersetInheritance
         }
 
         /// <summary> Gets or sets the SupersetModel1Data. </summary>
-        public SupersetModel1Data Data { get; private set; }
+        public virtual SupersetModel1Data Data { get; private set; }
     }
 }

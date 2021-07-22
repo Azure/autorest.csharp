@@ -539,13 +539,13 @@ namespace body_string_LowLevel
         ///     <term>ColorConstant</term>
         ///     <term>ColorConstant</term>
         ///     <term>Yes</term>
-        ///     <term> Referenced Color Constant Description. </term>
+        ///     <term>Referenced Color Constant Description.</term>
         ///   </item>
         ///   <item>
         ///     <term>field1</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Sample string. </term>
+        ///     <term>Sample string.</term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -602,13 +602,13 @@ namespace body_string_LowLevel
         ///     <term>ColorConstant</term>
         ///     <term>ColorConstant</term>
         ///     <term>Yes</term>
-        ///     <term> Referenced Color Constant Description. </term>
+        ///     <term>Referenced Color Constant Description.</term>
         ///   </item>
         ///   <item>
         ///     <term>field1</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Sample string. </term>
+        ///     <term>Sample string.</term>
         ///   </item>
         /// </list>
         /// </remarks>

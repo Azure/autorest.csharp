@@ -159,7 +159,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
@@ -235,7 +235,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>

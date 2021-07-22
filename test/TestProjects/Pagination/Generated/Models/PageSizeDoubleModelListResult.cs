@@ -20,8 +20,8 @@ namespace Pagination.Models
         }
 
         /// <summary> Initializes a new instance of PageSizeDoubleModelListResult. </summary>
-        /// <param name="value"> . </param>
-        /// <param name="nextLink"> . </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         internal PageSizeDoubleModelListResult(IReadOnlyList<PageSizeDoubleModelData> value, string nextLink)
         {
             Value = value;

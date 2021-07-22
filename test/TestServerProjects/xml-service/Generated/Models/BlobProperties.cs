@@ -13,8 +13,8 @@ namespace xml_service.Models
     public partial class BlobProperties
     {
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        /// <param name="lastModified"> . </param>
-        /// <param name="etag"> . </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
         internal BlobProperties(DateTimeOffset lastModified, string etag)
         {
@@ -28,34 +28,34 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of BlobProperties. </summary>
-        /// <param name="lastModified"> . </param>
-        /// <param name="etag"> . </param>
+        /// <param name="lastModified"></param>
+        /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>
-        /// <param name="contentType"> . </param>
-        /// <param name="contentEncoding"> . </param>
-        /// <param name="contentLanguage"> . </param>
-        /// <param name="contentMD5"> . </param>
-        /// <param name="contentDisposition"> . </param>
-        /// <param name="cacheControl"> . </param>
-        /// <param name="blobSequenceNumber"> . </param>
-        /// <param name="blobType"> . </param>
-        /// <param name="leaseStatus"> . </param>
-        /// <param name="leaseState"> . </param>
-        /// <param name="leaseDuration"> . </param>
-        /// <param name="copyId"> . </param>
-        /// <param name="copyStatus"> . </param>
-        /// <param name="copySource"> . </param>
-        /// <param name="copyProgress"> . </param>
-        /// <param name="copyCompletionTime"> . </param>
-        /// <param name="copyStatusDescription"> . </param>
-        /// <param name="serverEncrypted"> . </param>
-        /// <param name="incrementalCopy"> . </param>
-        /// <param name="destinationSnapshot"> . </param>
-        /// <param name="deletedTime"> . </param>
-        /// <param name="remainingRetentionDays"> . </param>
-        /// <param name="accessTier"> . </param>
-        /// <param name="accessTierInferred"> . </param>
-        /// <param name="archiveStatus"> . </param>
+        /// <param name="contentType"></param>
+        /// <param name="contentEncoding"></param>
+        /// <param name="contentLanguage"></param>
+        /// <param name="contentMD5"></param>
+        /// <param name="contentDisposition"></param>
+        /// <param name="cacheControl"></param>
+        /// <param name="blobSequenceNumber"></param>
+        /// <param name="blobType"></param>
+        /// <param name="leaseStatus"></param>
+        /// <param name="leaseState"></param>
+        /// <param name="leaseDuration"></param>
+        /// <param name="copyId"></param>
+        /// <param name="copyStatus"></param>
+        /// <param name="copySource"></param>
+        /// <param name="copyProgress"></param>
+        /// <param name="copyCompletionTime"></param>
+        /// <param name="copyStatusDescription"></param>
+        /// <param name="serverEncrypted"></param>
+        /// <param name="incrementalCopy"></param>
+        /// <param name="destinationSnapshot"></param>
+        /// <param name="deletedTime"></param>
+        /// <param name="remainingRetentionDays"></param>
+        /// <param name="accessTier"></param>
+        /// <param name="accessTierInferred"></param>
+        /// <param name="archiveStatus"></param>
         internal BlobProperties(DateTimeOffset lastModified, string etag, long? contentLength, string contentType, string contentEncoding, string contentLanguage, string contentMD5, string contentDisposition, string cacheControl, int? blobSequenceNumber, BlobType? blobType, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, string copyId, CopyStatusType? copyStatus, string copySource, string copyProgress, DateTimeOffset? copyCompletionTime, string copyStatusDescription, bool? serverEncrypted, bool? incrementalCopy, string destinationSnapshot, DateTimeOffset? deletedTime, int? remainingRetentionDays, AccessTier? accessTier, bool? accessTierInferred, ArchiveStatus? archiveStatus)
         {
             LastModified = lastModified;

@@ -19,8 +19,8 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="nEW"> . </param>
+        /// <param name="name"></param>
+        /// <param name="nEW"></param>
         internal ExactMatchModel8(string id, string name, string nEW) : base(id)
         {
             Name = name;

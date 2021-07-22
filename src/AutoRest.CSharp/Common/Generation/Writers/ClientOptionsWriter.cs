@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"private const ServiceVersion LatestVersion = ServiceVersion.{apiVersions.Last().Name};");
                     writer.Line();
-                    writer.WriteXmlDocumentationSummary("The version of the service to use.");
+                    writer.WriteXmlDocumentationSummary($"The version of the service to use.");
                     using (writer.Scope($"public enum ServiceVersion"))
                     {
                         int i = 1;

@@ -12,6 +12,11 @@ namespace ResourceIdentifierChooser
     /// <summary> A Class representing a SubRes3Resource along with the instance operations that can be performed on it. </summary>
     public class SubRes3Resource : SubRes3ResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "SubRes3Resource"/> class for mocking. </summary>
+        protected SubRes3Resource() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "SubRes3Resource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Gets or sets the SubRes3ResourceData. </summary>
-        public SubRes3ResourceData Data { get; private set; }
+        public virtual SubRes3ResourceData Data { get; private set; }
     }
 }

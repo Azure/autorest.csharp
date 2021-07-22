@@ -16,7 +16,7 @@ namespace TypeSchemaMapping.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithAbstractModel. </summary>
-        /// <param name="abstractModelProperty"> . </param>
+        /// <param name="abstractModelProperty"></param>
         internal ModelWithAbstractModel(AbstractModel abstractModelProperty)
         {
             AbstractModelProperty = abstractModelProperty;

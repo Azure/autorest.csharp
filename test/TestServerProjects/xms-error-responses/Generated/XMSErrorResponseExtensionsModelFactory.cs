@@ -11,7 +11,7 @@ namespace xms_error_responses.Models
     public static partial class XMSErrorResponseExtensionsModelFactory
     {
         /// <summary> Initializes a new instance of Animal. </summary>
-        /// <param name="aniType"> . </param>
+        /// <param name="aniType"></param>
         /// <returns> A new <see cref="Models.Animal"/> instance for mocking. </returns>
         public static Animal Animal(string aniType = null)
         {
@@ -19,7 +19,7 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="aniType"> . </param>
+        /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string aniType = null, string name = null)
@@ -37,7 +37,7 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of PetActionError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"> . </param>
+        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
         public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
@@ -47,7 +47,7 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of PetSadError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"> . </param>
+        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
@@ -58,7 +58,7 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"> . </param>
+        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <param name="hungryOrThirsty"> is the pet hungry or thirsty or both. </param>

@@ -32,8 +32,8 @@ namespace lro.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="provisioningState"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
+        /// <param name="provisioningState"></param>
+        /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(string id = null, string type = null, IDictionary<string, string> tags = null, string location = null, string name = null, string provisioningState = null, ProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
@@ -52,8 +52,8 @@ namespace lro.Models
 
         /// <summary> Initializes a new instance of SubProduct. </summary>
         /// <param name="id"> Sub Resource Id. </param>
-        /// <param name="provisioningState"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
+        /// <param name="provisioningState"></param>
+        /// <param name="provisioningStateValues"></param>
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
         public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {

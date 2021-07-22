@@ -23,8 +23,8 @@ namespace lro.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="provisioningState"> . </param>
-        /// <param name="provisioningStateValues"> . </param>
+        /// <param name="provisioningState"></param>
+        /// <param name="provisioningStateValues"></param>
         internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id, type, tags, location, name)
         {
             ProvisioningState = provisioningState;

@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
         {
-            writer.WriteXmlDocumentationSummary(method.Description);
+            writer.WriteXmlDocumentationSummary($"{method.Description}");
             writer.WriteXmlDocumentationParameters(method.Parameters);
             writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
             if (method.ReturnDescription != null)
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 
-        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
+        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyList<Parameter>? requiredParameters)
         {
             var required = parameters
                 .Where(p => HasNullCheck(p))

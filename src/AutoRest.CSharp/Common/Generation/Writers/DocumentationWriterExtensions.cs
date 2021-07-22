@@ -5,8 +5,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -14,24 +17,17 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly char[] _newLineChars = { '\r', '\n' };
 
-        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, string? cref = null)
-        {
-            if (string.IsNullOrWhiteSpace(cref))
-            {
-                return writer.Line($"/// <inheritdoc />");
-            }
-            else
-            {
-                return writer.Line($"/// <inheritdoc cref=\"{cref}\"/>");
-            }
-        }
+        public static CodeWriter WriteXmlDocumentationInheritDoc(this CodeWriter writer, CSharpType? crefType = null)
+            => crefType == null
+                ? writer.Line($"/// <inheritdoc />")
+                : writer.Line($"/// <inheritdoc cref=\"{crefType}\"/>");
 
-        public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, string? text)
+        public static CodeWriter WriteXmlDocumentationSummary(this CodeWriter writer, FormattableString? text)
         {
             return writer.WriteXmlDocumentation("summary", text);
         }
 
-        public static CodeWriter WriteXmlDocumentation(this CodeWriter writer, string tag, string? text)
+        public static CodeWriter WriteXmlDocumentation(this CodeWriter writer, string tag, FormattableString? text)
         {
             return writer.WriteDocumentationLines($"<{tag}>", $"</{tag}>", text);
         }
@@ -40,15 +36,15 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
 
             return writer;
         }
 
-        public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, string? text)
+        public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, string name, FormattableString? text)
         {
-            return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);
+            return writer.WriteDocumentationLines($"<param name=\"{name}\">", $"</param>", text);
         }
 
         /// <summary>
@@ -59,15 +55,15 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <returns></returns>
         public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, Parameter parameter)
         {
-            return writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            return writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
         }
 
-        public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, string? description)
+        public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, FormattableString? description)
         {
-            return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);
+            return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", $"</exception>", description);
         }
 
-        public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, string text)
+        public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, FormattableString text)
         {
             return writer.WriteDocumentationLines($"<returns>", $"</returns>", text);
         }
@@ -97,57 +93,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     _ => FormatParameters(requiredParameters),
                 };
 
-                var description = string.Format(delimitedParameters, requiredParameters.Select(p => p.Name).ToArray());
+                var description = FormattableStringFactory.Create(delimitedParameters, requiredParameters.Select(p => (object)p.Name).ToArray());
                 return writer.WriteXmlDocumentationException(typeof(ArgumentNullException), description);
             }
 
             return writer;
         }
 
-        public static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                if (skipWhenEmpty)
-                {
-                    return writer;
-                }
-
-                text = string.Empty;
-            }
-
-            var splitLines = SplitDocLines(text);
-            if (splitLines.Length == 1)
-            {
-                writer.Line($"/// {prefix} {splitLines[0]} {suffix}");
-            }
-            else
-            {
-                writer.Line($"/// {prefix}");
-                foreach (string line in splitLines)
-                {
-                    writer.Line($"/// {line}");
-                }
-                writer.Line($"/// {suffix}");
-            }
-
-            return writer;
-        }
-
-        private static string[] SplitDocLines(string text)
-        {
-            var lines = text.Split(_newLineChars);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                lines[i] = lines[i].TrimEnd();
-            }
-
-            if (lines.Length > 0 && !lines[^1].EndsWith("."))
-            {
-                lines[^1] = lines[^1] + ".";
-            }
-
-            return lines;
-        }
+        public static CodeWriter WriteDocumentationLines(this CodeWriter writer, FormattableString startTag, FormattableString endTag, FormattableString? text)
+            => writer.AppendXmlDocumentation(startTag, endTag, text ?? $"");
     }
 }

@@ -390,7 +390,7 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of TheExtensionFake for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="TheExtensionFake" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -413,7 +413,7 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Filters the list of TheExtensionFake for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="TheExtensionFake" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>

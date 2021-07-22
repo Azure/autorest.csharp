@@ -18,7 +18,7 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
-        /// <param name="url"> . </param>
+        /// <param name="url"></param>
         internal ModelWithUrlProperty(Uri url)
         {
             Url = url;

@@ -18,7 +18,7 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of PetActionError. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="errorType"> . </param>
+        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         internal PetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse)
         {

@@ -72,14 +72,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var methodParameters = BuildParameterMapping(clientMethod.RestClientMethod).Where(m => m.IsPassThru).Select(m => m.Parameter);
 
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
             foreach (var parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(methodParameters.ToArray());
             // writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
@@ -145,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType.Name}.");
+            writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
             var methodParameters = BuildParameterMapping(pagingMethod.Method).Where(m => m.IsPassThru).Select(m => m.Parameter);
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteXmlDocumentationParameter(parameter);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
             writer.WriteXmlDocumentationRequiredParametersException(methodParameters.ToArray());
 

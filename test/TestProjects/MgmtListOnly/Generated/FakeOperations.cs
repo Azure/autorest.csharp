@@ -83,7 +83,7 @@ namespace MgmtListOnly
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Fake>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
             scope.Start();
@@ -102,7 +102,7 @@ namespace MgmtListOnly
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Fake> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
             scope.Start();
@@ -121,7 +121,7 @@ namespace MgmtListOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -129,14 +129,14 @@ namespace MgmtListOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
             scope.Start();
@@ -154,7 +154,7 @@ namespace MgmtListOnly
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
             scope.Start();
@@ -172,7 +172,7 @@ namespace MgmtListOnly
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();
@@ -190,7 +190,7 @@ namespace MgmtListOnly
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();
@@ -211,7 +211,7 @@ namespace MgmtListOnly
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<Fake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -240,7 +240,7 @@ namespace MgmtListOnly
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<Fake> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -268,7 +268,7 @@ namespace MgmtListOnly
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<Fake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -297,7 +297,7 @@ namespace MgmtListOnly
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<Fake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -326,7 +326,7 @@ namespace MgmtListOnly
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<Fake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -354,7 +354,7 @@ namespace MgmtListOnly
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<Fake> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -507,7 +507,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FakePostResult>> LROMethodAsync(FakePost parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FakePostResult>> LROMethodAsync(FakePost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -532,7 +532,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<FakePostResult> LROMethod(FakePost parameters, CancellationToken cancellationToken = default)
+        public virtual Response<FakePostResult> LROMethod(FakePost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -557,7 +557,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<FakesLROMethodOperation> StartLROMethodAsync(FakePost parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakesLROMethodOperation> StartLROMethodAsync(FakePost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -582,7 +582,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public FakesLROMethodOperation StartLROMethod(FakePost parameters, CancellationToken cancellationToken = default)
+        public virtual FakesLROMethodOperation StartLROMethod(FakePost parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {

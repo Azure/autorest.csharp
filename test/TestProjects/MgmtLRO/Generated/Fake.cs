@@ -13,6 +13,11 @@ namespace MgmtLRO
     /// <summary> A Class representing a Fake along with the instance operations that can be performed on it. </summary>
     public class Fake : FakeOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "Fake"/> class for mocking. </summary>
+        protected Fake() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "Fake"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +27,6 @@ namespace MgmtLRO
         }
 
         /// <summary> Gets or sets the FakeData. </summary>
-        public FakeData Data { get; private set; }
+        public virtual FakeData Data { get; private set; }
     }
 }

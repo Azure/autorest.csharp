@@ -157,19 +157,19 @@ namespace body_complex_LowLevel
         ///     <term>id</term>
         ///     <term>number</term>
         ///     <term></term>
-        ///     <term> Basic Id. </term>
+        ///     <term>Basic Id</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Name property with a very long description that does not fit on a single line and a line break. </term>
+        ///     <term>Name property with a very long description that does not fit on a single line and a line break.</term>
         ///   </item>
         ///   <item>
         ///     <term>color</term>
         ///     <term>&quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -226,19 +226,19 @@ namespace body_complex_LowLevel
         ///     <term>id</term>
         ///     <term>number</term>
         ///     <term></term>
-        ///     <term> Basic Id. </term>
+        ///     <term>Basic Id</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Name property with a very long description that does not fit on a single line and a line break. </term>
+        ///     <term>Name property with a very long description that does not fit on a single line and a line break.</term>
         ///   </item>
         ///   <item>
         ///     <term>color</term>
         ///     <term>&quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>

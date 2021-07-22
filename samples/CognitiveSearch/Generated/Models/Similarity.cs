@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         }
 
         /// <summary> Initializes a new instance of Similarity. </summary>
-        /// <param name="odataType"> . </param>
+        /// <param name="odataType"></param>
         internal Similarity(string odataType)
         {
             OdataType = odataType;
