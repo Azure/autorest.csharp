@@ -53,7 +53,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
-            RemoveOperations(codeModel);
+            RemoveOperations(codeModel, context);
+
             _codeModel = codeModel;
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -61,14 +62,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
+
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+
             DecorateOperationGroup();
         }
 
-        private void RemoveOperations(CodeModel codeModel)
+        private void RemoveOperations(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
             if (operations != null)
@@ -84,6 +87,56 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
                 }
                 codeModel.OperationGroups.Remove(operations);
+            }
+
+            var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
+            if (operationGroupsToOmit != null)
+            {
+                foreach (var opName in operationGroupsToOmit)
+                {
+                    var operationGroup = codeModel.OperationGroups.FirstOrDefault(op => op.Key == opName);
+                    if (operationGroup != null)
+                    {
+                        RemoveOperationGroup(codeModel, context, operationGroup);
+                    }
+                    else
+                    {
+                        throw new Exception($"Invalid operation group name: {opName}");
+                    }
+                }
+            }
+        }
+
+        private void RemoveOperationGroup(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context, OperationGroup operationGroup)
+        {
+            codeModel.OperationGroups.Remove(operationGroup);
+
+            if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
+            {
+                RemoveSchemas(codeModel, operationGroup);
+            }
+
+            // remove child operation groups
+        }
+
+        private void RemoveSchemas(CodeModel codeModel, OperationGroup operationGroup)
+        {
+            List<Schema> schemasToOmit = new List<Schema>();
+            foreach (var operation in operationGroup.Operations)
+            {
+                foreach (var response in operation.Responses)
+                {
+                    var schema = response.ResponseSchema;
+                    if (schema != null && !schemasToOmit.Contains(schema))
+                    {
+                        schemasToOmit.Add(schema);
+                    }
+                }
+            }
+            foreach (var schema in schemasToOmit)
+            {
+                codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
+                // remove children
             }
         }
 
@@ -476,6 +529,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
+                /*Console.WriteLine(schema.Name);*/
                 if (_operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
