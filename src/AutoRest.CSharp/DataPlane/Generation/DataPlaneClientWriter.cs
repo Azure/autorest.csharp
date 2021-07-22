@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             RestClientMethod originalMethod = lroMethod.StartMethod;
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;
-            Parameter[] parameters = originalMethod.Parameters;
+            var parameters = originalMethod.Parameters;
 
             writer.WriteXmlDocumentationSummary($"{originalMethod.Description}");
 

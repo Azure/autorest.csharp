@@ -1,0 +1,1262 @@
+!CodeModel 
+info: !Info 
+  title: Verify path parameter generation
+schemas: !Schemas 
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: ParentId
+          description: Resource ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: ParentName
+          description: Resource name.
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: ReverseResourceId
+          description: Resource ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: ReverseResourceName
+          description: Resource name.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: NormalResourceId
+          description: Resource ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      language: !Languages 
+        default:
+          name: NormalResourceName
+          description: Resource name.
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_14
+      type: constant
+      value: !ConstantValue 
+        value: '2021-07-22'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20210722
+          description: Api Version (2021-07-22)
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_18
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_21
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_20
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_10
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-07-22'
+            elementType: !ObjectSchema &ref_3
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2021-07-22'
+              properties:
+                - !Property 
+                  schema: *ref_1
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_2
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: Parent
+                  description: ''
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: ParentsValue
+                description: Array of Parent
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: Parents
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_3
+    - !ObjectSchema &ref_29
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_11
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-07-22'
+            elementType: !ObjectSchema &ref_6
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2021-07-22'
+              properties:
+                - !Property 
+                  schema: *ref_4
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_5
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: ReverseResource
+                  description: ''
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: ReverseResourcesValue
+                description: Array of ReverseResource
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: ReverseResources
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_6
+    - !ObjectSchema &ref_39
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-07-22'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_12
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-07-22'
+            elementType: !ObjectSchema &ref_9
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2021-07-22'
+              properties:
+                - !Property 
+                  schema: *ref_7
+                  readOnly: true
+                  serializedName: id
+                  language: !Languages 
+                    default:
+                      name: id
+                      description: Resource ID.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_8
+                  readOnly: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: Resource name.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: NormalResource
+                  description: ''
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: NormalResourcesValue
+                description: Array of NormalResource
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: NormalResources
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_9
+  arrays:
+    - *ref_10
+    - *ref_11
+    - *ref_12
+globalParameters:
+  - !Parameter &ref_17
+    schema: *ref_13
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: SubscriptionId
+        description: ''
+        serializedName: subscriptionId
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_15
+    schema: *ref_0
+    clientDefaultValue: https://management.azure.com
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+  - !Parameter &ref_16
+    schema: *ref_14
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language: !Languages 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+operationGroups:
+  - !OperationGroup 
+    $key: Parents
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_19
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_19
+        responses:
+          - !SchemaResponse 
+            schema: *ref_20
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: Parent resource
+            summary: Parent resource
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_23
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_24
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_21
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_22
+                schema: *ref_3
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_22
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_23
+          - *ref_24
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: Parent resource
+            summary: Parent resource
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_25
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_26
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_25
+          - *ref_26
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Check path parameters order in generated method signature
+            summary: Check path parameters order in generated method signature
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Parents
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: ReverseResources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_27
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_28
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/reverseResources
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+          - *ref_28
+        responses:
+          - !SchemaResponse 
+            schema: *ref_29
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: Resource with reversed path parameter order
+            summary: Resource with reversed path parameter order
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_31
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: reverseResourceId
+                description: Id of the reverseResource
+                serializedName: reverseResourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_32
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_33
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_21
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_30
+                schema: *ref_6
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_30
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/reverseResources/{reverseResourceId}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_31
+          - *ref_32
+          - *ref_33
+        responses:
+          - !SchemaResponse 
+            schema: *ref_6
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: Resource with reversed path parameter order
+            summary: Resource with reversed path parameter order
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_34
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: reverseResourceId
+                description: Id of the reverseResource
+                serializedName: reverseResourceId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_35
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+          - !Parameter &ref_36
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/reverseResources/{reverseResourceId}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_34
+          - *ref_35
+          - *ref_36
+        responses:
+          - !SchemaResponse 
+            schema: *ref_6
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Resource with reversed path parameter order
+            summary: Resource with reversed path parameter order
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ReverseResources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: NormalResources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_37
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_38
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/normalResources
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_37
+          - *ref_38
+        responses:
+          - !SchemaResponse 
+            schema: *ref_39
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: List
+            description: Resource with normal path parameter order
+            summary: Resource with normal path parameter order
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_41
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_42
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: normalResourceName
+                description: NormalResource name
+                serializedName: normalResourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_43
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_21
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_40
+                schema: *ref_9
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_40
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/normalResources/{normalResourceName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_41
+          - *ref_42
+          - *ref_43
+        responses:
+          - !SchemaResponse 
+            schema: *ref_9
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: Resource with normal path parameter order
+            summary: Resource with normal path parameter order
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-07-22'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_44
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_45
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: parentName
+                description: Name of parent
+                serializedName: parentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_46
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: normalResourceName
+                description: NormalResource name
+                serializedName: normalResourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/normalResources/{normalResourceName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_44
+          - *ref_45
+          - *ref_46
+        responses:
+          - !SchemaResponse 
+            schema: *ref_9
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Resource with normal path parameter order
+            summary: Resource with normal path parameter order
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: NormalResources
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
+language: !Languages 
+  default:
+    name: VerifyPathParameterGeneration
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}

@@ -1,0 +1,518 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Verify path parameter generation",
+        "version": "2021-07-22"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents": {
+            "get": {
+                "tags": [
+                    "ParentContainer"
+                ],
+                "summary": "Parent resource",
+                "operationId": "Parents_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Parents"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}": {
+            "put": {
+                "tags": [
+                    "ParentContainer"
+                ],
+                "summary": "Parent resource",
+                "operationId": "Parents_Put",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Parent"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Parent"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "ParentContainer"
+                ],
+                "summary": "Check path parameters order in generated method signature",
+                "operationId": "Parents_Get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Parent"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/reverseResources": {
+            "get": {
+                "tags": [
+                    "ReverseResources"
+                ],
+                "summary": "Resource with reversed path parameter order",
+                "operationId": "ReverseResources_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ReverseResources"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/reverseResources/{reverseResourceId}": {
+            "put": {
+                "tags": [
+                    "ReverseResources"
+                ],
+                "summary": "Resource with reversed path parameter order",
+                "operationId": "ReverseResources_Put",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ReverseResourceIdParameter"
+                    },
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ReverseResource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ReverseResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "ReverseResources"
+                ],
+                "summary": "Resource with reversed path parameter order",
+                "operationId": "ReverseResources_Get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ReverseResourceIdParameter"
+                    },
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ReverseResource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/normalResources": {
+            "get": {
+                "tags": [
+                    "NormalResources"
+                ],
+                "summary": "Resource with normal path parameter order",
+                "operationId": "NormalResources_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NormalResources"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PathOrder/parents/{parentName}/normalResources/{normalResourceName}": {
+            "put": {
+                "tags": [
+                    "NormalResources"
+                ],
+                "summary": "Resource with normal path parameter order",
+                "operationId": "NormalResources_Put",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/NormalResourceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/NormalResource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NormalResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "NormalResources"
+                ],
+                "summary": "Resource with normal path parameter order",
+                "operationId": "NormalResources_Get",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                    "name": "resourceGroupName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The name of the resource group."
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/NormalResourceNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/NormalResource"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Parent": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource ID."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                }
+            }
+        },
+        "Parents": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Parent"
+                    }
+                }
+            }
+        },
+        "ReverseResource": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource ID."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                }
+            }
+        },
+        "ReverseResources": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ReverseResource"
+                    }
+                }
+            }
+        },
+        "NormalResource": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource ID."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                }
+            }
+        },
+        "NormalResources": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NormalResource"
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+        },
+        "ReverseResourceIdParameter": {
+            "name": "reverseResourceId",
+            "description": "Id of the reverseResource",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "NormalResourceNameParameter": {
+            "name": "normalResourceName",
+            "description": "NormalResource name",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "ParentNameParameter": {
+            "name": "parentName",
+            "description": "Name of parent",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        }
+    }
+}

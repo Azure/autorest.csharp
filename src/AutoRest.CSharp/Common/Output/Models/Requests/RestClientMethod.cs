@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         {
             Name = name;
             Request = request;
-            Parameters = parameters;
             Responses = responses;
             Description = description;
             ReturnType = returnType;
@@ -24,12 +23,17 @@ namespace AutoRest.CSharp.Output.Models.Requests
             BufferResponse = bufferResponse;
             Accessibility = accessibility;
             Operation = operation;
+
+            PathParameters = getPathParameters(parameters);
+            NonPathParameters = getNonPathParameters(parameters);
+
+            Parameters = SortParameters(parameters, new Queue<Parameter>(PathParameters));
         }
 
         public string Name { get; }
         public string? Description { get; }
         public Request Request { get; }
-        public Parameter[] Parameters { get; }
+        public List<Parameter> Parameters { get; }
         public Response[] Responses { get; }
         public DataPlaneResponseHeaderGroupType? HeaderModel { get; }
         public bool BufferResponse { get; }
@@ -37,30 +41,58 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public string Accessibility { get; }
         public Operation Operation { get; }
 
-        public List<Parameter> NonPathParameters
-        {
-            get
-            {
-                var pathSegments = this.Request.PathParameterSegments;
+        public List<Parameter> PathParameters { get; }
 
-                return this.Parameters.Where(parameter => !pathSegments.Any(
-                    pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
-                    pathSegment.Value.Reference.Name == parameter.Name)
-                ).ToList();
-            }
+        public List<Parameter> NonPathParameters { get; }
+
+        private List<Parameter> getPathParameters(Parameter[] parameters)
+        {
+            List<Parameter> pathParameters = new();
+            // Path segments are ordered from left to right, so iterate segments first will keep the sequence of
+            // path parameters in URL path
+            Request.PathParameterSegments.ForEach(pathSegment => {
+                var parameter = parameters.FirstOrDefault(p => pathSegment.Value.Reference.Type.Name == p.Type.Name &&
+                    pathSegment.Value.Reference.Name == p.Name);
+                if (parameter != null)
+                {
+                    pathParameters.Add(parameter);
+                }
+            });
+
+            return pathParameters;
         }
 
-        public List<Parameter> PathParameters
+        private List<Parameter> getNonPathParameters(Parameter[] parameters)
         {
-            get
-            {
-                var pathSegments = this.Request.PathParameterSegments;
+            return parameters.Where(p => !IsPathParameter(p)).ToList();
+        }
 
-                return this.Parameters.Where(parameter => pathSegments.Any(
-                    pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
-                    pathSegment.Value.Reference.Name == parameter.Name)
-                ).ToList();
+        private bool IsPathParameter(Parameter parameter)
+        {
+            return this.Request.PathParameterSegments.Any(
+                pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
+                pathSegment.Value.Reference.Name == parameter.Name
+            );
+        }
+
+        private List<Parameter> SortParameters(Parameter[] parameters, Queue<Parameter> pathParameters)
+        {
+            var sortedParameters = new List<Parameter>();
+
+            foreach (var parameter in parameters)
+            {
+                // sort only path parameters in the whole parameter list
+                if (IsPathParameter(parameter))
+                {
+                    sortedParameters.Add(pathParameters.Dequeue());
+                }
+                else
+                {
+                    sortedParameters.Add(parameter);
+                }
             }
+
+            return sortedParameters;
         }
     }
 }
