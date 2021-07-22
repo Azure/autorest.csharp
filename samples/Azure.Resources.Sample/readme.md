@@ -53,6 +53,8 @@ operation-group-to-parent:
   DeploymentScripts: resourceGroups
   ManagementLocks: tenant
   ResourceLinks: tenant
+merge-operations:
+  WhatIf: Deployments_WhatIfAtTenantScope;Deployments_WhatIfAtManagementGroupScope;Deployments_WhatIfAtSubscriptionScope;Deployments_WhatIf
 directive:
   - from: swagger-document
     where: $.paths
@@ -191,9 +193,9 @@ directive:
     transform: delete $["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}?disambiguation_dummy"]
     reason: The operations duplicate with the ones in /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}
 
-  - rename-operation:
-      from: Deployments_WhatIf
-      to: Deployments_WhatIfAtResourceGroupScope
+#   - rename-operation:
+#       from: Deployments_WhatIf
+#       to: Deployments_WhatIfAtResourceGroupScope
   - rename-operation:
       from: DeploymentScripts_GetLogs
       to: DeploymentScriptLogs_GetLogs

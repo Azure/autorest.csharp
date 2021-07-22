@@ -15013,7 +15013,7 @@ operationGroups:
             final-state-via: location
         language: !Languages 
           default:
-            name: WhatIfAtResourceGroupScope
+            name: WhatIf
             description: Returns changes that will be made by the deployment if executed at the scope of the resource group.
         protocol: !Protocols {}
       - !Operation 

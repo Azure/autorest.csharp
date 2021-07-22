@@ -954,7 +954,7 @@ namespace Azure.Resources.Sample
             }
         }
 
-        internal Core.HttpMessage CreateWhatIfAtResourceGroupScopeRequest(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location)
+        internal Core.HttpMessage CreateWhatIfRequest(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -990,7 +990,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="properties"/> is null. </exception>
-        public async Task<Response> WhatIfAtResourceGroupScopeAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1009,7 +1009,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var message = CreateWhatIfAtResourceGroupScopeRequest(subscriptionId, resourceGroupName, deploymentName, properties, location);
+            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, properties, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1029,7 +1029,7 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/>, or <paramref name="properties"/> is null. </exception>
-        public Response WhatIfAtResourceGroupScope(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (subscriptionId == null)
             {
@@ -1048,7 +1048,7 @@ namespace Azure.Resources.Sample
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var message = CreateWhatIfAtResourceGroupScopeRequest(subscriptionId, resourceGroupName, deploymentName, properties, location);
+            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, properties, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -419,327 +419,23 @@ namespace Azure.Resources.Sample
             }
         }
 
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtTenantScope");
-            scope.Start();
-            try
-            {
-                var operation = await StartWhatIfAtTenantScopeAsync(properties, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual Response<WhatIfOperationResult> WhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtTenantScope");
-            scope.Start();
-            try
-            {
-                var operation = StartWhatIfAtTenantScope(properties, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<DeploymentsWhatIfAtTenantScopeOperation> StartWhatIfAtTenantScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtTenantScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.WhatIfAtTenantScopeAsync(Id.Parent.Name, Id.Name, properties, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtTenantScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Parent.Name, Id.Name, properties).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual DeploymentsWhatIfAtTenantScopeOperation StartWhatIfAtTenantScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtTenantScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.WhatIfAtTenantScope(Id.Parent.Name, Id.Name, properties, cancellationToken);
-                return new DeploymentsWhatIfAtTenantScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Parent.Name, Id.Name, properties).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var operation = await StartWhatIfAtManagementGroupScopeAsync(properties, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual Response<WhatIfOperationResult> WhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var operation = StartWhatIfAtManagementGroupScope(properties, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<DeploymentsWhatIfAtManagementGroupScopeOperation> StartWhatIfAtManagementGroupScopeAsync(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtManagementGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual DeploymentsWhatIfAtManagementGroupScopeOperation StartWhatIfAtManagementGroupScope(DeploymentWhatIfProperties properties, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtManagementGroupScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, cancellationToken);
-                return new DeploymentsWhatIfAtManagementGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var operation = await StartWhatIfAtSubscriptionScopeAsync(properties, location, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual Response<WhatIfOperationResult> WhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var operation = StartWhatIfAtSubscriptionScope(properties, location, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<DeploymentsWhatIfAtSubscriptionScopeOperation> StartWhatIfAtSubscriptionScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="properties"> The deployment properties. </param>
-        /// <param name="location"> The location to store the deployment data. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual DeploymentsWhatIfAtSubscriptionScopeOperation StartWhatIfAtSubscriptionScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
-        {
-            if (properties == null)
-            {
-                throw new ArgumentNullException(nameof(properties));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtSubscriptionScope");
-            scope.Start();
-            try
-            {
-                var response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
-                return new DeploymentsWhatIfAtSubscriptionScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<WhatIfOperationResult>> WhatIfAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIf");
             scope.Start();
             try
             {
-                var operation = await StartWhatIfAtResourceGroupScopeAsync(properties, location, cancellationToken).ConfigureAwait(false);
+                var operation = await StartWhatIfAsync(properties, location, cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -754,18 +450,18 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual Response<WhatIfOperationResult> WhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual Response<WhatIfOperationResult> WhatIf(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIfAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.WhatIf");
             scope.Start();
             try
             {
-                var operation = StartWhatIfAtResourceGroupScope(properties, location, cancellationToken);
+                var operation = StartWhatIf(properties, location, cancellationToken);
                 return operation.WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
@@ -780,19 +476,41 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public async virtual Task<DeploymentsWhatIfAtResourceGroupScopeOperation> StartWhatIfAtResourceGroupScopeAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public async virtual Task<DeploymentsWhatIfOperation> StartWhatIfAsync(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIf");
             scope.Start();
             try
             {
-                var response = await _restClient.WhatIfAtResourceGroupScopeAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
-                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                Response response;
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    if (Id.ResourceType.Equals("Microsoft.Management/managementGroups"))
+                    {
+                        response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
+                        return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);
+                    }
+                    else
+                    {
+                        response = await _restClient.WhatIfAtTenantScopeAsync(Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
+                        return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Name, location, properties).Request, response);
+                    }
+                }
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                {
+                    response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                    return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
+                else
+                {
+                    response = await _restClient.WhatIfAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                    return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
             }
             catch (Exception e)
             {
@@ -806,19 +524,41 @@ namespace Azure.Resources.Sample
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
-        public virtual DeploymentsWhatIfAtResourceGroupScopeOperation StartWhatIfAtResourceGroupScope(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
+        public virtual DeploymentsWhatIfOperation StartWhatIf(DeploymentWhatIfProperties properties, string location = null, CancellationToken cancellationToken = default)
         {
             if (properties == null)
             {
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIfAtResourceGroupScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedOperations.StartWhatIf");
             scope.Start();
             try
             {
-                var response = _restClient.WhatIfAtResourceGroupScope(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
-                return new DeploymentsWhatIfAtResourceGroupScopeOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtResourceGroupScopeRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                Response response;
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    if (Id.ResourceType.Equals("Microsoft.Management/managementGroups"))
+                    {
+                        response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, location, properties, cancellationToken);
+                        return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);
+                    }
+                    else
+                    {
+                        response = _restClient.WhatIfAtTenantScope(Id.Name, location, properties, cancellationToken);
+                        return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Name, location, properties).Request, response);
+                    }
+                }
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                {
+                    response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                    return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
+                else
+                {
+                    response = _restClient.WhatIf(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                    return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
             }
             catch (Exception e)
             {

@@ -35,5 +35,13 @@
     "DeploymentScripts": "resourceGroups",
     "ManagementLocks": "tenant",
     "ResourceLinks": "tenant"
+  },
+  "MergeOperations": {
+    "WhatIf": [
+      "Deployments_WhatIfAtTenantScope",
+      "Deployments_WhatIfAtManagementGroupScope",
+      "Deployments_WhatIfAtSubscriptionScope",
+      "Deployments_WhatIf"
+    ]
   }
 }

@@ -45,6 +45,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
+        private Dictionary<string, string> _mergedOperations;
+
         /// <summary>
         /// A mapping of parent resource type to child operation groups that are not resources.
         /// </summary>
@@ -56,12 +58,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RemoveOperations(codeModel);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
-            UpdateSubscriptionIdForScopeResource(codeModel);
+            UpdateSubscriptionIdForTenantIdResource(codeModel);
             _codeModel = codeModel;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
+            _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
@@ -88,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        private void UpdateSubscriptionIdForScopeResource(CodeModel codeModel)
+        private void UpdateSubscriptionIdForTenantIdResource(CodeModel codeModel)
         {
             foreach (var operationGroup in codeModel.OperationGroups)
             {
@@ -194,6 +197,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+
+        public bool TryGetMethodForMergedOperation(string operationFullName, [MaybeNullWhen(false)] out string methodName) => _mergedOperations.TryGetValue(operationFullName, out methodName);
 
         public bool TryGetResourceData(OperationGroup operationGroup, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
@@ -556,7 +561,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 string? parent;
                 if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
                 {
-                    // If overriden, add parent to known types list (trusting user input)
+                    // If overridden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
                 if (operationGroup.IsResource(_mgmtConfiguration))

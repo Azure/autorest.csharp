@@ -278,13 +278,31 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
 
             // write rest of the LRO methods
+            var mergedMethods = new Dictionary<string, List<RestClientMethod>>();
             foreach (var clientMethod in resourceOperation.RestClient.Methods)
             {
                 if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
                     !clientMethodsList.Contains(clientMethod) && clientMethod.Request.HttpMethod != RequestMethod.Put)
                 {
+                    if (_context.Library.TryGetMethodForMergedOperation($"{_resourceOperation.OperationGroup.Key}_{clientMethod.Name}", out var mergedMethodName))
+                    {
+                        if (mergedMethods.TryGetValue(mergedMethodName, out var methods))
+                        {
+                            methods.Add(clientMethod);
+                        }
+                        else
+                        {
+                            mergedMethods.Add(mergedMethodName, new List<RestClientMethod>{clientMethod});
+                        }
+                        continue;
+                    }
                     WriteLRO(writer, clientMethod, resourceOperation, context);
                 }
+            }
+
+            foreach ( var kv in mergedMethods)
+            {
+                WriteLRO(writer, kv.Value.OrderBy(m => m.Name.Length).First(), resourceOperation, context, kv.Key, kv.Value);
             }
 
             foreach (var item in context.CodeModel.OperationGroups)
@@ -643,13 +661,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 
-        private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
+        private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(writer, clientMethod, context, true, true);
-            WriteFirstLROMethod(writer, clientMethod, context, false, true);
+            WriteFirstLROMethod(writer, clientMethod, context, true, true, methodName: methodName, clientMethods: clientMethods);
+            WriteFirstLROMethod(writer, clientMethod, context, false, true, methodName: methodName, clientMethods: clientMethods);
 
-            WriteStartLROMethod(writer, clientMethod, context, true, true);
-            WriteStartLROMethod(writer, clientMethod, context, false, true);
+            WriteStartLROMethod(writer, clientMethod, context, true, true, methodName: methodName, clientMethods: clientMethods);
+            WriteStartLROMethod(writer, clientMethod, context, false, true, methodName: methodName, clientMethods: clientMethods);
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)

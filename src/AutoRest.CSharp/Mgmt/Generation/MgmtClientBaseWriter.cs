@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -290,7 +291,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     continue;
                 }
-                else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
+                else if (parameter.Type.IsStringLike() && IsMandatory(parameter) && (method.Name.EndsWith("NextPage") || method.PathParameters.Contains(parameter))) // in a ListNextPage method, all parameters are nonpath parameters.
                 {
                     passThru = ShouldPassThrough(ref dotParent, parentNameStack, parameter, ref valueExpression);
                 }
@@ -574,7 +575,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual, string? methodName = null)
+            bool isVirtual, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -650,7 +651,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual = false, string? methodName = null)
+            bool isVirtual = false, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -689,27 +690,94 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
-                    writer.Append($"var {response:D} = ");
-                    if (async)
+                    if (clientMethods == null)
                     {
-                        writer.Append($"await ");
+                        WriteStartLROMethodBody(writer, clientMethod, lroObjectType, context, response, parameterMapping, async, clientMethods);
                     }
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-                    WriteArguments(writer, parameterMapping);
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
+                    else
                     {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                        var clientMethodSet = new HashSet<RestClientMethod>(clientMethods);
+                        writer.Line($"Response {response:D};");
+                        // TODO: should check method path instead of name to determine the corresponding resource identifier type
+                        var managementGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ManagementGroup"));
+                        if (managementGroupMethod != null)
+                        {
+                            clientMethodSet.Remove(managementGroupMethod);
+                            using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
+                            {
+                                using (writer.Scope($"if (Id.ResourceType.Equals(\"Microsoft.Management/managementGroups\"))"))
+                                {
+                                    WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), async, clientMethods);
+                                }
+                                using (writer.Scope($"else"))
+                                {
+                                    var tenantMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("Tenant"));
+                                    if (tenantMethod != null)
+                                    {
+                                        clientMethodSet.Remove(tenantMethod);
+                                        WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), async, clientMethods);
+                                    }
+                                    else
+                                    {
+                                        writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                                    }
+                                }
+                            }
+                        }
+                        var elseStr = managementGroupMethod != null ? "else " : "";
+                        var subscriptionMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("Subscription"));
+                        if (subscriptionMethod != null)
+                        {
+                            clientMethodSet.Remove(subscriptionMethod);
+                            using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
+                            {
+                                WriteStartLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), async, clientMethods);
+                            }
+                        }
 
-                    WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
+                        // elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                        var resourceGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ResourceGroup")) ?? clientMethodSet.FirstOrDefault();
+                        if (resourceGroupMethod != null)
+                        {
+                            // using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
+                            using (writer.Scope($"else"))
+                            {
+                                WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), async, clientMethods);
+                                // TODO: check methods at resource level
+                            }
+                        }
+                    }
                 });
                 writer.Line();
             }
         }
 
+        private void WriteStartLROMethodBody(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping, bool async, List<RestClientMethod>? clientMethods = null)
+        {
+            if (clientMethods == null)
+            {
+                writer.Append($"var {response:D} = ");
+            }
+            else
+            {
+                writer.Append($"{response} = ");
+            }
+            if (async)
+            {
+                writer.Append($"await ");
+            }
+            writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
+            WriteArguments(writer, parameterMapping);
+            writer.Append($"cancellationToken)");
+
+            if (async)
+            {
+                writer.Append($".ConfigureAwait(false)");
+            }
+            writer.Line($";");
+
+            WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
+        }
         protected void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping)
         {
             Debug.Assert(clientMethod.Operation != null);
