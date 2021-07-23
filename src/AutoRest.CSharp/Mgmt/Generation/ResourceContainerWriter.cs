@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (_resourceContainer.PutMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod, _resourceContainer.PutMethods);
             }
 
             if (_resourceContainer.GetMethod != null)
@@ -231,13 +231,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, isOverride: false, catch404: true);
         }
 
-        private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod)
+        private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
             WriteFirstLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
             WriteFirstLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
 
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
+            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
+            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>

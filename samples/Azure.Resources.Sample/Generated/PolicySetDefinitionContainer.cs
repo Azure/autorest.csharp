@@ -124,8 +124,28 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.Name, policySetDefinitionName, parameters, cancellationToken);
-                return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent as TenantResourceIdentifier;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    {
+                        var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, policySetDefinitionName, parameters, cancellationToken);
+                        return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                    }
+                    else
+                    {
+                        throw new ArgumentException($"Invalid Id: {Id}.");
+                    }
+                }
+                else
+                {
+                    var response = _restClient.CreateOrUpdate(Id.Name, policySetDefinitionName, parameters, cancellationToken);
+                    return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                }
             }
             catch (Exception e)
             {
@@ -154,8 +174,28 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.Name, policySetDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent as TenantResourceIdentifier;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    {
+                        var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policySetDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                        return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                    }
+                    else
+                    {
+                        throw new ArgumentException($"Invalid Id: {Id}.");
+                    }
+                }
+                else
+                {
+                    var response = await _restClient.CreateOrUpdateAsync(Id.Name, policySetDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                    return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                }
             }
             catch (Exception e)
             {
@@ -430,56 +470,6 @@ namespace Azure.Resources.Sample
                 var filters = new ResourceFilterCollection(PolicySetDefinitionOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> This operation creates or updates a policy set definition in the given management group with the given name. </summary>
-        /// <param name="parameters"> The policy set definition properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<PolicySetDefinitionData>> CreateOrUpdateAtManagementGroupAsync(PolicySetDefinitionData parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PolicySetDefinitionContainer.CreateOrUpdateAtManagementGroup");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> This operation creates or updates a policy set definition in the given management group with the given name. </summary>
-        /// <param name="parameters"> The policy set definition properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<PolicySetDefinitionData> CreateOrUpdateAtManagementGroup(PolicySetDefinitionData parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PolicySetDefinitionContainer.CreateOrUpdateAtManagementGroup");
-            scope.Start();
-            try
-            {
-                var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Parent.Name, Id.Name, parameters, cancellationToken);
-                return response;
             }
             catch (Exception e)
             {

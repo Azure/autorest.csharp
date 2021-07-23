@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ManagementGroupCommentName = "ManagementGroup";
 
         private RestClientMethod? _putMethod;
+        private List<RestClientMethod>? _putMethods;
         private RestClientMethod? _putByIdMethod;
         private PagingMethod? _listMethod;
         private List<PagingMethod>? _scopeListMethods;
@@ -41,9 +42,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != PutMethod && m.RestClientMethod != ListMethod?.Method && m.RestClientMethod != PutByIdMethod);
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => !PutMethods.Contains(m.RestClientMethod) && m.RestClientMethod != ListMethod?.Method && m.RestClientMethod != PutByIdMethod);
 
         public RestClientMethod? PutMethod => _putMethod ??= GetPutMethod();
+
+        public List<RestClientMethod> PutMethods => _putMethods ??= GetPutMethods();
 
         public RestClientMethod? PutByIdMethod => _putByIdMethod ??= GetPutByIdMethod();
 
@@ -69,7 +72,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private RestClientMethod? GetPutMethod()
         {
-            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? RestClient.Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+        }
+        private List<RestClientMethod> GetPutMethods()
+        {
+            var putMethods = RestClient.Methods.Where(m => m.Request.HttpMethod.Equals(RequestMethod.Put)).ToList();
+            if (PutByIdMethod != null && PutByIdMethod != PutMethod)
+            {
+                putMethods.Remove(PutByIdMethod);
+            }
+            return putMethods;
         }
 
         private RestClientMethod? GetPutByIdMethod()

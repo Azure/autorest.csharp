@@ -487,33 +487,32 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                Response response;
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
                     while (parent.Parent != null)
                     {
-                        parent = parent.Parent;
+                        parent = parent.Parent as TenantResourceIdentifier;
                     }
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
-                        response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
+                        var response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);
                     }
                     else
                     {
-                        response = await _restClient.WhatIfAtTenantScopeAsync(Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
+                        var response = await _restClient.WhatIfAtTenantScopeAsync(Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Name, location, properties).Request, response);
                     }
                 }
                 else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
                 {
-                    response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
                 else
                 {
-                    response = await _restClient.WhatIfAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.WhatIfAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
             }
@@ -540,33 +539,32 @@ namespace Azure.Resources.Sample
             scope.Start();
             try
             {
-                Response response;
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
                     while (parent.Parent != null)
                     {
-                        parent = parent.Parent;
+                        parent = parent.Parent as TenantResourceIdentifier;
                     }
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
-                        response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, location, properties, cancellationToken);
+                        var response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, location, properties, cancellationToken);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);
                     }
                     else
                     {
-                        response = _restClient.WhatIfAtTenantScope(Id.Name, location, properties, cancellationToken);
+                        var response = _restClient.WhatIfAtTenantScope(Id.Name, location, properties, cancellationToken);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtTenantScopeRequest(Id.Name, location, properties).Request, response);
                     }
                 }
                 else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
                 {
-                    response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                    var response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
                 else
                 {
-                    response = _restClient.WhatIf(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
+                    var response = _restClient.WhatIf(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
             }

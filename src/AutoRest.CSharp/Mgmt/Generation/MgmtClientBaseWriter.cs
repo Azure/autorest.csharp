@@ -535,7 +535,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         return $"{name}.Parent.Name";
                     }
-            default:
+                default:
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
         }
@@ -575,7 +575,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual, string? methodName = null, List<RestClientMethod>? clientMethods = null)
+            bool isVirtual, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -690,14 +690,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
-                    if (clientMethods == null)
+                    response.SetActualName(response.RequestedName);
+                    if (clientMethods == null || clientMethods.Count < 2)
                     {
-                        WriteStartLROMethodBody(writer, clientMethod, lroObjectType, context, response, parameterMapping, async, clientMethods);
+                        WriteStartLROMethodBody(writer, clientMethod, lroObjectType, context, response, parameterMapping, async);
                     }
                     else
                     {
                         var clientMethodSet = new HashSet<RestClientMethod>(clientMethods);
-                        writer.Line($"Response {response:D};");
                         // TODO: should check method path instead of name to determine the corresponding resource identifier type
                         var managementGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ManagementGroup"));
                         if (managementGroupMethod != null)
@@ -709,11 +709,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 writer.Line($"var {parent:D} = Id;");
                                 using (writer.Scope($"while ({parent}.Parent != null)"))
                                 {
-                                    writer.Line($"{parent} = {parent}.Parent;");
+                                    writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
                                 }
                                 using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
                                 {
-                                    WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), async, clientMethods);
+                                    WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), async);
                                 }
                                 using (writer.Scope($"else"))
                                 {
@@ -721,7 +721,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                     if (tenantMethod != null)
                                     {
                                         clientMethodSet.Remove(tenantMethod);
-                                        WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), async, clientMethods);
+                                        WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), async);
                                     }
                                     else
                                     {
@@ -737,19 +737,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             clientMethodSet.Remove(subscriptionMethod);
                             using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
                             {
-                                WriteStartLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), async, clientMethods);
+                                WriteStartLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), async);
                             }
                         }
 
-                        // elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
-                        var resourceGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ResourceGroup")) ?? clientMethodSet.FirstOrDefault();
+                        elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                        var resourceGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ResourceGroup"));
                         if (resourceGroupMethod != null)
                         {
-                            // using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
-                            using (writer.Scope($"else"))
+                            clientMethodSet.Remove(resourceGroupMethod);
+                            using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
                             {
-                                WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), async, clientMethods);
-                                // TODO: check methods at resource level
+                                WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), async);
+                                // TODO: Handle methods at resource level
+                            }
+                        }
+                        using (writer.Scope($"else"))
+                        {
+                            if (clientMethodSet.Count() > 1)
+                            {
+                                throw new Exception($"When trying to merge methods, there are more than 1 method that cannot be mapped to a specific scope. Please rename the Operation in readme with the scope. For instance, from CreateOrUpdate to CreateOrUpdateAtSubscription.");
+                            }
+                            // It's common that there will be one method simply named CreateOrUpdate instead of the full name with the scope like CreateOrUpdateAtSubscription or CreateOrUpdateAtResourceGroup.
+                            var remainingMethod = clientMethodSet.FirstOrDefault();
+                            if (remainingMethod != null)
+                            {
+                                WriteStartLROMethodBody(writer, remainingMethod, lroObjectType, context, response, BuildParameterMapping(remainingMethod), async);
+                            }
+                            else
+                            {
+                                writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
                             }
                         }
                     }
@@ -758,16 +775,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteStartLROMethodBody(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping, bool async, List<RestClientMethod>? clientMethods = null)
+        private void WriteStartLROMethodBody(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            if (clientMethods == null)
-            {
-                writer.Append($"var {response:D} = ");
-            }
-            else
-            {
-                writer.Append($"{response} = ");
-            }
+            writer.Append($"var {response} = ");
             if (async)
             {
                 writer.Append($"await ");

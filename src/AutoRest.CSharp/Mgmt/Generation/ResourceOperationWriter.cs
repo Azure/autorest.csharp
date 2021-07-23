@@ -663,8 +663,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(writer, clientMethod, context, true, true, methodName: methodName, clientMethods: clientMethods);
-            WriteFirstLROMethod(writer, clientMethod, context, false, true, methodName: methodName, clientMethods: clientMethods);
+            WriteFirstLROMethod(writer, clientMethod, context, true, true, methodName: methodName);
+            WriteFirstLROMethod(writer, clientMethod, context, false, true, methodName: methodName);
 
             WriteStartLROMethod(writer, clientMethod, context, true, true, methodName: methodName, clientMethods: clientMethods);
             WriteStartLROMethod(writer, clientMethod, context, false, true, methodName: methodName, clientMethods: clientMethods);
