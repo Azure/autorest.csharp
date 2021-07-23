@@ -2,11 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Azure.ResourceManager.Core;
-using SupersetFlattenInheritance;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
+using SupersetFlattenInheritance;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

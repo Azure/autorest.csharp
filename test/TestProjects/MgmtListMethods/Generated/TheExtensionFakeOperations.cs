@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
@@ -387,7 +389,7 @@ namespace MgmtListMethods
 
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<Models.Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListFeatures");
             scope.Start();
@@ -405,7 +407,7 @@ namespace MgmtListMethods
 
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Models.Feature>> ListFeatures(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Feature>> ListFeatures(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListFeatures");
             scope.Start();

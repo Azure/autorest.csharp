@@ -2,7 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 using SupersetInheritance;
 
