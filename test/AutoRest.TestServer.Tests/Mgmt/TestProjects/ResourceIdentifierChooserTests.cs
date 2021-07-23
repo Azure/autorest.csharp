@@ -1,5 +1,5 @@
 ﻿using System;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 using NUnit.Framework;
 using ResourceIdentifierChooser;
 using TenantOnly;

@@ -2,15 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {

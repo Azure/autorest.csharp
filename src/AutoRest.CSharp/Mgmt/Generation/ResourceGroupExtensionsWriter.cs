@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -12,7 +11,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {

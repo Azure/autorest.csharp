@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
                     _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
-                    baseConstructor = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
+                    baseConstructor = $" : base(options, resource.Id)";
                     if (!string.IsNullOrEmpty(baseConstructor) && _resource.OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                     {
                         baseConstructor = " : base(options)";
