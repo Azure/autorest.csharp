@@ -336,6 +336,56 @@ namespace MgmtListMethods
             }
         }
         /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="body"> The body parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response<TheExtensionData>> UpdateAsync(TheExtensionUpdate body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.Update");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, body, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="body"> The body parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response<TheExtensionData> Update(TheExtensionUpdate body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.Update");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, body, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<IReadOnlyList<Models.Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
         {
@@ -374,7 +424,7 @@ namespace MgmtListMethods
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Usage> ListUsages(CancellationToken cancellationToken = default)
+        public virtual Pageable<Usage> ListUsages(CancellationToken cancellationToken = default)
         {
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
@@ -412,7 +462,7 @@ namespace MgmtListMethods
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Usage> ListUsagesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Usage> ListUsagesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
