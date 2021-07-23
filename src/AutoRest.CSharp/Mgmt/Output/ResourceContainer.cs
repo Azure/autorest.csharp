@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private PagingMethod? _listMethod;
         private List<PagingMethod>? _scopeListMethods;
         private ClientMethod? _getMethod;
+
+        private List<ClientMethod>? _getMethods;
         private RestClientMethod? _getByIdMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -53,6 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public PagingMethod? ListMethod => _listMethod ??= FindListPagingMethod();
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
+        public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetResourceOperation(OperationGroup).GetMethods;
 
         public List<PagingMethod>? ScopeListMethods => _scopeListMethods ??= FindScopeListPagingMethods();
 
@@ -89,6 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.IsByIdMethod());
         }
 
+        // TODO: move to ResourceOperation
         private RestClientMethod? GetGetByIdMethod()
         {
             return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Get) && m.IsByIdMethod());

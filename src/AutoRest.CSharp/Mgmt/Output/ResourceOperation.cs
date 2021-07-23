@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<ClientMethod>? _methods;
         private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
+        private List<ClientMethod>? _getMethods;
 
         private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
 
@@ -81,7 +82,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             return restClientMethod.Name;
         }
 
-        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name && m.RestClientMethod.Parameters.Length > 0 && m.RestClientMethod.Parameters[0].Name.Equals("scope")) ?? Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+
+        public virtual List<ClientMethod> GetMethods => _getMethods ??= GetGetMethods();
+
+        private List<ClientMethod> GetGetMethods()
+        {
+            var getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
+            // TODO: remove GetByIdMethod
+            // if (GetByIdMethod != null && GetByIdMethod != GetMethod)
+            // {
+            //     getMethods.Remove(GetByIdMethod);
+            // }
+            return getMethods;
+        }
 
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {

@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (operationGroup.IsTenantResource(config))
             {
-                return TenantDetection.TenantName;
+                return ResourceTypeBuilder.Tenant;
             }
             if (operationGroup.IsExtensionResource(config))
             {
@@ -82,6 +82,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
             return canidateParent;
+        }
+
+        public static string GetAncestor(this HttpRequest method)
+        {
+            var path = method.Path;
+            if (path.Contains("/resourcegroups/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return ResourceTypeBuilder.ResourceGroups;
+            }
+            else if (path.Contains("/subscriptions/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return ResourceTypeBuilder.Subscriptions;
+            }
+            else if (path.Contains("/Microsoft.Management/managementGroups/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return ResourceTypeBuilder.ManagementGroups;
+            }
+            else
+            {
+                return ResourceTypeBuilder.Tenant;
+            }
         }
 
         public static HttpRequest? GetBestMethod(Dictionary<HttpMethod, List<ServiceRequest>> operations)

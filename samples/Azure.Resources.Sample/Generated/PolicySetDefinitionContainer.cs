@@ -218,8 +218,33 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(policySetDefinitionName));
                 }
 
-                var response = _restClient.Get(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken);
-                return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent as TenantResourceIdentifier;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    {
+                        var response = _restClient.GetAtManagementGroup(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken);
+                        return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                    }
+                    else
+                    {
+                        var response = _restClient.GetBuiltIn(policySetDefinitionName, cancellationToken: cancellationToken);
+                        return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                    }
+                }
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                {
+                    var response = _restClient.Get(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken);
+                    return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
+                }
             }
             catch (Exception e)
             {
@@ -242,8 +267,33 @@ namespace Azure.Resources.Sample
                     throw new ArgumentNullException(nameof(policySetDefinitionName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                {
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent as TenantResourceIdentifier;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    {
+                        var response = await _restClient.GetAtManagementGroupAsync(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                    }
+                    else
+                    {
+                        var response = await _restClient.GetBuiltInAsync(policySetDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                    }
+                }
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                {
+                    var response = await _restClient.GetAsync(Id.Name, policySetDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new PolicySetDefinition(Parent, response.Value), response.GetRawResponse());
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
+                }
             }
             catch (Exception e)
             {
