@@ -279,38 +279,41 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetVariants(RestClientMethod method)
         {
-            var parameterMapping = BuildParameterMapping(method);
+            WriteGetMethod(method, false, "Get");
+            WriteGetMethod(method, true, "Get");
+        }
 
-            var methodName = "Get";
+        private void WriteGetMethod(RestClientMethod method, bool async, string? methodName = null)
+        {
+            methodName = methodName ?? method.Name;
+            var parameterMapping = BuildParameterMapping(method);
             var scopeName = methodName;
 
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", methodName, passThruParameters, writer =>
+            var taskStrStart = async ? $"{typeof(Task)}<" : string.Empty;
+            var taskStrEnd = async ? ">" : string.Empty;
+            WriteContainerMethodScope(async, $"{taskStrStart}{typeof(Response)}<{_resource.Type.Name}>{taskStrEnd}", methodName, passThruParameters, writer =>
             {
-                _writer.Append($"var response = {RestClientField}.{method.Name}(");
+                _writer.Append($"var response = ");
+                if (async)
+                {
+                    writer.Append($"await ");
+                }
+                _writer.Append($"{RestClientField}.{CreateMethodName($"{method.Name}", async)}(");
                 foreach (var parameter in parameterMapping)
                 {
                     _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
                     _writer.AppendRaw(", ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken);");
-                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ContextProperty}, response.Value), response.GetRawResponse());");
-            }, isOverride: false);
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", methodName, passThruParameters, writer =>
-            {
-                _writer.Append($"var response = await {RestClientField}.{method.Name}Async(");
-                foreach (var parameter   in parameterMapping)
+                _writer.Append($"cancellationToken: cancellationToken)");
+                if (async)
                 {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
+                    writer.Append($".ConfigureAwait(false)");
                 }
-                _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+                writer.Line($";");
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ContextProperty}, response.Value), response.GetRawResponse());");
             }, isOverride: false);
         }
