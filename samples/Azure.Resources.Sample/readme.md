@@ -1,4 +1,4 @@
-# Azure.Resources.Sample
+# Azure.ResourceManager.Resources
 ### AutoRest Configuration
 > see https://aka.ms/autorest
 

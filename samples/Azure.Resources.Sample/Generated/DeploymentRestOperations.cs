@@ -13,7 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.Resources.Sample
+namespace Azure.ResourceManager.Resources
 {
     internal partial class DeploymentRestOperations
     {

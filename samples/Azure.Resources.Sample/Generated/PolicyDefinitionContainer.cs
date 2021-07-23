@@ -14,7 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.Resources.Sample
+namespace Azure.ResourceManager.Resources
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over a Tenant. </summary>
     public partial class PolicyDefinitionContainer : ResourceContainerBase<TenantResourceIdentifier, PolicyDefinition, PolicyDefinitionData>

@@ -14,7 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.Resources.Sample
+namespace Azure.ResourceManager.Resources
 {
     /// <summary> A class representing collection of DeploymentExtended and their operations over a Tenant. </summary>
     public partial class DeploymentExtendedContainer : ResourceContainerBase<TenantResourceIdentifier, DeploymentExtended, DeploymentExtendedData>
@@ -33,7 +33,7 @@ namespace Azure.Resources.Sample
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
         /// <param name="identifier"> The input resource Id to check. </param>
-        protected override void Validate(ResourceIdentifier identifier)
+        protected void Validate(ResourceIdentifier identifier)
         {
         }
 

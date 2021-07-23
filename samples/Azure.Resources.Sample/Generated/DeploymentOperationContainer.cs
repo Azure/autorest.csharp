@@ -14,7 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.Resources.Sample
+namespace Azure.ResourceManager.Resources
 {
     /// <summary> A class representing collection of DeploymentOperation and their operations over a DeploymentExtended. </summary>
     public partial class DeploymentOperationContainer : ResourceContainerBase<TenantResourceIdentifier, DeploymentOperation, DeploymentOperationData>

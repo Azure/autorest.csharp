@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
             _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
-            _writer.Line($"protected override void Validate(ResourceIdentifier identifier)");
+            _writer.Line($"protected override void ValidateResourceType(ResourceIdentifier identifier)");
             using (_writer.Scope())
             {
             }
