@@ -108,7 +108,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual BarsDoSomethingOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarsCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -123,8 +123,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _restClient.DoSomething(Id.ResourceGroupName, barName, body, cancellationToken);
-                return new BarsDoSomethingOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var response = _restClient.Create(Id.ResourceGroupName, barName, body, cancellationToken);
+                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -138,7 +138,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarsDoSomethingOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarsCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -153,8 +153,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _restClient.DoSomethingAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                return new BarsDoSomethingOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var response = await _restClient.CreateAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
+                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {

@@ -316,7 +316,7 @@
                 "tags": [
                     "Bars"
                 ],
-                "operationId": "Bars_DoSomething",
+                "operationId": "Bars_Create",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {

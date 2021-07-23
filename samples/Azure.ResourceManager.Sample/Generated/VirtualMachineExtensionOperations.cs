@@ -371,5 +371,105 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachineExtension>> UpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(extensionParameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public virtual Response<VirtualMachineExtension> Update(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(extensionParameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public async virtual Task<VirtualMachineExtensionsUpdateOperation> StartUpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public virtual VirtualMachineExtensionsUpdateOperation StartUpdate(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }

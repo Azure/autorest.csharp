@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -502,84 +501,6 @@ namespace MgmtParent
                 var filters = new ResourceFilterCollection(VirtualMachineExtensionImageOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a list of virtual machine extension image types. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListTypesAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListTypes");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListTypesAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a list of virtual machine extension image types. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListTypes(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListTypes");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListTypes(Id.Parent.Name, Id.Name, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a list of virtual machine extension image versions. </summary>
-        /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListVersionsAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListVersions");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListVersionsAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets a list of virtual machine extension image versions. </summary>
-        /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListVersions(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListVersions");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListVersions(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken);
-                return response;
             }
             catch (Exception e)
             {

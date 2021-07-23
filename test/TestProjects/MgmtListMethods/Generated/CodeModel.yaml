@@ -34,10 +34,21 @@ schemas: !Schemas
       precision: 32
       language: !Languages 
         default:
-          name: BarPropertiesBar
+          name: SubFakePropertiesBar
           description: Fault Domain count.
       protocol: !Protocols {}
     - !NumberSchema &ref_8
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 32
+      language: !Languages 
+        default:
+          name: BarPropertiesBar
+          description: Fault Domain count.
+      protocol: !Protocols {}
+    - !NumberSchema &ref_10
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -66,7 +77,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -76,7 +87,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -86,7 +97,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -96,7 +107,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_18
       type: string
       apiVersions:
         - !ApiVersion 
@@ -106,7 +117,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_25
+    - !StringSchema &ref_30
       type: string
       apiVersions:
         - !ApiVersion 
@@ -123,10 +134,41 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
+          name: SubFakePropertiesFoo
+          description: Update Domain count.
+      protocol: !Protocols {}
+    - !StringSchema &ref_31
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubFakeListResultNextLink
+          description: The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars.
+      protocol: !Protocols {}
+    - !StringSchema &ref_68
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      pattern: ^[-\w\._]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
           name: BarPropertiesFoo
           description: Update Domain count.
       protocol: !Protocols {}
-    - !StringSchema &ref_26
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -136,7 +178,7 @@ schemas: !Schemas
           name: BarsListResultNextLink
           description: The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars.
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -146,7 +188,7 @@ schemas: !Schemas
           name: TheExtensionPropertiesFoo
           description: Update Domain count.
       protocol: !Protocols {}
-    - !StringSchema &ref_27
+    - !StringSchema &ref_33
       type: string
       apiVersions:
         - !ApiVersion 
@@ -156,7 +198,7 @@ schemas: !Schemas
           name: TheExtensionsListResultNextLink
           description: The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars.
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -166,7 +208,7 @@ schemas: !Schemas
           name: UsageFoobar
           description: specifies foobar
       protocol: !Protocols {}
-    - !StringSchema &ref_29
+    - !StringSchema &ref_35
       type: string
       apiVersions:
         - !ApiVersion 
@@ -176,7 +218,7 @@ schemas: !Schemas
           name: UsagesListResultNextLink
           description: The URL for getting next page result
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_37
       type: string
       apiVersions:
         - !ApiVersion 
@@ -186,7 +228,7 @@ schemas: !Schemas
           name: FeatureID
           description: specifies foobar
       protocol: !Protocols {}
-    - !StringSchema &ref_32
+    - !StringSchema &ref_38
       type: string
       apiVersions:
         - !ApiVersion 
@@ -197,7 +239,7 @@ schemas: !Schemas
           description: The URL for getting next page result
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_39
+    - !ConstantSchema &ref_46
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -207,7 +249,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_43
+    - !ConstantSchema &ref_50
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -217,7 +259,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_44
+    - !ConstantSchema &ref_51
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -228,7 +270,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_16
+    - !DictionarySchema &ref_19
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -236,7 +278,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_24
+    - !DictionarySchema &ref_29
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -252,7 +294,7 @@ schemas: !Schemas
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_9
+          - !ObjectSchema &ref_11
             type: object
             apiVersions:
               - !ApiVersion 
@@ -264,7 +306,7 @@ schemas: !Schemas
                 - *ref_2
             properties:
               - !Property 
-                schema: !ObjectSchema &ref_17
+                schema: !ObjectSchema &ref_20
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -319,7 +361,7 @@ schemas: !Schemas
                   time. An existing VM cannot be added to an fake.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_10
+          - !ObjectSchema &ref_12
             type: object
             apiVersions:
               - !ApiVersion 
@@ -331,7 +373,7 @@ schemas: !Schemas
                 - *ref_2
             properties:
               - !Property 
-                schema: !ObjectSchema &ref_19
+                schema: !ObjectSchema &ref_22
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -347,6 +389,73 @@ schemas: !Schemas
                       protocol: !Protocols {}
                     - !Property 
                       schema: *ref_6
+                      serializedName: bar
+                      language: !Languages 
+                        default:
+                          name: bar
+                          description: Fault Domain count.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SubFakeProperties
+                      description: The instance view of a resource.
+                      namespace: ''
+                  protocol: !Protocols {}
+                serializedName: properties
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The instance view of a resource.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+              - input
+            language: !Languages 
+              default:
+                name: SubFake
+                description: >-
+                  Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
+                  see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
+                  information on Azure planned maintenance, see [Planned maintenance for virtual machines in
+                  Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation
+                  time. An existing VM cannot be added to an fake.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_13
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: !ObjectSchema &ref_23
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_7
+                      serializedName: foo
+                      language: !Languages 
+                        default:
+                          name: foo
+                          description: Update Domain count.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_8
                       serializedName: bar
                       language: !Languages 
                         default:
@@ -386,7 +495,7 @@ schemas: !Schemas
                   time. An existing VM cannot be added to an fake.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_11
+          - !ObjectSchema &ref_14
             type: object
             apiVersions:
               - !ApiVersion 
@@ -398,14 +507,14 @@ schemas: !Schemas
                 - *ref_2
             properties:
               - !Property 
-                schema: !ObjectSchema &ref_20
+                schema: !ObjectSchema &ref_24
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
                   properties:
                     - !Property 
-                      schema: *ref_7
+                      schema: *ref_9
                       serializedName: foo
                       language: !Languages 
                         default:
@@ -413,7 +522,7 @@ schemas: !Schemas
                           description: Update Domain count.
                       protocol: !Protocols {}
                     - !Property 
-                      schema: *ref_8
+                      schema: *ref_10
                       serializedName: bar
                       language: !Languages 
                         default:
@@ -454,12 +563,13 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_9
-          - *ref_10
           - *ref_11
+          - *ref_12
+          - *ref_13
+          - *ref_14
       properties:
         - !Property 
-          schema: *ref_12
+          schema: *ref_15
           readOnly: true
           required: false
           serializedName: id
@@ -469,7 +579,7 @@ schemas: !Schemas
               description: Resource Id
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_13
+          schema: *ref_16
           readOnly: true
           required: false
           serializedName: name
@@ -479,7 +589,7 @@ schemas: !Schemas
               description: Resource name
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_14
+          schema: *ref_17
           readOnly: true
           required: false
           serializedName: type
@@ -489,7 +599,7 @@ schemas: !Schemas
               description: Resource type
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_18
           required: true
           serializedName: location
           language: !Languages 
@@ -498,7 +608,7 @@ schemas: !Schemas
               description: Resource location
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_19
           required: false
           serializedName: tags
           language: !Languages 
@@ -519,28 +629,28 @@ schemas: !Schemas
           description: The Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_9
-    - *ref_17
-    - !ObjectSchema &ref_18
+    - *ref_11
+    - *ref_20
+    - !ObjectSchema &ref_21
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_21
+          - !ObjectSchema &ref_25
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_18
+                - *ref_21
               immediate:
-                - *ref_18
+                - *ref_21
             properties:
               - !Property 
-                schema: *ref_17
+                schema: *ref_20
                 serializedName: properties
                 language: !Languages 
                   default:
@@ -557,19 +667,48 @@ schemas: !Schemas
                 description: Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_22
+          - !ObjectSchema &ref_26
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_18
+                - *ref_21
               immediate:
-                - *ref_18
+                - *ref_21
             properties:
               - !Property 
-                schema: *ref_19
+                schema: *ref_22
+                serializedName: properties
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The instance view of a resource.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+            language: !Languages 
+              default:
+                name: SubFakeUpdate
+                description: Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_27
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_21
+              immediate:
+                - *ref_21
+            properties:
+              - !Property 
+                schema: *ref_23
                 serializedName: properties
                 language: !Languages 
                   default:
@@ -586,19 +725,19 @@ schemas: !Schemas
                 description: Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_23
+          - !ObjectSchema &ref_28
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_18
+                - *ref_21
               immediate:
-                - *ref_18
+                - *ref_21
             properties:
               - !Property 
-                schema: *ref_20
+                schema: *ref_24
                 serializedName: properties
                 language: !Languages 
                   default:
@@ -616,12 +755,13 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_21
-          - *ref_22
-          - *ref_23
+          - *ref_25
+          - *ref_26
+          - *ref_27
+          - *ref_28
       properties:
         - !Property 
-          schema: *ref_24
+          schema: *ref_29
           serializedName: tags
           language: !Languages 
             default:
@@ -638,20 +778,20 @@ schemas: !Schemas
           description: The Update Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_21
-    - !ObjectSchema &ref_59
+    - *ref_25
+    - !ObjectSchema &ref_66
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_34
+          schema: !ArraySchema &ref_40
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_9
+            elementType: *ref_11
             language: !Languages 
               default:
                 name: FakeListResultValue
@@ -665,7 +805,7 @@ schemas: !Schemas
               description: The list of fakes
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_25
+          schema: *ref_30
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -683,22 +823,69 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_10
-    - *ref_19
+    - *ref_12
     - *ref_22
-    - !ObjectSchema &ref_71
+    - *ref_26
+    - !ObjectSchema &ref_83
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_35
+          schema: !ArraySchema &ref_41
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_10
+            elementType: *ref_12
+            language: !Languages 
+              default:
+                name: SubFakeListResultValue
+                description: The list of fakes child
+            protocol: !Protocols {}
+          required: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: The list of fakes child
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_31
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: SubFakeListResult
+          description: The List Availability Set Child operation response.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_13
+    - *ref_23
+    - *ref_27
+    - !ObjectSchema &ref_95
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_42
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_13
             language: !Languages 
               default:
                 name: BarsListResultValue
@@ -712,7 +899,7 @@ schemas: !Schemas
               description: The list of fakes child
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_26
+          schema: *ref_32
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -730,22 +917,22 @@ schemas: !Schemas
           description: The List Availability Set Child operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_11
-    - *ref_20
-    - *ref_23
-    - !ObjectSchema &ref_83
+    - *ref_14
+    - *ref_24
+    - *ref_28
+    - !ObjectSchema &ref_107
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_36
+          schema: !ArraySchema &ref_43
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_11
+            elementType: *ref_14
             language: !Languages 
               default:
                 name: TheExtensionsListResultValue
@@ -759,7 +946,7 @@ schemas: !Schemas
               description: The list of fakes child
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_27
+          schema: *ref_33
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -777,26 +964,26 @@ schemas: !Schemas
           description: The List Availability Set Child operation response.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_86
+    - !ObjectSchema &ref_110
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_37
+          schema: !ArraySchema &ref_44
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_30
+            elementType: !ObjectSchema &ref_36
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
                 - !Property 
-                  schema: *ref_28
+                  schema: *ref_34
                   serializedName: foobar
                   language: !Languages 
                     default:
@@ -825,7 +1012,7 @@ schemas: !Schemas
               description: Usage
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_29
+          schema: *ref_35
           serializedName: nextLink
           language: !Languages 
             default:
@@ -842,27 +1029,27 @@ schemas: !Schemas
           description: The result of list usages
           namespace: ''
       protocol: !Protocols {}
-    - *ref_30
-    - !ObjectSchema &ref_89
+    - *ref_36
+    - !ObjectSchema &ref_113
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_38
+          schema: !ArraySchema &ref_45
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_33
+            elementType: !ObjectSchema &ref_39
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
                 - !Property 
-                  schema: *ref_31
+                  schema: *ref_37
                   serializedName: featureID
                   language: !Languages 
                     default:
@@ -891,7 +1078,7 @@ schemas: !Schemas
               description: Usage
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_32
+          schema: *ref_38
           serializedName: nextLink
           language: !Languages 
             default:
@@ -908,15 +1095,16 @@ schemas: !Schemas
           description: The result of list usages
           namespace: ''
       protocol: !Protocols {}
-    - *ref_33
+    - *ref_39
   arrays:
-    - *ref_34
-    - *ref_35
-    - *ref_36
-    - *ref_37
-    - *ref_38
+    - *ref_40
+    - *ref_41
+    - *ref_42
+    - *ref_43
+    - *ref_44
+    - *ref_45
 globalParameters:
-  - !Parameter &ref_42
+  - !Parameter &ref_49
     schema: *ref_1
     implementation: Client
     required: true
@@ -930,7 +1118,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_40
+  - !Parameter &ref_47
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -946,8 +1134,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_41
-    schema: *ref_39
+  - !Parameter &ref_48
+    schema: *ref_46
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -968,8 +1156,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_46
+          - *ref_47
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -981,7 +1169,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_47
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -993,13 +1181,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1011,8 +1199,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_45
-                schema: *ref_9
+              - !Parameter &ref_52
+                schema: *ref_11
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1024,7 +1212,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1037,7 +1225,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_45
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1051,11 +1239,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_46
-          - *ref_47
+          - *ref_53
+          - *ref_54
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -1077,8 +1265,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_49
+          - *ref_47
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1090,7 +1278,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_50
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1102,13 +1290,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1120,8 +1308,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_48
-                schema: *ref_21
+              - !Parameter &ref_55
+                schema: *ref_25
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1133,7 +1321,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1146,7 +1334,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_48
+              - *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -1160,11 +1348,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
-          - *ref_50
+          - *ref_56
+          - *ref_57
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -1186,8 +1374,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_51
+          - *ref_47
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1199,7 +1387,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1211,8 +1399,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             language: !Languages 
@@ -1225,8 +1413,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_51
-          - *ref_52
+          - *ref_58
+          - *ref_59
         responses:
           - !Response 
             language: !Languages 
@@ -1256,8 +1444,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_53
+          - *ref_47
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
             required: true
@@ -1269,7 +1457,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
             required: true
@@ -1281,7 +1469,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_55
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1292,13 +1480,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1321,12 +1509,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_53
-          - *ref_54
-          - *ref_55
+          - *ref_60
+          - *ref_61
+          - *ref_62
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -1348,8 +1536,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_56
+          - *ref_47
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1361,7 +1549,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_64
             schema: *ref_1
             implementation: Method
             required: true
@@ -1373,7 +1561,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_58
+          - !Parameter &ref_65
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1384,13 +1572,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1413,12 +1601,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
-          - *ref_58
+          - *ref_63
+          - *ref_64
+          - *ref_65
         responses:
           - !SchemaResponse 
-            schema: *ref_59
+            schema: *ref_66
             language: !Languages 
               default:
                 name: ''
@@ -1440,21 +1628,151 @@ operationGroups:
             paging:
               nextLinkName: nextLink
         protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: Fakes
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: Bars
-    operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_61
+          - *ref_47
+          - *ref_48
+          - *ref_49
+          - !Parameter &ref_67
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: statusOnly
+                description: statusOnly=true enables fetching run time status of all Virtual Machines in the subscription.
+                serializedName: statusOnly
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_67
+        responses:
+          - !SchemaResponse 
+            schema: *ref_66
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListBySubscription
+            description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_69
+            schema: *ref_68
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The location for which virtual machines under the subscription are queried.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/fakes
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_69
+        responses:
+          - !SchemaResponse 
+            schema: *ref_66
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: ListByLocation
+            description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_70
             schema: *ref_1
             implementation: Method
             required: true
@@ -1466,25 +1784,185 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_62
+          - !Parameter &ref_71
+            schema: *ref_68
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The location for which virtual machines under the subscription are queried.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/fakes
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_70
+          - *ref_71
+        responses:
+          - !SchemaResponse 
+            schema: *ref_66
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListByLocations
+            description: Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Fakes
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: SubFakes
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_72
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: barName
+                name: subFakeName
                 description: The name of the fake.
-                serializedName: barName
+                serializedName: subFakeName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Fake/subFakes/{subFakeName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_72
+        responses:
+          - !SchemaResponse 
+            schema: *ref_12
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about an fake.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_74
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: fakeName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: fakeName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_75
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subFakeName
+                description: The name of the fake.
+                serializedName: subFakeName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1496,8 +1974,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_60
-                schema: *ref_10
+              - !Parameter &ref_73
+                schema: *ref_12
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1509,7 +1987,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1522,25 +2000,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_60
+              - *ref_73
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                path: /providers/Microsoft.Fake/fakes/{fakeName}/subFakes/{subFakeName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_61
-          - *ref_62
+          - *ref_74
+          - *ref_75
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -1562,38 +2040,38 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_64
+          - *ref_47
+          - !Parameter &ref_77
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: fakeName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: fakeName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_65
+          - !Parameter &ref_78
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: barName
+                name: subFakeName
                 description: The name of the fake.
-                serializedName: barName
+                serializedName: subFakeName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1605,8 +2083,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_63
-                schema: *ref_22
+              - !Parameter &ref_76
+                schema: *ref_26
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1618,7 +2096,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1631,25 +2109,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_63
+              - *ref_76
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                path: /providers/Microsoft.Fake/fakes/{fakeName}/subFakes/{subFakeName}
                 method: patch
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_64
-          - *ref_65
+          - *ref_77
+          - *ref_78
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -1671,33 +2149,33 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_66
+          - *ref_47
+          - !Parameter &ref_79
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: fakeName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: fakeName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_67
+          - !Parameter &ref_80
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: barName
+                name: subFakeName
                 description: The name of the fake.
-                serializedName: barName
+                serializedName: subFakeName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             language: !Languages 
@@ -1706,12 +2184,12 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                path: /providers/Microsoft.Fake/fakes/{fakeName}/subFakes/{subFakeName}
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_66
-          - *ref_67
+          - *ref_79
+          - *ref_80
         responses:
           - !Response 
             language: !Languages 
@@ -1741,8 +2219,100 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_68
+          - *ref_47
+          - *ref_48
+          - !Parameter &ref_81
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: fakeName
+                description: The ID that uniquely identifies a billing account.
+                serializedName: fakeName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_82
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subFakeName
+                description: The ID that uniquely identifies an agreement.
+                serializedName: subFakeName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Fake/fakes/{fakeName}/subFakes/{subFakeName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_81
+          - *ref_82
+        responses:
+          - !SchemaResponse 
+            schema: *ref_83
+            language: !Languages 
+              default:
+                name: ''
+                description: OK. The request has succeeded.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Gets an agreement by ID.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SubFakes
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Bars
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -1754,7 +2324,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_69
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -1766,13 +2336,301 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_50
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_84
+                schema: *ref_13
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: body
+                    description: The body parameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_84
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_85
+          - *ref_86
+        responses:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Retrieves information about an fake.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_88
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_89
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: barName
+                description: The name of the fake.
+                serializedName: barName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_50
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_87
+                schema: *ref_27
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: body
+                    description: The body parameter
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_51
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_87
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_88
+          - *ref_89
+        responses:
+          - !SchemaResponse 
+            schema: *ref_13
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: Retrieves information about an fake.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_90
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_91
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: barName
+                description: The name of the fake.
+                serializedName: barName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_90
+          - *ref_91
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Retrieves information about an fake.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_47
+          - !Parameter &ref_92
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_93
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: barName
+                description: The name of the fake.
+                serializedName: barName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_48
+          - *ref_49
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1795,11 +2653,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
-          - *ref_69
+          - *ref_92
+          - *ref_93
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_13
             language: !Languages 
               default:
                 name: ''
@@ -1821,8 +2679,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_70
+          - *ref_47
+          - !Parameter &ref_94
             schema: *ref_1
             implementation: Method
             required: true
@@ -1834,13 +2692,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1863,10 +2721,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_70
+          - *ref_94
         responses:
           - !SchemaResponse 
-            schema: *ref_71
+            schema: *ref_95
             language: !Languages 
               default:
                 name: ''
@@ -1901,8 +2759,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_73
+          - *ref_47
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -1914,7 +2772,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_74
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -1926,13 +2784,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1944,8 +2802,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_72
-                schema: *ref_11
+              - !Parameter &ref_96
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1957,7 +2815,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1970,7 +2828,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_72
+              - *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1984,11 +2842,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_73
-          - *ref_74
+          - *ref_97
+          - *ref_98
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2010,8 +2868,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_76
+          - *ref_47
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -2023,7 +2881,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_77
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -2035,13 +2893,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2053,8 +2911,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_75
-                schema: *ref_23
+              - !Parameter &ref_99
+                schema: *ref_28
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2066,7 +2924,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2079,7 +2937,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_75
+              - *ref_99
             language: !Languages 
               default:
                 name: ''
@@ -2093,11 +2951,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_76
-          - *ref_77
+          - *ref_100
+          - *ref_101
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2119,8 +2977,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_78
+          - *ref_47
+          - !Parameter &ref_102
             schema: *ref_1
             implementation: Method
             required: true
@@ -2132,7 +2990,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -2144,8 +3002,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             language: !Languages 
@@ -2158,8 +3016,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_78
-          - *ref_79
+          - *ref_102
+          - *ref_103
         responses:
           - !Response 
             language: !Languages 
@@ -2189,8 +3047,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_80
+          - *ref_47
+          - !Parameter &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -2202,7 +3060,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_81
+          - !Parameter &ref_105
             schema: *ref_1
             implementation: Method
             required: true
@@ -2214,13 +3072,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2243,11 +3101,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_80
-          - *ref_81
+          - *ref_104
+          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2269,8 +3127,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_82
+          - *ref_47
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -2282,13 +3140,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2311,10 +3169,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_82
+          - *ref_106
         responses:
           - !SchemaResponse 
-            schema: *ref_83
+            schema: *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -2341,8 +3199,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_84
+          - *ref_47
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -2354,7 +3212,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_85
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -2366,13 +3224,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2395,11 +3253,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_84
-          - *ref_85
+          - *ref_108
+          - *ref_109
         responses:
           - !SchemaResponse 
-            schema: *ref_86
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -2426,8 +3284,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_87
+          - *ref_47
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -2439,7 +3297,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_88
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -2451,13 +3309,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2480,11 +3338,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_87
-          - *ref_88
+          - *ref_111
+          - *ref_112
         responses:
           - !SchemaResponse 
-            schema: *ref_89
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2514,8 +3372,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_91
+          - *ref_47
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -2527,7 +3385,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
+          - !Parameter &ref_116
             schema: *ref_1
             implementation: Method
             required: true
@@ -2539,7 +3397,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -2551,13 +3409,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2569,8 +3427,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_90
-                schema: *ref_11
+              - !Parameter &ref_114
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2582,7 +3440,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2595,7 +3453,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_90
+              - *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -2609,12 +3467,12 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_91
-          - *ref_92
-          - *ref_93
+          - *ref_115
+          - *ref_116
+          - *ref_117
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2636,8 +3494,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_95
+          - *ref_47
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             required: true
@@ -2649,7 +3507,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_96
+          - !Parameter &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -2661,7 +3519,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_121
             schema: *ref_1
             implementation: Method
             required: true
@@ -2673,13 +3531,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_43
+                schema: *ref_50
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2691,8 +3549,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_94
-                schema: *ref_23
+              - !Parameter &ref_118
+                schema: *ref_28
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2704,7 +3562,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2717,7 +3575,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_94
+              - *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -2731,12 +3589,12 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_95
-          - *ref_96
-          - *ref_97
+          - *ref_119
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2758,8 +3616,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_98
+          - *ref_47
+          - !Parameter &ref_122
             schema: *ref_1
             implementation: Method
             required: true
@@ -2771,7 +3629,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_99
+          - !Parameter &ref_123
             schema: *ref_1
             implementation: Method
             required: true
@@ -2783,7 +3641,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_100
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             required: true
@@ -2795,8 +3653,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             language: !Languages 
@@ -2809,9 +3667,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_98
-          - *ref_99
-          - *ref_100
+          - *ref_122
+          - *ref_123
+          - *ref_124
         responses:
           - !Response 
             language: !Languages 
@@ -2841,8 +3699,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_101
+          - *ref_47
+          - !Parameter &ref_125
             schema: *ref_1
             implementation: Method
             required: true
@@ -2854,7 +3712,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_102
+          - !Parameter &ref_126
             schema: *ref_1
             implementation: Method
             required: true
@@ -2866,7 +3724,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_103
+          - !Parameter &ref_127
             schema: *ref_1
             implementation: Method
             required: true
@@ -2878,13 +3736,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2907,12 +3765,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_101
-          - *ref_102
-          - *ref_103
+          - *ref_125
+          - *ref_126
+          - *ref_127
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -2934,8 +3792,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_104
+          - *ref_47
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             required: true
@@ -2947,7 +3805,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_105
+          - !Parameter &ref_129
             schema: *ref_1
             implementation: Method
             required: true
@@ -2959,13 +3817,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2988,11 +3846,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_104
-          - *ref_105
+          - *ref_128
+          - *ref_129
         responses:
           - !SchemaResponse 
-            schema: *ref_83
+            schema: *ref_107
             language: !Languages 
               default:
                 name: ''
@@ -3019,8 +3877,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_106
+          - *ref_47
+          - !Parameter &ref_130
             schema: *ref_1
             implementation: Method
             required: true
@@ -3032,7 +3890,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_107
+          - !Parameter &ref_131
             schema: *ref_1
             implementation: Method
             required: true
@@ -3044,7 +3902,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_108
+          - !Parameter &ref_132
             schema: *ref_1
             implementation: Method
             required: true
@@ -3056,13 +3914,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3085,12 +3943,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_106
-          - *ref_107
-          - *ref_108
+          - *ref_130
+          - *ref_131
+          - *ref_132
         responses:
           - !SchemaResponse 
-            schema: *ref_86
+            schema: *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -3117,8 +3975,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_40
-          - !Parameter &ref_109
+          - *ref_47
+          - !Parameter &ref_133
             schema: *ref_1
             implementation: Method
             required: true
@@ -3130,7 +3988,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_110
+          - !Parameter &ref_134
             schema: *ref_1
             implementation: Method
             required: true
@@ -3142,7 +4000,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_111
+          - !Parameter &ref_135
             schema: *ref_1
             implementation: Method
             required: true
@@ -3154,13 +4012,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_41
-          - *ref_42
+          - *ref_48
+          - *ref_49
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_44
+                schema: *ref_51
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3183,12 +4041,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_109
-          - *ref_110
-          - *ref_111
+          - *ref_133
+          - *ref_134
+          - *ref_135
         responses:
           - !SchemaResponse 
-            schema: *ref_89
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''

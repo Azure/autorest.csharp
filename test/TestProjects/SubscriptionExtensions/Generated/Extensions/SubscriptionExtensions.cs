@@ -63,7 +63,7 @@ namespace SubscriptionExtensions
                 }
                 async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {
@@ -109,7 +109,7 @@ namespace SubscriptionExtensions
                 }
                 Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {

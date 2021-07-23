@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -364,6 +365,106 @@ namespace MgmtMultipleParentResource
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new SubParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        public async virtual Task<Response<SubParent>> UpdateAsync(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        {
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(subBody, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        public virtual Response<SubParent> Update(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        {
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(subBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        public async virtual Task<SubParentsUpdateOperation> StartUpdateAsync(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        {
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody, cancellationToken).ConfigureAwait(false);
+                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the VMSS VM run command. </summary>
+        /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
+        public virtual SubParentsUpdateOperation StartUpdate(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        {
+            if (subBody == null)
+            {
+                throw new ArgumentNullException(nameof(subBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody, cancellationToken);
+                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
             }
             catch (Exception e)
             {

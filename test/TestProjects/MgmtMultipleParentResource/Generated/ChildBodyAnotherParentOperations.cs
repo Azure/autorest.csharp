@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
@@ -364,6 +365,106 @@ namespace MgmtMultipleParentResource
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new ChildBodyAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public async virtual Task<Response<ChildBodyAnotherParent>> UpdateAsync(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(childBody, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public virtual Response<ChildBodyAnotherParent> Update(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(childBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public async virtual Task<AnotherChildrenUpdateOperation> StartUpdateAsync(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken).ConfigureAwait(false);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public virtual AnotherChildrenUpdateOperation StartUpdate(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
             }
             catch (Exception e)
             {

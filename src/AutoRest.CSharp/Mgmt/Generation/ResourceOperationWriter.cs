@@ -213,36 +213,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             if (_isITaggableResource)
             {
-                var updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Patch);
-                if (updateMethods == null || updateMethods.Count() == 0)
-                {
-                    updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Put);
-                    // TODO -- not all the PUT operations can be used for update tags
-                }
-
-                RestClientMethod? updateMethod = null;
-                if (updateMethods != null && updateMethods.Count() == 1)
-                {
-                    updateMethod = updateMethods.FirstOrDefault();
-                }
-                else if (updateMethods != null && updateMethods.Count() > 1)
-                {
-                    updateMethod = updateMethods.Where(m => m.Name == "Update").FirstOrDefault();
-                }
-                else
-                {
-                    if (!resourceOperation.OperationGroup.IsTupleResource(context))
-                        throw new Exception($"Please update the swagger for {resource.Type.Name} to add the update operation.");
-                }
-
-                if (updateMethod != null)
-                {
-                    // write update method
-                    WriteAddTagMethod(writer, resourceOperation, updateMethod, context);
-                    WriteSetTagsMethod(writer, resourceOperation, updateMethod, context);
-                    WriteRemoveTagMethod(writer, resourceOperation, updateMethod, context);
-                    clientMethodsList.Add(updateMethod);
-                }
+                // write update method
+                WriteAddTagMethod(writer, resourceOperation, context);
+                WriteSetTagsMethod(writer, resourceOperation, context);
+                WriteRemoveTagMethod(writer, resourceOperation, context);
             }
 
             // 1. Listing myself at parent scope -> on the container named list
@@ -250,14 +224,23 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
-            foreach (var clientMethod in resourceOperation.Methods)
+            var resourceContainer = context.Library.GetResourceContainer(resourceOperation.OperationGroup);
+            foreach (var clientMethod in resourceOperation.ResourceOperationsClientMethods)
             {
-                if (!clientMethodsList.Contains(clientMethod.RestClientMethod) &&
-                    clientMethod.RestClientMethod.Request.HttpMethod != RequestMethod.Put &&
-                    !clientMethod.Name.StartsWith("List"))
+                if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
                     WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                }
+            }
+
+            // write paging methods
+            foreach (var listMethod in resourceOperation.ResourceOperationsListMethods)
+            {
+                if (listMethod.PagingMethod != null)
+                {
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, false);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, true);
                 }
             }
 
@@ -272,17 +255,17 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
-                    WriteChildPagingMethod(writer, pair.Key, false, pagingMethod);
-                    WriteChildPagingMethod(writer, pair.Key, true, pagingMethod);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), false);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), true);
                 }
             }
 
             // write rest of the LRO methods
             var mergedMethods = new Dictionary<string, List<RestClientMethod>>();
-            foreach (var clientMethod in resourceOperation.RestClient.Methods)
+            // foreach (var clientMethod in resourceOperation.RestClient.Methods)
+            foreach (var clientMethod in resourceOperation.ResourceOperationsLROMethods)
             {
-                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
-                    !clientMethodsList.Contains(clientMethod) && clientMethod.Request.HttpMethod != RequestMethod.Put)
+                if (!clientMethodsList.Contains(clientMethod))
                 {
                     if (_context.Library.TryGetMethodForMergedOperation($"{_resourceOperation.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
                     {
@@ -324,7 +307,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteChildPagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod)
+        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, string restClientName, bool async)
         {
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
@@ -343,7 +326,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var returnType = itemType.WrapPageable(async);
 
             var methodName = CreateMethodName(pagingMethod.Name, async);
-            writer.Append($"public {returnType} {methodName}(");
+            writer.Append($"public virtual {returnType} {methodName}(");
             foreach (var param in nonPathParameters)
             {
                 writer.WriteParameter(param);
@@ -352,7 +335,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, itemType, GetRestClientName(operationGroup), pagingMethod.Diagnostics,
+                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, pagingMethod.Diagnostics,
                     ClientDiagnosticsField, $"", async);
             }
         }
@@ -463,13 +446,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteAddTag(writer, resourceOperation, clientMethod, context, true);
-            WriteAddTag(writer, resourceOperation, clientMethod, context, false);
+            WriteAddTag(writer, resourceOperation, context, true);
+            WriteAddTag(writer, resourceOperation, context, false);
         }
 
-        private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
@@ -511,13 +494,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteSetTagsMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteSetTagsMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteSetTags(writer, resourceOperation, clientMethod, context, true);
-            WriteSetTags(writer, resourceOperation, clientMethod, context, false);
+            WriteSetTags(writer, resourceOperation, context, true);
+            WriteSetTags(writer, resourceOperation, context, false);
         }
 
-        private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
@@ -568,13 +551,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteRemoveTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteRemoveTagMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteRemoveTag(writer, resourceOperation, clientMethod, context, true);
-            WriteRemoveTag(writer, resourceOperation, clientMethod, context, false);
+            WriteRemoveTag(writer, resourceOperation, context, true);
+            WriteRemoveTag(writer, resourceOperation, context, false);
         }
 
-        private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
