@@ -490,7 +490,12 @@ namespace Azure.Resources.Sample
                 Response response;
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
-                    if (Id.ResourceType.Equals("Microsoft.Management/managementGroups"))
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, location, properties, cancellationToken).ConfigureAwait(false);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);
@@ -538,7 +543,12 @@ namespace Azure.Resources.Sample
                 Response response;
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
-                    if (Id.ResourceType.Equals("Microsoft.Management/managementGroups"))
+                    var parent = Id;
+                    while (parent.Parent != null)
+                    {
+                        parent = parent.Parent;
+                    }
+                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, location, properties, cancellationToken);
                         return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, location, properties).Request, response);

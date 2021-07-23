@@ -54,7 +54,7 @@ operation-group-to-parent:
   ManagementLocks: tenant
   ResourceLinks: tenant
 merge-operations:
-  WhatIf: Deployments_WhatIfAtTenantScope;Deployments_WhatIfAtManagementGroupScope;Deployments_WhatIfAtSubscriptionScope;Deployments_WhatIf
+  WhatIf: Deployments_WhatIf_POST;Deployments_WhatIfAtTenantScope_POST;Deployments_WhatIfAtManagementGroupScope_POST;Deployments_WhatIfAtSubscriptionScope_POST
 directive:
   - from: swagger-document
     where: $.paths

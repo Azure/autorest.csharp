@@ -705,7 +705,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             clientMethodSet.Remove(managementGroupMethod);
                             using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
                             {
-                                using (writer.Scope($"if (Id.ResourceType.Equals(\"Microsoft.Management/managementGroups\"))"))
+                                var parent = new CodeWriterDeclaration("parent");
+                                writer.Line($"var {parent:D} = Id;");
+                                using (writer.Scope($"while ({parent}.Parent != null)"))
+                                {
+                                    writer.Line($"{parent} = {parent}.Parent;");
+                                }
+                                using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
                                 {
                                     WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), async, clientMethods);
                                 }

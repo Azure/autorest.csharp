@@ -284,7 +284,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
                     !clientMethodsList.Contains(clientMethod) && clientMethod.Request.HttpMethod != RequestMethod.Put)
                 {
-                    if (_context.Library.TryGetMethodForMergedOperation($"{_resourceOperation.OperationGroup.Key}_{clientMethod.Name}", out var mergedMethodName))
+                    if (_context.Library.TryGetMethodForMergedOperation($"{_resourceOperation.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
                     {
                         if (mergedMethods.TryGetValue(mergedMethodName, out var methods))
                         {
