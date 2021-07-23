@@ -450,11 +450,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
-                else if (pathParamsLength == 1 && clientMethod.IsByIdMethod())
-                {
-                    paramNameList.Add("Id");
-                    return paramNameList.ToArray();
-                }
 
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
                 if (!isAncestorTenant)
@@ -476,13 +471,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (IsTerminalState(operationGroup, context) && paramLength == 1)
             {
-                if (operationGroup.IsTupleResource(context))
-                {
-                    name = $"{name}.Parent";
-                    paramNames.Add($"{name}.Name");
-                    paramLength--;
-                    return;
-                }
                 paramNames.Add(GetParentValue(operationGroup, context, name, clientMethod));
                 paramLength--;
             }
@@ -510,6 +498,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string name, RestClientMethod clientMethod)
         {
+            if (operationGroup.IsTupleResource(context))
+            {
+                return $"{name}.Parent.Name";
+            }
             var parentResourceType = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
 
             switch (parentResourceType)
@@ -520,13 +512,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     return "Id.SubscriptionId";
                 case ResourceTypeBuilder.Locations:
                     return "Id.Location";
+                case ResourceTypeBuilder.ManagementGroups:
+                    return $"{name}.Parent.Name";
                 case ResourceTypeBuilder.Tenant:
-                    // An operation group with /{scope} paths may also have paths in tenant/management group/subscription/resource group level. We need to consider all cases.
+                    // There are multiple cases when parent resource type is tenant:
+                    // 1. Tenant resource.
+                    // 2. Scope resource. The clientMethod may have a path starting with /{scope} or a path at any specific scope (tenant/management group/subscription/resource group) or a /{resourceId} path.
+                    // 3. Extension resource in the same operation group. The clientMethod may have a path at any scope (tenant/management group/subscription/resource group).
+                    if (clientMethod.IsByIdMethod())
+                    {
+                        return $"{name}"; // name will always be "Id".
+                    }
                     if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
                     {
                         return $"{name}.Parent";
                     }
                     // TODO: a better way to determine it's a tenant level operation
+                    // else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && httpRequest.GetAncestor() == ResourceTypeBuilder.Tenant)
                     else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
                     {
                         return $"{name}.Name";
@@ -697,12 +699,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        var clientMethodSet = new HashSet<RestClientMethod>(clientMethods);
-                        // TODO: should check method path instead of name to determine the corresponding resource identifier type
-                        var managementGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ManagementGroup"));
+                        var methodDict = clientMethods.Where(m => m.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
+                        var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
                         if (managementGroupMethod != null)
                         {
-                            clientMethodSet.Remove(managementGroupMethod);
+                            methodDict.Remove(managementGroupMethod);
                             using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
                             {
                                 var parent = new CodeWriterDeclaration("parent");
@@ -717,10 +718,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 }
                                 using (writer.Scope($"else"))
                                 {
-                                    var tenantMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("Tenant"));
+                                    var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
                                     if (tenantMethod != null)
                                     {
-                                        clientMethodSet.Remove(tenantMethod);
+                                        methodDict.Remove(tenantMethod);
                                         WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), async);
                                     }
                                     else
@@ -731,10 +732,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             }
                         }
                         var elseStr = managementGroupMethod != null ? "else " : "";
-                        var subscriptionMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("Subscription"));
+                        var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
                         if (subscriptionMethod != null)
                         {
-                            clientMethodSet.Remove(subscriptionMethod);
+                            methodDict.Remove(subscriptionMethod);
                             using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
                             {
                                 WriteStartLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), async);
@@ -742,24 +743,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
 
                         elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
-                        var resourceGroupMethod = clientMethods.FirstOrDefault(m => m.Name.Contains("ResourceGroup"));
+                        // There could be methods at resource group scope and at resource scope.
+                        var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
+                        var resourceGroupMethod = resourceGroupMethodsCount > 1 ? methodDict.FirstOrDefault(kv => kv.Key.Name.Contains("ResourceGroup")).Key : methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
                         if (resourceGroupMethod != null)
                         {
-                            clientMethodSet.Remove(resourceGroupMethod);
+                            methodDict.Remove(resourceGroupMethod);
                             using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
                             {
                                 WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), async);
                                 // TODO: Handle methods at resource level
+                                var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                                if (resourceMethod != null)
+                                {
+                                    throw new Exception($"When trying to merge methods, more than 1 method is under resource group/resource scope ({String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}). It's not supported yet.");
+                                }
                             }
                         }
                         using (writer.Scope($"else"))
                         {
-                            if (clientMethodSet.Count() > 1)
+                            if (methodDict.Count() > 1)
                             {
-                                throw new Exception($"When trying to merge methods, there are more than 1 method that cannot be mapped to a specific scope. Please rename the Operation in readme with the scope. For instance, from CreateOrUpdate to CreateOrUpdateAtSubscription.");
+                                throw new Exception($"When trying to merge methods, there are more than 1 method that cannot be mapped to a specific scope ({String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}). Please rename the Operation in readme with the scope. For instance, from CreateOrUpdate to CreateOrUpdateAtSubscription.");
                             }
                             // It's common that there will be one method simply named CreateOrUpdate instead of the full name with the scope like CreateOrUpdateAtSubscription or CreateOrUpdateAtResourceGroup.
-                            var remainingMethod = clientMethodSet.FirstOrDefault();
+                            var remainingMethod = methodDict.FirstOrDefault().Key;
                             if (remainingMethod != null)
                             {
                                 WriteStartLROMethodBody(writer, remainingMethod, lroObjectType, context, response, BuildParameterMapping(remainingMethod), async);

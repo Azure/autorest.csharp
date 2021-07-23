@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return ResourceTypeBuilder.Subscriptions;
             }
-            else if (path.Contains("/Microsoft.Management/managementGroups/", StringComparison.InvariantCultureIgnoreCase))
+            else if (path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
             {
                 return ResourceTypeBuilder.ManagementGroups;
             }

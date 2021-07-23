@@ -141,10 +141,14 @@ namespace Azure.Resources.Sample
                         throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
-                else
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
                 {
                     var response = _restClient.CreateOrUpdate(Id.Name, policySetDefinitionName, parameters, cancellationToken);
                     return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)
@@ -191,10 +195,14 @@ namespace Azure.Resources.Sample
                         throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
-                else
+                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
                 {
                     var response = await _restClient.CreateOrUpdateAsync(Id.Name, policySetDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                     return new PolicySetDefinitionsCreateOrUpdateOperation(Parent, response);
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)

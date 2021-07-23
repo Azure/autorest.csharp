@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,6 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<ClientMethod>? _methods;
         private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
+        private ClientMethod? _getByIdMethod;
         private List<ClientMethod>? _getMethods;
 
         private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
@@ -84,17 +86,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
 
+        public virtual ClientMethod? GetByIdMethod => _getByIdMethod ??= GetGetByIdMethod();
         public virtual List<ClientMethod> GetMethods => _getMethods ??= GetGetMethods();
 
         private List<ClientMethod> GetGetMethods()
         {
             var getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
-            // TODO: remove GetByIdMethod
-            // if (GetByIdMethod != null && GetByIdMethod != GetMethod)
-            // {
-            //     getMethods.Remove(GetByIdMethod);
-            // }
+            if (GetByIdMethod != null && GetByIdMethod.Name != GetMethod!.Name)
+            {
+                getMethods.RemoveAll(m => m.Name == GetByIdMethod.Name);
+            }
             return getMethods;
+        }
+
+        private ClientMethod? GetGetByIdMethod()
+        {
+            return Methods.FirstOrDefault(m => m.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Get) && m.RestClientMethod.IsByIdMethod());
         }
 
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()

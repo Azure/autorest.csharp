@@ -153,9 +153,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             //     WriteCreateByIdVariants(_resourceContainer.PutByIdMethod);
             // }
 
-            if (_resourceContainer.GetByIdMethod != null && _resourceContainer.GetMethod?.RestClientMethod != _resourceContainer.GetByIdMethod)
+            if (_resourceContainer.GetByIdMethod?.RestClientMethod != null && _resourceContainer.GetMethod?.RestClientMethod != _resourceContainer.GetByIdMethod.RestClientMethod)
             {
-                WriteGetByIdVariants(_resourceContainer.GetByIdMethod);
+                WriteGetByIdVariants(_resourceContainer.GetByIdMethod.RestClientMethod);
             }
 
             WriteListVariants();
@@ -305,7 +305,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    // var methodSet = new HashSet<RestClientMethod>(methods);
                     var methodDict = methods.Where(m => m.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
                     var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
                     if (managementGroupMethod != null)
@@ -360,11 +359,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod), async);
                             // TODO: Handle methods at resource level
-                            // var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                            // if (resourceMethod != null)
-                            // {
-
-                            // }
+                            var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                            if (resourceMethod != null)
+                            {
+                                throw new Exception($"When trying to merge methods in {_resourceContainer.OperationGroup.Key}, more than 1 method is under resource group/resource scope ({String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}). It's not supported yet.");
+                            }
                         }
                     }
                     using (writer.Scope($"else"))

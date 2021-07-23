@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private ClientMethod? _getMethod;
 
         private List<ClientMethod>? _getMethods;
-        private RestClientMethod? _getByIdMethod;
+        private ClientMethod? _getByIdMethod;
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public List<PagingMethod>? ScopeListMethods => _scopeListMethods ??= FindScopeListPagingMethods();
 
-        public RestClientMethod? GetByIdMethod => _getByIdMethod ??= GetGetByIdMethod();
+        public override ClientMethod? GetByIdMethod => _getByIdMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetByIdMethod;
 
         private PagingMethod? FindListPagingMethod()
         {
@@ -80,9 +80,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private List<RestClientMethod> GetPutMethods()
         {
             var putMethods = RestClient.Methods.Where(m => m.Request.HttpMethod.Equals(RequestMethod.Put)).ToList();
-            if (PutByIdMethod != null && PutByIdMethod != PutMethod)
+            if (PutByIdMethod != null && PutByIdMethod.Name != PutMethod!.Name)
             {
-                putMethods.Remove(PutByIdMethod);
+                putMethods.RemoveAll(m => m.Name == PutByIdMethod.Name);
             }
             return putMethods;
         }
@@ -90,12 +90,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         private RestClientMethod? GetPutByIdMethod()
         {
             return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put) && m.IsByIdMethod());
-        }
-
-        // TODO: move to ResourceOperation
-        private RestClientMethod? GetGetByIdMethod()
-        {
-            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Get) && m.IsByIdMethod());
         }
 
         protected override string SuffixValue => _suffixValue;

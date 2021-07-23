@@ -510,10 +510,14 @@ namespace Azure.Resources.Sample
                     var response = await _restClient.WhatIfAtSubscriptionScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
-                else
+                else if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))
                 {
                     var response = await _restClient.WhatIfAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)
@@ -562,10 +566,14 @@ namespace Azure.Resources.Sample
                     var response = _restClient.WhatIfAtSubscriptionScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtSubscriptionScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
                 }
-                else
+                else if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))
                 {
                     var response = _restClient.WhatIf(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location, cancellationToken);
                     return new DeploymentsWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfRequest(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, properties, location).Request, response);
+                }
+                else
+                {
+                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)
