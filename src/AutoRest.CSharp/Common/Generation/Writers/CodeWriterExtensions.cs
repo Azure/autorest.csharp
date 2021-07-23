@@ -128,10 +128,16 @@ namespace AutoRest.CSharp.Generation.Writers
             var assignToSelf = parameter.Name == variableName;
             if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
             {
+                if (assignToSelf)
+                {
+                    writer.Append($"{variableName:I} ??= ");
+                }
+                else
+                {
+                    writer.Append($"{variableName:I} = {parameter.Name:I} ?? ");
+                }
+
                 var defaultValue = parameter.DefaultValue.Value;
-                writer
-                    .AppendIf($"{variableName:I} ??= ", assignToSelf)
-                    .AppendIf($"{variableName:I} = {parameter.Name:I} ?? ", !assignToSelf);
                 if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
                 {
                     WriteConstant(writer, defaultValue);
