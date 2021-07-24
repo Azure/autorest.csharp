@@ -29,12 +29,7 @@ namespace CognitiveServices.TextAnalytics
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public CognitiveServicesTextAnalyticsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint)
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-
-            this.endpoint = endpoint;
+            this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

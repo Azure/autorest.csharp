@@ -33,19 +33,9 @@ namespace validation
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public AutoRestValidationTestRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            endpoint ??= new Uri("http://localhost:3000");
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-
-            this.subscriptionId = subscriptionId;
-            this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
+            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

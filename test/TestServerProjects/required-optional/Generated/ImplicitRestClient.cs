@@ -34,19 +34,9 @@ namespace required_optional
         /// <exception cref="ArgumentNullException"> <paramref name="requiredGlobalPath"/> or <paramref name="requiredGlobalQuery"/> is null. </exception>
         public ImplicitRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string requiredGlobalPath, string requiredGlobalQuery, Uri endpoint = null, int? optionalGlobalQuery = null)
         {
-            if (requiredGlobalPath == null)
-            {
-                throw new ArgumentNullException(nameof(requiredGlobalPath));
-            }
-            if (requiredGlobalQuery == null)
-            {
-                throw new ArgumentNullException(nameof(requiredGlobalQuery));
-            }
-            endpoint ??= new Uri("http://localhost:3000");
-
-            this.requiredGlobalPath = requiredGlobalPath;
-            this.requiredGlobalQuery = requiredGlobalQuery;
-            this.endpoint = endpoint;
+            this.requiredGlobalPath = requiredGlobalPath ?? throw new ArgumentNullException(nameof(requiredGlobalPath));
+            this.requiredGlobalQuery = requiredGlobalQuery ?? throw new ArgumentNullException(nameof(requiredGlobalQuery));
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
             this.optionalGlobalQuery = optionalGlobalQuery;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;

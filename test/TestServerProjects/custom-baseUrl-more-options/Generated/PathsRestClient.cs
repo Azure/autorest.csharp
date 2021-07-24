@@ -29,17 +29,8 @@ namespace custom_baseUrl_more_options
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="dnsSuffix"/> is null. </exception>
         public PathsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string dnsSuffix = "host")
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (dnsSuffix == null)
-            {
-                throw new ArgumentNullException(nameof(dnsSuffix));
-            }
-
-            this.subscriptionId = subscriptionId;
-            this.dnsSuffix = dnsSuffix;
+            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            this.dnsSuffix = dnsSuffix ?? throw new ArgumentNullException(nameof(dnsSuffix));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
