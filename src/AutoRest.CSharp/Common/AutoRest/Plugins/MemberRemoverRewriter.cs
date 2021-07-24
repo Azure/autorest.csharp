@@ -144,9 +144,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     {
                         if (argument.Value is IErrorTypeSymbol errorType)
                         {
-                            var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
                             var attribute = attributeData.ApplicationSyntaxReference.GetText();
-                            ErrorHelpers.ThrowError($"Type '{errorType.Name}' is not defined in attribute '{attribute}' applied to '{fullName}'.");
+                            var fileLinePosition = attributeData.ApplicationSyntaxReference.GetFileLinePosition();
+                            var filePath = fileLinePosition.Path;
+                            var line = fileLinePosition.StartLinePosition.Line + 1;
+                            ErrorHelpers.ThrowError($"The undefined type '{errorType.Name}' is referenced in the '{attribute}' attribute ({filePath}, line: {line}). Please define this type or remove it from the attribute.");
                         }
                     }
                     else

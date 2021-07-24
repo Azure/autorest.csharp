@@ -9,5 +9,8 @@ namespace AutoRest.CSharp.Utilities
     {
         public static string GetText(this SyntaxReference? syntaxReference)
             => syntaxReference?.SyntaxTree.GetText().ToString(syntaxReference.Span) ?? string.Empty;
+
+        public static FileLinePositionSpan GetFileLinePosition(this SyntaxReference? syntaxReference)
+            => syntaxReference?.SyntaxTree.GetLocation(syntaxReference.Span).GetLineSpan() ?? default;
     }
 }
