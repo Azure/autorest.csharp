@@ -743,39 +743,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         }
 
                         elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
-                        // There could be methods at resource group scope and at resource scope.
-                        var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
-                        var resourceGroupMethod = resourceGroupMethodsCount > 1 ? methodDict.FirstOrDefault(kv => kv.Key.Name.Contains("ResourceGroup")).Key : methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                        var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
                         if (resourceGroupMethod != null)
                         {
                             methodDict.Remove(resourceGroupMethod);
                             using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
                             {
                                 WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), async);
-                                // TODO: Handle methods at resource level
-                                var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                                if (resourceMethod != null)
-                                {
-                                    throw new Exception($"When trying to merge methods, more than 1 method is under resource group/resource scope ({String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}). It's not supported yet.");
-                                }
                             }
                         }
                         using (writer.Scope($"else"))
                         {
-                            if (methodDict.Count() > 1)
+                            if (methodDict.Count() > 0)
                             {
-                                throw new Exception($"When trying to merge methods, there are more than 1 method that cannot be mapped to a specific scope ({String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}). Please rename the Operation in readme with the scope. For instance, from CreateOrUpdate to CreateOrUpdateAtSubscription.");
+                                throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
                             }
-                            // It's common that there will be one method simply named CreateOrUpdate instead of the full name with the scope like CreateOrUpdateAtSubscription or CreateOrUpdateAtResourceGroup.
-                            var remainingMethod = methodDict.FirstOrDefault().Key;
-                            if (remainingMethod != null)
-                            {
-                                WriteStartLROMethodBody(writer, remainingMethod, lroObjectType, context, response, BuildParameterMapping(remainingMethod), async);
-                            }
-                            else
-                            {
-                                writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
-                            }
+                            writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
                         }
                     }
                 });

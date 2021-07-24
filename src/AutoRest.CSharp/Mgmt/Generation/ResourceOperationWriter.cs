@@ -183,17 +183,17 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
                 // write inherited get method
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true);
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true, resourceOperation.GetMethods, "Get");
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false, resourceOperation.GetMethods, "Get");
 
                 var nonPathParameters = resourceOperation.GetMethod.RestClientMethod.NonPathParameters;
                 if (nonPathParameters.Count > 0)
                 {
                     // write get method
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
+                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true, resourceOperation.GetMethods, "Get");
+                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false, resourceOperation.GetMethods, "Get");
                 }
-                clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
+                clientMethodsList.AddRange(resourceOperation.GetMethods.Select(m => m.RestClientMethod).ToList());
 
                 WriteListAvailableLocationsMethod(writer, true);
                 WriteListAvailableLocationsMethod(writer, false);
@@ -346,8 +346,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async, List<ClientMethod> clientMethods, string? methodName = null)
         {
+            methodName = methodName ?? clientMethod.Name;
             writer.Line();
             var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
             if (isInheritedMethod)
@@ -364,7 +365,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             }
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
 
             if (!isInheritedMethod)
             {
@@ -381,50 +382,123 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
-                    writer.Append($"var {response:D} = ");
-                    if (async)
+                    response.SetActualName(response.RequestedName);
+                    if (clientMethod.RestClientMethod.IsScope() || clientMethods.Count < 2)
                     {
-                        writer.Append($"await ");
+                        WriteGetMethodBody(writer, clientMethod, resource, context, response, isInheritedMethod, async, nonPathParameters);
                     }
-                    var pathParamNames = GetPathParametersName(clientMethod.RestClientMethod, resource.OperationGroup, context).ToList();
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-                    foreach (string paramNames in pathParamNames)
+                    else
                     {
-                        writer.Append($"{paramNames:I}, ");
-                    }
-                    foreach (Parameter parameter in nonPathParameters)
-                    {
-                        if (isInheritedMethod)
+                        var methodDict = clientMethods.Where(m => m.RestClientMethod.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.RestClientMethod.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
+                        var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
+                        if (managementGroupMethod != null)
                         {
-                            if (parameter.DefaultValue != null)
+                            methodDict.Remove(managementGroupMethod);
+                            using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
                             {
-                                if (TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+                                var parent = new CodeWriterDeclaration("parent");
+                                writer.Line($"var {parent:D} = Id;");
+                                using (writer.Scope($"while ({parent}.Parent != null)"))
                                 {
-                                    writer.WriteConstant(parameter.DefaultValue.Value);
-                                    writer.Append($", ");
+                                    writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
                                 }
-                                else
+                                using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
                                 {
-                                    writer.Append($"null, ");
+                                    WriteGetMethodBody(writer, managementGroupMethod, resource, context, response, isInheritedMethod, async, managementGroupMethod.RestClientMethod.NonPathParameters);
+                                }
+                                using (writer.Scope($"else"))
+                                {
+                                    var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
+                                    if (tenantMethod != null)
+                                    {
+                                        methodDict.Remove(tenantMethod);
+                                        WriteGetMethodBody(writer, tenantMethod, resource, context, response, isInheritedMethod, async, tenantMethod.RestClientMethod.NonPathParameters);
+                                    }
+                                    else
+                                    {
+                                        writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                                    }
                                 }
                             }
                         }
-                        else
+                        var elseStr = managementGroupMethod != null ? "else " : "";
+                        var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
+                        if (subscriptionMethod != null)
                         {
-                            writer.Append($"{parameter.Name}, ");
+                            methodDict.Remove(subscriptionMethod);
+                            using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
+                            {
+                                WriteGetMethodBody(writer, subscriptionMethod, resource, context, response, isInheritedMethod, async, subscriptionMethod.RestClientMethod.NonPathParameters);
+                            }
+                        }
+
+                        elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                        var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                        if (resourceGroupMethod != null)
+                        {
+                            methodDict.Remove(resourceGroupMethod);
+                            using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
+                            {
+                                WriteGetMethodBody(writer, resourceGroupMethod, resource, context, response, isInheritedMethod, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
+                            }
+                        }
+                        using (writer.Scope($"else"))
+                        {
+                            if (methodDict.Count() > 0)
+                            {
+                                throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
+                            }
+                            writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
                         }
                     }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, response.Value), response.GetRawResponse());");
                 });
                 writer.Line();
             }
+        }
+
+        private void WriteGetMethodBody(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, bool isInheritedMethod, bool async, List<Parameter> nonPathParameters)
+        {
+            writer.Append($"var {response} = ");
+            if (async)
+            {
+                writer.Append($"await ");
+            }
+            var pathParamNames = GetPathParametersName(clientMethod.RestClientMethod, resource.OperationGroup, context).ToList();
+            writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
+            foreach (string paramNames in pathParamNames)
+            {
+                writer.Append($"{paramNames:I}, ");
+            }
+            foreach (Parameter parameter in nonPathParameters)
+            {
+                if (isInheritedMethod)
+                {
+                    if (parameter.DefaultValue != null)
+                    {
+                        if (TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+                        {
+                            writer.WriteConstant(parameter.DefaultValue.Value);
+                            writer.Append($", ");
+                        }
+                        else
+                        {
+                            writer.Append($"null, ");
+                        }
+                    }
+                }
+                else
+                {
+                    writer.Append($"{parameter.Name}, ");
+                }
+            }
+            writer.Append($"cancellationToken)");
+
+            if (async)
+            {
+                writer.Append($".ConfigureAwait(false)");
+            }
+            writer.Line($";");
+            writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, response.Value), response.GetRawResponse());");
         }
 
         private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
