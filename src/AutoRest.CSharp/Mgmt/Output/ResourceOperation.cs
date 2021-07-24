@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var isMethodAlreadyExist = false;
                 if (ResourceContainer != null)
                 {
-                    isMethodAlreadyExist = clientMethod.RestClientMethod == ResourceContainer.CreateMethod ||
+                    isMethodAlreadyExist = ResourceContainer.PutMethods.Any(m => m == clientMethod.RestClientMethod) ||
                         ResourceContainer.RemainingMethods.Any(m => m == clientMethod) ||
                         ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
                         SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var isMethodExistInContainer = false;
                     if (ResourceContainer != null)
                     {
-                        isMethodExistInContainer = clientMethod == ResourceContainer.CreateMethod ||
+                        isMethodExistInContainer = ResourceContainer.PutMethods.Any(m => m == clientMethod) ||
                             ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
                             ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
                             SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));

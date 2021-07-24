@@ -18,7 +18,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Tenant = "tenant";
         public const string ManagementGroups = "managementGroups";
         public const string Locations = "locations";
-        public const string ManagementGroups = "managementGroups";
 
         public static readonly Dictionary<string, string> TypeToExtensionName = new Dictionary<string, string>()
         {

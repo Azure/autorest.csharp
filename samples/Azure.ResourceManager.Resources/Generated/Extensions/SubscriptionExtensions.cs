@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +27,264 @@ namespace Azure.ResourceManager.Resources
         public static DeploymentExtendedContainer GetDeploymentExtendedContainer(this SubscriptionOperations subscription)
         {
             return new DeploymentExtendedContainer(subscription);
+        }
+        #endregion
+
+        #region PolicyDefinition
+        private static PolicyDefinitionsRestOperations GetPolicyDefinitionsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        {
+            return new PolicyDefinitionsRestOperations(clientDiagnostics, pipeline, endpoint);
+        }
+
+        /// <summary> Lists the PolicyDefinitions for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
+        /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<PolicyDefinition> ListPolicyDefinitionsAsync(this SubscriptionOperations subscription, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetPolicyDefinitionsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                async Task<Page<PolicyDefinition>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicyDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(subscription.Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<PolicyDefinition>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicyDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListNextPageAsync(nextLink, subscription.Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the PolicyDefinitions for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy definitions whose category match the {value}. </param>
+        /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<PolicyDefinition> ListPolicyDefinitions(this SubscriptionOperations subscription, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetPolicyDefinitionsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Page<PolicyDefinition> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicyDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(subscription.Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<PolicyDefinition> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicyDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListNextPage(nextLink, subscription.Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Filters the list of PolicyDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<Core.GenericResourceExpanded> ListPolicyDefinitionByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(PolicyDefinitionOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of PolicyDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<Core.GenericResourceExpanded> ListPolicyDefinitionByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(PolicyDefinitionOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
+        }
+        #endregion
+
+        #region PolicySetDefinition
+        private static PolicySetDefinitionsRestOperations GetPolicySetDefinitionsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, Uri endpoint = null)
+        {
+            return new PolicySetDefinitionsRestOperations(clientDiagnostics, pipeline, endpoint);
+        }
+
+        /// <summary> Lists the PolicySetDefinitions for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy set definitions whose category match the {value}. </param>
+        /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<PolicySetDefinition> ListPolicySetDefinitionsAsync(this SubscriptionOperations subscription, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetPolicySetDefinitionsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                async Task<Page<PolicySetDefinition>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicySetDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(subscription.Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicySetDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<PolicySetDefinition>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicySetDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListNextPageAsync(nextLink, subscription.Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicySetDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the PolicySetDefinitions for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: &apos;atExactScope()&apos;, &apos;policyType -eq {value}&apos; or &apos;category eq &apos;{value}&apos;&apos;. If $filter is not provided, no filtering is performed. If $filter=atExactScope() is provided, the returned list only includes all policy set definitions that at the given scope. If $filter=&apos;policyType -eq {value}&apos; is provided, the returned list only includes all policy set definitions whose type match the {value}. Possible policyType values are NotSpecified, BuiltIn, Custom, and Static. If $filter=&apos;category -eq {value}&apos; is provided, the returned list only includes all policy set definitions whose category match the {value}. </param>
+        /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<PolicySetDefinition> ListPolicySetDefinitions(this SubscriptionOperations subscription, string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetPolicySetDefinitionsRestOperations(clientDiagnostics, credential, options, pipeline, baseUri);
+                Page<PolicySetDefinition> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicySetDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(subscription.Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicySetDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<PolicySetDefinition> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPolicySetDefinitions");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListNextPage(nextLink, subscription.Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicySetDefinition(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Filters the list of PolicySetDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<Core.GenericResourceExpanded> ListPolicySetDefinitionByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(PolicySetDefinitionOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of PolicySetDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<Core.GenericResourceExpanded> ListPolicySetDefinitionByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(PolicySetDefinitionOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
         }
         #endregion
 
@@ -62,7 +321,7 @@ namespace Azure.ResourceManager.Resources
                 }
                 async Task<Page<DeploymentScript>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DeploymentScriptOperations.ListDeploymentScripts");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
                     scope.Start();
                     try
                     {
@@ -107,11 +366,115 @@ namespace Azure.ResourceManager.Resources
                 }
                 Page<DeploymentScript> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DeploymentScriptOperations.ListDeploymentScripts");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
                     scope.Start();
                     try
                     {
                         var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DeploymentScript(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the DeploymentScripts for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public static AsyncPageable<DeploymentScript> ListDeploymentScriptsAsync(this SubscriptionOperations subscription, string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetDeploymentScriptsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<DeploymentScript>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListByResourceGroupAsync(resourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new DeploymentScript(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<DeploymentScript>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListByResourceGroupNextPageAsync(nextLink, resourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new DeploymentScript(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the DeploymentScripts for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public static Pageable<DeploymentScript> ListDeploymentScripts(this SubscriptionOperations subscription, string resourceGroupName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetDeploymentScriptsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<DeploymentScript> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListByResourceGroup(resourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DeploymentScript(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<DeploymentScript> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDeploymentScripts");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListByResourceGroupNextPage(nextLink, resourceGroupName, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new DeploymentScript(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -187,7 +550,7 @@ namespace Azure.ResourceManager.Resources
                 }
                 async Task<Page<Application>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ApplicationOperations.ListApplications");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApplications");
                     scope.Start();
                     try
                     {
@@ -232,7 +595,7 @@ namespace Azure.ResourceManager.Resources
                 }
                 Page<Application> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ApplicationOperations.ListApplications");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApplications");
                     scope.Start();
                     try
                     {
@@ -274,6 +637,91 @@ namespace Azure.ResourceManager.Resources
         public static Pageable<Core.GenericResourceExpanded> ListApplicationByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ApplicationOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
+        }
+        #endregion
+
+        #region JitRequestDefinition
+        private static JitRequestsRestOperations GetJitRequestsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new JitRequestsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Retrieves all JIT requests within the subscription. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public static async Task<Response<IReadOnlyList<JitRequestDefinition>>> ListJitRequestDefinitionsAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetJitRequestsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListJitRequestDefinitions");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.ListBySubscriptionAsync(cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(data => new JitRequestDefinition(subscription, data)).ToArray() as IReadOnlyList<JitRequestDefinition>, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            ).ConfigureAwait(false);
+        }
+
+        /// <summary> Retrieves all JIT requests within the subscription. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public static Response<IReadOnlyList<JitRequestDefinition>> ListJitRequestDefinitions(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetJitRequestsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListJitRequestDefinitions");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.ListBySubscription(cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(data => new JitRequestDefinition(subscription, data)).ToArray() as IReadOnlyList<JitRequestDefinition>, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Filters the list of JitRequestDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<Core.GenericResourceExpanded> ListJitRequestDefinitionByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(JitRequestDefinitionOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of JitRequestDefinitions for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<Core.GenericResourceExpanded> ListJitRequestDefinitionByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(JitRequestDefinitionOperations.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
         }

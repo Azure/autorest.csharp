@@ -87,8 +87,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                             methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
-                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient.Type.Name);
-                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, false, resourceOperation.RestClient.Type.Name);
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient);
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, false, resourceOperation.RestClient);
                                     }
 
                                 }
@@ -118,8 +118,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient.Type.Name);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient);
                         }
 
                         writer.LineRaw("#endregion");
@@ -199,6 +199,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
+            if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+            {
+                valueExpression = $"{ExtensionOperationVariableName}.Id.Name";
+                return false;
+            }
+
             return true;
         }
 

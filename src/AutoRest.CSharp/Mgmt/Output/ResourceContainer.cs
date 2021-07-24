@@ -26,13 +26,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ResourceGroupCommentName = "ResourceGroup";
         private const string SubscriptionCommentName = "Subscription";
         private const string TenantCommentName = "Tenant";
-
         private const string ManagementGroupCommentName = "ManagementGroup";
 
         // TODO: rename to create
         private List<RestClientMethod>? _putMethods;
         private RestClientMethod? _putByIdMethod;
-        private PagingMethod? _listMethod;
+        // private PagingMethod? _listMethod;
         private List<PagingMethod>? _scopeListMethods;
         private RestClientMethod? _createMethod;
         private ClientMethod? _getMethod;
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => !PutMethods.Contains(m.RestClientMethod) && m.RestClientMethod != PutByIdMethod
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => !PutMethods.Any(n => n.Name == m.RestClientMethod.Name) && m.RestClientMethod != PutByIdMethod
         && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceOperationsListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
 
         public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
