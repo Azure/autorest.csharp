@@ -201,14 +201,15 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             if (_isDeletableResource)
             {
-                var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).FirstOrDefault();
+                var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
+                var deleteMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList();
                 // write delete method
-                WriteFirstLROMethod(writer, deleteMethod, context, true, true);
-                WriteFirstLROMethod(writer, deleteMethod, context, false, true);
+                WriteFirstLROMethod(writer, deleteMethod, context, true, true, "Delete");
+                WriteFirstLROMethod(writer, deleteMethod, context, false, true, "Delete");
 
-                WriteStartLROMethod(writer, deleteMethod, context, true, true);
-                WriteStartLROMethod(writer, deleteMethod, context, false, true);
-                clientMethodsList.Add(deleteMethod);
+                WriteStartLROMethod(writer, deleteMethod, context, true, true, "Delete", deleteMethods);
+                WriteStartLROMethod(writer, deleteMethod, context, false, true, "Delete", deleteMethods);
+                clientMethodsList.AddRange(deleteMethods);
             }
 
             if (_isITaggableResource)

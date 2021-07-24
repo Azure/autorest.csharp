@@ -693,7 +693,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);
-                    if (clientMethods == null || clientMethods.Count < 2)
+                    if (clientMethod.IsScope() || clientMethods == null || clientMethods.Count < 2)
                     {
                         WriteStartLROMethodBody(writer, clientMethod, lroObjectType, context, response, parameterMapping, async);
                     }

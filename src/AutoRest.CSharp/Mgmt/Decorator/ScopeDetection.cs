@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -54,6 +55,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
             return false;
+        }
+
+        public static bool IsScope(this RestClientMethod method)
+        {
+            return method.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w));
         }
     }
 }

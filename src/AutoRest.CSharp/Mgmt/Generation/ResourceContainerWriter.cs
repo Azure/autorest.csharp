@@ -299,7 +299,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var taskStrEnd = async ? ">" : string.Empty;
             WriteContainerMethodScope(async, $"{taskStrStart}{typeof(Response)}<{_resource.Type.Name}>{taskStrEnd}", methodName, passThruParameters, writer =>
             {
-                if (methods.Count < 2)
+                if (method.IsScope() || methods.Count < 2)
                 {
                     WriteGetMethodBody(writer, method, parameterMapping, async);
                 }
