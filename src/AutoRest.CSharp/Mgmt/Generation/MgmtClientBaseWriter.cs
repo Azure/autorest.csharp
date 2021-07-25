@@ -528,7 +528,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         return $"{name}.Parent";
                     }
                     // TODO: a better way to determine it's a tenant level operation
-                    // else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && httpRequest.GetAncestor() == ResourceTypeBuilder.Tenant)
+                    // else if (clientMethod.Operation?.GetAncestor() == ResourceTypeBuilder.Tenant)
                     else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
                     {
                         return $"{name}.Name";
@@ -693,13 +693,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);
-                    if (clientMethod.IsScope() || clientMethods == null || clientMethods.Count < 2)
+                    if (clientMethod.Operation.IsAncestorScope() || clientMethods == null || clientMethods.Count < 2)
                     {
                         WriteStartLROMethodBody(writer, clientMethod, lroObjectType, context, response, parameterMapping, async);
                     }
                     else
                     {
-                        var methodDict = clientMethods.Where(m => m.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
+                        var methodDict = clientMethods.ToDictionary(m => m, m => m.Operation.AncestorResourceType());
                         var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
                         if (managementGroupMethod != null)
                         {

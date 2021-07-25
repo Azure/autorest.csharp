@@ -263,7 +263,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             // write rest of the LRO methods
             var mergedMethods = new Dictionary<string, List<RestClientMethod>>();
-            // foreach (var clientMethod in resourceOperation.RestClient.Methods)
             foreach (var clientMethod in resourceOperation.ResourceOperationsLROMethods)
             {
                 if (!clientMethodsList.Contains(clientMethod))
@@ -383,13 +382,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);
-                    if (clientMethod.RestClientMethod.IsScope() || clientMethods.Count < 2)
+                    if (clientMethod.RestClientMethod.Operation.IsAncestorScope() || clientMethods.Count < 2)
                     {
                         WriteGetMethodBody(writer, clientMethod, resource, context, response, isInheritedMethod, async, nonPathParameters);
                     }
                     else
                     {
-                        var methodDict = clientMethods.Where(m => m.RestClientMethod.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.RestClientMethod.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
+                        var methodDict = clientMethods.ToDictionary(m => m, m => m.RestClientMethod.Operation.AncestorResourceType());
                         var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
                         if (managementGroupMethod != null)
                         {

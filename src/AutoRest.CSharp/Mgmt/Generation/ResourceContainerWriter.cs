@@ -299,13 +299,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var taskStrEnd = async ? ">" : string.Empty;
             WriteContainerMethodScope(async, $"{taskStrStart}{typeof(Response)}<{_resource.Type.Name}>{taskStrEnd}", methodName, passThruParameters, writer =>
             {
-                if (method.IsScope() || methods.Count < 2)
+                if (method.Operation.IsAncestorScope() || methods.Count < 2)
                 {
                     WriteGetMethodBody(writer, method, parameterMapping, async);
                 }
                 else
                 {
-                    var methodDict = methods.Where(m => m.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest).Select(m => (Method: m, AncestorResourceType: (m.Operation.Requests.First().Protocol.Http as HttpRequest)!.GetAncestor())).ToDictionary(kv => kv.Method, kv => kv.AncestorResourceType);
+                    var methodDict = methods.ToDictionary(m => m, m => m.Operation.AncestorResourceType());
                     var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
                     if (managementGroupMethod != null)
                     {

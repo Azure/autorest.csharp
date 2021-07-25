@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
 
+        // True when it has a main resource directly under /{scope}
         public static bool IsScopeResource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             if (_valueCache.TryGetValue(operationGroup, out var result))
@@ -25,41 +26,33 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return result;
         }
 
-        // True when it's a main resource directly under /{scope}
         private static bool IsScope(OperationGroup operationGroup, MgmtConfiguration config)
         {
-            foreach (var operation in operationGroup.Operations)
-            {
-                // Check to see if any operation path starts with Scope keywords
-                if (operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
-                    && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w)))
-                {
-                    var providerSegmentsList = httpRequest?.ProviderSegments();
-                    // Check if it's a main resource
-                    return providerSegmentsList?.Count > 0 && providerSegmentsList[0].TokenValue.Trim('/').Equals(operationGroup.ResourceType(config));
-                }
-            }
-            return false;
+            return operationGroup.Operations.Any(op => op.IsParentScope());
         }
 
-        // True when it's a main resource or subresource that has paths starting with /{scope}
+        // True when it has a main resource or sub resource with the path starting with /{scope}
         public static bool IsAncestorScope(this OperationGroup operationGroup)
         {
-            foreach (var operation in operationGroup.Operations)
-            {
-                // Check to see if any operation path starts with Scope keywords
-                if (operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
-                    && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w)))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return operationGroup.Operations.Any(op => op.IsAncestorScope());
         }
 
-        public static bool IsScope(this RestClientMethod method)
+        // True when it's a main resource or sub resource with the path starting with /{scope}
+        public static bool IsAncestorScope(this Operation operation)
         {
-            return method.Operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w));
+            return operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w));
+        }
+
+        // True when it's a main resource with the path starting with /{scope}
+        public static bool IsParentScope(this Operation operation)
+        {
+            if (operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
+                    && ScopeKeywords.Any(w => httpRequest.Path.StartsWith(w)))
+            {
+                var providerSegmentsList = httpRequest?.ProviderSegments();
+                return providerSegmentsList?.Count > 0 && providerSegmentsList[0].TokenValue.Trim('/').Equals(operation.ResourceType());
+            }
+            return false;
         }
     }
 }

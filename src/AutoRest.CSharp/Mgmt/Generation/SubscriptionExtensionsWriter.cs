@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -35,7 +36,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
-                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
+                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions)
+                            || ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
                         {
                             if (resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
                             {
@@ -49,13 +51,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 WriteGetResourceContainerMethod(writer, resourceContainer!);
                                 writer.LineRaw("#endregion");
                             }
-                        }
-                        else if (resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration))
-                        {
-                            writer.Line($"#region {resource.Type.Name}");
-                            var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                            WriteGetScopeResourceContainerMethod(writer, resourceContainer!);
-                            writer.LineRaw("#endregion");
                         }
                         else
                         {
@@ -139,18 +134,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Type.Name}(this {typeof(SubscriptionOperations)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {resourceContainer.Type}({ExtensionOperationVariableName});");
-            }
-        }
-
-        private void WriteGetScopeResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
-
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Type.Name}(this {typeof(SubscriptionOperations)} {ExtensionOperationVariableName})"))
-            {
-                writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 

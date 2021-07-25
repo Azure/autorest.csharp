@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
                 // Subscriptions scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/"))
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") && !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
                 {
                     subscriptionExtensionsListMethods.Add(listMethod);
                 }

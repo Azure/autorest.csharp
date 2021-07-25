@@ -574,7 +574,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     AddToChildNonResourceOperationGroupMap(operationGroup);
                 }
             }
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
+            ParentDetection.VerifyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
         private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup)

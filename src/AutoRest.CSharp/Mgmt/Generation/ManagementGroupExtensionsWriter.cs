@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -32,11 +34,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
-                        if (resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration))
+                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ManagementGroups)
+                            || ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ManagementGroups))
                         {
                             writer.Line($"#region {resource.Type.Name}");
                             var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                            WriteGetScopeResourceContainerMethod(writer, resourceContainer!);
+                            WriteGetResourceContainerMethod(writer, resourceContainer!);
                             writer.LineRaw("#endregion");
                         }
                         writer.Line();
@@ -46,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetScopeResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
+        private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroupOperations)}\" /> instance the method will execute against.");
