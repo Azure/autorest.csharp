@@ -397,7 +397,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             {
                                 var parent = new CodeWriterDeclaration("parent");
                                 writer.Line($"var {parent:D} = Id;");
-                                using (writer.Scope($"while ({parent}.Parent != null)"))
+                                using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
                                 {
                                     writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
                                 }

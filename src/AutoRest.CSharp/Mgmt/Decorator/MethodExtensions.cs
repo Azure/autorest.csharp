@@ -108,6 +108,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var isParentExistsInPathParams = false;
             if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
             {
+                if (clientMethod.Operation.AncestorResourceType() == ResourceTypeBuilder.Tenant)
+                {
+                    return true;
+                }
                 // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
                 var fullPath = httpRequest.Path;
 

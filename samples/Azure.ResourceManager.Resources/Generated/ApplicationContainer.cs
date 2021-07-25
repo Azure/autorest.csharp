@@ -315,7 +315,7 @@ namespace Azure.ResourceManager.Resources
         /// <summary> Gets all the applications within a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Application" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Application> List(CancellationToken cancellationToken = default)
+        public Pageable<Application> ListByResourceGroup(CancellationToken cancellationToken = default)
         {
             Page<Application> FirstPageFunc(int? pageSizeHint)
             {
@@ -353,7 +353,7 @@ namespace Azure.ResourceManager.Resources
         /// <summary> Gets all the applications within a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Application" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Application> ListAsync(CancellationToken cancellationToken = default)
+        public AsyncPageable<Application> ListByResourceGroupAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<Application>> FirstPageFunc(int? pageSizeHint)
             {

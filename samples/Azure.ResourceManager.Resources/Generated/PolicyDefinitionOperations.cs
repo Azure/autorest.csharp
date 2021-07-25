@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Resources
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
-                    while (parent.Parent != null)
+                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
                         parent = parent.Parent as TenantResourceIdentifier;
                     }
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Resources
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
-                    while (parent.Parent != null)
+                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
                         parent = parent.Parent as TenantResourceIdentifier;
                     }
@@ -187,7 +187,7 @@ namespace Azure.ResourceManager.Resources
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
-                    while (parent.Parent != null)
+                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
                         parent = parent.Parent as TenantResourceIdentifier;
                     }
@@ -229,7 +229,7 @@ namespace Azure.ResourceManager.Resources
                 if (Id.GetType() == typeof(TenantResourceIdentifier))
                 {
                     var parent = Id;
-                    while (parent.Parent != null)
+                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
                         parent = parent.Parent as TenantResourceIdentifier;
                     }

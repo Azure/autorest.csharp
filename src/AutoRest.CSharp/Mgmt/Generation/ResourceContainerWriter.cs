@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
-                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration))
+                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == "ResourceIdentifier.RootResourceIdentifier.ResourceType")
                     {
                         WriteValidate();
                     }
@@ -314,7 +314,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             var parent = new CodeWriterDeclaration("parent");
                             writer.Line($"var {parent:D} = Id;");
-                            using (writer.Scope($"while ({parent}.Parent != null)"))
+                            using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
                             {
                                 writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
                             }
@@ -660,8 +660,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (listMethod.PagingMethod != null)
                     {
-                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, listMethod.PagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, listMethod.PagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
                     }
 
                     if (listMethod.ClientMethod != null)

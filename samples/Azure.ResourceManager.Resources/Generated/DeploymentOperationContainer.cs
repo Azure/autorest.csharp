@@ -196,7 +196,7 @@ namespace Azure.ResourceManager.Resources
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DeploymentOperation> List(int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<DeploymentOperation> ListAtScope(int? top = null, CancellationToken cancellationToken = default)
         {
             Page<DeploymentOperation> FirstPageFunc(int? pageSizeHint)
             {
@@ -235,7 +235,7 @@ namespace Azure.ResourceManager.Resources
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DeploymentOperation> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<DeploymentOperation> ListAtScopeAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentOperation>> FirstPageFunc(int? pageSizeHint)
             {

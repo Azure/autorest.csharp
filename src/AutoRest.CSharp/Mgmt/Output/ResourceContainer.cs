@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public RestClientMethod? PutByIdMethod => _putByIdMethod ??= GetPutByIdMethod();
 
-        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods();
+        public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods(); // TODO: should only call once with lazy init
 
         public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
         public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetResourceOperation(OperationGroup).GetMethods;
