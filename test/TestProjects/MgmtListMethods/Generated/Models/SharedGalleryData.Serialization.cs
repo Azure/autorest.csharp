@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtListMethods.Models
+namespace MgmtListMethods
 {
     public partial class SharedGalleryData
     {

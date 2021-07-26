@@ -5,7 +5,9 @@
 
 #nullable disable
 
-namespace MgmtListMethods.Models
+using MgmtListMethods.Models;
+
+namespace MgmtListMethods
 {
     /// <summary> A class representing the SharedGallery data model. </summary>
     public partial class SharedGalleryData : PirSharedGalleryResource
