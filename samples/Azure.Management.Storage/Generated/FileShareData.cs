@@ -40,7 +40,7 @@ namespace Azure.Management.Storage
         /// <param name="accessTierChangeTime"> Indicates the last modification time for share access tier. </param>
         /// <param name="accessTierStatus"> Indicates if there is a pending transition for access tier. </param>
         /// <param name="shareUsageBytes"> The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files. </param>
-        internal FileShareData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string etag, DateTimeOffset? lastModifiedTime, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocols? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedTime, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeTime, string accessTierStatus, int? shareUsageBytes) : base(id, name, type, etag)
+        internal FileShareData(ResourceIdentifier id, string name, ResourceType type, string etag, DateTimeOffset? lastModifiedTime, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocols? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedTime, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeTime, string accessTierStatus, int? shareUsageBytes) : base(id, name, type, etag)
         {
             LastModifiedTime = lastModifiedTime;
             Metadata = metadata;

@@ -18,7 +18,7 @@ using TenantOnly.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
-    public partial class BillingAccountContainer : ResourceContainerBase<TenantResourceIdentifier, BillingAccount, BillingAccountData>
+    public partial class BillingAccountContainer : ResourceContainerBase<BillingAccount, BillingAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>
         protected BillingAccountContainer()
@@ -36,9 +36,6 @@ namespace TenantOnly
 
         /// <summary> Represents the REST operations. </summary>
         private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -366,6 +363,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }

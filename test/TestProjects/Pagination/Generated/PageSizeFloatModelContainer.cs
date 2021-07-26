@@ -20,7 +20,7 @@ using Pagination.Models;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeFloatModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeFloatModelContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData>
+    public partial class PageSizeFloatModelContainer : ResourceContainerBase<PageSizeFloatModel, PageSizeFloatModelData>
     {
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModelContainer"/> class for mocking. </summary>
         protected PageSizeFloatModelContainer()
@@ -38,9 +38,6 @@ namespace Pagination
 
         /// <summary> Represents the REST operations. </summary>
         private PageSizeFloatModelsRestOperations _restClient => new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -432,6 +429,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, PageSizeFloatModel, PageSizeFloatModelData> Construct() { }
     }
 }

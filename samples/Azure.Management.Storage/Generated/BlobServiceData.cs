@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the BlobService data model. </summary>
-    public partial class BlobServiceData : Resource<ResourceGroupResourceIdentifier>
+    public partial class BlobServiceData : ResourceManager.Resources.Models.Resource
     {
         /// <summary> Initializes a new instance of BlobServiceData. </summary>
         public BlobServiceData()
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         /// <param name="changeFeed"> The blob service properties for change feed events. </param>
         /// <param name="restorePolicy"> The blob service properties for blob restore policy. </param>
         /// <param name="containerDeleteRetentionPolicy"> The blob service properties for container soft delete. </param>
-        internal BlobServiceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Models.Sku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy) : base(id, name, type)
+        internal BlobServiceData(ResourceIdentifier id, string name, ResourceType type, Models.Sku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy) : base(id, name, type)
         {
             Sku = sku;
             Cors = cors;

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the operations that can be performed over a specific ParentResource. </summary>
-    public partial class ParentResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ParentResource>
+    public partial class ParentResourceOperations : ResourceOperationsBase<ParentResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ParentResourcesRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref="ParentResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ParentResourceOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ParentResourceOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

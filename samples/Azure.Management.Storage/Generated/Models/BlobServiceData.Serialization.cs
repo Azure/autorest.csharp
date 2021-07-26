@@ -66,7 +66,7 @@ namespace Azure.Management.Storage
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element)
         {
             Optional<Sku> sku = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<CorsRules> cors = default;

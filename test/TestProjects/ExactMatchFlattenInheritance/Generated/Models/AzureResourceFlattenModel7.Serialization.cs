@@ -35,7 +35,7 @@ namespace ExactMatchFlattenInheritance.Models
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

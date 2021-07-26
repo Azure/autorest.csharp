@@ -59,7 +59,7 @@ namespace Azure.Management.Storage
         internal static FileShareData DeserializeFileShareData(JsonElement element)
         {
             Optional<string> etag = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<DateTimeOffset> lastModifiedTime = default;

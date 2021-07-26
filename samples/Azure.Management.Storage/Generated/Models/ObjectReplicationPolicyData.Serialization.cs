@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
 
         internal static ObjectReplicationPolicyData DeserializeObjectReplicationPolicyData(JsonElement element)
         {
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> policyId = default;

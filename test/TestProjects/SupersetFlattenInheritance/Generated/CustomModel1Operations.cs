@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific CustomModel1. </summary>
-    public partial class CustomModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, CustomModel1>
+    public partial class CustomModel1Operations : ResourceOperationsBase<CustomModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private CustomModel1SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="CustomModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal CustomModel1Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal CustomModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new CustomModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            SubscriptionResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             Optional<PurchasePlan> plan = default;
             Optional<OSDiskImage> osDiskImage = default;
             Optional<IList<DataDiskImage>> dataDiskImages = default;

@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample
             Models.Sku sku = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<int> platformFaultDomain = default;

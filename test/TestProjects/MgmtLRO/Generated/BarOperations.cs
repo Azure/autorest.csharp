@@ -19,7 +19,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing the operations that can be performed over a specific Bar. </summary>
-    public partial class BarOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Bar>
+    public partial class BarOperations : ResourceOperationsBase<Bar>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private BarsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtLRO
         /// <summary> Initializes a new instance of the <see cref="BarOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal BarOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal BarOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

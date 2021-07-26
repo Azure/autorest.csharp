@@ -11,7 +11,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the TenantParentSingleton data model. </summary>
-    public partial class TenantParentSingletonData : Resource<TenantResourceIdentifier>
+    public partial class TenantParentSingletonData : Resource
     {
         /// <summary> Initializes a new instance of TenantParentSingletonData. </summary>
         public TenantParentSingletonData()
@@ -23,7 +23,7 @@ namespace MgmtSingleton
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="new"></param>
-        internal TenantParentSingletonData(TenantResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
+        internal TenantParentSingletonData(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;
         }

@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtSingleton.Models
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : SubResource<ResourceGroupResourceIdentifier>
+    public partial class Resource : SubResource
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         public Resource()

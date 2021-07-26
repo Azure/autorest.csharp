@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over a StorageAccount. </summary>
-    public partial class FileShareContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, FileShare, FileShareData>
+    public partial class FileShareContainer : ResourceContainerBase<FileShare, FileShareData>
     {
         /// <summary> Initializes a new instance of the <see cref="FileShareContainer"/> class for mocking. </summary>
         protected FileShareContainer()
@@ -38,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private FileSharesRestOperations _restClient => new FileSharesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -440,6 +437,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, FileShare, FileShareData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, FileShare, FileShareData> Construct() { }
     }
 }

@@ -19,7 +19,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtension. </summary>
-    public partial class VirtualMachineExtensionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtension>
+    public partial class VirtualMachineExtensionOperations : ResourceOperationsBase<VirtualMachineExtension>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachineExtensionsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineExtensionOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

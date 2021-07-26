@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific CustomModel2. </summary>
-    public partial class CustomModel2Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, CustomModel2>
+    public partial class CustomModel2Operations : ResourceOperationsBase<CustomModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private CustomModel2SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal CustomModel2Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal CustomModel2Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

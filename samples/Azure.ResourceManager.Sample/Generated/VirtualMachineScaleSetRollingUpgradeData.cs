@@ -13,7 +13,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
         /// <param name="location"> The location. </param>
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="runningStatus"> Information about the current running state of the overall upgrade. </param>
         /// <param name="progress"> Information about the number of virtual machine instances in each upgrade state. </param>
         /// <param name="error"> Error details for this upgrade, if there are any. </param>
-        internal VirtualMachineScaleSetRollingUpgradeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error) : base(id, name, type, location, tags)
+        internal VirtualMachineScaleSetRollingUpgradeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error) : base(id, name, type, location, tags)
         {
             Policy = policy;
             RunningStatus = runningStatus;

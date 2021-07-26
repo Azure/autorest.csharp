@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the EncryptionScope data model. </summary>
-    public partial class EncryptionScopeData : Resource<ResourceGroupResourceIdentifier>
+    public partial class EncryptionScopeData : ResourceManager.Resources.Models.Resource
     {
         /// <summary> Initializes a new instance of EncryptionScopeData. </summary>
         public EncryptionScopeData()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
         /// <param name="creationTime"> Gets the creation date and time of the encryption scope in UTC. </param>
         /// <param name="lastModifiedTime"> Gets the last modification date and time of the encryption scope in UTC. </param>
         /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope &apos;source&apos; attribute is set to &apos;Microsoft.KeyVault&apos;. </param>
-        internal EncryptionScopeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties) : base(id, name, type)
+        internal EncryptionScopeData(ResourceIdentifier id, string name, ResourceType type, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties) : base(id, name, type)
         {
             Source = source;
             State = state;

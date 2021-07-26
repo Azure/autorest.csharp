@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over a StorageAccount. </summary>
-    public partial class EncryptionScopeContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, EncryptionScope, EncryptionScopeData>
+    public partial class EncryptionScopeContainer : ResourceContainerBase<EncryptionScope, EncryptionScopeData>
     {
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeContainer"/> class for mocking. </summary>
         protected EncryptionScopeContainer()
@@ -38,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private EncryptionScopesRestOperations _restClient => new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -438,6 +435,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
     }
 }

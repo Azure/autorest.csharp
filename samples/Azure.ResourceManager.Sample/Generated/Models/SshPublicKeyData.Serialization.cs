@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample
         {
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> publicKey = default;

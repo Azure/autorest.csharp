@@ -13,7 +13,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing the Fake data model. </summary>
-    public partial class FakeData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class FakeData : TrackedResource
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>
@@ -28,7 +28,7 @@ namespace MgmtLRO
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal FakeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, FakeProperties properties) : base(id, name, type, location, tags)
+        internal FakeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, FakeProperties properties) : base(id, name, type, location, tags)
         {
             Properties = properties;
         }

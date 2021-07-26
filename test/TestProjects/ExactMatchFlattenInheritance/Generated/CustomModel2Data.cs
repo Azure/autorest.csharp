@@ -11,7 +11,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the CustomModel2 data model. </summary>
-    public partial class CustomModel2Data : Resource<ResourceGroupResourceIdentifier>
+    public partial class CustomModel2Data : Resource
     {
         /// <summary> Initializes a new instance of CustomModel2Data. </summary>
         public CustomModel2Data()
@@ -23,7 +23,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="foo"></param>
-        internal CustomModel2Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
+        internal CustomModel2Data(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
         {
             Foo = foo;
         }

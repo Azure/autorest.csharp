@@ -13,7 +13,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the SubFake data model. </summary>
-    public partial class SubFakeData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class SubFakeData : TrackedResource
     {
         /// <summary> Initializes a new instance of SubFakeData. </summary>
         /// <param name="location"> The location. </param>
@@ -28,7 +28,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal SubFakeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, SubFakeProperties properties) : base(id, name, type, location, tags)
+        internal SubFakeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, SubFakeProperties properties) : base(id, name, type, location, tags)
         {
             Properties = properties;
         }

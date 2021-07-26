@@ -55,7 +55,7 @@ namespace SupersetFlattenInheritance
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> foo0 = default;

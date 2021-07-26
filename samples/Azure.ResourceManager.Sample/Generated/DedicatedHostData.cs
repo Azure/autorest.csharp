@@ -15,7 +15,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class DedicatedHostData : TrackedResource
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="location"> The location. </param>
@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="provisioningTime"> The date when the host was first provisioned. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="instanceView"> The dedicated host instance view. </param>
-        internal DedicatedHostData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<SubResourceReadOnly> virtualMachines, DedicatedHostLicenseTypes? licenseType, DateTimeOffset? provisioningTime, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, type, location, tags)
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<SubResourceReadOnly> virtualMachines, DedicatedHostLicenseTypes? licenseType, DateTimeOffset? provisioningTime, string provisioningState, DedicatedHostInstanceView instanceView) : base(id, name, type, location, tags)
         {
             Sku = sku;
             PlatformFaultDomain = platformFaultDomain;

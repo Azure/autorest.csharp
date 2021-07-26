@@ -58,7 +58,7 @@ namespace Azure.Management.Storage.Models
         internal static FileShareItem DeserializeFileShareItem(JsonElement element)
         {
             Optional<string> etag = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<DateTimeOffset> lastModifiedTime = default;

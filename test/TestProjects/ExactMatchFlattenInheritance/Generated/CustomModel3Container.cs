@@ -18,7 +18,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel3Container : ResourceContainerBase<ResourceGroupResourceIdentifier, CustomModel3, CustomModel3Data>
+    public partial class CustomModel3Container : ResourceContainerBase<CustomModel3, CustomModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Container"/> class for mocking. </summary>
         protected CustomModel3Container()
@@ -36,9 +36,6 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private CustomModel3SRestOperations _restClient => new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
     }
 }

@@ -97,7 +97,7 @@ namespace MgmtPropertyChooser
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> provisioningState = default;

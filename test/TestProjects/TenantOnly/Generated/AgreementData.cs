@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing the Agreement data model. </summary>
-    public partial class AgreementData : Resource<TenantResourceIdentifier>
+    public partial class AgreementData : Resource
     {
         /// <summary> Initializes a new instance of AgreementData. </summary>
         internal AgreementData()
@@ -28,7 +28,7 @@ namespace TenantOnly
         /// <param name="foo"></param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal AgreementData(TenantResourceIdentifier id, string name, ResourceType type, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
+        internal AgreementData(ResourceIdentifier id, string name, ResourceType type, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
         {
             Foo = foo;
             Location = location;

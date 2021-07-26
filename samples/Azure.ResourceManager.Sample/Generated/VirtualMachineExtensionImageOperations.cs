@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionImage. </summary>
-    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, VirtualMachineExtensionImage>
+    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<VirtualMachineExtensionImage>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachineExtensionImagesRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineExtensionImageOperations(OperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionImageOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

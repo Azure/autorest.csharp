@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtListOnly
 {
     /// <summary> A class representing the Fake data model. </summary>
-    public partial class FakeData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class FakeData : TrackedResource
     {
         /// <summary> Initializes a new instance of FakeData. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace MgmtListOnly
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal FakeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal FakeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

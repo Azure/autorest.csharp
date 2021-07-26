@@ -37,7 +37,7 @@ namespace MgmtSingleton.Models
         {
             Optional<IDictionary<string, string>> tags = default;
             string location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

@@ -68,7 +68,7 @@ namespace MgmtMultipleParentResource
         {
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<bool> asyncExecution = default;

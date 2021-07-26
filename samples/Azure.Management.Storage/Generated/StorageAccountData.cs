@@ -15,7 +15,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class StorageAccountData : ResourceManager.Resources.Models.TrackedResource
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
         /// <param name="location"> The location. </param>
@@ -55,7 +55,7 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        internal StorageAccountData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, location, tags)
+        internal StorageAccountData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, location, tags)
         {
             Sku = sku;
             Kind = kind;

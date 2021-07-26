@@ -11,7 +11,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the SubscriptionParentSingleton data model. </summary>
-    public partial class SubscriptionParentSingletonData : Resource<SubscriptionResourceIdentifier>
+    public partial class SubscriptionParentSingletonData : Resource
     {
         /// <summary> Initializes a new instance of SubscriptionParentSingletonData. </summary>
         public SubscriptionParentSingletonData()
@@ -23,7 +23,7 @@ namespace MgmtSingleton
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="new"></param>
-        internal SubscriptionParentSingletonData(SubscriptionResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
+        internal SubscriptionParentSingletonData(ResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;
         }

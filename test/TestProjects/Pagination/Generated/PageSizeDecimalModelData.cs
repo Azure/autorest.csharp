@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Pagination
 {
     /// <summary> A class representing the PageSizeDecimalModel data model. </summary>
-    public partial class PageSizeDecimalModelData : SubResource<ResourceGroupResourceIdentifier>
+    public partial class PageSizeDecimalModelData : SubResource
     {
         /// <summary> Initializes a new instance of PageSizeDecimalModelData. </summary>
         public PageSizeDecimalModelData()

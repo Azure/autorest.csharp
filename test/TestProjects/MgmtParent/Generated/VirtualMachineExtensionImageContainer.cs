@@ -18,7 +18,7 @@ using MgmtParent.Models;
 namespace MgmtParent
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over a Subscription. </summary>
-    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<SubscriptionResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
+    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageContainer()
@@ -36,9 +36,6 @@ namespace MgmtParent
 
         /// <summary> Represents the REST operations. </summary>
         private VirtualMachineExtensionImagesRestOperations _restClient => new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new SubscriptionResourceIdentifier Id => base.Id as SubscriptionResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
@@ -510,6 +507,6 @@ namespace MgmtParent
         }
 
         // Builders.
-        // public ArmBuilder<SubscriptionResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
     }
 }

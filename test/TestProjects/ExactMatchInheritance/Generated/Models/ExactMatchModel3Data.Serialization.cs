@@ -41,7 +41,7 @@ namespace ExactMatchInheritance
             Optional<string> @new = default;
             Optional<string> name = default;
             Optional<string> nEW = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))

@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the ProximityPlacementGroup data model. </summary>
-    public partial class ProximityPlacementGroupData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class ProximityPlacementGroupData : TrackedResource
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
         /// <param name="location"> The location. </param>
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="virtualMachineScaleSets"> A list of references to all virtual machine scale sets in the proximity placement group. </param>
         /// <param name="availabilitySets"> A list of references to all availability sets in the proximity placement group. </param>
         /// <param name="colocationStatus"> Describes colocation status of the Proximity Placement Group. </param>
-        internal ProximityPlacementGroupData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, type, location, tags)
+        internal ProximityPlacementGroupData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, type, location, tags)
         {
             ProximityPlacementGroupType = proximityPlacementGroupType;
             VirtualMachines = virtualMachines;
