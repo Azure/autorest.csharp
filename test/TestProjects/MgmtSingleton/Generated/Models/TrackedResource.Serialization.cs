@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace MgmtSingleton
+namespace MgmtSingleton.Models
 {
     public partial class TrackedResource : IUtf8JsonSerializable
     {

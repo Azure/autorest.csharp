@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
     internal partial class SubResourceModel
     {

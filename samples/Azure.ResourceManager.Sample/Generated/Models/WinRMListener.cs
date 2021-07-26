@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class WinRMListener

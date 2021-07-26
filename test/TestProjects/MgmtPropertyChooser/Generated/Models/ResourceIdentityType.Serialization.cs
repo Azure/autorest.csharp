@@ -7,7 +7,7 @@
 
 using System;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     internal static partial class ResourceIdentityTypeExtensions
     {

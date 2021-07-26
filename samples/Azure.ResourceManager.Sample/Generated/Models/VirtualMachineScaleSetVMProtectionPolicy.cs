@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The protection policy of a virtual machine scale set VM. </summary>
     public partial class VirtualMachineScaleSetVMProtectionPolicy

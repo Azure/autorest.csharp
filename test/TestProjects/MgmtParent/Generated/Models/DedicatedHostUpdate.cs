@@ -7,7 +7,7 @@
 
 using System;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated. </summary>
     public partial class DedicatedHostUpdate : UpdateResource

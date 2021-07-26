@@ -8,7 +8,6 @@
   ],
   "azure-arm": true,
   "public-clients": true,
-  "model-namespace": false,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"

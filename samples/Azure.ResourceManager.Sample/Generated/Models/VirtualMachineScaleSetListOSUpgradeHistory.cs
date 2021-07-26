@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> List of Virtual Machine Scale Set OS Upgrade History operation response. </summary>
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory

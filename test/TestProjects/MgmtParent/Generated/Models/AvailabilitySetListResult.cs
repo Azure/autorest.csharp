@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MgmtParent;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class AvailabilitySetListResult

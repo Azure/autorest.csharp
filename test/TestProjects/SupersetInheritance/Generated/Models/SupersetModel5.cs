@@ -8,8 +8,9 @@
 using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using SupersetInheritance;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
     /// <summary> The SupersetModel5. </summary>
     public partial class SupersetModel5 : SupersetModel4Data

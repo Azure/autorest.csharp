@@ -8,7 +8,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtSingleton
+namespace MgmtSingleton.Models
 {
     /// <summary> The Resource model definition. </summary>
     public partial class Resource : SubResource<ResourceGroupResourceIdentifier>

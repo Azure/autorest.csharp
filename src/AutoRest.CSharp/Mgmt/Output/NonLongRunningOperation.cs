@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class NonLongRunningOperation : TypeProvider
     {
+        private string? _defaultNamespace;
+
         public NonLongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo) : base(context)
         {
             Debug.Assert(!operation.IsLongRunning);
@@ -41,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }
+
+        protected override string DefaultNamespace => _defaultNamespace ??= $"{base.DefaultNamespace}.Models";
 
         /// <summary>
         /// Type of the result of the operation.

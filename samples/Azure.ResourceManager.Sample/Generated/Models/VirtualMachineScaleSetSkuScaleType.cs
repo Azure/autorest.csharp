@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The scale type applicable to the sku. </summary>
     public enum VirtualMachineScaleSetSkuScaleType

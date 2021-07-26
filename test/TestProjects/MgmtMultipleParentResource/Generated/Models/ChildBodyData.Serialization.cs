@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtMultipleParentResource.Models
+namespace MgmtMultipleParentResource
 {
     public partial class ChildBodyData : IUtf8JsonSerializable
     {

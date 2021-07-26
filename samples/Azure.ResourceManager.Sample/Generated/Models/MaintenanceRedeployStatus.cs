@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Maintenance Operation Status. </summary>
     public partial class MaintenanceRedeployStatus

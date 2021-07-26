@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Information about the current running state of the overall upgrade. </summary>
     public partial class RollingUpgradeRunningStatus

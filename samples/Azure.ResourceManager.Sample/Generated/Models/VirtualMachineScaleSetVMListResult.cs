@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.ResourceManager.Sample;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The List Virtual Machine Scale Set VMs operation response. </summary>
     internal partial class VirtualMachineScaleSetVMListResult

@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
     {

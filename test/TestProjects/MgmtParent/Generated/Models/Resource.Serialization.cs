@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {

@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual async Task<Response<FileShareData>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FileShare>> UpdateAsync(FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (fileShare == null)
             {
@@ -180,7 +180,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, fileShare, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileShare"/> is null. </exception>
-        public virtual Response<FileShareData> Update(FileShareData fileShare, CancellationToken cancellationToken = default)
+        public virtual Response<FileShare> Update(FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (fileShare == null)
             {
@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, fileShare, cancellationToken);
-                return response;
+                return Response.FromValue(new FileShare(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

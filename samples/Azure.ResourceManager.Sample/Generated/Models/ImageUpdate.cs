@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The source user image virtual hard disk. Only tags may be updated. </summary>
     public partial class ImageUpdate : UpdateResource

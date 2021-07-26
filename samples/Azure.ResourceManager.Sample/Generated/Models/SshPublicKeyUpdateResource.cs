@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies information about the SSH public key. </summary>
     public partial class SshPublicKeyUpdateResource : UpdateResource

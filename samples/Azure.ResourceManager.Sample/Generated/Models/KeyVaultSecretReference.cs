@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a reference to Key Vault Secret. </summary>
     public partial class KeyVaultSecretReference

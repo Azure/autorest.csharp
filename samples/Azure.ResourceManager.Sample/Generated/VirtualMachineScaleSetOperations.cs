@@ -15,6 +15,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {

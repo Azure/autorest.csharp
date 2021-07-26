@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtListOnly.Models
+namespace MgmtListOnly
 {
     public partial class FakeData : IUtf8JsonSerializable
     {

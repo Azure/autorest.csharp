@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     /// <summary> Describes a Virtual Machine Update. </summary>
     public partial class VirtualMachineUpdate : UpdateResource

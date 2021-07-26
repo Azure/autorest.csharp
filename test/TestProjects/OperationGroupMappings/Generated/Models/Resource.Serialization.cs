@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     public partial class Resource
     {

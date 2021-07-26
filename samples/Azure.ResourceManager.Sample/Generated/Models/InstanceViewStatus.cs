@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Instance view status. </summary>
     public partial class InstanceViewStatus

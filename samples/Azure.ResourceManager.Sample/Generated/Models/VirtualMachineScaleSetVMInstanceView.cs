@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The instance view of a virtual machine scale set VM. </summary>
     public partial class VirtualMachineScaleSetVMInstanceView

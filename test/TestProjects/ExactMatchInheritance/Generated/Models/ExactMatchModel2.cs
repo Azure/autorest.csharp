@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel2. </summary>
     public partial class ExactMatchModel2 : ExactMatchModel7

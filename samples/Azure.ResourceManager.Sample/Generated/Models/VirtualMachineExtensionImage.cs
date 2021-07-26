@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a Virtual Machine Extension Image. </summary>
     public partial class VirtualMachineExtensionImage : TrackedResource<TenantResourceIdentifier>

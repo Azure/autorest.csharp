@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Virtual machine image resource information. </summary>
     public partial class VirtualMachineImageResource : WritableSubResource<SubscriptionResourceIdentifier>

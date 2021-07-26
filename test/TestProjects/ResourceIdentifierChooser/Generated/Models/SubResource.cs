@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     /// <summary> Reference to another subresource. </summary>
     public partial class SubResource

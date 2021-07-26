@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the hardware settings for the virtual machine. </summary>
     public partial class HardwareProfile

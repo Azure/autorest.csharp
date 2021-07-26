@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
     public partial class SupersetModel5 : IUtf8JsonSerializable
     {

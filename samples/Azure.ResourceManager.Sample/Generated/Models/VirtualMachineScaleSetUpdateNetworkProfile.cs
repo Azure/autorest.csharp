@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machine scale set network profile. </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkProfile

@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Pagination.Models
+namespace Pagination
 {
     public partial class PageSizeInt32ModelData : IUtf8JsonSerializable
     {
