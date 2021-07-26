@@ -44,6 +44,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
+        private HashSet<Schema> _schemasToOmit;
+        private HashSet<Schema> _schemasStillUsed;
 
         /// <summary>
         /// A mapping of parent resource type to child operation groups that are not resources.
@@ -53,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
-            RemoveOperations(codeModel, context);
+            RemoveOperations(codeModel);
 
             _codeModel = codeModel;
             _context = context;
@@ -68,10 +70,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
+            _schemasToOmit = new HashSet<Schema>();
+            _schemasStillUsed = new HashSet<Schema>();
+            OmitOperationGroups(codeModel, context);
+
             DecorateOperationGroup();
         }
 
-        private void RemoveOperations(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
+        private void RemoveOperations(CodeModel codeModel)
         {
             var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
             if (operations != null)
@@ -88,88 +94,177 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
                 codeModel.OperationGroups.Remove(operations);
             }
+        }
 
+        private void OmitOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
+        {
             var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
             if (operationGroupsToOmit != null)
             {
-                foreach (var opName in operationGroupsToOmit)
+                var omitSet = operationGroupsToOmit.ToHashSet();
+                for (int i = 0; i < codeModel.OperationGroups.Count; i++)
                 {
-                    var operationGroup = codeModel.OperationGroups.FirstOrDefault(op => op.Key == opName);
-                    if (operationGroup != null)
+                    var operationGroup = codeModel.OperationGroups.ElementAt(i);
+                    if (omitSet.Contains(operationGroup.Key))
                     {
-                        RemoveOperationGroup(codeModel, context, operationGroup);
+                        codeModel.OperationGroups.Remove(operationGroup);
+                        i--;
+                        if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
+                        {
+                            OmitSchemas(codeModel, operationGroup);
+                        }
                     }
                     else
                     {
-                        throw new Exception($"Invalid operation group name: {opName}");
+                        foreach (var operation in operationGroup.Operations)
+                        {
+                            foreach (var response in operation.Responses)
+                            {
+                                var schema = response.ResponseSchema;
+                                if (schema != null && schema is ObjectSchema objSchema)
+                                {
+                                    if (_schemasToOmit.Contains(schema))
+                                    {
+                                        _schemasStillUsed.Add(schema);
+                                    }
+                                    foreach (var property in objSchema.Properties)
+                                    {
+                                        if (_schemasToOmit.Contains(property.Schema))
+                                        {
+                                            _schemasStillUsed.Add(property.Schema);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Queue<Schema> sInUseQueue = new Queue<Schema>(_schemasStillUsed);
+                while (sInUseQueue.Count > 0)
+                {
+                    var cur = sInUseQueue.Dequeue();
+                    if (cur is ObjectSchema curSchema)
+                    {
+                        foreach (var property in curSchema.Properties)
+                        {
+                            if (property.Schema is ObjectSchema propertySchema)
+                            {
+                                sInUseQueue.Enqueue(propertySchema);
+                                _schemasStillUsed.Add(propertySchema);
+                            }
+                        }
+                        if (curSchema.Parents != null)
+                        {
+                            foreach (var parent in curSchema.Parents.All)
+                            {
+                                if (parent is ObjectSchema propertySchema)
+                                {
+                                    sInUseQueue.Enqueue(propertySchema);
+                                    _schemasStillUsed.Add(propertySchema);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (var schema in _schemasToOmit)
+                {
+                    if (!_schemasStillUsed.Contains(schema))
+                    {
+                        codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
                     }
                 }
             }
+
         }
 
-        private void RemoveOperationGroup(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context, OperationGroup operationGroup)
+        private void OmitSchemas(CodeModel codeModel, OperationGroup operationGroup)
         {
-            codeModel.OperationGroups.Remove(operationGroup);
-
-            if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
-            {
-                RemoveSchemas(codeModel, operationGroup);
-            }
-        }
-
-        private void RemoveSchemas(CodeModel codeModel, OperationGroup operationGroup)
-        {
-            HashSet<Schema> schemasToOmit = new HashSet<Schema>();
             foreach (var operation in operationGroup.Operations)
             {
                 foreach (var response in operation.Responses)
                 {
                     var schema = response.ResponseSchema;
-                    if (schema != null && !schemasToOmit.Contains(schema))
+                    if (schema != null && !_schemasToOmit.Contains(schema))
                     {
-                        schemasToOmit.Add(schema);
+                        _schemasToOmit.Add(schema);
                     }
                 }
-                //also look at body params
+                foreach (var request in operation.Requests)
+                {
+                    foreach (var param in request.Parameters)
+                    {
+                        var schema = param.Schema;
+                        if (schema != null && !_schemasToOmit.Contains(schema))
+                        {
+                            _schemasToOmit.Add(schema);
+                        }
+                    }
+                }
             }
 
-            Queue<Schema> sQueue = new Queue<Schema>(schemasToOmit);
-            while(sQueue.Count>0)
+            Queue<Schema> sOmitQueue = new Queue<Schema>(_schemasToOmit);
+            while (sOmitQueue.Count > 0)
             {
-                var cur = sQueue.Dequeue();
-                //foreach property
-                //if the property is another schema
-                //add it to the queue
-                //add it to the HashSet
-                //foreach baseType
-                //if the base is another schema
-                //add it to the queue
-                //add it to the hashset
+                var cur = sOmitQueue.Dequeue();
+                if (cur is ObjectSchema curSchema)
+                {
+                    foreach (var property in curSchema.Properties)
+                    {
+                        if (property.Schema is ObjectSchema propertySchema)
+                        {
+                            sOmitQueue.Enqueue(propertySchema);
+                            _schemasToOmit.Add(propertySchema);
+                        }
+                    }
+                    if (curSchema.Parents != null)
+                    {
+                        foreach (var parent in curSchema.Parents.All)
+                        {
+                            if (parent is ObjectSchema propertySchema)
+                            {
+                                sOmitQueue.Enqueue(propertySchema);
+                                _schemasToOmit.Add(propertySchema);
+                            }
+                        }
+                    }
+                }
             }
 
-            HashSet<Schema> stillUsed = new HashSet<Schema>();
-            foreach(var schema in schemasToOmit)
+            foreach (var schema in _schemasToOmit)
             {
-                //see if the schema is used by anything outside of the schemasToOmit
                 if (schema is ObjectSchema objSchema)
                 {
                     if (objSchema.Children != null)
                     {
                         foreach (var child in objSchema.Children.All)
                         {
-                            if (!schemasToOmit.Contains(child))
-                                stillUsed.Add(child);
+                            if (!_schemasToOmit.Contains(child))
+                            {
+                                _schemasStillUsed.Add(child);
+                            }
                         }
                     }
-                    //do the same thing for parents
                 }
             }
 
-            foreach (var schema in schemasToOmit)
+
+
+            /*foreach (var og in codeModel.OperationGroups)
             {
-                if(!stillUsed.Contains(schema))
-                    codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
-            }
+                foreach (var operation in og.Operations)
+                {
+                    foreach (var response in operation.Responses)
+                    {
+                        var schema = response.ResponseSchema;
+                        if (schema != null && !_schemasToOmit.Contains(schema))
+                        {
+                            _schemasToOmit.Add(schema);
+                        }
+                    }
+                }
+            }*/
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
@@ -561,7 +656,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                /*Console.WriteLine(schema.Name);*/
                 if (_operationGroups.ContainsKey(schema.Name))
                 {
                     continue;

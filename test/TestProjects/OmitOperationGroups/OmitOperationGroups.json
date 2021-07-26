@@ -50,8 +50,7 @@
                         "name": "model1sName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the model1."
+                        "type": "string"
                     },
                     {
                         "name": "parameters",
@@ -59,8 +58,7 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Model1"
-                        },
-                        "description": "Parameters supplied to the Create Model1 operation."
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -88,15 +86,13 @@
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
                         "name": "model1sName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the model1."
+                        "type": "string"
                     },
                     {
                         "name": "parameters",
@@ -104,8 +100,7 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/Model1Update"
-                        },
-                        "description": "Parameters supplied to the Update Model1 operation."
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -133,15 +128,13 @@
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
                         "name": "model1sName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the model1."
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -169,8 +162,7 @@
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
                         "name": "model1sName",
@@ -187,9 +179,39 @@
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/model1s": {
+            "get": {
+                "tags": [
+                    "Model1s"
+                ],
+                "operationId": "Model1s_ListBySubscription",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "$expand",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Model1"
+                            "$ref": "#/definitions/Model1ListResult"
                         }
                     }
                 }
@@ -200,7 +222,7 @@
                 "tags": [
                     "Model2s"
                 ],
-                "operationId": "Model2s_Put",
+                "operationId": "Model2s_CreateOrUpdate",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -237,66 +259,21 @@
                         }
                     }
                 }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model3s/{model3sName}": {
-            "put": {
-                "tags": [
-                    "Model3s"
-                ],
-                "operationId": "Model3s_Put",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "model3sName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Model3"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Model3"
-                        }
-                    }
-                }
             },
             "get": {
                 "tags": [
-                    "Model3s"
+                    "Model2s"
                 ],
-                "operationId": "Model3s_Get",
+                "operationId": "Model2s_Get",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "model3sName",
+                        "name": "model2sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -312,130 +289,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Model3"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model4s/{model4sName}": {
-            "put": {
-                "tags": [
-                    "Model4s"
-                ],
-                "operationId": "Model4s_Put",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "model4sName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Model4"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Model4"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}": {
-            "put": {
-                "tags": [
-                    "Model5s"
-                ],
-                "operationId": "Model5s_Put",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "model5sName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Model5"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Model5"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "Model5s"
-                ],
-                "operationId": "Model5s_Get",
-                "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "model5sName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Model5"
+                            "$ref": "#/definitions/Model2"
                         }
                     }
                 }
@@ -446,17 +300,23 @@
         "Model1": {
             "type": "object",
             "properties": {
-                "new": {
+                "a": {
                     "type": "string"
+                },
+                "modelx": {
+                    "$ref": "#/definitions/ModelX"
                 }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Model6"
-                }
-            ]
+            }
         },
         "Model1Update": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Model1ListResult": {
             "type": "object",
             "properties": {
                 "name": {
@@ -467,158 +327,51 @@
         "Model2": {
             "type": "object",
             "properties": {
-                "new": {
+                "b": {
+                    "type": "string"
+                },
+                "modelx": {
+                    "$ref": "#/definitions/ModelX"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Model3"
+                }
+            ]
+        },
+        "ModelX": {
+            "type": "object",
+            "properties": {
+                "c": {
+                    "type": "string"
+                },
+                "d": {
                     "type": "string"
                 }
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Model7"
+                    "$ref": "#/definitions/ModelY"
                 }
             ]
+        },
+        "ModelY": {
+            "type": "object",
+            "properties": {
+                "e": {
+                    "type": "string"
+                }
+            }
         },
         "Model3": {
             "type": "object",
             "properties": {
-                "new": {
-                    "type": "string"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Model8"
-                }
-            ]
-        },
-        "Model4": {
-            "type": "object",
-            "properties": {
-                "new": {
-                    "type": "string"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Model9"
-                }
-            ]
-        },
-        "Model5": {
-            "type": "object",
-            "properties": {
-                "new": {
-                    "type": "string"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Model10"
-                }
-            ]
-        },
-        "Model6": {
-            "type": "object",
-            "properties": {
-                "id": {
+                "f": {
                     "readOnly": true,
                     "type": "string"
                 },
-                "name": {
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string"
-                }
-            }
-        },
-        "Model7": {
-            "type": "object",
-            "properties": {
-                "iD": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "Model8": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "NEW": {
-                    "type": "string"
-                }
-            }
-        },
-        "Model9": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "Model10": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "location": {
-                    "type": "string"
-                },
-                "tags": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Model11"
-                }
-            ]
-        },
-        "Model11": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string"
-                }
-            }
-        },
-        "Model12": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "readOnly": true,
-                    "type": "string"
-                },
-                "type": {
+                "g": {
                     "readOnly": true,
                     "type": "string"
                 }

@@ -12,7 +12,6 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
-    "Model2s": "NonResource",
     "Model4s": "NonResource"
   },
   "OperationGroupsToOmit": [
