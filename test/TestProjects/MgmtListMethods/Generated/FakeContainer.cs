@@ -408,7 +408,7 @@ namespace MgmtListMethods
         {
             Page<Fake> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -423,7 +423,7 @@ namespace MgmtListMethods
             }
             Page<Fake> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -446,7 +446,7 @@ namespace MgmtListMethods
         {
             async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -461,7 +461,7 @@ namespace MgmtListMethods
             }
             async Task<Page<Fake>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {

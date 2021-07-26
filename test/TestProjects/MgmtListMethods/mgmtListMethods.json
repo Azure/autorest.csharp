@@ -747,7 +747,7 @@
                 "tags": [
                     "Bars"
                 ],
-                "operationId": "Bars_List",
+                "operationId": "Bars_ListBars",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
@@ -769,6 +769,42 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/BarsListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands": {
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_List",
+                "description": "Lists all available run commands for a subscription in a location.",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The location upon which run commands is queried.",
+                        "pattern": "^[-\\w\\._]+$"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/RunCommandListResult"
                         }
                     }
                 },
@@ -1727,6 +1763,95 @@
                 "location"
             ],
             "x-ms-azure-resource": true
+        },
+        "RunCommandParameterDefinition": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The run command parameter name."
+              },
+              "type": {
+                "type": "string",
+                "description": "The run command parameter type."
+              },
+              "defaultValue": {
+                "type": "string",
+                "description": "The run command parameter default value."
+              },
+              "required": {
+                "type": "boolean",
+                "description": "The run command parameter required.",
+                "default": false
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ],
+            "description": "Describes the properties of a run command parameter."
+          },
+        "RunCommandDocumentBase": {
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The VM run command label."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The VM run command description."
+                }
+            },
+            "required": [
+                "label",
+                "description"
+            ],
+            "description": "Describes the properties of a Run Command metadata."
+        },
+        "RunCommandDocument": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RunCommandDocumentBase"
+                }
+            ],
+            "properties": {
+                "script": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The script to be executed."
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RunCommandParameterDefinition"
+                    },
+                    "description": "The parameters used by the script."
+                }
+            },
+            "required": [
+                "script"
+            ],
+            "description": "Describes the properties of a Run Command."
+        },
+        "RunCommandListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RunCommandDocumentBase"
+                    },
+                    "description": "The list of virtual machine run commands."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Virtual Machine operation response."
         }
     },
     "parameters": {

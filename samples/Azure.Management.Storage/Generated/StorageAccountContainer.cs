@@ -328,7 +328,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
                 scope.Start();
                 try
                 {
@@ -351,7 +351,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
                 scope.Start();
                 try
                 {

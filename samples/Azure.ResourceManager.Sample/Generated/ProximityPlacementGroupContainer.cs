@@ -327,7 +327,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -342,7 +342,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -365,7 +365,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -380,7 +380,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
                 scope.Start();
                 try
                 {
