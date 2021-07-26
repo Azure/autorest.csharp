@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtParent.Models
 {
     /// <summary> The VirtualMachineExtensionImage. </summary>
-    public partial class VirtualMachineExtensionImage : TrackedResource<TenantResourceIdentifier>
+    public partial class VirtualMachineExtensionImage : TrackedResource
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace MgmtParent.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachineExtensionImage(TenantResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal VirtualMachineExtensionImage(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }
