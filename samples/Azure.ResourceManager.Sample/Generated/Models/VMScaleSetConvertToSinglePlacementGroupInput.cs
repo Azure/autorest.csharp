@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The VMScaleSetConvertToSinglePlacementGroupInput. </summary>
     public partial class VMScaleSetConvertToSinglePlacementGroupInput

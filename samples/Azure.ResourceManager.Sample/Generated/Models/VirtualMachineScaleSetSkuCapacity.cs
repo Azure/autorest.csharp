@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes scaling information of a sku. </summary>
     public partial class VirtualMachineScaleSetSkuCapacity

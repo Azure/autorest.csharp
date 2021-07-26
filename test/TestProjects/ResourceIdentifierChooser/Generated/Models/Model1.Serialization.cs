@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     public partial class Model1 : IUtf8JsonSerializable
     {

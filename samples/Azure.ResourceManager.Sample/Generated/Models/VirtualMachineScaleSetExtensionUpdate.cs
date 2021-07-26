@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a Virtual Machine Scale Set Extension. </summary>
     public partial class VirtualMachineScaleSetExtensionUpdate : SubResource<ResourceIdentifier>

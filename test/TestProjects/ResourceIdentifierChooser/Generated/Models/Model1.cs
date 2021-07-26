@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     /// <summary> Model1 inherits from Model2. </summary>
     public partial class Model1 : Model2

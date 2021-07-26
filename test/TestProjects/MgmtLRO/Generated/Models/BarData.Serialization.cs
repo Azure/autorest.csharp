@@ -10,8 +10,9 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using MgmtLRO.Models;
 
-namespace MgmtLRO.Models
+namespace MgmtLRO
 {
     public partial class BarData : IUtf8JsonSerializable
     {

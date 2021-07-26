@@ -14,6 +14,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using MgmtParent.Models;
 
 namespace MgmtParent
 {
@@ -339,7 +340,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<DedicatedHostGroupData>> UpdateAsync(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DedicatedHostGroup>> UpdateAsync(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -351,7 +352,7 @@ namespace MgmtParent
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -364,7 +365,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Update Dedicated Host Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<DedicatedHostGroupData> Update(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroup> Update(DedicatedHostGroupUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -376,7 +377,7 @@ namespace MgmtParent
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
+                return Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

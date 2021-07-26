@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the Security profile settings for the virtual machine or virtual machine scale set. </summary>
     public partial class SecurityProfile

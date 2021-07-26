@@ -319,7 +319,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            (var bodyType, bool isListFunction) = restClientMethod.GetBodyTypeForList(operationGroup, context);
+            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -391,7 +391,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        writer.Append($"return response");
+                        context.Library.TryGetArmResource(operationGroup, out var resource);
+                        if (wasResourceData && resource != null && bodyType != null)
+                        {
+                            writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
+                        }
+                        else
+                        {
+                            writer.Append($"return response");
+                        }
                     }
 
                     if (bodyType == null && restClientMethod.HeaderModel != null)

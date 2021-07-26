@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MgmtParent;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> The list dedicated host operation response. </summary>
     internal partial class DedicatedHostListResult

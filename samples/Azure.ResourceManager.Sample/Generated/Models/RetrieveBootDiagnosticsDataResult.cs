@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The SAS URIs of the console screenshot and serial log blobs. </summary>
     public partial class RetrieveBootDiagnosticsDataResult

@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     /// <summary> The TrackedResource model definition. </summary>
     public partial class TrackedResource : Resource<ResourceGroupResourceIdentifier>

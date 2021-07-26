@@ -5,6 +5,7 @@ using System;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using ExactMatchFlattenInheritance;
+using ExactMatchFlattenInheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects

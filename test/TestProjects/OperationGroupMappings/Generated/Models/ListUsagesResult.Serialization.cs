@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     internal partial class ListUsagesResult
     {

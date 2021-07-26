@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies information about the proximity placement group. </summary>
     public partial class ProximityPlacementGroupUpdate : UpdateResource

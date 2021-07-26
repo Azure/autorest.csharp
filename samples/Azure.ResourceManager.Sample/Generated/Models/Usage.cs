@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes Compute Resource Usage. </summary>
     public partial class Usage

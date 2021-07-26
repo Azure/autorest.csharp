@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     public partial class Plan : IUtf8JsonSerializable
     {

@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Pagination;
 
 namespace Pagination.Models
 {

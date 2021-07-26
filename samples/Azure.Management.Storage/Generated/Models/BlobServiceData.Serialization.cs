@@ -7,9 +7,10 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
     public partial class BlobServiceData : IUtf8JsonSerializable
     {

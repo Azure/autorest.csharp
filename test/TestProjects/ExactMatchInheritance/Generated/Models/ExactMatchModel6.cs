@@ -8,7 +8,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel6. </summary>
     public partial class ExactMatchModel6 : SubResource<ResourceGroupResourceIdentifier>

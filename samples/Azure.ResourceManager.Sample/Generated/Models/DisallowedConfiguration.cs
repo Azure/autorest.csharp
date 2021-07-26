@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the disallowed configuration for a virtual machine image. </summary>
     public partial class DisallowedConfiguration

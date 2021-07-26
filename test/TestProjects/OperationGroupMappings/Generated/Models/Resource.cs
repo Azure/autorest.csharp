@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     /// <summary> The Resource model definition. </summary>
     public partial class Resource : Resource<ResourceGroupResourceIdentifier>

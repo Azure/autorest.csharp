@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Output of virtual machine capture operation. </summary>
     public partial class VirtualMachineCaptureResult : WritableSubResource<ResourceIdentifier>

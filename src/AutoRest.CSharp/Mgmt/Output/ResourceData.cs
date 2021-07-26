@@ -13,12 +13,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context) : base(schema, context, true)
+        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+            : base(schema, context)
         {
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource(context.Configuration.MgmtConfiguration)));
         }
 
-        protected override string DefaultName => GetDefaultName(ObjectSchema, true);
+        protected override string DefaultName => GetDefaultName(ObjectSchema);
+
+        protected override bool IsResourceType => true;
 
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

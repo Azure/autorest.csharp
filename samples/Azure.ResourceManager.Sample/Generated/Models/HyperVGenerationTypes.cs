@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the HyperVGeneration Type. </summary>
     public readonly partial struct HyperVGenerationTypes : IEquatable<HyperVGenerationTypes>

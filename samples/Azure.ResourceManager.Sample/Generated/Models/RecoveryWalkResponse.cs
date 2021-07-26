@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Response after calling a manual recovery walk. </summary>
     public partial class RecoveryWalkResponse

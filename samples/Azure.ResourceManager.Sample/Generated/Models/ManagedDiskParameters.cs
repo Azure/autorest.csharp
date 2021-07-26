@@ -8,7 +8,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The parameters of a managed disk. </summary>
     public partial class ManagedDiskParameters : WritableSubResource<ResourceIdentifier>

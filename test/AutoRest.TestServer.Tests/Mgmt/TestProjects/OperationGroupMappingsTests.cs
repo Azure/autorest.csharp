@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using OperationGroupMappings;
+using OperationGroupMappings.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

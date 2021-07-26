@@ -430,7 +430,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<StorageAccountData>> UpdateAsync(StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StorageAccount>> UpdateAsync(StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -442,7 +442,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -455,7 +455,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<StorageAccountData> Update(StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> Update(StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -467,7 +467,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

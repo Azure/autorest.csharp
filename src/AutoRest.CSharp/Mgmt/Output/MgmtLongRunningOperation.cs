@@ -16,13 +16,18 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal class MgmtLongRunningOperation : LongRunningOperation
     {
-        public MgmtLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo) : base(operationGroup, operation, context, lroInfo)
+        private string? _defaultNamespace;
+
+        public MgmtLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<MgmtOutputLibrary> context, LongRunningOperationInfo lroInfo)
+            : base(operationGroup, operation, context, lroInfo)
         {
             if (LongRunningOperationHelper.ShouldWrapResultType(context, operationGroup, operation, ResultType))
             {
                 WrapperType = context.Library.GetArmResource(operationGroup).Type;
             }
         }
+
+        protected override string DefaultNamespace => _defaultNamespace ??= $"{base.DefaultNamespace}.Models";
 
         /// <summary>
         /// Type of the [Resource] class to replace whatever response type in the LRO.

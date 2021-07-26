@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     public partial class SubResource : IUtf8JsonSerializable
     {

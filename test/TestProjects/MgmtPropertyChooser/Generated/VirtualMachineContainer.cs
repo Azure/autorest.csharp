@@ -13,6 +13,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {

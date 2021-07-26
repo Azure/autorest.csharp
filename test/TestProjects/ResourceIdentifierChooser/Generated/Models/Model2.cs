@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ResourceIdentifierChooser
+namespace ResourceIdentifierChooser.Models
 {
     /// <summary> Model2 inherits from a TrackedResource. </summary>
     public partial class Model2 : TrackedResource<ResourceGroupResourceIdentifier>

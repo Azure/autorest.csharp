@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace TenantOnly
+namespace TenantOnly.Models
 {
     internal partial class ErrorResponse
     {

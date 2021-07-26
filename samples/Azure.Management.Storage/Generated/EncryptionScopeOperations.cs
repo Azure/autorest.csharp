@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -96,7 +95,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual async Task<Response<EncryptionScopeData>> PatchAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScope>> PatchAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScope == null)
             {
@@ -108,7 +107,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.PatchAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +120,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual Response<EncryptionScopeData> Patch(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScope> Patch(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScope == null)
             {
@@ -133,7 +132,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Patch(Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken);
-                return response;
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     public partial class ExactMatchModel2 : IUtf8JsonSerializable
     {

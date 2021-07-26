@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes each OS upgrade on the Virtual Machine Scale Set. </summary>
     public partial class UpgradeOperationHistoricalStatusInfoProperties
