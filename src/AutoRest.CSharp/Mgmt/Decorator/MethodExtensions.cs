@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -95,5 +97,49 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var pageType = pagingMethod.PagingResponse.ItemType;
             return pageType.WrapPageable(async);
         }
+
+        /// <summary>
+        /// Checks if parent exists in path parameters
+        /// </summary>
+        /// <param name="clientMethod">Rest client method</param>
+        /// <param name="parentResourceType">Parent resource type</param>
+        public static bool IsParentExistsInPathParamaters(this RestClientMethod clientMethod, string parentResourceType)
+        {
+            var isParentExistsInPathParams = false;
+            if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
+            {
+                // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
+                var fullPath = httpRequest.Path;
+
+                // This will replace -
+                // "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children" with
+                // "/subscriptions/resourceGroups/providers/Microsoft.Compute/parents/subParents/children" in order to find the parent
+                var path = Regex.Replace(fullPath, @"\{[a-zA-Z]+\}\/", "");
+                var isParentFound = path.IndexOf(parentResourceType);
+                if (isParentFound != -1)
+                {
+                    // Parent is found, now check if the parent exists in path parameters
+                    var parentArr = parentResourceType.Split('/');
+                    var fullPathArr = fullPath.Split('/');
+                    foreach (var parentSegment in parentArr)
+                    {
+                        var index = Array.IndexOf(fullPathArr, parentSegment);
+                        if (index + 1 < fullPathArr.Length && fullPathArr[index + 1].StartsWith('{'))
+                        {
+                            char[] charsToTrim = { '{', '}' };
+                            var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
+                            isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
+                            if (isParentExistsInPathParams)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return isParentExistsInPathParams;
+        }
+
     }
 }

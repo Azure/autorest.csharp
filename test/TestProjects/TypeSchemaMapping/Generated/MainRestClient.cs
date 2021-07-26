@@ -29,9 +29,7 @@ namespace TypeSchemaMapping
         /// <param name="endpoint"> server parameter. </param>
         public MainRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("http://localhost:3000");
-
-            this.endpoint = endpoint;
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

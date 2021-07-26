@@ -10,7 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace TenantOnly
 {
@@ -107,7 +109,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountsUpdateOperation StartCreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public virtual BillingAccountsCreateOperation StartCreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -122,8 +124,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.Update(billingAccountName, parameters, cancellationToken);
-                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, response);
+                var response = _restClient.Create(billingAccountName, parameters, cancellationToken);
+                return new BillingAccountsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -137,7 +139,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountsUpdateOperation> StartCreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<BillingAccountsCreateOperation> StartCreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -152,8 +154,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, response);
+                var response = await _restClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
             }
             catch (Exception e)
             {

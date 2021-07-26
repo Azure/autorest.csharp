@@ -138,10 +138,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
-            var schemes = context.CodeModel.Security.Schemes;
+            var schemes = context.CodeModel.Security.Schemes.Distinct(SecuritySchemesComparer.Instance);
+            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             foreach (var scheme in schemes)
             {
-                var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
                 if (scheme is AzureKeySecurityScheme azureKeySecurityScheme)
                 {
                     var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
@@ -412,6 +412,63 @@ namespace AutoRest.CSharp.Generation.Writers
 
             }
             writer.Line();
+        }
+
+        private class SecuritySchemesComparer : IEqualityComparer<SecurityScheme>
+        {
+            public static IEqualityComparer<SecurityScheme> Instance { get; } = new SecuritySchemesComparer();
+
+            private SecuritySchemesComparer() { }
+
+            public bool Equals(SecurityScheme? x, SecurityScheme? y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (ReferenceEquals(x, null))
+                {
+                    return false;
+                }
+
+                if (ReferenceEquals(y, null))
+                {
+                    return false;
+                }
+
+                if (x.GetType() != y.GetType())
+                {
+                    return false;
+                }
+
+                return (x, y) switch
+                {
+                    (AzureKeySecurityScheme azureX, AzureKeySecurityScheme azureY)
+                        => azureX.Type == azureY.Type && azureX.HeaderName == azureY.HeaderName,
+                    (AADTokenSecurityScheme aadX, AADTokenSecurityScheme aadY)
+                        => aadX.Type == aadY.Type && aadX.Scopes.SequenceEqual(aadY.Scopes, StringComparer.Ordinal),
+                    _ => x.Type == y.Type
+                };
+            }
+
+            public int GetHashCode(SecurityScheme obj) =>
+                obj switch
+                {
+                    AzureKeySecurityScheme azure => HashCode.Combine(azure.Type, azure.HeaderName),
+                    AADTokenSecurityScheme aad => HashCode.Combine(aad.Type, GetHashCode(aad.Scopes)),
+                    _ => HashCode.Combine(obj.Type)
+                };
+
+            private static int GetHashCode(IEnumerable<string> values)
+            {
+                var hashCode = new HashCode();
+                foreach (var value in values)
+                {
+                    hashCode.Add(value);
+                }
+                return hashCode.ToHashCode();
+            }
         }
     }
 }

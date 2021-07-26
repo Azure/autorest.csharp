@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Azure;
+using MgmtLRO;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -7,14 +10,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtLROTests() : base("MgmtLRO") { }
 
-        [TestCase("BarContainer", "StartCreateOrUpdate", "BarsDoSomethingOperation")]
-        [TestCase("FakeContainer", "StartCreateOrUpdate", "FakesCreateOrUpdateOperation")]
-        public void ValidateLongRunningOperationFunctionInContainer(string className, string functionName, string returnTypeName)
+        [TestCase("BarContainer", "StartCreateOrUpdate", typeof(BarsCreateOperation))]
+        [TestCase("FakeContainer", "StartCreateOrUpdate", typeof(FakesCreateOrUpdateOperation))]
+        [TestCase("BarContainer", "CreateOrUpdate", typeof(Response))]
+        [TestCase("FakeContainer", "CreateOrUpdate", typeof(Response<Fake>))]
+        public void ValidateLongRunningOperationFunctionInContainer(string className, string functionName, Type returnType)
         {
             var container = FindAllContainers().First(c => c.Name == className);
             var method = container.GetMethod(functionName);
             Assert.NotNull(method, $"cannot find {className}.{functionName}");
-            Assert.AreEqual(method.ReturnType.Name, returnTypeName, $"method {className}.{functionName} does not return type {returnTypeName}");
+            Assert.AreEqual(method.ReturnType, returnType, $"method {className}.{functionName} does not return type {returnType}");
         }
     }
 }

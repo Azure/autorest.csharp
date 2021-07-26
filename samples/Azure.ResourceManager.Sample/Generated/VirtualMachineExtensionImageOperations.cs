@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -88,6 +90,255 @@ namespace Azure.ResourceManager.Sample
         public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        public async virtual Task<Response<VirtualMachineExtensionImage>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.AddTag");
+            scope.Start();
+            try
+            {
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        public virtual Response<VirtualMachineExtensionImage> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.AddTag");
+            scope.Start();
+            try
+            {
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue[key] = value;
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        public async virtual Task<Response<VirtualMachineExtensionImage>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.SetTags");
+            scope.Start();
+            try
+            {
+                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        public virtual Response<VirtualMachineExtensionImage> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.SetTags");
+            scope.Start();
+            try
+            {
+                TagResourceOperations.Delete(cancellationToken);
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        public async virtual Task<Response<VirtualMachineExtensionImage>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.RemoveTag");
+            scope.Start();
+            try
+            {
+                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        public virtual Response<VirtualMachineExtensionImage> RemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.RemoveTag");
+            scope.Start();
+            try
+            {
+                var originalTags = TagResourceOperations.Get(cancellationToken);
+                originalTags.Value.Data.Properties.TagsValue.Remove(key);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                var originalResponse = _restClient.Get(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListTypesAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.ListTypes");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListTypesAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListTypes(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.ListTypes");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListTypes(Id.Parent.Name, Id.Name, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListVersionsAsync(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.ListVersions");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.ListVersionsAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListVersions(string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.ListVersions");
+            scope.Start();
+            try
+            {
+                var response = _restClient.ListVersions(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

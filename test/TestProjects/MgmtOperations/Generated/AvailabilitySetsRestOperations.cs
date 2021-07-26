@@ -33,19 +33,9 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
         public AvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            if (subscriptionId == null)
-            {
-                throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            endpoint ??= new Uri("https://management.azure.com");
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-
-            this.subscriptionId = subscriptionId;
-            this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            this.subscriptionId = subscriptionId ?? throw new ArgumentNullException(nameof(subscriptionId));
+            this.endpoint = endpoint ?? new Uri("https://management.azure.com");
+            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -402,6 +392,94 @@ namespace MgmtOperations
                         value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateTestSetSharedKeyRequest(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/sharedkey", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(parameters);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Testing description. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> TestSetSharedKeyAsync(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateTestSetSharedKeyRequest(resourceGroupName, availabilitySetName, parameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Testing description. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response TestSetSharedKey(string resourceGroupName, string availabilitySetName, ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateTestSetSharedKeyRequest(resourceGroupName, availabilitySetName, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

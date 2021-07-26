@@ -17,20 +17,20 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
-    public partial class BillingAccountsUpdateOperation : Operation<BillingAccount>, IOperationSource<BillingAccount>
+    public partial class BillingAccountsCreateOperation : Operation<BillingAccount>, IOperationSource<BillingAccount>
     {
         private readonly OperationInternals<BillingAccount> _operation;
 
         private readonly OperationsBase _operationBase;
 
-        /// <summary> Initializes a new instance of BillingAccountsUpdateOperation for mocking. </summary>
-        protected BillingAccountsUpdateOperation()
+        /// <summary> Initializes a new instance of BillingAccountsCreateOperation for mocking. </summary>
+        protected BillingAccountsCreateOperation()
         {
         }
 
-        internal BillingAccountsUpdateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BillingAccountsCreateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<BillingAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsUpdateOperation");
+            _operation = new OperationInternals<BillingAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsCreateOperation");
             _operationBase = operationsBase;
         }
 

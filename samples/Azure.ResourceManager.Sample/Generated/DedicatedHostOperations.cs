@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -326,6 +328,106 @@ namespace Azure.ResourceManager.Sample
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHost(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an dedicated host . </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<Response<DedicatedHost>> UpdateAsync(DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an dedicated host . </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<DedicatedHost> Update(DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an dedicated host . </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<DedicatedHostsUpdateOperation> StartUpdateAsync(DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an dedicated host . </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual DedicatedHostsUpdateOperation StartUpdate(DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {

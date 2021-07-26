@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -54,7 +56,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -100,7 +102,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -180,7 +182,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -225,7 +227,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -305,7 +307,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<DedicatedHostGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -350,7 +352,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<DedicatedHostGroup> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -430,7 +432,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<SshPublicKey>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -475,7 +477,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<SshPublicKey> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -539,6 +541,110 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the VirtualMachines for this <see cref="SubscriptionOperations" />. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<VirtualMachine> ListVirtualMachinesByLocationAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListByLocationAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListByLocationNextPageAsync(nextLink, location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the VirtualMachines for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<VirtualMachine> ListVirtualMachinesByLocation(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListByLocation(location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachinesByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListByLocationNextPage(nextLink, location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the VirtualMachines for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -565,7 +671,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -611,7 +717,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -658,6 +764,131 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
+        #region Image
+        private static ImagesRestOperations GetImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new ImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Lists the Images for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<Image> ListImagesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<Image>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListImages");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<Image>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListImages");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the Images for this <see cref="SubscriptionOperations" />. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<Image> ListImages(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<Image> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListImages");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<Image> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListImages");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Filters the list of Images for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<GenericResourceExpanded> ListImageByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(ImageOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of Images for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="filter"> The string to filter the list. </param>
+        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        public static Pageable<GenericResourceExpanded> ListImageByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        {
+            ResourceFilterCollection filters = new(ImageOperations.ResourceType);
+            filters.SubstringFilter = filter;
+            return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
+        }
+        #endregion
+
         #region VirtualMachineScaleSet
         private static VirtualMachineScaleSetsRestOperations GetVirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -691,7 +922,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<VirtualMachineScaleSet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -736,7 +967,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<VirtualMachineScaleSet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {

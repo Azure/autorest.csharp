@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser;
 using NUnit.Framework;
 

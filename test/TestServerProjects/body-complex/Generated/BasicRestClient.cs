@@ -31,14 +31,8 @@ namespace body_complex
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public BasicRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2016-02-29")
         {
-            endpoint ??= new Uri("http://localhost:3000");
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-
-            this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
+            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

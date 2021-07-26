@@ -11,7 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtPropertyChooser
 {
@@ -330,6 +332,106 @@ namespace MgmtPropertyChooser
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachine(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachine>> UpdateAsync(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<VirtualMachine> Update(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<VirtualMachinesUpdateOperation> StartUpdateAsync(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual VirtualMachinesUpdateOperation StartUpdate(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {

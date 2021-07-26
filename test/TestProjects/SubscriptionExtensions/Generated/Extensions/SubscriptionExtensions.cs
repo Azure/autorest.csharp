@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace SubscriptionExtensions
 {
@@ -62,7 +64,7 @@ namespace SubscriptionExtensions
                 }
                 async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {
@@ -108,7 +110,7 @@ namespace SubscriptionExtensions
                 }
                 Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {

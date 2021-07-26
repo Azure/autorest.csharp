@@ -6,14 +6,15 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
@@ -428,42 +429,6 @@ namespace MgmtListMethods
                 var filters = new ResourceFilterCollection(TheExtensionOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<Models.Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.ListFeatures");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListFeaturesAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Models.Feature>> ListFeatures(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionContainer.ListFeatures");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListFeatures(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
             {

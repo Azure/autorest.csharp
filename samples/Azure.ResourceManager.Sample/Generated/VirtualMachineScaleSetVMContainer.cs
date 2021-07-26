@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -43,126 +45,6 @@ namespace Azure.ResourceManager.Sample
         protected override ResourceType ValidResourceType => VirtualMachineScaleSetOperations.ResourceType;
 
         // Container level operations.
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<VirtualMachineScaleSetVM> CreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(instanceId, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<VirtualMachineScaleSetVM>> CreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(instanceId, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual VirtualMachineScaleSetVMsUpdateOperation StartCreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken);
-                return new VirtualMachineScaleSetVMsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Updates a virtual machine of a VM scale set. </summary>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineScaleSetVMsUpdateOperation> StartCreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
-        {
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineScaleSetVMsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
 
         /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>

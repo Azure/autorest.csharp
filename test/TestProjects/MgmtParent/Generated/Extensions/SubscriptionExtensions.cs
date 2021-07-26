@@ -12,7 +12,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtParent
 {
@@ -53,7 +55,7 @@ namespace MgmtParent
                 }
                 async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -99,7 +101,7 @@ namespace MgmtParent
                 }
                 Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
