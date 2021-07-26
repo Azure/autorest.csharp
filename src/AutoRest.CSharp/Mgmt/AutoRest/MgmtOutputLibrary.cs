@@ -176,7 +176,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
-
         }
 
         private void OmitSchemas(CodeModel codeModel, OperationGroup operationGroup)
@@ -248,23 +247,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
-
-
-
-            /*foreach (var og in codeModel.OperationGroups)
-            {
-                foreach (var operation in og.Operations)
-                {
-                    foreach (var response in operation.Responses)
-                    {
-                        var schema = response.ResponseSchema;
-                        if (schema != null && !_schemasToOmit.Contains(schema))
-                        {
-                            _schemasToOmit.Add(schema);
-                        }
-                    }
-                }
-            }*/
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
