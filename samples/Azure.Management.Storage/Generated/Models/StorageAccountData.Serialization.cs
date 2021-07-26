@@ -73,7 +73,7 @@ namespace Azure.Management.Storage
             Optional<Identity> identity = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<ProvisioningState> provisioningState = default;

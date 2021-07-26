@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SharedGallery and their operations over a Subscription. </summary>
-    public partial class SharedGalleryContainer : ResourceContainerBase<SubscriptionResourceIdentifier, SharedGallery, SharedGalleryData>
+    public partial class SharedGalleryContainer : ResourceContainerBase<SharedGallery, SharedGalleryData>
     {
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryContainer"/> class for mocking. </summary>
         protected SharedGalleryContainer()
@@ -38,9 +38,6 @@ namespace MgmtListMethods
 
         /// <summary> Represents the REST operations. </summary>
         private SharedGalleriesRestOperations _restClient => new SharedGalleriesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new SubscriptionResourceIdentifier Id => base.Id as SubscriptionResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
@@ -320,6 +317,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<SubscriptionResourceIdentifier, SharedGallery, SharedGalleryData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, SharedGallery, SharedGalleryData> Construct() { }
     }
 }

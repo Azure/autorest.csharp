@@ -13,7 +13,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the Image data model. </summary>
-    public partial class ImageData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class ImageData : TrackedResource
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
         /// <param name="location"> The location. </param>
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, location, tags)
+        internal ImageData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, location, tags)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;

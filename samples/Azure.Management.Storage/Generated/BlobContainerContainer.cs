@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
-    public partial class BlobContainerContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData>
+    public partial class BlobContainerContainer : ResourceContainerBase<BlobContainer, BlobContainerData>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
         protected BlobContainerContainer()
@@ -38,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private BlobContainersRestOperations _restClient => new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -440,6 +437,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
     }
 }

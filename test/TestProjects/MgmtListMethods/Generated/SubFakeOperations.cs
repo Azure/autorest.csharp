@@ -19,7 +19,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific SubFake. </summary>
-    public partial class SubFakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubFake>
+    public partial class SubFakeOperations : ResourceOperationsBase<SubFake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SubFakesRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="SubFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubFakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal SubFakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SubFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

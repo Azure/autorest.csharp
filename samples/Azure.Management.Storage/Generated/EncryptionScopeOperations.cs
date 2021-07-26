@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
-    public partial class EncryptionScopeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, EncryptionScope>
+    public partial class EncryptionScopeOperations : ResourceOperationsBase<EncryptionScope>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private EncryptionScopesRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal EncryptionScopeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal EncryptionScopeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

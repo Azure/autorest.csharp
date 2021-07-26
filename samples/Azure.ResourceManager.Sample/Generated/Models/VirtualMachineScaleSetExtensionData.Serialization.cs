@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             Optional<string> forceUpdateTag = default;
             Optional<string> publisher = default;
             Optional<string> type0 = default;

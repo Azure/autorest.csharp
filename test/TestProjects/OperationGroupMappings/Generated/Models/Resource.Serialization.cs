@@ -18,7 +18,7 @@ namespace OperationGroupMappings.Models
         {
             string location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

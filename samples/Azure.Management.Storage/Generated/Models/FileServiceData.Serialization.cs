@@ -36,7 +36,7 @@ namespace Azure.Management.Storage
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
             Optional<Sku> sku = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<CorsRules> cors = default;

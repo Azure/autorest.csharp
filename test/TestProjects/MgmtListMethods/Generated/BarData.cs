@@ -13,7 +13,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the Bar data model. </summary>
-    public partial class BarData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class BarData : TrackedResource
     {
         /// <summary> Initializes a new instance of BarData. </summary>
         /// <param name="location"> The location. </param>
@@ -28,7 +28,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal BarData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, BarProperties properties) : base(id, name, type, location, tags)
+        internal BarData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, BarProperties properties) : base(id, name, type, location, tags)
         {
             Properties = properties;
         }

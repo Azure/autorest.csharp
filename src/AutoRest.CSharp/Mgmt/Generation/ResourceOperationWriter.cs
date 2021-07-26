@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { _resourceOperation.ResourceIdentifierType, resource.Type };
+                CSharpType[] arguments = { resource.Type };
                 CSharpType type = new CSharpType(baseClass, arguments);
                 _writer.Append($"{type}, ");
 
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
-                CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), _resourceOperation.ResourceIdentifierType);
+                CSharpType inheritType = new CSharpType(typeof(TrackedResource));
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
                 {
                     _isITaggableResource = true;
@@ -156,11 +156,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (!isSingleton)
                 {
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    var subscriptionValue = (resourceOperation.ResourceIdentifierType == typeof(TenantResourceIdentifier)) ? string.Empty : "Id.SubscriptionId, ";
-                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}BaseUri);");
+                    var subscriptionParamString = resourceOperation.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
                     {
-                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}BaseUri);");
+                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     }
                 }
             }
@@ -175,7 +175,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
-        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, Resource resource, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, Output.Resource resource, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
         {
             var clientMethodsList = new List<RestClientMethod>();
 
@@ -326,7 +326,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
         {
             writer.Line();
             var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
@@ -579,7 +579,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteTaggableCommonMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteTaggableCommonMethod(CodeWriter writer, Output.Resource resource, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             if (async)
             {

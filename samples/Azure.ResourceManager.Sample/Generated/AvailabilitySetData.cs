@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class AvailabilitySetData : TrackedResource
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="location"> The location. </param>
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="virtualMachines"> A list of references to all virtual machines in the availability set. </param>
         /// <param name="proximityPlacementGroup"> Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01. </param>
         /// <param name="statuses"> The resource status information. </param>
-        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<Models.SubResource> virtualMachines, Models.SubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(id, name, type, location, tags)
+        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, Models.Sku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<Models.SubResource> virtualMachines, Models.SubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(id, name, type, location, tags)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;

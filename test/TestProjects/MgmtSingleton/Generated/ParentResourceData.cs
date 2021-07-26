@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the ParentResource data model. </summary>
-    public partial class ParentResourceData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class ParentResourceData : TrackedResource
     {
         /// <summary> Initializes a new instance of ParentResourceData. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace MgmtSingleton
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"></param>
-        internal ParentResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal ParentResourceData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }

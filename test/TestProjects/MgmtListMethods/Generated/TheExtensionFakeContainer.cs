@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TheExtensionFake and their operations over a Fake. </summary>
-    public partial class TheExtensionFakeContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, TheExtensionFake, TheExtensionData>
+    public partial class TheExtensionFakeContainer : ResourceContainerBase<TheExtensionFake, TheExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="TheExtensionFakeContainer"/> class for mocking. </summary>
         protected TheExtensionFakeContainer()
@@ -38,9 +38,6 @@ namespace MgmtListMethods
 
         /// <summary> Represents the REST operations. </summary>
         private SecondResourcesRestOperations _restClient => new SecondResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => FakeOperations.ResourceType;
@@ -438,6 +435,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, TheExtensionFake, TheExtensionData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, TheExtensionFake, TheExtensionData> Construct() { }
     }
 }

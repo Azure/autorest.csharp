@@ -13,7 +13,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the TheExtension data model. </summary>
-    public partial class TheExtensionData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class TheExtensionData : TrackedResource
     {
         /// <summary> Initializes a new instance of TheExtensionData. </summary>
         /// <param name="location"> The location. </param>
@@ -28,7 +28,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal TheExtensionData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, TheExtensionProperties properties) : base(id, name, type, location, tags)
+        internal TheExtensionData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, TheExtensionProperties properties) : base(id, name, type, location, tags)
         {
             Properties = properties;
         }

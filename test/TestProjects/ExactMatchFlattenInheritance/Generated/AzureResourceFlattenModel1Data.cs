@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel1 data model. </summary>
-    public partial class AzureResourceFlattenModel1Data : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class AzureResourceFlattenModel1Data : TrackedResource
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="location"> The location. </param>
@@ -29,7 +29,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="foo"> New property. </param>
         /// <param name="fooPropertiesFoo"></param>
         /// <param name="idPropertiesId"> ID in CustomModel1. </param>
-        internal AzureResourceFlattenModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, location, tags)
+        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, location, tags)
         {
             Foo = foo;
             FooPropertiesFoo = fooPropertiesFoo;

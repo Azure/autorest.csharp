@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific StorageAccount. </summary>
-    public partial class StorageAccountOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, StorageAccount>
+    public partial class StorageAccountOperations : ResourceOperationsBase<StorageAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private StorageAccountsRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal StorageAccountOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal StorageAccountOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

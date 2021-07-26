@@ -18,7 +18,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of TrackedResourceModel1 and their operations over a ResourceGroup. </summary>
-    public partial class TrackedResourceModel1Container : ResourceContainerBase<ResourceGroupResourceIdentifier, TrackedResourceModel1, TrackedResourceModel1Data>
+    public partial class TrackedResourceModel1Container : ResourceContainerBase<TrackedResourceModel1, TrackedResourceModel1Data>
     {
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Container"/> class for mocking. </summary>
         protected TrackedResourceModel1Container()
@@ -36,9 +36,6 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private TrackedResourceModel1SRestOperations _restClient => new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -356,6 +353,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, TrackedResourceModel1, TrackedResourceModel1Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, TrackedResourceModel1, TrackedResourceModel1Data> Construct() { }
     }
 }

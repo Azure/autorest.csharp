@@ -288,7 +288,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsInheritFromTrackedResource(Type type)
         {
-            return type.BaseType.Name == typeof(TrackedResource<>).Name;
+            return type.BaseType.Name == typeof(TrackedResource).Name;
         }
 
         protected Type FindSubscriptionExtensions()

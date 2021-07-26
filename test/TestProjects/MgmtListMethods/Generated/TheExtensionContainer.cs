@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TheExtension and their operations over a ResourceGroup. </summary>
-    public partial class TheExtensionContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, TheExtension, TheExtensionData>
+    public partial class TheExtensionContainer : ResourceContainerBase<TheExtension, TheExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="TheExtensionContainer"/> class for mocking. </summary>
         protected TheExtensionContainer()
@@ -38,9 +38,6 @@ namespace MgmtListMethods
 
         /// <summary> Represents the REST operations. </summary>
         private OneResourcesRestOperations _restClient => new OneResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -438,6 +435,6 @@ namespace MgmtListMethods
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, TheExtension, TheExtensionData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, TheExtension, TheExtensionData> Construct() { }
     }
 }

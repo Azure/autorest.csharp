@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Oven data model. </summary>
-    public partial class OvenData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class OvenData : TrackedResource
     {
         /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace SubscriptionExtensions
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal OvenData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal OvenData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

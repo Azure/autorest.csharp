@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the SubParent data model. </summary>
-    public partial class SubParentData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class SubParentData : TrackedResource
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>
         /// <param name="location"> The location. </param>
@@ -33,7 +33,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal SubParentData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, location, tags)
+        internal SubParentData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, location, tags)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

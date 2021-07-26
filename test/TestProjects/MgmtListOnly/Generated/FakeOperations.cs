@@ -20,7 +20,7 @@ using MgmtListOnly.Models;
 namespace MgmtListOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific Fake. </summary>
-    public partial class FakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Fake>
+    public partial class FakeOperations : ResourceOperationsBase<Fake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private FakesRestOperations _restClient { get; }
@@ -35,7 +35,7 @@ namespace MgmtListOnly
         /// <summary> Initializes a new instance of the <see cref="FakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal FakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal FakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

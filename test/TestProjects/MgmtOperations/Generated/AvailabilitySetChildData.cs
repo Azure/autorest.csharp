@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing the AvailabilitySetChild data model. </summary>
-    public partial class AvailabilitySetChildData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class AvailabilitySetChildData : TrackedResource
     {
         /// <summary> Initializes a new instance of AvailabilitySetChildData. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace MgmtOperations
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetChildData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal AvailabilitySetChildData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

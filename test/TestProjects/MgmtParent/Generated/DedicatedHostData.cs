@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtParent
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class DedicatedHostData : TrackedResource
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace MgmtParent
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
+        internal DedicatedHostData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }

@@ -78,7 +78,7 @@ namespace MgmtPropertyChooser.Models
         {
             IDictionary<string, string> tags = default;
             Location location = default;
-            TenantResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> forceUpdateTag = default;

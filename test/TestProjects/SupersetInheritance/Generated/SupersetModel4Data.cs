@@ -12,7 +12,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel4 data model. </summary>
-    public partial class SupersetModel4Data : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class SupersetModel4Data : TrackedResource
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         /// <param name="location"> The location. </param>
@@ -27,7 +27,7 @@ namespace SupersetInheritance
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="new"></param>
-        internal SupersetModel4Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
+        internal SupersetModel4Data(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }

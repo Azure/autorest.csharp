@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific AzureResourceFlattenModel5. </summary>
-    public partial class AzureResourceFlattenModel5Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel5>
+    public partial class AzureResourceFlattenModel5Operations : ResourceOperationsBase<AzureResourceFlattenModel5>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AzureResourceFlattenModel5SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel5Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AzureResourceFlattenModel5Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AzureResourceFlattenModel5Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

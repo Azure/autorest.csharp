@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
                 if (_resourceContainer.GetMethod != null)
                 {
-                    _writer.Line($"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type}, {_resourceData.Type}>");
+                    _writer.Line($"ResourceContainerBase<{_resource.Type}, {_resourceData.Type}>");
                 }
                 else
                 {
@@ -76,7 +76,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     WriteFields(_writer, _restClient!);
-                    WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteRemainingMethods();
@@ -93,14 +92,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
                 WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
-        }
-
-        private void WriteIdProperty()
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_context);
-            _writer.Line($"public new {idType} Id => base.Id as {idType};");
         }
 
         private void WriteResourceOperations()

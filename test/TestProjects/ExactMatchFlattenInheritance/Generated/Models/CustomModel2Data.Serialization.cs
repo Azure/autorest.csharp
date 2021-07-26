@@ -27,7 +27,7 @@ namespace ExactMatchFlattenInheritance
         internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element)
         {
             Optional<string> foo = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

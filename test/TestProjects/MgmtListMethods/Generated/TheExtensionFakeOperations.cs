@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific TheExtensionFake. </summary>
-    public partial class TheExtensionFakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, TheExtensionFake>
+    public partial class TheExtensionFakeOperations : ResourceOperationsBase<TheExtensionFake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SecondResourcesRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="TheExtensionFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TheExtensionFakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal TheExtensionFakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SecondResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

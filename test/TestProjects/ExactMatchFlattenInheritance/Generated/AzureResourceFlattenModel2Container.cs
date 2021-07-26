@@ -18,7 +18,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel2 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel2Container : ResourceContainerBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel2, AzureResourceFlattenModel2Data>
+    public partial class AzureResourceFlattenModel2Container : ResourceContainerBase<AzureResourceFlattenModel2, AzureResourceFlattenModel2Data>
     {
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel2Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel2Container()
@@ -36,9 +36,6 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private AzureResourceFlattenModel2SRestOperations _restClient => new AzureResourceFlattenModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, AzureResourceFlattenModel2, AzureResourceFlattenModel2Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, AzureResourceFlattenModel2, AzureResourceFlattenModel2Data> Construct() { }
     }
 }

@@ -18,7 +18,7 @@ using ExactMatchInheritance.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel5 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel5Container : ResourceContainerBase<ResourceGroupResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data>
+    public partial class ExactMatchModel5Container : ResourceContainerBase<ExactMatchModel5, ExactMatchModel5Data>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Container"/> class for mocking. </summary>
         protected ExactMatchModel5Container()
@@ -36,9 +36,6 @@ namespace ExactMatchInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private ExactMatchModel5SRestOperations _restClient => new ExactMatchModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -356,6 +353,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data> Construct() { }
     }
 }

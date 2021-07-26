@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific FileService. </summary>
-    public partial class FileServiceOperations : SingletonOperationsBase<ResourceGroupResourceIdentifier, FileService>
+    public partial class FileServiceOperations : SingletonOperationsBase<FileService>
     {
         /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class for mocking. </summary>
         protected FileServiceOperations()

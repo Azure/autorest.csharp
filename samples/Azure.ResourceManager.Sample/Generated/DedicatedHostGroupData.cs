@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHostGroup data model. </summary>
-    public partial class DedicatedHostGroupData : TrackedResource<ResourceGroupResourceIdentifier>
+    public partial class DedicatedHostGroupData : TrackedResource
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
         /// <param name="location"> The location. </param>
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hosts"> A list of references to all dedicated hosts in the dedicated host group. </param>
         /// <param name="instanceView"> The dedicated host group instance view, which has the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="supportAutomaticPlacement"> Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to &apos;true&apos; when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. </param>
-        internal DedicatedHostGroupData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<SubResourceReadOnly> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement) : base(id, name, type, location, tags)
+        internal DedicatedHostGroupData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<SubResourceReadOnly> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement) : base(id, name, type, location, tags)
         {
             Zones = zones;
             PlatformFaultDomainCount = platformFaultDomainCount;

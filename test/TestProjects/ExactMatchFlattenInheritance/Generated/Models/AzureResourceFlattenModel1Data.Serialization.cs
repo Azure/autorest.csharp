@@ -54,7 +54,7 @@ namespace ExactMatchFlattenInheritance
             Optional<int> foo = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> foo0 = default;

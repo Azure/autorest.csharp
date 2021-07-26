@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific FileShare. </summary>
-    public partial class FileShareOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileShare>
+    public partial class FileShareOperations : ResourceOperationsBase<FileShare>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private FileSharesRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="FileShareOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal FileShareOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal FileShareOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -20,7 +20,7 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBodyAnotherParent and their operations over a AnotherParent. </summary>
-    public partial class ChildBodyAnotherParentContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ChildBodyAnotherParent, ChildBodyData>
+    public partial class ChildBodyAnotherParentContainer : ResourceContainerBase<ChildBodyAnotherParent, ChildBodyData>
     {
         /// <summary> Initializes a new instance of the <see cref="ChildBodyAnotherParentContainer"/> class for mocking. </summary>
         protected ChildBodyAnotherParentContainer()
@@ -38,9 +38,6 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Represents the REST operations. </summary>
         private AnotherChildrenRestOperations _restClient => new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => AnotherParentOperations.ResourceType;
@@ -446,6 +443,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ChildBodyAnotherParent, ChildBodyData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ChildBodyAnotherParent, ChildBodyData> Construct() { }
     }
 }
