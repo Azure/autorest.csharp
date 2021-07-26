@@ -6,6 +6,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 using SupersetFlattenInheritance;
+using SupersetFlattenInheritance.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

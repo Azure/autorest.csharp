@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser;
+using MgmtPropertyChooser.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
