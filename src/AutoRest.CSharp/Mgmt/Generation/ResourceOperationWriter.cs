@@ -156,10 +156,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (!isSingleton)
                 {
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, Id.SubscriptionId, BaseUri);");
+                    var subscriptionParamString = resourceOperation.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
                     {
-                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, Id.SubscriptionId, BaseUri);");
+                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     }
                 }
             }
