@@ -18,7 +18,7 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
-    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
+    "VirtualMachineExtensionImages": "NonResource",
     "VirtualMachineImages": "NonResource",
     "VirtualMachineSizes": "NonResource",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
@@ -34,8 +34,7 @@
     "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
   },
   "OperationGroupIsTuple": [
-    "VirtualMachineImages",
-    "VirtualMachineExtensionImages"
+    "VirtualMachineImages"
   ],
   "OperationGroupIsExtension": [
     "VirtualMachineScaleSetVMExtensions"
