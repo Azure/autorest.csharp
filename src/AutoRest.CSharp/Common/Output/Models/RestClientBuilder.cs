@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -27,12 +28,14 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext _context;
         private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
+        private readonly OperationGroup _operationGroup;
 
         public RestClientBuilder (OperationGroup operationGroup, BuildContext context)
         {
             _serializationBuilder = new SerializationBuilder ();
             _context = context;
             _library = context.BaseLibrary!;
+            _operationGroup = operationGroup;
 
             _parameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -64,8 +67,17 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
-
-            List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
+            //TODO: remove this part of code which makes subscriptionId and managementGroupId as the first parameter when parameters are sorted by their order in path.
+            var isAncestorResourceTypeTenant = false;
+            try
+            {
+                isAncestorResourceTypeTenant = _operationGroup.IsAncestorResourceTypeTenant(_context);
+            }
+            catch (ArgumentException)
+            {
+                // do nothing for exception in dataplane
+            }
+            List<RequestParameter> parameters = (isAncestorResourceTypeTenant ? operation.Parameters.OrderBy(p => !p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase) && !p.Language.Default.Name.Equals("managementGroupId", StringComparison.InvariantCultureIgnoreCase)).ToList() : operation.Parameters).Concat(requestParameters).ToList();
             // Remove ignored headers
             parameters.RemoveAll(requestParameter =>
                 requestParameter.In == ParameterLocation.Header &&
@@ -368,7 +380,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             Parameter? parameter = null;
             ReferenceOrConstant constantOrReference;
-            if (requestParameter.Implementation == ImplementationLocation.Method)
+            if (!_parameters.ContainsKey(requestParameter.Language.Default.Name))
             {
                 if (requestParameter.Schema is ConstantSchema constant)
                 {

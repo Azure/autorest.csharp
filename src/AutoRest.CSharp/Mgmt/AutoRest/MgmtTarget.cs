@@ -125,6 +125,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var subscriptionExtensionsCodeWriter = new CodeWriter();
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
             project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
+
+            if (context.Library.ResourceContainers.Any(c => c.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ManagementGroups)))
+            {
+                var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                managementGroupExtensionsWriter.WriteExtension(managementGroupExtensionsCodeWriter, context);
+                project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
+            }
         }
     }
 }

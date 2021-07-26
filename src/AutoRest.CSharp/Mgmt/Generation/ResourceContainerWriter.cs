@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
@@ -75,6 +77,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (_writer.Scope())
                 {
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
+                    //TODO: this is a workaround to allow resource container to accept multiple parent resource types
+                    //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
+                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
+                    {
+                        WriteValidate();
+                    }
                     WriteFields(_writer, _restClient!);
                     WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
@@ -82,6 +90,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteRemainingMethods();
                     WriteBuilders();
                 }
+            }
+        }
+
+        private void WriteValidate()
+        {
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Verify that the input resource Id is a valid container for this type.");
+            _writer.WriteXmlDocumentationParameter("identifier", $"The input resource Id to check.");
+            _writer.Line($"protected override void ValidateResourceType(ResourceIdentifier identifier)");
+            using (_writer.Scope())
+            {
             }
         }
 
@@ -110,14 +129,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (_resourceContainer.CreateMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod, _resourceContainer.PutMethods);
             }
 
             if (_resourceContainer.GetMethod != null)
             {
-                WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod);
+                var getMethods = _resourceContainer.GetMethods.Select(m => m.RestClientMethod).ToList();
+                WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod, getMethods);
                 WriteTryGetVariants(_resourceContainer.GetMethod.RestClientMethod);
                 WriteDoesExistVariants(_resourceContainer.GetMethod.RestClientMethod);
+            }
+
+            // TODO: Add back code with refactored base method as in WriteCreateOrUpdateVariants
+            // if (_resourceContainer.PutByIdMethod != null)
+            // {
+            //     WriteCreateByIdVariants(_resourceContainer.PutByIdMethod);
+            // }
+
+            if (_resourceContainer.GetByIdMethod?.RestClientMethod != null && _resourceContainer.GetMethod?.RestClientMethod != _resourceContainer.GetByIdMethod.RestClientMethod)
+            {
+                WriteGetByIdVariants(_resourceContainer.GetByIdMethod.RestClientMethod);
             }
 
             WriteListVariants();
@@ -195,13 +226,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, isOverride: false, catch404: true);
         }
 
-        private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod)
+        private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
             WriteFirstLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
             WriteFirstLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
 
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
+            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
+            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>
@@ -241,18 +272,132 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, catch404);
         }
 
-        private void WriteGetVariants(RestClientMethod method)
+        private void WriteGetVariants(RestClientMethod method, List<RestClientMethod> methods)
         {
-            var parameterMapping = BuildParameterMapping(method);
+            WriteGetMethod(method, false, methods, "Get");
+            WriteGetMethod(method, true, methods, "Get");
+        }
 
-            var methodName = "Get";
+        private void WriteGetMethod(RestClientMethod method, bool async, List<RestClientMethod> methods, string? methodName = null)
+        {
+            methodName = methodName ?? method.Name;
+            var parameterMapping = BuildParameterMapping(method);
             var scopeName = methodName;
 
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
+            var taskStrStart = async ? $"{typeof(Task)}<" : string.Empty;
+            var taskStrEnd = async ? ">" : string.Empty;
+            WriteContainerMethodScope(async, $"{taskStrStart}{typeof(Response)}<{_resource.Type.Name}>{taskStrEnd}", methodName, passThruParameters, writer =>
+            {
+                if (method.Operation.IsAncestorScope() || methods.Count < 2)
+                {
+                    WriteGetMethodBody(writer, method, parameterMapping, async);
+                }
+                else
+                {
+                    var methodDict = methods.ToDictionary(m => m, m => m.Operation.AncestorResourceType());
+                    var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
+                    if (managementGroupMethod != null)
+                    {
+                        methodDict.Remove(managementGroupMethod);
+                        using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
+                        {
+                            var parent = new CodeWriterDeclaration("parent");
+                            writer.Line($"var {parent:D} = Id;");
+                            using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                            {
+                                writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
+                            }
+                            using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                            {
+                                WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod), async);
+                            }
+                            using (writer.Scope($"else"))
+                            {
+                                var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
+                                if (tenantMethod != null)
+                                {
+                                    methodDict.Remove(tenantMethod);
+                                    WriteGetMethodBody(writer, tenantMethod, BuildParameterMapping(tenantMethod), async);
+                                }
+                                else
+                                {
+                                    writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                                }
+                            }
+                        }
+                    }
+                    var elseStr = managementGroupMethod != null ? "else " : "";
+                    var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
+                    if (subscriptionMethod != null)
+                    {
+                        methodDict.Remove(subscriptionMethod);
+                        using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
+                        {
+                            WriteGetMethodBody(writer, subscriptionMethod, BuildParameterMapping(subscriptionMethod), async);
+                        }
+                    }
+
+                    elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                    // There could be methods at resource group scope and at resource scope.
+                    var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                    if (resourceGroupMethod != null)
+                    {
+                        methodDict.Remove(resourceGroupMethod);
+                        using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
+                        {
+                            WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod), async);
+                        }
+                    }
+                    using (writer.Scope($"else"))
+                    {
+                        if (methodDict.Count() > 0)
+                        {
+                            throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
+                        }
+                        writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                    }
+                }
+            }, isOverride: false);
+        }
+
+        private void WriteGetMethodBody(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> parameterMapping, bool async)
+        {
+            writer.Append($"var response = ");
+            if (async)
+            {
+                writer.Append($"await ");
+            }
+            writer.Append($"{RestClientField}.{CreateMethodName($"{method.Name}", async)}(");
+            foreach (var parameter in parameterMapping)
+            {
+                writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                writer.AppendRaw(", ");
+            }
+            writer.Append($"cancellationToken: cancellationToken)");
+            if (async)
+            {
+                writer.Append($".ConfigureAwait(false)");
+            }
+            writer.Line($";");
+            writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({ContextProperty}, response.Value), response.GetRawResponse());");
+        }
+
+        private void WriteGetByIdVariants(RestClientMethod method)
+        {
+            var parameterMapping = BuildParameterMapping(method);
+
+            var methodName = "GetById";
+            var scopeName = methodName;
+
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service by ID.");
+            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", methodName, passThruParameters, writer =>
             {
                 _writer.Append($"var response = {RestClientField}.{method.Name}(");
                 foreach (var parameter in parameterMapping)
@@ -265,8 +410,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, isOverride: false);
 
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
+            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service by ID.");
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", methodName, passThruParameters, writer =>
             {
                 _writer.Append($"var response = await {RestClientField}.{method.Name}Async(");
                 foreach (var parameter in parameterMapping)
@@ -281,24 +426,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            foreach (var listMethod in _resourceContainer.ListMethods)
+            var pagingMethods = _resourceContainer.ListMethods.Where(m => m.PagingMethod != null).Select(m => m.PagingMethod!).ToList();
+            var pagingMethod = pagingMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
+            var clientMethods = _resourceContainer.ListMethods.Where(m => m.ClientMethod != null).Select(m => m.ClientMethod!).ToList();
+            var clientMethod = clientMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
+            if (pagingMethod != null)
             {
-                if (listMethod.PagingMethod != null)
-                {
-                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                }
-
-                if (listMethod.ClientMethod != null)
-                {
-                    _writer.Line();
-                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
-                }
+                var methodName = "List";
+                var diagnostic = new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}");
+                WriteList(_writer, false, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                WriteList(_writer, true, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
             }
 
-            WriteListAsGenericResource(async: false);
-            WriteListAsGenericResource(async: true);
+            _writer.Line();
+            if (clientMethod != null)
+            {
+                //TODO: merge methods like WriteList
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+            }
+            if (_resourceContainer.GetValidResourceValue() == ResourceContainer.ResourceGroupOperationsResourceType)
+            {
+                WriteListAsGenericResource(async: false);
+                WriteListAsGenericResource(async: true);
+            }
         }
 
         private void WriteListAsGenericResource(bool async)
@@ -349,7 +500,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+            var isAncestorResourceTypeTenant = _resourceOperation.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";
             }
