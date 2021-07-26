@@ -20,9 +20,9 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Container";
         private BuildContext<MgmtOutputLibrary> _context;
-        private const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
-        private const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
-        private const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
+        public const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
+        public const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
+        public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
         private const string ResourceGroupCommentName = "ResourceGroup";
         private const string SubscriptionCommentName = "Subscription";
         private const string TenantCommentName = "Tenant";

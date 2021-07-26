@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string name, FormattableString converter)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string name, FormattableString converter, List<PagingMethod> listMethods)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, listMethod.Diagnostics, ClientDiagnosticsField, converter, async);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, listMethod.Diagnostics, ClientDiagnosticsField, converter, async, listMethods);
             }
         }
 
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
         protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, CSharpType resourceType,
-            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async)
+            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async, List<PagingMethod>? pagingMethods = null)
         {
             var parameters = pagingMethod.Method.Parameters;
 
@@ -166,18 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                 {
-                    writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    BuildAndWriteParameters(writer, pagingMethod.Method);
-                    writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-
-                    // need the Select() for converting XXXResourceData to XXXResource
-                    if (!string.IsNullOrEmpty(converter.ToString()))
-                    {
-                        writer.UseNamespace("System.Linq");
-                    }
-                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                    writer.Append($"{converter}");
-                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                    WritePageFunction(writer, pagingMethod, restClientName, converter, async, false, pagingMethods);
                 });
             }
 
@@ -190,16 +179,151 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                     {
-                        writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        BuildAndWriteParameters(writer, pagingMethod.Method);
-                        writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                        writer.Append($"{converter}");
-                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                        WritePageFunction(writer, pagingMethod, restClientName, converter, async, true, pagingMethods);
                     });
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+        }
+
+        private void WritePageFunction(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc, List<PagingMethod>? pagingMethods = null)
+        {
+            if (pagingMethod.Method.Operation.IsAncestorScope() || pagingMethods == null || pagingMethods.Count < 2)
+            {
+                WritePageFunctionBody(writer, pagingMethod, restClientName, converter, async, isNextPageFunc);
+            }
+            else
+            {
+                var methodDict = pagingMethods.ToDictionary(m => m, m => m.Method.Operation.AncestorResourceType());
+                var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
+                if (managementGroupMethod != null)
+                {
+                    methodDict.Remove(managementGroupMethod);
+                    using (writer.Scope($"if (Id.GetType() == typeof(TenantResourceIdentifier))"))
+                    {
+                        var parent = new CodeWriterDeclaration("parent");
+                        writer.Line($"var {parent:D} = Id;");
+                        using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                        {
+                            writer.Line($"{parent} = {parent}.Parent as TenantResourceIdentifier;");
+                        }
+                        using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                        {
+                            WritePageFunctionBody(writer, managementGroupMethod, restClientName, converter, async, isNextPageFunc);
+                        }
+                        using (writer.Scope($"else"))
+                        {
+                            var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
+                            if (tenantMethod != null)
+                            {
+                                methodDict.Remove(tenantMethod);
+                                WritePageFunctionBody(writer, tenantMethod, restClientName, converter, async, isNextPageFunc);
+                            }
+                            else
+                            {
+                                writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                            }
+                        }
+                    }
+                }
+                var elseStr = managementGroupMethod != null ? "else " : "";
+                var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
+                if (subscriptionMethod != null)
+                {
+                    methodDict.Remove(subscriptionMethod);
+                    using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(SubscriptionResourceIdentifier))"))
+                    {
+                        WritePageFunctionBody(writer, subscriptionMethod, restClientName, converter, async, isNextPageFunc);
+                    }
+                }
+
+                elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                // There could be methods at resource group scope and at resource scope, both with ResourceGroupResourceIdentifier.
+                PagingMethod? resourceMethod = null;
+                var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
+                if (resourceGroupMethodsCount > 1)
+                {
+                    resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.Name.Contains("Resource", StringComparison.InvariantCultureIgnoreCase) && !kv.Key.Name.Contains("Group", StringComparison.InvariantCultureIgnoreCase)).Key;
+                    if (resourceMethod != null)
+                    {
+                        methodDict.Remove(resourceMethod);
+                        resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                    }
+                }
+                if (resourceGroupMethod != null)
+                {
+                    methodDict.Remove(resourceGroupMethod);
+                    using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
+                    {
+                        WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
+                        if (resourceMethod != null)
+                        {
+                            WritePageFunctionBodyForResourceLevel(writer, resourceMethod, restClientName, converter, async, isNextPageFunc);
+                        }
+                    }
+                }
+                using (writer.Scope($"else"))
+                {
+                    if (methodDict.Count() > 0)
+                    {
+                        throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
+                    }
+                    writer.Line($"throw new ArgumentException($\"Invalid Id: {{Id}}.\");");
+                }
+            }
+
+        }
+
+        private void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc)
+        {
+            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
+
+            writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, async)}(");
+            if (isNextPageFunc)
+            {
+                writer.Append($"nextLink, ");
+            }
+            BuildAndWriteParameters(writer, pagingMethod.Method);
+            writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+
+            // need the Select() for converting XXXResourceData to XXXResource
+            if (!string.IsNullOrEmpty(converter.ToString()))
+            {
+                writer.UseNamespace("System.Linq");
+            }
+            writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+            writer.Append($"{converter}");
+            writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+
+        }
+        private void WritePageFunctionBodyForResourceLevel(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc, List<PagingMethod>? pagingMethods = null)
+        {
+            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
+
+            writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, async)}(");
+            if (isNextPageFunc)
+            {
+                writer.Append($"nextLink, ");
+            }
+            BuildAndWriteParameters(writer, pagingMethod.Method);
+            writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+
+            // need the Select() for converting XXXResourceData to XXXResource
+            if (!string.IsNullOrEmpty(converter.ToString()))
+            {
+                writer.UseNamespace("System.Linq");
+            }
+            writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+            writer.Append($"{converter}");
+            writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+
         }
 
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping)

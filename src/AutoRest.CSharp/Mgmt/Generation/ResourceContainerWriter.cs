@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
-                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == "ResourceIdentifier.RootResourceIdentifier.ResourceType")
+                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
                     {
                         WriteValidate();
                     }
@@ -656,24 +656,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                foreach (var listMethod in _resourceContainer.ListMethods)
+                var pagingMethods = _resourceContainer.ListMethods.Where(m => m.PagingMethod != null).Select(m => m.PagingMethod!).ToList();
+                var pagingMethod = pagingMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
+                var clientMethods = _resourceContainer.ListMethods.Where(m => m.ClientMethod != null).Select(m => m.ClientMethod!).ToList();
+                var clientMethod = clientMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
+                if (pagingMethod != null)
                 {
-                    if (listMethod.PagingMethod != null)
-                    {
-                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, listMethod.PagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, listMethod.PagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                    }
-
-                    if (listMethod.ClientMethod != null)
-                    {
-                        _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
-                    }
+                    WriteList(_writer, false, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                    WriteList(_writer, true, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
                 }
 
-                WriteListAsGenericResource(async: false);
-                WriteListAsGenericResource(async: true);
+                _writer.Line();
+                if (clientMethod != null)
+                {
+                    //TODO: merge methods like WriteList
+                    WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                }
+                if (_resourceContainer.GetValidResourceValue() == ResourceContainer.ResourceGroupOperationsResourceType)
+                {
+                    WriteListAsGenericResource(async: false);
+                    WriteListAsGenericResource(async: true);
+                }
             }
         }
 
