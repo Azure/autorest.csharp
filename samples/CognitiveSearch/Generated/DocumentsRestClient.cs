@@ -34,22 +34,9 @@ namespace CognitiveSearch
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="indexName"/>, or <paramref name="apiVersion"/> is null. </exception>
         public DocumentsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string indexName, string apiVersion = "2019-05-06-Preview")
         {
-            if (endpoint == null)
-            {
-                throw new ArgumentNullException(nameof(endpoint));
-            }
-            if (indexName == null)
-            {
-                throw new ArgumentNullException(nameof(indexName));
-            }
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-
-            this.endpoint = endpoint;
-            this.indexName = indexName;
-            this.apiVersion = apiVersion;
+            this.endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
+            this.indexName = indexName ?? throw new ArgumentNullException(nameof(indexName));
+            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

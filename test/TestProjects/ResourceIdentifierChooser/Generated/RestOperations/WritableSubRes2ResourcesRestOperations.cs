@@ -30,14 +30,8 @@ namespace ResourceIdentifierChooser
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public WritableSubRes2ResourcesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
-            endpoint ??= new Uri("https://management.azure.com");
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
-
-            this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            this.endpoint = endpoint ?? new Uri("https://management.azure.com");
+            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
