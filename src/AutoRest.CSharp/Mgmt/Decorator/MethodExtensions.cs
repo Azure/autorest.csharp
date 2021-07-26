@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             char[] charsToTrim = { '{', '}' };
                             var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
-                            isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
+                            isParentExistsInPathParams = clientMethod.Request.PathParameterSegments.Any(p => p.Value.Reference.Name == parentParamName);
                             if (isParentExistsInPathParams)
                             {
                                 break;

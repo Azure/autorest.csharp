@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtParent
 {
-    public partial class VirtualMachineExtensionImageData : IUtf8JsonSerializable
+    public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,12 +36,12 @@ namespace MgmtParent
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
+        internal static VirtualMachineExtensionImage DeserializeVirtualMachineExtensionImage(JsonElement element)
         {
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            SubscriptionResourceIdentifier id = default;
+            TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
@@ -82,7 +82,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, location, tags, bar.Value);
+            return new VirtualMachineExtensionImage(id, name, type, location, tags, bar.Value);
         }
     }
 }

@@ -352,5 +352,14 @@ namespace MgmtListMethods
             return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
         }
         #endregion
+
+        #region SharedGallery
+        /// <summary> Gets an object representing a SharedGalleryContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        public static SharedGalleryContainer GetSharedGalleryContainer(this SubscriptionOperations subscription)
+        {
+            return new SharedGalleryContainer(subscription);
+        }
+        #endregion
     }
 }

@@ -32,6 +32,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("SubscriptionExtensions", "List", false)]
         [TestCase("FakeOperations", "List", false)]
         [TestCase("SubscriptionExtensions", "ListBars", true)]
+        [TestCase("SharedGalleryContainer", "List", true)]
+        [TestCase("SharedGalleryOperations", "List", false)]
         public void ValidateListMethods(string className, string methodName, bool exist)
         {
             var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtListMethods.SubscriptionExtensions");
