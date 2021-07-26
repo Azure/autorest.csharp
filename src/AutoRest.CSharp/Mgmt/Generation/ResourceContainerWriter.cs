@@ -90,8 +90,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
         }
 
@@ -292,8 +292,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (listMethod.ClientMethod != null)
                 {
                     _writer.Line();
-                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
                 }
             }
 
