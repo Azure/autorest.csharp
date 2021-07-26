@@ -315,7 +315,7 @@ namespace Azure.ResourceManager.Resources
         /// <summary> Lists deployments scripts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentScript" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DeploymentScript> ListByResourceGroup(CancellationToken cancellationToken = default)
+        public Pageable<DeploymentScript> List(CancellationToken cancellationToken = default)
         {
             Page<DeploymentScript> FirstPageFunc(int? pageSizeHint)
             {
@@ -353,7 +353,7 @@ namespace Azure.ResourceManager.Resources
         /// <summary> Lists deployments scripts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentScript" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DeploymentScript> ListByResourceGroupAsync(CancellationToken cancellationToken = default)
+        public AsyncPageable<DeploymentScript> ListAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentScript>> FirstPageFunc(int? pageSizeHint)
             {

@@ -663,8 +663,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var clientMethod = clientMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
                 if (pagingMethod != null)
                 {
-                    WriteList(_writer, false, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-                    WriteList(_writer, true, _resource.Type, pagingMethod, pagingMethod.Name, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                    WriteList(_writer, false, _resource.Type, pagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                    WriteList(_writer, true, _resource.Type, pagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
                 }
 
                 _writer.Line();
