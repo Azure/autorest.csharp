@@ -646,6 +646,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
+            // TODO: Remove WriteListAtScope and also use WriteList for scope resource.
             if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration))
             {
                 if (_resourceContainer.ScopeListMethods != null)

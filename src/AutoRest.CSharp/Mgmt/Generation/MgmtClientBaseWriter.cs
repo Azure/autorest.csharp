@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
                         if (resourceMethod != null)
                         {
-                            WritePageFunctionBodyForResourceLevel(writer, resourceMethod, restClientName, converter, async, isNextPageFunc);
+                            WritePageFunctionBody(writer, resourceMethod, restClientName, converter, async, isNextPageFunc, isResourceLevel: true);
                         }
                     }
                 }
@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         }
 
-        private void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc)
+        private void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc, bool isResourceLevel = false)
         {
             var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
@@ -287,32 +287,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Append($"nextLink, ");
             }
-            BuildAndWriteParameters(writer, pagingMethod.Method);
-            writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-
-            // need the Select() for converting XXXResourceData to XXXResource
-            if (!string.IsNullOrEmpty(converter.ToString()))
-            {
-                writer.UseNamespace("System.Linq");
-            }
-            writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-            writer.Append($"{converter}");
-            writer.Line($", {continuationTokenText}, response.GetRawResponse());");
-
-        }
-        private void WritePageFunctionBodyForResourceLevel(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool async, bool isNextPageFunc, List<PagingMethod>? pagingMethods = null)
-        {
-            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-
-            writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, async)}(");
-            if (isNextPageFunc)
-            {
-                writer.Append($"nextLink, ");
-            }
-            BuildAndWriteParameters(writer, pagingMethod.Method);
+            BuildAndWriteParameters(writer, pagingMethod.Method, isResourceLevel);
             writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
 
             // need the Select() for converting XXXResourceData to XXXResource
@@ -357,9 +332,33 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method, bool isResourceLevel = false)
         {
-            WriteArguments(writer, BuildParameterMapping(method));
+            var parameterMappings = BuildParameterMapping(method);
+            if (isResourceLevel)
+            {
+                // Parameter mapping for a path like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
+                writer.UseNamespace("System.Collections.Generic");
+                writer.Line($"var parent = Id.Parent;");
+                writer.Line($"var parentParts = new List<string>();");
+                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                {
+                    writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
+                    writer.Line($"parent = parent.Parent;");
+                }
+                writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
+                foreach (var paramMapping in parameterMappings)
+                {
+                    paramMapping.ValueExpression = paramMapping.Parameter.Name switch
+                    {
+                        "resourceProviderNamespace" => "Id.ResourceType.Namespace",
+                        "parentResourcePath" => "parentResourcePath",
+                        "resourceType" => "Id.ResourceType.Types[resourceGroupId.ResourceType.Types.Count - 1]",
+                        _ => paramMapping.ValueExpression
+                    };
+                }
+            }
+            WriteArguments(writer, parameterMappings);
         }
 
         /// <summary>
