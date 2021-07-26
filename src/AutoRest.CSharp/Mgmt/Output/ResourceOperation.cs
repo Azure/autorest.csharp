@@ -276,7 +276,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             bool isReturnTypeResourceData = false;
 
             var parentResourceType = clientMethod.Operation.ParentResourceType(); //OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-            isParentExistsInPathParams = MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+            // TODO: can we handle ResourceTypeBuilder.ResourceGroupResources in IsParentExistsInPathParamaters as well?
+            isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
 
             var resourceData = _context.Library.GetResourceData(OperationGroup);
             var returnType = clientMethod.ReturnType;

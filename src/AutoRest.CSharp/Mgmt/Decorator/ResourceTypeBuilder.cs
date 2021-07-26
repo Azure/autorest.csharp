@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Tenant = "tenant";
         public const string ManagementGroups = "providers/Microsoft.Management/managementGroups"; //"managementGroups";
         public const string Locations = "locations";
+        public const string ResourceGroupResources = "resourceGroupsResources"; // Represent any resource under a resource group. The resource type for /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
 
         public static readonly Dictionary<string, string> TypeToExtensionName = new Dictionary<string, string>()
         {

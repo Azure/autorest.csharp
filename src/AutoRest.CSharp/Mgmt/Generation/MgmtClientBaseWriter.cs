@@ -238,28 +238,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
-                // There could be methods at resource group scope and at resource scope, both with ResourceGroupResourceIdentifier.
-                PagingMethod? resourceMethod = null;
                 var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
-                if (resourceGroupMethodsCount > 1)
-                {
-                    resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.Name.Contains("Resource", StringComparison.InvariantCultureIgnoreCase) && !kv.Key.Name.Contains("Group", StringComparison.InvariantCultureIgnoreCase)).Key;
-                    if (resourceMethod != null)
-                    {
-                        methodDict.Remove(resourceMethod);
-                        resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
-                    }
-                }
                 if (resourceGroupMethod != null)
                 {
                     methodDict.Remove(resourceGroupMethod);
                     using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
                     {
-                        WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
+                        var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroupResources).Key;
                         if (resourceMethod != null)
                         {
-                            WritePageFunctionBody(writer, resourceMethod, restClientName, converter, async, isNextPageFunc, isResourceLevel: true);
+                            methodDict.Remove(resourceMethod);
+                            using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                            {
+                                WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
+                            }
+                            using (writer.Scope($"else"))
+                            {
+                                WritePageFunctionBody(writer, resourceMethod, restClientName, converter, async, isNextPageFunc, isResourceLevel: true);
+                            }
+                        }
+                        else
+                        {
+                            WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
                         }
                     }
                 }

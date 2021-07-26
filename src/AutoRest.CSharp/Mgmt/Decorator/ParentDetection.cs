@@ -132,6 +132,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 result = ResourceTypeBuilder.Tenant;
             }
+            else if (path.StartsWith("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // TODO: rethink about how to represent and get the resource type for this case
+                result = ResourceTypeBuilder.ResourceGroupResources;
+            }
             else
             {
                 var fullProvider = GetFullProvider(httpRequest.ProviderSegments());
