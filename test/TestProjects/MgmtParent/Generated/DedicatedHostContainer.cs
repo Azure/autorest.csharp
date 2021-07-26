@@ -322,7 +322,7 @@ namespace MgmtParent
         {
             Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
                 scope.Start();
                 try
                 {
@@ -337,7 +337,7 @@ namespace MgmtParent
             }
             Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
                 scope.Start();
                 try
                 {
@@ -360,7 +360,7 @@ namespace MgmtParent
         {
             async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
                 scope.Start();
                 try
                 {
@@ -375,7 +375,7 @@ namespace MgmtParent
             }
             async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
                 scope.Start();
                 try
                 {

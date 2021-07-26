@@ -322,7 +322,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
                 scope.Start();
                 try
                 {
@@ -337,7 +337,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<SshPublicKey> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
                 scope.Start();
                 try
                 {
@@ -360,7 +360,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
                 scope.Start();
                 try
                 {
@@ -375,7 +375,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<SshPublicKey>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
                 scope.Start();
                 try
                 {

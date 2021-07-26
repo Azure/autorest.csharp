@@ -229,8 +229,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
                 }
             }
 
@@ -250,8 +250,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {

@@ -322,7 +322,7 @@ namespace Azure.ResourceManager.Sample
         {
             Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -337,7 +337,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<DedicatedHostGroup> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -360,7 +360,7 @@ namespace Azure.ResourceManager.Sample
         {
             async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.List");
                 scope.Start();
                 try
                 {
@@ -375,7 +375,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<DedicatedHostGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.List");
                 scope.Start();
                 try
                 {
