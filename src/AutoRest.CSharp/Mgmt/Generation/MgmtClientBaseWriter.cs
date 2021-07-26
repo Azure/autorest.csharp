@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        Resource? resource = context.Library.GetArmResource(operationGroup);
+                        context.Library.TryGetArmResource(operationGroup, out var resource);
                         if (wasResourceData && resource != null && bodyType != null)
                         {
                             writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");

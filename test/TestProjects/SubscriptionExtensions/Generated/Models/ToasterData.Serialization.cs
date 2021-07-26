@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace SubscriptionExtensions.Models
+namespace SubscriptionExtensions
 {
     public partial class ToasterData : IUtf8JsonSerializable
     {

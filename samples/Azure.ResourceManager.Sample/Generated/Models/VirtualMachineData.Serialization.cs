@@ -10,6 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -141,7 +142,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Plan> plan = default;
+            Optional<Models.Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
@@ -157,14 +158,14 @@ namespace Azure.ResourceManager.Sample
             Optional<NetworkProfile> networkProfile = default;
             Optional<SecurityProfile> securityProfile = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<SubResource> availabilitySet = default;
-            Optional<SubResource> virtualMachineScaleSet = default;
-            Optional<SubResource> proximityPlacementGroup = default;
+            Optional<Models.SubResource> availabilitySet = default;
+            Optional<Models.SubResource> virtualMachineScaleSet = default;
+            Optional<Models.SubResource> proximityPlacementGroup = default;
             Optional<VirtualMachinePriorityTypes> priority = default;
             Optional<VirtualMachineEvictionPolicyTypes> evictionPolicy = default;
             Optional<BillingProfile> billingProfile = default;
-            Optional<SubResource> host = default;
-            Optional<SubResource> hostGroup = default;
+            Optional<Models.SubResource> host = default;
+            Optional<Models.SubResource> hostGroup = default;
             Optional<string> provisioningState = default;
             Optional<VirtualMachineInstanceView> instanceView = default;
             Optional<string> licenseType = default;
@@ -179,7 +180,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Plan.DeserializePlan(property.Value);
+                    plan = Models.Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -338,7 +339,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            availabilitySet = SubResource.DeserializeSubResource(property0.Value);
+                            availabilitySet = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("virtualMachineScaleSet"))
@@ -348,7 +349,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            virtualMachineScaleSet = SubResource.DeserializeSubResource(property0.Value);
+                            virtualMachineScaleSet = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("proximityPlacementGroup"))
@@ -358,7 +359,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            proximityPlacementGroup = SubResource.DeserializeSubResource(property0.Value);
+                            proximityPlacementGroup = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("priority"))
@@ -398,7 +399,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            host = SubResource.DeserializeSubResource(property0.Value);
+                            host = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"))
@@ -408,7 +409,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hostGroup = SubResource.DeserializeSubResource(property0.Value);
+                            hostGroup = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))

@@ -9,7 +9,7 @@ using System;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Response from generation of an SSH key pair. </summary>
     public partial class SshPublicKeyGenerateKeyPairResult : SubResource<ResourceIdentifier>

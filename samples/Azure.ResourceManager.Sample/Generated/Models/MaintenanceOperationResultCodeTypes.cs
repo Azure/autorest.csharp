@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The Last Maintenance Operation Result Code. </summary>
     public enum MaintenanceOperationResultCodeTypes

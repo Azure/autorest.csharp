@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machines scale sets network configuration&apos;s DNS settings. </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings

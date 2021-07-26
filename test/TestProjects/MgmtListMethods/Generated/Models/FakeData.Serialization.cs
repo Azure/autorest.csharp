@@ -10,8 +10,9 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using MgmtListMethods.Models;
 
-namespace MgmtListMethods.Models
+namespace MgmtListMethods
 {
     public partial class FakeData : IUtf8JsonSerializable
     {

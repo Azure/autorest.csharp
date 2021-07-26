@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> TrackedResource type. </summary>
     internal partial class TrackedResourceModel : Resource<TenantResourceIdentifier>

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The instance view of the VM Agent running on the virtual machine. </summary>
     public partial class VirtualMachineAgentInstanceView

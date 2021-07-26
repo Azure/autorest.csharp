@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     public partial class VirtualMachineExtension : IUtf8JsonSerializable
     {

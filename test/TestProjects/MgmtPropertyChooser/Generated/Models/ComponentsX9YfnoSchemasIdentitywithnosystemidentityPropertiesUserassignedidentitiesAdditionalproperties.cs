@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     /// <summary> The ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties. </summary>
     public partial class ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties

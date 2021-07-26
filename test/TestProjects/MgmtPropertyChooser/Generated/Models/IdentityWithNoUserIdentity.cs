@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     /// <summary> Identity for the virtual machine. </summary>
     public partial class IdentityWithNoUserIdentity

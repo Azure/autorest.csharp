@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machine scale set network profile&apos;s network configurations. </summary>
     public partial class VirtualMachineScaleSetNetworkConfiguration : WritableSubResource<ResourceIdentifier>

@@ -9,10 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
     public partial class StorageAccountData : IUtf8JsonSerializable
     {
@@ -67,7 +68,7 @@ namespace Azure.Management.Storage.Models
 
         internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<Models.Sku> sku = default;
             Optional<Kind> kind = default;
             Optional<Identity> identity = default;
             IDictionary<string, string> tags = default;
@@ -106,7 +107,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"))

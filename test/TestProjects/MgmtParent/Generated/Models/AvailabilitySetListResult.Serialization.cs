@@ -8,8 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using MgmtParent;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     internal partial class AvailabilitySetListResult
     {

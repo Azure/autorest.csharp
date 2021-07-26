@@ -8,7 +8,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a network interface reference. </summary>
     public partial class NetworkInterfaceReference : WritableSubResource<ResourceIdentifier>

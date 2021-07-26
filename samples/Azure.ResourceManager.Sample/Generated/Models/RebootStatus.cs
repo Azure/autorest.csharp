@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The reboot status of the machine after the patch operation. It will be in &quot;NotNeeded&quot; status if reboot is not needed after the patch operation. &quot;Required&quot; will be the status once the patch is applied and machine is required to reboot. &quot;Started&quot; will be the reboot status when the machine has started to reboot. &quot;Failed&quot; will be the status if the machine is failed to reboot. &quot;Completed&quot; will be the status once the machine is rebooted successfully. </summary>
     public readonly partial struct RebootStatus : IEquatable<RebootStatus>

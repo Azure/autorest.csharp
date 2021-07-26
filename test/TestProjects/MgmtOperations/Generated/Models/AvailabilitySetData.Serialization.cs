@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     public partial class AvailabilitySetData : IUtf8JsonSerializable
     {

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     /// <summary> Describes a Virtual Machine Extension. </summary>
     public partial class VirtualMachineExtension : TrackedResource<TenantResourceIdentifier>

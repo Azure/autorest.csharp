@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using MgmtListOnly;
 
 namespace MgmtListOnly.Models
 {

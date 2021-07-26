@@ -383,7 +383,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<FakeData>> UpdateAsync(FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fake>> UpdateAsync(FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -395,7 +395,7 @@ namespace MgmtListOnly
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -408,7 +408,7 @@ namespace MgmtListOnly
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<FakeData> Update(FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> Update(FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -420,7 +420,7 @@ namespace MgmtListOnly
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
+                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

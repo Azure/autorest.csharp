@@ -10,6 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -66,7 +67,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<Models.Sku> sku = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceGroupResourceIdentifier id = default;
@@ -74,8 +75,8 @@ namespace Azure.ResourceManager.Sample
             ResourceType type = default;
             Optional<int> platformUpdateDomainCount = default;
             Optional<int> platformFaultDomainCount = default;
-            Optional<IList<SubResource>> virtualMachines = default;
-            Optional<SubResource> proximityPlacementGroup = default;
+            Optional<IList<Models.SubResource>> virtualMachines = default;
+            Optional<Models.SubResource> proximityPlacementGroup = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -86,7 +87,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -155,10 +156,10 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            List<SubResource> array = new List<SubResource>();
+                            List<Models.SubResource> array = new List<Models.SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(SubResource.DeserializeSubResource(item));
+                                array.Add(Models.SubResource.DeserializeSubResource(item));
                             }
                             virtualMachines = array;
                             continue;
@@ -170,7 +171,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            proximityPlacementGroup = SubResource.DeserializeSubResource(property0.Value);
+                            proximityPlacementGroup = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("statuses"))

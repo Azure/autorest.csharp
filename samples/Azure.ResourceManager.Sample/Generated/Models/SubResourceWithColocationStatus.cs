@@ -8,7 +8,7 @@
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The SubResourceWithColocationStatus. </summary>
     public partial class SubResourceWithColocationStatus : WritableSubResource<ResourceIdentifier>
