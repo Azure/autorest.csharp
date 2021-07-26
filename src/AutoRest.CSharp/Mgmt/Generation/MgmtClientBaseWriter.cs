@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string name, FormattableString converter, List<PagingMethod> listMethods)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, Diagnostic diagnostic, string name, FormattableString converter, List<PagingMethod> listMethods)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, listMethod.Diagnostics, ClientDiagnosticsField, converter, async, listMethods);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, diagnostic, ClientDiagnosticsField, converter, async, listMethods);
             }
         }
 
@@ -238,16 +238,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                // There could be methods at resource group scope and at resource scope, both with ResourceGroupResourceIdentifier.
+                PagingMethod? resourceMethod = null;
                 var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
+                if (resourceGroupMethodsCount > 1)
+                {
+                    resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.Method.Operation.ParentResourceType() == ResourceTypeBuilder.ResourceGroupResources).Key;
+                    if (resourceMethod != null)
+                    {
+                        methodDict.Remove(resourceMethod);
+                        resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                    }
+                }
                 if (resourceGroupMethod != null)
                 {
                     methodDict.Remove(resourceGroupMethod);
                     using (writer.Scope($"{elseStr}if (Id.GetType() == typeof(ResourceGroupResourceIdentifier))"))
                     {
-                        var resourceMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroupResources).Key;
                         if (resourceMethod != null)
                         {
-                            methodDict.Remove(resourceMethod);
                             using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
                             {
                                 WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
@@ -282,6 +292,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
 
+            if (isResourceLevel)
+            {
+                writer.UseNamespace("System.Collections.Generic");
+                writer.Line($"var parent = Id.Parent;");
+                writer.Line($"var parentParts = new List<string>();");
+                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                {
+                    writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
+                    writer.Line($"parent = parent.Parent;");
+                }
+                writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
+                writer.Line($"var resourceGroupId = Id as ResourceGroupResourceIdentifier;");
+            }
             writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, async)}(");
             if (isNextPageFunc)
             {
@@ -338,22 +361,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (isResourceLevel)
             {
                 // Parameter mapping for a path like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
-                writer.UseNamespace("System.Collections.Generic");
-                writer.Line($"var parent = Id.Parent;");
-                writer.Line($"var parentParts = new List<string>();");
-                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
-                {
-                    writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
-                    writer.Line($"parent = parent.Parent;");
-                }
-                writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
                 foreach (var paramMapping in parameterMappings)
                 {
                     paramMapping.ValueExpression = paramMapping.Parameter.Name switch
                     {
+                        "subscriptionId" => "resourceGroupId.SubscriptionId",
+                        "resourceGroupName" => "resourceGroupId.ResourceGroupName",
                         "resourceProviderNamespace" => "Id.ResourceType.Namespace",
                         "parentResourcePath" => "parentResourcePath",
-                        "resourceType" => "Id.ResourceType.Types[resourceGroupId.ResourceType.Types.Count - 1]",
+                        "resourceType" => "Id.ResourceType.Types[Id.ResourceType.Types.Count - 1]",
                         _ => paramMapping.ValueExpression
                     };
                 }
