@@ -116,63 +116,81 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                     else
                     {
-                        foreach (var operation in operationGroup.Operations)
-                        {
-                            foreach (var response in operation.Responses)
-                            {
-                                var schema = response.ResponseSchema;
-                                if (schema != null && schema is ObjectSchema objSchema)
-                                {
-                                    if (_schemasToOmit.Contains(schema))
-                                    {
-                                        _schemasStillUsed.Add(schema);
-                                    }
-                                    foreach (var property in objSchema.Properties)
-                                    {
-                                        if (_schemasToOmit.Contains(property.Schema))
-                                        {
-                                            _schemasStillUsed.Add(property.Schema);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        AddNonOmmitedSchemasToSafeList(operationGroup);
                     }
                 }
 
-                Queue<Schema> sInUseQueue = new Queue<Schema>(_schemasStillUsed);
-                while (sInUseQueue.Count > 0)
-                {
-                    var cur = sInUseQueue.Dequeue();
-                    if (cur is ObjectSchema curSchema)
-                    {
-                        foreach (var property in curSchema.Properties)
-                        {
-                            if (property.Schema is ObjectSchema propertySchema)
-                            {
-                                sInUseQueue.Enqueue(propertySchema);
-                                _schemasStillUsed.Add(propertySchema);
-                            }
-                        }
-                        if (curSchema.Parents != null)
-                        {
-                            foreach (var parent in curSchema.Parents.All)
-                            {
-                                if (parent is ObjectSchema propertySchema)
-                                {
-                                    sInUseQueue.Enqueue(propertySchema);
-                                    _schemasStillUsed.Add(propertySchema);
-                                }
-                            }
-                        }
-                    }
-                }
+                AddDependantSchemasRecursively(_schemasStillUsed);
 
                 foreach (var schema in _schemasToOmit)
                 {
                     if (!_schemasStillUsed.Contains(schema))
                     {
                         codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
+                    }
+                }
+            }
+        }
+
+        private void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
+        {
+            Queue<Schema> sInUseQueue = new Queue<Schema>(setToProcess);
+            while (sInUseQueue.Count > 0)
+            {
+                var cur = sInUseQueue.Dequeue();
+                if (cur is ObjectSchema curSchema)
+                {
+                    foreach (var property in curSchema.Properties)
+                    {
+                        if (property.Schema is ObjectSchema propertySchema)
+                        {
+                            sInUseQueue.Enqueue(propertySchema);
+                            setToProcess.Add(propertySchema);
+                        }
+                    }
+                    if (curSchema.Parents != null)
+                    {
+                        foreach (var parent in curSchema.Parents.All)
+                        {
+                            if (parent is ObjectSchema propertySchema)
+                            {
+                                //remove the child from the parent
+                                //parent.Children.Remove(curSchema)
+                                sInUseQueue.Enqueue(propertySchema);
+                                setToProcess.Add(propertySchema);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddNonOmmitedSchemasToSafeList(OperationGroup operationGroup)
+        {
+            foreach (var operation in operationGroup.Operations)
+            {
+                AddResponseSchemas(operation);
+                //AddRequestSchemas(operation);
+            }
+        }
+
+        private void AddResponseSchemas(Operation operation)
+        {
+            foreach (var response in operation.Responses)
+            {
+                var schema = response.ResponseSchema;
+                if (schema != null && schema is ObjectSchema objSchema)
+                {
+                    if (_schemasToOmit.Contains(schema))
+                    {
+                        _schemasStillUsed.Add(schema);
+                    }
+                    foreach (var property in objSchema.Properties)
+                    {
+                        if (_schemasToOmit.Contains(property.Schema))
+                        {
+                            _schemasStillUsed.Add(property.Schema);
+                        }
                     }
                 }
             }
@@ -203,33 +221,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            Queue<Schema> sOmitQueue = new Queue<Schema>(_schemasToOmit);
-            while (sOmitQueue.Count > 0)
-            {
-                var cur = sOmitQueue.Dequeue();
-                if (cur is ObjectSchema curSchema)
-                {
-                    foreach (var property in curSchema.Properties)
-                    {
-                        if (property.Schema is ObjectSchema propertySchema)
-                        {
-                            sOmitQueue.Enqueue(propertySchema);
-                            _schemasToOmit.Add(propertySchema);
-                        }
-                    }
-                    if (curSchema.Parents != null)
-                    {
-                        foreach (var parent in curSchema.Parents.All)
-                        {
-                            if (parent is ObjectSchema propertySchema)
-                            {
-                                sOmitQueue.Enqueue(propertySchema);
-                                _schemasToOmit.Add(propertySchema);
-                            }
-                        }
-                    }
-                }
-            }
+            AddDependantSchemasRecursively(_schemasToOmit);
 
             foreach (var schema in _schemasToOmit)
             {
