@@ -414,13 +414,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listByNameMethodInfo = subscriptionExtension.GetMethod($"Get{resourceName}ByName", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameMethodInfo);
-                    Assert.GreaterOrEqual(1, listByNameMethodInfo.GetParameters().Length);
+                    Assert.GreaterOrEqual(listByNameMethodInfo.GetParameters().Length, 1);
                     var listByNameParam5 = TypeAsserts.HasParameter(listByNameMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listByNameParam5.ParameterType);
 
                     var listByNameAsyncMethodInfo = subscriptionExtension.GetMethod($"Get{resourceName}ByNameAsync", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameAsyncMethodInfo);
-                    Assert.GreaterOrEqual(1, listByNameAsyncMethodInfo.GetParameters().Length);
+                    Assert.GreaterOrEqual(listByNameAsyncMethodInfo.GetParameters().Length, 1);
                     var listByNameAsyncParam5 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listByNameAsyncParam5.ParameterType);
                 }
