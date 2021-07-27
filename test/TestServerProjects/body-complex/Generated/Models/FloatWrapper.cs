@@ -16,8 +16,8 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of FloatWrapper. </summary>
-        /// <param name="field1"> . </param>
-        /// <param name="field2"> . </param>
+        /// <param name="field1"></param>
+        /// <param name="field2"></param>
         internal FloatWrapper(float? field1, float? field2)
         {
             Field1 = field1;

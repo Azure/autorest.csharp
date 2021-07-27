@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific SupersetModel1. </summary>
-    public partial class SupersetModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SupersetModel1>
+    public partial class SupersetModel1Operations : ResourceOperationsBase<SupersetModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SupersetModel1SRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SupersetModel1Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal SupersetModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -77,7 +79,7 @@ namespace SupersetInheritance
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +87,7 @@ namespace SupersetInheritance
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }

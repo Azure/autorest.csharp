@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(restClient.Description);
+                writer.WriteXmlDocumentationSummary($"{restClient.Description}");
                 using (writer.Scope($"{restClient.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, restClient);
@@ -62,11 +62,11 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
-            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter(PipelineVariable, "The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, $"The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter(PipelineVariable, $"The HTTP pipeline for sending and receiving REST requests and responses.");
             foreach (Parameter parameter in restClient.Parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
             writer.WriteXmlDocumentationRequiredParametersException(restClient.Parameters);
@@ -81,11 +81,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($")");
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(restClient.Parameters);
-
                 foreach (Parameter clientParameter in restClient.Parameters)
                 {
-                    writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
+                    writer.WriteVariableAssignmentWithNullCheck($"this.{clientParameter.Name}", clientParameter);
                 }
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
@@ -116,14 +114,14 @@ namespace AutoRest.CSharp.Generation.Writers
             };
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
             var parameters = operation.Parameters;
-            writer.WriteXmlDocumentationSummary(operation.Description);
+            writer.WriteXmlDocumentationSummary($"{operation.Description}");
 
             foreach (Parameter parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             var methodName = CreateMethodName(operation.Name, async);

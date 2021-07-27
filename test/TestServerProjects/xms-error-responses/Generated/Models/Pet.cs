@@ -16,7 +16,7 @@ namespace xms_error_responses.Models
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="aniType"> . </param>
+        /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
         internal Pet(string aniType, string name) : base(aniType)
         {

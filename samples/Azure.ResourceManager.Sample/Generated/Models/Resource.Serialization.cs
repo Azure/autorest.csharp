@@ -8,9 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

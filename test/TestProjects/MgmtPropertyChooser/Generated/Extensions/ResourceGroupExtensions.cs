@@ -5,14 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtPropertyChooser
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region VirtualMachines
+        #region VirtualMachine
         /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>

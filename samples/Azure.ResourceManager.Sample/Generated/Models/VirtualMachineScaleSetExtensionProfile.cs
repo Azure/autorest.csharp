@@ -7,8 +7,9 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Sample;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machine scale set extension profile. </summary>
     public partial class VirtualMachineScaleSetExtensionProfile

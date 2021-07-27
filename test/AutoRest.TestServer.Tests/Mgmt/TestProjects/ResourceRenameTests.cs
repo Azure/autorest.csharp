@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using ResourceRename;
+using ResourceRename.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {

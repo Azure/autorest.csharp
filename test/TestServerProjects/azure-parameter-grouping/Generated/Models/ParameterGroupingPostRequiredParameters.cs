@@ -14,7 +14,7 @@ namespace azure_parameter_grouping.Models
     {
         /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
         /// <param name="path"> Path parameter. </param>
-        /// <param name="body"> . </param>
+        /// <param name="body"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="path"/> is null. </exception>
         public ParameterGroupingPostRequiredParameters(string path, int body)
         {

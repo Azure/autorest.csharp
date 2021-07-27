@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
     /// <summary> Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it&apos;s not recognized either. </summary>
     public partial class NonResourceModel1
@@ -16,8 +16,8 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Initializes a new instance of NonResourceModel1. </summary>
-        /// <param name="bar"> . </param>
-        /// <param name="foo"> . </param>
+        /// <param name="bar"></param>
+        /// <param name="foo"></param>
         internal NonResourceModel1(string bar, string foo)
         {
             Bar = bar;

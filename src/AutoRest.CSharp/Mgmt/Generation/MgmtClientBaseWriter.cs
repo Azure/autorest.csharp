@@ -21,7 +21,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "parent resource" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {TypeNameOfThis} class.");
-            writer.WriteXmlDocumentationParameter("parent", "The resource representing the parent resource.");
+            writer.WriteXmlDocumentationParameter("parent", $"The resource representing the parent resource.");
             using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
@@ -86,28 +86,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, FormattableString converter)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
             // else we just call ListAsGenericResource to get the list then call Get on every resource
 
-            var methodName = CreateMethodName("List", async);
             writer.Line();
-            writer.WriteXmlDocumentationSummary(listMethod.Method.Description);
+            writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
             var nonPathDomainParameters = listMethod.NonPathDomainParameters;
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            FormattableString returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentation("returns", returnText);
 
             var returnType = resourceType.WrapPageable(async);
 
-            writer.Append($"public {returnType} {methodName}(");
+            writer.Append($"public {returnType} {CreateMethodName(methodName, async)}(");
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteParameter(param);
@@ -116,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, listMethod.Diagnostics, ClientDiagnosticsField, converter, async);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()), ClientDiagnosticsField, converter, async);
             }
         }
 
@@ -187,10 +186,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
+                    WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                     {
                         writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        BuildAndWriteParameters(writer, pagingMethod.NextPageMethod);
+                        BuildAndWriteParameters(writer, pagingMethod.Method);
                         writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
                         writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
                         writer.Append($"{converter}");
@@ -317,16 +316,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            (var bodyType, bool isListFunction) = restClientMethod.GetBodyTypeForList(operationGroup, context);
+            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.WriteXmlDocumentationSummary(restClientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
 
             var nonPathParameters = restClientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParameters)
@@ -334,11 +333,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            var methodName = CreateMethodName(clientMethod.Name, async); // note clientMethod.Name not restClientMethod.Name
-            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {methodName}(");
+            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -393,7 +391,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        writer.Append($"return response");
+                        context.Library.TryGetArmResource(operationGroup, out var resource);
+                        if (wasResourceData && resource != null && bodyType != null)
+                        {
+                            writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
+                        }
+                        else
+                        {
+                            writer.Append($"return response");
+                        }
                     }
 
                     if (bodyType == null && restClientMethod.HeaderModel != null)
@@ -541,14 +547,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual = false, string? methodName = null)
+            bool isVirtual, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
             methodName = methodName ?? clientMethod.Name;
 
             writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
@@ -558,7 +564,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
             CSharpType? returnType = GetLROReturnType(clientMethod, context);
@@ -624,7 +630,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             methodName = methodName ?? clientMethod.Name;
 
             writer.Line();
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
@@ -634,7 +640,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning

@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a Virtual Machine Image. </summary>
     public partial class VirtualMachineImage : VirtualMachineImageResource
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md). </param>
         /// <param name="plan"> Used for establishing the purchase context of any 3rd Party artifact through MarketPlace. </param>
         /// <param name="osDiskImage"> Contains the os disk image information. </param>
-        /// <param name="dataDiskImages"> . </param>
+        /// <param name="dataDiskImages"></param>
         /// <param name="automaticOSUpgradeProperties"> Describes automatic OS upgrade properties on the image. </param>
         /// <param name="hyperVGeneration"> Specifies the HyperVGeneration Type. </param>
         /// <param name="disallowed"> Specifies disallowed configuration for the VirtualMachine created from the image. </param>

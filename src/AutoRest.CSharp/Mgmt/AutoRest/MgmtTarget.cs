@@ -20,7 +20,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
@@ -43,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
 
-                project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
+                project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
             foreach (var resourceOperation in context.Library.ResourceOperations)
@@ -73,17 +72,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
             foreach (var resource in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, resource, context);
+                var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
+                armResourceWriter.WriteResource();
 
-                var name = resource.Type.Name;
-                project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var operation in context.Library.LongRunningOperations)
@@ -91,7 +90,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 mgmtLongRunningOperationWriter.Write(codeWriter, operation);
 
-                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var operation in context.Library.NonLongRunningOperations)
@@ -99,7 +98,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 NonLongRunningOperationWriter.Write(codeWriter, operation);
 
-                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)

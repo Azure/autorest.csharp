@@ -6,13 +6,17 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A Class representing a Toaster along with the instance operations that can be performed on it. </summary>
     public class Toaster : ToasterOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "Toaster"/> class for mocking. </summary>
+        protected Toaster() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "Toaster"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +26,6 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Gets or sets the ToasterData. </summary>
-        public ToasterData Data { get; private set; }
+        public virtual ToasterData Data { get; private set; }
     }
 }

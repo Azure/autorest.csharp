@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
+using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SupersetModel1s
+        #region SupersetModel1
         /// <summary> Gets an object representing a SupersetModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SupersetModel1Container" /> object. </returns>
@@ -28,7 +30,7 @@ namespace SupersetInheritance
         }
         #endregion
 
-        #region SupersetModel4s
+        #region SupersetModel4
         /// <summary> Gets an object representing a SupersetModel4Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SupersetModel4Container" /> object. </returns>

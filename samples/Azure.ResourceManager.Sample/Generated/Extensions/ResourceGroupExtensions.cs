@@ -5,14 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region AvailabilitySets
+        #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region ProximityPlacementGroups
+        #region ProximityPlacementGroup
         /// <summary> Gets an object representing a ProximityPlacementGroupContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ProximityPlacementGroupContainer" /> object. </returns>
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region DedicatedHostGroups
+        #region DedicatedHostGroup
         /// <summary> Gets an object representing a DedicatedHostGroupContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="DedicatedHostGroupContainer" /> object. </returns>
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region SshPublicKeys
+        #region SshPublicKey
         /// <summary> Gets an object representing a SshPublicKeyContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SshPublicKeyContainer" /> object. </returns>
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachines
+        #region VirtualMachine
         /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region Images
+        #region Image
         /// <summary> Gets an object representing a ImageContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ImageContainer" /> object. </returns>
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineScaleSets
+        #region VirtualMachineScaleSet
         /// <summary> Gets an object representing a VirtualMachineScaleSetContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetContainer" /> object. </returns>

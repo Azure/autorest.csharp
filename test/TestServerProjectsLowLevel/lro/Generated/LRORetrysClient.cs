@@ -64,43 +64,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -158,43 +158,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -270,43 +270,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -363,43 +363,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -755,43 +755,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -848,43 +848,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -959,43 +959,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>
@@ -1052,43 +1052,43 @@ namespace lro_LowLevel
         ///     <term>id</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Id. </term>
+        ///     <term>Resource Id</term>
         ///   </item>
         ///   <item>
         ///     <term>type</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Type. </term>
+        ///     <term>Resource Type</term>
         ///   </item>
         ///   <item>
         ///     <term>tags</term>
         ///     <term>Dictionary&lt;string, string&gt;</term>
         ///     <term></term>
-        ///     <term> Dictionary of &lt;string&gt;. </term>
+        ///     <term>Dictionary of &lt;string&gt;</term>
         ///   </item>
         ///   <item>
         ///     <term>location</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Location. </term>
+        ///     <term>Resource Location</term>
         ///   </item>
         ///   <item>
         ///     <term>name</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///     <term> Resource Name. </term>
+        ///     <term>Resource Name</term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningState</term>
         ///     <term>string</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         ///   <item>
         ///     <term>provisioningStateValues</term>
         ///     <term>&quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;</term>
         ///     <term></term>
-        ///    <term></term>
+        ///     <term></term>
         ///   </item>
         /// </list>
         /// </remarks>

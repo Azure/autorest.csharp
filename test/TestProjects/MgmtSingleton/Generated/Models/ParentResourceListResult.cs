@@ -8,8 +8,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MgmtSingleton;
 
-namespace MgmtSingleton
+namespace MgmtSingleton.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
     public partial class ParentResourceListResult

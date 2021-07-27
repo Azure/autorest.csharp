@@ -20,8 +20,8 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
-        /// <param name="readonlyProperty"> . </param>
-        /// <param name="readonlyListProperty"> . </param>
+        /// <param name="readonlyProperty"></param>
+        /// <param name="readonlyListProperty"></param>
         internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty)
         {
             ReadonlyProperty = readonlyProperty;

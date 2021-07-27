@@ -8,7 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -120,13 +122,13 @@ namespace Azure.ResourceManager.Sample
 
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
-            Optional<Sku> sku = default;
-            Optional<Plan> plan = default;
+            Optional<Models.Sku> sku = default;
+            Optional<Models.Plan> plan = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<UpgradePolicy> upgradePolicy = default;
@@ -139,8 +141,8 @@ namespace Azure.ResourceManager.Sample
             Optional<bool> singlePlacementGroup = default;
             Optional<bool> zoneBalance = default;
             Optional<int> platformFaultDomainCount = default;
-            Optional<SubResource> proximityPlacementGroup = default;
-            Optional<SubResource> hostGroup = default;
+            Optional<Models.SubResource> proximityPlacementGroup = default;
+            Optional<Models.SubResource> hostGroup = default;
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<ScaleInPolicy> scaleInPolicy = default;
             foreach (var property in element.EnumerateObject())
@@ -152,7 +154,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
@@ -162,7 +164,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Plan.DeserializePlan(property.Value);
+                    plan = Models.Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"))
@@ -326,7 +328,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            proximityPlacementGroup = SubResource.DeserializeSubResource(property0.Value);
+                            proximityPlacementGroup = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("hostGroup"))
@@ -336,7 +338,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            hostGroup = SubResource.DeserializeSubResource(property0.Value);
+                            hostGroup = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("additionalCapabilities"))

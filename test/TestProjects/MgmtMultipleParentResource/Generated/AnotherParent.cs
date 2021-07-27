@@ -6,13 +6,17 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A Class representing a AnotherParent along with the instance operations that can be performed on it. </summary>
     public class AnotherParent : AnotherParentOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AnotherParent"/> class for mocking. </summary>
+        protected AnotherParent() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "AnotherParent"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +26,6 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> Gets or sets the AnotherParentData. </summary>
-        public AnotherParentData Data { get; private set; }
+        public virtual AnotherParentData Data { get; private set; }
     }
 }

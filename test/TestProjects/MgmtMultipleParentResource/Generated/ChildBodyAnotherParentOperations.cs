@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the operations that can be performed over a specific ChildBodyAnotherParent. </summary>
-    public partial class ChildBodyAnotherParentOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ChildBodyAnotherParent>
+    public partial class ChildBodyAnotherParentOperations : ResourceOperationsBase<ChildBodyAnotherParent>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AnotherChildrenRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref="ChildBodyAnotherParentOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ChildBodyAnotherParentOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ChildBodyAnotherParentOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -77,7 +80,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ChildBodyAnotherParent>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyAnotherParent>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Get");
             scope.Start();
@@ -96,7 +99,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ChildBodyAnotherParent> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyAnotherParent> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Get");
             scope.Start();
@@ -115,7 +118,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -123,14 +126,14 @@ namespace MgmtMultipleParentResource
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Delete");
             scope.Start();
@@ -148,7 +151,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Delete");
             scope.Start();
@@ -166,7 +169,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<AnotherChildrenDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherChildrenDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartDelete");
             scope.Start();
@@ -184,7 +187,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public AnotherChildrenDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual AnotherChildrenDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartDelete");
             scope.Start();
@@ -205,7 +208,7 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<ChildBodyAnotherParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyAnotherParent>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -234,7 +237,7 @@ namespace MgmtMultipleParentResource
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<ChildBodyAnotherParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyAnotherParent> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -262,7 +265,7 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<ChildBodyAnotherParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyAnotherParent>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -291,7 +294,7 @@ namespace MgmtMultipleParentResource
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<ChildBodyAnotherParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyAnotherParent> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -320,7 +323,7 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<ChildBodyAnotherParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ChildBodyAnotherParent>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -348,7 +351,7 @@ namespace MgmtMultipleParentResource
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<ChildBodyAnotherParent> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<ChildBodyAnotherParent> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -364,6 +367,106 @@ namespace MgmtMultipleParentResource
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new ChildBodyAnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public async virtual Task<Response<ChildBodyAnotherParent>> UpdateAsync(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(childBody, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public virtual Response<ChildBodyAnotherParent> Update(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(childBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public async virtual Task<AnotherChildrenUpdateOperation> StartUpdateAsync(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken).ConfigureAwait(false);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childBody"/> is null. </exception>
+        public virtual AnotherChildrenUpdateOperation StartUpdate(ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        {
+            if (childBody == null)
+            {
+                throw new ArgumentNullException(nameof(childBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody, cancellationToken);
+                return new AnotherChildrenUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childBody).Request, response);
             }
             catch (Exception e)
             {

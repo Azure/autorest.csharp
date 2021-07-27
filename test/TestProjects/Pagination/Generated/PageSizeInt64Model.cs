@@ -6,13 +6,17 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using Pagination.Models;
 
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeInt64Model along with the instance operations that can be performed on it. </summary>
     public class PageSizeInt64Model : PageSizeInt64ModelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64Model"/> class for mocking. </summary>
+        protected PageSizeInt64Model() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64Model"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +26,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeInt64ModelData. </summary>
-        public PageSizeInt64ModelData Data { get; private set; }
+        public virtual PageSizeInt64ModelData Data { get; private set; }
     }
 }

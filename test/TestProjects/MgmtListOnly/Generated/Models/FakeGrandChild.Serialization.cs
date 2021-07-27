@@ -8,7 +8,8 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListOnly.Models
 {
@@ -40,7 +41,7 @@ namespace MgmtListOnly.Models
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            TenantResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

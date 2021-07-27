@@ -696,13 +696,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, false),
+            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
+            ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
             _ => throw new NotImplementedException()
         };
 

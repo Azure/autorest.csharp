@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a Virtual Machine Scale Set VM Reimage Parameters. </summary>
     public partial class VirtualMachineScaleSetReimageParameters : VirtualMachineScaleSetVMReimageParameters

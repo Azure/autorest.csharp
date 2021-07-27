@@ -5,12 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, and is exactly a WritableSubResource type. </summary>
-    public partial class AzureResourceFlattenModel7 : WritableSubResource<ResourceGroupResourceIdentifier>
+    public partial class AzureResourceFlattenModel7 : WritableSubResource
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
         public AzureResourceFlattenModel7()
@@ -19,8 +19,8 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal AzureResourceFlattenModel7(string id, string name, string type) : base(id)
         {
             Name = name;

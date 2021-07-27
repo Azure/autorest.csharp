@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
+using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region CustomModel1s
+        #region CustomModel1
         /// <summary> Gets an object representing a CustomModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel1Container" /> object. </returns>
@@ -28,7 +30,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region CustomModel2s
+        #region CustomModel2
         /// <summary> Gets an object representing a CustomModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel2Container" /> object. </returns>
@@ -38,7 +40,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region SubResourceModel1s
+        #region SubResourceModel1
         /// <summary> Gets an object representing a SubResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubResourceModel1Container" /> object. </returns>
@@ -48,7 +50,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region SubResourceModel2s
+        #region SubResourceModel2
         /// <summary> Gets an object representing a SubResourceModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubResourceModel2Container" /> object. </returns>
@@ -58,7 +60,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region WritableSubResourceModel1s
+        #region WritableSubResourceModel1
         /// <summary> Gets an object representing a WritableSubResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WritableSubResourceModel1Container" /> object. </returns>
@@ -68,7 +70,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region WritableSubResourceModel2s
+        #region WritableSubResourceModel2
         /// <summary> Gets an object representing a WritableSubResourceModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WritableSubResourceModel2Container" /> object. </returns>
@@ -78,7 +80,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region ResourceModel1s
+        #region ResourceModel1
         /// <summary> Gets an object representing a ResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceModel1Container" /> object. </returns>
@@ -88,7 +90,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region ResourceModel2s
+        #region ResourceModel2
         /// <summary> Gets an object representing a ResourceModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceModel2Container" /> object. </returns>
@@ -98,7 +100,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region TrackedResourceModel1s
+        #region TrackedResourceModel1
         /// <summary> Gets an object representing a TrackedResourceModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="TrackedResourceModel1Container" /> object. </returns>
@@ -108,7 +110,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region TrackedResourceModel2s
+        #region TrackedResourceModel2
         /// <summary> Gets an object representing a TrackedResourceModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="TrackedResourceModel2Container" /> object. </returns>

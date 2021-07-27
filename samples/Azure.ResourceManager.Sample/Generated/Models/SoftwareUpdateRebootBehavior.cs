@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes the reboot requirements of the patch. </summary>
     public readonly partial struct SoftwareUpdateRebootBehavior : IEquatable<SoftwareUpdateRebootBehavior>

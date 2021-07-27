@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes automatic OS upgrade properties on the image. </summary>
     public partial class AutomaticOSUpgradeProperties

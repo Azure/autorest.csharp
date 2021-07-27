@@ -7,7 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -35,7 +35,7 @@ namespace Azure.Management.Storage.Models
         internal static ImmutabilityPolicy DeserializeImmutabilityPolicy(JsonElement element)
         {
             Optional<string> etag = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<int> immutabilityPeriodSinceCreationInDays = default;

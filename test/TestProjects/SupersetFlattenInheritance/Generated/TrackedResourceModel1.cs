@@ -12,6 +12,11 @@ namespace SupersetFlattenInheritance
     /// <summary> A Class representing a TrackedResourceModel1 along with the instance operations that can be performed on it. </summary>
     public class TrackedResourceModel1 : TrackedResourceModel1Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel1"/> class for mocking. </summary>
+        protected TrackedResourceModel1() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "TrackedResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Gets or sets the TrackedResourceModel1Data. </summary>
-        public TrackedResourceModel1Data Data { get; private set; }
+        public virtual TrackedResourceModel1Data Data { get; private set; }
     }
 }

@@ -5,14 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Pagination
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region PageSizeIntegerModels
+        #region PageSizeIntegerModel
         /// <summary> Gets an object representing a PageSizeIntegerModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeIntegerModelContainer" /> object. </returns>
@@ -22,7 +22,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeInt64Models
+        #region PageSizeInt64Model
         /// <summary> Gets an object representing a PageSizeInt64ModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeInt64ModelContainer" /> object. </returns>
@@ -32,7 +32,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeInt32Models
+        #region PageSizeInt32Model
         /// <summary> Gets an object representing a PageSizeInt32ModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeInt32ModelContainer" /> object. </returns>
@@ -42,7 +42,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeNumericModels
+        #region PageSizeNumericModel
         /// <summary> Gets an object representing a PageSizeNumericModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeNumericModelContainer" /> object. </returns>
@@ -52,7 +52,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeFloatModels
+        #region PageSizeFloatModel
         /// <summary> Gets an object representing a PageSizeFloatModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeFloatModelContainer" /> object. </returns>
@@ -62,7 +62,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeDoubleModels
+        #region PageSizeDoubleModel
         /// <summary> Gets an object representing a PageSizeDoubleModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeDoubleModelContainer" /> object. </returns>
@@ -72,7 +72,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeDecimalModels
+        #region PageSizeDecimalModel
         /// <summary> Gets an object representing a PageSizeDecimalModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeDecimalModelContainer" /> object. </returns>
@@ -82,7 +82,7 @@ namespace Pagination
         }
         #endregion
 
-        #region PageSizeStringModels
+        #region PageSizeStringModel
         /// <summary> Gets an object representing a PageSizeStringModelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeStringModelContainer" /> object. </returns>

@@ -8,9 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     public partial class Resource
     {
@@ -18,7 +18,7 @@ namespace OperationGroupMappings
         {
             string location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

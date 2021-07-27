@@ -5,14 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region AnotherParents
+        #region AnotherParent
         /// <summary> Gets an object representing a AnotherParentContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AnotherParentContainer" /> object. </returns>
@@ -22,7 +22,7 @@ namespace MgmtMultipleParentResource
         }
         #endregion
 
-        #region Parents
+        #region Parent
         /// <summary> Gets an object representing a ParentContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ParentContainer" /> object. </returns>

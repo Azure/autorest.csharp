@@ -7,7 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Models
 {
@@ -23,7 +23,7 @@ namespace Azure.Management.Storage.Models
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

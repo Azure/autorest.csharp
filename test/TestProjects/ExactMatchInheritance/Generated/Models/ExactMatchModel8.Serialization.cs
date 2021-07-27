@@ -7,9 +7,9 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     public partial class ExactMatchModel8 : IUtf8JsonSerializable
     {
@@ -35,7 +35,7 @@ namespace ExactMatchInheritance
         {
             Optional<string> name = default;
             Optional<string> nEW = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

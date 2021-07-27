@@ -10,12 +10,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
+using TenantOnly.Models;
 
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
-    public partial class BillingAccountContainer : ResourceContainerBase<TenantResourceIdentifier, BillingAccount, BillingAccountData>
+    public partial class BillingAccountContainer : ResourceContainerBase<BillingAccount, BillingAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>
         protected BillingAccountContainer()
@@ -33,9 +36,6 @@ namespace TenantOnly
 
         /// <summary> Represents the REST operations. </summary>
         private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -107,7 +107,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual BillingAccountsUpdateOperation StartCreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public virtual BillingAccountsCreateOperation StartCreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -122,8 +122,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _restClient.Update(billingAccountName, parameters, cancellationToken);
-                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, response);
+                var response = _restClient.Create(billingAccountName, parameters, cancellationToken);
+                return new BillingAccountsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<BillingAccountsUpdateOperation> StartCreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<BillingAccountsCreateOperation> StartCreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -152,8 +152,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, response);
+                var response = await _restClient.CreateAsync(billingAccountName, parameters, cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(billingAccountName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -316,7 +316,7 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Filters the list of BillingAccount for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="BillingAccount" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -339,7 +339,7 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Filters the list of BillingAccount for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="BillingAccount" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -363,6 +363,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }

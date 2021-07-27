@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
     public partial class NonResourceModel1 : IUtf8JsonSerializable
     {

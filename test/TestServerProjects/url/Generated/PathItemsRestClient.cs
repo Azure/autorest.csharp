@@ -31,14 +31,8 @@ namespace url
         /// <exception cref="ArgumentNullException"> <paramref name="globalStringPath"/> is null. </exception>
         public PathItemsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string globalStringPath, Uri endpoint = null, string globalStringQuery = null)
         {
-            if (globalStringPath == null)
-            {
-                throw new ArgumentNullException(nameof(globalStringPath));
-            }
-            endpoint ??= new Uri("http://localhost:3000");
-
-            this.globalStringPath = globalStringPath;
-            this.endpoint = endpoint;
+            this.globalStringPath = globalStringPath ?? throw new ArgumentNullException(nameof(globalStringPath));
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
             this.globalStringQuery = globalStringQuery;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;

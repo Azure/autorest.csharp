@@ -8,9 +8,11 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
+using MgmtListMethods.Models;
 
-namespace MgmtListMethods.Models
+namespace MgmtListMethods
 {
     public partial class TheExtensionData : IUtf8JsonSerializable
     {
@@ -40,7 +42,7 @@ namespace MgmtListMethods.Models
             Optional<TheExtensionProperties> properties = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

@@ -10,13 +10,17 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachine. </summary>
-    public partial class VirtualMachineOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachine>
+    public partial class VirtualMachineOperations : ResourceOperationsBase<VirtualMachine>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachinesRestOperations _restClient { get; }
@@ -29,7 +33,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -77,7 +81,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +89,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -93,7 +97,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Delete");
             scope.Start();
@@ -112,7 +116,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Delete");
             scope.Start();
@@ -131,7 +135,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesDeleteOperation> StartDeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesDeleteOperation> StartDeleteAsync(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDelete");
             scope.Start();
@@ -150,7 +154,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to delete a virtual machine. </summary>
         /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesDeleteOperation StartDelete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesDeleteOperation StartDelete(bool? forceDeletion = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDelete");
             scope.Start();
@@ -171,7 +175,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<VirtualMachine>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachine>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -200,7 +204,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<VirtualMachine> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachine> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -228,7 +232,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<VirtualMachine>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachine>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -257,7 +261,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<VirtualMachine> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachine> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -286,7 +290,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<VirtualMachine>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachine>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -314,7 +318,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<VirtualMachine> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachine> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -483,11 +487,57 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Lists all available virtual machine sizes to which the specified virtual machine can be resized. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<VirtualMachineSize> ListAvailableSizes(CancellationToken cancellationToken = default)
+        {
+            Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.ListAvailableSizes");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListAvailableSizes(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> Lists all available virtual machine sizes to which the specified virtual machine can be resized. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<VirtualMachineSize> ListAvailableSizesAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.ListAvailableSizes");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListAvailableSizesAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
         /// <summary> Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs. </summary>
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<VirtualMachineCaptureResult>> CaptureAsync(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineCaptureResult>> CaptureAsync(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -512,7 +562,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<VirtualMachineCaptureResult> Capture(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineCaptureResult> Capture(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -537,7 +587,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<VirtualMachinesCaptureOperation> StartCaptureAsync(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesCaptureOperation> StartCaptureAsync(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -562,7 +612,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Capture Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public VirtualMachinesCaptureOperation StartCapture(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesCaptureOperation StartCapture(VirtualMachineCaptureParameters parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -583,9 +633,109 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachine>> UpdateAsync(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<VirtualMachine> Update(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<VirtualMachinesUpdateOperation> StartUpdateAsync(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update a virtual machine. </summary>
+        /// <param name="parameters"> Parameters supplied to the Update Virtual Machine operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual VirtualMachinesUpdateOperation StartUpdate(VirtualMachineUpdate parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> ConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> ConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.ConvertToManagedDisks");
             scope.Start();
@@ -603,7 +753,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response ConvertToManagedDisks(CancellationToken cancellationToken = default)
+        public virtual Response ConvertToManagedDisks(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.ConvertToManagedDisks");
             scope.Start();
@@ -621,7 +771,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesConvertToManagedDisksOperation> StartConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesConvertToManagedDisksOperation> StartConvertToManagedDisksAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartConvertToManagedDisks");
             scope.Start();
@@ -639,7 +789,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesConvertToManagedDisksOperation StartConvertToManagedDisks(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesConvertToManagedDisksOperation StartConvertToManagedDisks(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartConvertToManagedDisks");
             scope.Start();
@@ -657,7 +807,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeallocateAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeallocateAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Deallocate");
             scope.Start();
@@ -675,7 +825,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Deallocate(CancellationToken cancellationToken = default)
+        public virtual Response Deallocate(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Deallocate");
             scope.Start();
@@ -693,7 +843,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesDeallocateOperation> StartDeallocateAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesDeallocateOperation> StartDeallocateAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDeallocate");
             scope.Start();
@@ -711,7 +861,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesDeallocateOperation StartDeallocate(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesDeallocateOperation StartDeallocate(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartDeallocate");
             scope.Start();
@@ -730,7 +880,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response> PowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.PowerOff");
             scope.Start();
@@ -749,7 +899,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public virtual Response PowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.PowerOff");
             scope.Start();
@@ -768,7 +918,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesPowerOffOperation> StartPowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesPowerOffOperation> StartPowerOffAsync(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPowerOff");
             scope.Start();
@@ -787,7 +937,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine. </summary>
         /// <param name="skipShutdown"> The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesPowerOffOperation StartPowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesPowerOffOperation StartPowerOff(bool? skipShutdown = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPowerOff");
             scope.Start();
@@ -805,7 +955,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> ReapplyAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> ReapplyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Reapply");
             scope.Start();
@@ -823,7 +973,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Reapply(CancellationToken cancellationToken = default)
+        public virtual Response Reapply(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Reapply");
             scope.Start();
@@ -841,7 +991,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesReapplyOperation> StartReapplyAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesReapplyOperation> StartReapplyAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReapply");
             scope.Start();
@@ -859,7 +1009,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to reapply a virtual machine&apos;s state. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesReapplyOperation StartReapply(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesReapplyOperation StartReapply(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReapply");
             scope.Start();
@@ -877,7 +1027,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> RestartAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> RestartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Restart");
             scope.Start();
@@ -895,7 +1045,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Restart(CancellationToken cancellationToken = default)
+        public virtual Response Restart(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Restart");
             scope.Start();
@@ -913,7 +1063,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesRestartOperation> StartRestartAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesRestartOperation> StartRestartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRestart");
             scope.Start();
@@ -931,7 +1081,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to restart a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesRestartOperation StartRestart(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesRestartOperation StartRestart(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRestart");
             scope.Start();
@@ -949,7 +1099,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> StartAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> StartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Start");
             scope.Start();
@@ -967,7 +1117,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Start(CancellationToken cancellationToken = default)
+        public virtual Response Start(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Start");
             scope.Start();
@@ -985,7 +1135,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesStartOperation> StartStartAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesStartOperation> StartStartAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartStart");
             scope.Start();
@@ -1003,7 +1153,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to start a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesStartOperation StartStart(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesStartOperation StartStart(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartStart");
             scope.Start();
@@ -1021,7 +1171,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> RedeployAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> RedeployAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Redeploy");
             scope.Start();
@@ -1039,7 +1189,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Redeploy(CancellationToken cancellationToken = default)
+        public virtual Response Redeploy(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Redeploy");
             scope.Start();
@@ -1057,7 +1207,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesRedeployOperation> StartRedeployAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesRedeployOperation> StartRedeployAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRedeploy");
             scope.Start();
@@ -1075,7 +1225,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Shuts down the virtual machine, moves it to a new node, and powers it back on. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesRedeployOperation StartRedeploy(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesRedeployOperation StartRedeploy(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartRedeploy");
             scope.Start();
@@ -1094,7 +1244,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> ReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response> ReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Reimage");
             scope.Start();
@@ -1113,7 +1263,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Reimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public virtual Response Reimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.Reimage");
             scope.Start();
@@ -1132,7 +1282,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesReimageOperation> StartReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesReimageOperation> StartReimageAsync(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReimage");
             scope.Start();
@@ -1151,7 +1301,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesReimageOperation StartReimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesReimageOperation StartReimage(VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartReimage");
             scope.Start();
@@ -1169,7 +1319,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PerformMaintenanceAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> PerformMaintenanceAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.PerformMaintenance");
             scope.Start();
@@ -1187,7 +1337,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PerformMaintenance(CancellationToken cancellationToken = default)
+        public virtual Response PerformMaintenance(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.PerformMaintenance");
             scope.Start();
@@ -1205,7 +1355,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesPerformMaintenanceOperation> StartPerformMaintenanceAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesPerformMaintenanceOperation> StartPerformMaintenanceAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPerformMaintenance");
             scope.Start();
@@ -1223,7 +1373,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to perform maintenance on a virtual machine. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesPerformMaintenanceOperation StartPerformMaintenance(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesPerformMaintenanceOperation StartPerformMaintenance(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartPerformMaintenance");
             scope.Start();
@@ -1241,7 +1391,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<VirtualMachineAssessPatchesResult>> AssessPatchesAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineAssessPatchesResult>> AssessPatchesAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.AssessPatches");
             scope.Start();
@@ -1259,7 +1409,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<VirtualMachineAssessPatchesResult> AssessPatches(CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineAssessPatchesResult> AssessPatches(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.AssessPatches");
             scope.Start();
@@ -1277,7 +1427,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachinesAssessPatchesOperation> StartAssessPatchesAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachinesAssessPatchesOperation> StartAssessPatchesAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartAssessPatches");
             scope.Start();
@@ -1295,7 +1445,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Assess patches on the VM. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachinesAssessPatchesOperation StartAssessPatches(CancellationToken cancellationToken = default)
+        public virtual VirtualMachinesAssessPatchesOperation StartAssessPatches(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineOperations.StartAssessPatches");
             scope.Start();

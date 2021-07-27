@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             Optional<string> forceUpdateTag = default;
             Optional<string> publisher = default;
             Optional<string> type0 = default;

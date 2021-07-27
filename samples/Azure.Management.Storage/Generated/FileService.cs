@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -13,15 +12,20 @@ namespace Azure.Management.Storage
     /// <summary> A Class representing a FileService along with the instance operations that can be performed on it. </summary>
     public class FileService : FileServiceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "FileService"/> class for mocking. </summary>
+        protected FileService() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "FileService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal FileService(OperationsBase options, FileServiceData resource) : base(options, resource.Id)
+        internal FileService(OperationsBase options, FileServiceData resource) : base(options)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the FileServiceData. </summary>
-        public FileServiceData Data { get; private set; }
+        public virtual FileServiceData Data { get; private set; }
     }
 }

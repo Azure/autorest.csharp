@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes the properties of a Virtual Machine software patch. </summary>
     public partial class VirtualMachineSoftwarePatchProperties

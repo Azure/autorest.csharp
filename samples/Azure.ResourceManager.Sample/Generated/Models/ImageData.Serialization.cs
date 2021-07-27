@@ -8,7 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -52,10 +54,10 @@ namespace Azure.ResourceManager.Sample
         {
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<SubResource> sourceVirtualMachine = default;
+            Optional<Models.SubResource> sourceVirtualMachine = default;
             Optional<ImageStorageProfile> storageProfile = default;
             Optional<string> provisioningState = default;
             Optional<HyperVGenerationTypes> hyperVGeneration = default;
@@ -107,7 +109,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            sourceVirtualMachine = SubResource.DeserializeSubResource(property0.Value);
+                            sourceVirtualMachine = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("storageProfile"))

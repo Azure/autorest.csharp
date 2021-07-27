@@ -35,6 +35,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
         }
 
+        internal Type SystemType => _type;
+
         private IEnumerable<ParameterInfo> GetCtorParameters(Type attributeType)
         {
             foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance))
@@ -114,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 prop.Required = true;
                 prop.Language.Default.Name = property.Name;
 
-                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager.Core is known
+                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
                 if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>))

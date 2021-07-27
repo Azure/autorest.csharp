@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Pagination
 {
     /// <summary> A class representing the operations that can be performed over a specific PageSizeInt32Model. </summary>
-    public partial class PageSizeInt32ModelOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PageSizeInt32Model>
+    public partial class PageSizeInt32ModelOperations : ResourceOperationsBase<PageSizeInt32Model>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PageSizeInt32ModelsRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeInt32ModelOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PageSizeInt32ModelOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal PageSizeInt32ModelOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeInt32ModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -77,7 +79,7 @@ namespace Pagination
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -85,7 +87,7 @@ namespace Pagination
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }

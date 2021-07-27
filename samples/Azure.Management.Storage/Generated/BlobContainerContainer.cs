@@ -13,12 +13,14 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
-    public partial class BlobContainerContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData>
+    public partial class BlobContainerContainer : ResourceContainerBase<BlobContainer, BlobContainerData>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
         protected BlobContainerContainer()
@@ -36,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private BlobContainersRestOperations _restClient => new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -391,7 +390,7 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of BlobContainer for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="BlobContainer" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -414,7 +413,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of BlobContainer for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="BlobContainer" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -437,47 +436,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.CreateOrUpdateImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.CreateOrUpdateImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
     }
 }

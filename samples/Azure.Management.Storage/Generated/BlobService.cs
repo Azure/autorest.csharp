@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -13,15 +12,20 @@ namespace Azure.Management.Storage
     /// <summary> A Class representing a BlobService along with the instance operations that can be performed on it. </summary>
     public class BlobService : BlobServiceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "BlobService"/> class for mocking. </summary>
+        protected BlobService() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "BlobService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BlobService(OperationsBase options, BlobServiceData resource) : base(options, resource.Id)
+        internal BlobService(OperationsBase options, BlobServiceData resource) : base(options)
         {
             Data = resource;
         }
 
         /// <summary> Gets or sets the BlobServiceData. </summary>
-        public BlobServiceData Data { get; private set; }
+        public virtual BlobServiceData Data { get; private set; }
     }
 }

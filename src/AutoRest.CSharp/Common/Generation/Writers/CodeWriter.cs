@@ -6,9 +6,9 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private string? _currentNamespace;
 
         private char[] _builder;
-        private int _position;
+        private int _length;
 
         public CodeWriter()
         {
@@ -90,11 +90,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     : span.Slice(0, formatSeparatorIndex));
 
                 var argument = formattableString.GetArgument(index);
-                var isLiteralFormat = span.EndsWith(literalFormatString);
                 var isDeclaration = span.EndsWith(declarationFormatString);
                 var isIdentifier = span.EndsWith(identifierFormatString);
+                var isLiteralFormat = span.EndsWith(literalFormatString);
                 switch (argument)
                 {
+                    case IEnumerable<FormattableString> fss:
+                        foreach (var fs in fss)
+                        {
+                            Append(fs);
+                        }
+                        break;
+                    case FormattableString fs:
+                        Append(fs);
+                        break;
                     case CodeWriterDelegate d:
                         Append(d);
                         break;
@@ -104,25 +113,17 @@ namespace AutoRest.CSharp.Generation.Writers
                     case CSharpType t:
                         AppendType(t);
                         break;
+                    case CodeWriterDeclaration declaration when isDeclaration:
+                        Declaration(declaration);
+                        break;
                     case CodeWriterDeclaration declaration:
-                        if (isDeclaration)
-                        {
-                            Declaration(declaration);
-                        }
-                        else
-                        {
-                            Identifier(declaration.ActualName);
-                        }
+                        Identifier(declaration.ActualName);
+                        break;
+                    case var _ when isLiteralFormat:
+                        Literal(argument);
                         break;
                     default:
-                        if (isLiteralFormat)
-                        {
-                            Literal(argument);
-                            continue;
-                        }
-
                         string? s = argument?.ToString();
-
                         if (s == null)
                         {
                             throw new ArgumentNullException(index.ToString());
@@ -153,6 +154,94 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 _usingNamespaces.Add(@namespace);
             }
+        }
+
+        public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)
+        {
+            const string xmlDoc = "/// ";
+            const string xmlDocNewLine = "\n/// ";
+
+            var commentStart = _length;
+            AppendRaw(CurrentLine.IsEmpty ? xmlDoc : xmlDocNewLine);
+
+            var startTagStart = _length;
+            Append(startTag);
+
+            var contentStart = _length;
+            if (content.Format.Length > 0)
+            {
+                Append(content);
+            }
+            var contentEnd = _length;
+
+            Append(endTag);
+
+            if (contentStart == contentEnd)
+            {
+                var startTagSpan = WrittenText.Slice(startTagStart + 1, contentStart - startTagStart - 1);
+                var endTagSpan = WrittenText.Slice(contentEnd + 2);
+
+                if (startTagSpan.SequenceEqual(endTagSpan))
+                {
+                    // Remove empty tags
+                    _length = commentStart;
+                }
+                else
+                {
+                    Line();
+                }
+
+                return this;
+            }
+
+            Line();
+            var contentSpan = _builder.AsSpan(contentStart, contentEnd - contentStart);
+
+            var lastLineBreak = contentSpan.LastIndexOf(_newLine);
+            if (lastLineBreak == -1)
+            {
+                // Add spaces and dot to match existing formatting
+                if (contentEnd > contentStart)
+                {
+                    if (contentSpan[^1] != ' ')
+                    {
+                        InsertRaw(contentSpan[^1] == '.' ? " " : ". ", contentEnd);
+                    }
+                    else
+                    {
+                        var trimmedContentSpan = contentSpan.TrimEnd();
+                        if (trimmedContentSpan[^1] != '.')
+                        {
+                            InsertRaw(".", contentStart + trimmedContentSpan.Length);
+                        }
+                    }
+
+                    if (contentSpan[0] != ' ')
+                    {
+                        InsertRaw(" ", contentStart);
+                    }
+                }
+                return this;
+            }
+
+            if (lastLineBreak != contentSpan.Length)
+            {
+                InsertRaw(xmlDocNewLine, contentEnd);
+            }
+
+            while (lastLineBreak != -1)
+            {
+                InsertRaw(xmlDoc, lastLineBreak + contentStart + 1);
+                contentSpan = contentSpan.Slice(0, lastLineBreak);
+                lastLineBreak = contentSpan.LastIndexOf(_newLine);
+            }
+
+            if (contentSpan.Length > 0)
+            {
+                InsertRaw(xmlDocNewLine, contentStart);
+            }
+
+            return this;
         }
 
         private string GetTemporaryVariable(string s)
@@ -281,7 +370,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        private Span<char> WrittenText => _builder.AsSpan(0, _position);
+        private Span<char> WrittenText => _builder.AsSpan(0, _length);
         private Span<char> PreviousLine
         {
             get
@@ -323,7 +412,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void EnsureSpace(int space)
         {
-            if (_builder.Length - _position < space)
+            if (_builder.Length - _length < space)
             {
                 var newBuilder = ArrayPool<char>.Shared.Rent(Math.Max(_builder.Length + space, _builder.Length * 2));
                 _builder.AsSpan().CopyTo(newBuilder);
@@ -339,10 +428,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var previousLine = PreviousLine;
 
-            if (previousLine.Contains('{'))
-            {
-
-            }
             if (CurrentLine.IsEmpty &&
                 (previousLine.SequenceEqual(_newLine) || previousLine.EndsWith(_braceNewLine)))
             {
@@ -356,11 +441,34 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public CodeWriter AppendRaw(string str) => AppendRaw(str.AsSpan());
 
-        private CodeWriter AppendRaw(ReadOnlySpan<char> span)
+        private CodeWriter AppendRaw(ReadOnlySpan<char> span) => InsertRaw(span, _length);
+
+        private CodeWriter InsertRaw(ReadOnlySpan<char> span, int position, bool skipNewLineCheck = false)
         {
+            Debug.Assert(0 <= position);
+            Debug.Assert(position <= _length);
+
+            if (!skipNewLineCheck)
+            {
+                var newLineSpan = "\r\n".AsSpan();
+                var newLineIndex = span.IndexOf(newLineSpan);
+                while (newLineIndex != -1)
+                {
+                    InsertRaw(span.Slice(0, newLineIndex), position, skipNewLineCheck: true);
+                    position += newLineIndex;
+                    span = span.Slice(newLineIndex + 1);
+                    newLineIndex = span.IndexOf(newLineSpan);
+                }
+            }
+
             EnsureSpace(span.Length);
-            span.CopyTo(_builder.AsSpan().Slice(_position));
-            _position += span.Length;
+            if (position < _length)
+            {
+                Array.Copy(_builder, position, _builder, span.Length + position, _length - position);
+            }
+
+            span.CopyTo(_builder.AsSpan(position));
+            _length += span.Length;
             return this;
         }
 
@@ -404,7 +512,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public string ToString(bool header)
         {
-            if (_position == 0)
+            if (_length == 0)
             {
                 return string.Empty;
             }
@@ -437,7 +545,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // Normalize newlines
-            builder.AppendLine(new string(_builder.AsSpan(0, _position).Trim()).Replace(_newLine, Environment.NewLine));
+            builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
 
             return builder.ToString();
         }
@@ -483,7 +591,7 @@ namespace AutoRest.CSharp.Generation.Writers
             while (PreviousLine.SequenceEqual(_newLine) &&
                 CurrentLine.IsEmpty)
             {
-                _position--;
+                _length--;
             }
         }
 
@@ -514,7 +622,7 @@ namespace AutoRest.CSharp.Generation.Writers
             int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
             if (lastCharIndex.HasValue)
             {
-                _position = lastCharIndex.Value;
+                _length = lastCharIndex.Value;
             }
         }
 
@@ -523,7 +631,7 @@ namespace AutoRest.CSharp.Generation.Writers
             int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
             if (lastCharIndex.HasValue && WrittenText[lastCharIndex.Value] == ',')
             {
-                _position = lastCharIndex.Value;
+                _length = lastCharIndex.Value;
             }
         }
 

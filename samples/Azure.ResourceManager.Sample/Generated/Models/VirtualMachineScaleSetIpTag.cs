@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Contains the IP tag associated with the public IP address. </summary>
     public partial class VirtualMachineScaleSetIpTag

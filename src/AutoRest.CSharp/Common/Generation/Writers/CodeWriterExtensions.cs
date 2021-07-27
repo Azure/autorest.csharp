@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
         {
-            writer.WriteXmlDocumentationSummary(method.Description);
+            writer.WriteXmlDocumentationSummary($"{method.Description}");
             writer.WriteXmlDocumentationParameters(method.Parameters);
             writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
             if (method.ReturnDescription != null)
@@ -116,32 +116,60 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (Parameter parameter in parameters)
             {
-                if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+                writer.WriteVariableAssignmentWithNullCheck(parameter.Name, parameter);
+            }
+
+            writer.Line();
+        }
+
+        public static void WriteVariableAssignmentWithNullCheck(this CodeWriter writer, string variableName, Parameter parameter)
+        {
+            // Temporary check to minimize amount of changes in existing generated code
+            var assignToSelf = parameter.Name == variableName;
+            if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+            {
+                if (assignToSelf)
                 {
-                    var defaultValue = parameter.DefaultValue.Value;
-                    writer.Append($"{parameter.Name} ??= ");
-                    if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsStruct(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
-                    {
-                        WriteConstant(writer, defaultValue);
-                    }
-                    else
-                    {
-                        writer.Append($"new {parameter.Type}(");
-                        WriteConstant(writer, parameter.DefaultValue.Value);
-                        writer.Append($")");
-                    }
-                    writer.Line($";");
+                    writer.Append($"{variableName:I} ??= ");
                 }
-                else if (CanWriteNullCheck(parameter))
+                else
+                {
+                    writer.Append($"{variableName:I} = {parameter.Name:I} ?? ");
+                }
+
+                var defaultValue = parameter.DefaultValue.Value;
+                if (defaultValue.IsNewInstanceSentinel || TypeFactory.IsExtendableEnum(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
+                {
+                    WriteConstant(writer, defaultValue);
+                }
+                else
+                {
+                    writer.Append($"new {parameter.Type}(");
+                    WriteConstant(writer, parameter.DefaultValue.Value);
+                    writer.Append($")");
+                }
+
+                writer.Line($";");
+            }
+            else if (CanWriteNullCheck(parameter))
+            {
+                // Temporary check to minimize amount of changes in existing generated code
+                if (assignToSelf)
                 {
                     using (writer.Scope($"if ({parameter.Name:I} == null)"))
                     {
                         writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
                     }
                 }
+                else
+                {
+                    writer.Line($"{variableName:I} = {parameter.Name:I} ?? throw new {typeof(ArgumentNullException)}(nameof({parameter.Name:I}));");
+                }
             }
-
-            writer.Line();
+            else if (!assignToSelf)
+            {
+                writer.Line($"{variableName:I} = {parameter.Name:I};");
+            }
         }
 
         private static bool CanWriteNullCheck(Parameter parameter) => parameter.ValidateNotNull && !parameter.Type.IsValueType;
@@ -150,7 +178,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static bool HasAnyNullCheck(this IReadOnlyCollection<Parameter> parameters) => parameters.Any(p => HasNullCheck(p));
 
-        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyCollection<Parameter>? requiredParameters)
+        public static bool TryGetRequiredParameters(this IReadOnlyCollection<Parameter> parameters, [NotNullWhen(true)] out IReadOnlyList<Parameter>? requiredParameters)
         {
             var required = parameters
                 .Where(p => HasNullCheck(p))

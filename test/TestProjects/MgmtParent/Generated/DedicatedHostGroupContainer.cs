@@ -10,12 +10,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
+using MgmtParent.Models;
 
 namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a ResourceGroup. </summary>
-    public partial class DedicatedHostGroupContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
+    public partial class DedicatedHostGroupContainer : ResourceContainerBase<DedicatedHostGroup, DedicatedHostGroupData>
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupContainer"/> class for mocking. </summary>
         protected DedicatedHostGroupContainer()
@@ -33,9 +36,6 @@ namespace MgmtParent
 
         /// <summary> Represents the REST operations. </summary>
         private DedicatedHostGroupsRestOperations _restClient => new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -310,7 +310,7 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> Filters the list of DedicatedHostGroup for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -333,7 +333,7 @@ namespace MgmtParent
             }
         }
 
-        /// <summary> Filters the list of DedicatedHostGroup for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -357,6 +357,6 @@ namespace MgmtParent
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

@@ -60,7 +60,7 @@
                 "tags": [
                     "BillingAccounts"
                 ],
-                "operationId": "BillingAccounts_Update",
+                "operationId": "BillingAccounts_Create",
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
                     "final-state-via": "azure-async-operation"

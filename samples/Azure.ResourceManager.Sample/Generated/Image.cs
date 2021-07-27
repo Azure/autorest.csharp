@@ -12,6 +12,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a Image along with the instance operations that can be performed on it. </summary>
     public class Image : ImageOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "Image"/> class for mocking. </summary>
+        protected Image() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "Image"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets or sets the ImageData. </summary>
-        public ImageData Data { get; private set; }
+        public virtual ImageData Data { get; private set; }
     }
 }

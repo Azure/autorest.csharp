@@ -6,20 +6,21 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TheExtensionFake and their operations over a Fake. </summary>
-    public partial class TheExtensionFakeContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, TheExtensionFake, TheExtensionData>
+    public partial class TheExtensionFakeContainer : ResourceContainerBase<TheExtensionFake, TheExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="TheExtensionFakeContainer"/> class for mocking. </summary>
         protected TheExtensionFakeContainer()
@@ -37,9 +38,6 @@ namespace MgmtListMethods
 
         /// <summary> Represents the REST operations. </summary>
         private SecondResourcesRestOperations _restClient => new SecondResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => FakeOperations.ResourceType;
@@ -390,7 +388,7 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of TheExtensionFake for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="TheExtensionFake" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -413,7 +411,7 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Filters the list of TheExtensionFake for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="TheExtensionFake" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -436,43 +434,7 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<Models.Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeContainer.ListFeatures");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListFeaturesAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Models.Feature>> ListFeatures(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeContainer.ListFeatures");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListFeatures(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, TheExtensionFake, TheExtensionData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, TheExtensionFake, TheExtensionData> Construct() { }
     }
 }

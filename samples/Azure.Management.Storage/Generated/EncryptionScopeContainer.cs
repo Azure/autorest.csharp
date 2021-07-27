@@ -13,12 +13,14 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over a StorageAccount. </summary>
-    public partial class EncryptionScopeContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, EncryptionScope, EncryptionScopeData>
+    public partial class EncryptionScopeContainer : ResourceContainerBase<EncryptionScope, EncryptionScopeData>
     {
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeContainer"/> class for mocking. </summary>
         protected EncryptionScopeContainer()
@@ -36,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private EncryptionScopesRestOperations _restClient => new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -389,7 +388,7 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of EncryptionScope for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -412,7 +411,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of EncryptionScope for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -436,6 +435,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, EncryptionScope, EncryptionScopeData> Construct() { }
     }
 }

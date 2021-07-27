@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtension. </summary>
-    public partial class VirtualMachineExtensionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtension>
+    public partial class VirtualMachineExtensionOperations : ResourceOperationsBase<VirtualMachineExtension>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachineExtensionsRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineExtensionOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -77,7 +80,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<VirtualMachineExtension>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtension>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Get");
             scope.Start();
@@ -96,7 +99,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<VirtualMachineExtension> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtension> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Get");
             scope.Start();
@@ -115,7 +118,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -123,14 +126,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
         /// <summary> The operation to delete the extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Delete");
             scope.Start();
@@ -148,7 +151,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
+        public virtual Response Delete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Delete");
             scope.Start();
@@ -166,7 +169,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<VirtualMachineExtensionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineExtensionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDelete");
             scope.Start();
@@ -184,7 +187,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public VirtualMachineExtensionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual VirtualMachineExtensionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDelete");
             scope.Start();
@@ -205,7 +208,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<VirtualMachineExtension>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtension>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -234,7 +237,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<VirtualMachineExtension> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtension> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -262,7 +265,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<VirtualMachineExtension>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtension>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -291,7 +294,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<VirtualMachineExtension> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtension> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
@@ -320,7 +323,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<VirtualMachineExtension>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtension>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -348,7 +351,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<VirtualMachineExtension> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtension> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
@@ -364,6 +367,106 @@ namespace Azure.ResourceManager.Sample
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public async virtual Task<Response<VirtualMachineExtension>> UpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(extensionParameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public virtual Response<VirtualMachineExtension> Update(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(extensionParameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public async virtual Task<VirtualMachineExtensionsUpdateOperation> StartUpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the extension. </summary>
+        /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
+        public virtual VirtualMachineExtensionsUpdateOperation StartUpdate(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        {
+            if (extensionParameters == null)
+            {
+                throw new ArgumentNullException(nameof(extensionParameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
             }
             catch (Exception e)
             {

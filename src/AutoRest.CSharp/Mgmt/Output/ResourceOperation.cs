@@ -30,6 +30,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<ClientMethod>? _methods;
         private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
+        private IEnumerable<ResourceListMethod>? _resourceOperationsListMethods;
+        private IEnumerable<ResourceListMethod>? _subscriptionExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _resourceGroupExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _tenantExtensionsListMethods;
+        private IEnumerable<ResourceListMethod>? _managementGroupExtensionsListMethods;
 
         private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
 
@@ -47,6 +52,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public Resource Resource => _context.Library.GetArmResource(OperationGroup);
+
+        public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
 
         public string ResourceName => Resource.Type.Name;
 
@@ -66,26 +73,235 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ClientMethod> Methods => _methods ??= GetMethodsInScope();
 
+        public IEnumerable<ClientMethod> ResourceOperationsClientMethods => GetResourceOperationsClientMethods();
+
+        public IEnumerable<RestClientMethod> ResourceOperationsLROMethods => GetResourceOperationsLROMethods();
+
         public IDictionary<OperationGroup, MgmtNonResourceOperation> ChildOperations => _childOperations;
 
-        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverridePagingMethodName);
+        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
 
-        private string OverridePagingMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod)
-        {
-            // override the name for ListBySubscription
-            if (restClientMethod.Name == "ListAll" || restClientMethod.Name == "ListBySubscription")
-            {
-                return $"List{ResourceName.ToPlural()}";
-            }
+        public IEnumerable<ResourceListMethod> ResourceOperationsListMethods => _resourceOperationsListMethods ??= GetResourceOperationsListMethod();
 
-            return restClientMethod.Name;
-        }
+        public IEnumerable<ResourceListMethod>? SubscriptionExtensionsListMethods => _subscriptionExtensionsListMethods ??= GetSubscriptionExtensionsListMethods();
+
+        public IEnumerable<ResourceListMethod>? ResourceGroupExtensionsListMethods => _resourceGroupExtensionsListMethods ??= GetResourceGroupExtensionsListMethods();
+
+        public IEnumerable<ResourceListMethod>? TenantExtensionsListMethods => _tenantExtensionsListMethods ??= GetTenantExtensionsListMethods();
+
+        public IEnumerable<ResourceListMethod>? ManagementGroupExtensionListMethods => _managementGroupExtensionsListMethods ??= GetManagementGroupExtensionsListMethods();
 
         public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
 
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
             return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
+        }
+
+        private IEnumerable<ClientMethod> GetResourceOperationsClientMethods()
+        {
+            var clientMethods = new List<ClientMethod>();
+            foreach (var clientMethod in Methods)
+            {
+                var isMethodAlreadyExist = false;
+                if (ResourceContainer != null)
+                {
+                    isMethodAlreadyExist = clientMethod.RestClientMethod == ResourceContainer.CreateMethod ||
+                        ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod.RestClientMethod) ||
+                        ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
+                        SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
+                }
+                if (!isMethodAlreadyExist)
+                {
+                    clientMethods.Add(clientMethod);
+                }
+            }
+
+            return clientMethods;
+        }
+
+        private IEnumerable<RestClientMethod> GetResourceOperationsLROMethods()
+        {
+            var clientMethods = new List<RestClientMethod>();
+            foreach (var clientMethod in RestClient.Methods)
+            {
+                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning)
+                {
+                    var isMethodExistInContainer = false;
+                    if (ResourceContainer != null)
+                    {
+                        isMethodExistInContainer = clientMethod == ResourceContainer.CreateMethod ||
+                            ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
+                            ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
+                            SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));
+                    }
+                    if (!isMethodExistInContainer)
+                    {
+                        clientMethods.Add(clientMethod);
+                    }
+                }
+            }
+
+            return clientMethods;
+        }
+
+        private IEnumerable<ResourceListMethod> GetResourceOperationsListMethod()
+        {
+            return GetListMethods(true, false);
+        }
+
+        private IEnumerable<ResourceListMethod>? GetSubscriptionExtensionsListMethods()
+        {
+            var listMethods = new List<ResourceListMethod>();
+            // for resource grand child
+            listMethods.AddRange(GetListMethods(false, true).ToList());
+
+            // for non resource grand child
+            listMethods.AddRange(GetListMethods(false, false).ToList());
+
+            var subscriptionExtensionsListMethods = new List<ResourceListMethod>();
+
+            foreach (var listMethod in listMethods)
+            {
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
+
+                // Subscriptions scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/"))
+                {
+                    subscriptionExtensionsListMethods.Add(listMethod);
+                }
+            }
+
+            return subscriptionExtensionsListMethods;
+        }
+
+        private IEnumerable<ResourceListMethod>? GetResourceGroupExtensionsListMethods()
+        {
+            var listMethods = new List<ResourceListMethod>();
+            // for resource grand child
+            listMethods.AddRange(GetListMethods(false, true).ToList());
+
+            // for non resource grand child
+            listMethods.AddRange(GetListMethods(false, false).ToList());
+
+            var resourceGroupExtensionsListMethod = new List<ResourceListMethod>();
+            foreach (var listMethod in listMethods)
+            {
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
+
+                // Resource group scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
+                {
+                    resourceGroupExtensionsListMethod.Add(listMethod);
+                }
+            }
+
+            return resourceGroupExtensionsListMethod;
+        }
+
+        private IEnumerable<ResourceListMethod>? GetTenantExtensionsListMethods()
+        {
+            var listMethods = new List<ResourceListMethod>();
+            // for resource grand child
+            listMethods.AddRange(GetListMethods(false, true).ToList());
+
+            // for non resource grand child
+            listMethods.AddRange(GetListMethods(false, false).ToList());
+
+            var tenantExtensionListMethods = new List<ResourceListMethod>();
+            foreach (var listMethod in listMethods)
+            {
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
+
+                // Tenant scope
+                if (!pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") &&
+                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/") &&
+                    !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
+                {
+                    tenantExtensionListMethods.Add(listMethod);
+                }
+            }
+
+            return tenantExtensionListMethods;
+        }
+
+        private IEnumerable<ResourceListMethod>? GetManagementGroupExtensionsListMethods()
+        {
+            var listMethods = new List<ResourceListMethod>();
+            // for resource grand child
+            listMethods.AddRange(GetListMethods(false, true).ToList());
+
+            // for non resource grand child
+            listMethods.AddRange(GetListMethods(false, false).ToList());
+
+            var managementGroupExtensionsListMethod = new List<ResourceListMethod>();
+            foreach (var listMethod in listMethods)
+            {
+                var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
+
+                // Management Group scope
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ManagementGroups}/"))
+                {
+                    managementGroupExtensionsListMethod.Add(listMethod);
+                }
+            }
+
+            return managementGroupExtensionsListMethod;
+        }
+
+        protected IEnumerable<ResourceListMethod> GetListMethods(bool parentExistsInPathParam, bool returnTypeIsResourceData)
+        {
+            List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
+            foreach (var pagingMethod in PagingMethods)
+            {
+                if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, pagingMethod.Method))
+                {
+                    listMethods.Add(new ResourceListMethod(pagingMethod));
+                }
+            }
+
+            foreach (var method in Methods)
+            {
+                if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, method.RestClientMethod))
+                {
+                    listMethods.Add(new ResourceListMethod(method));
+                }
+            }
+
+            return listMethods;
+        }
+
+        private bool IsValidListMethod(bool parentExistsInPathParam, bool returnTypeIsResourceData, RestClientMethod clientMethod)
+        {
+            if (parentExistsInPathParam == false && returnTypeIsResourceData == false && !MethodExtensions.GetBodyTypeForList(clientMethod, OperationGroup, _context).IsListFunction)
+            {
+                return false;
+            }
+
+            bool isParentExistsInPathParams = false;
+            bool isReturnTypeResourceData = false;
+
+            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+            isParentExistsInPathParams = MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+
+            var resourceData = _context.Library.GetResourceData(OperationGroup);
+            var returnType = clientMethod.ReturnType;
+            if (returnType != null && !returnType.IsFrameworkType)
+            {
+                var objType = returnType.Implementation as MgmtObjectType;
+                isReturnTypeResourceData = objType != null && objType.Properties.Any(p => p.ValueType.Name == "IReadOnlyList" && p.ValueType.Arguments != null && p.ValueType.Arguments[0].Name == resourceData.Type.Name);
+            }
+            else if (returnType != null && returnType.Arguments != null)
+            {
+                isReturnTypeResourceData = returnType.Name == "IReadOnlyList" && returnType.Arguments != null && returnType.Arguments[0].Name == resourceData.Type.Name;
+            }
+
+            if (isParentExistsInPathParams == parentExistsInPathParam && isReturnTypeResourceData == returnTypeIsResourceData)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public Diagnostic GetDiagnostic(RestClientMethod method)
@@ -95,10 +311,41 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
-            StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing the operations that can be performed over a specific {clientPrefix}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
+        }
+
+        public class ResourceListMethod
+        {
+            public PagingMethod? PagingMethod { get; }
+
+            public ClientMethod? ClientMethod { get; }
+
+            public ResourceListMethod(PagingMethod pagingMethod)
+            {
+                PagingMethod = pagingMethod;
+                ClientMethod = null;
+            }
+            public ResourceListMethod(ClientMethod clientMethod)
+            {
+                PagingMethod = null;
+                ClientMethod = clientMethod;
+            }
+
+            public RestClientMethod? GetRestClientMethod()
+            {
+                if (PagingMethod != null)
+                {
+                    return PagingMethod.Method;
+                }
+                else if (ClientMethod != null)
+                {
+                    return ClientMethod.RestClientMethod;
+                }
+
+                return null;
+            }
         }
     }
 }

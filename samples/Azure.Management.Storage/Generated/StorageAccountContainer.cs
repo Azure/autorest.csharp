@@ -13,12 +13,14 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a ResourceGroup. </summary>
-    public partial class StorageAccountContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData>
+    public partial class StorageAccountContainer : ResourceContainerBase<StorageAccount, StorageAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -36,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private StorageAccountsRestOperations _restClient => new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -326,7 +325,7 @@ namespace Azure.Management.Storage
         {
             Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
                 scope.Start();
                 try
                 {
@@ -349,7 +348,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
                 scope.Start();
                 try
                 {
@@ -365,7 +364,7 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Filters the list of StorageAccount for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -388,7 +387,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of StorageAccount for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -411,143 +410,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StorageAccountListKeysResult>> ListKeysAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListKeys");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageAccountListKeysResult> ListKeys(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListKeys");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List SAS credentials of a storage account. </summary>
-        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(AccountSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListAccountSAS");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List SAS credentials of a storage account. </summary>
-        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ListAccountSasResponse> ListAccountSAS(AccountSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListAccountSAS");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List service SAS credentials of a specific resource. </summary>
-        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListServiceSAS");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ListServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List service SAS credentials of a specific resource. </summary>
-        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ListServiceSasResponse> ListServiceSAS(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListServiceSAS");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ListServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
     }
 }

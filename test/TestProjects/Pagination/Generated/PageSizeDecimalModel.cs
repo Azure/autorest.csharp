@@ -6,13 +6,17 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using Pagination.Models;
 
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeDecimalModel along with the instance operations that can be performed on it. </summary>
     public class PageSizeDecimalModel : PageSizeDecimalModelOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class for mocking. </summary>
+        protected PageSizeDecimalModel() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +26,6 @@ namespace Pagination
         }
 
         /// <summary> Gets or sets the PageSizeDecimalModelData. </summary>
-        public PageSizeDecimalModelData Data { get; private set; }
+        public virtual PageSizeDecimalModelData Data { get; private set; }
     }
 }

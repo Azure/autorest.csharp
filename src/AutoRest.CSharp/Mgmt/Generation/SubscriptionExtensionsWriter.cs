@@ -3,8 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -12,7 +15,9 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -29,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(Description);
+                writer.WriteXmlDocumentationSummary($"{Description}");
                 using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
@@ -52,22 +57,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                            PagingMethod? pagingMethod = default;
-                            foreach (var method in resourceOperation.PagingMethods)
-                            {
-                                if (method.Method.Name == "ListAll" || method.Method.Name == "ListBySubscription")
-                                {
-                                    pagingMethod = method;
-                                    break;
-                                }
-                            }
-                            if (pagingMethod != null)
+                            if (resourceOperation.SubscriptionExtensionsListMethods != null && resourceOperation.SubscriptionExtensionsListMethods.Count() > 0)
                             {
                                 writer.Line($"#region {resource.Type.Name}");
                                 WriteGetRestOperations(writer, resourceOperation.RestClient);
 
-                                WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, true);
-                                WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, false);
+                                foreach (var listMethod in resourceOperation.SubscriptionExtensionsListMethods)
+                                {
+                                    var methodName = $"List{resource.Type.Name.ToPlural()}";
+                                    var count = resourceOperation.SubscriptionExtensionsListMethods.Count();
+                                    if (listMethod.PagingMethod != null)
+                                    {
+                                        if (count > 1 && listMethod.PagingMethod.Name == "ListByLocation")
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
+                                        }
+
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, true);
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, false);
+                                    }
+
+                                    if (listMethod.ClientMethod != null)
+                                    {
+                                        if (count > 1 && listMethod.ClientMethod.Name == "ListByLocation")
+                                        {
+                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
+                                        }
+
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient.Type.Name);
+                                        WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, false, resourceOperation.RestClient.Type.Name);
+                                    }
+
+                                }
 
                                 WriteListResourceByNameMethod(writer, resourceOperation, true);
                                 WriteListResourceByNameMethod(writer, resourceOperation, false);
@@ -88,14 +109,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, true, mgmtExtensionOperation.RestClient.Type.Name);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient.Type.Name);
                         }
 
                         writer.LineRaw("#endregion");
@@ -117,21 +138,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
+        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, string methodName, MgmtConfiguration config, bool async)
         {
-            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod,
+            if (pagingMethod.PagingResponse.ItemType.Name.Equals(resourceOperation.ResourceData.Type.Name))
+            {
+                WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, methodName,
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
+            }
+            else
+            {
+                WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, resourceOperation.RestClient, pagingMethod, methodName,
+                $"", async);
+            }
         }
 
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a <see cref=\"{typeof(SubscriptionOperations)}\" /> represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
-            writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
+            writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
+            writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = typeof(GenericResourceExpanded).WrapPageable(async);

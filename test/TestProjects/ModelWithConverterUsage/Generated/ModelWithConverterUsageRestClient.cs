@@ -28,9 +28,7 @@ namespace ModelWithConverterUsage
         /// <param name="endpoint"> server parameter. </param>
         public ModelWithConverterUsageRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("");
-
-            this.endpoint = endpoint;
+            this.endpoint = endpoint ?? new Uri("");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

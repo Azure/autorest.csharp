@@ -28,9 +28,7 @@ namespace xms_error_responses
         /// <param name="endpoint"> server parameter. </param>
         public PetRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("http://localhost");
-
-            this.endpoint = endpoint;
+            this.endpoint = endpoint ?? new Uri("http://localhost");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

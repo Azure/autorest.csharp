@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of ChildBodySubParent and their operations over a SubParent. </summary>
-    public partial class ChildBodySubParentContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ChildBodySubParent, ChildBodyData>
+    public partial class ChildBodySubParentContainer : ResourceContainerBase<ChildBodySubParent, ChildBodyData>
     {
         /// <summary> Initializes a new instance of the <see cref="ChildBodySubParentContainer"/> class for mocking. </summary>
         protected ChildBodySubParentContainer()
@@ -36,9 +38,6 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Represents the REST operations. </summary>
         private ChildrenRestOperations _restClient => new ChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubParentOperations.ResourceType;
@@ -397,7 +396,7 @@ namespace MgmtMultipleParentResource
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of ChildBodySubParent for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="ChildBodySubParent" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -420,7 +419,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        /// <summary> Filters the list of ChildBodySubParent for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="ChildBodySubParent" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -444,6 +443,6 @@ namespace MgmtMultipleParentResource
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ChildBodySubParent, ChildBodyData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ChildBodySubParent, ChildBodyData> Construct() { }
     }
 }

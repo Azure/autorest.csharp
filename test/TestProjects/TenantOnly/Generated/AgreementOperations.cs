@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
+    public partial class AgreementOperations : ResourceOperationsBase<Agreement>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AgreementsRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AgreementOperations(OperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected internal AgreementOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -77,7 +79,7 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<Agreement>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Agreement>> GetAsync(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementOperations.Get");
             scope.Start();
@@ -96,7 +98,7 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<Agreement> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<Agreement> Get(string expand, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementOperations.Get");
             scope.Start();
@@ -115,7 +117,7 @@ namespace TenantOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -123,7 +125,7 @@ namespace TenantOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }

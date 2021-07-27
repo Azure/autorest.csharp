@@ -7,9 +7,10 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
     public partial class FileServiceData : IUtf8JsonSerializable
     {
@@ -35,7 +36,7 @@ namespace Azure.Management.Storage.Models
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
             Optional<Sku> sku = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<CorsRules> cors = default;

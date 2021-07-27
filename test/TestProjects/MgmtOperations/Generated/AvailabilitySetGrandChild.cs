@@ -6,13 +6,17 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
     /// <summary> A Class representing a AvailabilitySetGrandChild along with the instance operations that can be performed on it. </summary>
     public class AvailabilitySetGrandChild : AvailabilitySetGrandChildOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChild"/> class for mocking. </summary>
+        protected AvailabilitySetGrandChild() : base()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChild"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -22,6 +26,6 @@ namespace MgmtOperations
         }
 
         /// <summary> Gets or sets the AvailabilitySetGrandChildData. </summary>
-        public AvailabilitySetGrandChildData Data { get; private set; }
+        public virtual AvailabilitySetGrandChildData Data { get; private set; }
     }
 }

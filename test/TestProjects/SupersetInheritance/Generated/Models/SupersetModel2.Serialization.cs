@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
     public partial class SupersetModel2 : IUtf8JsonSerializable
     {

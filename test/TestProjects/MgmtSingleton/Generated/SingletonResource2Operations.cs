@@ -6,12 +6,13 @@
 #nullable disable
 
 using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
     /// <summary> A class representing the operations that can be performed over a specific SingletonResource2. </summary>
-    public partial class SingletonResource2Operations : SingletonOperationsBase<ResourceGroupResourceIdentifier, SingletonResource2>
+    public partial class SingletonResource2Operations : SingletonOperationsBase<SingletonResource2>
     {
         /// <summary> Initializes a new instance of the <see cref="SingletonResource2Operations"/> class for mocking. </summary>
         protected SingletonResource2Operations()

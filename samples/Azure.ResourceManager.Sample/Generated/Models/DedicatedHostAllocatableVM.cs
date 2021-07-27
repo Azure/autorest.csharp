@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Represents the dedicated host unutilized capacity in terms of a specific VM size. </summary>
     public partial class DedicatedHostAllocatableVM

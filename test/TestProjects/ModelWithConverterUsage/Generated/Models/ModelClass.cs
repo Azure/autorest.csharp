@@ -18,7 +18,7 @@ namespace ModelWithConverterUsage.Models
         }
 
         /// <summary> Initializes a new instance of ModelClass. </summary>
-        /// <param name="stringProperty"> . </param>
+        /// <param name="stringProperty"></param>
         /// <param name="enumProperty"> More Letters. </param>
         /// <param name="objProperty"> The product documentation. </param>
         internal ModelClass(string stringProperty, EnumProperty enumProperty, Product objProperty)

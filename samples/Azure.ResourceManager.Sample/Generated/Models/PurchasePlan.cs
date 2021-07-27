@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Used for establishing the purchase context of any 3rd Party artifact through MarketPlace. </summary>
     public partial class PurchasePlan

@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
     public partial class VirtualMachineScaleSetVMInstanceRequiredIDs

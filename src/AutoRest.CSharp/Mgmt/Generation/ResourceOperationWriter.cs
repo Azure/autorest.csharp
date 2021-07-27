@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -22,7 +20,9 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary(_resourceOperation.Description);
+                _writer.WriteXmlDocumentationSummary($"{_resourceOperation.Description}");
 
                 var operationGroup = _resourceOperation.OperationGroup;
                 var resource = _context.Library.GetArmResource(operationGroup);
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { _resourceOperation.ResourceIdentifierType, resource.Type };
+                CSharpType[] arguments = { resource.Type };
                 CSharpType type = new CSharpType(baseClass, arguments);
                 _writer.Append($"{type}, ");
 
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
-                CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), _resourceOperation.ResourceIdentifierType);
+                CSharpType inheritType = new CSharpType(typeof(TrackedResource));
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
                 {
                     _isITaggableResource = true;
@@ -145,10 +145,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // write "resource + id" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+            writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
             if (!isSingleton)
             {
-                writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+                writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
             using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
@@ -156,11 +156,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 if (!isSingleton)
                 {
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    var subscriptionValue = (resourceOperation.ResourceIdentifierType == typeof(TenantResourceIdentifier)) ? string.Empty : "Id.SubscriptionId, ";
-                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}BaseUri);");
+                    var subscriptionParamString = resourceOperation.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                    writer.Line($"{RestClientField} = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
                     {
-                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}BaseUri);");
+                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     }
                 }
             }
@@ -175,7 +175,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
-        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, Resource resource, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
+        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, Output.Resource resource, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)
         {
             var clientMethodsList = new List<RestClientMethod>();
 
@@ -203,46 +203,20 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).FirstOrDefault();
                 // write delete method
-                WriteFirstLROMethod(writer, deleteMethod, context, true);
-                WriteFirstLROMethod(writer, deleteMethod, context, false);
+                WriteFirstLROMethod(writer, deleteMethod, context, true, true);
+                WriteFirstLROMethod(writer, deleteMethod, context, false, true);
 
-                WriteStartLROMethod(writer, deleteMethod, context, true);
-                WriteStartLROMethod(writer, deleteMethod, context, false);
+                WriteStartLROMethod(writer, deleteMethod, context, true, true);
+                WriteStartLROMethod(writer, deleteMethod, context, false, true);
                 clientMethodsList.Add(deleteMethod);
             }
 
             if (_isITaggableResource)
             {
-                var updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Patch);
-                if (updateMethods == null || updateMethods.Count() == 0)
-                {
-                    updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Put);
-                    // TODO -- not all the PUT operations can be used for update tags
-                }
-
-                RestClientMethod? updateMethod = null;
-                if (updateMethods != null && updateMethods.Count() == 1)
-                {
-                    updateMethod = updateMethods.FirstOrDefault();
-                }
-                else if (updateMethods != null && updateMethods.Count() > 1)
-                {
-                    updateMethod = updateMethods.Where(m => m.Name == "Update").FirstOrDefault();
-                }
-                else
-                {
-                    if (!resourceOperation.OperationGroup.IsTupleResource(context))
-                        throw new Exception($"Please update the swagger for {resource.Type.Name} to add the update operation.");
-                }
-
-                if (updateMethod != null)
-                {
-                    // write update method
-                    WriteAddTagMethod(writer, resourceOperation, updateMethod, context);
-                    WriteSetTagsMethod(writer, resourceOperation, updateMethod, context);
-                    WriteRemoveTagMethod(writer, resourceOperation, updateMethod, context);
-                    clientMethodsList.Add(updateMethod);
-                }
+                // write update method
+                WriteAddTagMethod(writer, resourceOperation, context);
+                WriteSetTagsMethod(writer, resourceOperation, context);
+                WriteRemoveTagMethod(writer, resourceOperation, context);
             }
 
             // 1. Listing myself at parent scope -> on the container named list
@@ -250,14 +224,23 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
-            foreach (var clientMethod in resourceOperation.Methods)
+            var resourceContainer = context.Library.GetResourceContainer(resourceOperation.OperationGroup);
+            foreach (var clientMethod in resourceOperation.ResourceOperationsClientMethods)
             {
-                if (!clientMethodsList.Contains(clientMethod.RestClientMethod) &&
-                    clientMethod.RestClientMethod.Request.HttpMethod != RequestMethod.Put &&
-                    !clientMethod.Name.StartsWith("List"))
+                if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                }
+            }
+
+            // write paging methods
+            foreach (var listMethod in resourceOperation.ResourceOperationsListMethods)
+            {
+                if (listMethod.PagingMethod != null)
+                {
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, false);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, true);
                 }
             }
 
@@ -267,21 +250,20 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
-                    WriteChildPagingMethod(writer, pair.Key, false, pagingMethod);
-                    WriteChildPagingMethod(writer, pair.Key, true, pagingMethod);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), false);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), true);
                 }
             }
 
             // write rest of the LRO methods
-            foreach (var clientMethod in resourceOperation.RestClient.Methods)
+            foreach (var clientMethod in resourceOperation.ResourceOperationsLROMethods)
             {
-                if (clientMethod.Operation != null && clientMethod.Operation.IsLongRunning &&
-                    !clientMethodsList.Contains(clientMethod) && clientMethod.Request.HttpMethod != RequestMethod.Put)
+                if (!clientMethodsList.Contains(clientMethod))
                 {
                     WriteLRO(writer, clientMethod, resourceOperation, context);
                 }
@@ -306,26 +288,26 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteChildPagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod)
+        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, string restClientName, bool async)
         {
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
 
-            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
+            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
             foreach (var param in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
 
             CSharpType itemType = pagingMethod.PagingResponse.ItemType;
-            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
+            FormattableString returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentationReturns(returnText);
 
             var returnType = itemType.WrapPageable(async);
 
             var methodName = CreateMethodName(pagingMethod.Name, async);
-            writer.Append($"public {returnType} {methodName}(");
+            writer.Append($"public virtual {returnType} {methodName}(");
             foreach (var param in nonPathParameters)
             {
                 writer.WriteParameter(param);
@@ -334,7 +316,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, itemType, GetRestClientName(operationGroup), pagingMethod.Diagnostics,
+                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, pagingMethod.Diagnostics,
                     ClientDiagnosticsField, $"", async);
             }
         }
@@ -344,7 +326,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
         {
             writer.Line();
             var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
@@ -354,15 +336,15 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
             else
             {
-                writer.WriteXmlDocumentationSummary(clientMethod.Description);
+                writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
                 foreach (Parameter parameter in nonPathParameters)
                 {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
                 }
-                writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+                writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             }
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod)} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
 
             if (!isInheritedMethod)
             {
@@ -429,12 +411,12 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"A collection of locations that may take multiple service requests to iterate over.");
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)
@@ -445,25 +427,25 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteAddTag(writer, resourceOperation, clientMethod, context, true);
-            WriteAddTag(writer, resourceOperation, clientMethod, context, false);
+            WriteAddTag(writer, resourceOperation, context, true);
+            WriteAddTag(writer, resourceOperation, context, false);
         }
 
-        private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Add a tag to the current resource.");
-            writer.WriteXmlDocumentationParameter("key", "The key for the tag.");
-            writer.WriteXmlDocumentationParameter("value", "The value for the tag.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
+            writer.WriteXmlDocumentationSummary($"Add a tag to the current resource.");
+            writer.WriteXmlDocumentationParameter("key", $"The key for the tag.");
+            writer.WriteXmlDocumentationParameter("value", $"The value for the tag.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -493,24 +475,24 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteSetTagsMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteSetTagsMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteSetTags(writer, resourceOperation, clientMethod, context, true);
-            WriteSetTags(writer, resourceOperation, clientMethod, context, false);
+            WriteSetTags(writer, resourceOperation, context, true);
+            WriteSetTags(writer, resourceOperation, context, false);
         }
 
-        private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Replace the tags on the resource with the given set.");
-            writer.WriteXmlDocumentationParameter("tags", "The set of tags to use as replacement.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
+            writer.WriteXmlDocumentationSummary($"Replace the tags on the resource with the given set.");
+            writer.WriteXmlDocumentationParameter("tags", $"The set of tags to use as replacement.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tags replaced.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (tags == null)"))
@@ -550,24 +532,24 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteRemoveTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteRemoveTagMethod(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteRemoveTag(writer, resourceOperation, clientMethod, context, true);
-            WriteRemoveTag(writer, resourceOperation, clientMethod, context, false);
+            WriteRemoveTag(writer, resourceOperation, context, true);
+            WriteRemoveTag(writer, resourceOperation, context, false);
         }
 
-        private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary("Removes a tag by key from the resource.");
-            writer.WriteXmlDocumentationParameter("key", "The key of the tag to remove.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
+            writer.WriteXmlDocumentationSummary($"Removes a tag by key from the resource.");
+            writer.WriteXmlDocumentationParameter("key", $"The key of the tag to remove.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns($"The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             var responseType = resource.Type.WrapAsyncResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -597,7 +579,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteTaggableCommonMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteTaggableCommonMethod(CodeWriter writer, Output.Resource resource, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             if (async)
             {
@@ -645,11 +627,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteFirstLROMethod(writer, clientMethod, context, true);
-            WriteFirstLROMethod(writer, clientMethod, context, false);
+            WriteFirstLROMethod(writer, clientMethod, context, true, true);
+            WriteFirstLROMethod(writer, clientMethod, context, false, true);
 
-            WriteStartLROMethod(writer, clientMethod, context, true);
-            WriteStartLROMethod(writer, clientMethod, context, false);
+            WriteStartLROMethod(writer, clientMethod, context, true, true);
+            WriteStartLROMethod(writer, clientMethod, context, false, true);
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)

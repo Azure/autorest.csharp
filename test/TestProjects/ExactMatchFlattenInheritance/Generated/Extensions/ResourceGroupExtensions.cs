@@ -5,14 +5,14 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region AzureResourceFlattenModel1s
+        #region AzureResourceFlattenModel1
         /// <summary> Gets an object representing a AzureResourceFlattenModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1Container" /> object. </returns>
@@ -22,7 +22,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModel2s
+        #region AzureResourceFlattenModel2
         /// <summary> Gets an object representing a AzureResourceFlattenModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel2Container" /> object. </returns>
@@ -32,7 +32,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModel3s
+        #region AzureResourceFlattenModel3
         /// <summary> Gets an object representing a AzureResourceFlattenModel3Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel3Container" /> object. </returns>
@@ -42,7 +42,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModel4s
+        #region AzureResourceFlattenModel4
         /// <summary> Gets an object representing a AzureResourceFlattenModel4Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel4Container" /> object. </returns>
@@ -52,7 +52,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModel5s
+        #region AzureResourceFlattenModel5
         /// <summary> Gets an object representing a AzureResourceFlattenModel5Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AzureResourceFlattenModel5Container" /> object. </returns>
@@ -62,7 +62,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region CustomModel2s
+        #region CustomModel2
         /// <summary> Gets an object representing a CustomModel2Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel2Container" /> object. </returns>
@@ -72,7 +72,7 @@ namespace ExactMatchFlattenInheritance
         }
         #endregion
 
-        #region CustomModel3s
+        #region CustomModel3
         /// <summary> Gets an object representing a CustomModel3Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel3Container" /> object. </returns>

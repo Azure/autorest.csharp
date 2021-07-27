@@ -18,7 +18,7 @@ operation-group-to-resource-type:
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
+   VirtualMachineExtensionImages: NonResource
    VirtualMachineImages: NonResource
    VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
@@ -31,7 +31,7 @@ operation-group-to-parent:
    VirtualMachineSizes: subscriptions
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
-operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages
+operation-group-is-tuple: VirtualMachineImages
 operation-group-is-extension: VirtualMachineScaleSetVMExtensions
 modelerfour:
   lenient-model-deduplication: true

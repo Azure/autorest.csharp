@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +15,9 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -61,13 +62,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (_writer.Namespace(TypeOfThis.Namespace))
             {
-                _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
-                string baseClass = GetBaseType();
-                using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : {baseClass}"))
+                _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
+                _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
+                if (_resourceContainer.GetMethod != null)
+                {
+                    _writer.Line($"ResourceContainerBase<{_resource.Type}, {_resourceData.Type}>");
+                }
+                else
+                {
+                    _writer.Line($"{typeof(ContainerBase)}");
+                }
+                using (_writer.Scope())
                 {
                     WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
                     WriteFields(_writer, _restClient!);
-                    WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteRemainingMethods();
@@ -81,24 +89,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, restMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
-        }
-
-        protected virtual string GetBaseType()
-        {
-            return _resourceContainer.GetMethod != null
-                ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                : $"ContainerBase";
-        }
-
-        private void WriteIdProperty()
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            var idType = _resourceContainer.OperationGroup.GetResourceIdentifierType(_context);
-            _writer.Line($"public new {idType} Id => base.Id as {idType};");
         }
 
         private void WriteResourceOperations()
@@ -106,9 +99,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.LineRaw($"// Container level operations.");
 
-            if (_resourceContainer.PutMethod != null)
+            if (_resourceContainer.CreateMethod != null)
             {
-                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod);
             }
 
             if (_resourceContainer.GetMethod != null)
@@ -223,7 +216,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             const string cancellationTokenParameter = "cancellationToken";
-            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""CancellationToken.None"" />.");
+            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
 
             _writer.Append($"public {AsyncKeyword(isAsync)} {OverrideKeyword(isOverride, true)} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
             foreach (var parameter in parameters)
@@ -279,10 +272,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            if (_resourceContainer.ListMethod != null)
+            foreach (var listMethod in _resourceContainer.ListMethods)
             {
-                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                if (listMethod.PagingMethod != null)
+                {
+                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                }
+
+                if (listMethod.ClientMethod != null)
+                {
+                    _writer.Line();
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                }
             }
 
             WriteListAsGenericResource(async: false);
@@ -294,11 +297,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string syncMethodName = "ListAsGenericResource";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
-            _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            _writer.WriteXmlDocumentationParameter("expand", "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
-            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");
+            _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
+            _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
+            _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
             CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResourceExpanded));
             using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))

@@ -28,9 +28,7 @@ namespace body_complex
         /// <param name="endpoint"> server parameter. </param>
         public PolymorphicrecursiveRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("http://localhost:3000");
-
-            this.endpoint = endpoint;
+            this.endpoint = endpoint ?? new Uri("http://localhost:3000");
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -159,7 +157,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
@@ -235,7 +233,7 @@ namespace body_complex
         ///             &quot;age&quot;: 105
         ///         }
         ///     ]
-        /// }.
+        /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
