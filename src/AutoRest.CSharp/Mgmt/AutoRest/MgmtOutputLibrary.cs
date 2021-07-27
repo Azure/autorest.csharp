@@ -144,29 +144,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
         {
-            Queue<Schema> sInUseQueue = new Queue<Schema>(setToProcess);
-            while (sInUseQueue.Count > 0)
+            Queue<Schema> sQueue = new Queue<Schema>(setToProcess);
+            while (sQueue.Count > 0)
             {
-                var cur = sInUseQueue.Dequeue();
+                var cur = sQueue.Dequeue();
                 if (cur is ObjectSchema curSchema)
                 {
                     foreach (var property in curSchema.Properties)
                     {
                         if (property.Schema is ObjectSchema propertySchema)
                         {
-                            sInUseQueue.Enqueue(propertySchema);
+                            sQueue.Enqueue(propertySchema);
                             setToProcess.Add(propertySchema);
                         }
                     }
                     if (curSchema.Parents != null)
                     {
-                        foreach (var parent in curSchema.Parents.All)
+                        foreach (var parent in curSchema.Parents.)
                         {
                             if (parent is ObjectSchema parentSchema)
                             {
-                                //remove the child from the parent
-                                //parent.Children.Remove(curSchema)
-                                sInUseQueue.Enqueue(parentSchema);
+                                sQueue.Enqueue(parentSchema);
                                 setToProcess.Add(parentSchema);
                             }
                         }
