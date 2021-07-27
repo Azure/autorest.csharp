@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Invoker of the Upgrade Operation. </summary>
     public enum UpgradeOperationInvoker

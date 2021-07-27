@@ -15,10 +15,10 @@ namespace xml_service.Models
     public partial class ListContainersResponse
     {
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        /// <param name="serviceEndpoint"> . </param>
-        /// <param name="prefix"> . </param>
-        /// <param name="maxResults"> . </param>
-        /// <param name="nextMarker"> . </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="prefix"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="nextMarker"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="serviceEndpoint"/>, <paramref name="prefix"/>, or <paramref name="nextMarker"/> is null. </exception>
         internal ListContainersResponse(string serviceEndpoint, string prefix, int maxResults, string nextMarker)
         {
@@ -43,12 +43,12 @@ namespace xml_service.Models
         }
 
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
-        /// <param name="serviceEndpoint"> . </param>
-        /// <param name="prefix"> . </param>
-        /// <param name="marker"> . </param>
-        /// <param name="maxResults"> . </param>
-        /// <param name="containers"> . </param>
-        /// <param name="nextMarker"> . </param>
+        /// <param name="serviceEndpoint"></param>
+        /// <param name="prefix"></param>
+        /// <param name="marker"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="containers"></param>
+        /// <param name="nextMarker"></param>
         internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker)
         {
             ServiceEndpoint = serviceEndpoint;

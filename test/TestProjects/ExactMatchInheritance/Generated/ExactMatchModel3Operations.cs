@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel3. </summary>
-    public partial class ExactMatchModel3Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ExactMatchModel3>
+    public partial class ExactMatchModel3Operations : ResourceOperationsBase<ExactMatchModel3>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ExactMatchModel3SRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ExactMatchModel3Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ExactMatchModel3Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ExactMatchModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific WritableSubResourceModel1. </summary>
-    public partial class WritableSubResourceModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, WritableSubResourceModel1>
+    public partial class WritableSubResourceModel1Operations : ResourceOperationsBase<WritableSubResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private WritableSubResourceModel1SRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal WritableSubResourceModel1Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal WritableSubResourceModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new WritableSubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

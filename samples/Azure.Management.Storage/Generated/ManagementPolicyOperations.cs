@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ManagementPolicy. </summary>
-    public partial class ManagementPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ManagementPolicy>
+    public partial class ManagementPolicyOperations : ResourceOperationsBase<ManagementPolicy>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ManagementPoliciesRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ManagementPolicyOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ManagementPolicyOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

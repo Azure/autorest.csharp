@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class AvailabilitySetUpdate : UpdateResource

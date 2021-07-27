@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator

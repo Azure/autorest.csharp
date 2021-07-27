@@ -7,9 +7,9 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
-namespace MgmtSingleton
+namespace MgmtSingleton.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {
@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

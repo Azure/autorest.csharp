@@ -8,12 +8,12 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a virtual machine scale set network profile&apos;s IP configuration. </summary>
-    public partial class VirtualMachineScaleSetIPConfiguration : WritableSubResource<ResourceIdentifier>
+    public partial class VirtualMachineScaleSetIPConfiguration : WritableSubResource
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
         /// <param name="name"> The IP configuration name. </param>

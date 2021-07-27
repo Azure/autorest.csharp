@@ -5,12 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The SubResourceWithColocationStatus. </summary>
-    public partial class SubResourceWithColocationStatus : WritableSubResource<ResourceIdentifier>
+    public partial class SubResourceWithColocationStatus : WritableSubResource
     {
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
         public SubResourceWithColocationStatus()

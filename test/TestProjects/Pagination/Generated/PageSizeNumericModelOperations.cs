@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Pagination
 {
     /// <summary> A class representing the operations that can be performed over a specific PageSizeNumericModel. </summary>
-    public partial class PageSizeNumericModelOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PageSizeNumericModel>
+    public partial class PageSizeNumericModelOperations : ResourceOperationsBase<PageSizeNumericModel>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PageSizeNumericModelsRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModelOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PageSizeNumericModelOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal PageSizeNumericModelOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

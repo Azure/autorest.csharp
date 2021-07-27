@@ -14,7 +14,7 @@ namespace additionalProperties.Models
     public partial class PetAPString
     {
         /// <summary> Initializes a new instance of PetAPString. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"></param>
         public PetAPString(int id)
         {
             Id = id;
@@ -22,9 +22,9 @@ namespace additionalProperties.Models
         }
 
         /// <summary> Initializes a new instance of PetAPString. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="status"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="status"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal PetAPString(int id, string name, bool? status, IDictionary<string, string> additionalProperties)
         {

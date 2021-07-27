@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     public partial class Usage
     {

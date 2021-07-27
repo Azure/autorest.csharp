@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific TrackedResourceModel1. </summary>
-    public partial class TrackedResourceModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, TrackedResourceModel1>
+    public partial class TrackedResourceModel1Operations : ResourceOperationsBase<TrackedResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private TrackedResourceModel1SRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TrackedResourceModel1Operations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal TrackedResourceModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TrackedResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes an available virtual machine scale set sku. </summary>
     public partial class VirtualMachineScaleSetSku

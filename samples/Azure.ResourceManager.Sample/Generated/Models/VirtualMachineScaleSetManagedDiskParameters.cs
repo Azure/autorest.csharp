@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes the parameters of a ScaleSet managed disk. </summary>
     public partial class VirtualMachineScaleSetManagedDiskParameters

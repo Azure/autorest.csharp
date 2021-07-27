@@ -7,7 +7,7 @@
 
 using System;
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     /// <summary> Describes Compute Resource Usage. </summary>
     public partial class Usage

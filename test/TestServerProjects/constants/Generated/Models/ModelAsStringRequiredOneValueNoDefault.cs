@@ -11,7 +11,7 @@ namespace constants.Models
     internal partial class ModelAsStringRequiredOneValueNoDefault
     {
         /// <summary> Initializes a new instance of ModelAsStringRequiredOneValueNoDefault. </summary>
-        /// <param name="parameter"> . </param>
+        /// <param name="parameter"></param>
         internal ModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultEnum parameter)
         {
             Parameter = parameter;

@@ -28,6 +28,7 @@ operation-group-to-parent:
   Usages: subscriptions
   StorageAccounts: resourceGroups
   PrivateLinkResources: Microsoft.Storage/storageAccounts
+singleton-resource: BlobService;FileService
 directive:
   - rename-model:
       from: BlobServiceProperties

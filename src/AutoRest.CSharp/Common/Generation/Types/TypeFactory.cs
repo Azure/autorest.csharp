@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Generation.Types
                 return true;
             }
 
-            if (IsStruct(type) && defaultValue.Value.Value != null)
+            if (IsExtendableEnum(type) && defaultValue.Value.Value != null)
             {
                 return defaultValue.Value.IsNewInstanceSentinel;
             }
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Types
             return type.IsValueType || defaultValue.Value.Value == null;
         }
 
-        public static bool IsStruct(CSharpType type)
+        public static bool IsExtendableEnum(CSharpType type)
         {
             return !type.IsFrameworkType && type.IsValueType &&
                 type.Implementation is EnumType enumType &&

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The configuration parameters used while performing a rolling upgrade. </summary>
     public partial class RollingUpgradePolicy

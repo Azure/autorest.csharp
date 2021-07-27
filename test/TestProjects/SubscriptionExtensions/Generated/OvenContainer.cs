@@ -6,19 +6,19 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Oven, OvenData>
+    public partial class OvenContainer : ResourceContainerBase<Oven, OvenData>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -36,9 +36,6 @@ namespace SubscriptionExtensions
 
         /// <summary> Represents the REST operations. </summary>
         private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -313,85 +310,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Oven" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Oven> List(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            Page<Oven> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.ListAll(statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
-                scope.Start();
-                try
-                {
-                    var response = _restClient.ListAllNextPage(nextLink, statusOnly, cancellationToken: cancellationToken);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Oven" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Oven> ListAsync(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.ListAllAsync(statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
-                scope.Start();
-                try
-                {
-                    var response = await _restClient.ListAllNextPageAsync(nextLink, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Oven" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -414,7 +333,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Oven" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -438,6 +357,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

@@ -12,11 +12,18 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "OneResources": "Microsoft.Fake/oneResources",
-    "SecondResources": "Microsoft.Fake/fakes/secondResources"
+    "SecondResources": "Microsoft.Fake/fakes/secondResources",
+    "SubFakes": "Microsoft.Fake/fakes/subFakes",
+    "SharedGalleries": "Microsoft.Compute/locations/sharedGalleries"
+  },
+  "OperationGroupToResource": {
+    "SharedGalleries": "SharedGallery"
   },
   "OperationGroupToParent": {
     "OneResources": "resourceGroups",
-    "SecondResources": "Microsoft.Fake/fakes"
+    "SecondResources": "Microsoft.Fake/fakes",
+    "SubFakes": "Microsoft.Fake/fakes",
+    "SharedGalleries": "subscriptions"
   },
   "OperationGroupIsExtension": [
     "OneResources",

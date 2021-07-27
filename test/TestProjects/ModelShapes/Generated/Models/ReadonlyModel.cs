@@ -16,7 +16,7 @@ namespace ModelShapes.Models
         }
 
         /// <summary> Initializes a new instance of ReadonlyModel. </summary>
-        /// <param name="name"> . </param>
+        /// <param name="name"></param>
         internal ReadonlyModel(string name)
         {
             Name = name;

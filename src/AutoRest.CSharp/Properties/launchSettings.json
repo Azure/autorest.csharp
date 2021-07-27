@@ -296,6 +296,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance\\Generated"
     },
+    "MultipleInputFiles": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MultipleInputFiles\\Generated"
+    },
     "NameConflicts": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\NameConflicts\\Generated"
@@ -327,10 +331,6 @@
     "required-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"
-    },
-    "ResourceIdentifierChooser": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceIdentifierChooser\\Generated"
     },
     "ResourceRename": {
       "commandName": "Project",

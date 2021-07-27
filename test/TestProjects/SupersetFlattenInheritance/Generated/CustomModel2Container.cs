@@ -10,12 +10,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
+using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel2 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel2Container : ResourceContainerBase<ResourceGroupResourceIdentifier, CustomModel2, CustomModel2Data>
+    public partial class CustomModel2Container : ResourceContainerBase<CustomModel2, CustomModel2Data>
     {
         /// <summary> Initializes a new instance of the <see cref="CustomModel2Container"/> class for mocking. </summary>
         protected CustomModel2Container()
@@ -33,9 +36,6 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private CustomModel2SRestOperations _restClient => new CustomModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -306,7 +306,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> Filters the list of CustomModel2 for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="CustomModel2" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -329,7 +329,7 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <summary> Filters the list of CustomModel2 for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="CustomModel2" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -353,6 +353,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, CustomModel2, CustomModel2Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, CustomModel2, CustomModel2Data> Construct() { }
     }
 }

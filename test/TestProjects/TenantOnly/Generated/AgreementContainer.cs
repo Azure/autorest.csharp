@@ -10,12 +10,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
-    public partial class AgreementContainer : ResourceContainerBase<TenantResourceIdentifier, Agreement, AgreementData>
+    public partial class AgreementContainer : ResourceContainerBase<Agreement, AgreementData>
     {
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
@@ -33,9 +35,6 @@ namespace TenantOnly
 
         /// <summary> Represents the REST operations. </summary>
         private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new TenantResourceIdentifier Id => base.Id as TenantResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => BillingAccountOperations.ResourceType;
@@ -196,7 +195,7 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Filters the list of Agreement for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Agreement" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -219,7 +218,7 @@ namespace TenantOnly
             }
         }
 
-        /// <summary> Filters the list of Agreement for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Agreement" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -243,6 +242,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }

@@ -8,7 +8,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -96,13 +98,13 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetVMData DeserializeVirtualMachineScaleSetVMData(JsonElement element)
         {
             Optional<string> instanceId = default;
-            Optional<Sku> sku = default;
-            Optional<Plan> plan = default;
+            Optional<Models.Sku> sku = default;
+            Optional<Models.Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<IReadOnlyList<string>> zones = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<bool> latestModelApplied = default;
@@ -116,7 +118,7 @@ namespace Azure.ResourceManager.Sample
             Optional<NetworkProfile> networkProfile = default;
             Optional<VirtualMachineScaleSetVMNetworkProfileConfiguration> networkProfileConfiguration = default;
             Optional<DiagnosticsProfile> diagnosticsProfile = default;
-            Optional<SubResource> availabilitySet = default;
+            Optional<Models.SubResource> availabilitySet = default;
             Optional<string> provisioningState = default;
             Optional<string> licenseType = default;
             Optional<string> modelDefinitionApplied = default;
@@ -135,7 +137,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = Models.Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
@@ -145,7 +147,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Plan.DeserializePlan(property.Value);
+                    plan = Models.Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -329,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            availabilitySet = SubResource.DeserializeSubResource(property0.Value);
+                            availabilitySet = Models.SubResource.DeserializeSubResource(property0.Value);
                             continue;
                         }
                         if (property0.NameEquals("provisioningState"))

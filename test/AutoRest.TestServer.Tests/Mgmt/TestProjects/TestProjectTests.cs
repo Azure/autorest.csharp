@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -203,7 +205,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.Name.Contains("Test") && t.Namespace == _projectName)
+                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.FullName.Contains("Test") && t.Namespace == _projectName)
                 {
                     // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
@@ -286,7 +288,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsInheritFromTrackedResource(Type type)
         {
-            return type.BaseType.Name == typeof(TrackedResource<>).Name;
+            return type.BaseType.Name == typeof(TrackedResource).Name;
         }
 
         protected Type FindSubscriptionExtensions()

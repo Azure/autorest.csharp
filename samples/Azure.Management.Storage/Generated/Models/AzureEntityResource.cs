@@ -5,12 +5,13 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a Azure Resource Manager resource with an etag. </summary>
-    public partial class AzureEntityResource : Resource<ResourceGroupResourceIdentifier>
+    public partial class AzureEntityResource : ResourceManager.Resources.Models.Resource
     {
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
         public AzureEntityResource()
@@ -22,7 +23,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="etag"> Resource Etag. </param>
-        internal AzureEntityResource(ResourceGroupResourceIdentifier id, string name, ResourceType type, string etag) : base(id, name, type)
+        internal AzureEntityResource(ResourceIdentifier id, string name, ResourceType type, string etag) : base(id, name, type)
         {
             Etag = etag;
         }

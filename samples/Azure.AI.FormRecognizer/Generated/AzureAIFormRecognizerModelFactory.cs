@@ -15,8 +15,8 @@ namespace Azure.AI.FormRecognizer.Models
     public static partial class AzureAIFormRecognizerModelFactory
     {
         /// <summary> Initializes a new instance of ErrorInformation. </summary>
-        /// <param name="code"> . </param>
-        /// <param name="message"> . </param>
+        /// <param name="code"></param>
+        /// <param name="message"></param>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
         public static ErrorInformation ErrorInformation(string code = null, string message = null)
         {

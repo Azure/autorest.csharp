@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SaveInputs = saveInputs;
             AzureArm = azureArm;
             PublicClients = publicClients || AzureArm;
-            ModelNamespace = modelNamespace;
+            ModelNamespace = azureArm || modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;

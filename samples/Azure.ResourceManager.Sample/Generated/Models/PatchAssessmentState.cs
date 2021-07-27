@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes the outcome of an install operation for a given patch. </summary>
     public readonly partial struct PatchAssessmentState : IEquatable<PatchAssessmentState>

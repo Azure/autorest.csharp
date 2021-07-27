@@ -7,7 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace SupersetFlattenInheritance
 {
@@ -27,7 +27,7 @@ namespace SupersetFlattenInheritance
         internal static SubResourceModel1Data DeserializeSubResourceModel1Data(JsonElement element)
         {
             Optional<string> foo = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))

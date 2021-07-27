@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Virtual Machine Scale Set OS Upgrade History operation response. </summary>
     public partial class UpgradeOperationHistoricalStatusInfo

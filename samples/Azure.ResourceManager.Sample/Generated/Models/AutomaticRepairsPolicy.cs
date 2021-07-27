@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the configuration parameters for automatic repairs on the virtual machine scale set. </summary>
     public partial class AutomaticRepairsPolicy

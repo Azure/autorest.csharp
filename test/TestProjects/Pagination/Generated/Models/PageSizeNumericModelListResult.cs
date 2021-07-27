@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Pagination;
 
 namespace Pagination.Models
 {
@@ -20,8 +21,8 @@ namespace Pagination.Models
         }
 
         /// <summary> Initializes a new instance of PageSizeNumericModelListResult. </summary>
-        /// <param name="value"> . </param>
-        /// <param name="nextLink"> . </param>
+        /// <param name="value"></param>
+        /// <param name="nextLink"></param>
         internal PageSizeNumericModelListResult(IReadOnlyList<PageSizeNumericModelData> value, string nextLink)
         {
             Value = value;

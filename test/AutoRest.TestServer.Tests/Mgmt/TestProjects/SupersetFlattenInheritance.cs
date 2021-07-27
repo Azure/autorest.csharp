@@ -2,11 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Azure.ResourceManager.Core;
-using SupersetFlattenInheritance;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
+using SupersetFlattenInheritance;
+using SupersetFlattenInheritance.Models;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
@@ -19,14 +19,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(object), typeof(CustomModel1Data))]
         [TestCase(typeof(object), typeof(CustomModel2Data))]
-        [TestCase(typeof(SubResource<ResourceGroupResourceIdentifier>), typeof(SubResourceModel1Data))]
-        [TestCase(typeof(SubResource<ResourceGroupResourceIdentifier>), typeof(SubResourceModel2Data))]
-        [TestCase(typeof(WritableSubResource<ResourceGroupResourceIdentifier>), typeof(WritableSubResourceModel1Data))]
-        [TestCase(typeof(WritableSubResource<ResourceGroupResourceIdentifier>), typeof(WritableSubResourceModel2Data))]
-        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(ResourceModel1Data))]
-        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(ResourceModel2Data))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(TrackedResourceModel1Data))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(TrackedResourceModel2Data))]
+        [TestCase(typeof(SubResource), typeof(SubResourceModel1Data))]
+        [TestCase(typeof(SubResource), typeof(SubResourceModel2Data))]
+        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel1Data))]
+        [TestCase(typeof(WritableSubResource), typeof(WritableSubResourceModel2Data))]
+        [TestCase(typeof(Resource), typeof(ResourceModel1Data))]
+        [TestCase(typeof(Resource), typeof(ResourceModel2Data))]
+        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel1Data))]
+        [TestCase(typeof(TrackedResource), typeof(TrackedResourceModel2Data))]
         [TestCase(typeof(object), typeof(NonResourceModel1))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {

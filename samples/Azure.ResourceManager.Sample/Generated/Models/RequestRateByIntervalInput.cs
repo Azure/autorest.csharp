@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Api request input for LogAnalytics getRequestRateByInterval Api. </summary>
     public partial class RequestRateByIntervalInput : LogAnalyticsInputBase

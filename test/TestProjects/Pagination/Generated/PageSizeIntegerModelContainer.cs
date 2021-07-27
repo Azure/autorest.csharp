@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 using Pagination.Models;
 
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeIntegerModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeIntegerModelContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, PageSizeIntegerModel, PageSizeIntegerModelData>
+    public partial class PageSizeIntegerModelContainer : ResourceContainerBase<PageSizeIntegerModel, PageSizeIntegerModelData>
     {
         /// <summary> Initializes a new instance of the <see cref="PageSizeIntegerModelContainer"/> class for mocking. </summary>
         protected PageSizeIntegerModelContainer()
@@ -36,9 +38,6 @@ namespace Pagination
 
         /// <summary> Represents the REST operations. </summary>
         private PageSizeIntegerModelsRestOperations _restClient => new PageSizeIntegerModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -383,7 +382,7 @@ namespace Pagination
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of PageSizeIntegerModel for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="PageSizeIntegerModel" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -406,7 +405,7 @@ namespace Pagination
             }
         }
 
-        /// <summary> Filters the list of PageSizeIntegerModel for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="PageSizeIntegerModel" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -430,6 +429,6 @@ namespace Pagination
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, PageSizeIntegerModel, PageSizeIntegerModelData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, PageSizeIntegerModel, PageSizeIntegerModelData> Construct() { }
     }
 }

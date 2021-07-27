@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The configuration parameters used for performing automatic OS upgrade. </summary>
     public partial class AutomaticOSUpgradePolicy

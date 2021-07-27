@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using MgmtMultipleParentResource.Models;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the operations that can be performed over a specific AnotherParent. </summary>
-    public partial class AnotherParentOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AnotherParent>
+    public partial class AnotherParentOperations : ResourceOperationsBase<AnotherParent>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AnotherParentsRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref="AnotherParentOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AnotherParentOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AnotherParentOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -364,6 +367,106 @@ namespace MgmtMultipleParentResource
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AnotherParent(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
+        public async virtual Task<Response<AnotherParent>> UpdateAsync(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        {
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = await StartUpdateAsync(anotherBody, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
+        public virtual Response<AnotherParent> Update(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        {
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.Update");
+            scope.Start();
+            try
+            {
+                var operation = StartUpdate(anotherBody, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
+        public async virtual Task<AnotherParentsUpdateOperation> StartUpdateAsync(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        {
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken).ConfigureAwait(false);
+                return new AnotherParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to update the run command. </summary>
+        /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
+        public virtual AnotherParentsUpdateOperation StartUpdate(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        {
+            if (anotherBody == null)
+            {
+                throw new ArgumentNullException(nameof(anotherBody));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.StartUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken);
+                return new AnotherParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
             }
             catch (Exception e)
             {

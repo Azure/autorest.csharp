@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific BillingAccount. </summary>
-    public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
+    public partial class BillingAccountOperations : ResourceOperationsBase<BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private BillingAccountsRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal BillingAccountOperations(OperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected internal BillingAccountOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);

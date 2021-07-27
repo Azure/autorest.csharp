@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel9. </summary>
     public partial class ExactMatchModel9
@@ -16,9 +16,9 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel9. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         internal ExactMatchModel9(int? id, string name, string type)
         {
             Id = id;

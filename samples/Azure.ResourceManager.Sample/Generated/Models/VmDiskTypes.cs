@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> VM disk types which are disallowed. </summary>
     public readonly partial struct VmDiskTypes : IEquatable<VmDiskTypes>

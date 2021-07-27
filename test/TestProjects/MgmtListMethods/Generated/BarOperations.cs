@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific Bar. </summary>
-    public partial class BarOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Bar>
+    public partial class BarOperations : ResourceOperationsBase<Bar>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private BarsRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="BarOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal BarOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal BarOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -326,6 +329,55 @@ namespace MgmtListMethods
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new Bar(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="body"> The body parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response<Bar>> UpdateAsync(BarUpdate body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarOperations.Update");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, body, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="body"> The body parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response<Bar> Update(BarUpdate body, CancellationToken cancellationToken = default)
+        {
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarOperations.Update");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, body, cancellationToken);
+                return Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes an upgrade policy - automatic, manual, or rolling. </summary>
     public partial class UpgradePolicy

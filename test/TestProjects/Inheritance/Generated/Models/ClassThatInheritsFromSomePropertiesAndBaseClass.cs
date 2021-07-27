@@ -16,9 +16,9 @@ namespace Inheritance.Models
         }
 
         /// <summary> Initializes a new instance of ClassThatInheritsFromSomePropertiesAndBaseClass. </summary>
-        /// <param name="someProperty"> . </param>
-        /// <param name="someOtherProperty"> . </param>
-        /// <param name="baseClassProperty"> . </param>
+        /// <param name="someProperty"></param>
+        /// <param name="someOtherProperty"></param>
+        /// <param name="baseClassProperty"></param>
         internal ClassThatInheritsFromSomePropertiesAndBaseClass(string someProperty, string someOtherProperty, string baseClassProperty) : base(someProperty, someOtherProperty)
         {
             BaseClassProperty = baseClassProperty;

@@ -11,12 +11,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.Management.Storage.Models;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific PrivateEndpointConnection. </summary>
-    public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PrivateEndpointConnection>
+    public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<PrivateEndpointConnection>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PrivateEndpointConnectionsRestOperations _restClient { get; }
@@ -29,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PrivateEndpointConnectionOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal PrivateEndpointConnectionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

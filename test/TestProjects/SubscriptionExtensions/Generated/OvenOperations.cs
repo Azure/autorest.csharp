@@ -11,12 +11,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the operations that can be performed over a specific Oven. </summary>
-    public partial class OvenOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Oven>
+    public partial class OvenOperations : ResourceOperationsBase<Oven>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private OvensRestOperations _restClient { get; }
@@ -29,7 +31,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal OvenOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal OvenOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

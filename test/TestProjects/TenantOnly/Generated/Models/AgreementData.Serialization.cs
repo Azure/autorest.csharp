@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
-using Azure.ResourceManager.Core;
+using Azure.ResourceManager;
 
 namespace TenantOnly
 {
@@ -19,7 +19,7 @@ namespace TenantOnly
             Optional<string> foo = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
-            TenantResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

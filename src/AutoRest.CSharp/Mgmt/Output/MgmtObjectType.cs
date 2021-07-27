@@ -15,26 +15,30 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
-        private bool _isResourceType;
+        private string? _defaultNamespace;
         private ObjectTypeProperty[]? _myProperties;
         private BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType) : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context)
+            : base(objectSchema, context)
         {
-            _isResourceType = isResourceType;
             _context = context;
         }
 
+        protected virtual bool IsResourceType => false;
+
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= IsResourceType ? base.DefaultNamespace.Substring(0, base.DefaultNamespace.Length - 7) : base.DefaultNamespace;
+
+        protected override string DefaultName => GetDefaultName(ObjectSchema);
 
         internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
 
-        protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
+        protected string GetDefaultName(ObjectSchema objectSchema)
         {
             var name = objectSchema.CSharpName();
-            return isResourceType ? name + "Data" : name;
+            return IsResourceType ? name + "Data" : name;
         }
 
         private HashSet<string> GetParentPropertyNames()

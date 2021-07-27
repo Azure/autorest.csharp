@@ -14,21 +14,21 @@ namespace body_complex.Models
     public partial class Goblinshark : Shark
     {
         /// <summary> Initializes a new instance of Goblinshark. </summary>
-        /// <param name="length"> . </param>
-        /// <param name="birthday"> . </param>
+        /// <param name="length"></param>
+        /// <param name="birthday"></param>
         public Goblinshark(float length, DateTimeOffset birthday) : base(length, birthday)
         {
             Fishtype = "goblin";
         }
 
         /// <summary> Initializes a new instance of Goblinshark. </summary>
-        /// <param name="fishtype"> . </param>
-        /// <param name="species"> . </param>
-        /// <param name="length"> . </param>
-        /// <param name="siblings"> . </param>
-        /// <param name="age"> . </param>
-        /// <param name="birthday"> . </param>
-        /// <param name="jawsize"> . </param>
+        /// <param name="fishtype"></param>
+        /// <param name="species"></param>
+        /// <param name="length"></param>
+        /// <param name="siblings"></param>
+        /// <param name="age"></param>
+        /// <param name="birthday"></param>
+        /// <param name="jawsize"></param>
         /// <param name="color"> Colors possible. </param>
         internal Goblinshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, int? jawsize, GoblinSharkColor? color) : base(fishtype, species, length, siblings, age, birthday)
         {

@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var verb = operation.CSharpName();
             var schemaName = SchemaName;
-            (_, bool isListFunction) = restClientMethod.GetBodyTypeForList(operationGroup, _context);
+            (_, bool isListFunction, _) = restClientMethod.GetBodyTypeForList(operationGroup, _context);
             if (isListFunction)
             {
                 schemaName = schemaName.ToPlural();

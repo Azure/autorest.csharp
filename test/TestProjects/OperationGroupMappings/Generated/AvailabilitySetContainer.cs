@@ -10,12 +10,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources;
 
 namespace OperationGroupMappings
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
-    public partial class AvailabilitySetContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, AvailabilitySet, AvailabilitySetData>
+    public partial class AvailabilitySetContainer : ResourceContainerBase<AvailabilitySet, AvailabilitySetData>
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetContainer"/> class for mocking. </summary>
         protected AvailabilitySetContainer()
@@ -33,9 +35,6 @@ namespace OperationGroupMappings
 
         /// <summary> Represents the REST operations. </summary>
         private AvailabilitySetsRestOperations _restClient => new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -190,7 +189,7 @@ namespace OperationGroupMappings
             }
         }
 
-        /// <summary> Filters the list of AvailabilitySet for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="AvailabilitySet" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -213,7 +212,7 @@ namespace OperationGroupMappings
             }
         }
 
-        /// <summary> Filters the list of AvailabilitySet for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="AvailabilitySet" /> for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -237,6 +236,6 @@ namespace OperationGroupMappings
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
     }
 }

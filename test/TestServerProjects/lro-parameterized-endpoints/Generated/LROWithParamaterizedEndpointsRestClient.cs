@@ -26,12 +26,7 @@ namespace lro_parameterized_endpoints
         /// <exception cref="ArgumentNullException"> <paramref name="host"/> is null. </exception>
         public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
         {
-            if (host == null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            this.host = host;
+            this.host = host ?? throw new ArgumentNullException(nameof(host));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }

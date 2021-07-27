@@ -584,7 +584,7 @@ operationGroups:
             final-state-via: azure-async-operation
         language: !Languages 
           default:
-            name: Update
+            name: Create
             description: Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
         protocol: !Protocols {}
     language: !Languages 

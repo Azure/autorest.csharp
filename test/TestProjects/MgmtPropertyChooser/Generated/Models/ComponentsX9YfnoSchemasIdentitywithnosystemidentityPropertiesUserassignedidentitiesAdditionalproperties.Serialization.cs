@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     public partial class ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties : IUtf8JsonSerializable
     {

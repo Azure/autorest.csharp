@@ -11,9 +11,9 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentimentConfidenceScorePerLabel
     {
         /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
-        /// <param name="positive"> . </param>
-        /// <param name="neutral"> . </param>
-        /// <param name="negative"> . </param>
+        /// <param name="positive"></param>
+        /// <param name="neutral"></param>
+        /// <param name="negative"></param>
         internal SentimentConfidenceScorePerLabel(double positive, double neutral, double negative)
         {
             Positive = positive;
