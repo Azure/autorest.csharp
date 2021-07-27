@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
     /// <summary> The SupersetModel2. </summary>
     public partial class SupersetModel2

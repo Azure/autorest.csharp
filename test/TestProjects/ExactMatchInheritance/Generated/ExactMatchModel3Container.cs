@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using ExactMatchInheritance.Models;
 
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel3 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel3Container : ResourceContainerBase<ResourceGroupResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data>
+    public partial class ExactMatchModel3Container : ResourceContainerBase<ExactMatchModel3, ExactMatchModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Container"/> class for mocking. </summary>
         protected ExactMatchModel3Container()
@@ -35,9 +36,6 @@ namespace ExactMatchInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private ExactMatchModel3SRestOperations _restClient => new ExactMatchModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -355,6 +353,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
     }
 }

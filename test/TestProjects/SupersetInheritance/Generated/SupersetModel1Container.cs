@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel1 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel1Container : ResourceContainerBase<ResourceGroupResourceIdentifier, SupersetModel1, SupersetModel1Data>
+    public partial class SupersetModel1Container : ResourceContainerBase<SupersetModel1, SupersetModel1Data>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Container"/> class for mocking. </summary>
         protected SupersetModel1Container()
@@ -35,9 +36,6 @@ namespace SupersetInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private SupersetModel1SRestOperations _restClient => new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -355,6 +353,6 @@ namespace SupersetInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, SupersetModel1, SupersetModel1Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, SupersetModel1, SupersetModel1Data> Construct() { }
     }
 }

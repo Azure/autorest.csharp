@@ -9,9 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
     public partial class FileShareData : IUtf8JsonSerializable
     {
@@ -58,7 +59,7 @@ namespace Azure.Management.Storage.Models
         internal static FileShareData DeserializeFileShareData(JsonElement element)
         {
             Optional<string> etag = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<DateTimeOffset> lastModifiedTime = default;

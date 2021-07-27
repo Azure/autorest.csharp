@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.Management.Storage;
 
 namespace Azure.Management.Storage.Models
 {

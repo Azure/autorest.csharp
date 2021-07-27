@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over a StorageAccount. </summary>
-    public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData>
+    public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<ObjectReplicationPolicy, ObjectReplicationPolicyData>
     {
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyContainer"/> class for mocking. </summary>
         protected ObjectReplicationPolicyContainer()
@@ -38,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private ObjectReplicationPoliciesRestOperations _restClient => new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
@@ -408,6 +405,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
     }
 }

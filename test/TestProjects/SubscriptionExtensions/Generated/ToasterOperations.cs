@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the operations that can be performed over a specific Toaster. </summary>
-    public partial class ToasterOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, Toaster>
+    public partial class ToasterOperations : ResourceOperationsBase<Toaster>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ToastersRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref="ToasterOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ToasterOperations(OperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
+        protected internal ToasterOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

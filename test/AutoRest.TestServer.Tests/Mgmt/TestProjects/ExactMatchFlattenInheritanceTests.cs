@@ -5,6 +5,7 @@ using System;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using ExactMatchFlattenInheritance;
+using ExactMatchFlattenInheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -16,13 +17,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel1Data))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel2Data))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel3Data))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel1Data))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel2Data))]
+        [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3Data))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
-        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel5Data))]
-        [TestCase(typeof(SubResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel6))]
-        [TestCase(typeof(WritableSubResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel7))]
+        [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5Data))]
+        [TestCase(typeof(SubResource), typeof(AzureResourceFlattenModel6))]
+        [TestCase(typeof(WritableSubResource), typeof(AzureResourceFlattenModel7))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);

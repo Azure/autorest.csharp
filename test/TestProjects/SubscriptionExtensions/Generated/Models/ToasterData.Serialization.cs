@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace SubscriptionExtensions.Models
+namespace SubscriptionExtensions
 {
     public partial class ToasterData : IUtf8JsonSerializable
     {
@@ -41,7 +41,7 @@ namespace SubscriptionExtensions.Models
             Optional<string> foo = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            SubscriptionResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

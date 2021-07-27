@@ -31,7 +31,7 @@ namespace SupersetFlattenInheritance
 
         internal static WritableSubResourceModel2Data DeserializeWritableSubResourceModel2Data(JsonElement element)
         {
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {

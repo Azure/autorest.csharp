@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Summary for an orchestration service of a virtual machine scale set. </summary>
     public partial class OrchestrationServiceSummary

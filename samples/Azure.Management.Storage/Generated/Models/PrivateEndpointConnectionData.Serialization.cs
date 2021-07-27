@@ -7,9 +7,10 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
     public partial class PrivateEndpointConnectionData : IUtf8JsonSerializable
     {
@@ -34,7 +35,7 @@ namespace Azure.Management.Storage.Models
 
         internal static PrivateEndpointConnectionData DeserializePrivateEndpointConnectionData(JsonElement element)
         {
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<PrivateEndpoint> privateEndpoint = default;

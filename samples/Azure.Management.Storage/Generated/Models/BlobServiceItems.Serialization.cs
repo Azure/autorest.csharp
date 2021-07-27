@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage;
 
 namespace Azure.Management.Storage.Models
 {

@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     public partial class Resource : IUtf8JsonSerializable
     {
@@ -37,7 +37,7 @@ namespace MgmtPropertyChooser
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

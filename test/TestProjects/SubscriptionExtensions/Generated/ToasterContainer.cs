@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
-    public partial class ToasterContainer : ResourceContainerBase<SubscriptionResourceIdentifier, Toaster, ToasterData>
+    public partial class ToasterContainer : ResourceContainerBase<Toaster, ToasterData>
     {
         /// <summary> Initializes a new instance of the <see cref="ToasterContainer"/> class for mocking. </summary>
         protected ToasterContainer()
@@ -36,9 +36,6 @@ namespace SubscriptionExtensions
 
         /// <summary> Represents the REST operations. </summary>
         private ToastersRestOperations _restClient => new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new SubscriptionResourceIdentifier Id => base.Id as SubscriptionResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<SubscriptionResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

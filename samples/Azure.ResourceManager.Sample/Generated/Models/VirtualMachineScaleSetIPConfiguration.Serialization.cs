@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineScaleSetIPConfiguration : IUtf8JsonSerializable
     {

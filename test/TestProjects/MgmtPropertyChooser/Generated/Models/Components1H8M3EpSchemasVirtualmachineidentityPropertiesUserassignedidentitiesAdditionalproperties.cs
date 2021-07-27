@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     /// <summary> The Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties. </summary>
     public partial class Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties

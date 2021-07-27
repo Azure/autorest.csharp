@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Enables or disables a capability on the virtual machine or virtual machine scale set. </summary>
     public partial class AdditionalCapabilities

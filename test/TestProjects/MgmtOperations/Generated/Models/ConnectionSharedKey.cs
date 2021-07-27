@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtOperations.Models
 {
     /// <summary> Response for GetConnectionSharedKey API service call. </summary>
-    public partial class ConnectionSharedKey : TrackedResource<TenantResourceIdentifier>
+    public partial class ConnectionSharedKey : TrackedResource
     {
         /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
         /// <param name="location"> The location. </param>
@@ -36,7 +36,7 @@ namespace MgmtOperations.Models
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
-        internal ConnectionSharedKey(TenantResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string value) : base(id, name, type, location, tags)
+        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string value) : base(id, name, type, location, tags)
         {
             Value = value;
         }

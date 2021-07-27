@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM. </summary>
     public partial class VaultCertificate

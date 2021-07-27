@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific TheExtension. </summary>
-    public partial class TheExtensionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, TheExtension>
+    public partial class TheExtensionOperations : ResourceOperationsBase<TheExtension>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private OneResourcesRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="TheExtensionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TheExtensionOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal TheExtensionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new OneResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -341,7 +341,7 @@ namespace MgmtListMethods
         /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Response<TheExtensionData>> UpdateAsync(TheExtensionUpdate body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<TheExtension>> UpdateAsync(TheExtensionUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -353,7 +353,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, body, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new TheExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -366,7 +366,7 @@ namespace MgmtListMethods
         /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Response<TheExtensionData> Update(TheExtensionUpdate body, CancellationToken cancellationToken = default)
+        public virtual Response<TheExtension> Update(TheExtensionUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -378,7 +378,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, body, cancellationToken);
-                return response;
+                return Response.FromValue(new TheExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -14,10 +14,9 @@ payload-flattening-threshold: 2
 operation-group-to-resource-type:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
 operation-group-to-resource:
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
+   VirtualMachineExtensionImages: NonResource
 operation-group-to-parent:
    VirtualMachineExtensionImages: subscriptions
-operation-group-is-tuple: VirtualMachineExtensionImages
 modelerfour:
   lenient-model-deduplication: true
 ```

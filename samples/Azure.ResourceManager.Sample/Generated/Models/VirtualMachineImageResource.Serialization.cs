@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineImageResource : IUtf8JsonSerializable
     {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            SubscriptionResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

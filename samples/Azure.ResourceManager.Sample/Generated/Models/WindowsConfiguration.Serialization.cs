@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     public partial class WindowsConfiguration : IUtf8JsonSerializable
     {
@@ -99,7 +99,7 @@ namespace Azure.ResourceManager.Sample
                     List<AdditionalUnattendContent> array = new List<AdditionalUnattendContent>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Sample.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item));
+                        array.Add(Models.AdditionalUnattendContent.DeserializeAdditionalUnattendContent(item));
                     }
                     additionalUnattendContent = array;
                     continue;

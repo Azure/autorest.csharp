@@ -27,7 +27,7 @@ namespace MgmtSingleton
         internal static SingletonResource2Data DeserializeSingletonResource2Data(JsonElement element)
         {
             Optional<string> @new = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

@@ -10,6 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
 {
@@ -86,7 +87,7 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Plan> plan = default;
+            Optional<Models.Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
@@ -96,7 +97,7 @@ namespace MgmtPropertyChooser
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
             Location location = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> provisioningState = default;
@@ -112,7 +113,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Plan.DeserializePlan(property.Value);
+                    plan = Models.Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged. </summary>
     public partial class VirtualMachineReimageParameters

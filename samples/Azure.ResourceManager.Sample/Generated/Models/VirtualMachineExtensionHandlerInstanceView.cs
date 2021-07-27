@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The instance view of a virtual machine extension handler. </summary>
     public partial class VirtualMachineExtensionHandlerInstanceView

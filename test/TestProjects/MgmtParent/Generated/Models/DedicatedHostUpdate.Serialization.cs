@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     public partial class DedicatedHostUpdate : IUtf8JsonSerializable
     {

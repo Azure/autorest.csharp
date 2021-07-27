@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ResourceRename
+namespace ResourceRename.Models
 {
     public partial class SshPublicKeyInfo : IUtf8JsonSerializable
     {

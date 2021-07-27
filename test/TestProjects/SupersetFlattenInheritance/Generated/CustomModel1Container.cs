@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel1 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel1Container : ResourceContainerBase<ResourceGroupResourceIdentifier, CustomModel1, CustomModel1Data>
+    public partial class CustomModel1Container : ResourceContainerBase<CustomModel1, CustomModel1Data>
     {
         /// <summary> Initializes a new instance of the <see cref="CustomModel1Container"/> class for mocking. </summary>
         protected CustomModel1Container()
@@ -35,9 +36,6 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private CustomModel1SRestOperations _restClient => new CustomModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -355,6 +353,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, CustomModel1, CustomModel1Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, CustomModel1, CustomModel1Data> Construct() { }
     }
 }

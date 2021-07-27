@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Azure.ResourceManager.Resources.Models;
 using MgmtPropertyChooser;
+using MgmtPropertyChooser.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -14,7 +15,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateModelUsingSystemIdentities()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineIdentity");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -31,7 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateModelUsingUserIdentities()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineIdentity");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var userAssignedProperty = properties[3];
@@ -72,7 +73,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithRenamedProperty()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.IdentityWithRenamedProperty");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithRenamedProperty");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -104,7 +105,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithDifferentPropertyType()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.IdentityWithDifferentPropertyType");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -136,7 +137,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithNoUserIdentity()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.IdentityWithNoUserIdentity");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithNoUserIdentity");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var principalIdProperty = properties[0];
@@ -165,7 +166,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase]
         public void ValidateIdentityWithNoSystemIdentity()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.IdentityWithNoSystemIdentity");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithNoSystemIdentity");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             Assert.IsFalse(properties.Any(p => p.Name == "PrincipalId"));

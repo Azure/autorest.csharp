@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel6. </summary>
-    public partial class ExactMatchModel6 : SubResource<ResourceGroupResourceIdentifier>
+    public partial class ExactMatchModel6 : SubResource
     {
         /// <summary> Initializes a new instance of ExactMatchModel6. </summary>
         public ExactMatchModel6()

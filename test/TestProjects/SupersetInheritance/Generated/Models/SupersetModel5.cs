@@ -8,8 +8,9 @@
 using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using SupersetInheritance;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Models
 {
     /// <summary> The SupersetModel5. </summary>
     public partial class SupersetModel5 : SupersetModel4Data
@@ -28,7 +29,7 @@ namespace SupersetInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="new"></param>
         /// <param name="foo"></param>
-        internal SupersetModel5(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new, string foo) : base(id, name, type, location, tags, @new)
+        internal SupersetModel5(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string @new, string foo) : base(id, name, type, location, tags, @new)
         {
             Foo = foo;
         }

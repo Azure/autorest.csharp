@@ -15,11 +15,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtension and their operations over a VirtualMachine. </summary>
-    public partial class VirtualMachineExtensionContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData>
+    public partial class VirtualMachineExtensionContainer : ResourceContainerBase<VirtualMachineExtension, VirtualMachineExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionContainer()
@@ -37,9 +38,6 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Represents the REST operations. </summary>
         private VirtualMachineExtensionsRestOperations _restClient => new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => VirtualMachineOperations.ResourceType;
@@ -405,6 +403,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData> Construct() { }
     }
 }

@@ -19,7 +19,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific SubFake. </summary>
-    public partial class SubFakeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubFake>
+    public partial class SubFakeOperations : ResourceOperationsBase<SubFake>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SubFakesRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="SubFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubFakeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal SubFakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SubFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -340,7 +340,7 @@ namespace MgmtListMethods
         /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual async Task<Response<SubFakeData>> UpdateAsync(SubFakeUpdate body, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SubFake>> UpdateAsync(SubFakeUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -352,7 +352,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, body, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -365,7 +365,7 @@ namespace MgmtListMethods
         /// <param name="body"> The body parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        public virtual Response<SubFakeData> Update(SubFakeUpdate body, CancellationToken cancellationToken = default)
+        public virtual Response<SubFake> Update(SubFakeUpdate body, CancellationToken cancellationToken = default)
         {
             if (body == null)
             {
@@ -377,7 +377,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, body, cancellationToken);
-                return response;
+                return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

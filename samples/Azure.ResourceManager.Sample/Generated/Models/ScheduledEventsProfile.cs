@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The ScheduledEventsProfile. </summary>
     public partial class ScheduledEventsProfile

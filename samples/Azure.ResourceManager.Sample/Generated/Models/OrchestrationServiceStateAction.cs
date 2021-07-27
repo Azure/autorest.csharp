@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The action to be performed. </summary>
     public readonly partial struct OrchestrationServiceStateAction : IEquatable<OrchestrationServiceStateAction>

@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Oven, OvenData>
+    public partial class OvenContainer : ResourceContainerBase<Oven, OvenData>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -36,9 +36,6 @@ namespace SubscriptionExtensions
 
         /// <summary> Represents the REST operations. </summary>
         private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

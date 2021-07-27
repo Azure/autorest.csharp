@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -18,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ObjectReplicationPolicy. </summary>
-    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ObjectReplicationPolicy>
+    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<ObjectReplicationPolicy>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ObjectReplicationPoliciesRestOperations _restClient { get; }
@@ -31,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ObjectReplicationPolicyOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ObjectReplicationPolicyOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
