@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
 
-        private static ConcurrentDictionary<Operation, string> _operationAncestorCache = new ConcurrentDictionary<Operation, string>();
-        private static ConcurrentDictionary<Operation, string> _operationParentCache = new ConcurrentDictionary<Operation, string>();
+        private static ConcurrentDictionary<string, string> _operationPathAncestorCache = new ConcurrentDictionary<string, string>();
+        private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
 
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
@@ -91,13 +91,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             //TODO: use PathSegment to get resource type?
             string? result = null;
-            if (_operationAncestorCache.TryGetValue(operation, out result))
-                return result;
             if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
             {
                 throw new ArgumentException($"The operation does not have an HttpRequest.");
             }
             var path = httpRequest.Path;
+            if (_operationPathAncestorCache.TryGetValue(path, out result))
+                return result;
+
             if (path.Contains("/resourcegroups/", StringComparison.InvariantCultureIgnoreCase))
             {
                 result = ResourceTypeBuilder.ResourceGroups;
@@ -114,20 +115,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 result = ResourceTypeBuilder.Tenant;
             }
-            _operationAncestorCache.TryAdd(operation, result);
+            _operationPathAncestorCache.TryAdd(path, result);
             return result;
         }
 
         public static string ParentResourceType(this Operation operation)
         {
             string? result = null;
-            if (_operationParentCache.TryGetValue(operation, out result))
-                return result;
             if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
             {
                 throw new ArgumentException($"The operation does not have an HttpRequest.");
             }
             var path = httpRequest.Path;
+            if (_operationPathParentCache.TryGetValue(path, out result))
+                return result;
+
             if (operation.IsParentTenant() || operation.IsParentScope())
             {
                 result = ResourceTypeBuilder.Tenant;
@@ -150,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     throw new ArgumentException($"Could not set parent for operation {httpRequest.Path}.");
                 }
             }
-            _operationParentCache.TryAdd(operation, result);
+            _operationPathParentCache.TryAdd(path, result);
             return result;
         }
 
@@ -190,7 +192,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             // Microsoft.Resources/deployments/ == lastFullProvider
             // resourceType = Microsoft.Management/managementGroups/providers/Microsoft.Resources/deployments
-            // TODO: Fix in GetProviderSegments?
+            // TODO: Fix in ResourceType()?
             var fullProviderToken = fullProvider.TokenValue;
             if (resourceType.StartsWith("Microsoft.Management/managementGroups/providers/"))
             {
