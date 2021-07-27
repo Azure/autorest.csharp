@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             bool wasResourceData = false;
             CSharpType? returnType;
-            ObjectTypeProperty? valueProperty;
+            CSharpType? valueProperty;
             bool isList = method.IsListMethod(out valueProperty, out returnType);
 
             if (returnType == null || returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // first we try to get the resource data - this could be a resource
             if (resourceData != null)
             {
-                if (valueProperty.ValueType.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                if (valueProperty.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
                 {
                     wasResourceData = true;
                     return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true, wasResourceData);
@@ -63,10 +63,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // otherwise this must be a non-resource, but still a list
-            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true, wasResourceData);
+            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty), true, wasResourceData);
         }
 
-        public static bool IsListMethod(this RestClientMethod method, out ObjectTypeProperty? valueProperty, out CSharpType? returnType)
+        public static bool IsListMethod(this RestClientMethod method, out CSharpType? valueProperty, out CSharpType? returnType)
         {
             valueProperty = null;
             returnType = method.ReturnType;
@@ -74,10 +74,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return false;
 
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
-                return false;
+            {
+                if (returnType.FrameworkType == typeof(IReadOnlyList<>))
+                {
+                    valueProperty = returnType.Arguments[0];
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
             var schemaObject = (SchemaObjectType)returnType.Implementation;
-            valueProperty = GetValueProperty(schemaObject);
+            valueProperty = GetValueProperty(schemaObject)?.ValueType;
             return valueProperty != null;
         }
 

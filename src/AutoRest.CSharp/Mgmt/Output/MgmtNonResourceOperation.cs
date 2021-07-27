@@ -52,17 +52,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var verb = operation.CSharpName();
             var schemaName = SchemaName;
-            (_, bool isListFunction, _) = restClientMethod.GetBodyTypeForList(operationGroup, _context);
-            if (isListFunction)
+            const string getAll = "GetAll";
+            var noun = verb.Substring(3);
+            if (noun == "All")
+                noun = string.Empty;
+            if (verb.StartsWith(getAll, StringComparison.InvariantCultureIgnoreCase))
             {
-                schemaName = schemaName.ToPlural();
+                if (restClientMethod.IsListMethod())
+                {
+                    schemaName = schemaName.ToPlural();
+                }
             }
-            const string list = "List";
-            if (verb.StartsWith(list, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return $"{list}{schemaName}{verb.Substring(list.Length)}";
-            }
-            return $"{operation.CSharpName()}{schemaName}";
+            return $"Get{schemaName}{noun}";
         }
     }
 }
