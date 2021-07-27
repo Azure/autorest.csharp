@@ -43,12 +43,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
+        public bool IsScopeOrExtension {get; }
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
             IEnumerable<OperationGroup>? nonResourceOperationGroups = null) : base(context)
         {
             _context = context;
             OperationGroup = operationGroup;
+            IsScopeOrExtension = OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration);
             DefaultName = ResourceName + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
@@ -133,10 +135,18 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private List<ClientMethod> GetGetMethods()
         {
-            var getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
-            if (GetByIdMethod != null && GetByIdMethod.Name != GetMethod!.Name)
+            var getMethods = new List<ClientMethod>();
+            if (IsScopeOrExtension)
             {
-                getMethods.RemoveAll(m => m.Name == GetByIdMethod.Name);
+                getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
+                if (GetByIdMethod != null && GetByIdMethod.Name != GetMethod!.Name)
+                {
+                    getMethods.RemoveAll(m => m.Name == GetByIdMethod.Name);
+                }
+            }
+            else if (GetMethod != null)
+            {
+                getMethods.Add(GetMethod);
             }
             return getMethods;
         }
@@ -281,7 +291,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             bool isParentExistsInPathParams = false;
             bool isReturnTypeResourceData = false;
 
-            var parentResourceType = clientMethod.Operation.ParentResourceType();
+            var parentResourceType = IsScopeOrExtension ? clientMethod.Operation.ParentResourceType() : OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
             // TODO: can we handle ResourceTypeBuilder.ResourceGroupResources in IsParentExistsInPathParamaters as well?
             isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
 

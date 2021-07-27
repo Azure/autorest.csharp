@@ -65,10 +65,18 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private List<RestClientMethod> GetPutMethods()
         {
-            var putMethods = RestClient.Methods.Where(m => m.Request.HttpMethod.Equals(RequestMethod.Put)).ToList();
-            if (PutByIdMethod != null && PutByIdMethod.Name != CreateMethod!.Name)
+            var putMethods = new List<RestClientMethod>();
+            if (IsScopeOrExtension)
             {
-                putMethods.RemoveAll(m => m.Name == PutByIdMethod.Name);
+                putMethods = RestClient.Methods.Where(m => m.Request.HttpMethod.Equals(RequestMethod.Put)).ToList();
+                if (PutByIdMethod != null && PutByIdMethod.Name != CreateMethod!.Name)
+                {
+                    putMethods.RemoveAll(m => m.Name == PutByIdMethod.Name);
+                }
+            }
+            else if (CreateMethod != null)
+            {
+                putMethods.Add(CreateMethod);
             }
             return putMethods;
         }

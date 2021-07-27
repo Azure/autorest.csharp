@@ -430,26 +430,44 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pagingMethod = pagingMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
             var clientMethods = _resourceContainer.ListMethods.Where(m => m.ClientMethod != null).Select(m => m.ClientMethod!).ToList();
             var clientMethod = clientMethods.OrderBy(m => m.Name.Length).FirstOrDefault();
-            if (pagingMethod != null)
+            var methodName = "List";
+            var diagnostic = new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}");
+            if (_resourceContainer.IsScopeOrExtension)
             {
-                var methodName = "List";
-                var diagnostic = new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}");
-                WriteList(_writer, false, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-                WriteList(_writer, true, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-            }
+                if (pagingMethod != null)
+                {
+                    WriteList(_writer, false, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                    WriteList(_writer, true, _resource.Type, pagingMethod, diagnostic, methodName, $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                }
 
-            _writer.Line();
-            if (clientMethod != null)
-            {
-                //TODO: merge methods like WriteList
-                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                _writer.Line();
+                if (clientMethod != null)
+                {
+                    //TODO: merge methods like WriteList
+                    WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, clientMethod, _resourceContainer.GetDiagnostic(clientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                }
             }
-            if (_resourceContainer.GetValidResourceValue() == ResourceContainer.ResourceGroupOperationsResourceType)
+            else
             {
-                WriteListAsGenericResource(async: false);
-                WriteListAsGenericResource(async: true);
+                foreach (var listMethod in _resourceContainer.ListMethods)
+                {
+                    if (listMethod.PagingMethod != null)
+                    {
+                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, diagnostic, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, diagnostic,"List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    }
+
+                    if (listMethod.ClientMethod != null)
+                    {
+                        _writer.Line();
+                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, _resourceContainer.GetDiagnostic(listMethod.ClientMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                    }
+                }
             }
+            WriteListAsGenericResource(async: false);
+            WriteListAsGenericResource(async: true);
         }
 
         private void WriteListAsGenericResource(bool async)

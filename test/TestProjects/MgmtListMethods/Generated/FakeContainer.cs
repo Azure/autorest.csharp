@@ -334,7 +334,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, Id.Name, optionalParam, cancellationToken: cancellationToken);
+                    var response = _restClient.List(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -349,7 +349,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, optionalParam, cancellationToken: cancellationToken);
+                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -374,7 +374,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -389,7 +389,7 @@ namespace MgmtListMethods
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Fake(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -408,7 +408,7 @@ namespace MgmtListMethods
         {
             Page<Fake> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -423,7 +423,7 @@ namespace MgmtListMethods
             }
             Page<Fake> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -446,7 +446,7 @@ namespace MgmtListMethods
         {
             async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {
@@ -461,7 +461,7 @@ namespace MgmtListMethods
             }
             async Task<Page<Fake>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListByLocations");
+                using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
                 scope.Start();
                 try
                 {

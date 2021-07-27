@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, Diagnostic diagnostic, string name, FormattableString converter, List<PagingMethod> listMethods)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, Diagnostic diagnostic, string name, FormattableString converter, List<PagingMethod>? listMethods = null)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
@@ -584,15 +584,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pathParamsLength = clientMethod.PathParameters.Count;
             if (pathParamsLength > 0)
             {
-                var isAncestorTenant = operationGroup.IsAncestorTenant(context);
-                if (pathParamsLength > 1 && !isAncestorTenant)
+                if (pathParamsLength > 1)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
-                if (!isAncestorTenant)
-                    paramNameList.Reverse();
+                paramNameList.Reverse();
             }
 
             return paramNameList.ToArray();
@@ -660,15 +658,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // 3. Extension resource in the same operation group. The clientMethod may have a path at any scope (tenant/management group/subscription/resource group).
                     if (clientMethod.IsByIdMethod())
                     {
-                        return $"{name}"; // name will always be "Id".
+                        return $"{name}"; // For /{resourceId} operations, there is only 1 parameter and name will always be "Id".
                     }
                     if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
                     {
                         return $"{name}.Parent";
                     }
-                    // TODO: a better way to determine it's a tenant level operation
-                    // else if (clientMethod.Operation?.GetAncestor() == ResourceTypeBuilder.Tenant)
-                    else if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest && httpRequest.Path.StartsWith("/providers") && !httpRequest.Path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
+                    else if (clientMethod.Operation?.IsParentTenant() == true) // If the operation is a main resource directly under tenant, there is only 1 parameter and returns "Id.name".
                     {
                         return $"{name}.Name";
                     }
@@ -946,8 +942,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 var nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
-                // TODO: temporary workaround to deal with delete operations that return a data response
-                if (nonLongRunningOperation.ResultType != null && !nonLongRunningOperation.ResultType.Name.EndsWith("Data"))
+                // need to check implementation type as some delete operation uses ResourceData.
+                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
                 {
                     writer.Append($"{ContextProperty}, ");
                 }

@@ -15,6 +15,7 @@ namespace ResourceIdentifierChooser
         #region SubscriptionLevelResource
         /// <summary> Gets an object representing a SubscriptionLevelResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SubscriptionLevelResourceContainer" /> object. </returns>
         public static SubscriptionLevelResourceContainer GetSubscriptionLevelResourceContainer(this SubscriptionOperations subscription)
         {
             return new SubscriptionLevelResourceContainer(subscription);
@@ -24,6 +25,7 @@ namespace ResourceIdentifierChooser
         #region SubResResource
         /// <summary> Gets an object representing a SubResResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SubResResourceContainer" /> object. </returns>
         public static SubResResourceContainer GetSubResResourceContainer(this SubscriptionOperations subscription)
         {
             return new SubResResourceContainer(subscription);
@@ -33,6 +35,7 @@ namespace ResourceIdentifierChooser
         #region WritableSubResResource
         /// <summary> Gets an object representing a WritableSubResResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="WritableSubResResourceContainer" /> object. </returns>
         public static WritableSubResResourceContainer GetWritableSubResResourceContainer(this SubscriptionOperations subscription)
         {
             return new WritableSubResResourceContainer(subscription);
