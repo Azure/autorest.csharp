@@ -40,7 +40,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string location, string expand)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string location, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -70,7 +70,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<ResourceGroupNonPageableFeatureListResult>> ListAsync(string resourceGroupName, string location, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceGroupNonPageableFeatureListResult>> GetAllAsync(string resourceGroupName, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -81,7 +81,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListRequest(resourceGroupName, location, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, location, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -103,7 +103,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public Response<ResourceGroupNonPageableFeatureListResult> List(string resourceGroupName, string location, string expand = null, CancellationToken cancellationToken = default)
+        public Response<ResourceGroupNonPageableFeatureListResult> GetAll(string resourceGroupName, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -114,7 +114,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListRequest(resourceGroupName, location, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, location, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

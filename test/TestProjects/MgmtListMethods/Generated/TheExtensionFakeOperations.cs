@@ -81,7 +81,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -89,7 +89,7 @@ namespace MgmtListMethods
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -389,13 +389,13 @@ namespace MgmtListMethods
 
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<Feature>>> ListFeaturesAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<Feature>>> GetFeaturesAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListFeatures");
+            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetFeatures");
             scope.Start();
             try
             {
-                var response = await _restClient.ListFeaturesAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetFeaturesAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
@@ -407,13 +407,13 @@ namespace MgmtListMethods
 
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<Feature>> ListFeatures(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Feature>> GetFeatures(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListFeatures");
+            using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetFeatures");
             scope.Start();
             try
             {
-                var response = _restClient.ListFeatures(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetFeatures(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
@@ -426,15 +426,15 @@ namespace MgmtListMethods
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<Usage> ListUsages(CancellationToken cancellationToken = default)
+        public virtual Pageable<Usage> GetUsages(CancellationToken cancellationToken = default)
         {
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListUsages");
+                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetUsages");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListUsages(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetUsages(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -445,11 +445,11 @@ namespace MgmtListMethods
             }
             Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListUsages");
+                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetUsages");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListUsagesNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetUsagesNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -464,15 +464,15 @@ namespace MgmtListMethods
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Usage" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<Usage> ListUsagesAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Usage> GetUsagesAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListUsages");
+                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetUsages");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListUsagesAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetUsagesAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -483,11 +483,11 @@ namespace MgmtListMethods
             }
             async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.ListUsages");
+                using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.GetUsages");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListUsagesNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetUsagesNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

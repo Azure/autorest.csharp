@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,7 +124,7 @@ namespace MgmtListOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -131,7 +132,7 @@ namespace MgmtListOnly
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
@@ -429,18 +430,70 @@ namespace MgmtListOnly
             }
         }
 
+        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
+        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
+        public virtual async Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        {
+            if (requiredParam == null)
+            {
+                throw new ArgumentNullException(nameof(requiredParam));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAll");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all fakes in a resource group. </summary>
+        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
+        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
+        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        {
+            if (requiredParam == null)
+            {
+                throw new ArgumentNullException(nameof(requiredParam));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAll");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FakeBar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FakeBar> ListFakeBars(CancellationToken cancellationToken = default)
+        public virtual Pageable<FakeBar> GetAllFakeBars(CancellationToken cancellationToken = default)
         {
             Page<FakeBar> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListFakeBars");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAllFakeBars");
                 scope.Start();
                 try
                 {
-                    var response = _fakeBarsRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeBarsRestClient.GetAll(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -451,11 +504,11 @@ namespace MgmtListOnly
             }
             Page<FakeBar> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListFakeBars");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAllFakeBars");
                 scope.Start();
                 try
                 {
-                    var response = _fakeBarsRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _fakeBarsRestClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -470,15 +523,15 @@ namespace MgmtListOnly
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FakeBar" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FakeBar> ListFakeBarsAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FakeBar> GetAllFakeBarsAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<FakeBar>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListFakeBars");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAllFakeBars");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeBarsRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeBarsRestClient.GetAllAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -489,11 +542,11 @@ namespace MgmtListOnly
             }
             async Task<Page<FakeBar>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("FakeOperations.ListFakeBars");
+                using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAllFakeBars");
                 scope.Start();
                 try
                 {
-                    var response = await _fakeBarsRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _fakeBarsRestClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

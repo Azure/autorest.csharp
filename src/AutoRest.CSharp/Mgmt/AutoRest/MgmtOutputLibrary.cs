@@ -15,6 +15,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         {
                             if (operation.Parameters.Any(p => p.In == ParameterLocation.Path))
                             {
-                                throw new Exception($"{operationGroup.Key} has an operation {operation.Language.Default.Name} which isn't using standard path parameter names. Please update in your swagger or an autorest directive.");
+                                ErrorHelpers.ThrowError($"{operationGroup.Key} has an operation {operation.Language.Default.Name} which isn't using standard path parameter names. Please update in your swagger or an autorest directive.");
                             }
                             else
                             {

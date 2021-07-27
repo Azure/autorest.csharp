@@ -142,7 +142,7 @@ namespace MgmtListOnly
             }
         }
 
-        internal HttpMessage CreateListPublishedRequest(string resourceGroupName, string publisher, string version, string expand)
+        internal HttpMessage CreateGetPublishedRequest(string resourceGroupName, string publisher, string version, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -175,7 +175,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="publisher"/>, or <paramref name="version"/> is null. </exception>
-        public async Task<Response<PublishedKeyListResult>> ListPublishedAsync(string resourceGroupName, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PublishedKeyListResult>> GetPublishedAsync(string resourceGroupName, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -190,7 +190,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var message = CreateListPublishedRequest(resourceGroupName, publisher, version, expand);
+            using var message = CreateGetPublishedRequest(resourceGroupName, publisher, version, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -213,7 +213,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="publisher"/>, or <paramref name="version"/> is null. </exception>
-        public Response<PublishedKeyListResult> ListPublished(string resourceGroupName, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public Response<PublishedKeyListResult> GetPublished(string resourceGroupName, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -228,7 +228,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(version));
             }
 
-            using var message = CreateListPublishedRequest(resourceGroupName, publisher, version, expand);
+            using var message = CreateGetPublishedRequest(resourceGroupName, publisher, version, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

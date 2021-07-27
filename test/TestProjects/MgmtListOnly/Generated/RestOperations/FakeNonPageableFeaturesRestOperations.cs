@@ -40,7 +40,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest()
+        internal HttpMessage CreateGetAllRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -58,9 +58,9 @@ namespace MgmtListOnly
 
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<FakeNonPageableFeatureListResult>> ListAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<FakeNonPageableFeatureListResult>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest();
+            using var message = CreateGetAllRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -78,9 +78,9 @@ namespace MgmtListOnly
 
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FakeNonPageableFeatureListResult> List(CancellationToken cancellationToken = default)
+        public Response<FakeNonPageableFeatureListResult> GetAll(CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest();
+            using var message = CreateGetAllRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
