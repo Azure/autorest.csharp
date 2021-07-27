@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
@@ -65,6 +66,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+
+            ReorderOperationParameters();
             DecorateOperationGroup();
         }
 
@@ -516,6 +519,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
+
+        private void ReorderOperationParameters()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
+                    if (httpRequest != null)
+                    {
+                        var orderedParams = operation.Parameters
+                            .Where(p => p.In == ParameterLocation.Path)
+                            .OrderBy(
+                                p => httpRequest.Path.IndexOf(
+                                    p.CSharpName(),
+                                    StringComparison.InvariantCultureIgnoreCase));
+                        operation.Parameters = orderedParams.Concat(operation.Parameters
+                                .Where(p => p.In != ParameterLocation.Path).ToList())
+                            .ToList();
+                    }
+                }
+            }
+        }
 
         private void DecorateOperationGroup()
         {
