@@ -306,7 +306,12 @@
                 "modelx": {
                     "$ref": "#/definitions/ModelX"
                 }
-            }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Model3"
+                }
+            ]
         },
         "Model1Update": {
             "type": "object",

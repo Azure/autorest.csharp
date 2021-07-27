@@ -124,9 +124,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                 foreach (var schema in _schemasToOmit)
                 {
-                    if (!_schemasStillUsed.Contains(schema))
+                    if (schema is ObjectSchema objSchema && !_schemasStillUsed.Contains(objSchema))
                     {
-                        codeModel.Schemas.Objects.Remove(schema as ObjectSchema);
+                        codeModel.Schemas.Objects.Remove(objSchema);
+                        if (objSchema.Parents != null)
+                        {
+                            foreach (ObjectSchema parent in objSchema.Parents.Immediate)
+                            {
+                                if (parent.Children != null)
+                                {
+                                    parent.Children.Immediate.Remove(objSchema);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -152,12 +162,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         foreach (var parent in curSchema.Parents.All)
                         {
-                            if (parent is ObjectSchema propertySchema)
+                            if (parent is ObjectSchema parentSchema)
                             {
                                 //remove the child from the parent
                                 //parent.Children.Remove(curSchema)
-                                sInUseQueue.Enqueue(propertySchema);
-                                setToProcess.Add(propertySchema);
+                                sInUseQueue.Enqueue(parentSchema);
+                                setToProcess.Add(parentSchema);
                             }
                         }
                     }
@@ -170,7 +180,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var operation in operationGroup.Operations)
             {
                 AddResponseSchemas(operation);
-                //AddRequestSchemas(operation);
+                AddRequestSchemas(operation);
             }
         }
 
@@ -181,15 +191,42 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var schema = response.ResponseSchema;
                 if (schema != null && schema is ObjectSchema objSchema)
                 {
-                    if (_schemasToOmit.Contains(schema))
+                    if (_schemasToOmit.Contains(objSchema))
                     {
-                        _schemasStillUsed.Add(schema);
+                        _schemasStillUsed.Add(objSchema);
                     }
                     foreach (var property in objSchema.Properties)
                     {
                         if (_schemasToOmit.Contains(property.Schema))
                         {
                             _schemasStillUsed.Add(property.Schema);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AddRequestSchemas(Operation operation)
+        {
+            foreach (var request in operation.Requests)
+            {
+                if (request.Parameters != null)
+                {
+                    foreach (var param in request.Parameters)
+                    {
+                        if (param.Schema is ObjectSchema objSchema)
+                        {
+                            if (_schemasToOmit.Contains(objSchema))
+                            {
+                                _schemasStillUsed.Add(objSchema);
+                            }
+                            foreach (var property in objSchema.Properties)
+                            {
+                                if (_schemasToOmit.Contains(property.Schema))
+                                {
+                                    _schemasStillUsed.Add(property.Schema);
+                                }
+                            }
                         }
                     }
                 }
@@ -213,7 +250,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     foreach (var param in request.Parameters)
                     {
                         var schema = param.Schema;
-                        if (schema != null && !_schemasToOmit.Contains(schema))
+                        if (!_schemasToOmit.Contains(schema))
                         {
                             _schemasToOmit.Add(schema);
                         }

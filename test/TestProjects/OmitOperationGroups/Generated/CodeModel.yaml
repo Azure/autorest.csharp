@@ -10,7 +10,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -20,67 +20,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_1
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: Model1A
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_3
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ModelYE
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_5
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ModelXC
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_6
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ModelXD
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_7
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: Model1UpdateName
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_8
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: Model1ListResultName
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -90,7 +30,7 @@ schemas: !Schemas
           name: Model3F
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -100,7 +40,67 @@ schemas: !Schemas
           name: Model3G
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: Model1A
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModelYE
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModelXC
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ModelXD
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: Model1UpdateName
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: Model1ListResultName
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -111,7 +111,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_15
+    - !ConstantSchema &ref_16
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -121,7 +121,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_19
+    - !ConstantSchema &ref_20
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -142,45 +142,87 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_20
+    - !ObjectSchema &ref_1
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_1
-          serializedName: a
-          language: !Languages 
-            default:
-              name: a
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: !ObjectSchema &ref_2
+      children: !Relations 
+        all:
+          - !ObjectSchema &ref_9
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - !ObjectSchema &ref_4
+                - *ref_1
+              immediate:
+                - *ref_1
+            properties:
+              - !Property 
+                schema: *ref_2
+                serializedName: a
+                language: !Languages 
+                  default:
+                    name: a
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_3
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  children: !Relations 
+                  parents: !Relations 
                     all:
-                      - *ref_2
+                      - !ObjectSchema &ref_5
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: '2020-06-01'
+                        children: !Relations 
+                          all:
+                            - *ref_3
+                          immediate:
+                            - *ref_3
+                        properties:
+                          - !Property 
+                            schema: *ref_4
+                            serializedName: e
+                            language: !Languages 
+                              default:
+                                name: e
+                                description: ''
+                            protocol: !Protocols {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - input
+                          - output
+                        language: !Languages 
+                          default:
+                            name: ModelY
+                            description: ''
+                            namespace: ''
+                        protocol: !Protocols {}
                     immediate:
-                      - *ref_2
+                      - *ref_5
                   properties:
                     - !Property 
-                      schema: *ref_3
-                      serializedName: e
+                      schema: *ref_6
+                      serializedName: c
                       language: !Languages 
                         default:
-                          name: e
+                          name: c
+                          description: ''
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_7
+                      serializedName: d
+                      language: !Languages 
+                        default:
+                          name: d
                           description: ''
                       protocol: !Protocols {}
                   serializationFormats:
@@ -190,27 +232,14 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: ModelY
+                      name: ModelX
                       description: ''
                       namespace: ''
                   protocol: !Protocols {}
-              immediate:
-                - *ref_4
-            properties:
-              - !Property 
-                schema: *ref_5
-                serializedName: c
+                serializedName: modelx
                 language: !Languages 
                   default:
-                    name: c
-                    description: ''
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_6
-                serializedName: d
-                language: !Languages 
-                  default:
-                    name: d
+                    name: modelx
                     description: ''
                 protocol: !Protocols {}
             serializationFormats:
@@ -220,14 +249,68 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ModelX
+                name: Model1
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
-          serializedName: modelx
+          - !ObjectSchema &ref_10
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_1
+              immediate:
+                - *ref_1
+            properties:
+              - !Property 
+                schema: *ref_8
+                serializedName: b
+                language: !Languages 
+                  default:
+                    name: b
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_3
+                serializedName: modelx
+                language: !Languages 
+                  default:
+                    name: modelx
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: Model2
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_9
+          - *ref_10
+      properties:
+        - !Property 
+          schema: *ref_11
+          readOnly: true
+          serializedName: f
           language: !Languages 
             default:
-              name: modelx
+              name: f
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          readOnly: true
+          serializedName: g
+          language: !Languages 
+            default:
+              name: g
               description: ''
           protocol: !Protocols {}
       serializationFormats:
@@ -237,12 +320,13 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: Model1
+          name: Model3
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_4
-    - *ref_2
+    - *ref_9
+    - *ref_5
+    - *ref_3
     - !ObjectSchema &ref_25
       type: object
       apiVersions:
@@ -250,7 +334,7 @@ schemas: !Schemas
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_7
+          schema: *ref_13
           serializedName: name
           language: !Languages 
             default:
@@ -274,7 +358,7 @@ schemas: !Schemas
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_8
+          schema: *ref_14
           serializedName: name
           language: !Languages 
             default:
@@ -291,87 +375,10 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_9
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      children: !Relations 
-        all:
-          - !ObjectSchema &ref_11
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            parents: !Relations 
-              all:
-                - *ref_9
-              immediate:
-                - *ref_9
-            properties:
-              - !Property 
-                schema: *ref_10
-                serializedName: b
-                language: !Languages 
-                  default:
-                    name: b
-                    description: ''
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_2
-                serializedName: modelx
-                language: !Languages 
-                  default:
-                    name: modelx
-                    description: ''
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - input
-              - output
-            language: !Languages 
-              default:
-                name: Model2
-                description: ''
-                namespace: ''
-            protocol: !Protocols {}
-        immediate:
-          - *ref_11
-      properties:
-        - !Property 
-          schema: *ref_12
-          readOnly: true
-          serializedName: f
-          language: !Languages 
-            default:
-              name: f
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_13
-          readOnly: true
-          serializedName: g
-          language: !Languages 
-            default:
-              name: g
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      language: !Languages 
-        default:
-          name: Model3
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - *ref_11
+    - *ref_10
 globalParameters:
-  - !Parameter &ref_18
-    schema: *ref_14
+  - !Parameter &ref_19
+    schema: *ref_15
     implementation: Client
     required: true
     extensions:
@@ -384,7 +391,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_16
+  - !Parameter &ref_17
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -400,8 +407,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_17
-    schema: *ref_15
+  - !Parameter &ref_18
+    schema: *ref_16
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -422,9 +429,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_23
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -436,7 +443,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_24
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -447,13 +454,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_20
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -466,7 +473,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_22
-                schema: *ref_20
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -509,7 +516,7 @@ operationGroups:
           - *ref_24
         responses:
           - !SchemaResponse 
-            schema: *ref_20
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -531,9 +538,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_27
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -545,7 +552,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_28
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -556,13 +563,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_20
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -618,7 +625,7 @@ operationGroups:
           - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_20
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -640,9 +647,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_29
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -654,7 +661,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_30
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -665,8 +672,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             parameters:
@@ -698,7 +705,7 @@ operationGroups:
           - *ref_30
         responses:
           - !SchemaResponse 
-            schema: *ref_20
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -720,9 +727,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_31
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -734,7 +741,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_32
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -745,8 +752,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             language: !Languages 
@@ -790,11 +797,11 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
           - *ref_17
           - *ref_18
+          - *ref_19
           - !Parameter &ref_33
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             language: !Languages 
               default:
@@ -864,9 +871,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_36
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -878,7 +885,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_37
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -889,13 +896,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_19
+                schema: *ref_20
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -908,7 +915,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_35
-                schema: *ref_11
+                schema: *ref_10
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -951,7 +958,7 @@ operationGroups:
           - *ref_37
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -973,9 +980,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_16
+          - *ref_17
           - !Parameter &ref_38
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -987,7 +994,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter &ref_39
-            schema: *ref_14
+            schema: *ref_15
             implementation: Method
             required: true
             language: !Languages 
@@ -998,8 +1005,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_17
           - *ref_18
+          - *ref_19
         requests:
           - !Request 
             parameters:
@@ -1031,7 +1038,7 @@ operationGroups:
           - *ref_39
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''
