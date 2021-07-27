@@ -7,13 +7,12 @@
 
 using System.Collections.Generic;
 using Azure.Core;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> TrackedResource type. </summary>
-    internal partial class TrackedResourceModel : Resource<TenantResourceIdentifier>
+    internal partial class TrackedResourceModel : Resource
     {
         /// <summary> Initializes a new instance of TrackedResourceModel. </summary>
         internal TrackedResourceModel()

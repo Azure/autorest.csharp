@@ -747,7 +747,7 @@
                 "tags": [
                     "Bars"
                 ],
-                "operationId": "Bars_List",
+                "operationId": "Bars_ListBars",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
@@ -769,6 +769,42 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/BarsListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands": {
+            "get": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_List",
+                "description": "Lists all available run commands for a subscription in a location.",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The location upon which run commands is queried.",
+                        "pattern": "^[-\\w\\._]+$"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/RunCommandListResult"
                         }
                     }
                 },
@@ -1393,6 +1429,86 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries": {
+            "get": {
+                "tags": [
+                    "SharedGalleries"
+                ],
+                "operationId": "SharedGalleries_List",
+                "description": "List shared galleries by subscription id or tenant id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LocationNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "sharedTo",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "The query parameter to decide what shared galleries to fetch when doing listing operations.",
+                        "enum": [
+                            "tenant"
+                        ],
+                        "x-ms-enum": {
+                            "name": "SharedToValues",
+                            "modelAsString": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SharedGalleryList"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/sharedGalleries/{galleryUniqueName}": {
+            "get": {
+                "tags": [
+                    "SharedGalleries"
+                ],
+                "operationId": "SharedGalleries_Get",
+                "description": "Get a shared gallery by subscription id or tenant id.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LocationNameParameter"
+                    },
+                    {
+                        "name": "galleryUniqueName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The unique name of the Shared Gallery."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SharedGallery"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1727,7 +1843,162 @@
                 "location"
             ],
             "x-ms-azure-resource": true
-        }
+        },
+        "RunCommandParameterDefinition": {
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The run command parameter name."
+              },
+              "type": {
+                "type": "string",
+                "description": "The run command parameter type."
+              },
+              "defaultValue": {
+                "type": "string",
+                "description": "The run command parameter default value."
+              },
+              "required": {
+                "type": "boolean",
+                "description": "The run command parameter required.",
+                "default": false
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ],
+            "description": "Describes the properties of a run command parameter."
+          },
+        "RunCommandDocumentBase": {
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The VM run command label."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The VM run command description."
+                }
+            },
+            "required": [
+                "label",
+                "description"
+            ],
+            "description": "Describes the properties of a Run Command metadata."
+        },
+        "RunCommandDocument": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RunCommandDocumentBase"
+                }
+            ],
+            "properties": {
+                "script": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The script to be executed."
+                },
+                "parameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RunCommandParameterDefinition"
+                    },
+                    "description": "The parameters used by the script."
+                }
+            },
+            "required": [
+                "script"
+            ],
+            "description": "Describes the properties of a Run Command."
+        },
+        "RunCommandListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RunCommandDocumentBase"
+                    },
+                    "description": "The list of virtual machine run commands."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Virtual Machine operation response."
+        },
+        "SharedGalleryList": {
+            "description": "The List Shared Galleries operation response.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SharedGallery"
+                    },
+                    "description": "A list of shared galleries."
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries."
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "SharedGallery": {
+            "properties": {},
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PirSharedGalleryResource"
+                }
+            ],
+            "description": "Specifies information about the Shared Gallery that you want to create or update."
+        },
+        "PirResource": {
+            "description": "The Resource model definition.",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name"
+                },
+                "location": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource location"
+                }
+            }
+        },
+        "PirSharedGalleryResource": {
+            "properties": {
+                "identifier": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/SharedGalleryIdentifier"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/PirResource"
+                }
+            ],
+            "description": "Base information about the shared gallery resource in pir."
+        },
+        "SharedGalleryIdentifier": {
+            "properties": {
+              "uniqueId": {
+                "type": "string",
+                "description": "The unique id of this shared gallery."
+              }
+            },
+            "description": "The identifier information of shared gallery."
+          }
     },
     "parameters": {
         "SubscriptionIdParameter": {
@@ -1736,6 +2007,14 @@
             "required": true,
             "type": "string",
             "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "LocationNameParameter": {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Resource location."
         },
         "ApiVersionParameter": {
             "name": "api-version",

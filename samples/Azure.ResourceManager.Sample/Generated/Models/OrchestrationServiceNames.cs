@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The name of the service. </summary>
     public readonly partial struct OrchestrationServiceNames : IEquatable<OrchestrationServiceNames>

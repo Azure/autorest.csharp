@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the operations that can be performed over a specific SingletonResource. </summary>
-    public partial class SingletonResourceOperations : SingletonOperationsBase<ResourceGroupResourceIdentifier, SingletonResource>
+    public partial class SingletonResourceOperations : SingletonOperationsBase<SingletonResource>
     {
         /// <summary> Initializes a new instance of the <see cref="SingletonResourceOperations"/> class for mocking. </summary>
         protected SingletonResourceOperations()

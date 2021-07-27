@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The last action performed on the rolling upgrade. </summary>
     public enum RollingUpgradeActionType

@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a ResourceGroup. </summary>
-    public partial class StorageAccountContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData>
+    public partial class StorageAccountContainer : ResourceContainerBase<StorageAccount, StorageAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -38,9 +38,6 @@ namespace Azure.Management.Storage
 
         /// <summary> Represents the REST operations. </summary>
         private StorageAccountsRestOperations _restClient => new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -414,6 +411,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
     }
 }

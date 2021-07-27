@@ -15,11 +15,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using MgmtSingleton.Models;
 
 namespace MgmtSingleton
 {
     /// <summary> A class representing collection of ParentResource and their operations over a ResourceGroup. </summary>
-    public partial class ParentResourceContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ParentResource, ParentResourceData>
+    public partial class ParentResourceContainer : ResourceContainerBase<ParentResource, ParentResourceData>
     {
         /// <summary> Initializes a new instance of the <see cref="ParentResourceContainer"/> class for mocking. </summary>
         protected ParentResourceContainer()
@@ -37,9 +38,6 @@ namespace MgmtSingleton
 
         /// <summary> Represents the REST operations. </summary>
         private ParentResourcesRestOperations _restClient => new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -393,6 +391,6 @@ namespace MgmtSingleton
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, ParentResource, ParentResourceData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ParentResource, ParentResourceData> Construct() { }
     }
 }

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The instance view of a virtual machine boot diagnostics. </summary>
     public partial class BootDiagnosticsInstanceView

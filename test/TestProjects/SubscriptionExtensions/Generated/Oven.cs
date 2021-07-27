@@ -6,7 +6,6 @@
 #nullable disable
 
 using Azure.ResourceManager.Core;
-using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {

@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Models
 {
     /// <summary> This model is x-ms-azure-resource, and is exactly a SubResource type. </summary>
-    public partial class AzureResourceFlattenModel6 : SubResource<ResourceGroupResourceIdentifier>
+    public partial class AzureResourceFlattenModel6 : SubResource
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel6. </summary>
         internal AzureResourceFlattenModel6()

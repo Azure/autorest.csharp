@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using SupersetFlattenInheritance.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of TrackedResourceModel2 and their operations over a ResourceGroup. </summary>
-    public partial class TrackedResourceModel2Container : ResourceContainerBase<ResourceGroupResourceIdentifier, TrackedResourceModel2, TrackedResourceModel2Data>
+    public partial class TrackedResourceModel2Container : ResourceContainerBase<TrackedResourceModel2, TrackedResourceModel2Data>
     {
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel2Container"/> class for mocking. </summary>
         protected TrackedResourceModel2Container()
@@ -35,9 +36,6 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private TrackedResourceModel2SRestOperations _restClient => new TrackedResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -355,6 +353,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, TrackedResourceModel2, TrackedResourceModel2Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, TrackedResourceModel2, TrackedResourceModel2Data> Construct() { }
     }
 }

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Api input base class for LogAnalytics Api. </summary>
     public partial class LogAnalyticsInputBase

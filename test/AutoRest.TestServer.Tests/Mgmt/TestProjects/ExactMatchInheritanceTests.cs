@@ -5,6 +5,7 @@ using System;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using ExactMatchInheritance;
+using ExactMatchInheritance.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
@@ -16,10 +17,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel1Data))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel5Data))]
-        [TestCase(typeof(SubResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel6))]
-        [TestCase(typeof(WritableSubResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel8))]
+        [TestCase(typeof(Resource), typeof(ExactMatchModel1Data))]
+        [TestCase(typeof(TrackedResource), typeof(ExactMatchModel5Data))]
+        [TestCase(typeof(SubResource), typeof(ExactMatchModel6))]
+        [TestCase(typeof(WritableSubResource), typeof(ExactMatchModel8))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]

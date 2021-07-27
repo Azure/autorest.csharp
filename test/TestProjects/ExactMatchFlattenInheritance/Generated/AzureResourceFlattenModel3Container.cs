@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel3 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel3Container : ResourceContainerBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel3, AzureResourceFlattenModel3Data>
+    public partial class AzureResourceFlattenModel3Container : ResourceContainerBase<AzureResourceFlattenModel3, AzureResourceFlattenModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel3Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel3Container()
@@ -35,9 +36,6 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private AzureResourceFlattenModel3SRestOperations _restClient => new AzureResourceFlattenModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -359,6 +357,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, AzureResourceFlattenModel3, AzureResourceFlattenModel3Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, AzureResourceFlattenModel3, AzureResourceFlattenModel3Data> Construct() { }
     }
 }

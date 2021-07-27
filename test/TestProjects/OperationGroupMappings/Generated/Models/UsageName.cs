@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OperationGroupMappings
+namespace OperationGroupMappings.Models
 {
     /// <summary> The Usage Names. </summary>
     public partial class UsageName

@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
+using MgmtListOnly;
 
 namespace MgmtListOnly.Models
 {
@@ -28,7 +29,7 @@ namespace MgmtListOnly.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
         /// <param name="foo"></param>
-        internal Grandson(ResourceGroupResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar, string foo) : base(id, name, type, location, tags, bar)
+        internal Grandson(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar, string foo) : base(id, name, type, location, tags, bar)
         {
             Foo = foo;
         }

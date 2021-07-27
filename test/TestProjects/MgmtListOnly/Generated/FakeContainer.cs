@@ -20,7 +20,7 @@ using MgmtListOnly.Models;
 namespace MgmtListOnly
 {
     /// <summary> A class representing collection of Fake and their operations over a ResourceGroup. </summary>
-    public partial class FakeContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Fake, FakeData>
+    public partial class FakeContainer : ResourceContainerBase<Fake, FakeData>
     {
         /// <summary> Initializes a new instance of the <see cref="FakeContainer"/> class for mocking. </summary>
         protected FakeContainer()
@@ -38,9 +38,6 @@ namespace MgmtListOnly
 
         /// <summary> Represents the REST operations. </summary>
         private FakesRestOperations _restClient => new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -420,6 +417,6 @@ namespace MgmtListOnly
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, Fake, FakeData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Fake, FakeData> Construct() { }
     }
 }

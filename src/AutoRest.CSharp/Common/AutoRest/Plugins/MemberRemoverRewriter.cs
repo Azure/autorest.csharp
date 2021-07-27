@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -93,6 +95,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 if (attributeData.AttributeClass?.Equals(_suppressAttribute) == true)
                 {
+                    ValidateArguments(namedTypeSymbol, attributeData);
+
                     suppressions ??= new List<Supression>();
                     var name = attributeData.ConstructorArguments[0].Value as string;
                     var parameterTypes = attributeData.ConstructorArguments[1].Values.Select(v => (ISymbol?)v.Value).ToArray();
@@ -105,6 +109,56 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 _suppressionCache.Add(namedTypeSymbol, suppressions);
             }
             return suppressions;
+
+            static void ValidateArguments(INamedTypeSymbol typeSymbol, AttributeData attributeData)
+            {
+                var arguments = attributeData.ConstructorArguments;
+                if (arguments.Length == 0)
+                {
+                    var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
+                    ErrorHelpers.ThrowError($"CodeGenSuppress attribute on {fullName} must specify a method name as its first argument.");
+                }
+
+                if (arguments.Length == 1 || arguments[0].Kind != TypedConstantKind.Primitive || arguments[0].Value is not string)
+                {
+                    var attribute = attributeData.ApplicationSyntaxReference.GetText();
+                    var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
+                    ErrorHelpers.ThrowError($"{attribute} attribute on {fullName} must specify a method name as its first argument.");
+                }
+
+                if (arguments.Length == 2 && arguments[1].Kind == TypedConstantKind.Array)
+                {
+                    ValidateTypeArguments(typeSymbol, attributeData, arguments[1].Values);
+                }
+                else
+                {
+                    ValidateTypeArguments(typeSymbol, attributeData, arguments.Skip(1));
+                }
+            }
+
+            static void ValidateTypeArguments(INamedTypeSymbol typeSymbol, AttributeData attributeData, IEnumerable<TypedConstant> arguments)
+            {
+                foreach (var argument in arguments)
+                {
+                    if (argument.Kind == TypedConstantKind.Type)
+                    {
+                        if (argument.Value is IErrorTypeSymbol errorType)
+                        {
+                            var attribute = attributeData.ApplicationSyntaxReference.GetText();
+                            var fileLinePosition = attributeData.ApplicationSyntaxReference.GetFileLinePosition();
+                            var filePath = fileLinePosition.Path;
+                            var line = fileLinePosition.StartLinePosition.Line + 1;
+                            ErrorHelpers.ThrowError($"The undefined type '{errorType.Name}' is referenced in the '{attribute}' attribute ({filePath}, line: {line}). Please define this type or remove it from the attribute.");
+                        }
+                    }
+                    else
+                    {
+                        var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
+                        var attribute = attributeData.ApplicationSyntaxReference.GetText();
+                        ErrorHelpers.ThrowError($"Argument '{argument.ToCSharpString()}' in attribute '{attribute}' applied to '{fullName}' must be a type.");
+                    }
+                }
+            }
         }
 
         private bool IsSuppressedType(BaseTypeDeclarationSyntax typeSyntax)

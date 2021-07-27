@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace SupersetFlattenInheritance
+namespace SupersetFlattenInheritance.Models
 {
     /// <summary> Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it&apos;s not recognized either. </summary>
     public partial class NonResourceModel1

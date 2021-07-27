@@ -19,7 +19,7 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the operations that can be performed over a specific AnotherParent. </summary>
-    public partial class AnotherParentOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AnotherParent>
+    public partial class AnotherParentOperations : ResourceOperationsBase<AnotherParent>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AnotherParentsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref="AnotherParentOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AnotherParentOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AnotherParentOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

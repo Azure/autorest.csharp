@@ -27,7 +27,7 @@ namespace ExactMatchFlattenInheritance
         internal static AzureResourceFlattenModel5Data DeserializeAzureResourceFlattenModel5Data(JsonElement element)
         {
             Optional<int> foo = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

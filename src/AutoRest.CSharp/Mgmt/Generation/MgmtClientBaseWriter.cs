@@ -87,13 +87,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, Diagnostic diagnostic, string name, FormattableString converter, List<PagingMethod>? listMethods = null)
+
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, List<PagingMethod>? listMethods = null)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
             // else we just call ListAsGenericResource to get the list then call Get on every resource
 
-            var methodName = CreateMethodName(name, async);
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var returnType = resourceType.WrapPageable(async);
 
-            writer.Append($"public {returnType} {methodName}(");
+            writer.Append($"public {returnType} {CreateMethodName(methodName, async)}(");
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteParameter(param);
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, diagnostic, ClientDiagnosticsField, converter, async, listMethods);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()), ClientDiagnosticsField, converter, async, listMethods);
             }
         }
 
@@ -474,10 +474,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            (var bodyType, bool isListFunction) = restClientMethod.GetBodyTypeForList(operationGroup, context);
+            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -494,8 +494,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            var methodName = CreateMethodName(clientMethod.Name, async); // note clientMethod.Name not restClientMethod.Name
-            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {methodName}(");
+            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -550,7 +549,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        writer.Append($"return response");
+                        context.Library.TryGetArmResource(operationGroup, out var resource);
+                        if (wasResourceData && resource != null && bodyType != null)
+                        {
+                            writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
+                        }
+                        else
+                        {
+                            writer.Append($"return response");
+                        }
                     }
 
                     if (bodyType == null && restClientMethod.HeaderModel != null)

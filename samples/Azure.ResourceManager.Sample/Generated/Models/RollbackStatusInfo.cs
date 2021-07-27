@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Information about rollback on failed VM instances after a OS Upgrade operation. </summary>
     public partial class RollbackStatusInfo

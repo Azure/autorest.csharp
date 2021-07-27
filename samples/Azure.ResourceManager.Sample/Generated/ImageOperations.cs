@@ -14,11 +14,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific Image. </summary>
-    public partial class ImageOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Image>
+    public partial class ImageOperations : ResourceOperationsBase<Image>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ImagesRestOperations _restClient { get; }
@@ -31,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="ImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ImageOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ImageOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

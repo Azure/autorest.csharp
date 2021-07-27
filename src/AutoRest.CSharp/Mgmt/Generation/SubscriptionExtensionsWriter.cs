@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -73,8 +74,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                             methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
-                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, true);
-                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, false);
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, true);
+                                        WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, false);
                                     }
 
                                     if (listMethod.ClientMethod != null)
@@ -139,10 +140,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, string methodName, bool async)
+        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, string methodName, MgmtConfiguration config, bool async)
         {
-            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, methodName,
+            if (pagingMethod.PagingResponse.ItemType.Name.Equals(resourceOperation.ResourceData.Type.Name))
+            {
+                WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, methodName,
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
+            }
+            else
+            {
+                WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, resourceOperation.RestClient, pagingMethod, methodName,
+                $"", async);
+            }
         }
 
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)

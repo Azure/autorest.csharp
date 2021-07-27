@@ -15,11 +15,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using MgmtParent.Models;
 
 namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
-    public partial class DedicatedHostContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, DedicatedHost, DedicatedHostData>
+    public partial class DedicatedHostContainer : ResourceContainerBase<DedicatedHost, DedicatedHostData>
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>
         protected DedicatedHostContainer()
@@ -37,9 +38,6 @@ namespace MgmtParent
 
         /// <summary> Represents the REST operations. </summary>
         private DedicatedHostsRestOperations _restClient => new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
@@ -437,6 +435,6 @@ namespace MgmtParent
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }
 }

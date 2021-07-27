@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> The Update Resource model definition. </summary>
     public partial class UpdateResource

@@ -11,10 +11,10 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtParent
+namespace MgmtParent.Models
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : Resource<ResourceGroupResourceIdentifier>
+    public partial class Resource : Azure.ResourceManager.Resources.Models.Resource
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="location"> Resource location. </param>
@@ -36,7 +36,7 @@ namespace MgmtParent
         /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(ResourceGroupResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
+        internal Resource(ResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
         {
             Location = location;
             Tags = tags;

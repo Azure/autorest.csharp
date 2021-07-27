@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> The status code and count of the virtual machine scale set instance view status summary. </summary>
     public partial class VirtualMachineStatusCodeCount

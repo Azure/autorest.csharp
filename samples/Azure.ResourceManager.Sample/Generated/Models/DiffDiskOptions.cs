@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Specifies the ephemeral disk option for operating system disk. </summary>
     public readonly partial struct DiffDiskOptions : IEquatable<DiffDiskOptions>

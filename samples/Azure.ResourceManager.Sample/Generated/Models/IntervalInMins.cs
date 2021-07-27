@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary> Interval value in minutes used to create LogAnalytics call rate logs. </summary>
     public enum IntervalInMins

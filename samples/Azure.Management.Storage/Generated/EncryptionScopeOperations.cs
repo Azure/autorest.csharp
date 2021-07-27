@@ -11,7 +11,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -19,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
-    public partial class EncryptionScopeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, EncryptionScope>
+    public partial class EncryptionScopeOperations : ResourceOperationsBase<EncryptionScope>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private EncryptionScopesRestOperations _restClient { get; }
@@ -32,7 +31,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal EncryptionScopeOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal EncryptionScopeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -96,7 +95,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual async Task<Response<EncryptionScopeData>> PatchAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<EncryptionScope>> PatchAsync(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScope == null)
             {
@@ -108,7 +107,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.PatchAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,7 +120,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="encryptionScope"/> is null. </exception>
-        public virtual Response<EncryptionScopeData> Patch(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public virtual Response<EncryptionScope> Patch(EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (encryptionScope == null)
             {
@@ -133,7 +132,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Patch(Id.ResourceGroupName, Id.Parent.Name, Id.Name, encryptionScope, cancellationToken);
-                return response;
+                return Response.FromValue(new EncryptionScope(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

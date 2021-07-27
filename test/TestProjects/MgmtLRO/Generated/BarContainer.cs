@@ -18,7 +18,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Bar and their operations over a ResourceGroup. </summary>
-    public partial class BarContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Bar, BarData>
+    public partial class BarContainer : ResourceContainerBase<Bar, BarData>
     {
         /// <summary> Initializes a new instance of the <see cref="BarContainer"/> class for mocking. </summary>
         protected BarContainer()
@@ -36,9 +36,6 @@ namespace MgmtLRO
 
         /// <summary> Represents the REST operations. </summary>
         private BarsRestOperations _restClient => new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace MgmtLRO
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, Bar, BarData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, Bar, BarData> Construct() { }
     }
 }

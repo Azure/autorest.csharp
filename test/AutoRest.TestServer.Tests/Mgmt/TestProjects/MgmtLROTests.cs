@@ -2,6 +2,7 @@
 using System.Linq;
 using Azure;
 using MgmtLRO;
+using MgmtLRO.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects

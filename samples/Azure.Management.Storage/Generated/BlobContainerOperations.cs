@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific BlobContainer. </summary>
-    public partial class BlobContainerOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, BlobContainer>
+    public partial class BlobContainerOperations : ResourceOperationsBase<BlobContainer>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private BlobContainersRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="BlobContainerOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal BlobContainerOperations(OperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal BlobContainerOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual async Task<Response<BlobContainerData>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BlobContainer>> UpdateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (blobContainer == null)
             {
@@ -180,7 +180,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
-                return response;
+                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -193,7 +193,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual Response<BlobContainerData> Update(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public virtual Response<BlobContainer> Update(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (blobContainer == null)
             {
@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken);
-                return response;
+                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

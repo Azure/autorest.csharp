@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -28,33 +29,43 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operationGroup">the <see cref="OperationGroup"/> this RestClientMethod belongs</param>
         /// <param name="context">the current building context</param>
         /// <returns>a tuple with the first argument is the expected return type of this function and the second argument is a boolean indicating whether this function is returning a collection</returns>
-        public static (CSharpType? BodyType, bool IsListFunction) GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        public static (CSharpType? BodyType, bool IsListFunction, bool WasResourceData) GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
+            bool wasResourceData = false;
             var returnType = method.ReturnType;
             if (returnType == null)
-                return (null, false);
+                return (null, false, wasResourceData);
 
             if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
-                return (returnType, false);
+                return (returnType, false, wasResourceData);
 
             var schemaObject = (SchemaObjectType)returnType.Implementation;
             var valueProperty = GetValueProperty(schemaObject);
 
+            //convert returnType if this is the same as the resourceData
+            if (context.Library.TryGetResourceData(operationGroup, out var resourceData) &&
+                returnType.Name == resourceData.Declaration.Name)
+            {
+                wasResourceData = true;
+                returnType = context.Library.GetArmResource(operationGroup).Type;
+            }
+
             if (valueProperty == null) // The returnType does not have a value of array in it, therefore it cannot be a list
             {
-                return (returnType, false);
+                return (returnType, false, wasResourceData);
             }
             // first we try to get the resource data - this could be a resource
-            if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
+            if (resourceData != null)
             {
                 if (valueProperty.ValueType.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
                 {
-                    return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true);
+                    wasResourceData = true;
+                    return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true, wasResourceData);
                 }
             }
 
             // otherwise this must be a non-resource, but still a list
-            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true);
+            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true, wasResourceData);
         }
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
@@ -132,7 +143,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             char[] charsToTrim = { '{', '}' };
                             var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
-                            isParentExistsInPathParams = clientMethod.PathParameters.Any(p => p.Name == parentParamName);
+                            isParentExistsInPathParams = clientMethod.Request.PathParameterSegments.Any(p => p.Value.Reference.Name == parentParamName);
                             if (isParentExistsInPathParams)
                             {
                                 break;

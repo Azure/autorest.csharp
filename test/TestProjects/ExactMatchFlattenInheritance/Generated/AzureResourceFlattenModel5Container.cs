@@ -13,11 +13,12 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel5 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel5Container : ResourceContainerBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel5, AzureResourceFlattenModel5Data>
+    public partial class AzureResourceFlattenModel5Container : ResourceContainerBase<AzureResourceFlattenModel5, AzureResourceFlattenModel5Data>
     {
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel5Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel5Container()
@@ -35,9 +36,6 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Represents the REST operations. </summary>
         private AzureResourceFlattenModel5SRestOperations _restClient => new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -343,6 +341,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, AzureResourceFlattenModel5, AzureResourceFlattenModel5Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, AzureResourceFlattenModel5, AzureResourceFlattenModel5Data> Construct() { }
     }
 }

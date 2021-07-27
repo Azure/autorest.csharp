@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 
-namespace Pagination.Models
+namespace Pagination
 {
     public partial class PageSizeNumericModelData : IUtf8JsonSerializable
     {
@@ -23,7 +23,7 @@ namespace Pagination.Models
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceGroupResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

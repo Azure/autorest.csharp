@@ -18,7 +18,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetChild and their operations over a AvailabilitySet. </summary>
-    public partial class AvailabilitySetChildContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, AvailabilitySetChild, AvailabilitySetChildData>
+    public partial class AvailabilitySetChildContainer : ResourceContainerBase<AvailabilitySetChild, AvailabilitySetChildData>
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetChildContainer()
@@ -36,9 +36,6 @@ namespace MgmtOperations
 
         /// <summary> Represents the REST operations. </summary>
         private AvailabilitySetChildRestOperations _restClient => new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
-        /// <summary> Typed Resource Identifier for the container. </summary>
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => AvailabilitySetOperations.ResourceType;
@@ -360,6 +357,6 @@ namespace MgmtOperations
         }
 
         // Builders.
-        // public ArmBuilder<ResourceGroupResourceIdentifier, AvailabilitySetChild, AvailabilitySetChildData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, AvailabilitySetChild, AvailabilitySetChildData> Construct() { }
     }
 }

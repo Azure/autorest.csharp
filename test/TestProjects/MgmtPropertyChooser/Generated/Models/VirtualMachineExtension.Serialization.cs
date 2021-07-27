@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtPropertyChooser
+namespace MgmtPropertyChooser.Models
 {
     public partial class VirtualMachineExtension : IUtf8JsonSerializable
     {
@@ -78,7 +78,7 @@ namespace MgmtPropertyChooser
         {
             IDictionary<string, string> tags = default;
             Location location = default;
-            TenantResourceIdentifier id = default;
+            ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> forceUpdateTag = default;
