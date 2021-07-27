@@ -32,15 +32,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static (CSharpType? BodyType, bool IsListFunction, bool WasResourceData) GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             bool wasResourceData = false;
-            var returnType = method.ReturnType;
-            if (returnType == null)
-                return (null, false, wasResourceData);
+            CSharpType? returnType;
+            ObjectTypeProperty? valueProperty;
+            bool isList = method.IsListMethod(out valueProperty, out returnType);
 
-            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+            if (returnType == null || returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
                 return (returnType, false, wasResourceData);
-
-            var schemaObject = (SchemaObjectType)returnType.Implementation;
-            var valueProperty = GetValueProperty(schemaObject);
 
             //convert returnType if this is the same as the resourceData
             if (context.Library.TryGetResourceData(operationGroup, out var resourceData) &&
@@ -54,6 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return (returnType, false, wasResourceData);
             }
+
             // first we try to get the resource data - this could be a resource
             if (resourceData != null)
             {
@@ -67,6 +65,27 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // otherwise this must be a non-resource, but still a list
             return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true, wasResourceData);
         }
+
+        public static bool IsListMethod(this RestClientMethod method, out ObjectTypeProperty? valueProperty, out CSharpType? returnType)
+        {
+            valueProperty = null;
+            returnType = method.ReturnType;
+            if (returnType == null)
+                return false;
+
+            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+                return false;
+
+            var schemaObject = (SchemaObjectType)returnType.Implementation;
+            valueProperty = GetValueProperty(schemaObject);
+            return valueProperty != null;
+        }
+
+        public static bool IsListMethod(this RestClientMethod method)
+        {
+            return IsListMethod(method, out var valueMethod, out var returnType);
+        }
+
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
         {

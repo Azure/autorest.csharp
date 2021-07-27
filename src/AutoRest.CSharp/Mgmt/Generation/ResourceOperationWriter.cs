@@ -416,7 +416,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)

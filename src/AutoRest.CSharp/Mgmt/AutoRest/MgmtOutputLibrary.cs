@@ -66,6 +66,52 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
             DecorateOperationGroup();
+            UpdateListMethodNames();
+        }
+
+        private void UpdateListMethodNames()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var curName = operation.Language.Default.Name;
+                    if (curName.Equals("List"))
+                    {
+                        operation.Language.Default.Name = "GetAll";
+                    }
+                    else if (curName.Equals("ListAll"))
+                    {
+                        if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "resourcegroupname"))
+                        {
+                            operation.Language.Default.Name = "GetByResourceGroup";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "subscriptionid"))
+                        {
+                            operation.Language.Default.Name = "GetBySubscription";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "groupid"))
+                        {
+                            operation.Language.Default.Name = "GetByManagementGroup";
+                        }
+                        else
+                        {
+                            if (operation.Parameters.Any(p => p.In == ParameterLocation.Path))
+                            {
+                                throw new Exception($"{operationGroup.Key} has an operation {operation.Language.Default.Name} which isn't using standard path parameter names. Please update in your swagger or an autorest directive.");
+                            }
+                            else
+                            {
+                                operation.Language.Default.Name = "GetByTenant";
+                            }
+                        }
+                    }
+                    else if (curName.StartsWith("List"))
+                    {
+                        operation.Language.Default.Name = curName.Replace("List", "Get");
+                    }
+                }
+            }
         }
 
         private void RemoveOperations(CodeModel codeModel)
