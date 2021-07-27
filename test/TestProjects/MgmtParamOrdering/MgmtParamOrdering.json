@@ -43,18 +43,18 @@
                 "description": "Create or update an availability set.",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
                         "name": "availabilitySetName",
                         "in": "path",
                         "required": true,
                         "type": "string",
                         "description": "The name of the availability set."
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "name": "parameters",
@@ -291,18 +291,18 @@
                 "description": "Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
                         "name": "hostGroupName",
                         "in": "path",
                         "required": true,
                         "type": "string",
                         "description": "The name of the dedicated host group."
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "name": "parameters",
@@ -348,13 +348,6 @@
                 "description": "Update an dedicated host group.",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
                         "name": "hostGroupName",
                         "in": "path",
                         "required": true,
@@ -369,6 +362,13 @@
                             "$ref": "#/definitions/DedicatedHostGroupUpdate"
                         },
                         "description": "Parameters supplied to the Update Dedicated Host Group operation."
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -394,13 +394,6 @@
                 "description": "Delete a dedicated host group.",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
                         "name": "hostGroupName",
                         "in": "path",
                         "required": true,
@@ -409,6 +402,13 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -489,11 +489,11 @@
                 "description": "Create or update a dedicated host .",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
+                        "name": "hostName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the resource group."
+                        "description": "The name of the dedicated host ."
                     },
                     {
                         "name": "hostGroupName",
@@ -501,13 +501,6 @@
                         "required": true,
                         "type": "string",
                         "description": "The name of the dedicated host group."
-                    },
-                    {
-                        "name": "hostName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the dedicated host ."
                     },
                     {
                         "name": "parameters",
@@ -520,6 +513,13 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -554,20 +554,6 @@
                 "description": "Update an dedicated host .",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
-                        "name": "hostGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the dedicated host group."
-                    },
-                    {
                         "name": "hostName",
                         "in": "path",
                         "required": true,
@@ -584,7 +570,21 @@
                         "description": "Parameters supplied to the Update Dedicated Host operation."
                     },
                     {
+                        "name": "hostGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the dedicated host group."
+                    },
+                    {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -615,18 +615,18 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "hostGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the dedicated host group."
-                    },
-                    {
                         "name": "hostName",
                         "in": "path",
                         "required": true,
                         "type": "string",
                         "description": "The name of the dedicated host."
+                    },
+                    {
+                        "name": "hostGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the dedicated host group."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -656,6 +656,13 @@
                 "description": "Retrieves information about a dedicated host.",
                 "parameters": [
                     {
+                        "name": "hostName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the dedicated host."
+                    },
+                    {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
@@ -668,13 +675,6 @@
                         "required": true,
                         "type": "string",
                         "description": "The name of the dedicated host group."
-                    },
-                    {
-                        "name": "hostName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the dedicated host."
                     },
                     {
                         "name": "$expand",
@@ -721,18 +721,18 @@
                 "description": "Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
-                    },
-                    {
                         "name": "hostGroupName",
                         "in": "path",
                         "required": true,
                         "type": "string",
                         "description": "The name of the dedicated host group."
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -763,11 +763,20 @@
                 "description": "Gets a virtual machine extension image.",
                 "parameters": [
                     {
+                        "name": "version",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "location",
                         "in": "path",
                         "required": true,
                         "type": "string",
                         "description": "The name of a supported Azure region."
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
                         "name": "publisherName",
@@ -782,16 +791,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "version",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
                     }
                 ],
                 "responses": {
@@ -911,11 +911,10 @@
                 "description": "Gets a list of virtual machine extension image versions.",
                 "parameters": [
                     {
-                        "name": "location",
+                        "name": "type",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of a supported Azure region."
+                        "type": "string"
                     },
                     {
                         "name": "publisherName",
@@ -924,10 +923,11 @@
                         "type": "string"
                     },
                     {
-                        "name": "type",
+                        "name": "location",
                         "in": "path",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "description": "The name of a supported Azure region."
                     },
                     {
                         "name": "$filter",

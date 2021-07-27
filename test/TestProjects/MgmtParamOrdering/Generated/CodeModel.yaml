@@ -899,9 +899,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -911,9 +911,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1418,9 +1418,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1430,9 +1430,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1540,9 +1540,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1552,9 +1552,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1649,18 +1649,6 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_62
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
                 name: hostGroupName
                 description: The name of the dedicated host group.
                 serializedName: hostGroupName
@@ -1668,6 +1656,18 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - *ref_38
+          - !Parameter &ref_62
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
           - *ref_39
         requests:
           - !Request 
@@ -1818,9 +1818,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostName
+                description: The name of the dedicated host .
+                serializedName: hostName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1836,19 +1836,19 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_38
           - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: hostName
-                description: The name of the dedicated host .
-                serializedName: hostName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
           - *ref_39
         requests:
           - !Request 
@@ -1955,9 +1955,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostName
+                description: The name of the dedicated host .
+                serializedName: hostName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1973,19 +1973,19 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
+          - *ref_38
           - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: hostName
-                description: The name of the dedicated host .
-                serializedName: hostName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
           - *ref_39
         requests:
           - !Request 
@@ -2091,9 +2091,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
+                name: hostName
+                description: The name of the dedicated host.
+                serializedName: hostName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2103,9 +2103,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostName
-                description: The name of the dedicated host.
-                serializedName: hostName
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2173,9 +2173,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostName
+                description: The name of the dedicated host.
+                serializedName: hostName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2185,9 +2185,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2197,9 +2197,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostName
-                description: The name of the dedicated host.
-                serializedName: hostName
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2277,9 +2277,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: hostGroupName
+                description: The name of the dedicated host group.
+                serializedName: hostGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2289,9 +2289,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: hostGroupName
-                description: The name of the dedicated host group.
-                serializedName: hostGroupName
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2370,13 +2370,26 @@ operationGroups:
             required: true
             language: !Languages 
               default:
+                name: version
+                description: ''
+                serializedName: version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_84
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
                 name: location
                 description: The name of a supported Azure region.
                 serializedName: location
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_84
+          - *ref_39
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -2388,7 +2401,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_85
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -2400,20 +2413,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_86
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: version
-                description: ''
-                serializedName: version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
           - *ref_38
-          - *ref_39
         requests:
           - !Request 
             parameters:
@@ -2691,9 +2691,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: location
-                description: The name of a supported Azure region.
-                serializedName: location
+                name: type
+                description: ''
+                serializedName: type
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -2715,9 +2715,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: type
-                description: ''
-                serializedName: type
+                name: location
+                description: The name of a supported Azure region.
+                serializedName: location
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
