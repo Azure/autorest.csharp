@@ -12,6 +12,11 @@ namespace OmitOperationGroups
     /// <summary> A Class representing a Model2 along with the instance operations that can be performed on it. </summary>
     public class Model2 : Model2Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "Model2"/> class for mocking. </summary>
+        protected Model2()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
@@ -21,6 +26,6 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Gets or sets the Model2Data. </summary>
-        public Model2Data Data { get; private set; }
+        public virtual Model2Data Data { get; private set; }
     }
 }

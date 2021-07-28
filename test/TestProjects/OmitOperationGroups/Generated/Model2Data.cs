@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using OmitOperationGroups.Models;
+
 namespace OmitOperationGroups
 {
     /// <summary> A class representing the Model2 data model. </summary>
@@ -16,10 +18,10 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of Model2Data. </summary>
-        /// <param name="f"> . </param>
-        /// <param name="g"> . </param>
-        /// <param name="b"> . </param>
-        /// <param name="modelx"> . </param>
+        /// <param name="f"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <param name="modelx"></param>
         internal Model2Data(string f, string g, string b, ModelX modelx) : base(f, g)
         {
             B = b;

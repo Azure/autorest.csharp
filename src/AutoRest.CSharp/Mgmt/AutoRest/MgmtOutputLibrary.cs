@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                     if (curSchema.Parents != null)
                     {
-                        foreach (var parent in curSchema.Parents.)
+                        foreach (var parent in curSchema.Parents.Immediate)
                         {
                             if (parent is ObjectSchema parentSchema)
                             {

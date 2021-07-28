@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
     /// <summary> The ModelY. </summary>
     public partial class ModelY
@@ -16,7 +16,7 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of ModelY. </summary>
-        /// <param name="e"> . </param>
+        /// <param name="e"></param>
         internal ModelY(string e)
         {
             E = e;

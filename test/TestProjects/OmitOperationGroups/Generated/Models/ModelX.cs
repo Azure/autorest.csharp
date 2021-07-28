@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
     /// <summary> The ModelX. </summary>
     public partial class ModelX : ModelY
@@ -16,9 +16,9 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of ModelX. </summary>
-        /// <param name="e"> . </param>
-        /// <param name="c"> . </param>
-        /// <param name="d"> . </param>
+        /// <param name="e"></param>
+        /// <param name="c"></param>
+        /// <param name="d"></param>
         internal ModelX(string e, string c, string d) : base(e)
         {
             C = c;

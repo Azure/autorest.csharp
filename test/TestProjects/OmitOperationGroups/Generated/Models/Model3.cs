@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
     /// <summary> The Model3. </summary>
     public partial class Model3
@@ -16,8 +16,8 @@ namespace OmitOperationGroups
         }
 
         /// <summary> Initializes a new instance of Model3. </summary>
-        /// <param name="f"> . </param>
-        /// <param name="g"> . </param>
+        /// <param name="f"></param>
+        /// <param name="g"></param>
         internal Model3(string f, string g)
         {
             F = f;

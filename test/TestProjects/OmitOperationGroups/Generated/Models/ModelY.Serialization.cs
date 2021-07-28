@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
     public partial class ModelY : IUtf8JsonSerializable
     {

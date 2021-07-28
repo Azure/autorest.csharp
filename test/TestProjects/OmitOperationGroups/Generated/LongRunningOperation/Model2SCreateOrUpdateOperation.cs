@@ -11,8 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
+using OmitOperationGroups;
 
-namespace OmitOperationGroups
+namespace OmitOperationGroups.Models
 {
     public partial class Model2SCreateOrUpdateOperation : Operation<Model2>
     {
