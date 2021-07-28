@@ -11,8 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20210727.3" />
-    <!-- <ProjectReference Include="../../../../azure-sdk-for-net/sdk/resourcemanager/Azure.ResourceManager/src/Azure.ResourceManager.csproj" /> -->
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20210726.2" />
   </ItemGroup>
 
   <ItemGroup>

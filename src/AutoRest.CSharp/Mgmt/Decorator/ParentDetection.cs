@@ -144,12 +144,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var fullProvider = GetFullProvider(httpRequest.ProviderSegments());
                 if (fullProvider == null)
                 {
-                    throw new ArgumentException($"Could not set parent for operation {httpRequest.Path}.");
+                    // fullProvider is null in the case of /{resourceId}
+                    // For other unkown cases, use tenant for now
+                    result = ResourceTypeBuilder.Tenant;
                 }
-                result = ParseMethodForParent(fullProvider, httpRequest.Path, operation.ResourceType());
-                if (result == string.Empty)
+                else
                 {
-                    throw new ArgumentException($"Could not set parent for operation {httpRequest.Path}.");
+                    result = ParseMethodForParent(fullProvider, httpRequest.Path, operation.ResourceType());
+                    if (result == string.Empty)
+                    {
+                        // If the parent is unknown, return tenant
+                        // Eventually we should be able to get a parent for every operation
+                        // This also aligns the behavior with AncestorResourceType().
+                        result = ResourceTypeBuilder.Tenant;
+                    }
                 }
             }
             _operationPathParentCache.TryAdd(path, result);

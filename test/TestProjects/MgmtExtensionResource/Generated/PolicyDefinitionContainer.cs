@@ -14,6 +14,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using MgmtExtensionResource.Models;
 
@@ -130,31 +131,15 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                if (Id.GetType() == typeof(TenantResourceIdentifier))
-                {
-                    var parent = Id;
-                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
-                    {
-                        parent = parent.Parent as TenantResourceIdentifier;
-                    }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
-                    {
-                        var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                        return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
-                    }
-                }
-                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.CreateOrUpdate(Id.Name, policyDefinitionName, parameters, cancellationToken);
                     return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
                 }
                 else
                 {
-                    throw new ArgumentException($"Invalid Id: {Id}.");
+                    var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
+                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
                 }
             }
             catch (Exception e)
@@ -184,31 +169,15 @@ namespace MgmtExtensionResource
             scope.Start();
             try
             {
-                if (Id.GetType() == typeof(TenantResourceIdentifier))
-                {
-                    var parent = Id;
-                    while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
-                    {
-                        parent = parent.Parent as TenantResourceIdentifier;
-                    }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
-                    {
-                        var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                        return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
-                    }
-                }
-                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
+                if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.CreateOrUpdateAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
                     return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
                 }
                 else
                 {
-                    throw new ArgumentException($"Invalid Id: {Id}.");
+                    var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
+                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
                 }
             }
             catch (Exception e)
@@ -232,12 +201,17 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                if (Id.TryGetSubscriptionId(out _))
+                {
+                    var response = _restClient.Get(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                    return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
+                }
+                else
                 {
                     var parent = Id;
                     while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
-                        parent = parent.Parent as TenantResourceIdentifier;
+                        parent = parent.Parent;
                     }
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
@@ -249,15 +223,6 @@ namespace MgmtExtensionResource
                         var response = _restClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
-                }
-                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                {
-                    var response = _restClient.Get(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
-                    return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
-                }
-                else
-                {
-                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)
@@ -281,12 +246,17 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                if (Id.GetType() == typeof(TenantResourceIdentifier))
+                if (Id.TryGetSubscriptionId(out _))
+                {
+                    var response = await _restClient.GetAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
+                }
+                else
                 {
                     var parent = Id;
                     while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                     {
-                        parent = parent.Parent as TenantResourceIdentifier;
+                        parent = parent.Parent;
                     }
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
@@ -298,15 +268,6 @@ namespace MgmtExtensionResource
                         var response = await _restClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
-                }
-                else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                {
-                    var response = await _restClient.GetAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
-                }
-                else
-                {
-                    throw new ArgumentException($"Invalid Id: {Id}.");
                 }
             }
             catch (Exception e)
@@ -429,12 +390,17 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    if (Id.GetType() == typeof(TenantResourceIdentifier))
+                    if (Id.TryGetSubscriptionId(out _))
+                    {
+                        var response = _restClient.List(Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    else
                     {
                         var parent = Id;
                         while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                         {
-                            parent = parent.Parent as TenantResourceIdentifier;
+                            parent = parent.Parent;
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
@@ -446,15 +412,6 @@ namespace MgmtExtensionResource
                             var response = _restClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
-                    }
-                    else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                    {
-                        var response = _restClient.List(Id.Name, filter, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
                 catch (Exception e)
@@ -469,12 +426,17 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    if (Id.GetType() == typeof(TenantResourceIdentifier))
+                    if (Id.TryGetSubscriptionId(out _))
+                    {
+                        var response = _restClient.ListNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    else
                     {
                         var parent = Id;
                         while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                         {
-                            parent = parent.Parent as TenantResourceIdentifier;
+                            parent = parent.Parent;
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
@@ -486,15 +448,6 @@ namespace MgmtExtensionResource
                             var response = _restClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
-                    }
-                    else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                    {
-                        var response = _restClient.ListNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
                 catch (Exception e)
@@ -519,12 +472,17 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    if (Id.GetType() == typeof(TenantResourceIdentifier))
+                    if (Id.TryGetSubscriptionId(out _))
+                    {
+                        var response = await _restClient.ListAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    else
                     {
                         var parent = Id;
                         while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                         {
-                            parent = parent.Parent as TenantResourceIdentifier;
+                            parent = parent.Parent;
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
@@ -536,15 +494,6 @@ namespace MgmtExtensionResource
                             var response = await _restClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
-                    }
-                    else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                    {
-                        var response = await _restClient.ListAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
                 catch (Exception e)
@@ -559,12 +508,17 @@ namespace MgmtExtensionResource
                 scope.Start();
                 try
                 {
-                    if (Id.GetType() == typeof(TenantResourceIdentifier))
+                    if (Id.TryGetSubscriptionId(out _))
+                    {
+                        var response = await _restClient.ListNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    else
                     {
                         var parent = Id;
                         while (parent.Parent != ResourceIdentifier.RootResourceIdentifier)
                         {
-                            parent = parent.Parent as TenantResourceIdentifier;
+                            parent = parent.Parent;
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
@@ -576,15 +530,6 @@ namespace MgmtExtensionResource
                             var response = await _restClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
-                    }
-                    else if (Id.GetType() == typeof(SubscriptionResourceIdentifier))
-                    {
-                        var response = await _restClient.ListNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Invalid Id: {Id}.");
                     }
                 }
                 catch (Exception e)
