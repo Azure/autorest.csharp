@@ -16,6 +16,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
+    [Parallelizable(ParallelScope.All)]
     public class TestProjectTests
     {
         private string _projectName;
@@ -41,6 +42,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
+        public void ValidateNoListMethods()
+        {
+            foreach (var type in MyTypes())
+            {
+                Assert.IsNull(type.GetMethods(BindingFlags.Public).FirstOrDefault(m => m.Name.StartsWith("List")));
+            }
+        }
+
+        [Test]
         public void ValidateBaseClass()
         {
             foreach (var type in FindAllOperations())
@@ -52,8 +62,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase("ListAvailableLocations")]
-        [TestCase("ListAvailableLocationsAsync")]
+        [TestCase("GetAvailableLocations")]
+        [TestCase("GetAvailableLocationsAsync")]
         public void ValidateListAvailableLocationsMethodExists(string methodName)
         {
             foreach (var type in FindAllOperations())
@@ -397,37 +407,20 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 ResourceType resourceType = GetContainerValidResourceType(type);
 
                 var restOperation = GetResourceRestOperationsType(type);
-                var listAllMethod = restOperation.GetMethod("ListAll");
-                var listBySubscriptionMethod = restOperation.GetMethod("ListBySubscription");
+                var listBySubscriptionMethod = restOperation.GetMethod("GetBySubscription");
 
                 if (!resourceType.Equals(SubscriptionOperations.ResourceType) &&
-                   (listAllMethod != null || listBySubscriptionMethod != null))
+                    listBySubscriptionMethod != null)
                 {
-                    var listByNameMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}ByName", BindingFlags.Static | BindingFlags.Public);
+                    var listByNameMethodInfo = subscriptionExtension.GetMethod($"Get{resourceName}ByName", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameMethodInfo);
-                    Assert.AreEqual(5, listByNameMethodInfo.GetParameters().Length);
-                    var listByNameParam1 = TypeAsserts.HasParameter(listByNameMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(SubscriptionOperations), listByNameParam1.ParameterType);
-                    var listByNameParam2 = TypeAsserts.HasParameter(listByNameMethodInfo, "filter");
-                    Assert.AreEqual(typeof(string), listByNameParam2.ParameterType);
-                    var listByNameParam3 = TypeAsserts.HasParameter(listByNameMethodInfo, "expand");
-                    Assert.AreEqual(typeof(string), listByNameParam3.ParameterType);
-                    var listByNameParam4 = TypeAsserts.HasParameter(listByNameMethodInfo, "top");
-                    Assert.AreEqual(typeof(int?), listByNameParam4.ParameterType);
+                    Assert.GreaterOrEqual(listByNameMethodInfo.GetParameters().Length, 1);
                     var listByNameParam5 = TypeAsserts.HasParameter(listByNameMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listByNameParam5.ParameterType);
 
-                    var listByNameAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}ByNameAsync", BindingFlags.Static | BindingFlags.Public);
+                    var listByNameAsyncMethodInfo = subscriptionExtension.GetMethod($"Get{resourceName}ByNameAsync", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listByNameAsyncMethodInfo);
-                    Assert.AreEqual(5, listByNameAsyncMethodInfo.GetParameters().Length);
-                    var listByNameAsyncParam1 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(SubscriptionOperations), listByNameAsyncParam1.ParameterType);
-                    var listByNameAsyncParam2 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "filter");
-                    Assert.AreEqual(typeof(string), listByNameAsyncParam2.ParameterType);
-                    var listByNameAsyncParam3 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "expand");
-                    Assert.AreEqual(typeof(string), listByNameAsyncParam3.ParameterType);
-                    var listByNameAsyncParam4 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "top");
-                    Assert.AreEqual(typeof(int?), listByNameAsyncParam4.ParameterType);
+                    Assert.GreaterOrEqual(listByNameAsyncMethodInfo.GetParameters().Length, 1);
                     var listByNameAsyncParam5 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listByNameAsyncParam5.ParameterType);
                 }

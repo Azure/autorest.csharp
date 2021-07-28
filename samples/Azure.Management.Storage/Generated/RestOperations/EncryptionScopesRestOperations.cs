@@ -355,7 +355,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string accountName)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -380,7 +380,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<EncryptionScopeListResult>> ListAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<EncryptionScopeListResult>> GetAllAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -391,7 +391,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, accountName);
+            using var message = CreateGetAllRequest(resourceGroupName, accountName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -412,7 +412,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<EncryptionScopeListResult> List(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<EncryptionScopeListResult> GetAll(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -423,7 +423,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, accountName);
+            using var message = CreateGetAllRequest(resourceGroupName, accountName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -439,7 +439,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string accountName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string accountName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -458,7 +458,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<EncryptionScopeListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<EncryptionScopeListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -473,7 +473,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, accountName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -495,7 +495,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="accountName"/> is null. </exception>
-        public Response<EncryptionScopeListResult> ListNextPage(string nextLink, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<EncryptionScopeListResult> GetAllNextPage(string nextLink, string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -510,7 +510,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(accountName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, accountName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, accountName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

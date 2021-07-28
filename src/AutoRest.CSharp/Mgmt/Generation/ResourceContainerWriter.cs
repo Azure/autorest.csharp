@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -108,13 +109,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod);
                 WriteTryGetVariants(_resourceContainer.GetMethod.RestClientMethod);
-                WriteDoesExistVariants(_resourceContainer.GetMethod.RestClientMethod);
+                WriteCheckIfExistsVariants(_resourceContainer.GetMethod.RestClientMethod);
             }
 
             WriteListVariants();
         }
 
-        private void WriteDoesExistVariants(RestClientMethod getMethod)
+        private void WriteCheckIfExistsVariants(RestClientMethod getMethod)
         {
             var parameterMapping = BuildParameterMapping(getMethod);
 
@@ -125,7 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(false, $"bool", "DoesExist", passThruParameters, writer =>
+            WriteContainerMethodScope(false, $"bool", "CheckIfExists", passThruParameters, writer =>
             {
                 _writer.Append($"return TryGet(");
                 foreach (var parameter in passThruParameters)
@@ -138,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<bool>", "DoesExist", passThruParameters, writer =>
+            WriteContainerMethodScope(true, $"{typeof(Task)}<bool>", "CheckIfExists", passThruParameters, writer =>
             {
                 _writer.Append($"return await TryGetAsync(");
                 foreach (var parameter in passThruParameters)
@@ -276,15 +277,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (listMethod.PagingMethod != null)
                 {
-                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "List", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                    WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
                 }
 
                 if (listMethod.ClientMethod != null)
                 {
                     _writer.Line();
-                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, listMethod.ClientMethod, "List", new Diagnostic($"{TypeNameOfThis}.List", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
                 }
             }
 
@@ -294,7 +295,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListAsGenericResource(bool async)
         {
-            const string syncMethodName = "ListAsGenericResource";
+            const string syncMethodName = "GetAsGenericResources";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");
@@ -310,7 +311,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}({ContextProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
                 });
             }
         }
@@ -322,17 +323,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType.Name}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
         }
 
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod restMethod, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {
             // if the method needs resource name (typically all non-list methods), we should make it pass-thru by
             // making the last string-like mandatory parameter (typically the resource name) pass-through
-            if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
+            if (!restMethod.IsListMethod())
             {
                 var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                if (lastString?.Parameter != null)
                 {
-                    lastString.IsPassThru = true;
-                    parentNameStack.Pop();
+                    var paramName = lastString.Parameter.Name;
+                    if (!paramName.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        lastString.IsPassThru = true;
+                        parentNameStack.Pop();
+                    }
                 }
             }
         }

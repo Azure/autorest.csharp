@@ -391,7 +391,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -413,14 +413,14 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<TheExtensionsListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<TheExtensionsListResult>> GetAllAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateGetAllRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -440,14 +440,14 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<TheExtensionsListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<TheExtensionsListResult> GetAll(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName);
+            using var message = CreateGetAllRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -463,7 +463,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListUsagesRequest(string resourceGroupName, string resourceName)
+        internal HttpMessage CreateGetUsagesRequest(string resourceGroupName, string resourceName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -488,7 +488,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response<UsagesListResult>> ListUsagesAsync(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public async Task<Response<UsagesListResult>> GetUsagesAsync(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -499,7 +499,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListUsagesRequest(resourceGroupName, resourceName);
+            using var message = CreateGetUsagesRequest(resourceGroupName, resourceName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -520,7 +520,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public Response<UsagesListResult> ListUsages(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public Response<UsagesListResult> GetUsages(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -531,7 +531,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListUsagesRequest(resourceGroupName, resourceName);
+            using var message = CreateGetUsagesRequest(resourceGroupName, resourceName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -547,7 +547,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListFeaturesRequest(string resourceGroupName, string resourceName)
+        internal HttpMessage CreateGetFeaturesRequest(string resourceGroupName, string resourceName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -572,7 +572,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response<FeaturesListResult>> ListFeaturesAsync(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public async Task<Response<FeaturesListResult>> GetFeaturesAsync(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -583,7 +583,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListFeaturesRequest(resourceGroupName, resourceName);
+            using var message = CreateGetFeaturesRequest(resourceGroupName, resourceName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -604,7 +604,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="resourceName"/> is null. </exception>
-        public Response<FeaturesListResult> ListFeatures(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public Response<FeaturesListResult> GetFeatures(string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -615,7 +615,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListFeaturesRequest(resourceGroupName, resourceName);
+            using var message = CreateGetFeaturesRequest(resourceGroupName, resourceName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -631,7 +631,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -649,7 +649,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<TheExtensionsListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<TheExtensionsListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -660,7 +660,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -681,7 +681,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<TheExtensionsListResult> ListNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<TheExtensionsListResult> GetAllNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -692,7 +692,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -708,7 +708,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListUsagesNextPageRequest(string nextLink, string resourceGroupName, string resourceName)
+        internal HttpMessage CreateGetUsagesNextPageRequest(string nextLink, string resourceGroupName, string resourceName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -727,7 +727,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="resourceName"/> is null. </exception>
-        public async Task<Response<UsagesListResult>> ListUsagesNextPageAsync(string nextLink, string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public async Task<Response<UsagesListResult>> GetUsagesNextPageAsync(string nextLink, string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -742,7 +742,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListUsagesNextPageRequest(nextLink, resourceGroupName, resourceName);
+            using var message = CreateGetUsagesNextPageRequest(nextLink, resourceGroupName, resourceName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -764,7 +764,7 @@ namespace MgmtListMethods
         /// <param name="resourceName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="resourceName"/> is null. </exception>
-        public Response<UsagesListResult> ListUsagesNextPage(string nextLink, string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
+        public Response<UsagesListResult> GetUsagesNextPage(string nextLink, string resourceGroupName, string resourceName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -779,7 +779,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceName));
             }
 
-            using var message = CreateListUsagesNextPageRequest(nextLink, resourceGroupName, resourceName);
+            using var message = CreateGetUsagesNextPageRequest(nextLink, resourceGroupName, resourceName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
