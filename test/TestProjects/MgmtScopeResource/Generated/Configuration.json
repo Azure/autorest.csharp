@@ -1,0 +1,16 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtScopeResource",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\Generator.Shared",
+    "..\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToParent": {
+    "PolicyAssignments": "tenant"
+  }
+}

@@ -1,0 +1,1624 @@
+!CodeModel 
+info: !Info 
+  description: To manage and control access to your resources, you can define customized policies and assign them at a scope.
+  title: PolicyClient
+schemas: !Schemas 
+  numbers:
+    - !NumberSchema &ref_43
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      maximum: 1000
+      minimum: 1
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_28
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_9
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentPropertiesDisplayName
+          description: The display name of the policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentPropertiesPolicyDefinitionId
+          description: The ID of the policy definition or policy set definition being assigned.
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentPropertiesScope
+          description: The scope for the policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentPropertiesNotScopesItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentPropertiesDescription
+          description: This message will be part of response in case of policy violation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: NonComplianceMessage
+          description: A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.
+      protocol: !Protocols {}
+    - !StringSchema &ref_17
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: NonComplianceMessagePolicyDefinitionReferenceId
+          description: >-
+            The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message applies to all
+            policies assigned by this policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentId
+          description: The ID of the policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentType
+          description: The type of the policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentName
+          description: The name of the policy assignment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentLocation
+          description: The location of the policy assignment. Only required when utilizing managed identity.
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: IdentityPrincipalId
+          description: The principal ID of the resource identity.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: IdentityTenantId
+          description: The tenant ID of the resource identity.
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseError
+          description: The details of the error.
+      protocol: !Protocols {}
+    - !StringSchema &ref_42
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      maxLength: 90
+      minLength: 1
+      pattern: ^[-\w\._\(\)]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_24
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      language: !Languages 
+        default:
+          name: PolicyAssignmentListResultNextLink
+          description: The URL to use for getting the next set of results.
+      protocol: !Protocols {}
+  choices:
+    - !ChoiceSchema &ref_15
+      choices:
+        - !ChoiceValue 
+          value: Default
+          language:
+            default:
+              name: Default
+              description: The policy effect is enforced during resource creation or update.
+        - !ChoiceValue 
+          value: DoNotEnforce
+          language:
+            default:
+              name: DoNotEnforce
+              description: The policy effect is not enforced during resource creation or update.
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      choiceType: *ref_0
+      defaultValue: Default
+      language: !Languages 
+        default:
+          name: EnforcementMode
+          description: The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.
+      protocol: !Protocols {}
+  sealedChoices:
+    - !SealedChoiceSchema &ref_8
+      choices:
+        - !ChoiceValue 
+          value: SystemAssigned
+          language:
+            default:
+              name: SystemAssigned
+              description: Indicates that a system assigned identity is associated with the resource.
+        - !ChoiceValue 
+          value: None
+          language:
+            default:
+              name: None
+              description: Indicates that no identity is associated with the resource or that the existing identity should be removed.
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ResourceIdentityType
+          description: The identity type. This is the only required field when adding a system assigned identity to a resource.
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_29
+      type: constant
+      value: !ConstantValue 
+        value: '2020-09-01'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20200901
+          description: Api Version (2020-09-01)
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_32
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_36
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_13
+      type: dictionary
+      elementType: !ObjectSchema &ref_18
+        type: object
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        properties:
+          - !Property 
+            schema: !AnyObjectSchema &ref_1
+              type: any-object
+              language: !Languages 
+                default:
+                  name: AnyObject
+                  description: Any object
+              protocol: !Protocols {}
+            serializedName: value
+            language: !Languages 
+              default:
+                name: value
+                description: The value of the parameter.
+            protocol: !Protocols {}
+        serializationFormats:
+          - json
+        usage:
+          - output
+          - input
+        language: !Languages 
+          default:
+            name: ParameterValuesValue
+            description: The value of a parameter.
+            namespace: ''
+        protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: ParameterValues
+          description: The parameter values for the policy rule. The keys are the parameter names.
+      protocol: !Protocols {}
+  anyObjects:
+    - *ref_1
+  objects:
+    - !ObjectSchema &ref_23
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      properties:
+        - !Property 
+          schema: *ref_2
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: The ID of the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_3
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: The type of the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_4
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_5
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: The location of the policy assignment. Only required when utilizing managed identity.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_20
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-09-01'
+            properties:
+              - !Property 
+                schema: *ref_6
+                readOnly: true
+                serializedName: principalId
+                language: !Languages 
+                  default:
+                    name: principalId
+                    description: The principal ID of the resource identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_7
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant ID of the resource identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_8
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: The identity type. This is the only required field when adding a system assigned identity to a resource.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+              - input
+            language: !Languages 
+              default:
+                name: Identity
+                description: Identity for the resource.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: identity
+          language: !Languages 
+            default:
+              name: identity
+              description: The managed identity associated with the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_9
+          flattenedNames:
+            - properties
+            - displayName
+          serializedName: displayName
+          language: !Languages 
+            default:
+              name: displayName
+              description: The display name of the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_10
+          flattenedNames:
+            - properties
+            - policyDefinitionId
+          serializedName: policyDefinitionId
+          language: !Languages 
+            default:
+              name: policyDefinitionId
+              description: The ID of the policy definition or policy set definition being assigned.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          flattenedNames:
+            - properties
+            - scope
+          readOnly: true
+          serializedName: scope
+          language: !Languages 
+            default:
+              name: scope
+              description: The scope for the policy assignment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_25
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-09-01'
+            elementType: *ref_12
+            language: !Languages 
+              default:
+                name: PolicyAssignmentPropertiesNotScopes
+                description: The policy's excluded scopes.
+            protocol: !Protocols {}
+          flattenedNames:
+            - properties
+            - notScopes
+          serializedName: notScopes
+          language: !Languages 
+            default:
+              name: notScopes
+              description: The policy's excluded scopes.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          flattenedNames:
+            - properties
+            - parameters
+          serializedName: parameters
+          language: !Languages 
+            default:
+              name: parameters
+              description: The parameter values for the assigned policy rule. The keys are the parameter names.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_14
+          flattenedNames:
+            - properties
+            - description
+          serializedName: description
+          language: !Languages 
+            default:
+              name: description
+              description: This message will be part of response in case of policy violation.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_1
+          flattenedNames:
+            - properties
+            - metadata
+          serializedName: metadata
+          language: !Languages 
+            default:
+              name: metadata
+              description: The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_15
+          flattenedNames:
+            - properties
+            - enforcementMode
+          serializedName: enforcementMode
+          language: !Languages 
+            default:
+              name: enforcementMode
+              description: The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_26
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-09-01'
+            elementType: !ObjectSchema &ref_19
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-09-01'
+              properties:
+                - !Property 
+                  schema: *ref_16
+                  required: true
+                  serializedName: message
+                  language: !Languages 
+                    default:
+                      name: message
+                      description: A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_17
+                  required: false
+                  serializedName: policyDefinitionReferenceId
+                  language: !Languages 
+                    default:
+                      name: policyDefinitionReferenceId
+                      description: >-
+                        The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message
+                        applies to all policies assigned by this policy assignment.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+                - input
+              language: !Languages 
+                default:
+                  name: NonComplianceMessage
+                  description: A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: PolicyAssignmentPropertiesNonComplianceMessages
+                description: The messages that describe why a resource is non-compliant with the policy.
+            protocol: !Protocols {}
+          flattenedNames:
+            - properties
+            - nonComplianceMessages
+          serializedName: nonComplianceMessages
+          language: !Languages 
+            default:
+              name: nonComplianceMessages
+              description: The messages that describe why a resource is non-compliant with the policy.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+        - input
+      extensions:
+        x-ms-azure-resource: true
+      language: !Languages 
+        default:
+          name: PolicyAssignment
+          description: The policy assignment.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_18
+    - *ref_19
+    - *ref_20
+    - !ObjectSchema &ref_35
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_22
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-09-01'
+            properties:
+              - !Property 
+                schema: *ref_21
+                serializedName: error
+                language: !Languages 
+                  default:
+                    name: error
+                    description: The details of the error.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: ErrorResponse
+                description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      extensions:
+        x-ms-external: true
+      language: !Languages 
+        default:
+          name: CloudError
+          description: An error response from a policy operation.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_22
+    - !ObjectSchema &ref_48
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_27
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-09-01'
+            elementType: *ref_23
+            language: !Languages 
+              default:
+                name: PolicyAssignmentListResultValue
+                description: An array of policy assignments.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: An array of policy assignments.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_24
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URL to use for getting the next set of results.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: PolicyAssignmentListResult
+          description: List of policy assignments.
+          namespace: ''
+      protocol: !Protocols {}
+  arrays:
+    - *ref_25
+    - *ref_26
+    - *ref_27
+globalParameters:
+  - !Parameter &ref_44
+    schema: *ref_28
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: SubscriptionId
+        description: The ID of the target subscription.
+        serializedName: subscriptionId
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_30
+    schema: *ref_0
+    clientDefaultValue: https://management.azure.com
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+  - !Parameter &ref_31
+    schema: *ref_29
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language: !Languages 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+operationGroups:
+  - !OperationGroup 
+    $key: PolicyAssignments
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_33
+            schema: *ref_28
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: >-
+                  The scope of the policy assignment. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource
+                  group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format:
+                  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_34
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: policyAssignmentName
+                description: The name of the policy assignment to delete.
+                serializedName: policyAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_31
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_33
+          - *ref_34
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the deleted assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content - the policy assignment doesn't exist.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Delete
+            description: >-
+              This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding
+              '/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
+            summary: Deletes a policy assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_38
+            schema: *ref_28
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: >-
+                  The scope of the policy assignment. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource
+                  group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format:
+                  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_39
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: policyAssignmentName
+                description: The name of the policy assignment.
+                serializedName: policyAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_31
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_36
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_37
+                schema: *ref_23
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters for the policy assignment.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_38
+          - *ref_39
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: Created - Returns information about the new policy assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Create
+            description: ' This operation creates or updates a policy assignment with the given scope and name. Policy assignments apply to all resources contained within their scope. For example, when you assign a policy at resource group scope, that policy applies to all resources in the group.'
+            summary: Creates or updates a policy assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_40
+            schema: *ref_28
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: >-
+                  The scope of the policy assignment. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource
+                  group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format:
+                  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_41
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: policyAssignmentName
+                description: The name of the policy assignment to get.
+                serializedName: policyAssignmentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_31
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_40
+          - *ref_41
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the policy assignment.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: This operation retrieves a single policy assignment, given its name and the scope it was created at.
+            summary: Retrieves a policy assignment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_45
+            schema: *ref_42
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group that contains policy assignments.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_46
+            schema: *ref_28
+            implementation: Method
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is
+                  provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If
+                  $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments
+                  of the policy definition whose id is {value}.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_47
+            schema: *ref_43
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_31
+          - *ref_44
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/policyAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_45
+          - *ref_46
+          - *ref_47
+        responses:
+          - !SchemaResponse 
+            schema: *ref_48
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of policy assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForResourceGroup
+            description: >-
+              This operation retrieves the list of all policy assignments associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()'
+              or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource group, including those that apply directly or apply from containing scopes, as
+              well as any applied to resources contained within the resource group. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource group, which is everything in the unfiltered
+              list except those applied to resources contained within the resource group. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource group. If
+              $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource group.
+            paging:
+              nextLinkName: nextLink
+            summary: Retrieves all policy assignments that apply to a resource group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_49
+            schema: *ref_42
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group containing the resource.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_50
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceProviderNamespace
+                description: The namespace of the resource provider. For example, the namespace of a virtual machine is Microsoft.Compute (from Microsoft.Compute/virtualMachines)
+                serializedName: resourceProviderNamespace
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_51
+            schema: *ref_28
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: parentResourcePath
+                description: The parent resource path. Use empty string if there is none.
+                serializedName: parentResourcePath
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_52
+            schema: *ref_28
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: resourceType
+                description: The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites).
+                serializedName: resourceType
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_53
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceName
+                description: The name of the resource.
+                serializedName: resourceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_54
+            schema: *ref_28
+            implementation: Method
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is
+                  provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If
+                  $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments
+                  of the policy definition whose id is {value}.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_55
+            schema: *ref_43
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_31
+          - *ref_44
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/policyAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_49
+          - *ref_50
+          - *ref_51
+          - *ref_52
+          - *ref_53
+          - *ref_54
+          - *ref_55
+        responses:
+          - !SchemaResponse 
+            schema: *ref_48
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of policy assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-odata: '#/components/schemas/PolicyAssignment'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForResource
+            description: >-
+              This operation retrieves the list of all policy assignments associated with the specified resource in the given resource group and subscription that match the optional given $filter. Valid values for $filter are: 'atScope()',
+              'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the resource, including those that apply directly or from all containing
+              scopes, as well as any applied to resources contained within the resource. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the resource, which is everything in the unfiltered
+              list except those applied to resources contained within the resource. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the resource level. If $filter=policyDefinitionId eq
+              '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the resource. Three parameters plus the resource name are used to identify a specific
+              resource. If the resource is not part of a parent resource (the more common case), the parent resource path should not be provided (or provided as ''). For example a web app could be specified as ({resourceProviderNamespace}
+              == 'Microsoft.Web', {parentResourcePath} == '', {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource is part of a parent resource, then all parameters should be provided. For example a virtual machine DNS
+              name could be specified as ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath} == 'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames', {resourceName} == 'MyComputerName'). A convenient
+              alternative to providing the namespace and type name separately is to provide both in the {resourceType} parameter, format: ({resourceProviderNamespace} == '', {parentResourcePath} == '', {resourceType} ==
+              'Microsoft.Web/sites', {resourceName} == 'MyWebApp').
+            paging:
+              nextLinkName: nextLink
+            summary: Retrieves all policy assignments that apply to a resource.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_56
+            schema: *ref_28
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: managementGroupId
+                description: The ID of the management group.
+                serializedName: managementGroupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_57
+            schema: *ref_28
+            implementation: Method
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is
+                  provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If
+                  $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments
+                  of the policy definition whose id is {value}.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_58
+            schema: *ref_43
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_31
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_56
+          - *ref_57
+          - *ref_58
+        responses:
+          - !SchemaResponse 
+            schema: *ref_48
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of policy assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListForManagementGroup
+            description: >-
+              This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If
+              $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=atExactScope() is provided, the returned list only
+              includes all policy assignments that at the management group. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to
+              the management group.
+            paging:
+              nextLinkName: nextLink
+            summary: Retrieves all policy assignments that apply to a management group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-09-01'
+        parameters:
+          - *ref_30
+          - !Parameter &ref_59
+            schema: *ref_28
+            implementation: Method
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: filter
+                description: >-
+                  The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is
+                  provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If
+                  $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments
+                  of the policy definition whose id is {value}.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_60
+            schema: *ref_43
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: Maximum number of records to return. When the $top filter is not provided, it will return 500 records.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_31
+          - *ref_44
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_59
+          - *ref_60
+        responses:
+          - !SchemaResponse 
+            schema: *ref_48
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of policy assignments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-odata: '#/components/schemas/PolicyAssignment'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: >-
+              This operation retrieves the list of all policy assignments associated with the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq
+              '{value}''. If $filter is not provided, the unfiltered list includes all policy assignments associated with the subscription, including those that apply directly or from management groups that contain the given subscription,
+              as well as any applied to objects contained within the subscription. If $filter=atScope() is provided, the returned list includes all policy assignments that apply to the subscription, which is everything in the unfiltered
+              list except those applied to objects contained within the subscription. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the subscription. If $filter=policyDefinitionId eq
+              '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}.
+            paging:
+              nextLinkName: nextLink
+            summary: Retrieves all policy assignments that apply to a subscription.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: PolicyAssignments
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
+language: !Languages 
+  default:
+    name: PolicyClient
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}
