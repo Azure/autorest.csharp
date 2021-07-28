@@ -55,10 +55,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
-                var expectedBaseOperationsType = IsSingletonOperation(type.BaseType.BaseType)
-                    ? typeof(SingletonOperationsBase)
-                    : typeof(ResourceOperationsBase);
-                Assert.AreEqual(expectedBaseOperationsType, type.BaseType.BaseType);
+                var expectedBaseOperationsType = IsSingletonOperation(type.BaseType)
+                    ? typeof(SingletonOperations)
+                    : typeof(ResourceOperations);
+                Assert.AreEqual(expectedBaseOperationsType, type.BaseType);
             }
         }
 
@@ -68,7 +68,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
-                if (IsSingletonOperation(type.BaseType.BaseType))
+                if (IsSingletonOperation(type.BaseType))
                 {
                     continue;
                 }
@@ -84,7 +84,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
-                if (IsSingletonOperation(type.BaseType.BaseType))
+                if (IsSingletonOperation(type.BaseType))
                 {
                     continue;
                 }
@@ -293,7 +293,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsSingletonOperation(Type type)
         {
-            return type == typeof(SingletonOperationsBase);
+            return type == typeof(SingletonOperations);
         }
 
         private bool IsInheritFromTrackedResource(Type type)
