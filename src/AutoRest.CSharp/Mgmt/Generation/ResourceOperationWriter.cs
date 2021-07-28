@@ -182,8 +182,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
                 // write main get method
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false);
 
                 clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
@@ -324,32 +324,22 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
-            if (isInheritedMethod)
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+            foreach (Parameter parameter in nonPathParameters)
             {
-                writer.WriteXmlDocumentationInheritDoc();
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            else
-            {
-                writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-                }
-                writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(false, true)} {responseType} {CreateMethodName("Get", async)}(");
 
-            if (!isInheritedMethod)
+            foreach (Parameter parameter in nonPathParameters)
             {
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.Append($"{parameter.Type} {parameter.Name}, ");
-                }
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -372,25 +362,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     }
                     foreach (Parameter parameter in nonPathParameters)
                     {
-                        if (isInheritedMethod)
-                        {
-                            if (parameter.DefaultValue != null)
-                            {
-                                if (TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
-                                {
-                                    writer.WriteConstant(parameter.DefaultValue.Value);
-                                    writer.Append($", ");
-                                }
-                                else
-                                {
-                                    writer.Append($"null, ");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            writer.Append($"{parameter.Name}, ");
-                        }
+                        writer.Append($"{parameter.Name}, ");
                     }
                     writer.Append($"cancellationToken)");
 
