@@ -21,7 +21,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
-        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
+        protected virtual Type BaseClass => typeof(Core.ResourceOperations);
 
         protected override string ContextProperty => "this";
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var config = _context.Configuration.MgmtConfiguration;
             var isSingleton = _resourceOperation.OperationGroup.IsSingletonResource(config);
-            var baseClass = isSingleton ? typeof(SingletonOperationsBase) : typeof(ResourceOperationsBase);
+            var baseClass = isSingleton ? typeof(Core.SingletonOperations) : typeof(Core.ResourceOperations);
 
             WriteUsings(_writer);
 
@@ -67,11 +67,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { resource.Type };
-                CSharpType type = new CSharpType(baseClass, arguments);
+                CSharpType type = new CSharpType(baseClass);
                 _writer.Append($"{type}, ");
 
-                if (_resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
+                if (_resourceOperation.GetMethod == null && baseClass == typeof(Core.ResourceOperations))
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
@@ -151,7 +150,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
+            using (writer.Scope($"protected internal {typeOfThis}({typeof(Core.ResourceOperations)} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
                 {
@@ -182,17 +181,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
-                // write inherited get method
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true);
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false);
+                // write main get method
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
 
-                var nonPathParameters = resourceOperation.GetMethod.RestClientMethod.NonPathParameters;
-                if (nonPathParameters.Count > 0)
-                {
-                    // write get method
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
-                }
                 clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
                 WriteListAvailableLocationsMethod(writer, true);
