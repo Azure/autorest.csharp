@@ -109,16 +109,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            var methodName = /*pagingMethod.Name == "GetAll" ? "Get" :*/ pagingMethod.Name;
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, methodName, $"", true);
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, methodName, $"", false);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            var methodName = /*clientMethod.RestClientMethod.Name == "GetAll" ? "Get" :*/ clientMethod.Name;
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, methodName, context, true, mgmtExtensionOperation.RestClient.Type.Name);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, methodName, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient.Type.Name);
                         }
 
                         writer.LineRaw("#endregion");
