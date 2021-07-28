@@ -12,28 +12,28 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtListMethods() : base("MgmtListMethods") { }
 
-        [TestCase("TheExtensionContainer", "ListUsages", false)]
-        [TestCase("TheExtensionContainer", "ListFeatures", false)]
-        [TestCase("TheExtensionOperations", "ListUsages", true)]
-        [TestCase("TheExtensionOperations", "ListFeatures", true)]
-        [TestCase("TheExtensionFakeContainer", "ListUsages", false)]
-        [TestCase("TheExtensionFakeContainer", "ListFeatures", false)]
-        [TestCase("TheExtensionFakeOperations", "ListUsages", true)]
-        [TestCase("TheExtensionFakeOperations", "ListFeatures", true)]
-        [TestCase("SubscriptionExtensions", "ListFakes", true)]
-        [TestCase("FakeContainer", "ListFakes", false)]
-        [TestCase("FakeOperations", "ListFakes", false)]
-        [TestCase("SubscriptionExtensions", "ListFakesByLocation", true)]
-        [TestCase("FakeContainer", "ListFakesByLocation", false)]
-        [TestCase("FakeOperations", "ListFakesByLocation", false)]
-        [TestCase("SubscriptionExtensions", "List", false)]
-        [TestCase("SubFakeContainer", "List", true)]
-        [TestCase("SubFakeOperations", "List", false)]
-        [TestCase("SubscriptionExtensions", "List", false)]
-        [TestCase("FakeOperations", "List", false)]
-        [TestCase("SubscriptionExtensions", "ListBars", true)]
-        [TestCase("SharedGalleryContainer", "List", true)]
-        [TestCase("SharedGalleryOperations", "List", false)]
+        [TestCase("TheExtensionContainer", "GetUsages", false)]
+        [TestCase("TheExtensionContainer", "GetFeatures", false)]
+        [TestCase("TheExtensionOperations", "GetUsages", true)]
+        [TestCase("TheExtensionOperations", "GetFeatures", true)]
+        [TestCase("TheExtensionFakeContainer", "GetUsages", false)]
+        [TestCase("TheExtensionFakeContainer", "GetFeatures", false)]
+        [TestCase("TheExtensionFakeOperations", "GetUsages", true)]
+        [TestCase("TheExtensionFakeOperations", "GetFeatures", true)]
+        [TestCase("SubscriptionExtensions", "GetFakes", true)]
+        [TestCase("FakeContainer", "GetFakes", false)]
+        [TestCase("FakeOperations", "GetFakes", false)]
+        [TestCase("SubscriptionExtensions", "GetFakesByLocation", true)]
+        [TestCase("FakeContainer", "GetFakesByLocation", false)]
+        [TestCase("FakeOperations", "GetFakesByLocation", false)]
+        [TestCase("SubscriptionExtensions", "GetAll", false)]
+        [TestCase("SubFakeContainer", "GetAll", true)]
+        [TestCase("SubFakeOperations", "GetAll", false)]
+        [TestCase("SubscriptionExtensions", "GetAll", false)]
+        [TestCase("FakeOperations", "GetAll", false)]
+        [TestCase("SubscriptionExtensions", "GetBars", true)]
+        [TestCase("SharedGalleryContainer", "GetAll", true)]
+        [TestCase("SharedGalleryOperations", "GetAll", false)]
         public void ValidateListMethods(string className, string methodName, bool exist)
         {
             var subscriptionExtensions = Assembly.GetExecutingAssembly().GetType("MgmtListMethods.SubscriptionExtensions");
@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
         }
 
-        [TestCase("FakeContainer", "List")]
+        [TestCase("FakeContainer", "GetAll")]
         public void ValidateListOverloadMethods(string className, string methodName)
         {
             var classToCheck = Assembly.GetExecutingAssembly().GetType("MgmtListMethods.FakeContainer");

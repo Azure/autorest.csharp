@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var resultList = new List<ClientMethod>();
             foreach (var method in base.GetMethodsInScope())
             {
-                if (method.Name.StartsWith("List") ||
+                if (method.Name.StartsWith("GetAll") ||
                     IsPutMethod(method))
                     resultList.Add(method);
             }

@@ -23,27 +23,27 @@ namespace AutoRest.CSharp.Output.Models.Requests.Tests
         });
 
         [Test]
-        public async Task ValidateInteger() => await new PageSizeIntegerModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateInteger() => await new PageSizeIntegerModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateInt64() => await new PageSizeInt64ModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateInt64() => await new PageSizeInt64ModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateInt32() => await new PageSizeInt32ModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateInt32() => await new PageSizeInt32ModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateNumeric() => await new PageSizeNumericModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateNumeric() => await new PageSizeNumericModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateFloat() => await new PageSizeFloatModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateFloat() => await new PageSizeFloatModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateDouble() => await new PageSizeDoubleModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateDouble() => await new PageSizeDoubleModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateDecimal() => await new PageSizeDecimalModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", 123);
+        public async Task ValidateDecimal() => await new PageSizeDecimalModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", 123);
 
         [Test]
-        public async Task ValidateString() => await new PageSizeStringModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).ListAsync("test", Convert.ToString(123));
+        public async Task ValidateString() => await new PageSizeStringModelsRestOperations(ClientDiagnostics, HttpPipeline, "test", testServer.Address).GetAllAsync("test", Convert.ToString(123));
     }
 }

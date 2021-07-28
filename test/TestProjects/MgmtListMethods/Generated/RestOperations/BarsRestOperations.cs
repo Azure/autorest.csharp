@@ -391,7 +391,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListBarsRequest(string resourceGroupName)
+        internal HttpMessage CreateGetBarsRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -413,14 +413,14 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<BarsListResult>> ListBarsAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<BarsListResult>> GetBarsAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListBarsRequest(resourceGroupName);
+            using var message = CreateGetBarsRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -440,14 +440,14 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<BarsListResult> ListBars(string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<BarsListResult> GetBars(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListBarsRequest(resourceGroupName);
+            using var message = CreateGetBarsRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -463,7 +463,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string location)
+        internal HttpMessage CreateGetAllRequest(string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -485,14 +485,14 @@ namespace MgmtListMethods
         /// <param name="location"> The location upon which run commands is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<RunCommandListResult>> ListAsync(string location, CancellationToken cancellationToken = default)
+        public async Task<Response<RunCommandListResult>> GetAllAsync(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListRequest(location);
+            using var message = CreateGetAllRequest(location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -512,14 +512,14 @@ namespace MgmtListMethods
         /// <param name="location"> The location upon which run commands is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<RunCommandListResult> List(string location, CancellationToken cancellationToken = default)
+        public Response<RunCommandListResult> GetAll(string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListRequest(location);
+            using var message = CreateGetAllRequest(location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -535,7 +535,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListBarsNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateGetBarsNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -553,7 +553,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<BarsListResult>> ListBarsNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<BarsListResult>> GetBarsNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -564,7 +564,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListBarsNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetBarsNextPageRequest(nextLink, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -585,7 +585,7 @@ namespace MgmtListMethods
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<BarsListResult> ListBarsNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<BarsListResult> GetBarsNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -596,7 +596,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListBarsNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetBarsNextPageRequest(nextLink, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -612,7 +612,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string location)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string location)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -630,7 +630,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location upon which run commands is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<RunCommandListResult>> ListNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
+        public async Task<Response<RunCommandListResult>> GetAllNextPageAsync(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -641,7 +641,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, location);
+            using var message = CreateGetAllNextPageRequest(nextLink, location);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -662,7 +662,7 @@ namespace MgmtListMethods
         /// <param name="location"> The location upon which run commands is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public Response<RunCommandListResult> ListNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
+        public Response<RunCommandListResult> GetAllNextPage(string nextLink, string location, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -673,7 +673,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(location));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, location);
+            using var message = CreateGetAllNextPageRequest(nextLink, location);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

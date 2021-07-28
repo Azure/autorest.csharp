@@ -28,8 +28,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DedicatedHostContainer", "GetAsync", "hostName")]
         [TestCase("DedicatedHostContainer", "TryGet", "hostName")]
         [TestCase("DedicatedHostContainer", "TryGetAsync", "hostName")]
-        [TestCase("DedicatedHostContainer", "DoesExist", "hostName")]
-        [TestCase("DedicatedHostContainer", "DoesExistAsync", "hostName")]
+        [TestCase("DedicatedHostContainer", "CheckIfExists", "hostName")]
+        [TestCase("DedicatedHostContainer", "CheckIfExistsAsync", "hostName")]
         [TestCase("DedicatedHostGroupContainer", "CreateOrUpdate", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "CreateOrUpdateAsync", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "StartCreateOrUpdate", "hostGroupName")]
@@ -38,8 +38,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DedicatedHostGroupContainer", "GetAsync", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "TryGet", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "TryGetAsync", "hostGroupName")]
-        [TestCase("DedicatedHostGroupContainer", "DoesExist", "hostGroupName")]
-        [TestCase("DedicatedHostGroupContainer", "DoesExistAsync", "hostGroupName")]
+        [TestCase("DedicatedHostGroupContainer", "CheckIfExists", "hostGroupName")]
+        [TestCase("DedicatedHostGroupContainer", "CheckIfExistsAsync", "hostGroupName")]
         public void ValidateContainerCorrectFirstParameter(string containerName, string methodName, string parameterName)
         {
             var method = FindAllContainers().Single(o => o.Name == containerName).GetMethod(methodName);
