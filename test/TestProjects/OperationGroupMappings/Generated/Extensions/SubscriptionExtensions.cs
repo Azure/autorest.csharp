@@ -32,7 +32,7 @@ namespace OperationGroupMappings
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<Usage> GetAllUsagesAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Usage> GetUsagesAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -45,7 +45,7 @@ namespace OperationGroupMappings
                 var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsages");
                     scope.Start();
                     try
                     {
@@ -60,7 +60,7 @@ namespace OperationGroupMappings
                 }
                 async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsages");
                     scope.Start();
                     try
                     {
@@ -84,7 +84,7 @@ namespace OperationGroupMappings
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<Usage> GetAllUsages(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<Usage> GetUsages(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -97,7 +97,7 @@ namespace OperationGroupMappings
                 var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsages");
                     scope.Start();
                     try
                     {
@@ -112,7 +112,7 @@ namespace OperationGroupMappings
                 }
                 Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsages");
                     scope.Start();
                     try
                     {

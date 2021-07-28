@@ -157,7 +157,7 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<SkuInformation> GetAllSkusAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<SkuInformation> GetSkusAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -165,7 +165,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllSkus");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSkus");
                     scope.Start();
                     try
                     {
@@ -187,7 +187,7 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<SkuInformation> GetAllSkus(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<SkuInformation> GetSkus(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -195,7 +195,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetAllSkus");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetSkus");
                     scope.Start();
                     try
                     {
@@ -227,7 +227,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<Usage> GetByLocationUsagesAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Usage> GetUsagesByLocationAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -240,7 +240,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetByLocationUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsagesByLocation");
                     scope.Start();
                     try
                     {
@@ -264,7 +264,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<Usage> GetByLocationUsages(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<Usage> GetUsagesByLocation(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -277,7 +277,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetByLocationUsages");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetUsagesByLocation");
                     scope.Start();
                     try
                     {

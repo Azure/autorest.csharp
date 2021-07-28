@@ -259,7 +259,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateVirtualMachineExtensionImageAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageateOrUpdateAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -286,7 +286,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.CreateOrUpdateVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageateOrUpdate");
                 scope.Start();
                 try
                 {
@@ -311,7 +311,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<VirtualMachineExtensionImage> CreateOrUpdateVirtualMachineExtensionImage(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineExtensionImage> GetVirtualMachineExtensionImageateOrUpdate(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -338,7 +338,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.CreateOrUpdateVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageateOrUpdate");
                 scope.Start();
                 try
                 {
@@ -360,7 +360,7 @@ namespace MgmtParent
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetTypesVirtualMachineExtensionImageAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetVirtualMachineExtensionImageTypesAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -375,7 +375,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTypesVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageTypes");
                 scope.Start();
                 try
                 {
@@ -397,7 +397,7 @@ namespace MgmtParent
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> GetTypesVirtualMachineExtensionImage(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageTypes(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -412,7 +412,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetTypesVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageTypes");
                 scope.Start();
                 try
                 {
@@ -438,7 +438,7 @@ namespace MgmtParent
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetVersionsVirtualMachineExtensionImageAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetVirtualMachineExtensionImageVersionsAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -457,7 +457,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVersionsVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageVersions");
                 scope.Start();
                 try
                 {
@@ -483,7 +483,7 @@ namespace MgmtParent
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> GetVersionsVirtualMachineExtensionImage(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageVersions(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -502,7 +502,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVersionsVirtualMachineExtensionImage");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageVersions");
                 scope.Start();
                 try
                 {
