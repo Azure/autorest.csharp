@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TheExtensionFake and their operations over a Fake. </summary>
-    public partial class TheExtensionFakeContainer : ResourceContainerBase<TheExtensionFake, TheExtensionData>
+    public partial class TheExtensionFakeContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="TheExtensionFakeContainer"/> class for mocking. </summary>
         protected TheExtensionFakeContainer()
@@ -29,7 +29,7 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of TheExtensionFakeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal TheExtensionFakeContainer(OperationsBase parent) : base(parent)
+        internal TheExtensionFakeContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

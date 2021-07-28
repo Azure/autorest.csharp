@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over a StorageAccount. </summary>
-    public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<ObjectReplicationPolicy, ObjectReplicationPolicyData>
+    public partial class ObjectReplicationPolicyContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyContainer"/> class for mocking. </summary>
         protected ObjectReplicationPolicyContainer()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of ObjectReplicationPolicyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ObjectReplicationPolicyContainer(OperationsBase parent) : base(parent)
+        internal ObjectReplicationPolicyContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

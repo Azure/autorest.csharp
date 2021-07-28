@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SubFake and their operations over a Fake. </summary>
-    public partial class SubFakeContainer : ResourceContainerBase<SubFake, SubFakeData>
+    public partial class SubFakeContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="SubFakeContainer"/> class for mocking. </summary>
         protected SubFakeContainer()
@@ -29,7 +29,7 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of SubFakeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubFakeContainer(OperationsBase parent) : base(parent)
+        internal SubFakeContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

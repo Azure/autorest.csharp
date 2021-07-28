@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing the operations that can be performed over a specific AvailabilitySetGrandChild. </summary>
-    public partial class AvailabilitySetGrandChildOperations : ResourceOperationsBase<AvailabilitySetGrandChild>
+    public partial class AvailabilitySetGrandChildOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AvailabilitySetGrandChildRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace MgmtOperations
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AvailabilitySetGrandChildOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal AvailabilitySetGrandChildOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetGrandChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,9 @@ namespace MgmtOperations
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<AvailabilitySetGrandChild>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<AvailabilitySetGrandChild>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.Get");
             scope.Start();
@@ -59,8 +60,9 @@ namespace MgmtOperations
             }
         }
 
-        /// <inheritdoc />
-        public override Response<AvailabilitySetGrandChild> Get(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<AvailabilitySetGrandChild> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.Get");
             scope.Start();

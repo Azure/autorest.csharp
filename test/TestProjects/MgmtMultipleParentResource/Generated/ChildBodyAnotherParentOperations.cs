@@ -19,7 +19,7 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing the operations that can be performed over a specific ChildBodyAnotherParent. </summary>
-    public partial class ChildBodyAnotherParentOperations : ResourceOperationsBase<ChildBodyAnotherParent>
+    public partial class ChildBodyAnotherParentOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AnotherChildrenRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref="ChildBodyAnotherParentOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ChildBodyAnotherParentOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal ChildBodyAnotherParentOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AnotherChildrenRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,40 +42,6 @@ namespace MgmtMultipleParentResource
         public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents/children";
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
-
-        /// <inheritdoc />
-        public async override Task<Response<ChildBodyAnotherParent>> GetAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new ChildBodyAnotherParent(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public override Response<ChildBodyAnotherParent> Get(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ChildBodyAnotherParentOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
-                return Response.FromValue(new ChildBodyAnotherParent(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
 
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>

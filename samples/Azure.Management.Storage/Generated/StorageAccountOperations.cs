@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific StorageAccount. </summary>
-    public partial class StorageAccountOperations : ResourceOperationsBase<StorageAccount>
+    public partial class StorageAccountOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private StorageAccountsRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal StorageAccountOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal StorageAccountOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -44,40 +44,6 @@ namespace Azure.Management.Storage
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
-
-        /// <inheritdoc />
-        public async override Task<Response<StorageAccount>> GetAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public override Response<StorageAccount> Get(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
 
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>

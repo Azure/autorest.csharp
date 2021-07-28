@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel1. </summary>
-    public partial class ExactMatchModel1Operations : ResourceOperationsBase<ExactMatchModel1>
+    public partial class ExactMatchModel1Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ExactMatchModel1SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ExactMatchModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal ExactMatchModel1Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,8 @@ namespace ExactMatchInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<ExactMatchModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Operations.Get");
             scope.Start();
@@ -59,8 +59,8 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<ExactMatchModel1> Get(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ExactMatchModel1> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Operations.Get");
             scope.Start();

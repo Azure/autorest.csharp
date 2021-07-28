@@ -18,7 +18,7 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of SubResourceModel2 and their operations over a ResourceGroup. </summary>
-    public partial class SubResourceModel2Container : ResourceContainerBase<SubResourceModel2, SubResourceModel2Data>
+    public partial class SubResourceModel2Container : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="SubResourceModel2Container"/> class for mocking. </summary>
         protected SubResourceModel2Container()
@@ -27,7 +27,7 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of SubResourceModel2Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SubResourceModel2Container(OperationsBase parent) : base(parent)
+        internal SubResourceModel2Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

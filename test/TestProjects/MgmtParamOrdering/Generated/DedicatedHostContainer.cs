@@ -20,7 +20,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
-    public partial class DedicatedHostContainer : ResourceContainerBase<DedicatedHost, DedicatedHostData>
+    public partial class DedicatedHostContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>
         protected DedicatedHostContainer()
@@ -29,7 +29,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Initializes a new instance of DedicatedHostContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DedicatedHostContainer(OperationsBase parent) : base(parent)
+        internal DedicatedHostContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

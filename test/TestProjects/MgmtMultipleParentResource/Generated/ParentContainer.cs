@@ -20,7 +20,7 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of Parent and their operations over a ResourceGroup. </summary>
-    public partial class ParentContainer : ResourceContainerBase<Parent, ParentData>
+    public partial class ParentContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ParentContainer"/> class for mocking. </summary>
         protected ParentContainer()
@@ -29,7 +29,7 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Initializes a new instance of ParentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ParentContainer(OperationsBase parent) : base(parent)
+        internal ParentContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

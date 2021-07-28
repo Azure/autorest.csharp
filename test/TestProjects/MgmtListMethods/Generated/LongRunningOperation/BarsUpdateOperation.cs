@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal BarsUpdateOperation(OperationsBase operationsBase, Response<BarData> response)
+        internal BarsUpdateOperation(ResourceOperations operationsBase, Response<BarData> response)
         {
             _operation = new OperationOrResponseInternals<Bar>(Response.FromValue(new Bar(operationsBase, response.Value), response.GetRawResponse()));
         }

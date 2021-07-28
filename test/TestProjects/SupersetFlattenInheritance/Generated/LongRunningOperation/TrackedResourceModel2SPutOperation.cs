@@ -24,7 +24,7 @@ namespace SupersetFlattenInheritance.Models
         {
         }
 
-        internal TrackedResourceModel2SPutOperation(OperationsBase operationsBase, Response<TrackedResourceModel2Data> response)
+        internal TrackedResourceModel2SPutOperation(ResourceOperations operationsBase, Response<TrackedResourceModel2Data> response)
         {
             _operation = new OperationOrResponseInternals<TrackedResourceModel2>(Response.FromValue(new TrackedResourceModel2(operationsBase, response.Value), response.GetRawResponse()));
         }

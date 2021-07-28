@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific FileService. </summary>
-    public partial class FileServiceOperations : SingletonOperationsBase<FileService>
+    public partial class FileServiceOperations : SingletonOperations
     {
         /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class for mocking. </summary>
         protected FileServiceOperations()
@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal FileServiceOperations(OperationsBase options) : base(options)
+        protected internal FileServiceOperations(ResourceOperations options) : base(options)
         {
         }
 

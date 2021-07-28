@@ -20,7 +20,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a ResourceGroup. </summary>
-    public partial class ProximityPlacementGroupContainer : ResourceContainerBase<ProximityPlacementGroup, ProximityPlacementGroupData>
+    public partial class ProximityPlacementGroupContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupContainer"/> class for mocking. </summary>
         protected ProximityPlacementGroupContainer()
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ProximityPlacementGroupContainer(OperationsBase parent) : base(parent)
+        internal ProximityPlacementGroupContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

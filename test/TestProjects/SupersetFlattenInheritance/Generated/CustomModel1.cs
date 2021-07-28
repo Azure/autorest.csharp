@@ -20,7 +20,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal CustomModel1(OperationsBase options, CustomModel1Data resource)
+        internal CustomModel1(ResourceOperations options, CustomModel1Data resource)
         {
             Data = resource;
         }

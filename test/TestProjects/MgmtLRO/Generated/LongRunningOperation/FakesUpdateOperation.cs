@@ -22,14 +22,14 @@ namespace MgmtLRO.Models
     {
         private readonly OperationInternals<Fake> _operation;
 
-        private readonly OperationsBase _operationBase;
+        private readonly ResourceOperations _operationBase;
 
         /// <summary> Initializes a new instance of FakesUpdateOperation for mocking. </summary>
         protected FakesUpdateOperation()
         {
         }
 
-        internal FakesUpdateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal FakesUpdateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Fake>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "FakesUpdateOperation");
             _operationBase = operationsBase;

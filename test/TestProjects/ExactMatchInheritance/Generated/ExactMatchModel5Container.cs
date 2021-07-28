@@ -18,7 +18,7 @@ using ExactMatchInheritance.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel5 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel5Container : ResourceContainerBase<ExactMatchModel5, ExactMatchModel5Data>
+    public partial class ExactMatchModel5Container : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Container"/> class for mocking. </summary>
         protected ExactMatchModel5Container()
@@ -27,7 +27,7 @@ namespace ExactMatchInheritance
 
         /// <summary> Initializes a new instance of ExactMatchModel5Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ExactMatchModel5Container(OperationsBase parent) : base(parent)
+        internal ExactMatchModel5Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

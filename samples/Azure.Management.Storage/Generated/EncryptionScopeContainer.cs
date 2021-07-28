@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of EncryptionScope and their operations over a StorageAccount. </summary>
-    public partial class EncryptionScopeContainer : ResourceContainerBase<EncryptionScope, EncryptionScopeData>
+    public partial class EncryptionScopeContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeContainer"/> class for mocking. </summary>
         protected EncryptionScopeContainer()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of EncryptionScopeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal EncryptionScopeContainer(OperationsBase parent) : base(parent)
+        internal EncryptionScopeContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
