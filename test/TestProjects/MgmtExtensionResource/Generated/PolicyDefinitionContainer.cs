@@ -334,9 +334,9 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -357,9 +357,9 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -382,17 +382,17 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PolicyDefinition> List(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<PolicyDefinition> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<PolicyDefinition> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     if (Id.TryGetSubscriptionId(out _))
                     {
-                        var response = _restClient.List(Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _restClient.GetAll(Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     else
@@ -404,12 +404,12 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = _restClient.ListByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
                         {
-                            var response = _restClient.ListBuiltIn(filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetBuiltIn(filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                     }
@@ -422,13 +422,13 @@ namespace MgmtExtensionResource
             }
             Page<PolicyDefinition> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     if (Id.TryGetSubscriptionId(out _))
                     {
-                        var response = _restClient.ListNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                        var response = _restClient.GetAllNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     else
@@ -440,12 +440,12 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = _restClient.ListByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
                         {
-                            var response = _restClient.ListBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetBuiltInNextPage(nextLink, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                     }
@@ -464,17 +464,17 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PolicyDefinition> ListAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<PolicyDefinition> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<PolicyDefinition>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     if (Id.TryGetSubscriptionId(out _))
                     {
-                        var response = await _restClient.ListAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _restClient.GetAllAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     else
@@ -486,12 +486,12 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = await _restClient.ListByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
                         {
-                            var response = await _restClient.ListBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetBuiltInAsync(filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                     }
@@ -504,13 +504,13 @@ namespace MgmtExtensionResource
             }
             async Task<Page<PolicyDefinition>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAll");
                 scope.Start();
                 try
                 {
                     if (Id.TryGetSubscriptionId(out _))
                     {
-                        var response = await _restClient.ListNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await _restClient.GetAllNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     else
@@ -522,12 +522,12 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = await _restClient.ListByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
                         {
-                            var response = await _restClient.ListBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetBuiltInNextPageAsync(nextLink, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                     }
@@ -547,15 +547,15 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(PolicyDefinitionOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -570,15 +570,15 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(PolicyDefinitionOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
