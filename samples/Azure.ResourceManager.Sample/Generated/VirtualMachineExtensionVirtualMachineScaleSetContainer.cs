@@ -20,7 +20,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionVirtualMachineScaleSet and their operations over a VirtualMachineScaleSet. </summary>
-    public partial class VirtualMachineExtensionVirtualMachineScaleSetContainer : ResourceContainerBase<VirtualMachineExtensionVirtualMachineScaleSet, VirtualMachineExtensionData>
+    public partial class VirtualMachineExtensionVirtualMachineScaleSetContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionVirtualMachineScaleSetContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionVirtualMachineScaleSetContainer()
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionVirtualMachineScaleSetContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineExtensionVirtualMachineScaleSetContainer(OperationsBase parent) : base(parent)
+        internal VirtualMachineExtensionVirtualMachineScaleSetContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

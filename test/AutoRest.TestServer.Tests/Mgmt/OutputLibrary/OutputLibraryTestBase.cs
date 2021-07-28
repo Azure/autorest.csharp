@@ -22,6 +22,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
+    [Parallelizable(ParallelScope.All)]
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
@@ -93,7 +94,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType.BaseType))
+                if (IsSingletonOperation(OperationsType.BaseType))
                 {
                     continue;
                 }
@@ -123,7 +124,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType.BaseType))
+                if (IsSingletonOperation(OperationsType.BaseType))
                 {
                     continue;
                 }
@@ -131,20 +132,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 var restClient = context.Library.GetRestClient(resourceOperation.OperationGroup);
                 var getMethod = restClient.Methods.Where(m => m.Name == "Get").FirstOrDefault();
                 Assert.NotNull(getMethod, $"{restClient.Type.Name} does not implement the Get method.");
-
-                var nonPathParameters = GetNonPathParameters(getMethod);
-                if (nonPathParameters.Length > 0)
-                {
-                    MethodInfo[] methods = OperationsType.GetMethods();
-                    var getMethods = methods.Where(m => m.Name == methodName);
-                    Assert.AreEqual(2, getMethods.Count());
-                }
             }
         }
 
         private bool IsSingletonOperation(Type type)
         {
-            return type == typeof(SingletonOperationsBase);
+            return type == typeof(SingletonOperations);
         }
 
         private Parameter[] GetNonPathParameters(RestClientMethod clientMethod)

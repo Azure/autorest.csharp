@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance.Models
         {
         }
 
-        internal AzureResourceFlattenModel3SPutOperation(OperationsBase operationsBase, Response<AzureResourceFlattenModel3Data> response)
+        internal AzureResourceFlattenModel3SPutOperation(ResourceOperations operationsBase, Response<AzureResourceFlattenModel3Data> response)
         {
             _operation = new OperationOrResponseInternals<AzureResourceFlattenModel3>(Response.FromValue(new AzureResourceFlattenModel3(operationsBase, response.Value), response.GetRawResponse()));
         }

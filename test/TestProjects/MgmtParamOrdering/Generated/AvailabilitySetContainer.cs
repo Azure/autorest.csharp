@@ -20,7 +20,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
-    public partial class AvailabilitySetContainer : ResourceContainerBase<AvailabilitySet, AvailabilitySetData>
+    public partial class AvailabilitySetContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetContainer"/> class for mocking. </summary>
         protected AvailabilitySetContainer()
@@ -29,7 +29,7 @@ namespace MgmtParamOrdering
 
         /// <summary> Initializes a new instance of AvailabilitySetContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AvailabilitySetContainer(OperationsBase parent) : base(parent)
+        internal AvailabilitySetContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

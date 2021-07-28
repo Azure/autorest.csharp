@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSetVM and their operations over a VirtualMachineScaleSet. </summary>
-    public partial class VirtualMachineScaleSetVMContainer : ResourceContainerBase<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>
+    public partial class VirtualMachineScaleSetVMContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMContainer"/> class for mocking. </summary>
         protected VirtualMachineScaleSetVMContainer()
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineScaleSetVMContainer(OperationsBase parent) : base(parent)
+        internal VirtualMachineScaleSetVMContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

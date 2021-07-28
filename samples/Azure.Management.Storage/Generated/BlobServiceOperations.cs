@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific BlobService. </summary>
-    public partial class BlobServiceOperations : SingletonOperationsBase<BlobService>
+    public partial class BlobServiceOperations : SingletonOperations
     {
         /// <summary> Initializes a new instance of the <see cref="BlobServiceOperations"/> class for mocking. </summary>
         protected BlobServiceOperations()
@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref="BlobServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal BlobServiceOperations(OperationsBase options) : base(options)
+        protected internal BlobServiceOperations(ResourceOperations options) : base(options)
         {
         }
 

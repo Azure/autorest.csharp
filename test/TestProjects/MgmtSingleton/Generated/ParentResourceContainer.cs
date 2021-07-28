@@ -20,7 +20,7 @@ using MgmtSingleton.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing collection of ParentResource and their operations over a ResourceGroup. </summary>
-    public partial class ParentResourceContainer : ResourceContainerBase<ParentResource, ParentResourceData>
+    public partial class ParentResourceContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ParentResourceContainer"/> class for mocking. </summary>
         protected ParentResourceContainer()
@@ -29,7 +29,7 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of ParentResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ParentResourceContainer(OperationsBase parent) : base(parent)
+        internal ParentResourceContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

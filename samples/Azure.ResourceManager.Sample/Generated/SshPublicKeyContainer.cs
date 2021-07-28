@@ -20,7 +20,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of SshPublicKey and their operations over a ResourceGroup. </summary>
-    public partial class SshPublicKeyContainer : ResourceContainerBase<SshPublicKey, SshPublicKeyData>
+    public partial class SshPublicKeyContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyContainer"/> class for mocking. </summary>
         protected SshPublicKeyContainer()
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of SshPublicKeyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SshPublicKeyContainer(OperationsBase parent) : base(parent)
+        internal SshPublicKeyContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

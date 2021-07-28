@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific AzureResourceFlattenModel1. </summary>
-    public partial class AzureResourceFlattenModel1Operations : ResourceOperationsBase<AzureResourceFlattenModel1>
+    public partial class AzureResourceFlattenModel1Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AzureResourceFlattenModel1SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AzureResourceFlattenModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal AzureResourceFlattenModel1Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<AzureResourceFlattenModel1>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Get an AzureResourceFlattenModel1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<AzureResourceFlattenModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Operations.Get");
             scope.Start();
@@ -59,8 +60,9 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<AzureResourceFlattenModel1> Get(CancellationToken cancellationToken = default)
+        /// <summary> Get an AzureResourceFlattenModel1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<AzureResourceFlattenModel1> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Operations.Get");
             scope.Start();

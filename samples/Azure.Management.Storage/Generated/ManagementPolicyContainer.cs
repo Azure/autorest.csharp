@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ManagementPolicy and their operations over a StorageAccount. </summary>
-    public partial class ManagementPolicyContainer : ResourceContainerBase<ManagementPolicy, ManagementPolicyData>
+    public partial class ManagementPolicyContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyContainer"/> class for mocking. </summary>
         protected ManagementPolicyContainer()
@@ -27,7 +27,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of ManagementPolicyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ManagementPolicyContainer(OperationsBase parent) : base(parent)
+        internal ManagementPolicyContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

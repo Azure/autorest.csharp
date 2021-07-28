@@ -24,7 +24,7 @@ namespace Pagination.Models
         {
         }
 
-        internal PageSizeDecimalModelsPutOperation(OperationsBase operationsBase, Response<PageSizeDecimalModelData> response)
+        internal PageSizeDecimalModelsPutOperation(ResourceOperations operationsBase, Response<PageSizeDecimalModelData> response)
         {
             _operation = new OperationOrResponseInternals<PageSizeDecimalModel>(Response.FromValue(new PageSizeDecimalModel(operationsBase, response.Value), response.GetRawResponse()));
         }

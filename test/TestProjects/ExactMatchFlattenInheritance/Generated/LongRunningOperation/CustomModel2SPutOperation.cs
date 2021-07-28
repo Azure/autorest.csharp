@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance.Models
         {
         }
 
-        internal CustomModel2SPutOperation(OperationsBase operationsBase, Response<CustomModel2Data> response)
+        internal CustomModel2SPutOperation(ResourceOperations operationsBase, Response<CustomModel2Data> response)
         {
             _operation = new OperationOrResponseInternals<CustomModel2>(Response.FromValue(new CustomModel2(operationsBase, response.Value), response.GetRawResponse()));
         }

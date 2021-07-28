@@ -17,7 +17,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -65,17 +65,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
                 _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
-                if (_resourceContainer.GetMethod != null)
-                {
-                    _writer.Line($"ResourceContainerBase<{_resource.Type}, {_resourceData.Type}>");
-                }
-                else
-                {
-                    _writer.Line($"{typeof(ContainerBase)}");
-                }
+                _writer.Line($"{typeof(Core.ResourceContainer)}");
                 using (_writer.Scope())
                 {
-                    WriteContainerCtors(_writer, typeof(OperationsBase), "parent");
+                    WriteContainerCtors(_writer, typeof(Core.ResourceOperations), "parent");
                     WriteFields(_writer, _restClient!);
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
@@ -311,7 +304,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
+                    _writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
                 });
             }
         }

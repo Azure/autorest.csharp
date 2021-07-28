@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific SupersetModel1. </summary>
-    public partial class SupersetModel1Operations : ResourceOperationsBase<SupersetModel1>
+    public partial class SupersetModel1Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SupersetModel1SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SupersetModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal SupersetModel1Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SupersetModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,8 @@ namespace SupersetInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<SupersetModel1>> GetAsync(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<SupersetModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Operations.Get");
             scope.Start();
@@ -59,8 +59,8 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<SupersetModel1> Get(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<SupersetModel1> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Operations.Get");
             scope.Start();

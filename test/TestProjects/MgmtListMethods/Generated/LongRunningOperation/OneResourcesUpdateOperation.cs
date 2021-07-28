@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal OneResourcesUpdateOperation(OperationsBase operationsBase, Response<TheExtensionData> response)
+        internal OneResourcesUpdateOperation(ResourceOperations operationsBase, Response<TheExtensionData> response)
         {
             _operation = new OperationOrResponseInternals<TheExtension>(Response.FromValue(new TheExtension(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ResourceContainerBase<Oven, OvenData>
+    public partial class OvenContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -27,7 +27,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Initializes a new instance of OvenContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal OvenContainer(OperationsBase parent) : base(parent)
+        internal OvenContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of SharedGallery and their operations over a Subscription. </summary>
-    public partial class SharedGalleryContainer : ResourceContainerBase<SharedGallery, SharedGalleryData>
+    public partial class SharedGalleryContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="SharedGalleryContainer"/> class for mocking. </summary>
         protected SharedGalleryContainer()
@@ -29,7 +29,7 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of SharedGalleryContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SharedGalleryContainer(OperationsBase parent) : base(parent)
+        internal SharedGalleryContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

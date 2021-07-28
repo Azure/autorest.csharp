@@ -20,7 +20,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "SubResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubResourceModel1(OperationsBase options, SubResourceModel1Data resource) : base(options, resource.Id)
+        internal SubResourceModel1(ResourceOperations options, SubResourceModel1Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

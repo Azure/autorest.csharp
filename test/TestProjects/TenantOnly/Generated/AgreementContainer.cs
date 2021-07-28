@@ -17,7 +17,7 @@ using Azure.ResourceManager.Resources;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
-    public partial class AgreementContainer : ResourceContainerBase<Agreement, AgreementData>
+    public partial class AgreementContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
@@ -26,7 +26,7 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of AgreementContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AgreementContainer(OperationsBase parent) : base(parent)
+        internal AgreementContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
