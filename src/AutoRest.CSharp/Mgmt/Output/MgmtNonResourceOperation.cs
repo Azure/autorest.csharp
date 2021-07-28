@@ -56,7 +56,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             var noun = verb.Substring(3);
             if (noun == "All")
                 noun = string.Empty;
-            if (verb.StartsWith(getAll, StringComparison.InvariantCultureIgnoreCase))
+            if (verb.StartsWith(getAll, StringComparison.InvariantCultureIgnoreCase) ||
+                noun.StartsWith("By"))
             {
                 if (restClientMethod.IsListMethod())
                 {

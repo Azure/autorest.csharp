@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // first we try to get the resource data - this could be a resource
             if (resourceData != null)
             {
-                if (valueProperty.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                if (valueProperty.EqualsByName(resourceData.Type))
                 {
                     wasResourceData = true;
                     return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true, wasResourceData);
@@ -78,16 +78,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (returnType.FrameworkType == typeof(IReadOnlyList<>))
                 {
                     valueProperty = returnType.Arguments[0];
-                    return true;
-                }
-                else
-                {
-                    return false;
                 }
             }
-
-            var schemaObject = (SchemaObjectType)returnType.Implementation;
-            valueProperty = GetValueProperty(schemaObject)?.ValueType;
+            else
+            {
+                var schemaObject = (SchemaObjectType)returnType.Implementation;
+                valueProperty = GetValueProperty(schemaObject)?.ValueType.Arguments.FirstOrDefault();
+            }
             return valueProperty != null;
         }
 
