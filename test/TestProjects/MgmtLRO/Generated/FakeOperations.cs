@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -375,58 +374,6 @@ namespace MgmtLRO
                 throw;
             }
         }
-        /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAll");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
-        /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
-        {
-            if (requiredParam == null)
-            {
-                throw new ArgumentNullException(nameof(requiredParam));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.GetAll");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<FakePostResult>> DoSomethingAsync(CancellationToken cancellationToken = default)
