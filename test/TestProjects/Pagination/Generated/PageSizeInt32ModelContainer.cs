@@ -265,9 +265,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -288,9 +288,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -310,15 +310,15 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeInt32Model" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PageSizeInt32Model> List(CancellationToken cancellationToken = default)
+        public Pageable<PageSizeInt32Model> GetAll(CancellationToken cancellationToken = default)
         {
             Page<PageSizeInt32Model> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAll(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeInt32Model(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,11 +329,11 @@ namespace Pagination
             }
             Page<PageSizeInt32Model> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeInt32Model(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -347,15 +347,15 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeInt32Model" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PageSizeInt32Model> ListAsync(CancellationToken cancellationToken = default)
+        public AsyncPageable<PageSizeInt32Model> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<PageSizeInt32Model>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeInt32Model(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -366,11 +366,11 @@ namespace Pagination
             }
             async Task<Page<PageSizeInt32Model>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeInt32Model(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -388,15 +388,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(PageSizeInt32ModelOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -411,15 +411,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt32ModelContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(PageSizeInt32ModelOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

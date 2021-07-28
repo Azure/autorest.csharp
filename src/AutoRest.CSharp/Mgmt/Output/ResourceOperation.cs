@@ -285,12 +285,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return managementGroupExtensionsListMethod;
         }
 
-        protected IEnumerable<ResourceListMethod> GetListMethods(bool parentExistsInPathParam, bool returnTypeIsResourceData)
+        protected IEnumerable<ResourceListMethod> GetListMethods(bool shouldParentExistInPath, bool shouldReturnTypeBeResourceData)
         {
             List<ResourceListMethod> listMethods = new List<ResourceListMethod>();
             foreach (var pagingMethod in PagingMethods)
             {
-                if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, pagingMethod.Method))
+                if (IsValidListMethod(shouldParentExistInPath, shouldReturnTypeBeResourceData, pagingMethod.Method))
                 {
                     listMethods.Add(new ResourceListMethod(pagingMethod));
                 }
@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var method in Methods)
             {
-                if (IsValidListMethod(parentExistsInPathParam, returnTypeIsResourceData, method.RestClientMethod))
+                if (IsValidListMethod(shouldParentExistInPath, shouldReturnTypeBeResourceData, method.RestClientMethod))
                 {
                     listMethods.Add(new ResourceListMethod(method));
                 }
@@ -307,38 +307,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             return listMethods;
         }
 
-        private bool IsValidListMethod(bool parentExistsInPathParam, bool returnTypeIsResourceData, RestClientMethod clientMethod)
+        private bool IsValidListMethod(bool shouldParentExistInPath, bool shouldReturnTypeBeResourceData, RestClientMethod clientMethod)
         {
-            if (parentExistsInPathParam == false && returnTypeIsResourceData == false && !MethodExtensions.GetBodyTypeForList(clientMethod, OperationGroup, _context).IsListFunction)
-            {
-                return false;
-            }
+            var result = MethodExtensions.GetBodyTypeForList(clientMethod, OperationGroup, _context);
 
-            bool isParentExistsInPathParams = false;
-            bool isReturnTypeResourceData = false;
+            if (!result.IsListFunction)
+                return false;
 
             var parentResourceType = IsScopeOrExtension ? clientMethod.Operation.ParentResourceType() : OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-            // TODO: can we handle ResourceTypeBuilder.ResourceGroupResources in IsParentExistsInPathParamaters as well?
-            isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+            bool isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
 
-            var resourceData = _context.Library.GetResourceData(OperationGroup);
-            var returnType = clientMethod.ReturnType;
-            if (returnType != null && !returnType.IsFrameworkType)
-            {
-                var objType = returnType.Implementation as MgmtObjectType;
-                isReturnTypeResourceData = objType != null && objType.Properties.Any(p => p.ValueType.Name == "IReadOnlyList" && p.ValueType.Arguments != null && p.ValueType.Arguments[0].Name == resourceData.Type.Name);
-            }
-            else if (returnType != null && returnType.Arguments != null)
-            {
-                isReturnTypeResourceData = returnType.Name == "IReadOnlyList" && returnType.Arguments != null && returnType.Arguments[0].Name == resourceData.Type.Name;
-            }
-
-            if (isParentExistsInPathParams == parentExistsInPathParam && isReturnTypeResourceData == returnTypeIsResourceData)
-            {
-                return true;
-            }
-
-            return false;
+            return (isParentExistsInPathParams == shouldParentExistInPath && result.WasResourceData == shouldReturnTypeBeResourceData);
         }
 
         public Diagnostic GetDiagnostic(RestClientMethod method)

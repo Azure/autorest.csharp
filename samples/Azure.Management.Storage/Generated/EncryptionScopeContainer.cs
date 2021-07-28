@@ -269,9 +269,9 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string encryptionScopeName, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string encryptionScopeName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -292,9 +292,9 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -315,15 +315,15 @@ namespace Azure.Management.Storage
         /// <summary> Lists all the encryption scopes available under the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<EncryptionScope> List(CancellationToken cancellationToken = default)
+        public Pageable<EncryptionScope> GetAll(CancellationToken cancellationToken = default)
         {
             Page<EncryptionScope> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAll(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -334,11 +334,11 @@ namespace Azure.Management.Storage
             }
             Page<EncryptionScope> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,15 +353,15 @@ namespace Azure.Management.Storage
         /// <summary> Lists all the encryption scopes available under the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<EncryptionScope> ListAsync(CancellationToken cancellationToken = default)
+        public AsyncPageable<EncryptionScope> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<EncryptionScope>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -372,11 +372,11 @@ namespace Azure.Management.Storage
             }
             async Task<Page<EncryptionScope>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -394,15 +394,15 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(EncryptionScopeOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -417,15 +417,15 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(EncryptionScopeOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

@@ -431,7 +431,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string vmScaleSetName)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -456,7 +456,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set containing the extension. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetExtensionListResult>> ListAsync(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetExtensionListResult>> GetAllAsync(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -467,7 +467,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, vmScaleSetName);
+            using var message = CreateGetAllRequest(resourceGroupName, vmScaleSetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -488,7 +488,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set containing the extension. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetExtensionListResult> List(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetExtensionListResult> GetAll(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -499,7 +499,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, vmScaleSetName);
+            using var message = CreateGetAllRequest(resourceGroupName, vmScaleSetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -515,7 +515,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string vmScaleSetName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string vmScaleSetName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -534,7 +534,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set containing the extension. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetExtensionListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetExtensionListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -549,7 +549,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, vmScaleSetName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, vmScaleSetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -571,7 +571,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set containing the extension. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetExtensionListResult> ListNextPage(string nextLink, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetExtensionListResult> GetAllNextPage(string nextLink, string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -586,7 +586,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, vmScaleSetName);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, vmScaleSetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

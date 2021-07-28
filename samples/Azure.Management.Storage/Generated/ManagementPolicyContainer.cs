@@ -231,9 +231,9 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -249,9 +249,9 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -270,15 +270,15 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -293,15 +293,15 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

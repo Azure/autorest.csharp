@@ -240,8 +240,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (listMethod.PagingMethod != null)
                 {
-                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, false);
-                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, true);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, false);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, true);
                 }
             }
 
@@ -251,13 +251,19 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
+                    var originalName = clientMethod.Name;
+                    var methodName = originalName.EndsWith($"By{_resourceOperation.Resource.Type.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
+                    Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                    WriteClientMethod(writer, clientMethod, methodName, diagnostic, pair.Key, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, methodName, diagnostic, pair.Key, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
-                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), false);
-                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), true);
+                    var originalName = pagingMethod.Name;
+                    var methodName = originalName.EndsWith($"By{_resourceOperation.Resource.Type.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
+                    Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                    WritePagingMethod(writer, pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), false);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), true);
                 }
             }
 
@@ -307,7 +313,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, string restClientName, bool async)
+        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, Diagnostic diagnostic, string clientMethodName, string restClientName, bool async)
         {
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
@@ -325,7 +331,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var returnType = itemType.WrapPageable(async);
 
-            var methodName = CreateMethodName(pagingMethod.Name, async);
+            var methodName = CreateMethodName(clientMethodName, async);
             writer.Append($"public virtual {returnType} {methodName}(");
             foreach (var param in nonPathParameters)
             {
@@ -335,7 +341,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, pagingMethod.Diagnostics,
+                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, diagnostic,
                     ClientDiagnosticsField, $"", async);
             }
         }
@@ -568,7 +574,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)

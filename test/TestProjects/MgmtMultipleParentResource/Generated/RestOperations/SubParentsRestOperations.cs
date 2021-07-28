@@ -430,7 +430,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string parentName, string expand)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string parentName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -460,7 +460,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
-        public async Task<Response<SubParentsListResult>> ListAsync(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentsListResult>> GetAllAsync(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -471,7 +471,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, parentName, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, parentName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -493,7 +493,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
-        public Response<SubParentsListResult> List(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<SubParentsListResult> GetAll(string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -504,7 +504,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, parentName, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, parentName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -520,7 +520,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string parentName, string expand)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string parentName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -540,7 +540,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public async Task<Response<SubParentsListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SubParentsListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -555,7 +555,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, parentName, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, parentName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -578,7 +578,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="parentName"/> is null. </exception>
-        public Response<SubParentsListResult> ListNextPage(string nextLink, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<SubParentsListResult> GetAllNextPage(string nextLink, string resourceGroupName, string parentName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -593,7 +593,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(parentName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, parentName, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, parentName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

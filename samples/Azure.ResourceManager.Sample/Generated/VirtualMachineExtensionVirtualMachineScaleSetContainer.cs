@@ -274,9 +274,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -298,9 +298,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -321,13 +321,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>>> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.GetAll");
             scope.Start();
             try
             {
-                var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtensionVirtualMachineScaleSet(Parent, data)).ToArray() as IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -340,13 +340,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>> List(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.GetAll");
             scope.Start();
             try
             {
-                var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _restClient.GetAll(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtensionVirtualMachineScaleSet(Parent, data)).ToArray() as IReadOnlyList<VirtualMachineExtensionVirtualMachineScaleSet>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -362,15 +362,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(VirtualMachineExtensionVirtualMachineScaleSetOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -385,15 +385,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(VirtualMachineExtensionVirtualMachineScaleSetOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

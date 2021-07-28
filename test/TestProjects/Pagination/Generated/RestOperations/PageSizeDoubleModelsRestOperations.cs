@@ -40,7 +40,7 @@ namespace Pagination
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, double? maxpagesize)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, double? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,14 +66,14 @@ namespace Pagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PageSizeDoubleModelListResult>> ListAsync(string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDoubleModelListResult>> GetAllAsync(string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, maxpagesize);
+            using var message = CreateGetAllRequest(resourceGroupName, maxpagesize);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -93,14 +93,14 @@ namespace Pagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PageSizeDoubleModelListResult> List(string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public Response<PageSizeDoubleModelListResult> GetAll(string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, maxpagesize);
+            using var message = CreateGetAllRequest(resourceGroupName, maxpagesize);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -292,7 +292,7 @@ namespace Pagination
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, double? maxpagesize)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, double? maxpagesize)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -310,7 +310,7 @@ namespace Pagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<PageSizeDoubleModelListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PageSizeDoubleModelListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -321,7 +321,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, maxpagesize);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, maxpagesize);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -342,7 +342,7 @@ namespace Pagination
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<PageSizeDoubleModelListResult> ListNextPage(string nextLink, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
+        public Response<PageSizeDoubleModelListResult> GetAllNextPage(string nextLink, string resourceGroupName, double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -353,7 +353,7 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, maxpagesize);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, maxpagesize);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
