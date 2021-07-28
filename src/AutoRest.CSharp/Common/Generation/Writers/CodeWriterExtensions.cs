@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializersSet
                 .Except(selectedCtorInitializers)
-                .Where(i => i.Property.IsReadOnly && TypeFactory.IsCollectionType(i.Property.Declaration.Type))
+                .Where(i => TypeFactory.IsCollectionType(i.Property.Declaration.Type))
                 .ToArray();
 
             // Find properties that would have to be initialized via property initializers
@@ -393,7 +393,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 // Writes the:
                 // foreach (var value in param)
                 // {
-                //     model.CollectionProperty = value;
+                //     model.CollectionProperty.Add(value);
                 // }
                 foreach (var propertyInitializer in collectionInitializers)
                 {
@@ -411,7 +411,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (collectionInitializers.Any())
             {
                 var modelVariable = new CodeWriterDeclaration(objectType.Declaration.Name.ToVariableName());
-                writer.Append($"{objectType.Type} {modelVariable:D} = ");
+                writer.Append($"var {modelVariable:D} = ");
                 WriteObjectInitializer(writer);
                 writer.Line($";");
 

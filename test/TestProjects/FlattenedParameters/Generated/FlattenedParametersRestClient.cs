@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -44,10 +43,15 @@ namespace FlattenedParameters
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
+            var pathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema = new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema();
+            if (items != null)
             {
-                Items = items?.ToList()
-            };
+                foreach (var value in items)
+                {
+                    pathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema.Items.Add(value);
+                }
+            }
+            var model = pathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema;
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -94,7 +98,7 @@ namespace FlattenedParameters
             uri.AppendPath("/OperationNotNull/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema = new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema();
+            var pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema = new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema();
             if (items != null)
             {
                 foreach (var value in items)
