@@ -4,9 +4,9 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtParamOrdering : TestProjectTests
+    public class MgmtParamOrderingTests : TestProjectTests
     {
-        public MgmtParamOrdering() : base("MgmtParamOrdering")
+        public MgmtParamOrderingTests() : base("MgmtParamOrdering")
         {
         }
 

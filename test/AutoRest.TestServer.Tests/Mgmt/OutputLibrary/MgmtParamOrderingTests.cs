@@ -10,9 +10,9 @@ using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
-    internal class MgmtParamOrdering : OutputLibraryTestBase
+    internal class MgmtParamOrderingTests : OutputLibraryTestBase
     {
-        public MgmtParamOrdering() : base("MgmtParamOrdering") { }
+        public MgmtParamOrderingTests() : base("MgmtParamOrdering") { }
 
         [Test]
         public void TestParentComputer()
