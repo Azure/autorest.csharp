@@ -48,7 +48,7 @@ namespace Azure.Management.Storage
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
         /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageAccount> Get(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> Get(StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
             scope.Start();

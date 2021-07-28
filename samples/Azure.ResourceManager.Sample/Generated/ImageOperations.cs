@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets an image. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Image>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Image>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageOperations.Get");
             scope.Start();
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets an image. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Image> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<Image> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageOperations.Get");
             scope.Start();

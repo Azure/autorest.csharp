@@ -47,7 +47,7 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AvailabilitySet>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AvailabilitySet>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Get");
             scope.Start();
@@ -66,7 +66,7 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AvailabilitySet> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<AvailabilitySet> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Get");
             scope.Start();

@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<VirtualMachineExtension>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<VirtualMachineExtension>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Get");
             scope.Start();
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get the extension. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineExtension> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<VirtualMachineExtension> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Get");
             scope.Start();

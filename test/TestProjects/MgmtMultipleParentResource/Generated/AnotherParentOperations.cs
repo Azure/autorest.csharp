@@ -46,7 +46,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<AnotherParent>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AnotherParent>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.Get");
             scope.Start();
@@ -65,7 +65,7 @@ namespace MgmtMultipleParentResource
         /// <summary> The operation to get the run command. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<AnotherParent> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<AnotherParent> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.Get");
             scope.Start();

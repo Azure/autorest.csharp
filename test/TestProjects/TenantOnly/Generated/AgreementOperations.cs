@@ -45,7 +45,7 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Agreement>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Agreement>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementOperations.Get");
             scope.Start();
@@ -64,7 +64,7 @@ namespace TenantOnly
         /// <summary> Gets an agreement by ID. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Agreement> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<Agreement> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementOperations.Get");
             scope.Start();

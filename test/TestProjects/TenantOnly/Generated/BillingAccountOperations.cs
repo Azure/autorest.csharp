@@ -45,7 +45,7 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BillingAccount>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();
@@ -64,7 +64,7 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BillingAccount> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();

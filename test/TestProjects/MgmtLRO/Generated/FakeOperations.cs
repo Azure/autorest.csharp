@@ -46,7 +46,7 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<Fake>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
             scope.Start();
@@ -65,7 +65,7 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fake> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.Get");
             scope.Start();

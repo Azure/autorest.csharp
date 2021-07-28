@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Retrieves information about a proximity placement group . </summary>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ProximityPlacementGroup>> GetAsync(string includeColocationStatus, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ProximityPlacementGroup>> GetAsync(string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.Get");
             scope.Start();
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Retrieves information about a proximity placement group . </summary>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ProximityPlacementGroup> Get(string includeColocationStatus, CancellationToken cancellationToken = default)
+        public virtual Response<ProximityPlacementGroup> Get(string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.Get");
             scope.Start();
