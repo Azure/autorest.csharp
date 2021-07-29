@@ -29,10 +29,10 @@ namespace AutoRest.CSharp.Output.Models
             OperationGroup = operationGroup;
             Builder = new RestClientBuilder(operationGroup, context);
 
-            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureNormalMethods);
-            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureGetNextPageMethods);
+            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureNormalMethods);
+            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod>(EnsureGetNextPageMethods);
 
-            Parameters = Builder.GetOrderedParameters ();
+            Parameters = Builder.GetOrderedParameters();
 
             ClientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
             RestClientSuffix = "Rest" + ClientBuilder.GetClientSuffix(context);
@@ -88,11 +88,16 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public"));
+                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
                 }
             }
 
             return requestMethods;
+        }
+
+        protected virtual bool ShouldReturnNullOn404(Operation operation)
+        {
+            return false;
         }
 
         protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()

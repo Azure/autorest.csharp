@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient, RestClientMethod? getMethod = default)
+        public void WriteClient(CodeWriter writer, RestClient restClient)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -34,10 +34,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var method in restClient.Methods)
                     {
-                        bool returnNullOn404 = method == getMethod;
                         WriteRequestCreation(writer, method);
-                        WriteOperation(writer, method, true, returnNullOn404);
-                        WriteOperation(writer, method, false, returnNullOn404);
+                        WriteOperation(writer, method, true);
+                        WriteOperation(writer, method, false);
                     }
                 }
             }
@@ -100,7 +99,7 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: false, "internal");
         }
 
-        private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async, bool returnNullOn404)
+        private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
         {
             using var methodScope = writer.AmbientScope();
 
@@ -160,13 +159,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{PipelineField}.Send({messageVariable}, cancellationToken);");
                 }
 
-                WriteStatusCodeSwitch(writer, messageVariable, operation, async, returnNullOn404);
+                WriteStatusCodeSwitch(writer, messageVariable, operation, async);
             }
             writer.Line();
         }
 
         //TODO: Do multiple status codes
-        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration message, RestClientMethod operation, bool async, bool returnNullOn404)
+        private void WriteStatusCodeSwitch(CodeWriter writer, CodeWriterDeclaration message, RestClientMethod operation, bool async)
         {
             string responseVariable = $"{message.ActualName}.Response";
 
@@ -199,7 +198,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope($"switch ({responseVariable}.Status)"))
             {
-                ResponseBody? responseBodyFor200 = null;
                 foreach (var response in operation.Responses)
                 {
                     var responseBody = response.ResponseBody;
@@ -209,8 +207,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (statusCode.Code != null)
                         {
-                            if (statusCode.Code == 200)
-                                responseBodyFor200 = responseBody;
                             writer.Line($"case {statusCode.Code}:");
                         }
                         else
@@ -301,15 +297,6 @@ namespace AutoRest.CSharp.Generation.Writers
                             default:
                                 throw new ArgumentOutOfRangeException();
                         }
-                    }
-                }
-
-                if (returnNullOn404 && responseBodyFor200 != null)
-                {
-                    writer.Line($"case 404:");
-                    using (writer.Scope())
-                    {
-                        writer.Line($"return Response.FromValue<{responseBodyFor200.Type}>(null, message.Response);");
                     }
                 }
 
