@@ -64,8 +64,8 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
-            List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
 
+            List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
             // Remove ignored headers
             parameters.RemoveAll(requestParameter =>
                 requestParameter.In == ParameterLocation.Header &&
