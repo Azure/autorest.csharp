@@ -54,6 +54,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<string, List<OperationGroup>> _childNonResourceOperationGroups;
 
+        private Dictionary<string, IEnumerable<Resource>>? _childResources;
+
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
@@ -171,6 +173,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
+
+        public IEnumerable<Resource>? ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+
+        private IEnumerable<Resource>? GetChildren(string parent)
+        {
+            EnsureChildResources().TryGetValue(parent, out var children);
+            return children;
+        }
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
@@ -447,6 +457,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _armResource;
+        }
+
+        private Dictionary<string, IEnumerable<Resource>> EnsureChildResources()
+        {
+            if (_childResources != null)
+            {
+                return _childResources;
+            }
+
+            _childResources = new Dictionary<string, IEnumerable<Resource>>();
+            var parentResourceTypes = new HashSet<string>{ResourceTypeBuilder.Tenant, ResourceTypeBuilder.ManagementGroups, ResourceTypeBuilder.Subscriptions, ResourceTypeBuilder.ResourceGroups};
+            foreach (var resource in ArmResource)
+            {
+                var parents = resource.OperationGroup.Operations.Where(op => parentResourceTypes.Contains(op.ParentResourceType())).Select(op => op.ParentResourceType()).Distinct().ToList();
+                foreach (var parent in parents)
+                {
+                    if (_childResources.TryGetValue(parent, out var resources))
+                    {
+                        resources.ToList().Add(resource);
+                    }
+                    else
+                    {
+                        _childResources.Add(parent, new List<Resource>{resource});
+                    }
+                }
+            }
+
+            return _childResources;
         }
 
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()

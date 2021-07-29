@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
-        private static ConcurrentDictionary<Operation, string> _operationValueCache = new ConcurrentDictionary<Operation, string>();
+        private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
         {
@@ -51,25 +51,26 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static string ResourceType(this Operation operation)
         {
             string? result = null;
-            if (_operationValueCache.TryGetValue(operation, out result))
-                return result;
             if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
             {
                 throw new ArgumentException($"The operation does not have an HttpRequest.");
             }
+            var path = httpRequest.Path;
+            if (_operationPathValueCache.TryGetValue(path, out result))
+                return result;
 
-            var indexOfProvider = httpRequest.Path.IndexOf(ProviderSegment.Providers);
+            var indexOfProvider = path.IndexOf(ProviderSegment.Providers);
             if (indexOfProvider < 0)
             {
-                throw new ArgumentException($"Could not set ResourceType for operations group {httpRequest.Path}. No {ProviderSegment.Providers} string found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {ProviderSegment.Providers} string found in the URI");
             }
-            var resourceType = ResourceTypeBuilder.ConstructResourceType(httpRequest.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
+            var resourceType = ResourceTypeBuilder.ConstructResourceType(path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
             if (resourceType == string.Empty)
             {
-                throw new ArgumentException($"Could not set ResourceType for operations group {httpRequest.Path}. An unexpected pattern of reference-reference was found in the URI");
+                throw new ArgumentException($"Could not set ResourceType for operations group {path}. An unexpected pattern of reference-reference was found in the URI");
             }
             result = resourceType.ToString().TrimEnd('/');
-            _operationValueCache.TryAdd(operation, result);
+            _operationPathValueCache.TryAdd(path, result);
             return result;
         }
 

@@ -182,5 +182,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isParentExistsInPathParams;
         }
 
+        public static bool IsByIdMethod(this RestClientMethod clientMethod)
+        {
+            return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);
+        }
+
     }
 }

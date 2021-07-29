@@ -63,9 +63,5 @@ namespace AutoRest.CSharp.Output.Models.Requests
             }
         }
 
-        public bool IsByIdMethod()
-        {
-            return this.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && this.Parameters.Count() > 0 && $"/{{{this.Parameters[0].Name}}}".Equals(httpRequest.Path);
-        }
     }
 }
