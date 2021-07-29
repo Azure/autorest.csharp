@@ -18,7 +18,7 @@ using TenantOnly.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
-    public partial class BillingAccountContainer : ResourceContainerBase<BillingAccount, BillingAccountData>
+    public partial class BillingAccountContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>
         protected BillingAccountContainer()
@@ -27,7 +27,7 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of BillingAccountContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BillingAccountContainer(OperationsBase parent) : base(parent)
+        internal BillingAccountContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -18,7 +18,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over a AvailabilitySetChild. </summary>
-    public partial class AvailabilitySetGrandChildContainer : ResourceContainerBase<AvailabilitySetGrandChild, AvailabilitySetGrandChildData>
+    public partial class AvailabilitySetGrandChildContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildContainer()
@@ -27,7 +27,7 @@ namespace MgmtOperations
 
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AvailabilitySetGrandChildContainer(OperationsBase parent) : base(parent)
+        internal AvailabilitySetGrandChildContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

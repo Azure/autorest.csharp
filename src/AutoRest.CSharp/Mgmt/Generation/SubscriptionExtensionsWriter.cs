@@ -16,7 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var filters = new CodeWriterDeclaration("filters");
                 writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resourceOperation.Type}.ResourceType);");
                 writer.Line($"{filters}.SubstringFilter = filter;");
-                writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
+                writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
             }
         }
 

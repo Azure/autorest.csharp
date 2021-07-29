@@ -20,7 +20,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeFloatModel(OperationsBase options, PageSizeFloatModelData resource) : base(options, resource.Id)
+        internal PageSizeFloatModel(ResourceOperations options, PageSizeFloatModelData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

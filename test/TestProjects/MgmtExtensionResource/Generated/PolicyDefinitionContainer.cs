@@ -21,7 +21,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over a Tenant. </summary>
-    public partial class PolicyDefinitionContainer : ResourceContainerBase<PolicyDefinition, PolicyDefinitionData>
+    public partial class PolicyDefinitionContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionContainer"/> class for mocking. </summary>
         protected PolicyDefinitionContainer()
@@ -30,7 +30,7 @@ namespace MgmtExtensionResource
 
         /// <summary> Initializes a new instance of PolicyDefinitionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PolicyDefinitionContainer(OperationsBase parent) : base(parent)
+        internal PolicyDefinitionContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal FakesUpdateOperation(OperationsBase operationsBase, Response<FakeData> response)
+        internal FakesUpdateOperation(ResourceOperations operationsBase, Response<FakeData> response)
         {
             _operation = new OperationOrResponseInternals<Fake>(Response.FromValue(new Fake(operationsBase, response.Value), response.GetRawResponse()));
         }

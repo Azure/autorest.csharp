@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a ResourceGroup. </summary>
-    public partial class StorageAccountContainer : ResourceContainerBase<StorageAccount, StorageAccountData>
+    public partial class StorageAccountContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of StorageAccountContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal StorageAccountContainer(OperationsBase parent) : base(parent)
+        internal StorageAccountContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

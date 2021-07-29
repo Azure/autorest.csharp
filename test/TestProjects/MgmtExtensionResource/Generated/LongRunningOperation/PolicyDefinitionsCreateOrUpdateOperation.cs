@@ -25,7 +25,7 @@ namespace MgmtExtensionResource.Models
         {
         }
 
-        internal PolicyDefinitionsCreateOrUpdateOperation(OperationsBase operationsBase, Response<PolicyDefinitionData> response)
+        internal PolicyDefinitionsCreateOrUpdateOperation(ResourceOperations operationsBase, Response<PolicyDefinitionData> response)
         {
             _operation = new OperationOrResponseInternals<PolicyDefinition>(Response.FromValue(new PolicyDefinition(operationsBase, response.Value), response.GetRawResponse()));
         }

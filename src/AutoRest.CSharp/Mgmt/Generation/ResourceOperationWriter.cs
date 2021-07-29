@@ -21,7 +21,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
-        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
+        protected virtual Type BaseClass => typeof(Core.ResourceOperations);
 
         protected override string ContextProperty => "this";
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var config = _context.Configuration.MgmtConfiguration;
             var isSingleton = _resourceOperation.OperationGroup.IsSingletonResource(config);
-            var baseClass = isSingleton ? typeof(SingletonOperationsBase) : typeof(ResourceOperationsBase);
+            var baseClass = isSingleton ? typeof(Core.SingletonOperations) : typeof(Core.ResourceOperations);
 
             WriteUsings(_writer);
 
@@ -67,11 +67,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { resource.Type };
-                CSharpType type = new CSharpType(baseClass, arguments);
+                CSharpType type = new CSharpType(baseClass);
                 _writer.Append($"{type}, ");
 
-                if (_resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
+                if (_resourceOperation.GetMethod == null && baseClass == typeof(Core.ResourceOperations))
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
@@ -151,7 +150,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
+            using (writer.Scope($"protected internal {typeOfThis}({typeof(Core.ResourceOperations)} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
                 {
@@ -183,16 +182,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
                 // write inherited get method
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true, resourceOperation.GetMethods, "Get");
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false, resourceOperation.GetMethods, "Get");
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, resourceOperation.GetMethods, "Get");
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, resourceOperation.GetMethods, "Get");
 
-                var nonPathParameters = resourceOperation.GetMethod.RestClientMethod.NonPathParameters;
-                if (nonPathParameters.Count > 0)
-                {
-                    // write get method
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true, resourceOperation.GetMethods, "Get");
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false, resourceOperation.GetMethods, "Get");
-                }
                 clientMethodsList.AddRange(resourceOperation.GetMethods.Select(m => m.RestClientMethod).ToList());
 
                 WriteListAvailableLocationsMethod(writer, true);
@@ -351,33 +343,23 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod method, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async, List<ClientMethod> methods, string? methodName = null)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod method, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool async, List<ClientMethod> methods, string? methodName = null)
         {
             methodName = methodName ?? method.Name;
             writer.Line();
             var nonPathParameters = method.RestClientMethod.NonPathParameters;
-            if (isInheritedMethod)
+            writer.WriteXmlDocumentationSummary($"{method.Description}");
+            foreach (Parameter parameter in nonPathParameters)
             {
-                writer.WriteXmlDocumentationInheritDoc();
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            else
-            {
-                writer.WriteXmlDocumentationSummary($"{method.Description}");
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-                }
-                writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(false, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
 
-            if (!isInheritedMethod)
+            foreach (Parameter parameter in nonPathParameters)
             {
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.Append($"{parameter.Type} {parameter.Name}, ");
-                }
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -390,7 +372,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     response.SetActualName(response.RequestedName);
                     if (method.RestClientMethod.Operation.IsAncestorScope() || methods.Count < 2)
                     {
-                        WriteGetMethodBody(writer, method, resource, context, response, isInheritedMethod, async, nonPathParameters);
+                        WriteGetMethodBody(writer, method, resource, context, response, async, nonPathParameters);
                     }
                     else
                     {
@@ -419,16 +401,16 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                                 {
                                     using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
                                     {
-                                        WriteGetMethodBody(writer, resourceGroupMethod, resource, context, response, isInheritedMethod, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(writer, resourceGroupMethod, resource, context, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteGetMethodBody(writer, resourceMethod, resource, context, response, isInheritedMethod, async, resourceMethod.RestClientMethod.NonPathParameters, isResourceLevel: true);
+                                        WriteGetMethodBody(writer, resourceMethod, resource, context, response, async, resourceMethod.RestClientMethod.NonPathParameters, isResourceLevel: true);
                                     }
                                 }
                                 else
                                 {
-                                    WriteGetMethodBody(writer, resourceGroupMethod, resource, context, response, isInheritedMethod, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
+                                    WriteGetMethodBody(writer, resourceGroupMethod, resource, context, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
                                 }
                             }
                         } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
@@ -441,7 +423,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             methodDict.Remove(subscriptionMethod);
                             using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
                             {
-                                WriteGetMethodBody(writer, subscriptionMethod, resource, context, response, isInheritedMethod, async, subscriptionMethod.RestClientMethod.NonPathParameters);
+                                WriteGetMethodBody(writer, subscriptionMethod, resource, context, response, async, subscriptionMethod.RestClientMethod.NonPathParameters);
                             }
                         }
 
@@ -463,16 +445,16 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                                     writer.UseNamespace("Azure.ResourceManager.Management");
                                     using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
                                     {
-                                        WriteGetMethodBody(writer, managementGroupMethod, resource, context, response, isInheritedMethod, async, managementGroupMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(writer, managementGroupMethod, resource, context, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteGetMethodBody(writer, tenantMethod, resource, context, response, isInheritedMethod, async, tenantMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(writer, tenantMethod, resource, context, response, async, tenantMethod.RestClientMethod.NonPathParameters);
                                     }
                                 }
                                 else
                                 {
-                                    WriteGetMethodBody(writer, managementGroupMethod, resource, context, response, isInheritedMethod, async, managementGroupMethod.RestClientMethod.NonPathParameters);
+                                    WriteGetMethodBody(writer, managementGroupMethod, resource, context, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
                                 }
                             }
                         }
@@ -481,7 +463,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             methodDict.Remove(tenantMethod);
                             using (writer.Scope($"{elseStr}"))
                             {
-                                WriteGetMethodBody(writer, tenantMethod, resource, context, response, isInheritedMethod, async, tenantMethod.RestClientMethod.NonPathParameters);
+                                WriteGetMethodBody(writer, tenantMethod, resource, context, response, async, tenantMethod.RestClientMethod.NonPathParameters);
                             }
                         }
 
@@ -495,7 +477,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteGetMethodBody(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, bool isInheritedMethod, bool async, List<Parameter> nonPathParameters, bool isResourceLevel = false)
+        private void WriteGetMethodBody(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, bool async, List<Parameter> nonPathParameters, bool isResourceLevel = false)
         {
             if (isResourceLevel)
             {

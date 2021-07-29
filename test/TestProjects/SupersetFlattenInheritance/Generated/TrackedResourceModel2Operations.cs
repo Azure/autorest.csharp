@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific TrackedResourceModel2. </summary>
-    public partial class TrackedResourceModel2Operations : ResourceOperationsBase<TrackedResourceModel2>
+    public partial class TrackedResourceModel2Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private TrackedResourceModel2SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TrackedResourceModel2Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal TrackedResourceModel2Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TrackedResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<TrackedResourceModel2>> GetAsync(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<TrackedResourceModel2>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Operations.Get");
             scope.Start();
@@ -59,8 +59,8 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<TrackedResourceModel2> Get(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<TrackedResourceModel2> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Operations.Get");
             scope.Start();

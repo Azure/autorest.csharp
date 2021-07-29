@@ -18,7 +18,7 @@ using SupersetInheritance.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel1 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel1Container : ResourceContainerBase<SupersetModel1, SupersetModel1Data>
+    public partial class SupersetModel1Container : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Container"/> class for mocking. </summary>
         protected SupersetModel1Container()
@@ -27,7 +27,7 @@ namespace SupersetInheritance
 
         /// <summary> Initializes a new instance of SupersetModel1Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SupersetModel1Container(OperationsBase parent) : base(parent)
+        internal SupersetModel1Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

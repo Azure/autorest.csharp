@@ -20,7 +20,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing the operations that can be performed over a specific PolicyDefinition. </summary>
-    public partial class PolicyDefinitionOperations : ResourceOperationsBase<PolicyDefinition>
+    public partial class PolicyDefinitionOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PolicyDefinitionsRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PolicyDefinitionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal PolicyDefinitionOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -44,8 +44,9 @@ namespace MgmtExtensionResource
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<PolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<PolicyDefinition>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionOperations.Get");
             scope.Start();
@@ -82,8 +83,9 @@ namespace MgmtExtensionResource
             }
         }
 
-        /// <inheritdoc />
-        public override Response<PolicyDefinition> Get(CancellationToken cancellationToken = default)
+        /// <summary> This operation retrieves the policy definition in the given subscription with the given name. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PolicyDefinition> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionOperations.Get");
             scope.Start();

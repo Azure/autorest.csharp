@@ -19,7 +19,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the operations that can be performed over a specific PolicyAssignment. </summary>
-    public partial class PolicyAssignmentOperations : ResourceOperationsBase<PolicyAssignment>
+    public partial class PolicyAssignmentOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PolicyAssignmentsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PolicyAssignmentOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal PolicyAssignmentOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -43,8 +43,9 @@ namespace MgmtScopeResource
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentOperations.Get");
             scope.Start();
@@ -60,8 +61,9 @@ namespace MgmtScopeResource
             }
         }
 
-        /// <inheritdoc />
-        public override Response<PolicyAssignment> Get(CancellationToken cancellationToken = default)
+        /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PolicyAssignment> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentOperations.Get");
             scope.Start();

@@ -20,7 +20,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific TheExtensionFake. </summary>
-    public partial class TheExtensionFakeOperations : ResourceOperationsBase<TheExtensionFake>
+    public partial class TheExtensionFakeOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SecondResourcesRestOperations _restClient { get; }
@@ -33,7 +33,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="TheExtensionFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal TheExtensionFakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal TheExtensionFakeOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SecondResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -44,8 +44,9 @@ namespace MgmtListMethods
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<TheExtensionFake>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<TheExtensionFake>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.Get");
             scope.Start();
@@ -61,8 +62,9 @@ namespace MgmtListMethods
             }
         }
 
-        /// <inheritdoc />
-        public override Response<TheExtensionFake> Get(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<TheExtensionFake> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TheExtensionFakeOperations.Get");
             scope.Start();

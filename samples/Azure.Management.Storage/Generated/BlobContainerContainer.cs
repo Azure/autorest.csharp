@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
-    public partial class BlobContainerContainer : ResourceContainerBase<BlobContainer, BlobContainerData>
+    public partial class BlobContainerContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
         protected BlobContainerContainer()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of BlobContainerContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BlobContainerContainer(OperationsBase parent) : base(parent)
+        internal BlobContainerContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

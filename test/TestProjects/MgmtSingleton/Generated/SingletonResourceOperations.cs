@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtSingleton
 {
     /// <summary> A class representing the operations that can be performed over a specific SingletonResource. </summary>
-    public partial class SingletonResourceOperations : SingletonOperationsBase<SingletonResource>
+    public partial class SingletonResourceOperations : SingletonOperations
     {
         /// <summary> Initializes a new instance of the <see cref="SingletonResourceOperations"/> class for mocking. </summary>
         protected SingletonResourceOperations()
@@ -21,7 +21,7 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        protected internal SingletonResourceOperations(OperationsBase options) : base(options)
+        protected internal SingletonResourceOperations(ResourceOperations options) : base(options)
         {
         }
 

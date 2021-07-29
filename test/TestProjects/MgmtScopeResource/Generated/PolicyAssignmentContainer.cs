@@ -21,7 +21,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of PolicyAssignment and their operations over a Tenant. </summary>
-    public partial class PolicyAssignmentContainer : ResourceContainerBase<PolicyAssignment, PolicyAssignmentData>
+    public partial class PolicyAssignmentContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentContainer"/> class for mocking. </summary>
         protected PolicyAssignmentContainer()
@@ -30,7 +30,7 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of PolicyAssignmentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PolicyAssignmentContainer(OperationsBase parent) : base(parent)
+        internal PolicyAssignmentContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -19,7 +19,7 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
-    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<DedicatedHostGroup>
+    public partial class DedicatedHostGroupOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private DedicatedHostGroupsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtParamOrdering
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal DedicatedHostGroupOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal DedicatedHostGroupOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -43,8 +43,9 @@ namespace MgmtParamOrdering
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<DedicatedHostGroup>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<DedicatedHostGroup>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.Get");
             scope.Start();
@@ -60,8 +61,9 @@ namespace MgmtParamOrdering
             }
         }
 
-        /// <inheritdoc />
-        public override Response<DedicatedHostGroup> Get(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about a dedicated host group. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DedicatedHostGroup> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.Get");
             scope.Start();

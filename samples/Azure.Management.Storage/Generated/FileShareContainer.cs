@@ -20,7 +20,7 @@ using Azure.ResourceManager.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over a StorageAccount. </summary>
-    public partial class FileShareContainer : ResourceContainerBase<FileShare, FileShareData>
+    public partial class FileShareContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="FileShareContainer"/> class for mocking. </summary>
         protected FileShareContainer()
@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of FileShareContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FileShareContainer(OperationsBase parent) : base(parent)
+        internal FileShareContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
