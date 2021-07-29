@@ -257,9 +257,7 @@ namespace Pagination
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<PageSizeNumericModelData>(null, message.Response);
-                    }
+                    return Response.FromValue((PageSizeNumericModelData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -292,9 +290,7 @@ namespace Pagination
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<PageSizeNumericModelData>(null, message.Response);
-                    }
+                    return Response.FromValue((PageSizeNumericModelData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

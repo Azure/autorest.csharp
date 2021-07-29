@@ -360,9 +360,7 @@ namespace Azure.ResourceManager.Sample
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<ProximityPlacementGroupData>(null, message.Response);
-                    }
+                    return Response.FromValue((ProximityPlacementGroupData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -397,9 +395,7 @@ namespace Azure.ResourceManager.Sample
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<ProximityPlacementGroupData>(null, message.Response);
-                    }
+                    return Response.FromValue((ProximityPlacementGroupData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

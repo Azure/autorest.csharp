@@ -165,9 +165,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<SharedGalleryData>(null, message.Response);
-                    }
+                    return Response.FromValue((SharedGalleryData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -201,9 +199,7 @@ namespace MgmtListMethods
                         return Response.FromValue(value, message.Response);
                     }
                 case 404:
-                    {
-                        return Response.FromValue<SharedGalleryData>(null, message.Response);
-                    }
+                    return Response.FromValue((SharedGalleryData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
