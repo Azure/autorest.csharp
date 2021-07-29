@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
-    public partial class EncryptionScopeOperations : ResourceOperationsBase<EncryptionScope>
+    public partial class EncryptionScopeOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private EncryptionScopesRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal EncryptionScopeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal EncryptionScopeOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,9 @@ namespace Azure.Management.Storage
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<EncryptionScope>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Returns the properties for the specified encryption scope. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<EncryptionScope>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeOperations.Get");
             scope.Start();
@@ -59,8 +60,9 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
-        public override Response<EncryptionScope> Get(CancellationToken cancellationToken = default)
+        /// <summary> Returns the properties for the specified encryption scope. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<EncryptionScope> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeOperations.Get");
             scope.Start();
@@ -79,7 +81,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -87,7 +89,7 @@ namespace Azure.Management.Storage
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }

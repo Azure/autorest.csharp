@@ -20,7 +20,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "WritableSubResourceModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal WritableSubResourceModel2(OperationsBase options, WritableSubResourceModel2Data resource) : base(options, resource.Id)
+        internal WritableSubResourceModel2(ResourceOperations options, WritableSubResourceModel2Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

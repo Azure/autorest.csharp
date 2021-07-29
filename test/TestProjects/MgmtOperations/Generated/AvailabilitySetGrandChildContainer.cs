@@ -18,7 +18,7 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetGrandChild and their operations over a AvailabilitySetChild. </summary>
-    public partial class AvailabilitySetGrandChildContainer : ResourceContainerBase<AvailabilitySetGrandChild, AvailabilitySetGrandChildData>
+    public partial class AvailabilitySetGrandChildContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildContainer()
@@ -27,7 +27,7 @@ namespace MgmtOperations
 
         /// <summary> Initializes a new instance of AvailabilitySetGrandChildContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AvailabilitySetGrandChildContainer(OperationsBase parent) : base(parent)
+        internal AvailabilitySetGrandChildContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -267,9 +267,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -290,9 +290,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -316,15 +316,15 @@ namespace MgmtOperations
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(AvailabilitySetGrandChildOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -339,15 +339,15 @@ namespace MgmtOperations
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(AvailabilitySetGrandChildOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

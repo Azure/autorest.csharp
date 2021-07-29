@@ -424,7 +424,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListByHostGroupRequest(string resourceGroupName, string hostGroupName)
+        internal HttpMessage CreateGetByHostGroupRequest(string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -449,7 +449,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public async Task<Response<DedicatedHostListResult>> ListByHostGroupAsync(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostListResult>> GetByHostGroupAsync(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -460,7 +460,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateListByHostGroupRequest(resourceGroupName, hostGroupName);
+            using var message = CreateGetByHostGroupRequest(resourceGroupName, hostGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -481,7 +481,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public Response<DedicatedHostListResult> ListByHostGroup(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostListResult> GetByHostGroup(string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -492,7 +492,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateListByHostGroupRequest(resourceGroupName, hostGroupName);
+            using var message = CreateGetByHostGroupRequest(resourceGroupName, hostGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -508,7 +508,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateListByHostGroupNextPageRequest(string nextLink, string resourceGroupName, string hostGroupName)
+        internal HttpMessage CreateGetByHostGroupNextPageRequest(string nextLink, string resourceGroupName, string hostGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -527,7 +527,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
-        public async Task<Response<DedicatedHostListResult>> ListByHostGroupNextPageAsync(string nextLink, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostListResult>> GetByHostGroupNextPageAsync(string nextLink, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -542,7 +542,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateListByHostGroupNextPageRequest(nextLink, resourceGroupName, hostGroupName);
+            using var message = CreateGetByHostGroupNextPageRequest(nextLink, resourceGroupName, hostGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -564,7 +564,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="hostGroupName"/> is null. </exception>
-        public Response<DedicatedHostListResult> ListByHostGroupNextPage(string nextLink, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostListResult> GetByHostGroupNextPage(string nextLink, string resourceGroupName, string hostGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -579,7 +579,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
 
-            using var message = CreateListByHostGroupNextPageRequest(nextLink, resourceGroupName, hostGroupName);
+            using var message = CreateGetByHostGroupNextPageRequest(nextLink, resourceGroupName, hostGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

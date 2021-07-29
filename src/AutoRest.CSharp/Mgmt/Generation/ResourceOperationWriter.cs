@@ -21,7 +21,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
-        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
+        protected virtual Type BaseClass => typeof(Core.ResourceOperations);
 
         protected override string ContextProperty => "this";
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var config = _context.Configuration.MgmtConfiguration;
             var isSingleton = _resourceOperation.OperationGroup.IsSingletonResource(config);
-            var baseClass = isSingleton ? typeof(SingletonOperationsBase) : typeof(ResourceOperationsBase);
+            var baseClass = isSingleton ? typeof(Core.SingletonOperations) : typeof(Core.ResourceOperations);
 
             WriteUsings(_writer);
 
@@ -67,11 +67,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resourceOperation.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritResourceOperationsBase = _resourceOperation.GetMethod != null;
-                CSharpType[] arguments = { resource.Type };
-                CSharpType type = new CSharpType(baseClass, arguments);
+                CSharpType type = new CSharpType(baseClass);
                 _writer.Append($"{type}, ");
 
-                if (_resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
+                if (_resourceOperation.GetMethod == null && baseClass == typeof(Core.ResourceOperations))
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
@@ -151,7 +150,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"protected internal {typeOfThis}({typeof(OperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
+            using (writer.Scope($"protected internal {typeOfThis}({typeof(Core.ResourceOperations)} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
                 {
@@ -182,17 +181,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.Line();
             if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
-                // write inherited get method
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true);
-                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false);
+                // write main get method
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false);
 
-                var nonPathParameters = resourceOperation.GetMethod.RestClientMethod.NonPathParameters;
-                if (nonPathParameters.Count > 0)
-                {
-                    // write get method
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
-                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
-                }
                 clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
                 WriteListAvailableLocationsMethod(writer, true);
@@ -239,8 +231,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (listMethod.PagingMethod != null)
                 {
-                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, false);
-                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, RestClientField, true);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, false);
+                    WritePagingMethod(writer, resourceOperation.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, true);
                 }
             }
 
@@ -250,13 +242,19 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
+                    var originalName = clientMethod.Name;
+                    var methodName = originalName.EndsWith($"By{_resourceOperation.Resource.Type.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
+                    Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                    WriteClientMethod(writer, clientMethod, methodName, diagnostic, pair.Key, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, methodName, diagnostic, pair.Key, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
-                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), false);
-                    WritePagingMethod(writer, pair.Key, pagingMethod, GetRestClientName(pair.Key), true);
+                    var originalName = pagingMethod.Name;
+                    var methodName = originalName.EndsWith($"By{_resourceOperation.Resource.Type.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
+                    Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                    WritePagingMethod(writer, pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), false);
+                    WritePagingMethod(writer, pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), true);
                 }
             }
 
@@ -288,7 +286,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, string restClientName, bool async)
+        private void WritePagingMethod(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, Diagnostic diagnostic, string clientMethodName, string restClientName, bool async)
         {
             writer.Line();
             var nonPathParameters = pagingMethod.Method.NonPathParameters;
@@ -306,7 +304,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var returnType = itemType.WrapPageable(async);
 
-            var methodName = CreateMethodName(pagingMethod.Name, async);
+            var methodName = CreateMethodName(clientMethodName, async);
             writer.Append($"public virtual {returnType} {methodName}(");
             foreach (var param in nonPathParameters)
             {
@@ -316,7 +314,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, pagingMethod.Diagnostics,
+                WritePagingOperationBody(writer, pagingMethod, itemType, restClientName, diagnostic,
                     ClientDiagnosticsField, $"", async);
             }
         }
@@ -326,32 +324,22 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
-        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
+        private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Output.Resource resource, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             var nonPathParameters = clientMethod.RestClientMethod.NonPathParameters;
-            if (isInheritedMethod)
+            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+            foreach (Parameter parameter in nonPathParameters)
             {
-                writer.WriteXmlDocumentationInheritDoc();
+                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            else
-            {
-                writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-                }
-                writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod, true)} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(false, true)} {responseType} {CreateMethodName("Get", async)}(");
 
-            if (!isInheritedMethod)
+            foreach (Parameter parameter in nonPathParameters)
             {
-                foreach (Parameter parameter in nonPathParameters)
-                {
-                    writer.Append($"{parameter.Type} {parameter.Name}, ");
-                }
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -374,25 +362,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     }
                     foreach (Parameter parameter in nonPathParameters)
                     {
-                        if (isInheritedMethod)
-                        {
-                            if (parameter.DefaultValue != null)
-                            {
-                                if (TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
-                                {
-                                    writer.WriteConstant(parameter.DefaultValue.Value);
-                                    writer.Append($", ");
-                                }
-                                else
-                                {
-                                    writer.Append($"null, ");
-                                }
-                            }
-                        }
-                        else
-                        {
-                            writer.Append($"{parameter.Name}, ");
-                        }
+                        writer.Append($"{parameter.Name}, ");
                     }
                     writer.Append($"cancellationToken)");
 
@@ -416,7 +386,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)

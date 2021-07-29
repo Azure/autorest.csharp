@@ -51,7 +51,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SupersetModel2>> PutSupersetModel2Async(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel2>> GetSupersetModel2Async(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -66,7 +66,7 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2");
                 scope.Start();
                 try
                 {
@@ -87,7 +87,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SupersetModel2> PutSupersetModel2(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel2> GetSupersetModel2(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -102,7 +102,7 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2");
                 scope.Start();
                 try
                 {
@@ -193,7 +193,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SupersetModel3>> PutSupersetModel3Async(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel3>> GetSupersetModel3Async(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -208,7 +208,7 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3");
                 scope.Start();
                 try
                 {
@@ -229,7 +229,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SupersetModel3> PutSupersetModel3(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel3> GetSupersetModel3(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -244,7 +244,7 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3");
                 scope.Start();
                 try
                 {

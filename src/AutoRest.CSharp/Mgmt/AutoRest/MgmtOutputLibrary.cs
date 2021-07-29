@@ -12,9 +12,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -74,7 +76,55 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _schemasStillUsed = new HashSet<Schema>();
             OmitOperationGroups(codeModel, context);
 
+
+            ReorderOperationParameters();
             DecorateOperationGroup();
+            UpdateListMethodNames();
+        }
+
+        private void UpdateListMethodNames()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var curName = operation.Language.Default.Name;
+                    if (curName.Equals("List"))
+                    {
+                        operation.Language.Default.Name = "GetAll";
+                    }
+                    else if (curName.Equals("ListAll"))
+                    {
+                        if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "resourcegroupname"))
+                        {
+                            operation.Language.Default.Name = "GetByResourceGroup";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "subscriptionid"))
+                        {
+                            operation.Language.Default.Name = "GetBySubscription";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "groupid"))
+                        {
+                            operation.Language.Default.Name = "GetByManagementGroup";
+                        }
+                        else
+                        {
+                            if (operation.Parameters.Any(p => p.In == ParameterLocation.Path))
+                            {
+                                ErrorHelpers.ThrowError($"{operationGroup.Key} has an operation {operation.Language.Default.Name} which isn't using standard path parameter names. Please update in your swagger or an autorest directive.");
+                            }
+                            else
+                            {
+                                operation.Language.Default.Name = "GetByTenant";
+                            }
+                        }
+                    }
+                    else if (curName.StartsWith("List"))
+                    {
+                        operation.Language.Default.Name = curName.Replace("List", "Get");
+                    }
+                }
+            }
         }
 
         private void RemoveOperations(CodeModel codeModel)
@@ -705,6 +755,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
             _ => throw new NotImplementedException()
         };
+
+        private void ReorderOperationParameters()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
+                    if (httpRequest != null)
+                    {
+                        var orderedParams = operation.Parameters
+                            .Where(p => p.In == ParameterLocation.Path)
+                            .OrderBy(
+                                p => httpRequest.Path.IndexOf(
+                                    p.CSharpName(),
+                                    StringComparison.InvariantCultureIgnoreCase));
+                        operation.Parameters = orderedParams.Concat(operation.Parameters
+                                .Where(p => p.In != ParameterLocation.Path).ToList())
+                            .ToList();
+                    }
+                }
+            }
+        }
 
         private void DecorateOperationGroup()
         {

@@ -16,7 +16,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -64,13 +64,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                                 foreach (var listMethod in resourceOperation.SubscriptionExtensionsListMethods)
                                 {
-                                    var methodName = $"List{resource.Type.Name.ToPlural()}";
+                                    var methodName = $"Get{resource.Type.Name.ToPlural()}";
                                     var count = resourceOperation.SubscriptionExtensionsListMethods.Count();
                                     if (listMethod.PagingMethod != null)
                                     {
-                                        if (count > 1 && listMethod.PagingMethod.Name == "ListByLocation")
+                                        if (count > 1 && listMethod.PagingMethod.Name == "GetByLocation")
                                         {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
+                                            methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
                                         WriteListResourceMethod(writer, resource, resourceOperation, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, true);
@@ -79,9 +79,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                                     if (listMethod.ClientMethod != null)
                                     {
-                                        if (count > 1 && listMethod.ClientMethod.Name == "ListByLocation")
+                                        if (count > 1 && listMethod.ClientMethod.Name == "GetByLocation")
                                         {
-                                            methodName = $"List{resource.Type.Name.ToPlural()}ByLocation";
+                                            methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
                                         WriteExtensionClientMethod(writer, resourceOperation.OperationGroup, listMethod.ClientMethod, methodName, context, true, resourceOperation.RestClient.Type.Name);
@@ -164,12 +164,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
             var responseType = typeof(GenericResourceExpanded).WrapPageable(async);
-            using (writer.Scope($"public static {responseType} {CreateMethodName($"List{resourceOperation.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public static {responseType} {CreateMethodName($"Get{resourceOperation.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 var filters = new CodeWriterDeclaration("filters");
                 writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resourceOperation.Type}.ResourceType);");
                 writer.Line($"{filters}.SubstringFilter = filter;");
-                writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
+                writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
             }
         }
 

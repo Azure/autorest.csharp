@@ -371,7 +371,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListRequest(string fakeName, string subFakeName)
+        internal HttpMessage CreateGetAllRequest(string fakeName, string subFakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -393,7 +393,7 @@ namespace MgmtListMethods
         /// <param name="subFakeName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="subFakeName"/> is null. </exception>
-        public async Task<Response<SubFakeListResult>> ListAsync(string fakeName, string subFakeName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubFakeListResult>> GetAllAsync(string fakeName, string subFakeName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -404,7 +404,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subFakeName));
             }
 
-            using var message = CreateListRequest(fakeName, subFakeName);
+            using var message = CreateGetAllRequest(fakeName, subFakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -425,7 +425,7 @@ namespace MgmtListMethods
         /// <param name="subFakeName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="subFakeName"/> is null. </exception>
-        public Response<SubFakeListResult> List(string fakeName, string subFakeName, CancellationToken cancellationToken = default)
+        public Response<SubFakeListResult> GetAll(string fakeName, string subFakeName, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -436,7 +436,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subFakeName));
             }
 
-            using var message = CreateListRequest(fakeName, subFakeName);
+            using var message = CreateGetAllRequest(fakeName, subFakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -452,7 +452,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string fakeName, string subFakeName)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string fakeName, string subFakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -471,7 +471,7 @@ namespace MgmtListMethods
         /// <param name="subFakeName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="fakeName"/>, or <paramref name="subFakeName"/> is null. </exception>
-        public async Task<Response<SubFakeListResult>> ListNextPageAsync(string nextLink, string fakeName, string subFakeName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubFakeListResult>> GetAllNextPageAsync(string nextLink, string fakeName, string subFakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -486,7 +486,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subFakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, fakeName, subFakeName);
+            using var message = CreateGetAllNextPageRequest(nextLink, fakeName, subFakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -508,7 +508,7 @@ namespace MgmtListMethods
         /// <param name="subFakeName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="fakeName"/>, or <paramref name="subFakeName"/> is null. </exception>
-        public Response<SubFakeListResult> ListNextPage(string nextLink, string fakeName, string subFakeName, CancellationToken cancellationToken = default)
+        public Response<SubFakeListResult> GetAllNextPage(string nextLink, string fakeName, string subFakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -523,7 +523,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(subFakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, fakeName, subFakeName);
+            using var message = CreateGetAllNextPageRequest(nextLink, fakeName, subFakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

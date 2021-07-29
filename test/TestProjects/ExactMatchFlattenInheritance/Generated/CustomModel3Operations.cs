@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific CustomModel3. </summary>
-    public partial class CustomModel3Operations : ResourceOperationsBase<CustomModel3>
+    public partial class CustomModel3Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private CustomModel3SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal CustomModel3Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal CustomModel3Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Get an CustomModel3. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Operations.Get");
             scope.Start();
@@ -59,8 +60,9 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<CustomModel3> Get(CancellationToken cancellationToken = default)
+        /// <summary> Get an CustomModel3. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CustomModel3> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Operations.Get");
             scope.Start();
@@ -79,7 +81,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public async virtual Task<IEnumerable<Location>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
@@ -87,7 +89,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
-        public virtual IEnumerable<Location> ListAvailableLocations(CancellationToken cancellationToken = default)
+        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }

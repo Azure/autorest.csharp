@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
-using Azure.ResourceManager.Core;
+using Core = Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         baseConstructor = " : base(options)";
                     }
 
-                    using (_writer.Scope($"internal {cs.Name}({typeof(OperationsBase)} options, {_resourceData.Type} resource){baseConstructor}"))
+                    using (_writer.Scope($"internal {cs.Name}({typeof(Core.ResourceOperations)} options, {_resourceData.Type} resource){baseConstructor}"))
                     {
                         _writer.LineRaw("Data = resource;");
                     }

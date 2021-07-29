@@ -20,7 +20,7 @@ using MgmtSingleton.Models;
 namespace MgmtSingleton
 {
     /// <summary> A class representing collection of ParentResource and their operations over a ResourceGroup. </summary>
-    public partial class ParentResourceContainer : ResourceContainerBase<ParentResource, ParentResourceData>
+    public partial class ParentResourceContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ParentResourceContainer"/> class for mocking. </summary>
         protected ParentResourceContainer()
@@ -29,7 +29,7 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of ParentResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ParentResourceContainer(OperationsBase parent) : base(parent)
+        internal ParentResourceContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }
@@ -265,9 +265,9 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string parentName, CancellationToken cancellationToken = default)
+        public virtual bool CheckIfExists(string parentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -288,9 +288,9 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<bool> CheckIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -310,13 +310,13 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<ParentResource>>> ListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<ParentResource>>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAll");
             scope.Start();
             try
             {
-                var response = await _restClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -328,13 +328,13 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<ParentResource>> List(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<ParentResource>> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAll");
             scope.Start();
             try
             {
-                var response = _restClient.List(Id.ResourceGroupName, cancellationToken);
+                var response = _restClient.GetAll(Id.ResourceGroupName, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -350,15 +350,15 @@ namespace MgmtSingleton
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(ParentResourceOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -373,15 +373,15 @@ namespace MgmtSingleton
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetAsGenericResources");
             scope.Start();
             try
             {
                 var filters = new ResourceFilterCollection(ParentResourceOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

@@ -25,7 +25,7 @@ namespace Azure.Management.Storage.Models
         {
         }
 
-        internal BlobContainersUpdateOperation(OperationsBase operationsBase, Response<BlobContainerData> response)
+        internal BlobContainersUpdateOperation(ResourceOperations operationsBase, Response<BlobContainerData> response)
         {
             _operation = new OperationOrResponseInternals<BlobContainer>(Response.FromValue(new BlobContainer(operationsBase, response.Value), response.GetRawResponse()));
         }
