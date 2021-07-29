@@ -19,7 +19,6 @@ namespace MgmtScopeResource
     internal partial class PolicyAssignmentsRestOperations
     {
         private Uri endpoint;
-        private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
@@ -27,17 +26,14 @@ namespace MgmtScopeResource
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public PolicyAssignmentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2020-09-01")
+        public PolicyAssignmentsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             this.endpoint = endpoint ?? new Uri("https://management.azure.com");
-            this.apiVersion = apiVersion ?? throw new ArgumentNullException(nameof(apiVersion));
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateDeleteRequest(string scope, string policyAssignmentName)
+        internal Azure.Core.HttpMessage CreateDeleteRequest(string scope, string policyAssignmentName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -48,7 +44,7 @@ namespace MgmtScopeResource
             uri.AppendPath(scope, false);
             uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
             uri.AppendPath(policyAssignmentName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -122,7 +118,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, PolicyAssignmentData parameters)
+        internal Azure.Core.HttpMessage CreateCreateRequest(string scope, string policyAssignmentName, PolicyAssignmentData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -133,7 +129,7 @@ namespace MgmtScopeResource
             uri.AppendPath(scope, false);
             uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
             uri.AppendPath(policyAssignmentName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -217,7 +213,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetRequest(string scope, string policyAssignmentName)
+        internal Azure.Core.HttpMessage CreateGetRequest(string scope, string policyAssignmentName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -228,7 +224,7 @@ namespace MgmtScopeResource
             uri.AppendPath(scope, false);
             uri.AppendPath("/providers/Microsoft.Authorization/policyAssignments/", false);
             uri.AppendPath(policyAssignmentName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -298,7 +294,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForResourceGroupRequest(string subscriptionId, string resourceGroupName, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForResourceGroupRequest(string subscriptionId, string resourceGroupName, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -318,7 +314,7 @@ namespace MgmtScopeResource
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -392,7 +388,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForResourceRequest(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForResourceRequest(string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -420,7 +416,7 @@ namespace MgmtScopeResource
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -534,7 +530,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForManagementGroupRequest(string managementGroupId, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForManagementGroupRequest(string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -552,7 +548,7 @@ namespace MgmtScopeResource
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -616,7 +612,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string subscriptionId, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetAllRequest(string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -634,7 +630,7 @@ namespace MgmtScopeResource
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("api-version", apiVersion, true);
+            uri.AppendQuery("api-version", "2020-09-01", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -698,7 +694,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForResourceGroupNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -789,7 +785,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForResourceNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForResourceNextPageRequest(string nextLink, string subscriptionId, string resourceGroupName, string resourceProviderNamespace, string parentResourcePath, string resourceType, string resourceName, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -920,7 +916,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetForManagementGroupNextPageRequest(string nextLink, string managementGroupId, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetForManagementGroupNextPageRequest(string nextLink, string managementGroupId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1001,7 +997,7 @@ namespace MgmtScopeResource
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)
+        internal Azure.Core.HttpMessage CreateGetAllNextPageRequest(string nextLink, string subscriptionId, string filter, int? top)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;

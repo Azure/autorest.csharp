@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
+using MgmtScopeResource;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -67,6 +68,70 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                             Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
                             Assert.IsFalse(operation.IsAncestorScope());
                             Assert.IsFalse(operation.IsParentScope());
+                        }
+                    }
+                }
+                else if (operations.Key.Equals("Deployments"))
+                {
+                    Assert.IsTrue(operations.IsScopeResource(context.Configuration.MgmtConfiguration));
+                    Assert.IsTrue(operations.IsAncestorScope());
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant));
+                    Assert.IsTrue(operations.IsAncestorResourceTypeTenant(context));
+                    foreach (var operation in operations.Operations)
+                    {
+                        if (operation.Language.Default.Name.Equals("CreateOrUpdateAtScope") || operation.Language.Default.Name.Equals("GetAtScope") || operation.Language.Default.Name.Equals("DeleteAtScope"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.IsAncestorScope());
+                            Assert.IsTrue(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                        else if (operation.Language.Default.Name.Equals("WhatIfAtTenantScope"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                        else if (operation.Language.Default.Name.Equals("WhatIfAtManagementGroupScope"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals("Microsoft.Management/managementGroups/providers/Microsoft.Resources/deployments"));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.ManagementGroups));
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                        else if (operation.Language.Default.Name.Equals("WhatIfAtSubscriptionScope"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Subscriptions));
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                        else if (operation.Language.Default.Name.Equals("WhatIf"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.ResourceGroups));
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                    }
+                }
+                else if (operations.Key.Equals("DeploymentOperations"))
+                {
+                    Assert.IsFalse(operations.IsScopeResource(context.Configuration.MgmtConfiguration));
+                    Assert.IsTrue(operations.IsAncestorScope());
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(DeploymentExtendedOperations.ResourceType));
+                    Assert.IsTrue(operations.IsAncestorResourceTypeTenant(context));
+                    foreach (var operation in operations.Operations)
+                    {
+                        if (operation.Language.Default.Name.Equals("GetAtScope") || operation.Language.Default.Name.Equals("ListAtScope"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.IsAncestorScope());
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
                         }
                     }
                 }

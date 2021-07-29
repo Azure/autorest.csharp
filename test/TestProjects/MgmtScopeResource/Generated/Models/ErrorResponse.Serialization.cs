@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class ErrorResponse
+    public partial class ErrorResponse
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {

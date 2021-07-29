@@ -1,16 +1,27 @@
 !CodeModel 
 info: !Info 
   description: To manage and control access to your resources, you can define customized policies and assign them at a scope.
-  title: PolicyClient
+  title: ResourceManagementClient
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_43
+    - !NumberSchema &ref_104
       type: integer
       apiVersions:
         - !ApiVersion 
           version: '2020-09-01'
       maximum: 1000
       minimum: 1
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_143
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
       precision: 32
       language: !Languages 
         default:
@@ -25,7 +36,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_91
       type: string
       apiVersions:
         - !ApiVersion 
@@ -35,7 +46,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -45,7 +56,7 @@ schemas: !Schemas
           name: PolicyAssignmentPropertiesDisplayName
           description: The display name of the policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -55,7 +66,7 @@ schemas: !Schemas
           name: PolicyAssignmentPropertiesPolicyDefinitionId
           description: The ID of the policy definition or policy set definition being assigned.
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -65,7 +76,7 @@ schemas: !Schemas
           name: PolicyAssignmentPropertiesScope
           description: The scope for the policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -75,7 +86,7 @@ schemas: !Schemas
           name: PolicyAssignmentPropertiesNotScopesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -85,7 +96,7 @@ schemas: !Schemas
           name: PolicyAssignmentPropertiesDescription
           description: This message will be part of response in case of policy violation.
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_18
       type: string
       apiVersions:
         - !ApiVersion 
@@ -95,7 +106,7 @@ schemas: !Schemas
           name: NonComplianceMessage
           description: A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -107,7 +118,7 @@ schemas: !Schemas
             The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message applies to all
             policies assigned by this policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_4
       type: string
       apiVersions:
         - !ApiVersion 
@@ -117,7 +128,7 @@ schemas: !Schemas
           name: PolicyAssignmentId
           description: The ID of the policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -127,7 +138,7 @@ schemas: !Schemas
           name: PolicyAssignmentType
           description: The type of the policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_4
+    - !StringSchema &ref_6
       type: string
       apiVersions:
         - !ApiVersion 
@@ -137,7 +148,7 @@ schemas: !Schemas
           name: PolicyAssignmentName
           description: The name of the policy assignment.
       protocol: !Protocols {}
-    - !StringSchema &ref_5
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -147,7 +158,7 @@ schemas: !Schemas
           name: PolicyAssignmentLocation
           description: The location of the policy assignment. Only required when utilizing managed identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -157,7 +168,7 @@ schemas: !Schemas
           name: IdentityPrincipalId
           description: The principal ID of the resource identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -167,17 +178,19 @@ schemas: !Schemas
           name: IdentityTenantId
           description: The tenant ID of the resource identity.
       protocol: !Protocols {}
-    - !StringSchema &ref_21
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-09-01'
+        - !ApiVersion 
+          version: '2021-04-01'
       language: !Languages 
         default:
           name: ErrorResponseError
           description: The details of the error.
       protocol: !Protocols {}
-    - !StringSchema &ref_42
+    - !StringSchema &ref_103
       type: string
       apiVersions:
         - !ApiVersion 
@@ -190,7 +203,19 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_89
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-09-01'
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_26
       type: string
       apiVersions:
         - !ApiVersion 
@@ -200,8 +225,474 @@ schemas: !Schemas
           name: PolicyAssignmentListResultNextLink
           description: The URL to use for getting the next set of results.
       protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_122
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      maxLength: 64
+      minLength: 1
+      pattern: ^[-\w\._\(\)]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_27
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentLocation
+          description: The location to store the deployment data.
+      protocol: !Protocols {}
+    - !StringSchema &ref_33
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentExtendedId
+          description: The ID of the deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_34
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentExtendedName
+          description: The name of the deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_35
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentExtendedType
+          description: The type of the deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_36
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentExtendedLocation
+          description: the location of the deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_38
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentPropertiesExtendedCorrelationId
+          description: The correlation ID of the deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_40
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentPropertiesExtendedDuration
+          description: The duration of the template deployment.
+      protocol: !Protocols {}
+    - !StringSchema &ref_44
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentListResultNextLink
+          description: The URL to use for getting the next set of results.
+      protocol: !Protocols {}
+    - !StringSchema &ref_45
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentWhatIfLocation
+          description: The location to store the deployment data.
+      protocol: !Protocols {}
+    - !StringSchema &ref_47
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: WhatIfOperationResultStatus
+          description: Status of the What-If operation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_48
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: WhatIfChangeResourceId
+          description: Resource ID
+      protocol: !Protocols {}
+    - !StringSchema &ref_50
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: WhatIfChangeUnsupportedReason
+          description: The explanation about why the resource is unsupported by What-If.
+      protocol: !Protocols {}
+    - !StringSchema &ref_156
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !StringSchema &ref_157
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      maxLength: 90
+      minLength: 1
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_163
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_164
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !StringSchema &ref_169
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_170
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !StringSchema &ref_171
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      maxLength: 90
+      minLength: 1
+      pattern: ^[-\w\._\(\)]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_177
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_178
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_52
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationId
+          description: Full deployment operation ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_53
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationId
+          description: Deployment operation ID.
+      protocol: !Protocols {}
+    - !StringSchema &ref_55
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesProvisioningState
+          description: The state of the provisioning.
+      protocol: !Protocols {}
+    - !StringSchema &ref_57
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesDuration
+          description: The duration of the operation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_58
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesServiceRequestId
+          description: Deployment operation service request id.
+      protocol: !Protocols {}
+    - !StringSchema &ref_59
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesStatusCode
+          description: Operation status code from the resource provider. This property may not be set if a response has not yet been received.
+      protocol: !Protocols {}
+    - !StringSchema &ref_60
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: StatusMessageStatus
+          description: Status of the deployment operation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_65
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationsListResultNextLink
+          description: The URL to use for getting the next set of results.
+      protocol: !Protocols {}
+    - !StringSchema &ref_66
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: TemplateHashResultMinifiedTemplate
+          description: The minified template string.
+      protocol: !Protocols {}
+    - !StringSchema &ref_67
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: TemplateHashResultTemplateHash
+          description: The template hash.
+      protocol: !Protocols {}
+    - !StringSchema &ref_68
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentExtendedFilterProvisioningState
+          description: The provisioning state.
+      protocol: !Protocols {}
+    - !StringSchema &ref_69
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: ScopedDeploymentLocation
+          description: The location to store the deployment data.
+      protocol: !Protocols {}
+    - !StringSchema &ref_71
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: ScopedDeploymentWhatIfLocation
+          description: The location to store the deployment data.
+      protocol: !Protocols {}
+    - !StringSchema &ref_72
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: ApiProfileVersion
+          description: The profile version.
+      protocol: !Protocols {}
+    - !StringSchema &ref_73
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: ApiProfileApiVersion
+          description: The API version.
+      protocol: !Protocols {}
+    - !StringSchema &ref_74
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationName
+          description: 'Operation name: {provider}/{resource}/{operation}'
+      protocol: !Protocols {}
+    - !StringSchema &ref_75
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationDisplayProvider
+          description: 'Service provider: Microsoft.Resources'
+      protocol: !Protocols {}
+    - !StringSchema &ref_76
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationDisplayResource
+          description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+      protocol: !Protocols {}
+    - !StringSchema &ref_77
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationDisplayOperation
+          description: 'Operation type: Read, write, delete, etc.'
+      protocol: !Protocols {}
+    - !StringSchema &ref_78
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationDisplayDescription
+          description: Description of the operation.
+      protocol: !Protocols {}
+    - !StringSchema &ref_81
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: OperationListResultNextLink
+          description: URL to get the next set of operation list results if there are any.
+      protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_15
+    - !ChoiceSchema &ref_17
       choices:
         - !ChoiceValue 
           value: Default
@@ -226,8 +717,92 @@ schemas: !Schemas
           name: EnforcementMode
           description: The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.
       protocol: !Protocols {}
+    - !ChoiceSchema &ref_37
+      choices:
+        - !ChoiceValue 
+          value: NotSpecified
+          language:
+            default:
+              name: NotSpecified
+              description: ''
+        - !ChoiceValue 
+          value: Accepted
+          language:
+            default:
+              name: Accepted
+              description: ''
+        - !ChoiceValue 
+          value: Running
+          language:
+            default:
+              name: Running
+              description: ''
+        - !ChoiceValue 
+          value: Ready
+          language:
+            default:
+              name: Ready
+              description: ''
+        - !ChoiceValue 
+          value: Creating
+          language:
+            default:
+              name: Creating
+              description: ''
+        - !ChoiceValue 
+          value: Created
+          language:
+            default:
+              name: Created
+              description: ''
+        - !ChoiceValue 
+          value: Deleting
+          language:
+            default:
+              name: Deleting
+              description: ''
+        - !ChoiceValue 
+          value: Deleted
+          language:
+            default:
+              name: Deleted
+              description: ''
+        - !ChoiceValue 
+          value: Canceled
+          language:
+            default:
+              name: Canceled
+              description: ''
+        - !ChoiceValue 
+          value: Failed
+          language:
+            default:
+              name: Failed
+              description: ''
+        - !ChoiceValue 
+          value: Succeeded
+          language:
+            default:
+              name: Succeeded
+              description: ''
+        - !ChoiceValue 
+          value: Updating
+          language:
+            default:
+              name: Updating
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ProvisioningState
+          description: Denotes the state of provisioning.
+      protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_8
+    - !SealedChoiceSchema &ref_10
       choices:
         - !ChoiceValue 
           value: SystemAssigned
@@ -251,8 +826,184 @@ schemas: !Schemas
           name: ResourceIdentityType
           description: The identity type. This is the only required field when adding a system assigned identity to a resource.
       protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_31
+      choices:
+        - !ChoiceValue 
+          value: Incremental
+          language:
+            default:
+              name: Incremental
+              description: ''
+        - !ChoiceValue 
+          value: Complete
+          language:
+            default:
+              name: Complete
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: DeploymentMode
+          description: >-
+            The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete
+            mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources.
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_29
+      choices:
+        - !ChoiceValue 
+          value: ResourceIdOnly
+          language:
+            default:
+              name: ResourceIdOnly
+              description: ''
+        - !ChoiceValue 
+          value: FullResourcePayloads
+          language:
+            default:
+              name: FullResourcePayloads
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: WhatIfResultFormat
+          description: The format of the What-If results
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_49
+      choices:
+        - !ChoiceValue 
+          value: Create
+          language:
+            default:
+              name: Create
+              description: The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed.
+        - !ChoiceValue 
+          value: Delete
+          language:
+            default:
+              name: Delete
+              description: The resource exists in the current state and is missing from the desired state. The resource will be deleted when the deployment is executed.
+        - !ChoiceValue 
+          value: Ignore
+          language:
+            default:
+              name: Ignore
+              description: The resource exists in the current state and is missing from the desired state. The resource will not be deployed or modified when the deployment is executed.
+        - !ChoiceValue 
+          value: Deploy
+          language:
+            default:
+              name: Deploy
+              description: The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource may or may not change.
+        - !ChoiceValue 
+          value: NoChange
+          language:
+            default:
+              name: NoChange
+              description: The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change.
+        - !ChoiceValue 
+          value: Modify
+          language:
+            default:
+              name: Modify
+              description: The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change.
+        - !ChoiceValue 
+          value: Unsupported
+          language:
+            default:
+              name: Unsupported
+              description: The resource is not supported by What-If.
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ChangeType
+          description: Type of change that will be made to the resource when the deployment is executed.
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_54
+      choices:
+        - !ChoiceValue 
+          value: NotSpecified
+          language:
+            default:
+              name: NotSpecified
+              description: The provisioning operation is not specified.
+        - !ChoiceValue 
+          value: Create
+          language:
+            default:
+              name: Create
+              description: The provisioning operation is create.
+        - !ChoiceValue 
+          value: Delete
+          language:
+            default:
+              name: Delete
+              description: The provisioning operation is delete.
+        - !ChoiceValue 
+          value: Waiting
+          language:
+            default:
+              name: Waiting
+              description: The provisioning operation is waiting.
+        - !ChoiceValue 
+          value: AzureAsyncOperationWaiting
+          language:
+            default:
+              name: AzureAsyncOperationWaiting
+              description: The provisioning operation is waiting Azure async operation.
+        - !ChoiceValue 
+          value: ResourceCacheWaiting
+          language:
+            default:
+              name: ResourceCacheWaiting
+              description: The provisioning operation is waiting for resource cache.
+        - !ChoiceValue 
+          value: Action
+          language:
+            default:
+              name: Action
+              description: The provisioning operation is action.
+        - !ChoiceValue 
+          value: Read
+          language:
+            default:
+              name: Read
+              description: The provisioning operation is read.
+        - !ChoiceValue 
+          value: EvaluateDeploymentOutput
+          language:
+            default:
+              name: EvaluateDeploymentOutput
+              description: The provisioning operation is evaluate output.
+        - !ChoiceValue 
+          value: DeploymentCleanup
+          language:
+            default:
+              name: DeploymentCleanup
+              description: The provisioning operation is cleanup. This operation is part of the 'complete' mode deployment.
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ProvisioningOperation
+          description: The name of the current provisioning operation.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_29
+    - !ConstantSchema &ref_92
       type: constant
       value: !ConstantValue 
         value: '2020-09-01'
@@ -262,7 +1013,7 @@ schemas: !Schemas
           name: ApiVersion20200901
           description: Api Version (2020-09-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_32
+    - !ConstantSchema &ref_93
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -272,7 +1023,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_36
+    - !ConstantSchema &ref_97
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -282,17 +1033,27 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_123
+      type: constant
+      value: !ConstantValue 
+        value: '2021-04-01'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20210401
+          description: Api Version (2021-04-01)
+      protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_13
+    - !DictionarySchema &ref_15
       type: dictionary
-      elementType: !ObjectSchema &ref_18
+      elementType: !ObjectSchema &ref_20
         type: object
         apiVersions:
           - !ApiVersion 
             version: '2020-09-01'
         properties:
           - !Property 
-            schema: !AnyObjectSchema &ref_1
+            schema: !AnyObjectSchema &ref_3
               type: any-object
               language: !Languages 
                 default:
@@ -321,17 +1082,64 @@ schemas: !Schemas
           name: ParameterValues
           description: The parameter values for the policy rule. The keys are the parameter names.
       protocol: !Protocols {}
+    - !DictionarySchema &ref_32
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: DeploymentTags
+          description: Deployment tags
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_41
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: DeploymentExtendedTags
+          description: Deployment tags
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_70
+      type: dictionary
+      elementType: *ref_2
+      language: !Languages 
+        default:
+          name: ScopedDeploymentTags
+          description: Deployment tags
+      protocol: !Protocols {}
   anyObjects:
-    - *ref_1
+    - *ref_3
+  dateTimes:
+    - !DateTimeSchema &ref_39
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentPropertiesExtendedTimestamp
+          description: The timestamp of the template deployment.
+      protocol: !Protocols {}
+    - !DateTimeSchema &ref_56
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: DeploymentOperationPropertiesTimestamp
+          description: The date and time of the operation.
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_23
+    - !ObjectSchema &ref_25
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-09-01'
       properties:
         - !Property 
-          schema: *ref_2
+          schema: *ref_4
           readOnly: true
           serializedName: id
           language: !Languages 
@@ -340,7 +1148,7 @@ schemas: !Schemas
               description: The ID of the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_3
+          schema: *ref_5
           readOnly: true
           serializedName: type
           language: !Languages 
@@ -349,7 +1157,7 @@ schemas: !Schemas
               description: The type of the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_4
+          schema: *ref_6
           readOnly: true
           serializedName: name
           language: !Languages 
@@ -358,7 +1166,7 @@ schemas: !Schemas
               description: The name of the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_5
+          schema: *ref_7
           serializedName: location
           language: !Languages 
             default:
@@ -366,14 +1174,14 @@ schemas: !Schemas
               description: The location of the policy assignment. Only required when utilizing managed identity.
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_20
+          schema: !ObjectSchema &ref_22
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
             properties:
               - !Property 
-                schema: *ref_6
+                schema: *ref_8
                 readOnly: true
                 serializedName: principalId
                 language: !Languages 
@@ -382,7 +1190,7 @@ schemas: !Schemas
                     description: The principal ID of the resource identity.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_7
+                schema: *ref_9
                 readOnly: true
                 serializedName: tenantId
                 language: !Languages 
@@ -391,7 +1199,7 @@ schemas: !Schemas
                     description: The tenant ID of the resource identity.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_8
+                schema: *ref_10
                 serializedName: type
                 language: !Languages 
                   default:
@@ -416,7 +1224,7 @@ schemas: !Schemas
               description: The managed identity associated with the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_9
+          schema: *ref_11
           flattenedNames:
             - properties
             - displayName
@@ -427,7 +1235,7 @@ schemas: !Schemas
               description: The display name of the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_10
+          schema: *ref_12
           flattenedNames:
             - properties
             - policyDefinitionId
@@ -438,7 +1246,7 @@ schemas: !Schemas
               description: The ID of the policy definition or policy set definition being assigned.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_11
+          schema: *ref_13
           flattenedNames:
             - properties
             - scope
@@ -450,12 +1258,12 @@ schemas: !Schemas
               description: The scope for the policy assignment.
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_25
+          schema: !ArraySchema &ref_82
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
-            elementType: *ref_12
+            elementType: *ref_14
             language: !Languages 
               default:
                 name: PolicyAssignmentPropertiesNotScopes
@@ -471,7 +1279,7 @@ schemas: !Schemas
               description: The policy's excluded scopes.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_13
+          schema: *ref_15
           flattenedNames:
             - properties
             - parameters
@@ -482,7 +1290,7 @@ schemas: !Schemas
               description: The parameter values for the assigned policy rule. The keys are the parameter names.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_14
+          schema: *ref_16
           flattenedNames:
             - properties
             - description
@@ -493,7 +1301,7 @@ schemas: !Schemas
               description: This message will be part of response in case of policy violation.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_1
+          schema: *ref_3
           flattenedNames:
             - properties
             - metadata
@@ -504,7 +1312,7 @@ schemas: !Schemas
               description: The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_17
           flattenedNames:
             - properties
             - enforcementMode
@@ -515,19 +1323,19 @@ schemas: !Schemas
               description: The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_26
+          schema: !ArraySchema &ref_83
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
-            elementType: !ObjectSchema &ref_19
+            elementType: !ObjectSchema &ref_21
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-09-01'
               properties:
                 - !Property 
-                  schema: *ref_16
+                  schema: *ref_18
                   required: true
                   serializedName: message
                   language: !Languages 
@@ -536,7 +1344,7 @@ schemas: !Schemas
                       description: A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_17
+                  schema: *ref_19
                   required: false
                   serializedName: policyDefinitionReferenceId
                   language: !Languages 
@@ -584,24 +1392,28 @@ schemas: !Schemas
           description: The policy assignment.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_18
-    - *ref_19
     - *ref_20
-    - !ObjectSchema &ref_35
+    - *ref_21
+    - *ref_22
+    - !ObjectSchema &ref_96
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-09-01'
+        - !ApiVersion 
+          version: '2021-04-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_22
+          schema: !ObjectSchema &ref_24
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
+              - !ApiVersion 
+                version: '2021-04-01'
             properties:
               - !Property 
-                schema: *ref_21
+                schema: *ref_23
                 serializedName: error
                 language: !Languages 
                   default:
@@ -612,6 +1424,7 @@ schemas: !Schemas
               - json
             usage:
               - exception
+              - output
             language: !Languages 
               default:
                 name: ErrorResponse
@@ -636,20 +1449,20 @@ schemas: !Schemas
           description: An error response from a policy operation.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_22
-    - !ObjectSchema &ref_48
+    - *ref_24
+    - !ObjectSchema &ref_109
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-09-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_27
+          schema: !ArraySchema &ref_84
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-09-01'
-            elementType: *ref_23
+            elementType: *ref_25
             language: !Languages 
               default:
                 name: PolicyAssignmentListResultValue
@@ -662,7 +1475,7 @@ schemas: !Schemas
               description: An array of policy assignments.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_24
+          schema: *ref_26
           serializedName: nextLink
           language: !Languages 
             default:
@@ -679,13 +1492,1065 @@ schemas: !Schemas
           description: List of policy assignments.
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema &ref_128
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_27
+          required: false
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: The location to store the deployment data.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_28
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            children: !Relations 
+              all:
+                - !ObjectSchema &ref_30
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-04-01'
+                  parents: !Relations 
+                    all:
+                      - *ref_28
+                    immediate:
+                      - *ref_28
+                  properties:
+                    - !Property 
+                      schema: !ObjectSchema &ref_46
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: '2021-04-01'
+                        properties:
+                          - !Property 
+                            schema: *ref_29
+                            serializedName: resultFormat
+                            language: !Languages 
+                              default:
+                                name: resultFormat
+                                description: The format of the What-If results
+                            protocol: !Protocols {}
+                        serializationFormats:
+                          - json
+                        usage:
+                          - input
+                        language: !Languages 
+                          default:
+                            name: DeploymentWhatIfSettings
+                            description: Deployment What-If operation settings.
+                            namespace: ''
+                        protocol: !Protocols {}
+                      serializedName: whatIfSettings
+                      language: !Languages 
+                        default:
+                          name: whatIfSettings
+                          description: Optional What-If operation settings.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                  language: !Languages 
+                    default:
+                      name: DeploymentWhatIfProperties
+                      description: Deployment What-if properties.
+                      namespace: ''
+                  protocol: !Protocols {}
+              immediate:
+                - *ref_30
+            properties:
+              - !Property 
+                schema: *ref_3
+                required: false
+                serializedName: template
+                language: !Languages 
+                  default:
+                    name: template
+                    description: >-
+                      The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the
+                      templateLink property or the template property, but not both.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_3
+                required: false
+                serializedName: parameters
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: >-
+                      Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file.
+                      Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_31
+                required: true
+                serializedName: mode
+                language: !Languages 
+                  default:
+                    name: mode
+                    description: >-
+                      The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In
+                      Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+            language: !Languages 
+              default:
+                name: DeploymentProperties
+                description: Deployment properties.
+                namespace: ''
+            protocol: !Protocols {}
+          required: true
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: The deployment properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_32
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Deployment tags
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: Deployment
+          description: Deployment operation parameters.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_28
+    - !ObjectSchema &ref_43
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_33
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: The ID of the deployment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_34
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the deployment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_35
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: The type of the deployment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_36
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: the location of the deployment.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_42
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            properties:
+              - !Property 
+                schema: *ref_37
+                readOnly: true
+                serializedName: provisioningState
+                language: !Languages 
+                  default:
+                    name: provisioningState
+                    description: Denotes the state of provisioning.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_38
+                readOnly: true
+                serializedName: correlationId
+                language: !Languages 
+                  default:
+                    name: correlationId
+                    description: The correlation ID of the deployment.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_39
+                readOnly: true
+                serializedName: timestamp
+                language: !Languages 
+                  default:
+                    name: timestamp
+                    description: The timestamp of the template deployment.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_40
+                readOnly: true
+                serializedName: duration
+                language: !Languages 
+                  default:
+                    name: duration
+                    description: The duration of the template deployment.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_3
+                readOnly: true
+                serializedName: outputs
+                language: !Languages 
+                  default:
+                    name: outputs
+                    description: Key/value pairs that represent deployment output.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_3
+                readOnly: true
+                serializedName: parameters
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: 'Deployment parameters. '
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_24
+                readOnly: true
+                serializedName: error
+                language: !Languages 
+                  default:
+                    name: error
+                    description: The deployment error.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+            language: !Languages 
+              default:
+                name: DeploymentPropertiesExtended
+                description: Deployment properties with additional details.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: Deployment properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_41
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Deployment tags
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      extensions:
+        x-ms-azure-resource: true
+      language: !Languages 
+        default:
+          name: DeploymentExtended
+          description: Deployment information.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_42
+    - !ObjectSchema &ref_139
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_24
+          readOnly: true
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: The deployment validation error.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_42
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: The template deployment properties.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: DeploymentValidateResult
+          description: Information from validate template deployment response.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_142
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_3
+          serializedName: template
+          language: !Languages 
+            default:
+              name: template
+              description: The template content.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: DeploymentExportResult
+          description: 'The deployment export result. '
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_147
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_85
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            elementType: *ref_43
+            language: !Languages 
+              default:
+                name: DeploymentListResultValue
+                description: An array of deployments.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: An array of deployments.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_44
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URL to use for getting the next set of results.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: DeploymentListResult
+          description: List of deployments.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_148
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property &ref_150
+          schema: *ref_45
+          required: false
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: The location to store the deployment data.
+          protocol: !Protocols {}
+        - !Property &ref_151
+          schema: *ref_30
+          required: true
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: The deployment properties.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: DeploymentWhatIf
+          description: Deployment What-if operation parameters.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_30
+    - *ref_46
+    - !ObjectSchema &ref_155
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_47
+          serializedName: status
+          language: !Languages 
+            default:
+              name: status
+              description: Status of the What-If operation.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_24
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Error when What-If operation fails.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_86
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            elementType: !ObjectSchema &ref_51
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2021-04-01'
+              properties:
+                - !Property 
+                  schema: *ref_48
+                  required: true
+                  serializedName: resourceId
+                  language: !Languages 
+                    default:
+                      name: resourceId
+                      description: Resource ID
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_49
+                  required: true
+                  serializedName: changeType
+                  language: !Languages 
+                    default:
+                      name: changeType
+                      description: Type of change that will be made to the resource when the deployment is executed.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_50
+                  required: false
+                  serializedName: unsupportedReason
+                  language: !Languages 
+                    default:
+                      name: unsupportedReason
+                      description: The explanation about why the resource is unsupported by What-If.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  required: false
+                  serializedName: before
+                  language: !Languages 
+                    default:
+                      name: before
+                      description: The snapshot of the resource before the deployment is executed.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  required: false
+                  serializedName: after
+                  language: !Languages 
+                    default:
+                      name: after
+                      description: The predicted snapshot of the resource after the deployment is executed.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: WhatIfChange
+                  description: Information about a single resource change predicted by What-If operation.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: WhatIfOperationPropertiesChanges
+                description: List of resource changes predicted by What-If operation.
+            protocol: !Protocols {}
+          flattenedNames:
+            - properties
+            - changes
+          serializedName: changes
+          language: !Languages 
+            default:
+              name: changes
+              description: List of resource changes predicted by What-If operation.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: WhatIfOperationResult
+          description: Result of the What-If operation. Contains a list of predicted changes and a URL link to get to the next set of results.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_51
+    - !ObjectSchema &ref_64
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_52
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Full deployment operation ID.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_53
+          readOnly: true
+          serializedName: operationId
+          language: !Languages 
+            default:
+              name: operationId
+              description: Deployment operation ID.
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_62
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            properties:
+              - !Property 
+                schema: *ref_54
+                readOnly: true
+                serializedName: provisioningOperation
+                language: !Languages 
+                  default:
+                    name: provisioningOperation
+                    description: The name of the current provisioning operation.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_55
+                readOnly: true
+                serializedName: provisioningState
+                language: !Languages 
+                  default:
+                    name: provisioningState
+                    description: The state of the provisioning.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_56
+                readOnly: true
+                serializedName: timestamp
+                language: !Languages 
+                  default:
+                    name: timestamp
+                    description: The date and time of the operation.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_57
+                readOnly: true
+                serializedName: duration
+                language: !Languages 
+                  default:
+                    name: duration
+                    description: The duration of the operation.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_58
+                readOnly: true
+                serializedName: serviceRequestId
+                language: !Languages 
+                  default:
+                    name: serviceRequestId
+                    description: Deployment operation service request id.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_59
+                readOnly: true
+                serializedName: statusCode
+                language: !Languages 
+                  default:
+                    name: statusCode
+                    description: Operation status code from the resource provider. This property may not be set if a response has not yet been received.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_63
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-04-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_60
+                      serializedName: status
+                      language: !Languages 
+                        default:
+                          name: status
+                          description: Status of the deployment operation.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_24
+                      serializedName: error
+                      language: !Languages 
+                        default:
+                          name: error
+                          description: The error reported by the operation.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                  language: !Languages 
+                    default:
+                      name: StatusMessage
+                      description: Operation status message object.
+                      namespace: ''
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: statusMessage
+                language: !Languages 
+                  default:
+                    name: statusMessage
+                    description: Operation status message from the resource provider. This property is optional.  It will only be provided if an error was received from the resource provider.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_61
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-04-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_3
+                      serializedName: content
+                      language: !Languages 
+                        default:
+                          name: content
+                          description: HTTP message content.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - output
+                  language: !Languages 
+                    default:
+                      name: HttpMessage
+                      description: HTTP message.
+                      namespace: ''
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: request
+                language: !Languages 
+                  default:
+                    name: request
+                    description: The HTTP request message.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_61
+                readOnly: true
+                serializedName: response
+                language: !Languages 
+                  default:
+                    name: response
+                    description: The HTTP response message.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+            language: !Languages 
+              default:
+                name: DeploymentOperationProperties
+                description: Deployment operation properties.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: Deployment properties.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: DeploymentOperation
+          description: Deployment operation information.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_62
+    - *ref_63
+    - *ref_61
+    - !ObjectSchema &ref_187
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_87
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            elementType: *ref_64
+            language: !Languages 
+              default:
+                name: DeploymentOperationsListResultValue
+                description: An array of deployment operations.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: An array of deployment operations.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_65
+          readOnly: true
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URL to use for getting the next set of results.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: DeploymentOperationsListResult
+          description: List of deployment operations.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_180
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_66
+          serializedName: minifiedTemplate
+          language: !Languages 
+            default:
+              name: minifiedTemplate
+              description: The minified template string.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_67
+          serializedName: templateHash
+          language: !Languages 
+            default:
+              name: templateHash
+              description: The template hash.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: TemplateHashResult
+          description: Result of the request to calculate template hash. It contains a string of minified template and its hash.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_68
+          serializedName: provisioningState
+          language: !Languages 
+            default:
+              name: provisioningState
+              description: The provisioning state.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: DeploymentExtendedFilter
+          description: Deployment filter.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_69
+          required: true
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: The location to store the deployment data.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_28
+          required: true
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: The deployment properties.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_70
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Deployment tags
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: ScopedDeployment
+          description: Deployment operation parameters.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_71
+          required: true
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: The location to store the deployment data.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_30
+          required: true
+          serializedName: properties
+          language: !Languages 
+            default:
+              name: properties
+              description: The deployment properties.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: ScopedDeploymentWhatIf
+          description: Deployment What-if operation parameters.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_72
+          readOnly: true
+          serializedName: profileVersion
+          language: !Languages 
+            default:
+              name: profileVersion
+              description: The profile version.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_73
+          readOnly: true
+          serializedName: apiVersion
+          language: !Languages 
+            default:
+              name: apiVersion
+              description: The API version.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: ApiProfile
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_80
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: *ref_74
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: 'Operation name: {provider}/{resource}/{operation}'
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_79
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            properties:
+              - !Property 
+                schema: *ref_75
+                serializedName: provider
+                language: !Languages 
+                  default:
+                    name: provider
+                    description: 'Service provider: Microsoft.Resources'
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_76
+                serializedName: resource
+                language: !Languages 
+                  default:
+                    name: resource
+                    description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_77
+                serializedName: operation
+                language: !Languages 
+                  default:
+                    name: operation
+                    description: 'Operation type: Read, write, delete, etc.'
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_78
+                serializedName: description
+                language: !Languages 
+                  default:
+                    name: description
+                    description: Description of the operation.
+                protocol: !Protocols {}
+            extensions:
+              x-internal-autorest-anonymous-schema:
+                anonymous: true
+            language: !Languages 
+              default:
+                name: OperationDisplay
+                description: The object that represents the operation.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: display
+          language: !Languages 
+            default:
+              name: display
+              description: The object that represents the operation.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: Operation
+          description: Microsoft.Resources operation
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_79
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_88
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-04-01'
+            elementType: *ref_80
+            language: !Languages 
+              default:
+                name: OperationListResultValue
+                description: List of Microsoft.Resources operations.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: List of Microsoft.Resources operations.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_81
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: URL to get the next set of operation list results if there are any.
+          protocol: !Protocols {}
+      language: !Languages 
+        default:
+          name: OperationListResult
+          description: Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.
+          namespace: ''
+      protocol: !Protocols {}
   arrays:
-    - *ref_25
-    - *ref_26
-    - *ref_27
+    - *ref_82
+    - *ref_83
+    - *ref_84
+    - *ref_85
+    - *ref_86
+    - *ref_87
+    - *ref_88
 globalParameters:
-  - !Parameter &ref_44
-    schema: *ref_28
+  - !Parameter &ref_105
+    schema: *ref_89
     implementation: Client
     required: true
     extensions:
@@ -698,7 +2563,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_30
+  - !Parameter &ref_90
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -714,19 +2579,6 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_31
-    schema: *ref_29
-    implementation: Client
-    origin: modelerfour:synthesized/api-version
-    required: true
-    language: !Languages 
-      default:
-        name: apiVersion
-        description: Api Version
-        serializedName: api-version
-    protocol: !Protocols 
-      http: !HttpParameter 
-        in: query
 operationGroups:
   - !OperationGroup 
     $key: PolicyAssignments
@@ -736,9 +2588,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_33
-            schema: *ref_28
+          - *ref_90
+          - !Parameter &ref_94
+            schema: *ref_91
             implementation: Method
             required: true
             extensions:
@@ -754,8 +2606,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_34
-            schema: *ref_28
+          - !Parameter &ref_95
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -766,12 +2618,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_31
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -794,11 +2658,11 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_33
-          - *ref_34
+          - *ref_94
+          - *ref_95
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -821,7 +2685,7 @@ operationGroups:
                   - '204'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -846,9 +2710,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_38
-            schema: *ref_28
+          - *ref_90
+          - !Parameter &ref_99
+            schema: *ref_91
             implementation: Method
             required: true
             extensions:
@@ -864,8 +2728,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
-            schema: *ref_28
+          - !Parameter &ref_100
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -876,12 +2740,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_31
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_36
+                schema: *ref_97
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -893,8 +2769,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_37
-                schema: *ref_23
+              - !Parameter &ref_98
+                schema: *ref_25
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -906,7 +2782,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -919,7 +2795,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_37
+              - *ref_98
             language: !Languages 
               default:
                 name: ''
@@ -933,11 +2809,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_38
-          - *ref_39
+          - *ref_99
+          - *ref_100
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -951,7 +2827,7 @@ operationGroups:
                   - '201'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -974,9 +2850,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_40
-            schema: *ref_28
+          - *ref_90
+          - !Parameter &ref_101
+            schema: *ref_91
             implementation: Method
             required: true
             extensions:
@@ -992,8 +2868,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
-            schema: *ref_28
+          - !Parameter &ref_102
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -1004,12 +2880,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_31
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1032,11 +2920,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_40
-          - *ref_41
+          - *ref_101
+          - *ref_102
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_25
             language: !Languages 
               default:
                 name: ''
@@ -1050,7 +2938,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1073,9 +2961,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_45
-            schema: *ref_42
+          - *ref_90
+          - !Parameter &ref_106
+            schema: *ref_103
             implementation: Method
             required: true
             language: !Languages 
@@ -1086,8 +2974,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_46
-            schema: *ref_28
+          - !Parameter &ref_107
+            schema: *ref_91
             implementation: Method
             extensions:
               x-ms-skip-url-encoding: true
@@ -1103,8 +2991,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_47
-            schema: *ref_43
+          - !Parameter &ref_108
+            schema: *ref_104
             implementation: Method
             language: !Languages 
               default:
@@ -1114,13 +3002,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_31
-          - *ref_44
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_105
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1143,12 +3043,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_45
-          - *ref_46
-          - *ref_47
+          - *ref_106
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -1162,7 +3062,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1195,9 +3095,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_49
-            schema: *ref_42
+          - *ref_90
+          - !Parameter &ref_110
+            schema: *ref_103
             implementation: Method
             required: true
             language: !Languages 
@@ -1208,8 +3108,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_50
-            schema: *ref_28
+          - !Parameter &ref_111
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -1220,8 +3120,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
-            schema: *ref_28
+          - !Parameter &ref_112
+            schema: *ref_91
             implementation: Method
             required: true
             extensions:
@@ -1234,8 +3134,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
-            schema: *ref_28
+          - !Parameter &ref_113
+            schema: *ref_91
             implementation: Method
             required: true
             extensions:
@@ -1248,8 +3148,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
-            schema: *ref_28
+          - !Parameter &ref_114
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -1260,8 +3160,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
-            schema: *ref_28
+          - !Parameter &ref_115
+            schema: *ref_91
             implementation: Method
             extensions:
               x-ms-skip-url-encoding: true
@@ -1277,8 +3177,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_55
-            schema: *ref_43
+          - !Parameter &ref_116
+            schema: *ref_104
             implementation: Method
             language: !Languages 
               default:
@@ -1288,13 +3188,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_31
-          - *ref_44
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_105
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1317,16 +3229,16 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
-          - *ref_50
-          - *ref_51
-          - *ref_52
-          - *ref_53
-          - *ref_54
-          - *ref_55
+          - *ref_110
+          - *ref_111
+          - *ref_112
+          - *ref_113
+          - *ref_114
+          - *ref_115
+          - *ref_116
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -1340,7 +3252,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1379,9 +3291,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_56
-            schema: *ref_28
+          - *ref_90
+          - !Parameter &ref_117
+            schema: *ref_91
             implementation: Method
             required: true
             language: !Languages 
@@ -1392,8 +3304,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
-            schema: *ref_28
+          - !Parameter &ref_118
+            schema: *ref_91
             implementation: Method
             extensions:
               x-ms-skip-url-encoding: true
@@ -1409,8 +3321,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_58
-            schema: *ref_43
+          - !Parameter &ref_119
+            schema: *ref_104
             implementation: Method
             language: !Languages 
               default:
@@ -1420,12 +3332,24 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_31
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1448,12 +3372,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
-          - *ref_58
+          - *ref_117
+          - *ref_118
+          - *ref_119
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -1467,7 +3391,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1499,9 +3423,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-09-01'
         parameters:
-          - *ref_30
-          - !Parameter &ref_59
-            schema: *ref_28
+          - *ref_90
+          - !Parameter &ref_120
+            schema: *ref_91
             implementation: Method
             extensions:
               x-ms-skip-url-encoding: true
@@ -1517,8 +3441,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_60
-            schema: *ref_43
+          - !Parameter &ref_121
+            schema: *ref_104
             implementation: Method
             language: !Languages 
               default:
@@ -1528,13 +3452,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_31
-          - *ref_44
+          - !Parameter 
+            schema: *ref_92
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_105
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_93
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1557,11 +3493,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_59
-          - *ref_60
+          - *ref_120
+          - *ref_121
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -1575,7 +3511,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_96
             language: !Languages 
               default:
                 name: ''
@@ -1609,6 +3545,2088 @@ operationGroups:
         name: PolicyAssignments
         description: ''
     protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Deployments
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_124
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_125
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_124
+          - *ref_125
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns this status until the asynchronous operation has completed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: DeleteAtScope
+            description: >-
+              A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template
+              deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of
+              202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.
+            summary: Deletes a deployment from the deployment history.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_126
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_127
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+                method: head
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_126
+          - *ref_127
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Not Found
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '404'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: CheckExistenceAtScope
+            description: Checks whether the deployment exists.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_130
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_131
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_129
+                schema: *ref_128
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Additional parameters supplied to the operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_129
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_130
+          - *ref_131
+        responses:
+          - !SchemaResponse 
+            schema: *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the deployment, including provisioning status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: Created - Returns information about the deployment, including provisioning status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdateAtScope
+            description: You can provide the template and parameters directly in the request or link to JSON files.
+            summary: Deploys resources at a given scope.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_132
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_133
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_132
+          - *ref_133
+        responses:
+          - !SchemaResponse 
+            schema: *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the deployment, including provisioning status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetAtScope
+            description: Gets a deployment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_134
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_135
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_134
+          - *ref_135
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: CancelAtScope
+            description: >-
+              You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template
+              deployment and leaves the resources partially deployed.
+            summary: Cancels a currently running template deployment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_137
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_138
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_136
+                schema: *ref_128
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to validate.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_136
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_137
+          - *ref_138
+        responses:
+          - !SchemaResponse 
+            schema: *ref_139
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns the validation result.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - The request has been accepted for processing and the operation will complete asynchronously.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+          - !SchemaResponse 
+            schema: *ref_139
+            language: !Languages 
+              default:
+                name: ''
+                description: Returns the validation result.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '400'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: ValidateAtScope
+            description: Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_140
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_141
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_140
+          - *ref_141
+        responses:
+          - !SchemaResponse 
+            schema: *ref_142
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns the template.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: ExportTemplateAtScope
+            description: Exports the template used for specified deployment.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_144
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_145
+            schema: *ref_1
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_146
+            schema: *ref_143
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: The number of results to get. If null is passed, returns all deployments.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_144
+          - *ref_145
+          - *ref_146
+        responses:
+          - !SchemaResponse 
+            schema: *ref_147
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns an array of deployments.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-odata: '#/components/schemas/DeploymentExtendedFilter'
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListAtScope
+            description: Get all the deployments at the given scope.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_154
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_149
+                schema: *ref_148
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to validate.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_152
+                schema: *ref_45
+                implementation: Method
+                originalParameter: *ref_149
+                pathToProperty: []
+                required: false
+                targetProperty: *ref_150
+                language: !Languages 
+                  default:
+                    name: location
+                    description: The location to store the deployment data.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_153
+                schema: *ref_30
+                implementation: Method
+                originalParameter: *ref_149
+                pathToProperty: []
+                required: true
+                targetProperty: *ref_151
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The deployment properties.
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_152
+              - *ref_153
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_154
+        responses:
+          - !SchemaResponse 
+            schema: *ref_155
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns What-If operation status
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns URL in Location header to query for long-running operation status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_1
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL to get status of this long-running operation.
+                  - !HttpHeader 
+                    schema: *ref_156
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of seconds to wait before polling for status.
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+        language: !Languages 
+          default:
+            name: WhatIfAtTenantScope
+            description: Returns changes that will be made by the deployment if executed at the scope of the tenant group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_161
+            schema: *ref_157
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: groupId
+                description: The management group ID.
+                serializedName: groupId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_162
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_158
+                schema: *ref_148
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to validate.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_159
+                schema: *ref_45
+                implementation: Method
+                originalParameter: *ref_158
+                pathToProperty: []
+                required: false
+                targetProperty: *ref_150
+                language: !Languages 
+                  default:
+                    name: location
+                    description: The location to store the deployment data.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_160
+                schema: *ref_30
+                implementation: Method
+                originalParameter: *ref_158
+                pathToProperty: []
+                required: true
+                targetProperty: *ref_151
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The deployment properties.
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_159
+              - *ref_160
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_161
+          - *ref_162
+        responses:
+          - !SchemaResponse 
+            schema: *ref_155
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns What-If operation status
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns URL in Location header to query for long-running operation status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_163
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL to get status of this long-running operation.
+                  - !HttpHeader 
+                    schema: *ref_164
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of seconds to wait before polling for status.
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+        language: !Languages 
+          default:
+            name: WhatIfAtManagementGroupScope
+            description: Returns changes that will be made by the deployment if executed at the scope of the management group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_168
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_105
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_165
+                schema: *ref_148
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to What If.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_166
+                schema: *ref_45
+                implementation: Method
+                originalParameter: *ref_165
+                pathToProperty: []
+                required: false
+                targetProperty: *ref_150
+                language: !Languages 
+                  default:
+                    name: location
+                    description: The location to store the deployment data.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_167
+                schema: *ref_30
+                implementation: Method
+                originalParameter: *ref_165
+                pathToProperty: []
+                required: true
+                targetProperty: *ref_151
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The deployment properties.
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_166
+              - *ref_167
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_168
+        responses:
+          - !SchemaResponse 
+            schema: *ref_155
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns What-If operation status
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns URL in Location header to query for long-running operation status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_169
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL to get status of this long-running operation.
+                  - !HttpHeader 
+                    schema: *ref_170
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of seconds to wait before polling for status.
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+        language: !Languages 
+          default:
+            name: WhatIfAtSubscriptionScope
+            description: Returns changes that will be made by the deployment if executed at the scope of the subscription.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_175
+            schema: *ref_171
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group the template will be deployed to. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_176
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_105
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_172
+                schema: *ref_148
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters to validate.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_173
+                schema: *ref_45
+                implementation: Method
+                originalParameter: *ref_172
+                pathToProperty: []
+                required: false
+                targetProperty: *ref_150
+                language: !Languages 
+                  default:
+                    name: location
+                    description: The location to store the deployment data.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_174
+                schema: *ref_30
+                implementation: Method
+                originalParameter: *ref_172
+                pathToProperty: []
+                required: true
+                targetProperty: *ref_151
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: The deployment properties.
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_173
+              - *ref_174
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_175
+          - *ref_176
+        responses:
+          - !SchemaResponse 
+            schema: *ref_155
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns What-If operation status
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted - Returns URL in Location header to query for long-running operation status.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_177
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: URL to get status of this long-running operation.
+                  - !HttpHeader 
+                    schema: *ref_178
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of seconds to wait before polling for status.
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+        language: !Languages 
+          default:
+            name: WhatIf
+            description: Returns changes that will be made by the deployment if executed at the scope of the resource group.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_97
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_179
+                schema: *ref_3
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: template
+                    description: The template provided to calculate hash.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_179
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Resources/calculateTemplateHash
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_180
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns the hash.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: CalculateTemplateHash
+            description: Calculate the hash of the given template.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Deployments
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: DeploymentOperations
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_181
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_182
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_183
+            schema: *ref_2
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: operationId
+                description: The ID of the operation to get.
+                serializedName: operationId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_181
+          - *ref_182
+          - *ref_183
+        responses:
+          - !SchemaResponse 
+            schema: *ref_64
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Returns information about the deployment operation.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: GetAtScope
+            description: Gets a deployments operation.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-04-01'
+        parameters:
+          - *ref_90
+          - !Parameter &ref_184
+            schema: *ref_1
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+            language: !Languages 
+              default:
+                name: scope
+                description: The resource scope.
+                serializedName: scope
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_185
+            schema: *ref_122
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: deploymentName
+                description: The name of the deployment.
+                serializedName: deploymentName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_186
+            schema: *ref_143
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: The number of results to return.
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter 
+            schema: *ref_123
+            implementation: Method
+            origin: modelerfour:synthesized/api-version
+            required: true
+            language: !Languages 
+              default:
+                name: apiVersion
+                description: Api Version
+                serializedName: api-version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_93
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_184
+          - *ref_185
+          - *ref_186
+        responses:
+          - !SchemaResponse 
+            schema: *ref_187
+            language: !Languages 
+              default:
+                name: ''
+                description: OK - Return an array of deployment operations.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListAtScope
+            description: Gets all deployments operations for a deployment.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: DeploymentOperations
+        description: ''
+    protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
   schemes:
@@ -1618,7 +5636,7 @@ security: !Security
         - https://management.azure.com/.default
 language: !Languages 
   default:
-    name: PolicyClient
+    name: ResourceManagementClient
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

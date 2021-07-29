@@ -19,6 +19,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("PolicyAssignmentContainer", "GetForManagementGroup", false)]
         [TestCase("PolicyAssignmentOperations", "Get", true)]
         [TestCase("PolicyAssignmentOperations", "Delete", true)]
+        [TestCase("DeploymentExtendedContainer", "CreateOrUpdate", true)]
+        [TestCase("DeploymentExtendedContainer", "Get", true)]
+        [TestCase("DeploymentExtendedContainer", "GetAll", true)]
+        [TestCase("DeploymentExtendedOperations", "WhatIf", true)]
+        [TestCase("DeploymentExtendedOperations", "WhatIfAtTenantScope", false)]
+        [TestCase("DeploymentExtendedOperations", "WhatIfAtSubscriptionScope", false)]
+        [TestCase("DeploymentExtendedOperations", "WhatIfAtManagementGroupScope", false)]
+        [TestCase("DeploymentOperationContainer", "Get", true)]
+        [TestCase("DeploymentOperationContainer", "GetAll", true)]
+        [TestCase("DeploymentOperationOperations", "Get", true)]
         public void ValidateScopeResourceMethods(string className, string methodName, bool exist)
         {
             var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupExtensions");
