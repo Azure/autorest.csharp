@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
             project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
 
-            if (context.Library.ManagementGroupChildResources != null)
+            if (context.Library.ManagementGroupChildResources.Count() > 0)
             {
                 var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
                 var managementGroupExtensionsCodeWriter = new CodeWriter();

@@ -32,8 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationSummary($"{Description}");
                 using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    var managementGroupChildResources = context.Library.ManagementGroupChildResources == null ? new List<Resource>() : context.Library.ManagementGroupChildResources;
-                    foreach (var resource in managementGroupChildResources)
+                    foreach (var resource in context.Library.ManagementGroupChildResources)
                     {
                         writer.Line($"#region {resource.Type.Name}");
                         var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);

@@ -430,7 +430,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // Id.ResourceGroupName, Id.Name, Id.Parent.Name...
             // special case: type is enum and you can convert string to it (model-as-string), we should handle it as string
             // special case 2: in paging scenarios, `nextLink` needs to be handled specially, so here we just ignore it
-            // TODO: The correctness of parentNameStack relies on parameters in the order by their appearance order in path
             foreach (var parameter in method.Parameters)
             {
                 bool passThru = true;
@@ -521,7 +520,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Append($"await ");
                     }
-
                     var parameterNames = GetParametersName(restClientMethod, operationGroup, context);
                     writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, async)}(");
                     // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases

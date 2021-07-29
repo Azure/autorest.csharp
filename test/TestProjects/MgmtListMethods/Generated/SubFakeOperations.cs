@@ -51,7 +51,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                var response = _restClient.Get(Id.Name, cancellationToken);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

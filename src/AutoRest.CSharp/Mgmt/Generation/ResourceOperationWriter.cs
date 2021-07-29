@@ -498,45 +498,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.Append($"await ");
             }
             writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            // TODO: Include the variant of this section in BuildAndWriteParameters() and just call it.
-            // section start
-            var pathParamNames = GetPathParametersName(clientMethod.RestClientMethod, resource.OperationGroup, context);
-            if (isResourceLevel)
-            {
-                // Parameter mapping for a path like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
-                pathParamNames[0] = "subscriptionId";
-                pathParamNames[1] = "resourceGroupName";
-                pathParamNames[2] = "Id.ResourceType.Namespace";
-                pathParamNames[3] = "parentResourcePath";
-                pathParamNames[4] = "Id.ResourceType.Types[Id.ResourceType.Types.Count - 1]";
-            }
-            foreach (string paramNames in pathParamNames)
-            {
-                writer.Append($"{paramNames:I}, ");
-            }
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                if (isInheritedMethod)
-                {
-                    if (parameter.DefaultValue != null)
-                    {
-                        if (TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
-                        {
-                            writer.WriteConstant(parameter.DefaultValue.Value);
-                            writer.Append($", ");
-                        }
-                        else
-                        {
-                            writer.Append($"null, ");
-                        }
-                    }
-                }
-                else
-                {
-                    writer.Append($"{parameter.Name}, ");
-                }
-            }
-            // section end
+            BuildAndWriteParameters(writer, clientMethod.RestClientMethod, isResourceLevel);
             writer.Append($"cancellationToken)");
 
             if (async)

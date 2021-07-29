@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private Dictionary<string, List<OperationGroup>> _childNonResourceOperationGroups;
 
-        private Dictionary<string, IEnumerable<Resource>>? _childResources;
+        private Dictionary<string, List<Resource>>? _childResources;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -174,12 +174,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 
-        public IEnumerable<Resource>? ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+        public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
 
-        private IEnumerable<Resource>? GetChildren(string parent)
+        private IEnumerable<Resource> GetChildren(string parent)
         {
-            EnsureChildResources().TryGetValue(parent, out var children);
-            return children;
+            if (EnsureChildResources().TryGetValue(parent, out var children))
+            {
+                foreach (var child in children)
+                {
+                    yield return child;
+                }
+            }
+            else
+            {
+                yield break;
+            }
         }
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
@@ -459,14 +468,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _armResource;
         }
 
-        private Dictionary<string, IEnumerable<Resource>> EnsureChildResources()
+        private Dictionary<string, List<Resource>> EnsureChildResources()
         {
             if (_childResources != null)
             {
                 return _childResources;
             }
 
-            _childResources = new Dictionary<string, IEnumerable<Resource>>();
+            _childResources = new Dictionary<string, List<Resource>>();
             var parentResourceTypes = new HashSet<string>{ResourceTypeBuilder.Tenant, ResourceTypeBuilder.ManagementGroups, ResourceTypeBuilder.Subscriptions, ResourceTypeBuilder.ResourceGroups};
             foreach (var resource in ArmResource)
             {
@@ -475,7 +484,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     if (_childResources.TryGetValue(parent, out var resources))
                     {
-                        resources.ToList().Add(resource);
+                        resources.Add(resource);
                     }
                     else
                     {

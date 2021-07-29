@@ -50,7 +50,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -68,7 +68,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new SharedGallery(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
