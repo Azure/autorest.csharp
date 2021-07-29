@@ -10,17 +10,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(new string[] { "Model1Data", "Model1Update", "Model1ListResult" }, new string[] { "Model2Data", "ModelX", "ModelY", "Model3" })]
-        public void ValidateOperationGroupExistence(string[] notExist, string[] doesExist)
+        [TestCase("Model1Data", false)]
+        [TestCase("Model1Update", false)]
+        [TestCase("Model1ListResult", false)]
+        [TestCase("Model2Data", true)]
+        [TestCase("ModelX", true)]
+        [TestCase("ModelY", true)]
+        [TestCase("Model3", true)]
+        public void ValidateOperationGroupExistence(string className, bool isExist)
         {
-            for (int i = 0; i < notExist.Length; i++)
+            Assert.AreEqual(isExist, CheckExistence(className));
+        }
+
+        private bool CheckExistence(string className)
+        {
+            if (Type.GetType(GetTypeName(className)) == null)
             {
-                Assert.IsNull(Type.GetType(GetTypeName(notExist[i])));
+                return false;
             }
-            for (int i = 0; i < doesExist.Length; i++)
+            else
             {
-                string name = GetTypeName(doesExist[i]);
-                Assert.IsNotNull(Type.GetType(name));
+                return true;
             }
         }
 

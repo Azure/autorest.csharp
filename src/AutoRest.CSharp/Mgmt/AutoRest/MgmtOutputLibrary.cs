@@ -46,8 +46,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
-        private HashSet<Schema> _schemasToOmit;
-        private HashSet<Schema> _schemasStillUsed;
 
         /// <summary>
         /// A mapping of parent resource type to child operation groups that are not resources.
@@ -72,8 +70,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
-            _schemasToOmit = new HashSet<Schema>();
-            _schemasStillUsed = new HashSet<Schema>();
             RemoveOperationGroups.OmitOperationGroups(codeModel, context);
 
             ReorderOperationParameters();
