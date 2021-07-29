@@ -62,6 +62,5 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 ).ToList();
             }
         }
-
     }
 }

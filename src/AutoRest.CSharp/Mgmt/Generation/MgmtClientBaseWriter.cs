@@ -520,14 +520,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Append($"await ");
                     }
-                    var parameterNames = GetParametersName(restClientMethod, operationGroup, context);
                     writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, async)}(");
-                    // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases
-                    // but directly replace the following logic by this function is causing issues
-                    foreach (var parameter in parameterNames)
-                    {
-                        writer.Append($"{parameter:I}, ");
-                    }
+                    BuildAndWriteParameters(writer, restClientMethod);
                     writer.Append($"cancellationToken)");
 
                     if (async)
@@ -580,6 +574,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // This method returns an array of path and non-path parameters name
+        // TODO: this method has some bugs for methods in MgmtListMethods and is no longer used, we should consistently use BuildParameterMapping().
         protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             var paramNames = GetPathParametersName(clientMethod, operationGroup, context).ToList();

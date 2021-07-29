@@ -65,6 +65,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
+
             // Remove ignored headers
             parameters.RemoveAll(requestParameter =>
                 requestParameter.In == ParameterLocation.Header &&

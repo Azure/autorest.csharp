@@ -353,7 +353,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, body, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.Parent.Name, Id.Name, body, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -378,7 +378,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, body, cancellationToken);
+                var response = _restClient.Update(Id.Parent.Name, Id.Name, body, cancellationToken);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
