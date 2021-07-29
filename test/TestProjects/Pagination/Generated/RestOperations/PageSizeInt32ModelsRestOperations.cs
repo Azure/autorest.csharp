@@ -256,6 +256,8 @@ namespace Pagination
                         value = PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((PageSizeInt32ModelData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -287,6 +289,8 @@ namespace Pagination
                         value = PageSizeInt32ModelData.DeserializePageSizeInt32ModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((PageSizeInt32ModelData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

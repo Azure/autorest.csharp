@@ -177,6 +177,8 @@ namespace MgmtParent
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +203,8 @@ namespace MgmtParent
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +217,9 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual DedicatedHostGroup TryGet(string hostGroupName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHostGroup> GetIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +228,10 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostGroupName));
                 }
 
-                return Get(hostGroupName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
+                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +243,9 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<DedicatedHostGroup> TryGetAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DedicatedHostGroup>> GetIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +254,10 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostGroupName));
                 }
 
-                return await GetAsync(hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<DedicatedHostGroup>(null, response.GetRawResponse())
+                    : Response.FromValue(new DedicatedHostGroup(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,7 +269,7 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string hostGroupName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CheckIfExists");
             scope.Start();
@@ -278,7 +280,8 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostGroupName));
                 }
 
-                return TryGet(hostGroupName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(hostGroupName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,7 +293,7 @@ namespace MgmtParent
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CheckIfExists");
             scope.Start();
@@ -301,7 +304,8 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostGroupName));
                 }
 
-                return await TryGetAsync(hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

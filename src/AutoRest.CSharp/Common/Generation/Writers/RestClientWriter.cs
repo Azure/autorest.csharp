@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation (writer, clientMethod, lowLevel: false, "internal");
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: false, "internal");
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (statusCode.Code != null)
                         {
-                           writer.Line($"case {statusCode.Code}:");
+                            writer.Line($"case {statusCode.Code}:");
                         }
                         else
                         {
@@ -256,14 +256,14 @@ namespace AutoRest.CSharp.Generation.Writers
                                 value = new Reference(valueVariable.ActualName, responseBody.Type);
                                 break;
                             default:
-                            {
-                                if (returnType != null)
                                 {
-                                    value = Constant.Default(returnType.WithNullable(true));
-                                }
+                                    if (returnType != null)
+                                    {
+                                        value = Constant.Default(returnType.WithNullable(true));
+                                    }
 
-                                break;
-                            }
+                                    break;
+                                }
                         }
 
                         switch (kind)

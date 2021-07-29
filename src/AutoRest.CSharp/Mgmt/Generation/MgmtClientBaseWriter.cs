@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.UseNamespace(typeof(Task).Namespace!);
         }
 
-        protected void WriteFields(CodeWriter writer, RestClient restClient)
+       protected void WriteFields(CodeWriter writer, RestClient restClient)
         {
             writer.Line();
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
@@ -54,6 +54,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
             writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
             writer.Line();
+        }
+
+        protected void WriteEndOfGet(CodeWriter writer, CSharpType resourcetype, bool isAsync)
+        {
+            writer.Line($"if (response.Value == null)");
+            writer.Line($"throw {GetAwait(isAsync)} {ClientDiagnosticsField}.CreateRequestFailedException{GetAsyncSuffix(isAsync)}(response.GetRawResponse()){GetConfigureAwait(isAsync)};");
+            writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
 
         protected void WriteContainerCtors(CodeWriter writer, Type contextArgumentType, string parentArguments)
@@ -119,24 +126,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected internal string VirtualKeyword(bool isVirtual)
+        protected internal string GetConfigureAwait(bool isAsync)
+        {
+            return isAsync ? ".ConfigureAwait(false)" : string.Empty;
+        }
+
+        protected internal string GetVirtual(bool isVirtual)
         {
             return isVirtual ? "virtual" : string.Empty;
         }
 
-        protected internal string AsyncKeyword(bool async)
+        protected internal string GetAsyncKeyword(bool isAsync)
         {
-            return async ? "async" : string.Empty;
+            return isAsync ? "async" : string.Empty;
         }
 
-        protected internal string AwaitKeyword(bool async)
+        protected internal string GetAsyncSuffix(bool isAsync)
         {
-            return async ? "await" : string.Empty;
+            return isAsync ? "Async" : string.Empty;
         }
 
-        protected internal string OverrideKeyword(bool isInheritedMethod, bool isVirtual = false)
+        protected internal string GetAwait(bool isAsync)
         {
-            return isInheritedMethod ? "override" : VirtualKeyword(isVirtual);
+            return isAsync ? "await " : string.Empty;
+        }
+
+        protected internal string GetOverride(bool isInheritedMethod, bool isVirtual = false)
+        {
+            return isInheritedMethod ? "override" : GetVirtual(isVirtual);
         }
 
         /// <summary>
@@ -144,29 +161,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// </summary>
         /// <param name="writer">The code writer to use.</param>
         /// <param name="pagingMethod">Paging method that contains rest methods.</param>
-        /// <param name="async">Should the method be written sync or async.</param>
+        /// <param name="isAsync">Should the method be written sync or async.</param>
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
         protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, CSharpType resourceType,
-            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async)
+            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool isAsync)
         {
             var parameters = pagingMethod.Method.Parameters;
 
-            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
+            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(isAsync);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
 
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
+            using (writer.Scope($"{GetAsyncKeyword(isAsync)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                 {
-                    writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, isAsync)}(");
                     BuildAndWriteParameters(writer, pagingMethod.Method);
-                    writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+                    writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
                     // need the Select() for converting XXXResourceData to XXXResource
                     if (!string.IsNullOrEmpty(converter.ToString()))
@@ -184,20 +200,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 nextPageFunctionName = "NextPageFunc";
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
+                using (writer.Scope($"{GetAsyncKeyword(isAsync)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                     {
-                        writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, isAsync)}(nextLink, ");
                         BuildAndWriteParameters(writer, pagingMethod.Method);
-                        writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+                        writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
                         writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
                         writer.Append($"{converter}");
                         writer.Line($", {continuationTokenText}, response.GetRawResponse());");
                     });
                 }
             }
-            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", isAsync)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping)
@@ -262,6 +278,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        protected IEnumerable<Parameter> BuildPassThroughParameters(RestClientMethod method)
+        {
+            var parameterMapping = BuildParameterMapping(method);
+            return parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+        }
+
         /// <summary>
         /// Builds the mapping between parameters of the rest client method and its caller.
         /// Decides which parameters should pass through, which should be evaluated with what expressions.
@@ -316,14 +338,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool isAsync, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
             (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
-            responseType = responseType.WrapAsync(async);
+            responseType = responseType.WrapAsync(isAsync);
 
             writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
 
@@ -336,7 +358,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(");
+            writer.Append($"{restClientMethod.Accessibility} virtual {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -349,28 +371,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteParameterNullChecks(nonPathParameters);
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    writer.Append($"var response = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
+                    writer.Append($"var response = {GetAwait(isAsync)}");
 
                     var parameterNames = GetParametersName(restClientMethod, operationGroup, context);
-                    writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, async)}(");
+                    writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
                     // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases
                     // but directly replace the following logic by this function is causing issues
                     foreach (var parameter in parameterNames)
                     {
                         writer.Append($"{parameter:I}, ");
                     }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-
-                    writer.Line($";");
+                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
                     if (isListFunction)
                     {
@@ -546,8 +557,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual, string? methodName = null)
+        protected void WriteFirstLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -571,9 +581,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType responseType = returnType != null ?
                 new CSharpType(typeof(Response<>), returnType) :
                 typeof(Response);
-            responseType = responseType.WrapAsync(async);
+            responseType = responseType.WrapAsync(isAsync);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName(methodName, async)}(");
+            writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, isAsync)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -588,42 +598,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
-                    writer.Append($"var {operation:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{CreateMethodName($"Start{methodName}", async)}(");
+                    writer.Append($"var {operation:D} = {GetAwait(isAsync)}");
+                    writer.Append($"{CreateMethodName($"Start{methodName}", isAsync)}(");
                     WriteArguments(writer, parameterMapping.Where(p => p.IsPassThru));
-                    writer.Append($"cancellationToken)");
+                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
-                    writer.Append($"return ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-
-                    var waitForCompletionMethod = returnType == null && async ?
+                    writer.Append($"return {GetAwait(isAsync)}");
+                    var waitForCompletionMethod = returnType == null && isAsync ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
-                    writer.Append($"{operation}.{CreateMethodName(waitForCompletionMethod, async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"{operation}.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
                 });
                 writer.Line();
             }
         }
 
-        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async,
-            bool isVirtual = false, string? methodName = null)
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual = false, string? methodName = null)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -646,9 +636,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = lroObjectType.WrapAsync(async);
+            CSharpType responseType = lroObjectType.WrapAsync(isAsync);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(isVirtual)} {responseType} {CreateMethodName($"Start{methodName}", async)}(");
+            writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName($"Start{methodName}", isAsync)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);
@@ -662,20 +652,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
-                    writer.Append($"var {response:D} = ");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
+                    writer.Append($"var {response:D} = {GetAwait(isAsync)}");
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
                     WriteArguments(writer, parameterMapping);
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
                     WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
                 });

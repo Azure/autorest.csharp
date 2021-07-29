@@ -77,6 +77,8 @@ namespace MgmtListMethods
                         value = SubFakeData.DeserializeSubFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((SubFakeData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -104,6 +106,8 @@ namespace MgmtListMethods
                         value = SubFakeData.DeserializeSubFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((SubFakeData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
