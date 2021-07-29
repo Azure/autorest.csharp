@@ -38,23 +38,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                 }
 
-                /*var opCopy = new List<OperationGroup>(codeModel.OperationGroups);
-                foreach (var operationGroup in opCopy)
-                {
-                    if (omitSet.Contains(operationGroup.Key))
-                    {
-                        codeModel.OperationGroups.Remove(operationGroup);
-                        if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
-                        {
-                            DetectSchemasToOmit(codeModel, operationGroup);
-                        }
-                    }
-                    else
-                    {
-                        AddNonOmittedSchemasToSafeList(operationGroup);
-                    }
-                }*/
-
                 AddDependantSchemasRecursively(_schemasStillUsed);
                 RemoveSchemas(codeModel);
             }
