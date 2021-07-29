@@ -110,69 +110,52 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCheckIfExistsVariants(RestClientMethod getMethod)
         {
-            var parameterMapping = BuildParameterMapping(getMethod);
+            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(getMethod);
 
-            var methodName = "Get";
-            var scopeName = methodName;
+            WriteCheckIfExists(getMethod, passThruParameters, false);
+            WriteCheckIfExists(getMethod, passThruParameters, true);
+        }
 
-            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-
+        private void WriteCheckIfExists(RestClientMethod getMethod, IEnumerable<Parameter> passThruParameters, bool isAsync)
+        {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(false, $"Response<bool>", "CheckIfExists", passThruParameters, writer =>
+            WriteContainerMethodScope(isAsync, $"{typeof(bool).WrapResponse(isAsync)}", $"CheckIfExists", passThruParameters, writer =>
             {
-                WriteCheckIfExistsBody(getMethod, false);
-            }, isOverride: false);
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<Response<bool>>", "CheckIfExists", passThruParameters, writer =>
-            {
-                WriteCheckIfExistsBody(getMethod, true);
+                WriteCheckIfExistsBody(getMethod, isAsync);
             }, isOverride: false);
         }
 
         private void WriteCheckIfExistsBody(RestClientMethod method, bool isAsync)
         {
-            var parameterMapping = BuildParameterMapping(method);
-            var await = isAsync ? "await " : string.Empty;
-            var asyncSuffix = isAsync ? "Async" : string.Empty;
-            var configAwait = isAsync ? ".ConfigureAwait(false)" : string.Empty;
-            IEnumerable <Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-            _writer.Append($"var response = {await}GetIfExists{asyncSuffix}(");
+            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(method);
+            _writer.Append($"var response = {GetAwait(isAsync)} GetIfExists{GetAsyncSuffix(isAsync)}(");
             foreach (var parameter in passThruParameters)
             {
                 _writer.AppendRaw(parameter.Name);
                 _writer.AppendRaw(", ");
             }
-            _writer.Line($"cancellationToken: cancellationToken){configAwait};");
+            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
             _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
         }
 
         private void WriteGetIfExistsVariants(RestClientMethod getMethod)
         {
-            var parameterMapping = BuildParameterMapping(getMethod);
+            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(getMethod);
 
-            var methodName = "Get";
-            var scopeName = methodName;
+            WriteGetIfExists(getMethod, passThruParameters, false);
+            WriteGetIfExists(getMethod, passThruParameters, true);
+        }
 
-            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-
+        private void WriteGetIfExists(RestClientMethod getMethod, IEnumerable<Parameter> passThruParameters, bool isAsync)
+        {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(false, $"Response<{_resource.Type.Name}>", "GetIfExists", passThruParameters, writer =>
+            WriteContainerMethodScope(isAsync, $"{_resource.Type.WrapResponse(isAsync)}", "GetIfExists", passThruParameters, writer =>
             {
-                WriteGetFromRestClient(getMethod, false);
+                WriteGetFromRestClient(getMethod, isAsync);
                 WriteEndOfGetIfExists();
-            }, isOverride: false, catch404: false);
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<Response<{_resource.Type.Name}>>", "GetIfExists", passThruParameters, writer =>
-            {
-                WriteGetFromRestClient(getMethod, true);
-                WriteEndOfGetIfExists();
-            }, isOverride: false, catch404: false);
+            }, isOverride: false);
         }
 
         private void WriteEndOfGetIfExists()
@@ -214,7 +197,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             const string cancellationTokenParameter = "cancellationToken";
             _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
 
-            _writer.Append($"public {AsyncKeyword(isAsync)} {OverrideKeyword(isOverride, true)} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
+            _writer.Append($"public {GetAsyncKeyword(isAsync)} {GetOverride(isOverride, true)} {returnType} {CreateMethodName(syncMethodName, isAsync)}(");
             foreach (var parameter in parameters)
             {
                 _writer.WriteParameter(parameter);
@@ -228,44 +211,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, catch404);
         }
 
-        private void WriteGetFromRestClient(RestClientMethod method, bool async)
+        private void WriteGetFromRestClient(RestClientMethod method, bool isAsync)
         {
             var parameterMapping = BuildParameterMapping(method);
-            string await = async ? "await " : string.Empty;
-            string asyncSuffix = async ? "Async" : string.Empty;
-            string configAwait = async ? ".ConfigureAwait(false)" : string.Empty;
-            _writer.Append($"var response = {await}{RestClientField}.{method.Name}{asyncSuffix}(");
-            foreach (var parameter in parameterMapping)
-            {
-                _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                _writer.AppendRaw(", ");
-            }
-            _writer.Line($"cancellationToken: cancellationToken){configAwait};");
+            _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
+            WriteArguments(_writer, parameterMapping);
+            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
         }
 
         private void WriteGetVariants(RestClientMethod method)
         {
-            var parameterMapping = BuildParameterMapping(method);
+            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(method);
 
-            var methodName = "Get";
-            var scopeName = methodName;
+            WriteGetMethod(method, passThruParameters, false);
+            WriteGetMethod(method, passThruParameters, true);
+        }
 
-            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-
+        private void WriteGetMethod(RestClientMethod method, IEnumerable<Parameter> passThruParameters, bool isAsync)
+        {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
+            WriteContainerMethodScope(isAsync, $"{_resource.Type.WrapResponse(isAsync)}", "Get", passThruParameters, writer =>
             {
-                WriteGetFromRestClient(method, false);
-                WriteEndOfGet(_writer, _resource.Type);
-            }, isOverride: false);
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service.");
-            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
-            {
-                WriteGetFromRestClient(method, true);
-                WriteEndOfGet(_writer, _resource.Type);
+                WriteGetFromRestClient(method, isAsync);
+                WriteEndOfGet(_writer, _resource.Type, isAsync);
             }, isOverride: false);
         }
 
