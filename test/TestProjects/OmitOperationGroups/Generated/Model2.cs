@@ -20,7 +20,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model2(OperationsBase options, Model2Data resource)
+        internal Model2(ResourceOperations options, Model2Data resource)
         {
             Data = resource;
         }
