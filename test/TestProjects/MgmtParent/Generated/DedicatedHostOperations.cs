@@ -19,7 +19,7 @@ using MgmtParent.Models;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHost. </summary>
-    public partial class DedicatedHostOperations : ResourceOperationsBase<DedicatedHost>
+    public partial class DedicatedHostOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private DedicatedHostsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal DedicatedHostOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal DedicatedHostOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -43,8 +43,9 @@ namespace MgmtParent
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about a dedicated host. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Get");
             scope.Start();
@@ -60,8 +61,9 @@ namespace MgmtParent
             }
         }
 
-        /// <inheritdoc />
-        public override Response<DedicatedHost> Get(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about a dedicated host. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DedicatedHost> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Get");
             scope.Start();

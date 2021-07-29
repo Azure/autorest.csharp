@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific PrivateEndpointConnection. </summary>
-    public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<PrivateEndpointConnection>
+    public partial class PrivateEndpointConnectionOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private PrivateEndpointConnectionsRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal PrivateEndpointConnectionOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal PrivateEndpointConnectionOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -43,8 +43,9 @@ namespace Azure.Management.Storage
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<PrivateEndpointConnection>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<PrivateEndpointConnection>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Get");
             scope.Start();
@@ -60,8 +61,9 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
-        public override Response<PrivateEndpointConnection> Get(CancellationToken cancellationToken = default)
+        /// <summary> Gets the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PrivateEndpointConnection> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Get");
             scope.Start();

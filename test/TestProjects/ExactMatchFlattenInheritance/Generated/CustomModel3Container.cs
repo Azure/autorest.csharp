@@ -18,7 +18,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel3Container : ResourceContainerBase<CustomModel3, CustomModel3Data>
+    public partial class CustomModel3Container : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Container"/> class for mocking. </summary>
         protected CustomModel3Container()
@@ -27,7 +27,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of CustomModel3Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal CustomModel3Container(OperationsBase parent) : base(parent)
+        internal CustomModel3Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

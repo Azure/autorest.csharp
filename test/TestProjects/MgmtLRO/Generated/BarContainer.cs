@@ -18,7 +18,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Bar and their operations over a ResourceGroup. </summary>
-    public partial class BarContainer : ResourceContainerBase<Bar, BarData>
+    public partial class BarContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="BarContainer"/> class for mocking. </summary>
         protected BarContainer()
@@ -27,7 +27,7 @@ namespace MgmtLRO
 
         /// <summary> Initializes a new instance of BarContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BarContainer(OperationsBase parent) : base(parent)
+        internal BarContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific ResourceModel1. </summary>
-    public partial class ResourceModel1Operations : ResourceOperationsBase<ResourceModel1>
+    public partial class ResourceModel1Operations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private ResourceModel1SRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal ResourceModel1Operations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal ResourceModel1Operations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,8 @@ namespace SupersetFlattenInheritance
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<ResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Operations.Get");
             scope.Start();
@@ -59,8 +59,8 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
-        public override Response<ResourceModel1> Get(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ResourceModel1> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Operations.Get");
             scope.Start();

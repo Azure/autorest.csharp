@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal SecondResourcesUpdateOperation(OperationsBase operationsBase, Response<TheExtensionData> response)
+        internal SecondResourcesUpdateOperation(ResourceOperations operationsBase, Response<TheExtensionData> response)
         {
             _operation = new OperationOrResponseInternals<TheExtensionFake>(Response.FromValue(new TheExtensionFake(operationsBase, response.Value), response.GetRawResponse()));
         }

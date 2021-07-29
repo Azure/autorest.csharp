@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
-    public partial class ToasterContainer : ResourceContainerBase<Toaster, ToasterData>
+    public partial class ToasterContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="ToasterContainer"/> class for mocking. </summary>
         protected ToasterContainer()
@@ -27,7 +27,7 @@ namespace SubscriptionExtensions
 
         /// <summary> Initializes a new instance of ToasterContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ToasterContainer(OperationsBase parent) : base(parent)
+        internal ToasterContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

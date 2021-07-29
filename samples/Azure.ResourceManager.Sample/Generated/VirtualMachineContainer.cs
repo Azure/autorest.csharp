@@ -20,7 +20,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachine and their operations over a ResourceGroup. </summary>
-    public partial class VirtualMachineContainer : ResourceContainerBase<VirtualMachine, VirtualMachineData>
+    public partial class VirtualMachineContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineContainer"/> class for mocking. </summary>
         protected VirtualMachineContainer()
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineContainer(OperationsBase parent) : base(parent)
+        internal VirtualMachineContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

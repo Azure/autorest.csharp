@@ -20,7 +20,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64Model"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeInt64Model(OperationsBase options, PageSizeInt64ModelData resource) : base(options, resource.Id)
+        internal PageSizeInt64Model(ResourceOperations options, PageSizeInt64ModelData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific BillingAccount. </summary>
-    public partial class BillingAccountOperations : ResourceOperationsBase<BillingAccount>
+    public partial class BillingAccountOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private BillingAccountsRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal BillingAccountOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal BillingAccountOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -42,44 +42,10 @@ namespace TenantOnly
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<BillingAccount>> GetAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <inheritdoc />
-        public override Response<BillingAccount> Get(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Get(Id.Name, null, cancellationToken);
-                return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<BillingAccount>> GetAsync(string expand, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<BillingAccount>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();
@@ -98,7 +64,7 @@ namespace TenantOnly
         /// <summary> Gets a billing account by its ID. </summary>
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BillingAccount> Get(string expand, CancellationToken cancellationToken = default)
+        public virtual Response<BillingAccount> Get(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.Get");
             scope.Start();

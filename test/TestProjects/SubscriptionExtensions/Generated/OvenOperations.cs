@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the operations that can be performed over a specific Oven. </summary>
-    public partial class OvenOperations : ResourceOperationsBase<Oven>
+    public partial class OvenOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private OvensRestOperations _restClient { get; }
@@ -31,7 +31,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal OvenOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal OvenOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -42,8 +42,8 @@ namespace SubscriptionExtensions
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenOperations.Get");
             scope.Start();
@@ -59,8 +59,8 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <inheritdoc />
-        public override Response<Oven> Get(CancellationToken cancellationToken = default)
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<Oven> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenOperations.Get");
             scope.Start();

@@ -19,7 +19,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing the operations that can be performed over a specific SubFake. </summary>
-    public partial class SubFakeOperations : ResourceOperationsBase<SubFake>
+    public partial class SubFakeOperations : ResourceOperations
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private SubFakesRestOperations _restClient { get; }
@@ -32,7 +32,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="SubFakeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubFakeOperations(OperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal SubFakeOperations(ResourceOperations options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SubFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -43,8 +43,9 @@ namespace MgmtListMethods
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
 
-        /// <inheritdoc />
-        public async override Task<Response<SubFake>> GetAsync(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<SubFake>> GetAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Get");
             scope.Start();
@@ -60,8 +61,9 @@ namespace MgmtListMethods
             }
         }
 
-        /// <inheritdoc />
-        public override Response<SubFake> Get(CancellationToken cancellationToken = default)
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<SubFake> Get(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubFakeOperations.Get");
             scope.Start();

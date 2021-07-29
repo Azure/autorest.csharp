@@ -20,7 +20,7 @@ using Pagination.Models;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeFloatModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeFloatModelContainer : ResourceContainerBase<PageSizeFloatModel, PageSizeFloatModelData>
+    public partial class PageSizeFloatModelContainer : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModelContainer"/> class for mocking. </summary>
         protected PageSizeFloatModelContainer()
@@ -29,7 +29,7 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of PageSizeFloatModelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PageSizeFloatModelContainer(OperationsBase parent) : base(parent)
+        internal PageSizeFloatModelContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

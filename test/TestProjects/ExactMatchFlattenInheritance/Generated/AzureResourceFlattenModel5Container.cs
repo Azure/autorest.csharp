@@ -18,7 +18,7 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel5 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel5Container : ResourceContainerBase<AzureResourceFlattenModel5, AzureResourceFlattenModel5Data>
+    public partial class AzureResourceFlattenModel5Container : ResourceContainer
     {
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel5Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel5Container()
@@ -27,7 +27,7 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel5Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AzureResourceFlattenModel5Container(OperationsBase parent) : base(parent)
+        internal AzureResourceFlattenModel5Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
         }

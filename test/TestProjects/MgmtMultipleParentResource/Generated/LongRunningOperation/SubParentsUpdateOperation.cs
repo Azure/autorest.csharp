@@ -22,14 +22,14 @@ namespace MgmtMultipleParentResource.Models
     {
         private readonly OperationInternals<SubParent> _operation;
 
-        private readonly OperationsBase _operationBase;
+        private readonly ResourceOperations _operationBase;
 
         /// <summary> Initializes a new instance of SubParentsUpdateOperation for mocking. </summary>
         protected SubParentsUpdateOperation()
         {
         }
 
-        internal SubParentsUpdateOperation(OperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal SubParentsUpdateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<SubParent>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "SubParentsUpdateOperation");
             _operationBase = operationsBase;
