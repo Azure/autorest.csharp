@@ -179,6 +179,10 @@ namespace ExactMatchInheritance
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<ExactMatchModel5Data>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -209,6 +213,10 @@ namespace ExactMatchInheritance
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = ExactMatchModel5Data.DeserializeExactMatchModel5Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<ExactMatchModel5Data>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

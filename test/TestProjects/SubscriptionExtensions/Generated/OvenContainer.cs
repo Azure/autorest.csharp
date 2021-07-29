@@ -177,6 +177,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +203,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +217,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Oven TryGet(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<Oven> GetIfExists(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +228,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return Get(vmName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
+                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +243,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Oven> TryGetAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Oven>> GetIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +254,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return await GetAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
+                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,7 +269,7 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CheckIfExists");
             scope.Start();
@@ -278,7 +280,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return TryGet(vmName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(vmName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,7 +293,7 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CheckIfExists");
             scope.Start();
@@ -301,7 +304,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return await TryGetAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

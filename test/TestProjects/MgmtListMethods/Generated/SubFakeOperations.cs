@@ -52,6 +52,8 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -70,6 +72,8 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -174,6 +174,10 @@ namespace SubscriptionExtensions
                         value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<OvenData>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -204,6 +208,10 @@ namespace SubscriptionExtensions
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<OvenData>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

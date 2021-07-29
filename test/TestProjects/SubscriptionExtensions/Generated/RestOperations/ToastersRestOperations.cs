@@ -177,6 +177,10 @@ namespace SubscriptionExtensions
                         value = ToasterData.DeserializeToasterData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<ToasterData>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -207,6 +211,10 @@ namespace SubscriptionExtensions
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = ToasterData.DeserializeToasterData(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<ToasterData>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

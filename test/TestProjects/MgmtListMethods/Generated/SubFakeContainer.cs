@@ -179,6 +179,8 @@ namespace MgmtListMethods
                 }
 
                 var response = _restClient.Get(subFakeName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubFake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -203,6 +205,8 @@ namespace MgmtListMethods
                 }
 
                 var response = await _restClient.GetAsync(subFakeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubFake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -215,9 +219,9 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subFakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual SubFake TryGet(string subFakeName, CancellationToken cancellationToken = default)
+        public virtual Response<SubFake> GetIfExists(string subFakeName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -226,11 +230,10 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subFakeName));
                 }
 
-                return Get(subFakeName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(subFakeName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<SubFake>(null, response.GetRawResponse())
+                    : Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -242,9 +245,9 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subFakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<SubFake> TryGetAsync(string subFakeName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SubFake>> GetIfExistsAsync(string subFakeName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -253,11 +256,10 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subFakeName));
                 }
 
-                return await GetAsync(subFakeName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(subFakeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<SubFake>(null, response.GetRawResponse())
+                    : Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -269,7 +271,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subFakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string subFakeName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string subFakeName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.CheckIfExists");
             scope.Start();
@@ -280,7 +282,8 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subFakeName));
                 }
 
-                return TryGet(subFakeName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(subFakeName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -292,7 +295,7 @@ namespace MgmtListMethods
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="subFakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string subFakeName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string subFakeName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubFakeContainer.CheckIfExists");
             scope.Start();
@@ -303,7 +306,8 @@ namespace MgmtListMethods
                     throw new ArgumentNullException(nameof(subFakeName));
                 }
 
-                return await TryGetAsync(subFakeName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(subFakeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

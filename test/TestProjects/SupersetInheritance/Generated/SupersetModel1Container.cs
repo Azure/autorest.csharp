@@ -173,6 +173,8 @@ namespace SupersetInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -197,6 +199,8 @@ namespace SupersetInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,9 +213,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual SupersetModel1 TryGet(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<SupersetModel1> GetIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -220,11 +224,10 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel1SName));
                 }
 
-                return Get(supersetModel1SName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<SupersetModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,9 +239,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<SupersetModel1> TryGetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SupersetModel1>> GetIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -247,11 +250,10 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel1SName));
                 }
 
-                return await GetAsync(supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<SupersetModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new SupersetModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +265,7 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.CheckIfExists");
             scope.Start();
@@ -274,7 +276,8 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel1SName));
                 }
 
-                return TryGet(supersetModel1SName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(supersetModel1SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,7 +289,7 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.CheckIfExists");
             scope.Start();
@@ -297,7 +300,8 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel1SName));
                 }
 
-                return await TryGetAsync(supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(supersetModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

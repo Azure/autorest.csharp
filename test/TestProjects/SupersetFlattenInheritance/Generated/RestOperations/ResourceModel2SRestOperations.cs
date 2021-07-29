@@ -179,6 +179,10 @@ namespace SupersetFlattenInheritance
                         value = ResourceModel2Data.DeserializeResourceModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<ResourceModel2Data>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -209,6 +213,10 @@ namespace SupersetFlattenInheritance
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = ResourceModel2Data.DeserializeResourceModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<ResourceModel2Data>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

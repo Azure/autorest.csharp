@@ -256,6 +256,10 @@ namespace Pagination
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<PageSizeFloatModelData>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -286,6 +290,10 @@ namespace Pagination
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = PageSizeFloatModelData.DeserializePageSizeFloatModelData(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<PageSizeFloatModelData>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

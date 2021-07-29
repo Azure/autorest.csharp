@@ -89,6 +89,10 @@ namespace Azure.Management.Storage
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<ManagementPolicyData>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -121,6 +125,10 @@ namespace Azure.Management.Storage
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<ManagementPolicyData>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

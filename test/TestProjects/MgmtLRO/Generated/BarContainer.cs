@@ -177,6 +177,8 @@ namespace MgmtLRO
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +203,8 @@ namespace MgmtLRO
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +217,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Bar TryGet(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +228,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return Get(barName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
+                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +243,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Bar> TryGetAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +254,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return await GetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
+                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,7 +269,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExists");
             scope.Start();
@@ -278,7 +280,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return TryGet(barName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(barName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,7 +293,7 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExists");
             scope.Start();
@@ -301,7 +304,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return await TryGetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

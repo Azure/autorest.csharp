@@ -173,6 +173,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TrackedResourceModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -197,6 +199,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new TrackedResourceModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,9 +213,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual TrackedResourceModel1 TryGet(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<TrackedResourceModel1> GetIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -220,11 +224,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(trackedResourceModel1SName));
                 }
 
-                return Get(trackedResourceModel1SName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,9 +239,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<TrackedResourceModel1> TryGetAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<TrackedResourceModel1>> GetIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -247,11 +250,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(trackedResourceModel1SName));
                 }
 
-                return await GetAsync(trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<TrackedResourceModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new TrackedResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +265,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.CheckIfExists");
             scope.Start();
@@ -274,7 +276,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(trackedResourceModel1SName));
                 }
 
-                return TryGet(trackedResourceModel1SName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(trackedResourceModel1SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,7 +289,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="trackedResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel1Container.CheckIfExists");
             scope.Start();
@@ -297,7 +300,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(trackedResourceModel1SName));
                 }
 
-                return await TryGetAsync(trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(trackedResourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

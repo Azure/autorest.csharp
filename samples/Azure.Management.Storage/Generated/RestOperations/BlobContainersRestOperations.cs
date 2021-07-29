@@ -409,6 +409,10 @@ namespace Azure.Management.Storage
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    {
+                        return Response.FromValue<BlobContainerData>(null, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -445,6 +449,10 @@ namespace Azure.Management.Storage
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
+                    }
+                case 404:
+                    {
+                        return Response.FromValue<BlobContainerData>(null, message.Response);
                     }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);

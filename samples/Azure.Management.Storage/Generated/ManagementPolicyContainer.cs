@@ -156,6 +156,8 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -175,6 +177,8 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -187,17 +191,16 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual ManagementPolicy TryGet(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public virtual Response<ManagementPolicy> GetIfExists(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.GetIfExists");
             scope.Start();
             try
             {
-                return Get(managementPolicyName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<ManagementPolicy>(null, response.GetRawResponse())
+                    : Response.FromValue(new ManagementPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -209,17 +212,16 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<ManagementPolicy> TryGetAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ManagementPolicy>> GetIfExistsAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.GetIfExists");
             scope.Start();
             try
             {
-                return await GetAsync(managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<ManagementPolicy>(null, response.GetRawResponse())
+                    : Response.FromValue(new ManagementPolicy(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,13 +233,14 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CheckIfExists");
             scope.Start();
             try
             {
-                return TryGet(managementPolicyName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(managementPolicyName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -249,13 +252,14 @@ namespace Azure.Management.Storage
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CheckIfExists");
             scope.Start();
             try
             {
-                return await TryGetAsync(managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

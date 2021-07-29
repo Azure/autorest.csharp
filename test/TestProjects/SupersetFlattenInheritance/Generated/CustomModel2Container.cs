@@ -173,6 +173,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, customModel2SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -197,6 +199,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new CustomModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,9 +213,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual CustomModel2 TryGet(string customModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<CustomModel2> GetIfExists(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.GetIfExists");
             scope.Start();
             try
             {
@@ -220,11 +224,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(customModel2SName));
                 }
 
-                return Get(customModel2SName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, customModel2SName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
+                    : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,9 +239,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<CustomModel2> TryGetAsync(string customModel2SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<CustomModel2>> GetIfExistsAsync(string customModel2SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.GetIfExists");
             scope.Start();
             try
             {
@@ -247,11 +250,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(customModel2SName));
                 }
 
-                return await GetAsync(customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<CustomModel2>(null, response.GetRawResponse())
+                    : Response.FromValue(new CustomModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,7 +265,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string customModel2SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CheckIfExists");
             scope.Start();
@@ -274,7 +276,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(customModel2SName));
                 }
 
-                return TryGet(customModel2SName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(customModel2SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,7 +289,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="customModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string customModel2SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string customModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CheckIfExists");
             scope.Start();
@@ -297,7 +300,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(customModel2SName));
                 }
 
-                return await TryGetAsync(customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(customModel2SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
