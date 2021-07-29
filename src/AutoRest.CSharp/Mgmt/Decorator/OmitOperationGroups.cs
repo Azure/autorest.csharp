@@ -22,7 +22,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (operationGroupsToOmit != null)
             {
                 var omitSet = operationGroupsToOmit.ToHashSet();
-                var opCopy = new List<OperationGroup>(codeModel.OperationGroups);
+                var omittedOGs = codeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
+                var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
+
+                codeModel.OperationGroups = nonOmittedOGs;
+                foreach (var operationGroup in codeModel.OperationGroups)
+                {
+                    AddNonOmittedSchemasToSafeList(operationGroup);
+                }
+                foreach (var operationGroup in omittedOGs)
+                {
+                    if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
+                    {
+                        DetectSchemasToOmit(codeModel, operationGroup);
+                    }
+                }
+
+                /*var opCopy = new List<OperationGroup>(codeModel.OperationGroups);
                 foreach (var operationGroup in opCopy)
                 {
                     if (omitSet.Contains(operationGroup.Key))
@@ -35,9 +51,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                     else
                     {
-                        AddNonOmmitedSchemasToSafeList(operationGroup);
+                        AddNonOmittedSchemasToSafeList(operationGroup);
                     }
-                }
+                }*/
 
                 AddDependantSchemasRecursively(_schemasStillUsed);
                 RemoveSchemas(codeModel);
@@ -101,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void AddNonOmmitedSchemasToSafeList(OperationGroup operationGroup)
+        private static void AddNonOmittedSchemasToSafeList(OperationGroup operationGroup)
         {
             foreach (var operation in operationGroup.Operations)
             {
