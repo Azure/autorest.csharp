@@ -56,6 +56,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
+        protected void WriteEndOfGet(CodeWriter writer, CSharpType resourcetype)
+        {
+            writer.Line($"if (response.Value == null)");
+            writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException(response.GetRawResponse());");
+            writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
+        }
+
         protected void WriteContainerCtors(CodeWriter writer, Type contextArgumentType, string parentArguments)
         {
             // write protected default constructor

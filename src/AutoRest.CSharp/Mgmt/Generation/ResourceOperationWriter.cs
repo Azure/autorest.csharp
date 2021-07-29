@@ -371,7 +371,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                         writer.Append($".ConfigureAwait(false)");
                     }
                     writer.Line($";");
-                    writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, response.Value), response.GetRawResponse());");
+                    WriteEndOfGet(writer, resource.Type);
                 });
                 writer.Line();
             }
