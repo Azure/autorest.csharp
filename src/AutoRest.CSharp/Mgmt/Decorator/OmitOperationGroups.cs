@@ -11,27 +11,26 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
-    internal static class RemoveOperationGroups
+    internal static class OmitOperationGroups
     {
         private static HashSet<Schema> _schemasToOmit = new HashSet<Schema>();
         private static HashSet<Schema> _schemasStillUsed = new HashSet<Schema>();
 
-        public static void OmitOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
+        public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
             if (operationGroupsToOmit != null)
             {
                 var omitSet = operationGroupsToOmit.ToHashSet();
-                for (int i = 0; i < codeModel.OperationGroups.Count; i++)
+                var opCopy = new List<OperationGroup>(codeModel.OperationGroups);
+                foreach (var operationGroup in opCopy)
                 {
-                    var operationGroup = codeModel.OperationGroups.ElementAt(i);
                     if (omitSet.Contains(operationGroup.Key))
                     {
                         codeModel.OperationGroups.Remove(operationGroup);
-                        i--;
                         if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                         {
-                            OmitSchemas(codeModel, operationGroup);
+                            DetectSchemasToOmit(codeModel, operationGroup);
                         }
                     }
                     else
@@ -41,22 +40,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
 
                 AddDependantSchemasRecursively(_schemasStillUsed);
+                RemoveSchemas(codeModel);
+            }
+        }
 
-                foreach (var schema in _schemasToOmit)
+        private static void RemoveSchemas(CodeModel codeModel)
+        {
+            foreach (var schema in _schemasToOmit)
+            {
+                if (schema is ObjectSchema objSchema && !_schemasStillUsed.Contains(objSchema))
                 {
-                    if (schema is ObjectSchema objSchema && !_schemasStillUsed.Contains(objSchema))
+                    codeModel.Schemas.Objects.Remove(objSchema);
+                    RemoveRelations(objSchema);
+                }
+            }
+        }
+
+        private static void RemoveRelations(ObjectSchema schema)
+        {
+            if (schema.Parents != null)
+            {
+                foreach (ObjectSchema parent in schema.Parents.Immediate)
+                {
+                    if (parent.Children != null)
                     {
-                        codeModel.Schemas.Objects.Remove(objSchema);
-                        if (objSchema.Parents != null)
-                        {
-                            foreach (ObjectSchema parent in objSchema.Parents.Immediate)
-                            {
-                                if (parent.Children != null)
-                                {
-                                    parent.Children.Immediate.Remove(objSchema);
-                                }
-                            }
-                        }
+                        parent.Children.Immediate.Remove(schema);
                     }
                 }
             }
@@ -151,7 +159,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void OmitSchemas(CodeModel codeModel, OperationGroup operationGroup)
+        private static void DetectSchemasToOmit(CodeModel codeModel, OperationGroup operationGroup)
         {
             foreach (var operation in operationGroup.Operations)
             {
