@@ -494,10 +494,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (generatedModel == null)
                 return leastParamCtor;
 
-            if (generatedModel.GetCustomAttribute(typeof(ReferenceTypeAttribute), false) != null)
+            if (generatedModel.GetCustomAttributes(false).Where(a => a.GetType().Name == "ReferenceTypeAttribute") != null)
+            {
                 return generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                    .Where(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute), false) != null)
+                    .Where(c => c.GetCustomAttributes(false).Where(a => a.GetType().Name == "InitializationConstructorAttribute") != null)
                     .FirstOrDefault();
+            }
 
             foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {

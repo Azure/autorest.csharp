@@ -11,12 +11,14 @@ namespace AutoRest.TestServer.Tests.Mgmt
 {
     public class ReferenceClassFinderTests
     {
+        private class ReferenceTypeAttribute : Attribute { }
+
         private class A { }
         private class B : A { }
         private class C : B { }
         private class D { }
         private class E : D { }
-        [ReferenceType(typeof(int))]
+        [ReferenceType]
         private class F<T> { }
         private class G : F<int> { }
         private class H : F<int> { }
@@ -30,7 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt
         [TestCaseSource(nameof(TestReferenceTypes))]
         public void ValidateRootNodes(params Type[] referenceTypes)
         {
-            var rootNodes = ReferenceClassFinder.GetRootNodes(ReferenceClassFinder.ConvertGenericType(new List<Type>(referenceTypes)));
+            var rootNodes = ReferenceClassFinder.GetRootNodes(new List<Type>(referenceTypes));
             HashSet<Type> rootTypes = new HashSet<Type>();
             foreach (var node in rootNodes)
             {
