@@ -494,10 +494,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (generatedModel == null)
                 return leastParamCtor;
 
-            if (generatedModel.GetCustomAttribute(typeof(ReferenceTypeAttribute), false) != null)
-                return generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                    .Where(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute), false) != null)
-                    .FirstOrDefault();
+            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == "ReferenceTypeAttribute"))
+            {
+                var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
+                return attrCtors.FirstOrDefault();
+            }
 
             foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {
@@ -507,9 +509,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return leastParamCtor;
         }
 
+        private bool HasInitializationAttribute(ConstructorInfo c)
+        {
+            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == "InitializationConstructorAttribute");
+        }
+
         protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)
         {
-            var ctors = model.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var ctors = model.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             Assert.AreEqual(1, ctors.Length);
             var ctor = ctors.First();
             var parameters = ctor.GetParameters();

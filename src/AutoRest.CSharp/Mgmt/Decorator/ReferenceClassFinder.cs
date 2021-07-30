@@ -33,13 +33,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return new List<Type>();
             }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
+            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == "ReferenceTypeAttribute").Count() > 0).ToList();
         }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {
-            var referenceClasses = ConvertGenericType(referenceTypes);
-            var rootNodes = GetRootNodes(referenceClasses);
+            var rootNodes = GetRootNodes(referenceTypes);
             var output = new List<Type>();
             foreach (var root in rootNodes)
             {
@@ -94,19 +93,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return PromoteGenericType(output);
 
             return output;
-        }
-
-        internal static IList<Type> ConvertGenericType(IList<Type> referenceClassCollection)
-        {
-            for (int i = 0; i < referenceClassCollection.Count; i++)
-            {
-                if (referenceClassCollection[i].IsGenericType)
-                {
-                    var attributeObj = referenceClassCollection[i].GetCustomAttributes().First() as ReferenceTypeAttribute;
-                    referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(attributeObj!.GenericType);
-                }
-            }
-            return referenceClassCollection;
         }
 
         internal static List<Node> GetRootNodes(IList<Type> referenceClassCollection)
