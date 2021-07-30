@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
@@ -494,7 +495,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (generatedModel == null)
                 return leastParamCtor;
 
-            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == "ReferenceTypeAttribute"))
+            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == ReferenceClassFinder.ReferenceTypeAttributeName))
             {
                 var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
                 var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
@@ -511,7 +512,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool HasInitializationAttribute(ConstructorInfo c)
         {
-            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == "InitializationConstructorAttribute");
+            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == ReferenceClassFinder.InitializationCtorAttributeName);
         }
 
         protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)
