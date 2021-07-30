@@ -19,14 +19,14 @@ namespace AutoRest.TestServer.Tests.Mgmt
         private class D { }
         private class E : D { }
         [ReferenceType]
-        private class F<T> { }
-        private class G : F<int> { }
-        private class H : F<int> { }
+        private class F { }
+        private class G : F { }
+        private class H : F { }
 
         private static object[] TestReferenceTypes =
         {
-            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(F<>) },
-            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(H), typeof(F<>) }
+            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(F) },
+            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(H), typeof(F) }
         };
 
         [TestCaseSource(nameof(TestReferenceTypes))]
@@ -41,25 +41,7 @@ namespace AutoRest.TestServer.Tests.Mgmt
             Assert.AreEqual(3, rootNodes.Count);
             Assert.IsTrue(rootTypes.Contains(typeof(A)), "Did not find type A in the root list");
             Assert.IsTrue(rootTypes.Contains(typeof(D)), "Did not find type D in the root list");
-            Assert.IsTrue(rootTypes.Contains(typeof(F<int>)), "Did not find type F<int> in the root list");
-        }
-
-        [TestCaseSource(nameof(TestReferenceTypes))]
-        public void ValidateGenericOrder(params Type[] referenceTypes)
-        {
-            var orderedList = ReferenceClassFinder.GetOrderedList(new List<Type>(referenceTypes));
-            bool foundGeneric = false;
-            bool foundNonGeneric = false;
-            foreach (var type in orderedList)
-            {
-                if (type == typeof(F<int>))
-                    foundGeneric = true;
-
-                if (type == typeof(G))
-                    foundNonGeneric = true;
-
-                Assert.IsTrue(!foundNonGeneric || foundGeneric, "We found the non generic type G before the generic type F<int>");
-            }
+            Assert.IsTrue(rootTypes.Contains(typeof(F)), "Did not find type F<int> in the root list");
         }
     }
 }

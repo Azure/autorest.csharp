@@ -38,8 +38,6 @@
 
   <ItemGroup>
     <None Include="../../src/assets/**/*.cs" CopyToOutputDirectory="PreserveNewest" />
-    <Compile Remove="..\..\src\assets\Management.Shared\InitializationConstructorAttribute.cs" />
-    <None Remove="..\..\src\assets\Management.Shared\InitializationConstructorAttribute.cs" />
     <None Include="package.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
