@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
             // write the signature of this function
-            writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {GetAsyncKeyword(async)} {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(methodParameters.ToArray());
 
-                writer.Append($"return {AwaitKeyword(async)} {ExtensionOperationVariableName}.UseClientContext({AsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
+                writer.Append($"return {GetAwait(async)} {ExtensionOperationVariableName}.UseClientContext({GetAsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     WriteDiagnosticScope(writer, new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName, writer =>
                     {
-                        writer.Append($"var response = {AwaitKeyword(async)} ");
+                        writer.Append($"var response = {GetAwait(async)} ");
 
                         writer.Append($"{restOperations}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
                         BuildAndWriteParameters(writer, clientMethod.RestClientMethod);

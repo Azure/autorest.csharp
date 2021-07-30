@@ -354,8 +354,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            var responseType = resource.Type.WrapAsyncResponse(async);
-            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(false, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
+            var responseType = resource.Type.WrapResponse(async);
+            writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(false, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -498,7 +498,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.Append($"await ");
             }
             writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            BuildAndWriteParameters(writer, clientMethod.RestClientMethod, isResourceLevel);
+            BuildAndWriteParameters(writer, clientMethod.RestClientMethod, isResourceLevel: isResourceLevel);
             writer.Append($"cancellationToken)");
 
             if (async)
@@ -506,7 +506,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 writer.Append($".ConfigureAwait(false)");
             }
             writer.Line($";");
-            writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, response.Value), response.GetRawResponse());");
+            WriteEndOfGet(writer, resource.Type, async);
         }
 
         private void WriteListAvailableLocationsMethod(CodeWriter writer, bool async)
@@ -518,14 +518,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var responseType = new CSharpType(typeof(IEnumerable<Location>)).WrapAsync(async);
 
-            using (writer.Scope($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("GetAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
-                if (async)
-                {
-                    writer.Append($".ConfigureAwait(false)");
-                }
-                writer.Append($";");
+                writer.Line($"return {GetAwait(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken){GetConfigureAwait(async)};");
             }
         }
 
@@ -545,9 +540,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.WriteXmlDocumentationReturns($"The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            var responseType = resource.Type.WrapAsyncResponse(async);
+            var responseType = resource.Type.WrapResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -564,12 +559,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         writer.Append($"await ");
                     }
-                    writer.Append($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
                     WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
@@ -592,9 +582,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.WriteXmlDocumentationReturns($"The updated resource with the tags replaced.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            var responseType = resource.Type.WrapAsyncResponse(async);
+            var responseType = resource.Type.WrapResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (tags == null)"))
@@ -610,23 +600,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         writer.Append($"await ");
                     }
-                    writer.Append($"TagResourceOperations.{CreateMethodName("Delete", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"TagResourceOperations.{CreateMethodName("Delete", async)}(cancellationToken){GetConfigureAwait(async)};");
                     writer.Append($"var originalTags  = ");
                     if (async)
                     {
                         writer.Append($"await ");
                     }
-                    writer.Append($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
                     WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
@@ -649,9 +629,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             writer.WriteXmlDocumentationReturns($"The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            var responseType = resource.Type.WrapAsyncResponse(async);
+            var responseType = resource.Type.WrapResponse(async);
 
-            writer.Append($"public {AsyncKeyword(async)} {VirtualKeyword(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {GetAsyncKeyword(async)} {GetVirtual(true)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (string.IsNullOrWhiteSpace(key))"))
@@ -668,12 +648,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         writer.Append($"await ");
                     }
-                    writer.Append($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken)");
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-                    writer.Line($";");
+                    writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
                     WriteTaggableCommonMethod(writer, resource, resourceOperation, context, async);
                 });
@@ -687,12 +662,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 writer.Append($"await ");
             }
-            writer.Append($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken)");
-            if (async)
-            {
-                writer.Append($".ConfigureAwait(false)");
-            }
-            writer.Line($";");
+            writer.Line($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken){GetConfigureAwait(async)};");
             writer.Append($"var originalResponse = ");
             if (async)
             {
@@ -717,13 +687,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     writer.Append($"null, ");
                 }
             }
-            writer.Append($"cancellationToken)");
-
-            if (async)
-            {
-                writer.Append($".ConfigureAwait(false)");
-            }
-            writer.Line($";");
+            writer.Line($"cancellationToken){GetConfigureAwait(async)};");
             writer.Line($"return {typeof(Response)}.FromValue(new {resource.Type}(this, originalResponse.Value), originalResponse.GetRawResponse());");
         }
 

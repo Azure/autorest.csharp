@@ -175,6 +175,8 @@ namespace MgmtSingleton
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -199,6 +201,8 @@ namespace MgmtSingleton
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -211,9 +215,9 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual ParentResource TryGet(string parentName, CancellationToken cancellationToken = default)
+        public virtual Response<ParentResource> GetIfExists(string parentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -222,11 +226,10 @@ namespace MgmtSingleton
                     throw new ArgumentNullException(nameof(parentName));
                 }
 
-                return Get(parentName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<ParentResource>(null, response.GetRawResponse())
+                    : Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,9 +241,9 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<ParentResource> TryGetAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ParentResource>> GetIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -249,11 +252,10 @@ namespace MgmtSingleton
                     throw new ArgumentNullException(nameof(parentName));
                 }
 
-                return await GetAsync(parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<ParentResource>(null, response.GetRawResponse())
+                    : Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -265,7 +267,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string parentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CheckIfExists");
             scope.Start();
@@ -276,7 +278,8 @@ namespace MgmtSingleton
                     throw new ArgumentNullException(nameof(parentName));
                 }
 
-                return TryGet(parentName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(parentName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -288,7 +291,7 @@ namespace MgmtSingleton
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CheckIfExists");
             scope.Start();
@@ -299,7 +302,8 @@ namespace MgmtSingleton
                     throw new ArgumentNullException(nameof(parentName));
                 }
 
-                return await TryGetAsync(parentName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

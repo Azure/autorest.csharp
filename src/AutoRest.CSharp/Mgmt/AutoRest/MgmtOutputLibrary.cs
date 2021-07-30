@@ -74,6 +74,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
 
+            OmitOperationGroups.RemoveOperationGroups(codeModel, context);
+
             ReorderOperationParameters();
             DecorateOperationGroup();
             UpdateListMethodNames();

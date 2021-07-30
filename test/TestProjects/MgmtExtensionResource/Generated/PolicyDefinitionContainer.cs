@@ -204,6 +204,8 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.Get(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                    if (response.Value == null)
+                        throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                     return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                 }
                 else
@@ -216,11 +218,15 @@ namespace MgmtExtensionResource
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         var response = _restClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                        if (response.Value == null)
+                            throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
                     else
                     {
                         var response = _restClient.GetBuiltIn(policyDefinitionName, cancellationToken: cancellationToken);
+                        if (response.Value == null)
+                            throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
                 }
@@ -249,6 +255,8 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.GetAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    if (response.Value == null)
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                     return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                 }
                 else
@@ -261,11 +269,15 @@ namespace MgmtExtensionResource
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         var response = await _restClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        if (response.Value == null)
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
                     else
                     {
                         var response = await _restClient.GetBuiltInAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        if (response.Value == null)
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                         return Response.FromValue(new PolicyDefinition(Parent, response.Value), response.GetRawResponse());
                     }
                 }
@@ -280,9 +292,9 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual PolicyDefinition TryGet(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual Response<PolicyDefinition> GetIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -291,11 +303,10 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                return Get(policyDefinitionName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<PolicyDefinition>(null, response.GetRawResponse())
+                    : Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -307,9 +318,9 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<PolicyDefinition> TryGetAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PolicyDefinition>> GetIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -318,11 +329,10 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                return await GetAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<PolicyDefinition>(null, response.GetRawResponse())
+                    : Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -334,7 +344,7 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CheckIfExists");
             scope.Start();
@@ -345,7 +355,8 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                return TryGet(policyDefinitionName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(policyDefinitionName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -357,7 +368,7 @@ namespace MgmtExtensionResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CheckIfExists");
             scope.Start();
@@ -368,7 +379,8 @@ namespace MgmtExtensionResource
                     throw new ArgumentNullException(nameof(policyDefinitionName));
                 }
 
-                return await TryGetAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -186,6 +186,8 @@ namespace MgmtScopeResource
                 }
 
                 var response = _restClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PolicyAssignment(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -210,6 +212,8 @@ namespace MgmtScopeResource
                 }
 
                 var response = await _restClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PolicyAssignment(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -222,9 +226,9 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual PolicyAssignment TryGet(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public virtual Response<PolicyAssignment> GetIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -233,11 +237,10 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(policyAssignmentName));
                 }
 
-                return Get(policyAssignmentName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id, policyAssignmentName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
+                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -249,9 +252,9 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<PolicyAssignment> TryGetAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PolicyAssignment>> GetIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -260,11 +263,10 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(policyAssignmentName));
                 }
 
-                return await GetAsync(policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id, policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<PolicyAssignment>(null, response.GetRawResponse())
+                    : Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -276,7 +278,7 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.CheckIfExists");
             scope.Start();
@@ -287,7 +289,8 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(policyAssignmentName));
                 }
 
-                return TryGet(policyAssignmentName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(policyAssignmentName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -299,7 +302,7 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.CheckIfExists");
             scope.Start();
@@ -310,7 +313,8 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(policyAssignmentName));
                 }
 
-                return await TryGetAsync(policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(policyAssignmentName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

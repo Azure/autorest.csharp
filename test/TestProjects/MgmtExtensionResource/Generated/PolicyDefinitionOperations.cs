@@ -55,6 +55,8 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.GetAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                    if (response.Value == null)
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                     return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                 }
                 else
@@ -67,11 +69,15 @@ namespace MgmtExtensionResource
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         var response = await _restClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                        if (response.Value == null)
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                         return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                     }
                     else
                     {
                         var response = await _restClient.GetBuiltInAsync(Id.Name, cancellationToken).ConfigureAwait(false);
+                        if (response.Value == null)
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                         return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                     }
                 }
@@ -94,6 +100,8 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.Get(Id.Parent.Name, Id.Name, cancellationToken);
+                    if (response.Value == null)
+                        throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                     return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                 }
                 else
@@ -106,11 +114,15 @@ namespace MgmtExtensionResource
                     if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                     {
                         var response = _restClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
+                        if (response.Value == null)
+                            throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                         return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                     }
                     else
                     {
                         var response = _restClient.GetBuiltIn(Id.Name, cancellationToken);
+                        if (response.Value == null)
+                            throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                         return Response.FromValue(new PolicyDefinition(this, response.Value), response.GetRawResponse());
                     }
                 }

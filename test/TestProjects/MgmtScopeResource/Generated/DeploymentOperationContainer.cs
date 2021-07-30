@@ -58,6 +58,8 @@ namespace MgmtScopeResource
                 }
 
                 var response = _restClient.GetAtScope(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentOperation(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -82,6 +84,8 @@ namespace MgmtScopeResource
                 }
 
                 var response = await _restClient.GetAtScopeAsync(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentOperation(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -94,9 +98,9 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual DeploymentOperation TryGet(string operationId, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentOperation> GetIfExists(string operationId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -105,11 +109,10 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                return Get(operationId, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.GetAtScope(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<DeploymentOperation>(null, response.GetRawResponse())
+                    : Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -121,9 +124,9 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<DeploymentOperation> TryGetAsync(string operationId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentOperation>> GetIfExistsAsync(string operationId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -132,11 +135,10 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                return await GetAsync(operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAtScopeAsync(Id.Parent, Id.Name, operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<DeploymentOperation>(null, response.GetRawResponse())
+                    : Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -148,7 +150,7 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string operationId, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string operationId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.CheckIfExists");
             scope.Start();
@@ -159,7 +161,8 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                return TryGet(operationId, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(operationId, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -171,7 +174,7 @@ namespace MgmtScopeResource
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="operationId"> The ID of the operation to get. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string operationId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string operationId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentOperationContainer.CheckIfExists");
             scope.Start();
@@ -182,7 +185,8 @@ namespace MgmtScopeResource
                     throw new ArgumentNullException(nameof(operationId));
                 }
 
-                return await TryGetAsync(operationId, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(operationId, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

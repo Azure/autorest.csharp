@@ -177,6 +177,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = _restClient.Get(Id.Name, availabilitySetName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +203,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = await _restClient.GetAsync(Id.Name, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +217,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Toaster TryGet(string availabilitySetName, CancellationToken cancellationToken = default)
+        public virtual Response<Toaster> GetIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +228,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return Get(availabilitySetName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.Name, availabilitySetName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Toaster>(null, response.GetRawResponse())
+                    : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +243,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Toaster> TryGetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Toaster>> GetIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +254,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return await GetAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.Name, availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Toaster>(null, response.GetRawResponse())
+                    : Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,7 +269,7 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string availabilitySetName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CheckIfExists");
             scope.Start();
@@ -278,7 +280,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return TryGet(availabilitySetName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(availabilitySetName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,7 +293,7 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CheckIfExists");
             scope.Start();
@@ -301,7 +304,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return await TryGetAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

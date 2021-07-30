@@ -1,0 +1,19 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "OmitOperationGroups",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResource": {
+    "Model4s": "NonResource"
+  },
+  "OperationGroupsToOmit": [
+    "Model1s"
+  ]
+}
