@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 AddNonOmittedSchemasToSafeList(operationGroup);
             }
 
-            AddDependantSchemasRecursively(_schemasStillUsed);
-            RemoveSchemas(codeModel, _schemasStillUsed);
+            AddDependantSchemasRecursively();
+            RemoveSchemas(codeModel);
         }
 
         private static void AddNonOmittedSchemasToSafeList(OperationGroup operationGroup)
@@ -71,9 +71,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
+        private static void AddDependantSchemasRecursively()
         {
-            Queue<Schema> sQueue = new Queue<Schema>(setToProcess);
+            Queue<Schema> sQueue = new Queue<Schema>(_schemasStillUsed);
             while (sQueue.Count > 0)
             {
                 var cur = sQueue.Dequeue();
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (property.Schema is ObjectSchema propertySchema)
                         {
                             sQueue.Enqueue(propertySchema);
-                            setToProcess.Add(propertySchema);
+                            _schemasStillUsed.Add(propertySchema);
                         }
                     }
                     if (curSchema.Parents != null)
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (parent is ObjectSchema parentSchema)
                             {
                                 sQueue.Enqueue(parentSchema);
-                                setToProcess.Add(parentSchema);
+                                _schemasStillUsed.Add(parentSchema);
                             }
                         }
                     }
@@ -102,9 +102,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void RemoveSchemas(CodeModel codeModel, HashSet<Schema> schemasStillUsed)
+        private static void RemoveSchemas(CodeModel codeModel)
         {
-            var removeList = codeModel.Schemas.Objects.Where(s => s is ObjectSchema objSchema && !schemasStillUsed.Contains(objSchema)).ToList();
+            var removeList = codeModel.Schemas.Objects.Where(s => s is ObjectSchema objSchema && !_schemasStillUsed.Contains(objSchema)).ToList();
             foreach (var schema in removeList)
             {
                 codeModel.Schemas.Objects.Remove(schema);
