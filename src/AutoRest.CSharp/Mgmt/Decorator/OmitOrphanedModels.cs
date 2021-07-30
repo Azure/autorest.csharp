@@ -44,7 +44,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                     foreach (var property in objSchema.Properties)
                     {
-                        _schemasStillUsed.Add(property.Schema);
+                        if (property.Schema is ObjectSchema propObjSchema)
+                        {
+                            _schemasStillUsed.Add(propObjSchema);
+                        }
+                        else if (property.Schema is ArraySchema propArraySchema && propArraySchema.ElementType is ObjectSchema elementSchema)
+                        {
+                            _schemasStillUsed.Add(elementSchema);
+                        }
                     }
                 }
             }
@@ -63,7 +70,25 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             _schemasStillUsed.Add(objSchema);
                             foreach (var property in objSchema.Properties)
                             {
-                                _schemasStillUsed.Add(property.Schema);
+                                if (property.Schema is ObjectSchema propObjSchema)
+                                {
+                                    _schemasStillUsed.Add(propObjSchema);
+                                }
+                                else if (property.Schema is ArraySchema propArraySchema && propArraySchema.ElementType is ObjectSchema elementSchema)
+                                {
+                                    _schemasStillUsed.Add(elementSchema);
+                                }
+                            }
+                        }
+                        else if (param.Schema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema elementSchema)
+                        {
+                            _schemasStillUsed.Add(elementSchema);
+                            foreach (var property in elementSchema.Properties)
+                            {
+                                if (property.Schema is ObjectSchema proObjSchema)
+                                {
+                                    _schemasStillUsed.Add(proObjSchema);
+                                }
                             }
                         }
                     }
@@ -81,10 +106,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     foreach (var property in curSchema.Properties)
                     {
-                        if (property.Schema is ObjectSchema propertySchema)
+                        if (property.Schema is ObjectSchema objPropSchema)
                         {
-                            sQueue.Enqueue(propertySchema);
-                            _schemasStillUsed.Add(propertySchema);
+                            sQueue.Enqueue(objPropSchema);
+                            _schemasStillUsed.Add(objPropSchema);
+                        }
+                        else if (property.Schema is ArraySchema arrayPropSchma && arrayPropSchma.ElementType is ObjectSchema elementSchema)
+                        {
+                            sQueue.Enqueue(elementSchema);
+                            _schemasStillUsed.Add(elementSchema);
                         }
                     }
                     if (curSchema.Parents != null)
