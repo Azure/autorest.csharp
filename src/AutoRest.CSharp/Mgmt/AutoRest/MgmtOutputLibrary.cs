@@ -664,7 +664,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             .Where(p => p.In == ParameterLocation.Path)
                             .OrderBy(
                                 p => httpRequest.Path.IndexOf(
-                                    p.CSharpName(),
+                                    "{" + p.CSharpName() + "}",
                                     StringComparison.InvariantCultureIgnoreCase));
                         operation.Parameters = orderedParams.Concat(operation.Parameters
                                 .Where(p => p.In != ParameterLocation.Path).ToList())
