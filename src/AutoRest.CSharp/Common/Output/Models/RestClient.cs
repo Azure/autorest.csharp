@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected virtual Func<string?, bool> ShouldReturnNullOn404(Operation operation)
         {
-            return (x) => false;
+            return (responseBodyType) => false;
         }
 
         protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
