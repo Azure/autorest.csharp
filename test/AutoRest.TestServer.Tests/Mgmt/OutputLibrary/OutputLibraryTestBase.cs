@@ -130,7 +130,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 }
 
                 var restClient = context.Library.GetRestClient(resourceOperation.OperationGroup);
-                var getMethod = restClient.Methods.Where(m => m.Name == "Get").FirstOrDefault();
+                var getMethod = restClient.Methods.Where(m => m.Name == "Get" || m.Name == "GetAtScope").FirstOrDefault();
                 Assert.NotNull(getMethod, $"{restClient.Type.Name} does not implement the Get method.");
             }
         }

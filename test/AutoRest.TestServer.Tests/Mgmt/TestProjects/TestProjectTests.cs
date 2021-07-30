@@ -189,6 +189,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
             Assert.NotNull(resourceExtensions);
 
+            var scopeResourceContainers = new HashSet<string>{"PolicyAssignmentContainer"};
             foreach (var type in FindAllContainers())
             {
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
@@ -201,7 +202,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
                     Assert.AreEqual(typeof(ResourceGroupOperations), param.ParameterType);
                 }
-                else
+                else if (!scopeResourceContainers.Contains(type.Name))
                 {
                     var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
                     Assert.IsNull(getContainerMethod);

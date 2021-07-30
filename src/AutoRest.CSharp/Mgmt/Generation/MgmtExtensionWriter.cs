@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
+        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, BuildContext<MgmtOutputLibrary> context, bool async, MgmtRestClient restClient)
         {
             (var bodyType, bool isResourceList, bool wasResourceData) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
             var responseType = bodyType != null ?
@@ -103,7 +103,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{restClientName}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
+                    // subscriptionId might not always be needed. For example `RestOperations` does not have it.
+                    var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
+                    writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline{subIdIfNeeded}, baseUri);");
 
                     WriteDiagnosticScope(writer, new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName, writer =>
                     {
@@ -191,7 +193,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
+                    // subscriptionId might not always be needed. For example `RestOperations` does not have it.
+                    var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? $", {ExtensionOperationVariableName}.Id.SubscriptionId" : "";
+                    writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline{subIdIfNeeded}, baseUri);");
 
                     WritePagingOperationBody(writer, pagingMethod, pageType, restOperations.ActualName,
                         new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName,

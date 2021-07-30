@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -30,6 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IEnumerable<ClientMethod>? _methods;
         private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
+        private ClientMethod? _getByIdMethod;
+        private List<ClientMethod>? _getMethods;
         private IEnumerable<ResourceListMethod>? _resourceOperationsListMethods;
         private IEnumerable<ResourceListMethod>? _subscriptionExtensionsListMethods;
         private IEnumerable<ResourceListMethod>? _resourceGroupExtensionsListMethods;
@@ -40,12 +43,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
+        public bool IsScopeOrExtension {get; }
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
             IEnumerable<OperationGroup>? nonResourceOperationGroups = null) : base(context)
         {
             _context = context;
             OperationGroup = operationGroup;
+            IsScopeOrExtension = OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration);
             DefaultName = ResourceName + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
@@ -91,7 +96,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ResourceListMethod>? ManagementGroupExtensionListMethods => _managementGroupExtensionsListMethods ??= GetManagementGroupExtensionsListMethods();
 
-        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => IsGetResourceMethod(m) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => IsGetResourceMethod(m));
+
+        private bool IsGetResourceMethod(ClientMethod method)
+        {
+            return method.Name.StartsWith("Get") && method.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name;
+        }
 
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
@@ -106,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var isMethodAlreadyExist = false;
                 if (ResourceContainer != null)
                 {
-                    isMethodAlreadyExist = clientMethod.RestClientMethod == ResourceContainer.CreateMethod ||
+                    isMethodAlreadyExist = ResourceContainer.PutMethods.Any(m => m == clientMethod.RestClientMethod) ||
                         ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod.RestClientMethod) ||
                         ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod.RestClientMethod ||
                         SubscriptionExtensionsListMethods.Any(s => clientMethod.RestClientMethod == s.GetRestClientMethod()));
@@ -120,6 +130,32 @@ namespace AutoRest.CSharp.Mgmt.Output
             return clientMethods;
         }
 
+        public virtual ClientMethod? GetByIdMethod => _getByIdMethod ??= GetGetByIdMethod();
+        public virtual List<ClientMethod> GetMethods => _getMethods ??= GetGetMethods();
+
+        private List<ClientMethod> GetGetMethods()
+        {
+            var getMethods = new List<ClientMethod>();
+            if (IsScopeOrExtension)
+            {
+                getMethods = Methods.Where(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name).ToList();
+                if (GetByIdMethod != null && GetByIdMethod.Name != GetMethod!.Name)
+                {
+                    getMethods.RemoveAll(m => m.Name == GetByIdMethod.Name);
+                }
+            }
+            else if (GetMethod != null)
+            {
+                getMethods.Add(GetMethod);
+            }
+            return getMethods;
+        }
+
+        private ClientMethod? GetGetByIdMethod()
+        {
+            return Methods.FirstOrDefault(m => m.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Get) && m.RestClientMethod.IsByIdMethod());
+        }
+
         private IEnumerable<RestClientMethod> GetResourceOperationsLROMethods()
         {
             var clientMethods = new List<RestClientMethod>();
@@ -130,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var isMethodExistInContainer = false;
                     if (ResourceContainer != null)
                     {
-                        isMethodExistInContainer = clientMethod == ResourceContainer.CreateMethod ||
+                        isMethodExistInContainer = ResourceContainer.PutMethods.Any(m => m == clientMethod) ||
                             ResourceContainer.RemainingMethods.Any(m => m.RestClientMethod == clientMethod) ||
                             ResourceContainer.ListMethods.Any(m => m.GetRestClientMethod() == clientMethod ||
                             SubscriptionExtensionsListMethods.Any(s => clientMethod == s.GetRestClientMethod()));
@@ -166,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var pathSegments = listMethod.GetRestClientMethod()?.Request.PathSegments;
 
                 // Subscriptions scope
-                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/"))
+                if (pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.Subscriptions}/") && !pathSegments.Any(p => p.Value.IsConstant && p.Value.Constant.Value?.ToString() == $"/{ResourceTypeBuilder.ResourceGroups}/"))
                 {
                     subscriptionExtensionsListMethods.Add(listMethod);
                 }
@@ -278,8 +314,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (!result.IsListFunction)
                 return false;
 
-            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-            bool isParentExistsInPathParams = MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+            var parentResourceType = IsScopeOrExtension ? clientMethod.Operation.ParentResourceType() : OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+            bool isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
 
             return (isParentExistsInPathParams == shouldParentExistInPath && result.WasResourceData == shouldReturnTypeBeResourceData);
         }
