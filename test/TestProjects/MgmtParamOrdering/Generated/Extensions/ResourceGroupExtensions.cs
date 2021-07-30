@@ -31,5 +31,15 @@ namespace MgmtParamOrdering
             return new DedicatedHostGroupContainer(resourceGroup);
         }
         #endregion
+
+        #region Workspace
+        /// <summary> Gets an object representing a WorkspaceContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="WorkspaceContainer" /> object. </returns>
+        public static WorkspaceContainer GetWorkspaces(this ResourceGroupOperations resourceGroup)
+        {
+            return new WorkspaceContainer(resourceGroup);
+        }
+        #endregion
     }
 }
