@@ -52,30 +52,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
-        public static CSharpType WrapPageable(this CSharpType type, bool async)
+        public static CSharpType WrapPageable(this CSharpType type, bool isAsync)
         {
-            return async ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
+            return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
         }
 
-        public static CSharpType WrapPageable(this Type type, bool async)
+        public static CSharpType WrapPageable(this Type type, bool isAsync)
         {
-            return async ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
+            return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
         }
 
-        public static CSharpType WrapAsync(this CSharpType type, bool async)
+        public static CSharpType WrapAsync(this CSharpType type, bool isAsync)
         {
-            return async ? new CSharpType(typeof(Task<>), type) : type;
+            return isAsync ? new CSharpType(typeof(Task<>), type) : type;
         }
 
-        public static CSharpType WrapResponse(this CSharpType type)
+        public static CSharpType WrapResponse(this CSharpType type, bool isAsync)
         {
-            return new CSharpType(typeof(Response<>), type);
+            var response = new CSharpType(typeof(Response<>), type);
+            return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 
-        public static CSharpType WrapAsyncResponse(this CSharpType type, bool async)
+        public static CSharpType WrapResponse(this Type type, bool isAsync)
         {
-            var responseType = type.WrapResponse();
-            return async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var response = new CSharpType(typeof(Response<>), type);
+            return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
     }
 }

@@ -180,6 +180,8 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.GetProperties(Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new StorageAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -205,6 +207,8 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new StorageAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -218,9 +222,9 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual StorageAccount TryGet(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<StorageAccount> GetIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -229,11 +233,10 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return Get(accountName, expand, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.GetProperties(Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<StorageAccount>(null, response.GetRawResponse())
+                    : Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,9 +249,9 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<StorageAccount> TryGetAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<StorageAccount>> GetIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -257,11 +260,10 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return await GetAsync(accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<StorageAccount>(null, response.GetRawResponse())
+                    : Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -274,7 +276,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool CheckIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CheckIfExists");
             scope.Start();
@@ -285,7 +287,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return TryGet(accountName, expand, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(accountName, expand, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -298,7 +301,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> CheckIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CheckIfExists");
             scope.Start();
@@ -309,7 +312,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return await TryGetAsync(accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(accountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -179,6 +179,8 @@ namespace ExactMatchInheritance
                         value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ExactMatchModel3Data)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -210,6 +212,8 @@ namespace ExactMatchInheritance
                         value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ExactMatchModel3Data)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
