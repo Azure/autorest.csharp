@@ -40,6 +40,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DedicatedHostGroupContainer", "GetIfExistsAsync", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "CheckIfExists", "hostGroupName")]
         [TestCase("DedicatedHostGroupContainer", "CheckIfExistsAsync", "hostGroupName")]
+        [TestCase("EnvironmentContainerResourceContainer", "CreateOrUpdate", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "CreateOrUpdateAsync", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "StartCreateOrUpdate", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "StartCreateOrUpdateAsync", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "Get", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "GetAsync", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "GetIfExists", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "GetIfExistsAsync", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "CheckIfExists", "name")]
+        [TestCase("EnvironmentContainerResourceContainer", "CheckIfExistsAsync", "name")]
         public void ValidateContainerCorrectFirstParameter(string containerName, string methodName, string parameterName)
         {
             var method = FindAllContainers().Single(o => o.Name == containerName).GetMethod(methodName);

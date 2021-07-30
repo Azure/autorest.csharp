@@ -273,7 +273,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     yield return t;
                 }
