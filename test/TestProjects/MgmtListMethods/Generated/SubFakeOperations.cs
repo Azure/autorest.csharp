@@ -51,7 +51,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
@@ -71,7 +71,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, cancellationToken);
+                var response = _restClient.Get(Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
@@ -357,7 +357,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, body, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.Parent.Name, Id.Name, body, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -382,7 +382,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, body, cancellationToken);
+                var response = _restClient.Update(Id.Parent.Name, Id.Name, body, cancellationToken);
                 return Response.FromValue(new SubFake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -93,7 +94,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter)
+
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, List<PagingMethod>? listMethods = null)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
@@ -122,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()), ClientDiagnosticsField, converter, async);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()), ClientDiagnosticsField, converter, async, listMethods);
             }
         }
 
@@ -151,6 +153,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return isAsync ? "await " : string.Empty;
         }
 
+        protected internal string GetNextLink(bool isNextPageFunc)
+        {
+            return isNextPageFunc ? "nextLink, " : string.Empty;
+        }
+
         protected internal string GetOverride(bool isInheritedMethod, bool isVirtual = false)
         {
             return isInheritedMethod ? "override" : GetVirtual(isVirtual);
@@ -165,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
         protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, CSharpType resourceType,
-            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool isAsync)
+            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool isAsync, List<PagingMethod>? pagingMethods = null)
         {
             var parameters = pagingMethod.Method.Parameters;
 
@@ -180,18 +187,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                 {
-                    writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, isAsync)}(");
-                    BuildAndWriteParameters(writer, pagingMethod.Method);
-                    writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-
-                    // need the Select() for converting XXXResourceData to XXXResource
-                    if (!string.IsNullOrEmpty(converter.ToString()))
-                    {
-                        writer.UseNamespace("System.Linq");
-                    }
-                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                    writer.Append($"{converter}");
-                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                    WritePageFunction(writer, pagingMethod, restClientName, converter, isAsync, false, pagingMethods);
                 });
             }
 
@@ -204,16 +200,149 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                     {
-                        writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, isAsync)}(nextLink, ");
-                        BuildAndWriteParameters(writer, pagingMethod.Method);
-                        writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                        writer.Append($"{converter}");
-                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                        WritePageFunction(writer, pagingMethod, restClientName, converter, isAsync, true, pagingMethods);
                     });
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", isAsync)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+        }
+
+        private void WritePageFunction(CodeWriter writer, PagingMethod method, string restClientName, FormattableString converter, bool async, bool isNextPageFunc, List<PagingMethod>? methods = null)
+        {
+            if (method.Method.Operation.IsAncestorScope() || methods == null || methods.Count < 2)
+            {
+                WritePageFunctionBody(writer, method, restClientName, converter, async, isNextPageFunc);
+            }
+            else
+            {
+                var methodDict = methods.ToDictionary(m => m, m => m.Method.Operation.AncestorResourceType());
+                // There could be methods at resource group scope and at resource scope, both with ResourceGroups AncestorResourceType.
+                PagingMethod? resourceMethod = null;
+                var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
+                if (resourceGroupMethodsCount > 1)
+                {
+                    // The parent resource type of a resource method is always resourceGroupsResources
+                    resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.Method.Operation.ParentResourceType() == ResourceTypeBuilder.ResourceGroupResources).Key;
+                    if (resourceMethod != null)
+                    {
+                        methodDict.Remove(resourceMethod);
+                        resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                    }
+                }
+                if (resourceGroupMethod != null)
+                {
+                    methodDict.Remove(resourceGroupMethod);
+                    var resourceGroupNameVar = resourceMethod == null ? "_" : "var resourceGroupName";
+                    using (writer.Scope($"if (Id.TryGetResourceGroupName(out {resourceGroupNameVar}))"))
+                    {
+                        if (resourceMethod != null)
+                        {
+                            using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                            {
+                                WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
+                            }
+                            using (writer.Scope($"else"))
+                            {
+                                WritePageFunctionBody(writer, resourceMethod, restClientName, converter, async, isNextPageFunc, isResourceLevel: true);
+                            }
+                        }
+                        else
+                        {
+                            WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
+                        }
+                    }
+                } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
+                var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
+                var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
+                var elseStr = resourceGroupMethod != null ? (managementGroupMethod == null && tenantMethod == null ? "else" : "else if") : "if";
+                var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
+                if (subscriptionMethod != null)
+                {
+                    methodDict.Remove(subscriptionMethod);
+                    using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
+                    {
+                        WritePageFunctionBody(writer, subscriptionMethod, restClientName, converter, async, isNextPageFunc);
+                    }
+                }
+
+                elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                if (managementGroupMethod != null)
+                {
+                    methodDict.Remove(managementGroupMethod);
+                    using (elseStr.IsNullOrEmpty() ?  null: writer.Scope($"{elseStr}"))
+                    {
+                        if (tenantMethod != null)
+                        {
+                            methodDict.Remove(tenantMethod);
+                            var parent = new CodeWriterDeclaration("parent");
+                            writer.Line($"var {parent:D} = Id;");
+                            using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                            {
+                                writer.Line($"{parent} = {parent}.Parent;");
+                            }
+                            writer.UseNamespace("Azure.ResourceManager.Management");
+                            using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                            {
+                                WritePageFunctionBody(writer, managementGroupMethod, restClientName, converter, async, isNextPageFunc);
+                            }
+                            using (writer.Scope($"else"))
+                            {
+                                WritePageFunctionBody(writer, tenantMethod, restClientName, converter, async, isNextPageFunc);
+                            }
+                        }
+                        else
+                        {
+                            WritePageFunctionBody(writer, managementGroupMethod, restClientName, converter, async, isNextPageFunc);
+                        }
+                    }
+                }
+                else if (tenantMethod != null)
+                {
+                    methodDict.Remove(tenantMethod);
+                    using (writer.Scope($"{elseStr}"))
+                    {
+                        WritePageFunctionBody(writer, tenantMethod, restClientName, converter, async, isNextPageFunc);
+                    }
+                }
+
+                if (methodDict.Count() > 0)
+                {
+                    throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
+                }
+            }
+
+        }
+
+        private void WritePageFunctionBody(CodeWriter writer, PagingMethod pagingMethod, string restClientName, FormattableString converter, bool isAsync, bool isNextPageFunc, bool isResourceLevel = false)
+        {
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
+
+            if (isResourceLevel)
+            {
+                writer.UseNamespace("System.Collections.Generic");
+                writer.Line($"var parent = Id.Parent;");
+                writer.Line($"var parentParts = new List<string>();");
+                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                {
+                    writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
+                    writer.Line($"parent = parent.Parent;");
+                }
+                writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
+                writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
+            }
+            writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
+            BuildAndWriteParameters(writer, pagingMethod.Method, isResourceLevel: isResourceLevel);
+            writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
+
+            // need the Select() for converting XXXResourceData to XXXResource
+            if (!string.IsNullOrEmpty(converter.ToString()))
+            {
+                writer.UseNamespace("System.Linq");
+            }
+            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}{converter}, {continuationTokenText}, response.GetRawResponse());");
         }
 
         protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping)
@@ -247,9 +376,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping>? parameterMappings = null, bool isResourceLevel = false)
         {
-            WriteArguments(writer, BuildParameterMapping(method));
+            parameterMappings = parameterMappings ?? BuildParameterMapping(method);
+            if (isResourceLevel)
+            {
+                // Parameter mapping for a path like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
+                foreach (var paramMapping in parameterMappings)
+                {
+                    paramMapping.ValueExpression = paramMapping.Parameter.Name switch
+                    {
+                        "subscriptionId" => "subscriptionId",
+                        "resourceGroupName" => "resourceGroupName",
+                        "resourceProviderNamespace" => "Id.ResourceType.Namespace",
+                        "parentResourcePath" => "parentResourcePath",
+                        "resourceType" => "Id.ResourceType.Types[Id.ResourceType.Types.Count - 1]",
+                        _ => paramMapping.ValueExpression
+                    };
+                }
+            }
+            WriteArguments(writer, parameterMappings);
         }
 
         /// <summary>
@@ -311,7 +457,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     continue;
                 }
-                else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
+                else if (parameter.Type.IsStringLike() && IsMandatory(parameter) && (method.Name.EndsWith("NextPage") || method.PathParameters.Contains(parameter))) // in a ListNextPage method, all parameters are nonpath parameters.
                 {
                     passThru = ShouldPassThrough(ref dotParent, parentNameStack, parameter, ref valueExpression);
                 }
@@ -319,13 +465,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             MakeResourceNameParamPassThrough(method, parameterMapping, parentNameStack);
+            MakeByIdParamPassThrough(method, parameterMapping, parentNameStack);
 
             // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
             foreach (var parameter in parameterMapping)
             {
                 if (IsMandatory(parameter.Parameter) && !parameter.IsPassThru && string.IsNullOrEmpty(parameter.ValueExpression))
                 {
-                    parameter.ValueExpression = parentNameStack.Pop();
+                    var parentName = parentNameStack.Pop();
+                    // scope is a whole Id, remove ".Name" for it.
+                    parameter.ValueExpression = parameter.Parameter.Name == "scope" ? parentName.Substring(0, parentName.LastIndexOf(".Name")) : parentName;
                 }
             }
 
@@ -333,6 +482,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected abstract void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack);
+
+        protected virtual void MakeByIdParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            var request = method.Operation?.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
+            if (method.IsByIdMethod())
+            {
+                var firstString = parameterMapping.FirstOrDefault(parameter => parameter.Parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase));
+                if (firstString?.Parameter != null)
+                {
+                    firstString.IsPassThru = true;
+                    firstString.Parameter = firstString.Parameter with { Type = typeof(ResourceIdentifier) };
+                }
+            }
+        }
 
         protected abstract bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression);
 
@@ -372,15 +535,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     writer.Append($"var response = {GetAwait(isAsync)}");
-
-                    var parameterNames = GetParametersName(restClientMethod, operationGroup, context);
                     writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
-                    // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases
-                    // but directly replace the following logic by this function is causing issues
-                    foreach (var parameter in parameterNames)
-                    {
-                        writer.Append($"{parameter:I}, ");
-                    }
+                    BuildAndWriteParameters(writer, restClientMethod);
                     writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
                     if (isListFunction)
@@ -426,6 +582,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // This method returns an array of path and non-path parameters name
+        // TODO: this method has some bugs for methods in MgmtListMethods and is no longer used, we should consistently use BuildParameterMapping().
         protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             var paramNames = GetPathParametersName(clientMethod, operationGroup, context).ToList();
@@ -444,17 +601,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pathParamsLength = clientMethod.PathParameters.Count;
             if (pathParamsLength > 0)
             {
-                var isAncestorTenant = operationGroup.IsAncestorTenant(context);
-                if (pathParamsLength > 1 && !isAncestorTenant)
+                if (pathParamsLength > 1)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
-
-                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
-
-                if (!isAncestorTenant)
-                    paramNameList.Reverse();
+                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
+                paramNameList.Reverse();
             }
 
             return paramNameList.ToArray();
@@ -468,44 +621,41 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // This method builds the path parameters names
-        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, RestClientMethod clientMethod)
         {
             if (IsTerminalState(operationGroup, context) && paramLength == 1)
             {
-                if (operationGroup.IsTupleResource(context))
-                {
-                    name = $"{name}.Parent";
-                    paramNames.Add($"{name}.Name");
-                    paramLength--;
-                    return;
-                }
-                paramNames.Add(GetParentValue(operationGroup, context));
+                paramNames.Add(GetParentValue(operationGroup, context, name, clientMethod));
                 paramLength--;
             }
             else if (paramLength == 1)
             {
                 var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
             }
             else
             {
+                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 name = $"{name}.Parent";
                 paramNames.Add($"{name}.Name");
                 paramLength--;
 
-                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
             }
         }
 
-        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string name, RestClientMethod clientMethod)
         {
+            if (operationGroup.IsTupleResource(context))
+            {
+                return $"{name}.Parent.Name";
+            }
             var parentResourceType = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
 
             switch (parentResourceType)
@@ -516,8 +666,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     return "Id.SubscriptionId";
                 case ResourceTypeBuilder.Locations:
                     return "Id.Location";
+                case ResourceTypeBuilder.ManagementGroups:
+                    return $"{name}.Parent.Name";
                 case ResourceTypeBuilder.Tenant:
-                    return "Id.Name";
+                    // There are multiple cases when parent resource type is tenant:
+                    // 1. Tenant resource.
+                    // 2. Scope resource. The clientMethod may have a path starting with /{scope} or a path at any specific scope (tenant/management group/subscription/resource group) or a /{resourceId} path.
+                    // 3. Extension resource in the same operation group. The clientMethod may have a path at any scope (tenant/management group/subscription/resource group).
+                    if (clientMethod.IsByIdMethod())
+                    {
+                        return $"{name}"; // For /{resourceId} operations, there is only 1 parameter and name will always be "Id".
+                    }
+                    if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
+                    {
+                        return $"{name}.Parent";
+                    }
+                    else if (clientMethod.Operation?.IsParentTenant() == true) // If the operation is a main resource directly under tenant, there is only 1 parameter and returns "Id.name".
+                    {
+                        return $"{name}.Name";
+                    }
+                    else
+                    {
+                        return $"{name}.Parent.Name";
+                    }
                 default:
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
@@ -613,16 +784,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual = false, string? methodName = null)
+        protected void WriteStartLROMethod(CodeWriter writer, RestClientMethod method, BuildContext<MgmtOutputLibrary> context, bool isAsync,
+            bool isVirtual = false, string? methodName = null, List<RestClientMethod>? methods = null)
         {
-            Debug.Assert(clientMethod.Operation != null);
+            Debug.Assert(method.Operation != null);
 
-            methodName = methodName ?? clientMethod.Name;
+            methodName = methodName ?? method.Name;
 
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+            writer.WriteXmlDocumentationSummary($"{method.Description}");
 
-            var parameterMapping = BuildParameterMapping(clientMethod);
+            var parameterMapping = BuildParameterMapping(method);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             foreach (var parameter in passThruParameters)
@@ -633,9 +805,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
-            CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
+            CSharpType lroObjectType = method.Operation.IsLongRunning
+                ? context.Library.GetLongRunningOperation(method.Operation).Type
+                : context.Library.GetNonLongRunningOperation(method.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(isAsync);
 
             writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName($"Start{methodName}", isAsync)}(");
@@ -652,15 +824,136 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
-                    writer.Append($"var {response:D} = {GetAwait(isAsync)}");
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
-                    WriteArguments(writer, parameterMapping);
-                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+                    response.SetActualName(response.RequestedName);
+                    if (method.Operation.IsAncestorScope() || methods == null || methods.Count < 2)
+                    {
+                        WriteStartLROMethodBody(writer, method, lroObjectType, context, response, parameterMapping, isAsync);
+                    }
+                    else
+                    {
+                        var methodDict = methods.ToDictionary(m => m, m => m.Operation.AncestorResourceType());
+                        // There could be methods at resource group scope and at resource scope, both with ResourceGroups AncestorResourceType.
+                        RestClientMethod? resourceMethod = null;
+                        var resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                        var resourceGroupMethodsCount = methodDict.Count(kv => kv.Value == ResourceTypeBuilder.ResourceGroups);
+                        if (resourceGroupMethodsCount > 1)
+                        {
+                            // The parent resource type of a resource method is always resourceGroupsResources
+                            resourceMethod = methodDict.FirstOrDefault(kv => kv.Key.Operation.ParentResourceType() == ResourceTypeBuilder.ResourceGroupResources).Key;
+                            if (resourceMethod != null)
+                            {
+                                methodDict.Remove(resourceMethod);
+                                resourceGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ResourceGroups).Key;
+                            }
+                        }
+                        if (resourceGroupMethod != null)
+                        {
+                            methodDict.Remove(resourceGroupMethod);
+                            var resourceGroupNameVar = resourceMethod == null ? "_" : "var resourceGroupName";
+                            using (writer.Scope($"if (Id.TryGetResourceGroupName(out {resourceGroupNameVar}))"))
+                            {
+                                if (resourceMethod != null)
+                                {
+                                    using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                                    {
+                                        WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                    }
+                                    using (writer.Scope($"else"))
+                                    {
+                                        WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync, isResourceLevel: true);
+                                    }
+                                }
+                                else
+                                {
+                                    WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                }
+                            }
+                        } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
+                        var managementGroupMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.ManagementGroups).Key;
+                        var tenantMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Tenant).Key;
+                        var elseStr = resourceGroupMethod != null ? (managementGroupMethod == null && tenantMethod == null ? "else" : "else if") : "if";
+                        var subscriptionMethod = methodDict.FirstOrDefault(kv => kv.Value == ResourceTypeBuilder.Subscriptions).Key;
+                        if (subscriptionMethod != null)
+                        {
+                            methodDict.Remove(subscriptionMethod);
+                            using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
+                            {
+                                WriteStartLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), isAsync);
+                            }
+                        }
 
-                    WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
+                        elseStr = (!elseStr.IsNullOrEmpty() || subscriptionMethod != null) ? "else " : string.Empty;
+                        if (managementGroupMethod != null)
+                        {
+                            methodDict.Remove(managementGroupMethod);
+                            using (elseStr.IsNullOrEmpty() ? null : writer.Scope($"{elseStr}"))
+                            {
+                                if (tenantMethod != null)
+                                {
+                                    methodDict.Remove(tenantMethod);
+                                    var parent = new CodeWriterDeclaration("parent");
+                                    writer.Line($"var {parent:D} = Id;");
+                                    using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                                    {
+                                        writer.Line($"{parent} = {parent}.Parent;");
+                                    }
+                                    writer.UseNamespace("Azure.ResourceManager.Management");
+                                    using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                                    {
+                                        WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                    }
+                                    using (writer.Scope($"else"))
+                                    {
+                                        WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), isAsync);
+                                    }
+                                }
+                                else
+                                {
+                                    WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                }
+                            }
+                        }
+                        else if (tenantMethod != null)
+                        {
+                            methodDict.Remove(tenantMethod);
+                            using (writer.Scope($"{elseStr}"))
+                            {
+                                WriteStartLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), isAsync);
+                            }
+                        }
+
+                        if (methodDict.Count() > 0)
+                        {
+                            throw new Exception($"When trying to merge methods, multiple methods can be mapped to the same scope. The methods not handled: {String.Join(", ", methodDict.Select(kv => kv.Key.Name).ToList())}.");
+                        }
+                    }
                 });
                 writer.Line();
             }
+        }
+
+        private void WriteStartLROMethodBody(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping, bool isAsync, bool isResourceLevel = false)
+        {
+            if (isResourceLevel)
+            {
+                writer.UseNamespace("System.Collections.Generic");
+                writer.Line($"var parent = Id.Parent;");
+                writer.Line($"var parentParts = new List<string>();");
+                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                {
+                    writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
+                    writer.Line($"parent = parent.Parent;");
+                }
+                writer.Line($"var parentResourcePath = parentParts.Count > 0 ? string.Join(\"/\", parentParts) : \"\";");
+                writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
+            }
+            writer.Append($"var {response} = {GetAwait(isAsync)}");
+            writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
+            BuildAndWriteParameters(writer, clientMethod, isResourceLevel: isResourceLevel);
+            writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+
+            WriteStartLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping);
+
         }
 
         protected void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, CSharpType lroObjectType, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, IEnumerable<ParameterMapping> parameterMapping)
@@ -684,7 +977,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
             {
                 var nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
-                if (nonLongRunningOperation.ResultType != null)
+                // need to check implementation type as some delete operation uses ResourceData.
+                if (nonLongRunningOperation.ResultType != null && nonLongRunningOperation.ResultType.Implementation.GetType() == typeof(Resource))
                 {
                     writer.Append($"{ContextProperty}, ");
                 }

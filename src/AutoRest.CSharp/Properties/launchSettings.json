@@ -244,6 +244,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\media_types\\Generated"
     },
+    "MgmtExtensionResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtExtensionResource\\Generated"
+    },
     "MgmtListMethods": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtListMethods\\Generated"
@@ -271,6 +275,10 @@
     "MgmtPropertyChooser": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPropertyChooser\\Generated"
+    },
+    "MgmtScopeResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtScopeResource\\Generated"
     },
     "MgmtSingleton": {
       "commandName": "Project",
