@@ -20,6 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ReferenceTypePropertyChooser
     {
+        internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
+
         private static IList<System.Type> GetReferenceClassCollection()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
@@ -27,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return new List<System.Type>();
             }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == "PropertyReferenceTypeAttribute").Count() > 0).ToList();
+            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
         public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties)

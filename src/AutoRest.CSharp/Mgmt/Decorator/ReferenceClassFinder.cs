@@ -12,6 +12,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     public class ReferenceClassFinder
     {
+        internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
+        internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
+        internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
+
         internal class Node
         {
             public Type Type { get; }
@@ -33,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return new List<Type>();
             }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == "ReferenceTypeAttribute").Count() > 0).ToList();
+            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
         }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
