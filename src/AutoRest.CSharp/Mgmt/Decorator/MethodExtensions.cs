@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
@@ -187,5 +188,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);
         }
 
+        public static bool IsGetResourceMethod(this ClientMethod method, ResourceData resourceData)
+        {
+            return method.RestClientMethod.Operation.IsGetResourceOperation(method.RestClientMethod.Responses[0].ResponseBody?.Type.Name, resourceData);
+        }
+
+        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
+        {
+            return operation.Language.Default.Name.StartsWith("Get") && responseBodyType == resourceData.Type.Name;
+        }
     }
 }
