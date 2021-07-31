@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
-            if (operationGroupsToOmit != null)
+            if (operationGroupsToOmit.Length > 0)
             {
                 var omitSet = operationGroupsToOmit.ToHashSet();
                 codeModel.OperationGroups = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
