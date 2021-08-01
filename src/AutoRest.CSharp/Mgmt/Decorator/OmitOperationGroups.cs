@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 codeModel.OperationGroups = nonOmittedOGs;
                 foreach (var operationGroup in codeModel.OperationGroups)
                 {
-                    AddNonOmittedSchemasToSafeList(operationGroup);
+                    DetectSchemasToKeep(operationGroup);
                 }
 
                 foreach (var operationGroup in omittedOGs)
@@ -116,33 +116,39 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void AddNonOmittedSchemasToSafeList(OperationGroup operationGroup)
+        private static void DetectSchemasToKeep(OperationGroup operationGroup)
         {
             foreach (var operation in operationGroup.Operations)
             {
-                AddResponseSchemas(operation);
-                AddRequestSchemas(operation);
+                AddResponseSchemas(operation, _schemasToKeep);
+                AddRequestSchemas(operation, _schemasToKeep);
             }
             AddDependantSchemasRecursively(_schemasToKeep);
         }
 
-        private static void AddResponseSchemas(Operation operation)
+        private static void DetectSchemasToOmit(CodeModel codeModel, OperationGroup operationGroup)
+        {
+            foreach (var operation in operationGroup.Operations)
+            {
+                AddResponseSchemas(operation, _schemasToOmit);
+                AddRequestSchemas(operation, _schemasToOmit);
+            }
+            AddDependantSchemasRecursively(_schemasToOmit);
+        }
+
+        private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
         {
             foreach (var response in operation.Responses)
             {
                 var schema = response.ResponseSchema;
                 if (schema != null && schema is ObjectSchema objSchema)
                 {
-                    _schemasToKeep.Add(objSchema);
-                    foreach (var property in objSchema.Properties)
-                    {
-                        _schemasToKeep.Add(property.Schema);
-                    }
+                    setToProcess.Add(objSchema);
                 }
             }
         }
 
-        private static void AddRequestSchemas(Operation operation)
+        private static void AddRequestSchemas(Operation operation, HashSet<Schema> setToProcess)
         {
             foreach (var request in operation.Requests)
             {
@@ -152,60 +158,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     {
                         if (param.Schema is ObjectSchema objSchema)
                         {
-                            _schemasToKeep.Add(objSchema);
-                            foreach (var property in objSchema.Properties)
-                            {
-                                _schemasToKeep.Add(property.Schema);
-                            }
+                            setToProcess.Add(objSchema);
                         }
                     }
                 }
             }
         }
 
-        private static void DetectSchemasToOmit(CodeModel codeModel, OperationGroup operationGroup)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                foreach (var response in operation.Responses)
-                {
-                    var schema = response.ResponseSchema;
-                    if (schema != null && !_schemasToOmit.Contains(schema))
-                    {
-                        _schemasToOmit.Add(schema);
-                    }
-                }
-                foreach (var request in operation.Requests)
-                {
-                    foreach (var param in request.Parameters)
-                    {
-                        var schema = param.Schema;
-                        if (!_schemasToOmit.Contains(schema))
-                        {
-                            _schemasToOmit.Add(schema);
-                        }
-                    }
-                }
-            }
-
-            AddDependantSchemasRecursively(_schemasToOmit);
-
-            foreach (var schema in _schemasToOmit)
-            {
-                if (schema is ObjectSchema objSchema)
-                {
-                    if (objSchema.Children != null)
-                    {
-                        foreach (var child in objSchema.Children.All)
-                        {
-                            if (!_schemasToOmit.Contains(child))
-                            {
-                                _schemasToKeep.Add(child);
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }
