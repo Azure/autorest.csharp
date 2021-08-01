@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class OmitOperationGroups
     {
         private static HashSet<Schema> _schemasToOmit = new HashSet<Schema>();
-        private static HashSet<Schema> _schemasStillUsed = new HashSet<Schema>();
+        private static HashSet<Schema> _schemasToKeep = new HashSet<Schema>();
 
         public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     AddNonOmittedSchemasToSafeList(operationGroup);
                 }
+
                 foreach (var operationGroup in omittedOGs)
                 {
                     if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
@@ -37,8 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         DetectSchemasToOmit(codeModel, operationGroup);
                     }
                 }
-
-                AddDependantSchemasRecursively(_schemasStillUsed);
+                _schemasToOmit = _schemasToOmit.Except(_schemasToKeep).ToHashSet();
                 RemoveSchemas(codeModel);
             }
         }
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (var schema in _schemasToOmit)
             {
-                if (schema is ObjectSchema objSchema && !_schemasStillUsed.Contains(objSchema))
+                if (schema is ObjectSchema objSchema)
                 {
                     codeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
@@ -72,17 +72,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void AddDependantSchemasRecursively(HashSet<Schema> setToProcess)
         {
             Queue<Schema> sQueue = new Queue<Schema>(setToProcess);
+            HashSet<Schema> handledSchemas = new HashSet<Schema>();
             while (sQueue.Count > 0)
             {
                 var cur = sQueue.Dequeue();
+                handledSchemas.Add(cur);
                 if (cur is ObjectSchema curSchema)
                 {
                     foreach (var property in curSchema.Properties)
                     {
                         if (property.Schema is ObjectSchema propertySchema)
                         {
-                            sQueue.Enqueue(propertySchema);
-                            setToProcess.Add(propertySchema);
+                            if (!handledSchemas.Contains(propertySchema))
+                            {
+                                sQueue.Enqueue(propertySchema);
+                                setToProcess.Add(propertySchema);
+                            }
+                        }
+                        else if (property.Schema is ArraySchema arraySchema && arraySchema.ElementType is ObjectSchema arrayPropertySchema)
+                        {
+                            if (!handledSchemas.Contains(arrayPropertySchema))
+                            {
+                                sQueue.Enqueue(arrayPropertySchema);
+                                setToProcess.Add(arrayPropertySchema);
+                            }
                         }
                     }
                     if (curSchema.Parents != null)
@@ -91,8 +104,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             if (parent is ObjectSchema parentSchema)
                             {
-                                sQueue.Enqueue(parentSchema);
-                                setToProcess.Add(parentSchema);
+                                if (!handledSchemas.Contains(parentSchema))
+                                {
+                                    sQueue.Enqueue(parentSchema);
+                                    setToProcess.Add(parentSchema);
+                                }
                             }
                         }
                     }
@@ -107,6 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 AddResponseSchemas(operation);
                 AddRequestSchemas(operation);
             }
+            AddDependantSchemasRecursively(_schemasToKeep);
         }
 
         private static void AddResponseSchemas(Operation operation)
@@ -116,16 +133,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var schema = response.ResponseSchema;
                 if (schema != null && schema is ObjectSchema objSchema)
                 {
-                    if (_schemasToOmit.Contains(objSchema))
-                    {
-                        _schemasStillUsed.Add(objSchema);
-                    }
+                    _schemasToKeep.Add(objSchema);
                     foreach (var property in objSchema.Properties)
                     {
-                        if (_schemasToOmit.Contains(property.Schema))
-                        {
-                            _schemasStillUsed.Add(property.Schema);
-                        }
+                        _schemasToKeep.Add(property.Schema);
                     }
                 }
             }
@@ -141,16 +152,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     {
                         if (param.Schema is ObjectSchema objSchema)
                         {
-                            if (_schemasToOmit.Contains(objSchema))
-                            {
-                                _schemasStillUsed.Add(objSchema);
-                            }
+                            _schemasToKeep.Add(objSchema);
                             foreach (var property in objSchema.Properties)
                             {
-                                if (_schemasToOmit.Contains(property.Schema))
-                                {
-                                    _schemasStillUsed.Add(property.Schema);
-                                }
+                                _schemasToKeep.Add(property.Schema);
                             }
                         }
                     }
@@ -195,7 +200,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             if (!_schemasToOmit.Contains(child))
                             {
-                                _schemasStillUsed.Add(child);
+                                _schemasToKeep.Add(child);
                             }
                         }
                     }
