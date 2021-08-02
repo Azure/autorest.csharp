@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
@@ -17,16 +18,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string ResourceGroups = "resourceGroups";
         public const string Tenant = "tenant";
         public const string Locations = "locations";
-        public const string ManagementGroups = "managementGroups";
+        public const string ManagementGroups = "providers/Microsoft.Management/managementGroups"; // TODO: Fix ResourceType() and make it "Microsoft.Management/managementGroups".
+        public const string ResourceGroupResources = "resourceGroupsResources"; // Represent any resource under a resource group. The resource type for /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
 
         public static readonly Dictionary<string, string> TypeToExtensionName = new Dictionary<string, string>()
         {
             { Subscriptions , "SubscriptionExtensions" },
             { ResourceGroups , "ResourceGroupExtensions" },
             { Tenant , "ArmClientExtensions" },
+            { ManagementGroups , "ManagementGroupExtensions" },
         };
 
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+
+        private static ConcurrentDictionary<string, string> _operationPathValueCache = new ConcurrentDictionary<string, string>();
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
         {
@@ -40,6 +45,32 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             _valueCache.TryAdd(operationsGroup, result);
+            return result;
+        }
+
+        public static string ResourceType(this Operation operation)
+        {
+            string? result = null;
+            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
+            {
+                throw new ArgumentException($"The operation does not have an HttpRequest.");
+            }
+            var path = httpRequest.Path;
+            if (_operationPathValueCache.TryGetValue(path, out result))
+                return result;
+
+            var indexOfProvider = path.IndexOf(ProviderSegment.Providers);
+            if (indexOfProvider < 0)
+            {
+                throw new ArgumentException($"Could not set ResourceType for operations group {path}. No {ProviderSegment.Providers} string found in the URI");
+            }
+            var resourceType = ResourceTypeBuilder.ConstructResourceType(path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
+            if (resourceType == string.Empty)
+            {
+                throw new ArgumentException($"Could not set ResourceType for operations group {path}. An unexpected pattern of reference-reference was found in the URI");
+            }
+            result = resourceType.ToString().TrimEnd('/');
+            _operationPathValueCache.TryAdd(path, result);
             return result;
         }
 

@@ -22,7 +22,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 if (operations.Key.Equals("AvailableBalances") || operations.Key.Equals("Instructions"))
                     Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts/billingProfiles"));
                 else if (operations.Key.Equals("Agreements"))
+                {
                     Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts"));
+                    Assert.IsTrue(operations.IsAncestorTenant(context));
+                    Assert.IsFalse(operations.IsTenantResource(context.Configuration.MgmtConfiguration));
+                }
                 else
                     Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("tenant"));
             }

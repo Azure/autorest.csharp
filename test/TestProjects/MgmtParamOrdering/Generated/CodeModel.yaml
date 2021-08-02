@@ -4,7 +4,7 @@ info: !Info
   title: MgmtParamOrdering
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_21
+    - !BooleanSchema &ref_49
       type: boolean
       language: !Languages 
         default:
@@ -13,15 +13,31 @@ schemas: !Schemas
             Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the
             dedicated host group. The value is defaulted to 'true' when not provided. <br><br>Minimum api-version: 2020-06-01.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_23
+    - !BooleanSchema &ref_51
       type: boolean
       language: !Languages 
         default:
           name: Boolean
           description: Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
       protocol: !Protocols {}
+    - !BooleanSchema &ref_26
+      type: boolean
+      defaultValue: false
+      language: !Languages 
+        default:
+          name: Boolean
+          description: The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service
+      protocol: !Protocols {}
+    - !BooleanSchema &ref_30
+      type: boolean
+      defaultValue: false
+      language: !Languages 
+        default:
+          name: Boolean
+          description: The flag to indicate whether to allow public access when behind VNet.
+      protocol: !Protocols {}
   numbers:
-    - !NumberSchema &ref_17
+    - !NumberSchema &ref_45
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -32,7 +48,7 @@ schemas: !Schemas
           name: AvailabilitySetPropertiesPlatformUpdateDomainCount
           description: Update Domain count.
       protocol: !Protocols {}
-    - !NumberSchema &ref_18
+    - !NumberSchema &ref_46
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -43,7 +59,7 @@ schemas: !Schemas
           name: AvailabilitySetPropertiesPlatformFaultDomainCount
           description: Fault Domain count.
       protocol: !Protocols {}
-    - !NumberSchema &ref_20
+    - !NumberSchema &ref_48
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -55,7 +71,7 @@ schemas: !Schemas
           name: DedicatedHostGroupPropertiesPlatformFaultDomainCount
           description: Number of fault domains that the host group can span.
       protocol: !Protocols {}
-    - !NumberSchema &ref_22
+    - !NumberSchema &ref_50
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -67,7 +83,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesPlatformFaultDomain
           description: Fault domain of the dedicated host within a dedicated host group.
       protocol: !Protocols {}
-    - !NumberSchema &ref_95
+    - !NumberSchema &ref_134
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -77,6 +93,17 @@ schemas: !Schemas
         default:
           name: Integer
           description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_28
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 32
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesPrivateLinkCount
+          description: Count of private connections in the workspace
       protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
@@ -96,7 +123,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_39
       type: string
       apiVersions:
         - !ApiVersion 
@@ -106,7 +133,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_40
       type: string
       apiVersions:
         - !ApiVersion 
@@ -116,7 +143,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_41
       type: string
       apiVersions:
         - !ApiVersion 
@@ -126,7 +153,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
@@ -146,7 +173,7 @@ schemas: !Schemas
           name: AvailabilitySetBar
           description: specifies the bar
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_59
       type: string
       apiVersions:
         - !ApiVersion 
@@ -166,7 +193,7 @@ schemas: !Schemas
           name: DedicatedHostGroupFoo
           description: specifies the foo
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_47
       type: string
       apiVersions:
         - !ApiVersion 
@@ -186,7 +213,7 @@ schemas: !Schemas
           name: DedicatedHostFoo
           description: specifies the foo
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_52
       type: string
       apiVersions:
         - !ApiVersion 
@@ -196,7 +223,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesHostId
           description: A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host.
       protocol: !Protocols {}
-    - !StringSchema &ref_26
+    - !StringSchema &ref_54
       type: string
       apiVersions:
         - !ApiVersion 
@@ -206,7 +233,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesProvisioningState
           description: The provisioning state, which only appears in the response.
       protocol: !Protocols {}
-    - !StringSchema &ref_32
+    - !StringSchema &ref_60
       type: string
       apiVersions:
         - !ApiVersion 
@@ -226,8 +253,322 @@ schemas: !Schemas
           name: VirtualMachineExtensionImageBar
           description: specifies the bar
       protocol: !Protocols {}
+    - !StringSchema &ref_142
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      maxLength: 90
+      minLength: 1
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_61
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorDetailCode
+          description: The error code.
+      protocol: !Protocols {}
+    - !StringSchema &ref_62
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorDetailMessage
+          description: The error message.
+      protocol: !Protocols {}
+    - !StringSchema &ref_63
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorDetailTarget
+          description: The error target.
+      protocol: !Protocols {}
+    - !StringSchema &ref_65
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorAdditionalInfoType
+          description: The additional info type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: EnvironmentContainerDescription
+          description: The asset description text.
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SystemDataCreatedBy
+          description: The identity that created the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SystemDataLastModifiedBy
+          description: The identity that last modified the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_150
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-_]{0,254}$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_17
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesWorkspaceId
+          description: The immutable id associated with this workspace.
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesDescription
+          description: The description of this workspace.
+      protocol: !Protocols {}
+    - !StringSchema &ref_19
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesFriendlyName
+          description: The friendly name for this workspace. This name in mutable
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesKeyVault
+          description: ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesApplicationInsights
+          description: ARM id of the application insights associated with this workspace. This cannot be changed once the workspace has been created
+      protocol: !Protocols {}
+    - !StringSchema &ref_22
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesContainerRegistry
+          description: ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created
+      protocol: !Protocols {}
+    - !StringSchema &ref_23
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesStorageAccount
+          description: ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created
+      protocol: !Protocols {}
+    - !StringSchema &ref_24
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesDiscoveryUrl
+          description: Url for the discovery service to identify regional endpoints for machine learning experimentation services
+      protocol: !Protocols {}
+    - !StringSchema &ref_27
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesServiceProvisionedResourceGroup
+          description: The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesImageBuildCompute
+          description: The compute name for image build
+      protocol: !Protocols {}
+    - !StringSchema &ref_31
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesPrimaryUserAssignedIdentity
+          description: The user assigned identity resource id that represents the workspace identity.
+      protocol: !Protocols {}
+    - !StringSchema &ref_32
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspacePropertiesTenantId
+          description: The tenant id associated with this workspace.
+      protocol: !Protocols {}
+    - !StringSchema 
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WorkspaceLocation
+          description: Specifies the location of the resource.
+      protocol: !Protocols {}
+  choices:
+    - !ChoiceSchema &ref_11
+      choices:
+        - !ChoiceValue 
+          value: User
+          language:
+            default:
+              name: User
+              description: ''
+        - !ChoiceValue 
+          value: Application
+          language:
+            default:
+              name: Application
+              description: ''
+        - !ChoiceValue 
+          value: ManagedIdentity
+          language:
+            default:
+              name: ManagedIdentity
+              description: ''
+        - !ChoiceValue 
+          value: Key
+          language:
+            default:
+              name: Key
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: CreatedByType
+          description: The type of identity that created the resource.
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_25
+      choices:
+        - !ChoiceValue 
+          value: Unknown
+          language:
+            default:
+              name: Unknown
+              description: ''
+        - !ChoiceValue 
+          value: Updating
+          language:
+            default:
+              name: Updating
+              description: ''
+        - !ChoiceValue 
+          value: Creating
+          language:
+            default:
+              name: Creating
+              description: ''
+        - !ChoiceValue 
+          value: Deleting
+          language:
+            default:
+              name: Deleting
+              description: ''
+        - !ChoiceValue 
+          value: Succeeded
+          language:
+            default:
+              name: Succeeded
+              description: ''
+        - !ChoiceValue 
+          value: Failed
+          language:
+            default:
+              name: Failed
+              description: ''
+        - !ChoiceValue 
+          value: Canceled
+          language:
+            default:
+              name: Canceled
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: ProvisioningState
+          description: The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_36
+    - !ConstantSchema &ref_75
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -237,7 +578,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_40
+    - !ConstantSchema &ref_79
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -247,7 +588,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_41
+    - !ConstantSchema &ref_80
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -257,7 +598,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_63
+    - !ConstantSchema &ref_102
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -271,7 +612,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_15
+    - !DictionarySchema &ref_43
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -279,7 +620,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_30
+    - !DictionarySchema &ref_58
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -287,8 +628,48 @@ schemas: !Schemas
           name: UpdateResourceTags
           description: Resource tags
       protocol: !Protocols {}
+    - !DictionarySchema &ref_8
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: EnvironmentContainerProperties
+          description: The asset property dictionary.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_9
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: EnvironmentContainerTags
+          description: Tag dictionary. Tags can be added, removed, and updated.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_15
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: WorkspaceTags
+          description: Contains resource tags defined as key/value pairs.
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_69
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: WorkspaceUpdateParametersTags
+          description: The resource tags for the machine learning workspace.
+      protocol: !Protocols {}
+  anyObjects:
+    - !AnyObjectSchema &ref_66
+      type: any-object
+      language: !Languages 
+        default:
+          name: AnyObject
+          description: Any object
+      protocol: !Protocols {}
   dateTimes:
-    - !DateTimeSchema &ref_25
+    - !DateTimeSchema &ref_53
       type: date-time
       format: date-time
       apiVersions:
@@ -299,6 +680,28 @@ schemas: !Schemas
           name: DedicatedHostPropertiesProvisioningTime
           description: The date when the host was first provisioned.
       protocol: !Protocols {}
+    - !DateTimeSchema &ref_12
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SystemDataCreatedAt
+          description: The timestamp of resource creation (UTC).
+      protocol: !Protocols {}
+    - !DateTimeSchema &ref_14
+      type: date-time
+      format: date-time
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SystemDataLastModifiedAt
+          description: The timestamp of resource last modification (UTC)
+      protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_2
       type: object
@@ -307,7 +710,7 @@ schemas: !Schemas
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_7
+          - !ObjectSchema &ref_33
             type: object
             apiVersions:
               - !ApiVersion 
@@ -342,7 +745,7 @@ schemas: !Schemas
                   Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_8
+          - !ObjectSchema &ref_34
             type: object
             apiVersions:
               - !ApiVersion 
@@ -372,7 +775,7 @@ schemas: !Schemas
                 description: Specifies information about the Dedicated host.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_9
+          - !ObjectSchema &ref_35
             type: object
             apiVersions:
               - !ApiVersion 
@@ -402,7 +805,7 @@ schemas: !Schemas
                 description: Specifies information about the Dedicated host.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_10
+          - !ObjectSchema &ref_36
             type: object
             apiVersions:
               - !ApiVersion 
@@ -432,14 +835,385 @@ schemas: !Schemas
                 description: The VirtualMachineExtensionImage.
                 namespace: ''
             protocol: !Protocols {}
+          - !ObjectSchema &ref_37
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: !ObjectSchema &ref_68
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_7
+                      serializedName: description
+                      language: !Languages 
+                        default:
+                          name: description
+                          description: The asset description text.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_8
+                      serializedName: properties
+                      language: !Languages 
+                        default:
+                          name: properties
+                          description: The asset property dictionary.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_9
+                      serializedName: tags
+                      language: !Languages 
+                        default:
+                          name: tags
+                          description: Tag dictionary. Tags can be added, removed, and updated.
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: EnvironmentContainer
+                      description: Container for environment specification versions.
+                      namespace: ''
+                  protocol: !Protocols {}
+                required: true
+                serializedName: properties
+                language: !Languages 
+                  default:
+                    name: properties
+                    description: Additional attributes of the entity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ObjectSchema &ref_16
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  properties:
+                    - !Property 
+                      schema: *ref_10
+                      serializedName: createdBy
+                      language: !Languages 
+                        default:
+                          name: createdBy
+                          description: The identity that created the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_11
+                      serializedName: createdByType
+                      language: !Languages 
+                        default:
+                          name: createdByType
+                          description: The type of identity that created the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_12
+                      serializedName: createdAt
+                      language: !Languages 
+                        default:
+                          name: createdAt
+                          description: The timestamp of resource creation (UTC).
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_13
+                      serializedName: lastModifiedBy
+                      language: !Languages 
+                        default:
+                          name: lastModifiedBy
+                          description: The identity that last modified the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_11
+                      serializedName: lastModifiedByType
+                      language: !Languages 
+                        default:
+                          name: lastModifiedByType
+                          description: The type of identity that last modified the resource.
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_14
+                      serializedName: lastModifiedAt
+                      language: !Languages 
+                        default:
+                          name: lastModifiedAt
+                          description: The timestamp of resource last modification (UTC)
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: SystemData
+                      description: Metadata pertaining to creation and last modification of the resource.
+                      namespace: ''
+                  protocol: !Protocols {}
+                readOnly: true
+                required: false
+                serializedName: systemData
+                extensions:
+                  x-ms-mutability:
+                    - read
+                language: !Languages 
+                  default:
+                    name: systemData
+                    description: System data associated with resource provider
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+              - input
+            language: !Languages 
+              default:
+                name: EnvironmentContainerResource
+                description: Azure Resource Manager resource envelope.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_38
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_15
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Contains resource tags defined as key/value pairs.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_16
+                readOnly: true
+                serializedName: systemData
+                language: !Languages 
+                  default:
+                    name: systemData
+                    description: Metadata pertaining to creation and last modification of the resource.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_17
+                flattenedNames:
+                  - properties
+                  - workspaceId
+                readOnly: true
+                serializedName: workspaceId
+                language: !Languages 
+                  default:
+                    name: workspaceId
+                    description: The immutable id associated with this workspace.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_18
+                flattenedNames:
+                  - properties
+                  - description
+                serializedName: description
+                language: !Languages 
+                  default:
+                    name: description
+                    description: The description of this workspace.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_19
+                flattenedNames:
+                  - properties
+                  - friendlyName
+                serializedName: friendlyName
+                language: !Languages 
+                  default:
+                    name: friendlyName
+                    description: The friendly name for this workspace. This name in mutable
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_20
+                flattenedNames:
+                  - properties
+                  - keyVault
+                serializedName: keyVault
+                language: !Languages 
+                  default:
+                    name: keyVault
+                    description: ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_21
+                flattenedNames:
+                  - properties
+                  - applicationInsights
+                serializedName: applicationInsights
+                language: !Languages 
+                  default:
+                    name: applicationInsights
+                    description: ARM id of the application insights associated with this workspace. This cannot be changed once the workspace has been created
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_22
+                flattenedNames:
+                  - properties
+                  - containerRegistry
+                nullable: true
+                serializedName: containerRegistry
+                language: !Languages 
+                  default:
+                    name: containerRegistry
+                    description: ARM id of the container registry associated with this workspace. This cannot be changed once the workspace has been created
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_23
+                flattenedNames:
+                  - properties
+                  - storageAccount
+                serializedName: storageAccount
+                language: !Languages 
+                  default:
+                    name: storageAccount
+                    description: ARM id of the storage account associated with this workspace. This cannot be changed once the workspace has been created
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_24
+                flattenedNames:
+                  - properties
+                  - discoveryUrl
+                serializedName: discoveryUrl
+                language: !Languages 
+                  default:
+                    name: discoveryUrl
+                    description: Url for the discovery service to identify regional endpoints for machine learning experimentation services
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_25
+                flattenedNames:
+                  - properties
+                  - provisioningState
+                readOnly: true
+                serializedName: provisioningState
+                language: !Languages 
+                  default:
+                    name: provisioningState
+                    description: The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_26
+                flattenedNames:
+                  - properties
+                  - hbiWorkspace
+                serializedName: hbiWorkspace
+                language: !Languages 
+                  default:
+                    name: hbiWorkspace
+                    description: The flag to signal HBI data in the workspace and reduce diagnostic data collected by the service
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_27
+                flattenedNames:
+                  - properties
+                  - serviceProvisionedResourceGroup
+                readOnly: true
+                serializedName: serviceProvisionedResourceGroup
+                language: !Languages 
+                  default:
+                    name: serviceProvisionedResourceGroup
+                    description: The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_28
+                flattenedNames:
+                  - properties
+                  - privateLinkCount
+                readOnly: true
+                serializedName: privateLinkCount
+                language: !Languages 
+                  default:
+                    name: privateLinkCount
+                    description: Count of private connections in the workspace
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_29
+                flattenedNames:
+                  - properties
+                  - imageBuildCompute
+                serializedName: imageBuildCompute
+                language: !Languages 
+                  default:
+                    name: imageBuildCompute
+                    description: The compute name for image build
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_30
+                flattenedNames:
+                  - properties
+                  - allowPublicAccessWhenBehindVnet
+                serializedName: allowPublicAccessWhenBehindVnet
+                language: !Languages 
+                  default:
+                    name: allowPublicAccessWhenBehindVnet
+                    description: The flag to indicate whether to allow public access when behind VNet.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_31
+                flattenedNames:
+                  - properties
+                  - primaryUserAssignedIdentity
+                serializedName: primaryUserAssignedIdentity
+                language: !Languages 
+                  default:
+                    name: primaryUserAssignedIdentity
+                    description: The user assigned identity resource id that represents the workspace identity.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_32
+                flattenedNames:
+                  - properties
+                  - tenantId
+                readOnly: true
+                serializedName: tenantId
+                language: !Languages 
+                  default:
+                    name: tenantId
+                    description: The tenant id associated with this workspace.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+              - input
+            language: !Languages 
+              default:
+                name: Workspace
+                description: An object that represents a machine learning workspace.
+                namespace: ''
+            protocol: !Protocols {}
         immediate:
-          - *ref_7
-          - *ref_8
-          - *ref_9
-          - *ref_10
+          - *ref_33
+          - *ref_34
+          - *ref_35
+          - *ref_36
+          - *ref_37
+          - *ref_38
       properties:
         - !Property 
-          schema: *ref_11
+          schema: *ref_39
           readOnly: true
           required: false
           serializedName: id
@@ -449,7 +1223,7 @@ schemas: !Schemas
               description: Resource Id
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_12
+          schema: *ref_40
           readOnly: true
           required: false
           serializedName: name
@@ -459,7 +1233,7 @@ schemas: !Schemas
               description: Resource name
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_13
+          schema: *ref_41
           readOnly: true
           required: false
           serializedName: type
@@ -469,7 +1243,7 @@ schemas: !Schemas
               description: Resource type
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_14
+          schema: *ref_42
           required: true
           serializedName: location
           language: !Languages 
@@ -478,7 +1252,7 @@ schemas: !Schemas
               description: Resource location
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_43
           required: false
           serializedName: tags
           language: !Languages 
@@ -499,27 +1273,27 @@ schemas: !Schemas
           description: The Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_7
-    - !ObjectSchema &ref_16
+    - *ref_33
+    - !ObjectSchema &ref_44
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_27
+          - !ObjectSchema &ref_55
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_16
+                - *ref_44
               immediate:
-                - *ref_16
+                - *ref_44
             properties:
               - !Property 
-                schema: *ref_17
+                schema: *ref_45
                 flattenedNames:
                   - properties
                   - platformUpdateDomainCount
@@ -530,7 +1304,7 @@ schemas: !Schemas
                     description: Update Domain count.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_18
+                schema: *ref_46
                 flattenedNames:
                   - properties
                   - platformFaultDomainCount
@@ -550,24 +1324,24 @@ schemas: !Schemas
                 description: Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_28
+          - !ObjectSchema &ref_56
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_16
+                - *ref_44
               immediate:
-                - *ref_16
+                - *ref_44
             properties:
               - !Property 
-                schema: !ArraySchema &ref_34
+                schema: !ArraySchema &ref_71
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_19
+                  elementType: *ref_47
                   language: !Languages 
                     default:
                       name: DedicatedHostGroupUpdateZones
@@ -584,7 +1358,7 @@ schemas: !Schemas
                       in the group to be in the same zone.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_20
+                schema: *ref_48
                 flattenedNames:
                   - properties
                   - platformFaultDomainCount
@@ -595,7 +1369,7 @@ schemas: !Schemas
                     description: Number of fault domains that the host group can span.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_21
+                schema: *ref_49
                 flattenedNames:
                   - properties
                   - supportAutomaticPlacement
@@ -617,19 +1391,19 @@ schemas: !Schemas
                 description: Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated.
                 namespace: ''
             protocol: !Protocols {}
-          - !ObjectSchema &ref_29
+          - !ObjectSchema &ref_57
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_16
+                - *ref_44
               immediate:
-                - *ref_16
+                - *ref_44
             properties:
               - !Property 
-                schema: *ref_22
+                schema: *ref_50
                 flattenedNames:
                   - properties
                   - platformFaultDomain
@@ -640,7 +1414,7 @@ schemas: !Schemas
                     description: Fault domain of the dedicated host within a dedicated host group.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_23
+                schema: *ref_51
                 flattenedNames:
                   - properties
                   - autoReplaceOnFailure
@@ -651,7 +1425,7 @@ schemas: !Schemas
                     description: Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_24
+                schema: *ref_52
                 flattenedNames:
                   - properties
                   - hostId
@@ -663,7 +1437,7 @@ schemas: !Schemas
                     description: A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_25
+                schema: *ref_53
                 flattenedNames:
                   - properties
                   - provisioningTime
@@ -675,7 +1449,7 @@ schemas: !Schemas
                     description: The date when the host was first provisioned.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_26
+                schema: *ref_54
                 flattenedNames:
                   - properties
                   - provisioningState
@@ -697,12 +1471,12 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_27
-          - *ref_28
-          - *ref_29
+          - *ref_55
+          - *ref_56
+          - *ref_57
       properties:
         - !Property 
-          schema: *ref_30
+          schema: *ref_58
           serializedName: tags
           language: !Languages 
             default:
@@ -719,20 +1493,20 @@ schemas: !Schemas
           description: The Update Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_27
-    - !ObjectSchema &ref_53
+    - *ref_55
+    - !ObjectSchema &ref_92
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_33
+          schema: !ArraySchema &ref_70
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_7
+            elementType: *ref_33
             language: !Languages 
               default:
                 name: AvailabilitySetListResultValue
@@ -746,7 +1520,7 @@ schemas: !Schemas
               description: The list of availability sets
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_31
+          schema: *ref_59
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -764,23 +1538,23 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_8
-    - *ref_28
-    - *ref_9
-    - *ref_29
-    - !ObjectSchema &ref_82
+    - *ref_34
+    - *ref_56
+    - *ref_35
+    - *ref_57
+    - !ObjectSchema &ref_121
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_35
+          schema: !ArraySchema &ref_72
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_9
+            elementType: *ref_35
             language: !Languages 
               default:
                 name: DedicatedHostListResultValue
@@ -794,7 +1568,7 @@ schemas: !Schemas
               description: The list of dedicated hosts
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_32
+          schema: *ref_60
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -812,35 +1586,206 @@ schemas: !Schemas
           description: The list dedicated host operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_10
+    - *ref_36
+    - !ObjectSchema &ref_146
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_64
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_61
+                readOnly: true
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: The error code.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_62
+                readOnly: true
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The error message.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_63
+                readOnly: true
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: The error target.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_73
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_64
+                  language: !Languages 
+                    default:
+                      name: ErrorDetailDetails
+                      description: The error details.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: details
+                language: !Languages 
+                  default:
+                    name: details
+                    description: The error details.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_74
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: !ObjectSchema &ref_67
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_65
+                        readOnly: true
+                        serializedName: type
+                        language: !Languages 
+                          default:
+                            name: type
+                            description: The additional info type.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_66
+                        readOnly: true
+                        serializedName: info
+                        language: !Languages 
+                          default:
+                            name: info
+                            description: The additional info.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - exception
+                    language: !Languages 
+                      default:
+                        name: ErrorAdditionalInfo
+                        description: The resource management error additional info.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  language: !Languages 
+                    default:
+                      name: ErrorDetailAdditionalInfo
+                      description: The error additional info.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: additionalInfo
+                language: !Languages 
+                  default:
+                    name: additionalInfo
+                    description: The error additional info.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: ErrorDetail
+                description: The error detail.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: The error object.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      summary: Error response
+      usage:
+        - exception
+      language: !Languages 
+        default:
+          name: ErrorResponse
+          description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).
+          namespace: ''
+          summary: Error response
+      protocol: !Protocols {}
+    - *ref_64
+    - *ref_67
+    - *ref_37
+    - *ref_68
+    - *ref_16
+    - *ref_38
+    - !ObjectSchema &ref_162
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_69
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: The resource tags for the machine learning workspace.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: WorkspaceUpdateParameters
+          description: The parameters for updating a machine learning workspace.
+          namespace: ''
+      protocol: !Protocols {}
   arrays:
-    - *ref_33
-    - *ref_34
-    - *ref_35
-    - !ArraySchema &ref_94
+    - *ref_70
+    - *ref_71
+    - *ref_72
+    - !ArraySchema &ref_133
       type: array
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      elementType: *ref_10
+      elementType: *ref_36
       language: !Languages 
         default:
           name: ArrayOfVirtualMachineExtensionImage
           description: Array of VirtualMachineExtensionImage
       protocol: !Protocols {}
-    - !ArraySchema &ref_102
+    - !ArraySchema &ref_141
       type: array
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      elementType: *ref_10
+      elementType: *ref_36
       language: !Languages 
         default:
           name: ArrayOfVirtualMachineExtensionImage
           description: Array of VirtualMachineExtensionImage
       protocol: !Protocols {}
+    - *ref_73
+    - *ref_74
 globalParameters:
-  - !Parameter &ref_39
+  - !Parameter &ref_78
     schema: *ref_1
     implementation: Client
     required: true
@@ -854,7 +1799,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_37
+  - !Parameter &ref_76
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -870,8 +1815,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_38
-    schema: *ref_36
+  - !Parameter &ref_77
+    schema: *ref_75
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -892,8 +1837,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_43
+          - *ref_76
+          - !Parameter &ref_82
             schema: *ref_1
             implementation: Method
             required: true
@@ -905,7 +1850,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_44
+          - !Parameter &ref_83
             schema: *ref_1
             implementation: Method
             required: true
@@ -917,13 +1862,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -935,8 +1880,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_42
-                schema: *ref_7
+              - !Parameter &ref_81
+                schema: *ref_33
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -948,7 +1893,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -961,7 +1906,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_42
+              - *ref_81
             language: !Languages 
               default:
                 name: ''
@@ -975,11 +1920,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_43
-          - *ref_44
+          - *ref_82
+          - *ref_83
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -1001,8 +1946,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_46
+          - *ref_76
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -1014,7 +1959,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_47
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -1026,13 +1971,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1044,8 +1989,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_45
-                schema: *ref_27
+              - !Parameter &ref_84
+                schema: *ref_55
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1057,7 +2002,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1070,7 +2015,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_45
+              - *ref_84
             language: !Languages 
               default:
                 name: ''
@@ -1084,11 +2029,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_46
-          - *ref_47
+          - *ref_85
+          - *ref_86
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -1110,8 +2055,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_48
+          - *ref_76
+          - !Parameter &ref_87
             schema: *ref_1
             implementation: Method
             required: true
@@ -1123,7 +2068,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -1135,8 +2080,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             language: !Languages 
@@ -1149,8 +2094,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
-          - *ref_49
+          - *ref_87
+          - *ref_88
         responses:
           - !Response 
             language: !Languages 
@@ -1180,8 +2125,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_50
+          - *ref_76
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -1193,7 +2138,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_51
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -1205,13 +2150,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1234,11 +2179,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_50
-          - *ref_51
+          - *ref_89
+          - *ref_90
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -1260,10 +2205,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - *ref_38
-          - *ref_39
-          - !Parameter &ref_52
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - !Parameter &ref_91
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -1278,7 +2223,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1301,10 +2246,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
+          - *ref_91
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -1331,8 +2276,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_54
+          - *ref_76
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -1344,13 +2289,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1373,10 +2318,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_54
+          - *ref_93
         responses:
           - !SchemaResponse 
-            schema: *ref_53
+            schema: *ref_92
             language: !Languages 
               default:
                 name: ''
@@ -1411,8 +2356,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_56
+          - *ref_76
+          - !Parameter &ref_95
             schema: *ref_1
             implementation: Method
             required: true
@@ -1424,7 +2369,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -1436,13 +2381,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1454,8 +2399,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
-                schema: *ref_8
+              - !Parameter &ref_94
+                schema: *ref_34
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1467,7 +2412,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1480,7 +2425,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_94
             language: !Languages 
               default:
                 name: ''
@@ -1494,11 +2439,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_95
+          - *ref_96
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -1511,7 +2456,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -1533,8 +2478,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_59
+          - *ref_76
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -1546,7 +2491,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_60
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             required: true
@@ -1558,13 +2503,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1576,8 +2521,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_58
-                schema: *ref_28
+              - !Parameter &ref_97
+                schema: *ref_56
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1589,7 +2534,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1602,7 +2547,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_58
+              - *ref_97
             language: !Languages 
               default:
                 name: ''
@@ -1616,11 +2561,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_59
-          - *ref_60
+          - *ref_98
+          - *ref_99
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -1642,8 +2587,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_61
+          - *ref_76
+          - !Parameter &ref_100
             schema: *ref_1
             implementation: Method
             required: true
@@ -1655,8 +2600,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - !Parameter &ref_62
+          - *ref_77
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             required: true
@@ -1668,7 +2613,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_39
+          - *ref_78
         requests:
           - !Request 
             language: !Languages 
@@ -1681,8 +2626,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_61
-          - *ref_62
+          - *ref_100
+          - *ref_101
         responses:
           - !Response 
             language: !Languages 
@@ -1712,8 +2657,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_64
+          - *ref_76
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -1725,7 +2670,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_65
+          - !Parameter &ref_104
             schema: *ref_1
             implementation: Method
             required: true
@@ -1738,7 +2683,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_63
+            schema: *ref_102
             implementation: Method
             language: !Languages 
               default:
@@ -1748,13 +2693,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1777,11 +2722,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_64
-          - *ref_65
+          - *ref_103
+          - *ref_104
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -1811,8 +2756,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_67
+          - *ref_76
+          - !Parameter &ref_106
             schema: *ref_1
             implementation: Method
             required: true
@@ -1824,7 +2769,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_68
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -1836,8 +2781,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - !Parameter &ref_69
+          - *ref_77
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -1849,12 +2794,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_39
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1866,8 +2811,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_66
-                schema: *ref_9
+              - !Parameter &ref_105
+                schema: *ref_35
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1879,7 +2824,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1892,7 +2837,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_66
+              - *ref_105
             language: !Languages 
               default:
                 name: ''
@@ -1906,12 +2851,12 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_67
-          - *ref_68
-          - *ref_69
+          - *ref_106
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -1924,7 +2869,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -1948,8 +2893,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_71
+          - *ref_76
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -1961,7 +2906,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
+          - !Parameter &ref_111
             schema: *ref_1
             implementation: Method
             required: true
@@ -1973,8 +2918,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - !Parameter &ref_73
+          - *ref_77
+          - !Parameter &ref_112
             schema: *ref_1
             implementation: Method
             required: true
@@ -1986,12 +2931,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_39
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2003,8 +2948,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_70
-                schema: *ref_29
+              - !Parameter &ref_109
+                schema: *ref_57
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2016,7 +2961,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2029,7 +2974,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_70
+              - *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -2043,12 +2988,12 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
-          - *ref_72
-          - *ref_73
+          - *ref_110
+          - *ref_111
+          - *ref_112
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -2072,8 +3017,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_74
+          - *ref_76
+          - !Parameter &ref_113
             schema: *ref_1
             implementation: Method
             required: true
@@ -2085,7 +3030,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_114
             schema: *ref_1
             implementation: Method
             required: true
@@ -2097,7 +3042,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_76
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             required: true
@@ -2109,8 +3054,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             language: !Languages 
@@ -2123,9 +3068,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_74
-          - *ref_75
-          - *ref_76
+          - *ref_113
+          - *ref_114
+          - *ref_115
         responses:
           - !Response 
             language: !Languages 
@@ -2166,8 +3111,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_77
+          - *ref_76
+          - !Parameter &ref_116
             schema: *ref_1
             implementation: Method
             required: true
@@ -2179,7 +3124,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_78
+          - !Parameter &ref_117
             schema: *ref_1
             implementation: Method
             required: true
@@ -2191,7 +3136,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
+          - !Parameter &ref_118
             schema: *ref_1
             implementation: Method
             required: true
@@ -2204,7 +3149,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_63
+            schema: *ref_102
             implementation: Method
             language: !Languages 
               default:
@@ -2214,13 +3159,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2243,12 +3188,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
-          - *ref_78
-          - *ref_79
+          - *ref_116
+          - *ref_117
+          - *ref_118
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -2270,8 +3215,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_80
+          - *ref_76
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             required: true
@@ -2283,7 +3228,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_81
+          - !Parameter &ref_120
             schema: *ref_1
             implementation: Method
             required: true
@@ -2295,13 +3240,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2324,11 +3269,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_80
-          - *ref_81
+          - *ref_119
+          - *ref_120
         responses:
           - !SchemaResponse 
-            schema: *ref_82
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -2363,8 +3308,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_83
+          - *ref_76
+          - !Parameter &ref_122
             schema: *ref_1
             implementation: Method
             required: true
@@ -2376,7 +3321,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_84
+          - !Parameter &ref_123
             schema: *ref_1
             implementation: Method
             required: true
@@ -2388,8 +3333,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_39
-          - !Parameter &ref_85
+          - *ref_78
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             required: true
@@ -2401,7 +3346,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_86
+          - !Parameter &ref_125
             schema: *ref_1
             implementation: Method
             required: true
@@ -2413,12 +3358,12 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
+          - *ref_77
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2441,13 +3386,13 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_83
-          - *ref_84
-          - *ref_85
-          - *ref_86
+          - *ref_122
+          - *ref_123
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -2469,8 +3414,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_88
+          - *ref_76
+          - !Parameter &ref_127
             schema: *ref_1
             implementation: Method
             required: true
@@ -2482,7 +3427,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_89
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             required: true
@@ -2494,7 +3439,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_90
+          - !Parameter &ref_129
             schema: *ref_1
             implementation: Method
             required: true
@@ -2506,7 +3451,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_91
+          - !Parameter &ref_130
             schema: *ref_1
             implementation: Method
             required: true
@@ -2518,13 +3463,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_79
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2536,8 +3481,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_87
-                schema: *ref_10
+              - !Parameter &ref_126
+                schema: *ref_36
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2549,7 +3494,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2562,7 +3507,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_87
+              - *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -2576,13 +3521,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_88
-          - *ref_89
-          - *ref_90
-          - *ref_91
+          - *ref_127
+          - *ref_128
+          - *ref_129
+          - *ref_130
         responses:
           - !SchemaResponse 
-            schema: *ref_10
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -2604,8 +3549,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_92
+          - *ref_76
+          - !Parameter &ref_131
             schema: *ref_1
             implementation: Method
             required: true
@@ -2617,7 +3562,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_132
             schema: *ref_1
             implementation: Method
             required: true
@@ -2629,13 +3574,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2658,11 +3603,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_92
-          - *ref_93
+          - *ref_131
+          - *ref_132
         responses:
           - !SchemaResponse 
-            schema: *ref_94
+            schema: *ref_133
             language: !Languages 
               default:
                 name: ''
@@ -2684,8 +3629,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_37
-          - !Parameter &ref_96
+          - *ref_76
+          - !Parameter &ref_135
             schema: *ref_1
             implementation: Method
             required: true
@@ -2697,7 +3642,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_97
+          - !Parameter &ref_136
             schema: *ref_1
             implementation: Method
             required: true
@@ -2709,7 +3654,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_98
+          - !Parameter &ref_137
             schema: *ref_1
             implementation: Method
             required: true
@@ -2721,7 +3666,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_99
+          - !Parameter &ref_138
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2732,8 +3677,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_100
-            schema: *ref_95
+          - !Parameter &ref_139
+            schema: *ref_134
             implementation: Method
             language: !Languages 
               default:
@@ -2743,7 +3688,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_101
+          - !Parameter &ref_140
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2754,13 +3699,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_38
-          - *ref_39
+          - *ref_77
+          - *ref_78
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_41
+                schema: *ref_80
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2783,15 +3728,15 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_96
-          - *ref_97
-          - *ref_98
-          - *ref_99
-          - *ref_100
-          - *ref_101
+          - *ref_135
+          - *ref_136
+          - *ref_137
+          - *ref_138
+          - *ref_139
+          - *ref_140
         responses:
           - !SchemaResponse 
-            schema: *ref_102
+            schema: *ref_141
             language: !Languages 
               default:
                 name: ''
@@ -2813,6 +3758,867 @@ operationGroups:
     language: !Languages 
       default:
         name: VirtualMachineExtensionImages
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: EnvironmentContainers
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_78
+          - !Parameter &ref_143
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_144
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_145
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Container name.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_77
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_143
+          - *ref_144
+          - *ref_145
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete container.
+            summary: Delete container.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_78
+          - !Parameter &ref_147
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_148
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_149
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Container name.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_77
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_147
+          - *ref_148
+          - *ref_149
+        responses:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: Get container.
+            summary: Get container.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_78
+          - !Parameter &ref_152
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_153
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_154
+            schema: *ref_150
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Container name.
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_77
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_79
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_151
+                schema: *ref_37
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: body
+                    description: Container entity to create or update.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_151
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_152
+          - *ref_153
+          - *ref_154
+        responses:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: Created
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or update container.
+            summary: Create or update container.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: EnvironmentContainers
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Workspaces
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - !Parameter &ref_155
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_156
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_155
+          - *ref_156
+        responses:
+          - !SchemaResponse 
+            schema: *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Get
+            description: Gets the properties of the specified machine learning workspace.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - !Parameter &ref_158
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_159
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_79
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_157
+                schema: *ref_38
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The parameters for creating or updating a machine learning workspace.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_157
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_158
+          - *ref_159
+        responses:
+          - !SchemaResponse 
+            schema: *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !SchemaResponse 
+            schema: *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '201'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Creates or updates a workspace with the specified parameters.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - !Parameter &ref_160
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_161
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_160
+          - *ref_161
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was accepted; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: The machine learning workspace does not exist in the subscription.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Delete
+            description: Deletes a machine learning workspace.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_76
+          - *ref_77
+          - *ref_78
+          - !Parameter &ref_164
+            schema: *ref_142
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group. The name is case insensitive.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_165
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: workspaceName
+                description: Name of Azure Machine Learning workspace.
+                serializedName: workspaceName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_79
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_163
+                schema: *ref_162
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: The parameters for updating a machine learning workspace.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_80
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_163
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_164
+          - *ref_165
+        responses:
+          - !SchemaResponse 
+            schema: *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: The request was successful; the request was well-formed and received properly.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_146
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: Update
+            description: Updates a machine learning workspace with the specified parameters.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Workspaces
         description: ''
     protocol: !Protocols {}
 security: !Security 

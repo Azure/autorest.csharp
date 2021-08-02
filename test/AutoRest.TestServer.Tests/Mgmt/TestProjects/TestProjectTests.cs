@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
@@ -189,6 +190,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
             Assert.NotNull(resourceExtensions);
 
+            var scopeResourceContainers = new HashSet<string>{"PolicyAssignmentContainer"};
             foreach (var type in FindAllContainers())
             {
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
@@ -201,7 +203,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
                     Assert.AreEqual(typeof(ResourceGroupOperations), param.ParameterType);
                 }
-                else
+                else if (!scopeResourceContainers.Contains(type.Name))
                 {
                     var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
                     Assert.IsNull(getContainerMethod);
@@ -271,7 +273,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     yield return t;
                 }
@@ -493,10 +495,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (generatedModel == null)
                 return leastParamCtor;
 
-            if (generatedModel.GetCustomAttribute(typeof(ReferenceTypeAttribute), false) != null)
-                return generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                    .Where(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute), false) != null)
-                    .FirstOrDefault();
+            if (generatedModel.GetCustomAttributes(false).Any(a => a.GetType().Name == ReferenceClassFinder.ReferenceTypeAttributeName))
+            {
+                var ctors = generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                var attrCtors = ctors.Where(c => HasInitializationAttribute(c));
+                return attrCtors.FirstOrDefault();
+            }
 
             foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {
@@ -506,9 +510,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return leastParamCtor;
         }
 
+        private bool HasInitializationAttribute(ConstructorInfo c)
+        {
+            return c.GetCustomAttributes(false).Any(c => c.GetType().Name == ReferenceClassFinder.InitializationCtorAttributeName);
+        }
+
         protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)
         {
-            var ctors = model.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            var ctors = model.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
             Assert.AreEqual(1, ctors.Length);
             var ctor = ctors.First();
             var parameters = ctor.GetParameters();

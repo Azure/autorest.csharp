@@ -356,6 +356,7 @@ namespace MgmtListMethods
         #region SharedGallery
         /// <summary> Gets an object representing a SharedGalleryContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SharedGalleryContainer" /> object. </returns>
         public static SharedGalleryContainer GetSharedGalleryContainer(this SubscriptionOperations subscription)
         {
             return new SharedGalleryContainer(subscription);

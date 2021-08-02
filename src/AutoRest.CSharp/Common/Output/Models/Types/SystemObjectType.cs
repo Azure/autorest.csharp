@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager.Core;
@@ -37,13 +38,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal Type SystemType => _type;
 
-        private IEnumerable<ParameterInfo> GetCtorParameters(Type attributeType)
+        private IEnumerable<ParameterInfo> GetCtorParameters(string attributeType)
         {
             foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (!ctor.IsPublic)
                 {
-                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType() == attributeType) != null)
+                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == attributeType) != null)
                         return ctor.GetParameters();
                 }
             }
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(DefaultName, "protected", parameters, initializers.ToArray(), GetBaseCtor());
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructorAttribute)));
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(ReferenceClassFinder.InitializationCtorAttributeName));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -147,7 +148,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructorAttribute)));
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(ReferenceClassFinder.SerializationCtorAttributeName));
 
         protected override CSharpType? CreateInheritedType()
         {

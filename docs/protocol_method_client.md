@@ -42,14 +42,12 @@ security-scopes: https://yourendpoint.azure.com/.default
 
 4. Try the generated code.
 
-Read the [user documentation for clients with protocol methods](protocol_method_user_doc) and give it a try.
+Read the [user documentation for clients with protocol methods](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/ProtocolMethods.md) and give it a try.
 
-The standard [customizations](customizations) that are applicable (example: don't involve models) work just the same.
+The standard [customizations](https://github.com/Azure/autorest.csharp#customizing-the-generated-code) that are applicable (example: don't involve models) work just the same.
 
 
 <!-- LINKS -->
 [csharp_generate]: ./generate/readme.md
 [1128]: https://github.com/Azure/autorest.csharp/pull/1128
 [1221]: https://github.com/Azure/autorest.csharp/issues/1221
-[protocol_method_user_doc]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/core/Azure.Core/samples/ProtocolMethods.md
-[customizations]: https://github.com/Azure/autorest.csharp#customizing-the-generated-code

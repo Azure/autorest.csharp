@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -47,6 +48,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 }
                             }
                         }
+                        else if ((resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration) || resource.OperationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration))
+                            && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
+                        {
+                            foreach (var container in context.Library.ResourceContainers)
+                            {
+                                if (container.ResourceName == resource.Type.Name)
+                                {
+                                    writer.Line($"#region {resource.Type.Name}");
+                                    WriteGetContainers(writer, resource, container);
+                                    writer.LineRaw("#endregion");
+                                    writer.Line();
+                                }
+                            }
+                        }
                     }
 
                     // write the standalone list operations with the parent of a subscription
@@ -66,8 +81,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient.Type.Name);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient);
                         }
 
                         writer.LineRaw("#endregion");
@@ -82,9 +97,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} resourceGroup)"))
+            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} {ExtensionOperationVariableName})"))
             {
-                writer.Line($"return new {container.Type.Name}(resourceGroup);");
+                writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 
