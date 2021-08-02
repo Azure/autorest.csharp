@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using MgmtParent.Models;
 
 namespace MgmtParent
 {
@@ -71,7 +70,7 @@ namespace MgmtParent
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionImage>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImageData>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -96,11 +95,13 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((VirtualMachineExtensionImageData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -113,7 +114,7 @@ namespace MgmtParent
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
-        public Response<VirtualMachineExtensionImage> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImageData> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -138,17 +139,19 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((VirtualMachineExtensionImageData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -183,7 +186,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImageData>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -212,9 +215,9 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -230,7 +233,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<VirtualMachineExtensionImage> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImageData> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -259,9 +262,9 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -294,7 +297,7 @@ namespace MgmtParent
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> GetTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -311,12 +314,12 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -331,7 +334,7 @@ namespace MgmtParent
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImage>> GetTypes(string location, string publisherName, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> GetTypes(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -348,12 +351,12 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -406,7 +409,7 @@ namespace MgmtParent
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> GetVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> GetVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -427,12 +430,12 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -451,7 +454,7 @@ namespace MgmtParent
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImage>> GetVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> GetVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -472,12 +475,12 @@ namespace MgmtParent
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);

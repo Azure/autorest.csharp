@@ -14,16 +14,22 @@
     "OneResources": "Microsoft.Fake/oneResources",
     "SecondResources": "Microsoft.Fake/fakes/secondResources",
     "SubFakes": "Microsoft.Fake/fakes/subFakes",
-    "SharedGalleries": "Microsoft.Compute/locations/sharedGalleries"
+    "SharedGalleries": "Microsoft.Compute/locations/sharedGalleries",
+    "Quotas": "Microsoft.Fake/locations/updateQuotas",
+    "Features": "Microsoft.Fake/locations/features"
   },
   "OperationGroupToResource": {
-    "SharedGalleries": "SharedGallery"
+    "SharedGalleries": "SharedGallery",
+    "Quotas": "NonResource",
+    "Features": "NonResource"
   },
   "OperationGroupToParent": {
     "OneResources": "resourceGroups",
     "SecondResources": "Microsoft.Fake/fakes",
     "SubFakes": "Microsoft.Fake/fakes",
-    "SharedGalleries": "subscriptions"
+    "SharedGalleries": "subscriptions",
+    "Quotas": "subscriptions",
+    "Features": "subscriptions"
   },
   "OperationGroupIsExtension": [
     "OneResources",

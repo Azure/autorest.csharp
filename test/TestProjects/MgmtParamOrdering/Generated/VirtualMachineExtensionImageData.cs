@@ -9,25 +9,25 @@ using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtParamOrdering.Models
+namespace MgmtParamOrdering
 {
-    /// <summary> The VirtualMachineExtensionImage. </summary>
-    public partial class VirtualMachineExtensionImage : TrackedResource
+    /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
+    public partial class VirtualMachineExtensionImageData : TrackedResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineExtensionImage(Location location) : base(location)
+        public VirtualMachineExtensionImageData(Location location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImage. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachineExtensionImage(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal VirtualMachineExtensionImageData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

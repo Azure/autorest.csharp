@@ -11,9 +11,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtParent.Models
+namespace MgmtParamOrdering
 {
-    public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
+    public partial class VirtualMachineExtensionImageData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace MgmtParent.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineExtensionImage DeserializeVirtualMachineExtensionImage(JsonElement element)
+        internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
         {
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
@@ -82,7 +82,7 @@ namespace MgmtParent.Models
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImage(id, name, type, location, tags, bar.Value);
+            return new VirtualMachineExtensionImageData(id, name, type, location, tags, bar.Value);
         }
     }
 }
