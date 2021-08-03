@@ -280,22 +280,25 @@ namespace Azure.Core
         {
             _originalHasLocation = _rawResponse.Headers.Contains("Location");
 
-            if (_rawResponse.Headers.Contains("Operation-Location"))
+            if (!(_requestMethod.Method == RequestMethod.Patch.Method && _rawResponse.Status == 200))
             {
-                _headerFrom = HeaderFrom.OperationLocation;
-                return;
-            }
+                if (_rawResponse.Headers.Contains("Operation-Location"))
+                {
+                    _headerFrom = HeaderFrom.OperationLocation;
+                    return;
+                }
 
-            if (_rawResponse.Headers.Contains("Azure-AsyncOperation"))
-            {
-                _headerFrom = HeaderFrom.AzureAsyncOperation;
-                return;
-            }
+                if (_rawResponse.Headers.Contains("Azure-AsyncOperation"))
+                {
+                    _headerFrom = HeaderFrom.AzureAsyncOperation;
+                    return;
+                }
 
-            if (_originalHasLocation)
-            {
-                _headerFrom = HeaderFrom.Location;
-                return;
+                if (_originalHasLocation)
+                {
+                    _headerFrom = HeaderFrom.Location;
+                    return;
+                }
             }
 
             _pollUri = _originalUri.AbsoluteUri;
