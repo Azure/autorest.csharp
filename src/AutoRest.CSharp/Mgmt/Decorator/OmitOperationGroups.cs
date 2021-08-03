@@ -38,14 +38,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         DetectSchemasToOmit(codeModel, operationGroup);
                     }
                 }
-                _schemasToOmit = _schemasToOmit.Except(_schemasToKeep).ToHashSet();
                 RemoveSchemas(codeModel);
             }
         }
 
         private static void RemoveSchemas(CodeModel codeModel)
         {
-            foreach (var schema in _schemasToOmit)
+            foreach (var schema in _schemasToOmit.Except(_schemasToKeep))
             {
                 if (schema is ObjectSchema objSchema)
                 {
