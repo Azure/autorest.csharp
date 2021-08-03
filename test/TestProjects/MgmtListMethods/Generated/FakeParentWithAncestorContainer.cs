@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentWithAncestorsCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeParentWithAncestorCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
@@ -125,7 +125,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorName, parameters, cancellationToken);
-                return new FakeParentWithAncestorsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentWithAncestorCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -139,7 +139,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentWithAncestorsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentWithAncestorCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentWithAncestorName, FakeParentWithAncestorData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorName == null)
             {
@@ -155,7 +155,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakeParentWithAncestorsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentWithAncestorCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -398,9 +398,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -421,9 +421,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

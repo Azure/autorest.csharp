@@ -137,14 +137,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FileSharesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<FileShareDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new FileSharesDeleteOperation(response);
+                return new FileShareDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes specified share under its account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FileSharesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual FileShareDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new FileSharesDeleteOperation(response);
+                return new FileShareDeleteOperation(response);
             }
             catch (Exception e)
             {

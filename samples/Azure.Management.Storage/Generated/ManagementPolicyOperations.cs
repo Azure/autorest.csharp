@@ -137,14 +137,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<ManagementPoliciesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementPolicyDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new ManagementPoliciesDeleteOperation(response);
+                return new ManagementPolicyDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual ManagementPoliciesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual ManagementPolicyDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new ManagementPoliciesDeleteOperation(response);
+                return new ManagementPolicyDeleteOperation(response);
             }
             catch (Exception e)
             {

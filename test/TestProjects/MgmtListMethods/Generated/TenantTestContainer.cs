@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantTestsCreateOperation StartCreateOrUpdate(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantTestCreateOperation StartCreateOrUpdate(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -125,7 +125,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.Create(tenantTestName, parameters, cancellationToken);
-                return new TenantTestsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                return new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -139,7 +139,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantTestsCreateOperation> StartCreateOrUpdateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantTestCreateOperation> StartCreateOrUpdateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -155,7 +155,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                return new TenantTestsCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                return new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -408,9 +408,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -431,9 +431,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

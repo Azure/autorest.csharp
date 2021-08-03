@@ -139,14 +139,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AnotherParentsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherParentDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new AnotherParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -157,14 +157,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AnotherParentsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual AnotherParentDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new AnotherParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -399,7 +399,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
-        public async virtual Task<AnotherParentsUpdateOperation> StartUpdateAsync(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        public async virtual Task<AnotherParentUpdateOperation> StartUpdateAsync(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherBody == null)
             {
@@ -411,7 +411,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken).ConfigureAwait(false);
-                return new AnotherParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                return new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
             }
             catch (Exception e)
             {
@@ -424,7 +424,7 @@ namespace MgmtMultipleParentResource
         /// <param name="anotherBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="anotherBody"/> is null. </exception>
-        public virtual AnotherParentsUpdateOperation StartUpdate(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
+        public virtual AnotherParentUpdateOperation StartUpdate(AnotherParentUpdate anotherBody, CancellationToken cancellationToken = default)
         {
             if (anotherBody == null)
             {
@@ -436,7 +436,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, anotherBody, cancellationToken);
-                return new AnotherParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
+                return new AnotherParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, anotherBody).Request, response);
             }
             catch (Exception e)
             {
