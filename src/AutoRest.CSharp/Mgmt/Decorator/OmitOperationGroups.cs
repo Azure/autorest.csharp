@@ -44,9 +44,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static void RemoveSchemas(CodeModel codeModel)
         {
-            foreach (var schema in _schemasToOmit.Except(_schemasToKeep))
+            foreach (var schema in _schemasToOmit)
             {
-                if (schema is ObjectSchema objSchema)
+                if (schema is ObjectSchema objSchema && !_schemasToKeep.Contains(objSchema))
                 {
                     codeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
