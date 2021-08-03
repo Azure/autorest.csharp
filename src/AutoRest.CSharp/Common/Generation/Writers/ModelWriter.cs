@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.WriteXmlDocumentationSummary($"{schema.Description}");
+                AddClassAttributes(writer);
 
                 if (schema.IsStruct)
                 {
@@ -83,10 +84,19 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteConstructor(CodeWriter writer, ObjectType schema)
+        protected virtual void AddClassAttributes(CodeWriter writer)
+        {
+        }
+
+        protected virtual void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)
+        {
+        }
+
+        public void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {
+                AddCtorAttribute(writer, schema, constructor);
                 using (writer.WriteMethodDeclaration(constructor.Signature))
                 {
                     writer.WriteParameterNullChecks(constructor.Signature.Parameters);
