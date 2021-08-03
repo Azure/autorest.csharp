@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return false;
 
             var parentResourceType = IsScopeOrExtension ? clientMethod.Operation.ParentResourceType() : OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
-            bool isParentExistsInPathParams = parentResourceType == ResourceTypeBuilder.ResourceGroupResources ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
+            bool isParentExistsInPathParams = (parentResourceType == ResourceTypeBuilder.ResourceGroupResources || parentResourceType == ResourceTypeBuilder.Tenant) ? true : MethodExtensions.IsParentExistsInPathParamaters(clientMethod, parentResourceType);
 
             return (isParentExistsInPathParams == shouldParentExistInPath && result.WasResourceData == shouldReturnTypeBeResourceData);
         }

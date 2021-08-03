@@ -197,16 +197,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 ResourceType resourceType = GetContainerValidResourceType(type);
                 if (resourceType.Equals(ResourceGroupOperations.ResourceType))
                 {
-                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
+                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}".ToPlural());
                     Assert.NotNull(getContainerMethod);
                     Assert.AreEqual(1, getContainerMethod.GetParameters().Length);
                     var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
                     Assert.AreEqual(typeof(ResourceGroupOperations), param.ParameterType);
-                }
-                else if (!scopeResourceContainers.Contains(type.Name))
-                {
-                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
-                    Assert.IsNull(getContainerMethod);
                 }
             }
         }
