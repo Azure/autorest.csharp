@@ -9,24 +9,5 @@
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true,
-  "OperationGroupToResourceType": {
-    "OneResources": "Microsoft.Fake/oneResources",
-    "SecondResources": "Microsoft.Fake/fakes/secondResources",
-    "SubFakes": "Microsoft.Fake/fakes/subFakes",
-    "SharedGalleries": "Microsoft.Compute/locations/sharedGalleries"
-  },
-  "OperationGroupToResource": {
-    "SharedGalleries": "SharedGallery"
-  },
-  "OperationGroupToParent": {
-    "OneResources": "resourceGroups",
-    "SecondResources": "Microsoft.Fake/fakes",
-    "SubFakes": "Microsoft.Fake/fakes",
-    "SharedGalleries": "subscriptions"
-  },
-  "OperationGroupIsExtension": [
-    "OneResources",
-    "SecondResources"
-  ]
+  "skip-csproj-packagereference": true
 }

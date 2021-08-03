@@ -13,7 +13,7 @@ using MgmtListMethods;
 namespace MgmtListMethods.Models
 {
     /// <summary> The List Availability Set operation response. </summary>
-    public partial class FakeListResult
+    internal partial class FakeListResult
     {
         /// <summary> Initializes a new instance of FakeListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
