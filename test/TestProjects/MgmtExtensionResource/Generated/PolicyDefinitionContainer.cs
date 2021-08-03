@@ -116,7 +116,7 @@ namespace MgmtExtensionResource
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyDefinitionsCreateOrUpdateOperation StartCreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyDefinitionCreateOrUpdateOperation StartCreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -134,12 +134,12 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.CreateOrUpdate(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
+                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 }
                 else
                 {
                     var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
+                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 }
             }
             catch (Exception e)
@@ -154,7 +154,7 @@ namespace MgmtExtensionResource
         /// <param name="parameters"> The policy definition properties. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyDefinitionsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyDefinitionCreateOrUpdateOperation> StartCreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -172,12 +172,12 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.CreateOrUpdateAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
+                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 }
                 else
                 {
                     var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionsCreateOrUpdateOperation(Parent, response);
+                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
                 }
             }
             catch (Exception e)
@@ -559,9 +559,9 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -582,9 +582,9 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

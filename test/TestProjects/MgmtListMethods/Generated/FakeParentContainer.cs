@@ -109,7 +109,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentsCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeParentCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
@@ -125,7 +125,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, fakeParentName, parameters, cancellationToken);
-                return new FakeParentsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -139,7 +139,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
@@ -155,7 +155,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakeParentsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -398,9 +398,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -421,9 +421,9 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

@@ -188,7 +188,7 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyDefinitionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyDefinitionDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionOperations.StartDelete");
             scope.Start();
@@ -197,12 +197,12 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.DeleteAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionsDeleteOperation(response);
+                    return new PolicyDefinitionDeleteOperation(response);
                 }
                 else
                 {
                     var response = await _restClient.DeleteAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionsDeleteOperation(response);
+                    return new PolicyDefinitionDeleteOperation(response);
                 }
             }
             catch (Exception e)
@@ -214,7 +214,7 @@ namespace MgmtExtensionResource
 
         /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyDefinitionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual PolicyDefinitionDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionOperations.StartDelete");
             scope.Start();
@@ -223,12 +223,12 @@ namespace MgmtExtensionResource
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.Delete(Id.Parent.Name, Id.Name, cancellationToken);
-                    return new PolicyDefinitionsDeleteOperation(response);
+                    return new PolicyDefinitionDeleteOperation(response);
                 }
                 else
                 {
                     var response = _restClient.DeleteAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
-                    return new PolicyDefinitionsDeleteOperation(response);
+                    return new PolicyDefinitionDeleteOperation(response);
                 }
             }
             catch (Exception e)

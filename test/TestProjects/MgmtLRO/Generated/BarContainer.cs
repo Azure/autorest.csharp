@@ -107,7 +107,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual BarsCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -123,7 +123,7 @@ namespace MgmtLRO
             try
             {
                 var response = _restClient.Create(Id.ResourceGroupName, barName, body, cancellationToken);
-                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarsCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -153,7 +153,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _restClient.CreateAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -320,9 +320,9 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -343,9 +343,9 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

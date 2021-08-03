@@ -462,7 +462,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListAsGenericResource(bool async)
         {
-            const string syncMethodName = "GetAsGenericResources";
+            const string syncMethodName = "GetAllAsGenericResources";
             var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");

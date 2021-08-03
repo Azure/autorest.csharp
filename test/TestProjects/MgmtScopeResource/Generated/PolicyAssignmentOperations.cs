@@ -137,14 +137,14 @@ namespace MgmtScopeResource
 
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<PolicyAssignmentsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new PolicyAssignmentsDeleteOperation(response);
+                return new PolicyAssignmentDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace MgmtScopeResource
 
         /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual PolicyAssignmentsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.Parent, Id.Name, cancellationToken);
-                return new PolicyAssignmentsDeleteOperation(response);
+                return new PolicyAssignmentDeleteOperation(response);
             }
             catch (Exception e)
             {

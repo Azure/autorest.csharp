@@ -137,14 +137,14 @@ namespace MgmtParamOrdering
 
         /// <summary> Delete an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AvailabilitySetsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsDeleteOperation(response);
+                return new AvailabilitySetDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -155,14 +155,14 @@ namespace MgmtParamOrdering
 
         /// <summary> Delete an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AvailabilitySetsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new AvailabilitySetsDeleteOperation(response);
+                return new AvailabilitySetDeleteOperation(response);
             }
             catch (Exception e)
             {

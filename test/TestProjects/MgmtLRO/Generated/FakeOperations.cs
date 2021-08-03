@@ -139,14 +139,14 @@ namespace MgmtLRO
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<FakeDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new FakesDeleteOperation(response);
+                return new FakeDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -157,14 +157,14 @@ namespace MgmtLRO
 
         /// <summary> Delete an fake. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual FakeDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new FakesDeleteOperation(response);
+                return new FakeDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -434,7 +434,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakesUpdateOperation> StartUpdateAsync(FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeUpdateOperation> StartUpdateAsync(FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -446,7 +446,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -459,7 +459,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual FakesUpdateOperation StartUpdate(FakeUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual FakeUpdateOperation StartUpdate(FakeUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -471,7 +471,7 @@ namespace MgmtLRO
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new FakesUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new FakeUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
