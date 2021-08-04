@@ -107,7 +107,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AzureResourceFlattenModel2SPutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual AzureResourceFlattenModel2PutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -123,7 +123,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -137,7 +137,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AzureResourceFlattenModel2SPutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AzureResourceFlattenModel2PutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -153,7 +153,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -320,9 +320,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -343,9 +343,9 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {

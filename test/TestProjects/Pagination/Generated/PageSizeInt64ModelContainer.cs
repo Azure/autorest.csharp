@@ -106,7 +106,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeInt64ModelsPutOperation StartCreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeInt64ModelPutOperation StartCreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -122,7 +122,7 @@ namespace Pagination
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new PageSizeInt64ModelsPutOperation(Parent, response);
+                return new PageSizeInt64ModelPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -135,7 +135,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeInt64ModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeInt64ModelPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -151,7 +151,7 @@ namespace Pagination
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new PageSizeInt64ModelsPutOperation(Parent, response);
+                return new PageSizeInt64ModelPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -392,9 +392,9 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -415,9 +415,9 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

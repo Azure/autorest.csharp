@@ -109,7 +109,7 @@ namespace MgmtMultipleParentResource
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
-        public virtual SubParentsCreateOrUpdateOperation StartCreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        public virtual SubParentCreateOrUpdateOperation StartCreateOrUpdate(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             if (instanceId == null)
             {
@@ -125,7 +125,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken);
-                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
+                return new SubParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
             }
             catch (Exception e)
             {
@@ -139,7 +139,7 @@ namespace MgmtMultipleParentResource
         /// <param name="subBody"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> or <paramref name="subBody"/> is null. </exception>
-        public async virtual Task<SubParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentCreateOrUpdateOperation> StartCreateOrUpdateAsync(string instanceId, SubParentData subBody, CancellationToken cancellationToken = default)
         {
             if (instanceId == null)
             {
@@ -155,7 +155,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, subBody, cancellationToken).ConfigureAwait(false);
-                return new SubParentsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
+                return new SubParentCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, subBody).Request, response);
             }
             catch (Exception e)
             {
@@ -406,9 +406,9 @@ namespace MgmtMultipleParentResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -429,9 +429,9 @@ namespace MgmtMultipleParentResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SubParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

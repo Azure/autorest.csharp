@@ -104,7 +104,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel1SPutOperation StartCreateOrUpdate(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual SupersetModel1PutOperation StartCreateOrUpdate(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -120,7 +120,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken);
-                return new SupersetModel1SPutOperation(Parent, response);
+                return new SupersetModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel1SPutOperation> StartCreateOrUpdateAsync(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel1PutOperation> StartCreateOrUpdateAsync(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel1SName == null)
             {
@@ -149,7 +149,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new SupersetModel1SPutOperation(Parent, response);
+                return new SupersetModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -316,9 +316,9 @@ namespace SupersetInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -339,9 +339,9 @@ namespace SupersetInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {

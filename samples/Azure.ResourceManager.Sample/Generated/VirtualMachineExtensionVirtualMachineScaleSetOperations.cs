@@ -139,14 +139,14 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<VirtualMachineScaleSetVMExtensionsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVMExtensionDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineScaleSetVMExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                return new VirtualMachineScaleSetVMExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -157,14 +157,14 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> The operation to delete the VMSS VM extension. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual VirtualMachineScaleSetVMExtensionsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVMExtensionDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
-                return new VirtualMachineScaleSetVMExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
+                return new VirtualMachineScaleSetVMExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -399,7 +399,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        public async virtual Task<VirtualMachineScaleSetVMExtensionsUpdateOperation> StartUpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public async virtual Task<VirtualMachineScaleSetVMExtensionUpdateOperation> StartUpdateAsync(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             if (extensionParameters == null)
             {
@@ -411,7 +411,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
+                return new VirtualMachineScaleSetVMExtensionUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
             }
             catch (Exception e)
             {
@@ -424,7 +424,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="extensionParameters"> Parameters supplied to the Update Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="extensionParameters"/> is null. </exception>
-        public virtual VirtualMachineScaleSetVMExtensionsUpdateOperation StartUpdate(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
+        public virtual VirtualMachineScaleSetVMExtensionUpdateOperation StartUpdate(VirtualMachineExtensionUpdate extensionParameters, CancellationToken cancellationToken = default)
         {
             if (extensionParameters == null)
             {
@@ -436,7 +436,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters, cancellationToken);
-                return new VirtualMachineScaleSetVMExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
+                return new VirtualMachineScaleSetVMExtensionUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, extensionParameters).Request, response);
             }
             catch (Exception e)
             {
