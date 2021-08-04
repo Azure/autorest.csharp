@@ -96,6 +96,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var constructor in schema.Constructors)
             {
+                writer.WriteMethodDocumentation(constructor.Signature);
                 AddCtorAttribute(writer, schema, constructor);
                 using (writer.WriteMethodDeclaration(constructor.Signature))
                 {

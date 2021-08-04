@@ -6,16 +6,19 @@
 #nullable disable
 
 using System;
+using ReferenceTypes.Models;
 
-namespace ReferenceTypes.Models
+namespace Azure.ResourceManager.Resources.Models
 {
     /// <summary> The resource model definition representing SKU. </summary>
-    internal partial class Sku
+    [ReferenceType]
+    public partial class SkuReference
     {
-        /// <summary> Initializes a new instance of Sku. </summary>
+        /// <summary> Initializes a new instance of SkuReference. </summary>
         /// <param name="name"> The name of the SKU. Ex - P3. It is typically a letter+number code. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Sku(string name)
+        [InitializationConstructor]
+        internal SkuReference(string name)
         {
             if (name == null)
             {

@@ -5,18 +5,18 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
-
 namespace ReferenceTypes.Models
 {
     /// <summary> Common fields that are returned in the response for all Azure Resource Manager resources. </summary>
-    internal partial class Resource : SubResource
+    internal partial class ResourceNon
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
-        internal Resource()
+        /// <summary> Initializes a new instance of ResourceNon. </summary>
+        internal ResourceNon()
         {
         }
 
+        /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>
+        public string Id { get; }
         /// <summary> The name of the resource. </summary>
         public string Name { get; }
         /// <summary> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </summary>

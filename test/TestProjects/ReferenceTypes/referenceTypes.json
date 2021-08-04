@@ -6,7 +6,7 @@
     },
     "paths": {},
     "definitions": {
-        "Resource": {
+        "ResourceReference": {
             "title": "Resource",
             "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
             "type": "object",
@@ -29,7 +29,7 @@
             },
             "x-ms-azure-resource": true
         },
-        "TrackedResource": {
+        "TrackedResourceReference": {
             "title": "Tracked Resource",
             "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
             "type": "object",
@@ -60,11 +60,11 @@
             ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/ResourceReference"
                 }
             ]
         },
-        "Sku": {
+        "SkuReference": {
             "description": "The resource model definition representing SKU",
             "type": "object",
             "properties": {

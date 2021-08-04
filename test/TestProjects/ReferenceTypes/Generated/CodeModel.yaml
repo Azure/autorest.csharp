@@ -11,7 +11,7 @@ schemas: !Schemas
       precision: 32
       language: !Languages 
         default:
-          name: SkuCapacity
+          name: SkuReferenceCapacity
           description: If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
       protocol: !Protocols {}
   strings:
@@ -22,7 +22,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: ResourceId
+          name: ResourceReferenceId
           description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
       protocol: !Protocols {}
     - !StringSchema &ref_7
@@ -32,7 +32,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: ResourceName
+          name: ResourceReferenceName
           description: The name of the resource
       protocol: !Protocols {}
     - !StringSchema &ref_8
@@ -42,7 +42,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: ResourceType
+          name: ResourceReferenceType
           description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
       protocol: !Protocols {}
     - !StringSchema &ref_1
@@ -66,7 +66,7 @@ schemas: !Schemas
           - create
       language: !Languages 
         default:
-          name: TrackedResourceLocation
+          name: TrackedResourceReferenceLocation
           description: The geo-location where the resource lives
       protocol: !Protocols {}
     - !StringSchema &ref_9
@@ -76,7 +76,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: SkuName
+          name: SkuReferenceName
           description: The name of the SKU. Ex - P3. It is typically a letter+number code
       protocol: !Protocols {}
     - !StringSchema &ref_0
@@ -93,7 +93,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: SkuSize
+          name: SkuReferenceSize
           description: 'The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. '
       protocol: !Protocols {}
     - !StringSchema &ref_12
@@ -103,7 +103,7 @@ schemas: !Schemas
           version: '2.0'
       language: !Languages 
         default:
-          name: SkuFamily
+          name: SkuReferenceFamily
           description: If the service has different generations of hardware, for the same SKU, then that can be captured here.
       protocol: !Protocols {}
     - !StringSchema 
@@ -128,6 +128,36 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonId
+          description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonName
+          description: The name of the resource
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonType
+          description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
       protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_10
@@ -172,7 +202,7 @@ schemas: !Schemas
       elementType: *ref_1
       language: !Languages 
         default:
-          name: TrackedResourceTags
+          name: TrackedResourceReferenceTags
           description: Resource tags.
       protocol: !Protocols {}
   objects:
@@ -222,9 +252,13 @@ schemas: !Schemas
                     description: The geo-location where the resource lives
                 protocol: !Protocols {}
             summary: Tracked Resource
+            extensions:
+              x-accessibility: public
+              x-ms-mgmt-referenceType: true
+              x-namespace: Azure.ResourceManager.Resources.Models
             language: !Languages 
               default:
-                name: TrackedResource
+                name: TrackedResourceReference
                 description: The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
                 namespace: ''
                 summary: Tracked Resource
@@ -261,10 +295,13 @@ schemas: !Schemas
           protocol: !Protocols {}
       summary: Resource
       extensions:
+        x-accessibility: public
         x-ms-azure-resource: true
+        x-ms-mgmt-referenceType: true
+        x-namespace: Azure.ResourceManager.Resources.Models
       language: !Languages 
         default:
-          name: Resource
+          name: ResourceReference
           description: Common fields that are returned in the response for all Azure Resource Manager resources
           namespace: ''
           summary: Resource
@@ -321,11 +358,58 @@ schemas: !Schemas
               name: capacity
               description: If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
           protocol: !Protocols {}
+      extensions:
+        x-accessibility: public
+        x-ms-mgmt-referenceType: true
+        x-namespace: Azure.ResourceManager.Resources.Models
       language: !Languages 
         default:
-          name: Sku
+          name: SkuReference
           description: The resource model definition representing SKU
           namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      properties:
+        - !Property 
+          schema: *ref_14
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_15
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the resource
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_16
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+          protocol: !Protocols {}
+      summary: ResourceNon
+      extensions:
+        x-ms-azure-resource: true
+      language: !Languages 
+        default:
+          name: ResourceNon
+          description: Common fields that are returned in the response for all Azure Resource Manager resources
+          namespace: ''
+          summary: ResourceNon
       protocol: !Protocols {}
 operationGroups: []
 security: !Security 

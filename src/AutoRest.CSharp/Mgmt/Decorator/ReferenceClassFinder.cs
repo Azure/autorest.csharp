@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
@@ -20,6 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string SerializationCtorAttributeName = $"{SerializationCtorAttribute}Attribute";
         internal const string ReferenceTypeAttributeName = $"{ReferenceTypeAttribute}Attribute";
 
+        private static IList<Type>? _referenceTypes;
+
         internal class Node
         {
             public Type Type { get; }
@@ -32,10 +36,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static IList<Type> ReferenceClassCollection = GetOrderedList(GetReferenceClassCollection());
+        internal static IList<Type> GetReferenceClassCollection(BuildContext<MgmtOutputLibrary> context) => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal(context));
 
-        private static IList<Type> GetReferenceClassCollection()
+        private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
         {
+            if (context.Configuration.MgmtConfiguration.IsArmCore)
+                return new List<Type>();
+
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
             if (assembly == null)
             {
