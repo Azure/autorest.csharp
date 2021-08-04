@@ -116,7 +116,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentsCreateOperation StartCreateOrUpdate(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentCreateOperation StartCreateOrUpdate(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -132,7 +132,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _restClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                return new PolicyAssignmentsCreateOperation(Parent, response);
+                return new PolicyAssignmentCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -146,7 +146,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentsCreateOperation> StartCreateOrUpdateAsync(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentCreateOperation> StartCreateOrUpdateAsync(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -162,7 +162,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _restClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicyAssignmentsCreateOperation(Parent, response);
+                return new PolicyAssignmentCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -529,9 +529,9 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -552,9 +552,9 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {

@@ -139,14 +139,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubParentsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new SubParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new SubParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -157,14 +157,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> The operation to delete the VMSS VM run command. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubParentsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual SubParentDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubParentOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new SubParentsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new SubParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -399,7 +399,7 @@ namespace MgmtMultipleParentResource
         /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
-        public async virtual Task<SubParentsUpdateOperation> StartUpdateAsync(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        public async virtual Task<SubParentUpdateOperation> StartUpdateAsync(SubParentUpdate subBody, CancellationToken cancellationToken = default)
         {
             if (subBody == null)
             {
@@ -411,7 +411,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody, cancellationToken).ConfigureAwait(false);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
+                return new SubParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
             }
             catch (Exception e)
             {
@@ -424,7 +424,7 @@ namespace MgmtMultipleParentResource
         /// <param name="subBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subBody"/> is null. </exception>
-        public virtual SubParentsUpdateOperation StartUpdate(SubParentUpdate subBody, CancellationToken cancellationToken = default)
+        public virtual SubParentUpdateOperation StartUpdate(SubParentUpdate subBody, CancellationToken cancellationToken = default)
         {
             if (subBody == null)
             {
@@ -436,7 +436,7 @@ namespace MgmtMultipleParentResource
             try
             {
                 var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody, cancellationToken);
-                return new SubParentsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
+                return new SubParentUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, subBody).Request, response);
             }
             catch (Exception e)
             {

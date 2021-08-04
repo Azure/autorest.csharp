@@ -104,7 +104,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TrackedResourceModel2SPutOperation StartCreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual TrackedResourceModel2PutOperation StartCreateOrUpdate(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel2SName == null)
             {
@@ -120,7 +120,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken);
-                return new TrackedResourceModel2SPutOperation(Parent, response);
+                return new TrackedResourceModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TrackedResourceModel2SPutOperation> StartCreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TrackedResourceModel2PutOperation> StartCreateOrUpdateAsync(string trackedResourceModel2SName, TrackedResourceModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (trackedResourceModel2SName == null)
             {
@@ -149,7 +149,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, trackedResourceModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new TrackedResourceModel2SPutOperation(Parent, response);
+                return new TrackedResourceModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -316,9 +316,9 @@ namespace SupersetFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -339,9 +339,9 @@ namespace SupersetFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {

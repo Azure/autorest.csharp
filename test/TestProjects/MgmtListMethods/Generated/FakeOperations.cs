@@ -14,7 +14,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -52,7 +51,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -73,7 +72,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
@@ -101,78 +100,6 @@ namespace MgmtListMethods
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Delete an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
-            scope.Start();
-            try
-            {
-                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Delete");
-            scope.Start();
-            try
-            {
-                var operation = StartDelete(cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakesDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new FakesDeleteOperation(response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an fake. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakesDeleteOperation StartDelete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.StartDelete");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new FakesDeleteOperation(response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
@@ -192,7 +119,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -221,7 +148,7 @@ namespace MgmtListMethods
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -250,7 +177,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -279,7 +206,7 @@ namespace MgmtListMethods
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -307,7 +234,7 @@ namespace MgmtListMethods
                 var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -335,7 +262,7 @@ namespace MgmtListMethods
                 var originalTags = TagResourceOperations.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var originalResponse = _restClient.Get(Id.SubscriptionId, null, cancellationToken);
                 return Response.FromValue(new Fake(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -344,68 +271,47 @@ namespace MgmtListMethods
                 throw;
             }
         }
-        /// <summary> Update an fake. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<Fake>> UpdateAsync(FakeUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Update");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+        /// <summary> Gets a list of FakeParentWithAncestorWithNonResChWithLocs in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChWithLocs and their operations over a Fake. </returns>
+        public FakeParentWithAncestorWithNonResChWithLocContainer GetFakeParentWithAncestorWithNonResChWithLocs()
+        {
+            return new FakeParentWithAncestorWithNonResChWithLocContainer(this);
         }
 
-        /// <summary> Update an fake. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<Fake> Update(FakeUpdate parameters, CancellationToken cancellationToken = default)
+        /// <summary> Gets a list of FakeParentWithAncestorWithNonResChes in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParentWithAncestorWithNonResChes and their operations over a Fake. </returns>
+        public FakeParentWithAncestorWithNonResChContainer GetFakeParentWithAncestorWithNonResChes()
         {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeOperations.Update");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            return new FakeParentWithAncestorWithNonResChContainer(this);
         }
 
-        /// <summary> Gets a list of SubFakes in the Fake. </summary>
-        /// <returns> An object representing collection of SubFakes and their operations over a Fake. </returns>
-        public SubFakeContainer GetSubFakes()
+        /// <summary> Gets a list of FakeParentWithAncestorWithLocs in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParentWithAncestorWithLocs and their operations over a Fake. </returns>
+        public FakeParentWithAncestorWithLocContainer GetFakeParentWithAncestorWithLocs()
         {
-            return new SubFakeContainer(this);
+            return new FakeParentWithAncestorWithLocContainer(this);
         }
 
-        /// <summary> Gets a list of TheExtensionFakes in the Fake. </summary>
-        /// <returns> An object representing collection of TheExtensionFakes and their operations over a Fake. </returns>
-        public TheExtensionFakeContainer GetTheExtensionFakes()
+        /// <summary> Gets a list of FakeParentWithAncestors in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParentWithAncestors and their operations over a Fake. </returns>
+        public FakeParentWithAncestorContainer GetFakeParentWithAncestors()
         {
-            return new TheExtensionFakeContainer(this);
+            return new FakeParentWithAncestorContainer(this);
+        }
+
+        /// <summary> Gets a list of FakeParentWithNonResChes in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParentWithNonResChes and their operations over a Fake. </returns>
+        public FakeParentWithNonResChContainer GetFakeParentWithNonResChes()
+        {
+            return new FakeParentWithNonResChContainer(this);
+        }
+
+        /// <summary> Gets a list of FakeParents in the Fake. </summary>
+        /// <returns> An object representing collection of FakeParents and their operations over a Fake. </returns>
+        public FakeParentContainer GetFakeParents()
+        {
+            return new FakeParentContainer(this);
         }
     }
 }
