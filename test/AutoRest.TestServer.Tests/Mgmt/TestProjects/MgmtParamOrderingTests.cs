@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySetOperations", true)]
         [TestCase("DedicatedHostGroupOperations", true)]
         [TestCase("DedicatedHostOperations", true)]
-        [TestCase("VirtualMachineExtensionImageOperations", true)]
+        [TestCase("VirtualMachineExtensionImageOperations", false)]
         public void ValidateOperations(string operation, bool isExists)
         {
             var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
