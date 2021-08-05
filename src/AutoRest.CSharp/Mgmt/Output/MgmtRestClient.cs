@@ -27,7 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 if (!_context.Library.TryGetResourceData(OperationGroup, out var resourceData))
                     return false;
-
+                if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                    return false;
                 if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
                     return false;
 

@@ -64,8 +64,6 @@ namespace MgmtSingleton
                         value = TenantParentSingletonData.DeserializeTenantParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((TenantParentSingletonData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -85,8 +83,6 @@ namespace MgmtSingleton
                         value = TenantParentSingletonData.DeserializeTenantParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
-                case 404:
-                    return Response.FromValue((TenantParentSingletonData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
