@@ -13,6 +13,9 @@
   "OperationGroupToResourceType": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"
   },
+  "OperationGroupToResource": {
+    "VirtualMachineExtensionImages": "NonResource"
+  },
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "subscriptions"
   }

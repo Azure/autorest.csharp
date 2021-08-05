@@ -14,6 +14,8 @@ modelerfour:
 
 operation-group-to-resource-type:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
+operation-group-to-resource:
+   VirtualMachineExtensionImages: NonResource
 operation-group-to-parent:
    VirtualMachineExtensionImages: subscriptions
 ```
