@@ -102,6 +102,20 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LROPatchInlineComplete() => Test(async (host, pipeline) =>
+        {
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededAsync();
+            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+        });
+
+        [Test]
+        public Task LROPatchInlineComplete_Sync() => Test((host, pipeline) =>
+        {
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200Succeeded();
+            var resp = WaitForCompletion(operation);
+        });
+
+        [Test]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();
