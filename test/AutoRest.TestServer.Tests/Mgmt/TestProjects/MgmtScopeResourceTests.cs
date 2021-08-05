@@ -8,8 +8,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtScopeResourceTests() : base("MgmtScopeResource") { }
 
-        [TestCase("ManagementGroupExtensions", "GetPolicyAssignmentContainer", true)]
-        [TestCase("SubscriptionExtensions", "GetPolicyAssignmentContainer", true)]
+        [TestCase("ManagementGroupExtensions", "GetPolicyAssignments", true)]
+        [TestCase("SubscriptionExtensions", "GetPolicyAssignments", true)]
         [TestCase("ResourceGroupExtensions", "GetPolicyAssignments", true)]
         [TestCase("PolicyAssignmentContainer", "CreateOrUpdate", true)]
         [TestCase("PolicyAssignmentContainer", "Get", true)]
