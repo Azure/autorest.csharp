@@ -196,11 +196,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var deleteMethod = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
                 var deleteMethods = resourceOperation.IsScopeOrExtension ? resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList() : new List<RestClientMethod>{deleteMethod};
                 // write delete method
-                WriteFirstLROMethod(writer, deleteMethod, context, true, true, "Delete");
-                WriteFirstLROMethod(writer, deleteMethod, context, false, true, "Delete");
+                WriteLROMethod(writer, deleteMethod, context, context.Library.IsLongRunningReallyLong(deleteMethod), true, true, "Delete");
+                WriteLROMethod(writer, deleteMethod, context, context.Library.IsLongRunningReallyLong(deleteMethod), false, true, "Delete");
 
-                WriteStartLROMethod(writer, deleteMethod, context, true, true, "Delete", deleteMethods);
-                WriteStartLROMethod(writer, deleteMethod, context, false, true, "Delete", deleteMethods);
+                //WriteFirstLROMethod(writer, deleteMethod, context, true, true, "Delete");
+                //WriteFirstLROMethod(writer, deleteMethod, context, false, true, "Delete");
+
+                //WriteStartLROMethod(writer, deleteMethod, context, true, true, "Delete", deleteMethods);
+                //WriteStartLROMethod(writer, deleteMethod, context, false, true, "Delete", deleteMethods);
                 clientMethodsList.AddRange(deleteMethods);
             }
 
@@ -693,11 +696,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(writer, clientMethod, context, true, true, methodName: methodName);
-            WriteFirstLROMethod(writer, clientMethod, context, false, true, methodName: methodName);
+            WriteLROMethod(writer, clientMethod, context, context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName);
+            WriteLROMethod(writer, clientMethod, context, context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName);
 
-            WriteStartLROMethod(writer, clientMethod, context, true, true, methodName: methodName, methods: clientMethods);
-            WriteStartLROMethod(writer, clientMethod, context, false, true, methodName: methodName, methods: clientMethods);
+            //WriteFirstLROMethod(writer, clientMethod, context, true, true, methodName: methodName);
+            //WriteFirstLROMethod(writer, clientMethod, context, false, true, methodName: methodName);
+
+            //WriteStartLROMethod(writer, clientMethod, context, true, true, methodName: methodName, methods: clientMethods);
+            //WriteStartLROMethod(writer, clientMethod, context, false, true, methodName: methodName, methods: clientMethods);
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)
