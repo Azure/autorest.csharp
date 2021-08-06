@@ -259,7 +259,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImageateOrUpdateAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<VirtualMachineExtensionImage>> CreateVirtualMachineExtensionImageOrUpdateAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -286,7 +286,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageateOrUpdate");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.CreateVirtualMachineExtensionImageOrUpdate");
                 scope.Start();
                 try
                 {
@@ -311,7 +311,7 @@ namespace MgmtParent
         /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, <paramref name="version"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<VirtualMachineExtensionImage> GetVirtualMachineExtensionImageateOrUpdate(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
+        public static Response<VirtualMachineExtensionImage> CreateVirtualMachineExtensionImageOrUpdate(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, VirtualMachineExtensionImage parameters, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -338,7 +338,7 @@ namespace MgmtParent
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImageateOrUpdate");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.CreateVirtualMachineExtensionImageOrUpdate");
                 scope.Start();
                 try
                 {

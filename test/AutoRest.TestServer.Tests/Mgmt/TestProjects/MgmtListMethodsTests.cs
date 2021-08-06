@@ -75,6 +75,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("FakeParentContainer", "GetAll", true, false)]
         [TestCase("FakeParentOperations", "GetAll", false, false)]
+
+        [TestCase("SubscriptionExtensions", "UpdateQuotas", true, false)]
         public void ValidateFakesResourceAsAParentListMethods(string className, string methodName, bool exist, bool haveOverload)
         {
             ValidateListMethods(className, methodName, exist, haveOverload);

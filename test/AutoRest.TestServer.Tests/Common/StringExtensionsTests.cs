@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace AutoRest.CSharp.Utilities
@@ -46,6 +47,20 @@ namespace AutoRest.CSharp.Utilities
         {
             var plural = noun.ToSingular(inputIsKnownToBePlural);
             Assert.AreEqual(expected, plural);
+        }
+
+        [TestCase("CamelCase", new string[] { "Camel", "Case" })]
+        [TestCase("IPAddress", new string[] { "IP", "Address" })]
+        [TestCase("HTTPIsURL", new string[] { "HTTP", "Is", "URL" })]
+        [TestCase("GetAllByLocation", new string[] { "Get", "All", "By", "Location" })]
+        public void ValidateSplitByCamelCase(string camelCase, string[] expected)
+        {
+            var result = camelCase.SplitByCamelCase().ToArray();
+            Assert.AreEqual(expected.Length, result.Length);
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], result[i]);
+            }
         }
     }
 }
