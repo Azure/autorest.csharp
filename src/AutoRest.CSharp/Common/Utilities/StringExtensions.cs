@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Humanizer;
@@ -287,6 +288,19 @@ namespace AutoRest.CSharp.Utilities
                 return str;
 
             return char.ToLower(str[0]) + str.Substring(1);
+        }
+
+        public static string FirstCharToUpperCase(this string str)
+        {
+            if (string.IsNullOrEmpty(str) || char.IsUpper(str[0]))
+                return str;
+
+            return char.ToUpper(str[0]) + str.Substring(1);
+        }
+
+        public static IEnumerable<string> SplitByCamelCase(this string camelCase)
+        {
+            return camelCase.Humanize().Split(' ').Select(w => w.FirstCharToUpperCase());
         }
     }
 }
