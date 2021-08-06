@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -27,13 +26,13 @@ namespace MgmtListMethods
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
-        /// <param name="properties"> The instance view of a resource. </param>
-        internal FakeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, FakeProperties properties) : base(id, name, type, location, tags)
+        /// <param name="bar"> specifies the bar. </param>
+        internal FakeData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
-            Properties = properties;
+            Bar = bar;
         }
 
-        /// <summary> The instance view of a resource. </summary>
-        public FakeProperties Properties { get; set; }
+        /// <summary> specifies the bar. </summary>
+        public string Bar { get; set; }
     }
 }

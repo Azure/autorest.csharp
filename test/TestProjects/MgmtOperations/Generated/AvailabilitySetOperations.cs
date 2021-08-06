@@ -140,14 +140,14 @@ namespace MgmtOperations
 
         /// <summary> Delete an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AvailabilitySetsDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsDeleteOperation(response);
+                return new AvailabilitySetDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -158,14 +158,14 @@ namespace MgmtOperations
 
         /// <summary> Delete an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AvailabilitySetsDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetDeleteOperation StartDelete(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new AvailabilitySetsDeleteOperation(response);
+                return new AvailabilitySetDeleteOperation(response);
             }
             catch (Exception e)
             {
@@ -501,7 +501,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetsTestSetSharedKeyOperation> StartTestSetSharedKeyAsync(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> StartTestSetSharedKeyAsync(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -513,7 +513,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _restClient.TestSetSharedKeyAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -526,7 +526,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetsTestSetSharedKeyOperation StartTestSetSharedKey(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetTestSetSharedKeyOperation StartTestSetSharedKey(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -538,7 +538,7 @@ namespace MgmtOperations
             try
             {
                 var response = _restClient.TestSetSharedKey(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new AvailabilitySetsTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -601,7 +601,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetsTestLROMethodOperation> StartTestLROMethodAsync(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetTestLROMethodOperation> StartTestLROMethodAsync(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -613,7 +613,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _restClient.TestLROMethodAsync(Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                return new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -626,7 +626,7 @@ namespace MgmtOperations
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetsTestLROMethodOperation StartTestLROMethod(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetTestLROMethodOperation StartTestLROMethod(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -638,7 +638,7 @@ namespace MgmtOperations
             try
             {
                 var response = _restClient.TestLROMethod(Id.ResourceGroupName, parameters, cancellationToken);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                return new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {

@@ -11,22 +11,12 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
-    "OneResources": "Microsoft.Fake/oneResources",
-    "SecondResources": "Microsoft.Fake/fakes/secondResources",
-    "SubFakes": "Microsoft.Fake/fakes/subFakes",
-    "SharedGalleries": "Microsoft.Compute/locations/sharedGalleries"
+    "Quotas": "something"
   },
   "OperationGroupToResource": {
-    "SharedGalleries": "SharedGallery"
+    "Quotas": "NonResource"
   },
   "OperationGroupToParent": {
-    "OneResources": "resourceGroups",
-    "SecondResources": "Microsoft.Fake/fakes",
-    "SubFakes": "Microsoft.Fake/fakes",
-    "SharedGalleries": "subscriptions"
-  },
-  "OperationGroupIsExtension": [
-    "OneResources",
-    "SecondResources"
-  ]
+    "Quotas": "subscriptions"
+  }
 }
