@@ -10,8 +10,11 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "Model4s": "Microsoft.Compute/model2s/model4s"
+  },
   "OperationGroupToResource": {
-    "Model4s": "NonResource"
+    "Model4s": "Model4"
   },
   "OperationGroupsToOmit": [
     "Model1s"
