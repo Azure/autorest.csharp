@@ -756,6 +756,44 @@ namespace lro
             }
         }
 
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<LROsPatch200SucceededOperation> StartPatch200SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch200Succeeded");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.Patch200SucceededAsync(product, cancellationToken).ConfigureAwait(false);
+                return new LROsPatch200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual LROsPatch200SucceededOperation StartPatch200Succeeded(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch200Succeeded");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.Patch200Succeeded(product, cancellationToken);
+                return new LROsPatch200SucceededOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededRequest(product).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<LROsDeleteProvisioning202Accepted200SucceededOperation> StartDeleteProvisioning202Accepted200SucceededAsync(CancellationToken cancellationToken = default)

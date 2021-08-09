@@ -104,7 +104,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model5SCreateOrUpdateOperation StartCreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public virtual Model5CreateOrUpdateOperation StartCreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -120,7 +120,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, model5SName, parameters, cancellationToken);
-                return new Model5SCreateOrUpdateOperation(Parent, response);
+                return new Model5CreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +133,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model5SCreateOrUpdateOperation> StartCreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Model5CreateOrUpdateOperation> StartCreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -149,7 +149,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new Model5SCreateOrUpdateOperation(Parent, response);
+                return new Model5CreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -316,9 +316,9 @@ namespace OmitOperationGroups
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
@@ -339,9 +339,9 @@ namespace OmitOperationGroups
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAllAsGenericResources");
             scope.Start();
             try
             {

@@ -15,16 +15,16 @@ using OmitOperationGroups;
 
 namespace OmitOperationGroups.Models
 {
-    public partial class Model5SCreateOrUpdateOperation : Operation<Model5>
+    public partial class Model5CreateOrUpdateOperation : Operation<Model5>
     {
         private readonly OperationOrResponseInternals<Model5> _operation;
 
-        /// <summary> Initializes a new instance of Model5SCreateOrUpdateOperation for mocking. </summary>
-        protected Model5SCreateOrUpdateOperation()
+        /// <summary> Initializes a new instance of Model5CreateOrUpdateOperation for mocking. </summary>
+        protected Model5CreateOrUpdateOperation()
         {
         }
 
-        internal Model5SCreateOrUpdateOperation(ResourceOperations operationsBase, Response<Model5Data> response)
+        internal Model5CreateOrUpdateOperation(ResourceOperations operationsBase, Response<Model5Data> response)
         {
             _operation = new OperationOrResponseInternals<Model5>(Response.FromValue(new Model5(operationsBase, response.Value), response.GetRawResponse()));
         }

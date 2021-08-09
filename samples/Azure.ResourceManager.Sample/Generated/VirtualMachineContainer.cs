@@ -319,7 +319,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<VirtualMachine> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachine> GetAll(CancellationToken cancellationToken = default)
         {
             Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
             {
@@ -357,7 +357,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<VirtualMachine> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachine> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
             {
@@ -398,7 +398,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.GetAllAsGenericResources");
             scope.Start();
@@ -421,7 +421,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.GetAllAsGenericResources");
             scope.Start();

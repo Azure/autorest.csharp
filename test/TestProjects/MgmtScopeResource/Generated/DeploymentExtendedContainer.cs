@@ -327,7 +327,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentExtended" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DeploymentExtended> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DeploymentExtended> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<DeploymentExtended> FirstPageFunc(int? pageSizeHint)
             {
@@ -367,7 +367,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentExtended" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DeploymentExtended> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeploymentExtended> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentExtended>> FirstPageFunc(int? pageSizeHint)
             {
@@ -408,7 +408,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.GetAllAsGenericResources");
             scope.Start();
@@ -431,7 +431,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.GetAllAsGenericResources");
             scope.Start();
