@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -26,6 +27,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
+                // For the shared models in Core and Resources/Management, we should generate them in Core package and skip in Resources/Management package.
+                if (context.Configuration.LibraryName != "Core")
+                {
+                    if (context.SourceInputModel?.FindForType($"{model.Declaration.Namespace}", model.Declaration.Name) != null)
+                    {
+                        continue;
+                    }
+                    var mgmtObj = model as MgmtObjectType;
+                    if (mgmtObj != null && ReferenceTypePropertyChooser.GetExactMatch(mgmtObj) != null)
+                    {
+                        continue;
+                    }
+                }
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 

@@ -522,6 +522,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"({frameworkType}){element}.GetString()");
                 return;
             }
+            else if (frameworkType.Namespace?.StartsWith("Azure.ResourceManager") == true)
+            {
+                writer.Append($"{frameworkType}.Deserialize{frameworkType.Name}({element})");
+                return;
+            }
             else
                 writer.Append($"{element}.");
 

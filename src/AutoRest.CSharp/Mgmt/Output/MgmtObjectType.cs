@@ -77,14 +77,33 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
+            if (_context.Configuration.LibraryName == "Core")
+                return objectTypeProperty;
+            if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
+            {
+                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
+                {
+                    var type = objectTypeProperty.ValueType.Arguments[i];
+                    if (!type.IsFrameworkType)
+                    {
+                        var typeToRep = type.Implementation as MgmtObjectType;
+                        if (typeToRep != null)
+                        {
+                            var mh = ReferenceTypePropertyChooser.GetExactMatch(typeToRep);
+                            objectTypeProperty.ValueType.Arguments[i] = mh ?? type;
+                        }
+                    }
+                }
+                return objectTypeProperty;
+            }
             ObjectTypeProperty propertyType = objectTypeProperty;
             var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
             if (typeToReplace != null)
             {
-                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties);
+                var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                 if (match != null)
                 {
-                    propertyType = match;
+                    propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
                 }
             }
             return propertyType;
