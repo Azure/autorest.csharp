@@ -21,5 +21,15 @@ namespace OmitOperationGroups
             return new Model2Container(resourceGroup);
         }
         #endregion
+
+        #region Model5
+        /// <summary> Gets an object representing a Model5Container along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="Model5Container" /> object. </returns>
+        public static Model5Container GetModel5s(this ResourceGroupOperations resourceGroup)
+        {
+            return new Model5Container(resourceGroup);
+        }
+        #endregion
     }
 }

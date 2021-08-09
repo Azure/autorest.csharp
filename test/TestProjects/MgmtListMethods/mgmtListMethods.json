@@ -6,20 +6,12 @@
         "version": "2020-06-01"
     },
     "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "security": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+            "azure_auth": ["user_impersonation"]
         }
     ],
     "securityDefinitions": {
@@ -36,9 +28,7 @@
     "paths": {
         "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}": {
             "put": {
-                "tags": [
-                    "Fakes"
-                ],
+                "tags": ["Fakes"],
                 "operationId": "Fakes_CreateOrUpdate",
                 "description": "Create or update an fake.",
                 "parameters": [
@@ -3837,6 +3827,46 @@
                     "nextLinkName": "nextLink"
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/updateQuotas": {
+            "post": {
+                "tags": ["Quota"],
+                "operationId": "Quotas_Update",
+                "description": "Update quota for each VM family in workspace.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The location for update quota is queried.",
+                        "pattern": "^[-\\w\\._]+$"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/QuotaUpdateParameters"
+                        },
+                        "description": "Quota update parameters."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The operation was successful.",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateWorkspaceQuotasResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -4831,9 +4861,7 @@
                     "description": "Resource tags"
                 }
             },
-            "required": [
-                "location"
-            ],
+            "required": ["location"],
             "x-ms-azure-resource": true
         },
         "NonResourceChild": {
@@ -4861,6 +4889,119 @@
                 }
             },
             "description": "The List of Non Resource Child operation response."
+        },
+        "QuotaUpdateParameters": {
+            "properties": {
+                "value": {
+                    "description": "The list for update quota.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/QuotaBaseProperties"
+                    }
+                },
+                "location": {
+                    "description": "Region of workspace quota to be updated.",
+                    "type": "string"
+                }
+            },
+            "description": "Quota update parameters."
+        },
+        "QuotaBaseProperties": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Specifies the resource ID."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Specifies the resource type."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64",
+                    "title": "Limit.",
+                    "description": "The maximum permitted quota of the resource."
+                },
+                "unit": {
+                    "type": "string",
+                    "description": "An enum describing the unit of quota measurement.",
+                    "enum": ["Count"],
+                    "x-ms-enum": {
+                        "name": "QuotaUnit",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "The properties for Quota update or retrieval."
+        },
+        "UpdateWorkspaceQuotasResult": {
+            "properties": {
+                "value": {
+                    "description": "The list of workspace quota update result.",
+                    "items": {
+                        "$ref": "#/definitions/UpdateWorkspaceQuotas"
+                    },
+                    "readOnly": true,
+                    "type": "array"
+                },
+                "nextLink": {
+                    "description": "The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.",
+                    "readOnly": true,
+                    "type": "string"
+                }
+            },
+            "description": "The result of update workspace quota."
+        },
+        "UpdateWorkspaceQuotas": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the resource ID."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Specifies the resource type."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int64",
+                    "title": "Limit.",
+                    "description": "The maximum permitted quota of the resource."
+                },
+                "unit": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "An enum describing the unit of quota measurement.",
+                    "enum": ["Count"],
+                    "x-ms-enum": {
+                        "name": "QuotaUnit",
+                        "modelAsString": true
+                    }
+                },
+                "status": {
+                    "type": "string",
+                    "readOnly": false,
+                    "title": "Update Workspace Quota Status.",
+                    "description": "Status of update workspace quota.",
+                    "enum": [
+                        "Undefined",
+                        "Success",
+                        "Failure",
+                        "InvalidQuotaBelowClusterMinimum",
+                        "InvalidQuotaExceedsSubscriptionLimit",
+                        "InvalidVMFamilyName",
+                        "OperationNotSupportedForSku",
+                        "OperationNotEnabledForRegion"
+                    ],
+                    "x-ms-enum": {
+                        "name": "status",
+                        "modelAsString": true
+                    }
+                }
+            },
+            "description": "The properties for update Quota response."
         }
     },
     "parameters": {
