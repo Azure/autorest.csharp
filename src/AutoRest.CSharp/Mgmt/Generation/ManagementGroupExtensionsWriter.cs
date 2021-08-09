@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Line($"#region {resource.Type.Name}");
                         var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                        WriteGetResourceContainerMethod(writer, resource, resourceContainer!);
+                        WriteGetResourceContainerMethod(writer, resourceContainer!);
                         writer.LineRaw("#endregion");
                         writer.Line();
                     }
@@ -46,13 +46,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetResourceContainerMethod(CodeWriter writer, Resource armResource, ResourceContainer resourceContainer)
+        private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
 
-            using (writer.Scope($"public static {resourceContainer.Type} Get{armResource.Type.Name.ToPlural()}(this {typeof(ManagementGroupOperations)} {ExtensionOperationVariableName})"))
+            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(ManagementGroupOperations)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }
