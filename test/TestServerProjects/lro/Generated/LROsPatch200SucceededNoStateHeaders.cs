@@ -10,10 +10,10 @@ using Azure.Core;
 
 namespace lro
 {
-    internal partial class LROsPatch200SucceededHeaders
+    internal partial class LROsPatch200SucceededNoStateHeaders
     {
         private readonly Response _response;
-        public LROsPatch200SucceededHeaders(Response response)
+        public LROsPatch200SucceededNoStateHeaders(Response response)
         {
             _response = response;
         }

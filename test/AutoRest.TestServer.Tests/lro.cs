@@ -918,6 +918,28 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
+        public Task LROPatch200InlineCompleteNoState() => Test(async (host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededNoStateAsync(value);
+            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
+        });
+
+        [Test]
+        public Task LROPatch200InlineCompleteNoState_Sync() => Test((host, pipeline) =>
+        {
+            var value = new Product();
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededNoState(value);
+            var result = WaitForCompletionWithValue(operation);
+            Assert.AreEqual("100", result.Value.Id);
+            Assert.AreEqual("foo", result.Value.Name);
+            Assert.AreEqual(null, result.Value.ProvisioningState);
+        });
+
+        [Test]
         public Task LROPut202Retry200() => Test(async (host, pipeline) =>
         {
             var value = new Product();

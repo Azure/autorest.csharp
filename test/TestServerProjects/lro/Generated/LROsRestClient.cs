@@ -86,6 +86,114 @@ namespace lro
             }
         }
 
+        internal HttpMessage CreatePatch200SucceededRequest(Product product)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/lro/patch/200/succeeded", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            if (product != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<ResponseWithHeaders<LROsPatch200SucceededHeaders>> Patch200SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch200SucceededRequest(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LROsPatch200SucceededHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<LROsPatch200SucceededHeaders> Patch200Succeeded(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch200SucceededRequest(product);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new LROsPatch200SucceededHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePatch200SucceededNoStateRequest(Product product)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/lro/patch/200/succeeded/nostate", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            if (product != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<ResponseWithHeaders<LROsPatch200SucceededNoStateHeaders>> Patch200SucceededNoStateAsync(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch200SucceededNoStateRequest(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            var headers = new LROsPatch200SucceededNoStateHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
+        /// <param name="product"> Product to patch. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public ResponseWithHeaders<LROsPatch200SucceededNoStateHeaders> Patch200SucceededNoState(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch200SucceededNoStateRequest(product);
+            _pipeline.Send(message, cancellationToken);
+            var headers = new LROsPatch200SucceededNoStateHeaders(message.Response);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreatePut201SucceededRequest(Product product)
         {
             var message = _pipeline.CreateMessage();
@@ -332,6 +440,60 @@ namespace lro
         public Response Put201CreatingSucceeded200(Product product = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePut201CreatingSucceeded200Request(product);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 201:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePatch201UpdatingSucceeded200Request(Product product)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/lro/patch/201/updating/succeeded/200", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            if (product != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(product);
+                request.Content = content;
+            }
+            return message;
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> Patch201UpdatingSucceeded200Async(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch201UpdatingSucceeded200Request(product);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 201:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
+        /// <param name="product"> Product to put. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Patch201UpdatingSucceeded200(Product product = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePatch201UpdatingSucceeded200Request(product);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1028,60 +1190,6 @@ namespace lro
             {
                 case 202:
                     return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreatePatch200SucceededRequest(Product product)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Patch;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/lro/patch/200/succeeded", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            if (product != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteObjectValue(product);
-                request.Content = content;
-            }
-            return message;
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
-        /// <param name="product"> Product to patch. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<LROsPatch200SucceededHeaders>> Patch200SucceededAsync(Product product = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePatch200SucceededRequest(product);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            var headers = new LROsPatch200SucceededHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
-        /// <param name="product"> Product to patch. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<LROsPatch200SucceededHeaders> Patch200Succeeded(Product product = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePatch200SucceededRequest(product);
-            _pipeline.Send(message, cancellationToken);
-            var headers = new LROsPatch200SucceededHeaders(message.Response);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
