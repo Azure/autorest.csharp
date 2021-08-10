@@ -54,7 +54,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateBaseClass()
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
                 var expectedBaseOperationsType = IsSingletonOperation(type.BaseType)
                     ? typeof(SingletonOperations)
@@ -67,7 +67,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAvailableLocationsAsync")]
         public void ValidateListAvailableLocationsMethodExists(string methodName)
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
                 if (IsSingletonOperation(type.BaseType))
                 {
@@ -83,7 +83,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("GetAsync")]
         public void ValidateGetMethodExists(string methodName)
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
                 if (IsSingletonOperation(type.BaseType))
                 {
@@ -100,9 +100,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AddTagAsync")]
         public void ValidateAddTagMethod(string methodName)
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
-                var resourceData = GetResourceDataByOperations(type);
+                var resourceData = GetResourceDataByResource(type);
                 if (!IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
@@ -125,9 +125,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("SetTagsAsync")]
         public void ValidateSetTagsMethod(string methodName)
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
-                var resourceData = GetResourceDataByOperations(type);
+                var resourceData = GetResourceDataByResource(type);
                 if (!IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
@@ -148,9 +148,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("RemoveTagAsync")]
         public void ValidateRemoveTagMethod(string methodName)
         {
-            foreach (var type in FindAllOperations())
+            foreach (var type in FindAllResources())
             {
-                var resourceData = GetResourceDataByOperations(type);
+                var resourceData = GetResourceDataByResource(type);
                 if (!IsInheritFromTrackedResource(resourceData))
                 {
                     continue;
@@ -167,13 +167,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private Type GetResourceDataByOperations(Type resourceOperations)
+        private Type GetResourceDataByResource(Type resourceType)
         {
-            var resourceName = resourceOperations.Name.Remove(resourceOperations.Name.LastIndexOf("Operations"));
             // the name of resource data is not just simply appending a `Data` after the resource name
             // we have the special cases like extension resource, in this case, we may have multiple resources with different name, but the same resource data
             // therefore here we are finding the type of the resource, and get the type of its `Data` property
-            var resourceType = FindAllResources().First(t => t.Name == resourceName);
             var resourceData = resourceType.GetProperty("Data")?.PropertyType;
             return resourceData;
         }
@@ -206,20 +204,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        public IEnumerable<Type> FindAllOperations()
-        {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-
-            foreach (Type t in allTypes)
-            {
-                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.FullName.Contains("Test") && t.Namespace == _projectName)
-                {
-                    // Only [Resource]Operations types for the specified test project are going to be tested.
-                    yield return t;
-                }
-            }
-        }
-
         public IEnumerable<Type> FindAllResources()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
@@ -241,11 +225,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.EndsWith("Operations") && !t.Name.Contains("Tests")
-                    && !t.Name.Contains("RestOperations") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Data") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     // Only [Resource] types names for the specified test project are going to be tested.
-                    var resourceName = t.Name.Substring(0, t.Name.Length - 10);
+                    var resourceName = t.Name.Replace("Data", string.Empty);
                     yield return resourceName;
                 }
             }
@@ -342,7 +325,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private Type GetResourceRestOperationsType(Type containerType)
         {
             var containerObj = Activator.CreateInstance(containerType, true);
-            return containerObj.GetType().GetProperty("_restClient", BindingFlags.NonPublic | BindingFlags.Instance).PropertyType;
+            return containerObj.GetType().GetField("_restClient", BindingFlags.NonPublic | BindingFlags.Instance).FieldType;
         }
 
         [Test]
@@ -427,7 +410,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateParentResourceOperation()
         {
-            foreach (var operation in FindAllOperations())
+            foreach (var operation in FindAllResources())
             {
                 var operationTypeProperty = operation.GetField("ResourceType");
                 ResourceType operationType = operationTypeProperty.GetValue(operation) as ResourceType;
