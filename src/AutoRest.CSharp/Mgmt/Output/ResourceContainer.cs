@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
         && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
-        
+
         public Resource Resource => _context.Library.GetArmResource(OperationGroup);
 
         public override string ResourceName => Resource.ResourceName;

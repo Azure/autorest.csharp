@@ -76,7 +76,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual string SuffixValue => string.Empty;
 
-
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
         public ResourceData ResourceData => _context.Library.GetResourceData(OperationGroup);
