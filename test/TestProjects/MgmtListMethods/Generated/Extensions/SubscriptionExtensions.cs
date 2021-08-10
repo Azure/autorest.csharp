@@ -27,7 +27,7 @@ namespace MgmtListMethods
         /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
-        public static FakeContainer GetFakeContainer(this SubscriptionOperations subscription)
+        public static FakeContainer GetFakes(this SubscriptionOperations subscription)
         {
             return new FakeContainer(subscription);
         }
@@ -1387,7 +1387,7 @@ namespace MgmtListMethods
         /// <summary> Gets an object representing a SubParentWithNonResChWithLocContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubParentWithNonResChWithLocContainer" /> object. </returns>
-        public static SubParentWithNonResChWithLocContainer GetSubParentWithNonResChWithLocContainer(this SubscriptionOperations subscription)
+        public static SubParentWithNonResChWithLocContainer GetSubParentWithNonResChWithLocs(this SubscriptionOperations subscription)
         {
             return new SubParentWithNonResChWithLocContainer(subscription);
         }
@@ -1397,7 +1397,7 @@ namespace MgmtListMethods
         /// <summary> Gets an object representing a SubParentWithNonResChContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubParentWithNonResChContainer" /> object. </returns>
-        public static SubParentWithNonResChContainer GetSubParentWithNonResChContainer(this SubscriptionOperations subscription)
+        public static SubParentWithNonResChContainer GetSubParentWithNonResChes(this SubscriptionOperations subscription)
         {
             return new SubParentWithNonResChContainer(subscription);
         }
@@ -1407,7 +1407,7 @@ namespace MgmtListMethods
         /// <summary> Gets an object representing a SubParentWithLocContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubParentWithLocContainer" /> object. </returns>
-        public static SubParentWithLocContainer GetSubParentWithLocContainer(this SubscriptionOperations subscription)
+        public static SubParentWithLocContainer GetSubParentWithLocs(this SubscriptionOperations subscription)
         {
             return new SubParentWithLocContainer(subscription);
         }
@@ -1417,7 +1417,7 @@ namespace MgmtListMethods
         /// <summary> Gets an object representing a SubParentContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubParentContainer" /> object. </returns>
-        public static SubParentContainer GetSubParentContainer(this SubscriptionOperations subscription)
+        public static SubParentContainer GetSubParents(this SubscriptionOperations subscription)
         {
             return new SubParentContainer(subscription);
         }

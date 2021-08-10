@@ -13,9 +13,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OmitOperationGroups
     {
-        private static HashSet<Schema> _schemasToOmit = new HashSet<Schema>();
-        private static HashSet<Schema> _schemasToKeep = new HashSet<Schema>();
-
         public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
             var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
@@ -26,27 +23,29 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
                 codeModel.OperationGroups = nonOmittedOGs;
+                var schemasToOmit = new HashSet<Schema>();
+                var schemasToKeep = new HashSet<Schema>();
                 foreach (var operationGroup in codeModel.OperationGroups)
                 {
-                    DetectSchemasToKeep(operationGroup);
+                    DetectSchemas(operationGroup, schemasToKeep);
                 }
 
                 foreach (var operationGroup in omittedOGs)
                 {
                     if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                     {
-                        DetectSchemasToOmit(codeModel, operationGroup);
+                        DetectSchemas(operationGroup, schemasToOmit);
                     }
                 }
-                RemoveSchemas(codeModel);
+                RemoveSchemas(codeModel, schemasToOmit, schemasToKeep);
             }
         }
 
-        private static void RemoveSchemas(CodeModel codeModel)
+        private static void RemoveSchemas(CodeModel codeModel, HashSet<Schema> schemasToOmit, HashSet<Schema> schemasToKeep)
         {
-            foreach (var schema in _schemasToOmit)
+            foreach (var schema in schemasToOmit)
             {
-                if (schema is ObjectSchema objSchema && !_schemasToKeep.Contains(objSchema))
+                if (schema is ObjectSchema objSchema && !schemasToKeep.Contains(objSchema))
                 {
                     codeModel.Schemas.Objects.Remove(objSchema);
                     RemoveRelations(objSchema);
@@ -115,24 +114,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static void DetectSchemasToKeep(OperationGroup operationGroup)
+        private static void DetectSchemas(OperationGroup operationGroup, HashSet<Schema> setToProcess)
         {
             foreach (var operation in operationGroup.Operations)
             {
-                AddResponseSchemas(operation, _schemasToKeep);
-                AddRequestSchemas(operation, _schemasToKeep);
+                AddResponseSchemas(operation, setToProcess);
+                AddRequestSchemas(operation, setToProcess);
             }
-            AddDependantSchemasRecursively(_schemasToKeep);
-        }
-
-        private static void DetectSchemasToOmit(CodeModel codeModel, OperationGroup operationGroup)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                AddResponseSchemas(operation, _schemasToOmit);
-                AddRequestSchemas(operation, _schemasToOmit);
-            }
-            AddDependantSchemasRecursively(_schemasToOmit);
+            AddDependantSchemasRecursively(setToProcess);
         }
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
