@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Management;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
 
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Type.Name}(this {typeof(ManagementGroupOperations)} {ExtensionOperationVariableName})"))
+            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(ManagementGroupOperations)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }

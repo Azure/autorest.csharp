@@ -16,7 +16,7 @@ namespace MgmtExtensionResource
         /// <summary> Gets an object representing a PolicyDefinitionContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PolicyDefinitionContainer" /> object. </returns>
-        public static PolicyDefinitionContainer GetPolicyDefinitionContainer(this SubscriptionOperations subscription)
+        public static PolicyDefinitionContainer GetPolicyDefinitions(this SubscriptionOperations subscription)
         {
             return new PolicyDefinitionContainer(subscription);
         }
