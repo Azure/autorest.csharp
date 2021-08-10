@@ -96,13 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ResourceListMethod>? ManagementGroupExtensionListMethods => _managementGroupExtensionsListMethods ??= GetManagementGroupExtensionsListMethods();
 
-        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => IsGetResourceMethod(m) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => IsGetResourceMethod(m));
-
-        private bool IsGetResourceMethod(ClientMethod method)
-        {
-            return method.Name.StartsWith("Get") && method.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name;
-        }
-
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.IsGetResourceMethod(ResourceData) && m.RestClientMethod.Parameters.FirstOrDefault()?.Name.Equals("scope") == true) ?? Methods.OrderBy(m => m.Name.Length).FirstOrDefault(m => m.IsGetResourceMethod(ResourceData));
         protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
             return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);

@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -19,15 +21,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        protected override bool ShouldReturnNullOn404(Operation operation)
+        protected override Func<string?, bool> ShouldReturnNullOn404(Operation operation)
         {
-            if (!_context.Library.TryGetResourceData(OperationGroup, out var resourceData))
-                return false;
+            Func<string?, bool> f = delegate (string? responseBodyType)
+            {
+                if (!_context.Library.TryGetResourceData(OperationGroup, out var resourceData))
+                    return false;
+                if (OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                    return false;
+                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
+                    return false;
 
-            if (!operation.Language.Default.Name.Equals("Get"))
-                return false;
-
-            return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
+                return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
+            };
+            return f;
         }
     }
 }

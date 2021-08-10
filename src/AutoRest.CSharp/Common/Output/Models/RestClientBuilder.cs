@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, bool returnNullOn404 = false)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
 
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             Request request = BuildRequest(httpRequest, parameters, allParameters);
-            Response[] responses = BuildResponses(operation, request, out var responseType, returnNullOn404);
+            Response[] responses = BuildResponses(operation, request, out var responseType, returnNullOn404Func);
             Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
 
             return new RestClientMethod(
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private Response[] BuildResponses(Operation operation, Request request, out CSharpType? responseType, bool returnNullOn404 = false)
+        private Response[] BuildResponses(Operation operation, Request request, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
         {
             List<Response> clientResponse = new List<Response>();
 
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Output.Models
 
             }
 
-            if (returnNullOn404)
+            if (returnNullOn404Func != null && returnNullOn404Func(clientResponse.FirstOrDefault()?.ResponseBody?.Type.Name))
                 clientResponse.Add(new Response(null, new[] { new StatusCodes(404, null) }));
 
             responseType = ReduceResponses(clientResponse);

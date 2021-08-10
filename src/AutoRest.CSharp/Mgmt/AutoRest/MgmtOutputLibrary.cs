@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             CodeModelValidator.Validate(codeModel);
             RemoveOperations(codeModel);
+            OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             UpdateSubscriptionIdForTenantIdResource(codeModel);
@@ -73,8 +74,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
-
-            OmitOperationGroups.RemoveOperationGroups(codeModel, context);
 
             ReorderOperationParameters();
             DecorateOperationGroup();
