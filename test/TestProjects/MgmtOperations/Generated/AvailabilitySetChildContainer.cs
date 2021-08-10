@@ -20,6 +20,9 @@ namespace MgmtOperations
     /// <summary> A class representing collection of AvailabilitySetChild and their operations over a AvailabilitySet. </summary>
     public partial class AvailabilitySetChildContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AvailabilitySetChildRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetChildContainer()
         {
@@ -30,15 +33,11 @@ namespace MgmtOperations
         internal AvailabilitySetChildContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AvailabilitySetChildRestOperations _restClient => new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => AvailabilitySetOperations.ResourceType;
+        protected override ResourceType ValidResourceType => AvailabilitySet.ResourceType;
 
         // Container level operations.
 
@@ -326,7 +325,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AvailabilitySetChildOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AvailabilitySetChild.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -349,7 +348,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AvailabilitySetChildOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AvailabilitySetChild.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

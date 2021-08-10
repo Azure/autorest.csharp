@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
         private Resource _resource;
-        private ResourceOperation _resourceOperation;
         private BuildContext<MgmtOutputLibrary> _context;
 
         protected override string ContextProperty => "Parent";
@@ -55,7 +54,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resourceData = context.Library.GetResourceData(operationGroup);
             _restClient = context.Library.GetRestClient(operationGroup);
             _resource = context.Library.GetArmResource(operationGroup);
-            _resourceOperation = context.Library.GetResourceOperation(operationGroup);
             _context = context;
         }
 
@@ -70,14 +68,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"{typeof(Core.ResourceContainer)}");
                 using (_writer.Scope())
                 {
-                    WriteContainerCtors(_writer, typeof(Core.ResourceOperations), "parent");
+                    WriteFields(_writer, _restClient!);
+                    WriteContainerCtors(_writer, _restClient!, typeof(Core.ResourceOperations), "parent");
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
                     if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
                     {
                         WriteValidate();
                     }
-                    WriteFields(_writer, _restClient!);
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteRemainingMethods();
@@ -512,7 +510,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            var isAncestorResourceTypeTenant = _resourceOperation.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
             if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";

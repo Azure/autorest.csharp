@@ -20,6 +20,9 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class representing collection of AzureResourceFlattenModel4 and their operations over a ResourceGroup. </summary>
     public partial class AzureResourceFlattenModel4Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AzureResourceFlattenModel4SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel4Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel4Container()
         {
@@ -30,12 +33,8 @@ namespace ExactMatchFlattenInheritance
         internal AzureResourceFlattenModel4Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AzureResourceFlattenModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AzureResourceFlattenModel4SRestOperations _restClient => new AzureResourceFlattenModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -326,7 +325,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -349,7 +348,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

@@ -22,6 +22,9 @@ namespace MgmtParent
     /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
     public partial class DedicatedHostContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DedicatedHostsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>
         protected DedicatedHostContainer()
         {
@@ -32,15 +35,11 @@ namespace MgmtParent
         internal DedicatedHostContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private DedicatedHostsRestOperations _restClient => new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => DedicatedHostGroup.ResourceType;
 
         // Container level operations.
 
@@ -404,7 +403,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DedicatedHost.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -427,7 +426,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DedicatedHost.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

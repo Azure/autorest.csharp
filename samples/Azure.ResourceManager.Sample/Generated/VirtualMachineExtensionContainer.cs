@@ -22,6 +22,9 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineExtension and their operations over a VirtualMachine. </summary>
     public partial class VirtualMachineExtensionContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly VirtualMachineExtensionsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionContainer()
         {
@@ -32,15 +35,11 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineExtensionContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineExtensionsRestOperations _restClient => new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => VirtualMachineOperations.ResourceType;
+        protected override ResourceType ValidResourceType => VirtualMachine.ResourceType;
 
         // Container level operations.
 
@@ -372,7 +371,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineExtensionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineExtension.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -395,7 +394,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineExtensionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineExtension.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

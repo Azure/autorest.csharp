@@ -22,6 +22,9 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over a ResourceGroup. </summary>
     public partial class VirtualMachineScaleSetContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly VirtualMachineScaleSetsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetContainer"/> class for mocking. </summary>
         protected VirtualMachineScaleSetContainer()
         {
@@ -32,12 +35,8 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSetContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new VirtualMachineScaleSetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineScaleSetsRestOperations _restClient => new VirtualMachineScaleSetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -404,7 +403,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineScaleSetOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSet.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -427,7 +426,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineScaleSetOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSet.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

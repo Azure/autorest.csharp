@@ -20,6 +20,9 @@ namespace SupersetInheritance
     /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
     public partial class SupersetModel4Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly SupersetModel4SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>
         protected SupersetModel4Container()
         {
@@ -30,12 +33,8 @@ namespace SupersetInheritance
         internal SupersetModel4Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private SupersetModel4SRestOperations _restClient => new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -322,7 +321,7 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -345,7 +344,7 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

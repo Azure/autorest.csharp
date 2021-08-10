@@ -22,6 +22,9 @@ namespace Pagination
     /// <summary> A class representing collection of PageSizeNumericModel and their operations over a ResourceGroup. </summary>
     public partial class PageSizeNumericModelContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PageSizeNumericModelsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModelContainer"/> class for mocking. </summary>
         protected PageSizeNumericModelContainer()
         {
@@ -32,12 +35,8 @@ namespace Pagination
         internal PageSizeNumericModelContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PageSizeNumericModelsRestOperations _restClient => new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -398,7 +397,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeNumericModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeNumericModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -421,7 +420,7 @@ namespace Pagination
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeNumericModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeNumericModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

@@ -21,6 +21,9 @@ namespace MgmtScopeResource
     /// <summary> A class representing collection of DeploymentOperation and their operations over a DeploymentExtended. </summary>
     public partial class DeploymentOperationContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DeploymentRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="DeploymentOperationContainer"/> class for mocking. </summary>
         protected DeploymentOperationContainer()
         {
@@ -31,15 +34,11 @@ namespace MgmtScopeResource
         internal DeploymentOperationContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private DeploymentRestOperations _restClient => new DeploymentRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => DeploymentExtendedOperations.ResourceType;
+        protected override ResourceType ValidResourceType => DeploymentExtended.ResourceType;
 
         // Container level operations.
 
@@ -285,7 +284,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentOperationOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentOperation.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -308,7 +307,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentOperationOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentOperation.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

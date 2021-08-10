@@ -212,7 +212,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetFakeParentWithAncestorWithNonResChWithLocByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -226,7 +226,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetFakeParentWithAncestorWithNonResChWithLocByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -337,7 +337,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetFakeParentWithAncestorWithNonResChByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -351,7 +351,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetFakeParentWithAncestorWithNonResChByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResChOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -566,7 +566,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetFakeParentWithAncestorWithLocByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -580,7 +580,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetFakeParentWithAncestorWithLocByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -691,7 +691,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetFakeParentWithAncestorByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -705,7 +705,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetFakeParentWithAncestorByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(FakeParentWithAncestorOperations.ResourceType);
+            ResourceFilterCollection filters = new(FakeParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -922,7 +922,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithNonResChWithLocByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -936,7 +936,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithNonResChWithLocByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -1049,7 +1049,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithNonResChByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -1063,7 +1063,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithNonResChByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResChOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithNonResCh.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -1278,7 +1278,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithLocByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -1292,7 +1292,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetResGrpParentWithAncestorWithLocByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLocOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestorWithLoc.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
@@ -1363,7 +1363,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResourceExpanded> GetResGrpParentWithAncestorByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
@@ -1377,7 +1377,7 @@ namespace MgmtListMethods
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResourceExpanded> GetResGrpParentWithAncestorByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(ResGrpParentWithAncestorOperations.ResourceType);
+            ResourceFilterCollection filters = new(ResGrpParentWithAncestor.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }

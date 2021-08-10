@@ -20,6 +20,9 @@ namespace MgmtParamOrdering
     /// <summary> A class representing collection of EnvironmentContainerResource and their operations over a Workspace. </summary>
     public partial class EnvironmentContainerResourceContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly EnvironmentContainersRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResourceContainer"/> class for mocking. </summary>
         protected EnvironmentContainerResourceContainer()
         {
@@ -30,15 +33,11 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private EnvironmentContainersRestOperations _restClient => new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => WorkspaceOperations.ResourceType;
+        protected override ResourceType ValidResourceType => Workspace.ResourceType;
 
         // Container level operations.
 
@@ -326,7 +325,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(EnvironmentContainerResourceOperations.ResourceType);
+                var filters = new ResourceFilterCollection(EnvironmentContainerResource.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -349,7 +348,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(EnvironmentContainerResourceOperations.ResourceType);
+                var filters = new ResourceFilterCollection(EnvironmentContainerResource.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

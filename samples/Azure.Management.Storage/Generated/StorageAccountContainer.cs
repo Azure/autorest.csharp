@@ -22,6 +22,9 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of StorageAccount and their operations over a ResourceGroup. </summary>
     public partial class StorageAccountContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly StorageAccountsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
         {
@@ -32,12 +35,8 @@ namespace Azure.Management.Storage
         internal StorageAccountContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private StorageAccountsRestOperations _restClient => new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -380,7 +379,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(StorageAccountOperations.ResourceType);
+                var filters = new ResourceFilterCollection(StorageAccount.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -403,7 +402,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(StorageAccountOperations.ResourceType);
+                var filters = new ResourceFilterCollection(StorageAccount.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

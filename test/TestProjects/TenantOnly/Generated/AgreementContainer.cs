@@ -19,6 +19,9 @@ namespace TenantOnly
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
     public partial class AgreementContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AgreementsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
         {
@@ -29,15 +32,11 @@ namespace TenantOnly
         internal AgreementContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => BillingAccountOperations.ResourceType;
+        protected override ResourceType ValidResourceType => BillingAccount.ResourceType;
 
         // Container level operations.
 
@@ -211,7 +210,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AgreementOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Agreement.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -234,7 +233,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AgreementOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Agreement.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

@@ -20,6 +20,9 @@ namespace OmitOperationGroups
     /// <summary> A class representing collection of Model5 and their operations over a ResourceGroup. </summary>
     public partial class Model5Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly Model5SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="Model5Container"/> class for mocking. </summary>
         protected Model5Container()
         {
@@ -30,12 +33,8 @@ namespace OmitOperationGroups
         internal Model5Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new Model5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private Model5SRestOperations _restClient => new Model5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -104,7 +103,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model5SCreateOrUpdateOperation StartCreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public virtual Model5CreateOrUpdateOperation StartCreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -120,7 +119,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, model5SName, parameters, cancellationToken);
-                return new Model5SCreateOrUpdateOperation(Parent, response);
+                return new Model5CreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +132,7 @@ namespace OmitOperationGroups
         /// <param name="parameters"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model5SCreateOrUpdateOperation> StartCreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Model5CreateOrUpdateOperation> StartCreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -149,7 +148,7 @@ namespace OmitOperationGroups
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new Model5SCreateOrUpdateOperation(Parent, response);
+                return new Model5CreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -316,13 +315,13 @@ namespace OmitOperationGroups
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(Model5Operations.ResourceType);
+                var filters = new ResourceFilterCollection(Model5.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -339,13 +338,13 @@ namespace OmitOperationGroups
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("Model5Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(Model5Operations.ResourceType);
+                var filters = new ResourceFilterCollection(Model5.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

@@ -43,18 +43,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.UseNamespace(typeof(Task).Namespace!);
         }
-
-       protected void WriteFields(CodeWriter writer, RestClient restClient)
+        protected void WriteFields(CodeWriter writer, RestClient client)
         {
-            writer.Line();
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
-            // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-            var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
-            writer.Line();
+            writer.Line($"{RestClientAccessibility} readonly {client.Type} {RestClientField};");
         }
 
         protected void WriteEndOfGet(CodeWriter writer, CSharpType resourcetype, bool isAsync)
@@ -64,9 +56,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, Type contextArgumentType, string parentArguments)
+        protected void WriteContainerCtors(CodeWriter writer, RestClient restClient, Type contextArgumentType, string parentArguments)
         {
             // write protected default constructor
+            writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");
             using (writer.Scope($"protected {TypeNameOfThis}()"))
             { }
@@ -78,6 +71,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
+                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
             }
         }
 

@@ -22,6 +22,9 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of Image and their operations over a ResourceGroup. </summary>
     public partial class ImageContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ImagesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ImageContainer"/> class for mocking. </summary>
         protected ImageContainer()
         {
@@ -32,12 +35,8 @@ namespace Azure.ResourceManager.Sample
         internal ImageContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ImagesRestOperations _restClient => new ImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -410,7 +409,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ImageOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Image.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -433,7 +432,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ImageOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Image.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

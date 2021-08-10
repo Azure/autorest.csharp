@@ -22,6 +22,9 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of TenantParentWithNonResCh and their operations over a TenantTest. </summary>
     public partial class TenantParentWithNonResChContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly TenantParentWithNonResChesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChContainer"/> class for mocking. </summary>
         protected TenantParentWithNonResChContainer()
         {
@@ -32,15 +35,11 @@ namespace MgmtListMethods
         internal TenantParentWithNonResChContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new TenantParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private TenantParentWithNonResChesRestOperations _restClient => new TenantParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => TenantTestOperations.ResourceType;
+        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
 
         // Container level operations.
 
@@ -404,7 +403,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(TenantParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(TenantParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -427,7 +426,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(TenantParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(TenantParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

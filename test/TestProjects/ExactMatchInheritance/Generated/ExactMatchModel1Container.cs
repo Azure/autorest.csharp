@@ -20,6 +20,9 @@ namespace ExactMatchInheritance
     /// <summary> A class representing collection of ExactMatchModel1 and their operations over a ResourceGroup. </summary>
     public partial class ExactMatchModel1Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ExactMatchModel1SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Container"/> class for mocking. </summary>
         protected ExactMatchModel1Container()
         {
@@ -30,12 +33,8 @@ namespace ExactMatchInheritance
         internal ExactMatchModel1Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ExactMatchModel1SRestOperations _restClient => new ExactMatchModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -322,7 +321,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ExactMatchModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(ExactMatchModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -345,7 +344,7 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ExactMatchModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(ExactMatchModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

@@ -22,6 +22,9 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of MgmtGrpParentWithNonResChWithLoc and their operations over a ManagementGroup. </summary>
     public partial class MgmtGrpParentWithNonResChWithLocContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLocContainer"/> class for mocking. </summary>
         protected MgmtGrpParentWithNonResChWithLocContainer()
         {
@@ -32,15 +35,11 @@ namespace MgmtListMethods
         internal MgmtGrpParentWithNonResChWithLocContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private MgmtGrpParentWithNonResChWithLocsRestOperations _restClient => new MgmtGrpParentWithNonResChWithLocsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ManagementGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ManagementGroup.ResourceType;
 
         // Container level operations.
 
@@ -404,7 +403,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChWithLocOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChWithLoc.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -427,7 +426,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChWithLocOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChWithLoc.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

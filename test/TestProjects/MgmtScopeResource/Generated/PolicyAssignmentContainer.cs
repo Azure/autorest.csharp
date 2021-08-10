@@ -23,6 +23,9 @@ namespace MgmtScopeResource
     /// <summary> A class representing collection of PolicyAssignment and their operations over a Tenant. </summary>
     public partial class PolicyAssignmentContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PolicyAssignmentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentContainer"/> class for mocking. </summary>
         protected PolicyAssignmentContainer()
         {
@@ -33,6 +36,7 @@ namespace MgmtScopeResource
         internal PolicyAssignmentContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -40,11 +44,6 @@ namespace MgmtScopeResource
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PolicyAssignmentsRestOperations _restClient => new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -535,7 +534,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyAssignmentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -558,7 +557,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyAssignmentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

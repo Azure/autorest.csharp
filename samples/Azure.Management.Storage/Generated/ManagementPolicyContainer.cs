@@ -20,6 +20,9 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of ManagementPolicy and their operations over a StorageAccount. </summary>
     public partial class ManagementPolicyContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ManagementPoliciesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyContainer"/> class for mocking. </summary>
         protected ManagementPolicyContainer()
         {
@@ -30,15 +33,11 @@ namespace Azure.Management.Storage
         internal ManagementPolicyContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ManagementPoliciesRestOperations _restClient => new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
+        protected override ResourceType ValidResourceType => StorageAccount.ResourceType;
 
         // Container level operations.
 
@@ -280,7 +279,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementPolicy.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -303,7 +302,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementPolicy.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

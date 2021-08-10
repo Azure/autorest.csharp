@@ -10,11 +10,11 @@ using Core = Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class TupleResourceOperationWriter : ResourceOperationWriter
+    internal class TupleResourceWriter : ResourceWriter
     {
         protected override Type BaseClass => typeof(Core.ResourceOperations);
 
-        public TupleResourceOperationWriter(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context) : base(writer, resourceOperation, context)
+        public TupleResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(writer, resource, context)
         {
         }
     }

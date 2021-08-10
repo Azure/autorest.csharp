@@ -20,6 +20,9 @@ namespace MgmtParamOrdering
     /// <summary> A class representing collection of Workspace and their operations over a ResourceGroup. </summary>
     public partial class WorkspaceContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly WorkspacesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="WorkspaceContainer"/> class for mocking. </summary>
         protected WorkspaceContainer()
         {
@@ -30,12 +33,8 @@ namespace MgmtParamOrdering
         internal WorkspaceContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new WorkspacesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private WorkspacesRestOperations _restClient => new WorkspacesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -326,7 +325,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(WorkspaceOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Workspace.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -349,7 +348,7 @@ namespace MgmtParamOrdering
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(WorkspaceOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Workspace.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

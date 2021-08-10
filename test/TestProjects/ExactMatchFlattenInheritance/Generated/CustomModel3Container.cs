@@ -20,6 +20,9 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class representing collection of CustomModel3 and their operations over a ResourceGroup. </summary>
     public partial class CustomModel3Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly CustomModel3SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Container"/> class for mocking. </summary>
         protected CustomModel3Container()
         {
@@ -30,12 +33,8 @@ namespace ExactMatchFlattenInheritance
         internal CustomModel3Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private CustomModel3SRestOperations _restClient => new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -326,7 +325,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(CustomModel3Operations.ResourceType);
+                var filters = new ResourceFilterCollection(CustomModel3.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -349,7 +348,7 @@ namespace ExactMatchFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(CustomModel3Operations.ResourceType);
+                var filters = new ResourceFilterCollection(CustomModel3.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

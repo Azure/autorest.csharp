@@ -22,6 +22,9 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
     public partial class BlobContainerContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly BlobContainersRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
         protected BlobContainerContainer()
         {
@@ -32,15 +35,11 @@ namespace Azure.Management.Storage
         internal BlobContainerContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private BlobContainersRestOperations _restClient => new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
+        protected override ResourceType ValidResourceType => StorageAccount.ResourceType;
 
         // Container level operations.
 
@@ -406,7 +405,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BlobContainerOperations.ResourceType);
+                var filters = new ResourceFilterCollection(BlobContainer.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -429,7 +428,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BlobContainerOperations.ResourceType);
+                var filters = new ResourceFilterCollection(BlobContainer.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

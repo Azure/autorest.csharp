@@ -20,6 +20,9 @@ namespace SupersetFlattenInheritance
     /// <summary> A class representing collection of WritableSubResourceModel2 and their operations over a ResourceGroup. </summary>
     public partial class WritableSubResourceModel2Container : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly WritableSubResourceModel2SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel2Container"/> class for mocking. </summary>
         protected WritableSubResourceModel2Container()
         {
@@ -30,12 +33,8 @@ namespace SupersetFlattenInheritance
         internal WritableSubResourceModel2Container(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new WritableSubResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private WritableSubResourceModel2SRestOperations _restClient => new WritableSubResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -322,7 +321,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(WritableSubResourceModel2Operations.ResourceType);
+                var filters = new ResourceFilterCollection(WritableSubResourceModel2.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -345,7 +344,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(WritableSubResourceModel2Operations.ResourceType);
+                var filters = new ResourceFilterCollection(WritableSubResourceModel2.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

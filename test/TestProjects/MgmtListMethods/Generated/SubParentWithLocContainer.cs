@@ -22,6 +22,9 @@ namespace MgmtListMethods
     /// <summary> A class representing collection of SubParentWithLoc and their operations over a Subscription. </summary>
     public partial class SubParentWithLocContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly SubParentWithLocsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="SubParentWithLocContainer"/> class for mocking. </summary>
         protected SubParentWithLocContainer()
         {
@@ -32,12 +35,8 @@ namespace MgmtListMethods
         internal SubParentWithLocContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new SubParentWithLocsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private SubParentWithLocsRestOperations _restClient => new SubParentWithLocsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
@@ -404,7 +403,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SubParentWithLocOperations.ResourceType);
+                var filters = new ResourceFilterCollection(SubParentWithLoc.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -427,7 +426,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SubParentWithLocOperations.ResourceType);
+                var filters = new ResourceFilterCollection(SubParentWithLoc.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

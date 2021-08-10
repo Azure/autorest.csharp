@@ -22,6 +22,9 @@ namespace MgmtMultipleParentResource
     /// <summary> A class representing collection of Parent and their operations over a ResourceGroup. </summary>
     public partial class ParentContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ParentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ParentContainer"/> class for mocking. </summary>
         protected ParentContainer()
         {
@@ -32,12 +35,8 @@ namespace MgmtMultipleParentResource
         internal ParentContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ParentsRestOperations _restClient => new ParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
@@ -412,7 +411,7 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtMultipleParentResource.Parent.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -435,7 +434,7 @@ namespace MgmtMultipleParentResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtMultipleParentResource.Parent.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

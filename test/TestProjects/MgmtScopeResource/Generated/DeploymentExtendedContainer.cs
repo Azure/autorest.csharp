@@ -22,6 +22,9 @@ namespace MgmtScopeResource
     /// <summary> A class representing collection of DeploymentExtended and their operations over a Tenant. </summary>
     public partial class DeploymentExtendedContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DeploymentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedContainer"/> class for mocking. </summary>
         protected DeploymentExtendedContainer()
         {
@@ -32,6 +35,7 @@ namespace MgmtScopeResource
         internal DeploymentExtendedContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -39,11 +43,6 @@ namespace MgmtScopeResource
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private DeploymentsRestOperations _restClient => new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -414,7 +413,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentExtendedOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentExtended.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -437,7 +436,7 @@ namespace MgmtScopeResource
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentExtendedOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentExtended.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }

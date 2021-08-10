@@ -20,6 +20,9 @@ namespace TenantOnly
     /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
     public partial class BillingAccountContainer : ResourceContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly BillingAccountsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>
         protected BillingAccountContainer()
         {
@@ -30,12 +33,8 @@ namespace TenantOnly
         internal BillingAccountContainer(ResourceOperations parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -332,7 +331,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BillingAccountOperations.ResourceType);
+                var filters = new ResourceFilterCollection(BillingAccount.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
@@ -355,7 +354,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BillingAccountOperations.ResourceType);
+                var filters = new ResourceFilterCollection(BillingAccount.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
             }
