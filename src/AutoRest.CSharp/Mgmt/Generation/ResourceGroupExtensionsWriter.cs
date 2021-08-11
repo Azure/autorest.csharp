@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 if (container.ResourceName == resource.Type.Name)
                                 {
                                     writer.Line($"#region {resource.Type.Name}");
-                                    WriteGetContainers(writer, resource, container);
+                                    WriteGetContainers(writer, container);
                                     writer.LineRaw("#endregion");
                                     writer.Line();
                                 }
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 if (container.ResourceName == resource.Type.Name)
                                 {
                                     writer.Line($"#region {resource.Type.Name}");
-                                    WriteGetContainers(writer, resource, container);
+                                    WriteGetContainers(writer, container);
                                     writer.LineRaw("#endregion");
                                     writer.Line();
                                 }
@@ -92,12 +92,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetContainers(CodeWriter writer, Resource armResource, ResourceContainer container)
+        private void WriteGetContainers(CodeWriter writer, ResourceContainer container)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} {ExtensionOperationVariableName})"))
+            using (writer.Scope($"public static {container.Type} Get{container.Resource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }

@@ -16,7 +16,7 @@ namespace MgmtScopeResource
         /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
-        public static PolicyAssignmentContainer GetPolicyAssignmentContainer(this ManagementGroupOperations managementGroup)
+        public static PolicyAssignmentContainer GetPolicyAssignments(this ManagementGroupOperations managementGroup)
         {
             return new PolicyAssignmentContainer(managementGroup);
         }
