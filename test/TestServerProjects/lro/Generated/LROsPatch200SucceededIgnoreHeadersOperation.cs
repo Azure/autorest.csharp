@@ -17,18 +17,18 @@ using lro.Models;
 namespace lro
 {
     /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
-    public partial class LROsPatch200SucceededOperation : Operation<Product>, IOperationSource<Product>
+    public partial class LROsPatch200SucceededIgnoreHeadersOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly OperationInternals<Product> _operation;
 
-        /// <summary> Initializes a new instance of LROsPatch200SucceededOperation for mocking. </summary>
-        protected LROsPatch200SucceededOperation()
+        /// <summary> Initializes a new instance of LROsPatch200SucceededIgnoreHeadersOperation for mocking. </summary>
+        protected LROsPatch200SucceededIgnoreHeadersOperation()
         {
         }
 
-        internal LROsPatch200SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal LROsPatch200SucceededIgnoreHeadersOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPatch200SucceededOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPatch200SucceededIgnoreHeadersOperation");
         }
 
         /// <inheritdoc />

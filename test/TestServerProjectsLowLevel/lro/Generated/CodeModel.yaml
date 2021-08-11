@@ -15,7 +15,7 @@ schemas: !Schemas
           name: CloudErrorCode
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_48
+    - !NumberSchema &ref_45
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -27,7 +27,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_55
+    - !NumberSchema &ref_52
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -39,7 +39,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_67
+    - !NumberSchema &ref_64
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -51,7 +51,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_69
+    - !NumberSchema &ref_66
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -63,7 +63,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_71
+    - !NumberSchema &ref_68
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -75,7 +75,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_73
+    - !NumberSchema &ref_70
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -87,7 +87,19 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_75
+    - !NumberSchema &ref_72
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+          header: Retry-After
+      protocol: !Protocols {}
+    - !NumberSchema &ref_77
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -159,7 +171,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_95
+    - !NumberSchema &ref_96
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -171,7 +183,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_99
+    - !NumberSchema &ref_100
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -183,7 +195,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_103
+    - !NumberSchema &ref_104
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -195,7 +207,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_107
+    - !NumberSchema &ref_108
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -207,7 +219,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_111
+    - !NumberSchema &ref_113
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -219,7 +231,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_116
+    - !NumberSchema &ref_115
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -231,7 +243,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_118
+    - !NumberSchema &ref_117
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -267,7 +279,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_126
+    - !NumberSchema &ref_127
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -279,7 +291,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_130
+    - !NumberSchema &ref_134
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -291,7 +303,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_137
+    - !NumberSchema &ref_136
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -303,7 +315,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_139
+    - !NumberSchema &ref_138
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -351,7 +363,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_150
+    - !NumberSchema &ref_151
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -363,7 +375,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_154
+    - !NumberSchema &ref_156
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -375,7 +387,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_159
+    - !NumberSchema &ref_160
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -411,7 +423,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_169
+    - !NumberSchema &ref_170
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -423,7 +435,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_173
+    - !NumberSchema &ref_175
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -435,7 +447,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_178
+    - !NumberSchema &ref_179
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -447,7 +459,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_182
+    - !NumberSchema &ref_181
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -495,7 +507,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_193
+    - !NumberSchema &ref_194
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -507,7 +519,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_197
+    - !NumberSchema &ref_198
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -519,7 +531,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_201
+    - !NumberSchema &ref_202
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -531,7 +543,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_205
+    - !NumberSchema &ref_206
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -543,19 +555,7 @@ schemas: !Schemas
           description: ''
           header: Retry-After
       protocol: !Protocols {}
-    - !NumberSchema &ref_209
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      precision: 32
-      language: !Languages 
-        default:
-          name: Integer
-          description: ''
-          header: Retry-After
-      protocol: !Protocols {}
-    - !NumberSchema &ref_213
+    - !NumberSchema &ref_210
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -615,7 +615,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
     - !StringSchema &ref_9
       type: string
@@ -657,18 +657,7 @@ schemas: !Schemas
           name: CloudErrorMessage
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_31
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: location
-      protocol: !Protocols {}
-    - !StringSchema &ref_34
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
@@ -679,7 +668,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_33
       type: string
       apiVersions:
         - !ApiVersion 
@@ -690,7 +679,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_44
+    - !StringSchema &ref_41
       type: string
       apiVersions:
         - !ApiVersion 
@@ -701,7 +690,7 @@ schemas: !Schemas
           description: ''
           header: location
       protocol: !Protocols {}
-    - !StringSchema &ref_46
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -712,7 +701,29 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
+    - !StringSchema &ref_44
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
     - !StringSchema &ref_47
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_48
       type: string
       apiVersions:
         - !ApiVersion 
@@ -745,7 +756,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_53
+    - !StringSchema &ref_54
       type: string
       apiVersions:
         - !ApiVersion 
@@ -756,7 +767,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_54
+    - !StringSchema &ref_55
       type: string
       apiVersions:
         - !ApiVersion 
@@ -768,28 +779,6 @@ schemas: !Schemas
           header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_57
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !Protocols {}
-    - !StringSchema &ref_58
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_60
       type: string
       apiVersions:
         - !ApiVersion 
@@ -840,7 +829,7 @@ schemas: !Schemas
           name: SubProductPropertiesProvisioningState
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_66
+    - !StringSchema &ref_63
       type: string
       apiVersions:
         - !ApiVersion 
@@ -851,7 +840,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_68
+    - !StringSchema &ref_65
       type: string
       apiVersions:
         - !ApiVersion 
@@ -862,7 +851,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_70
+    - !StringSchema &ref_67
       type: string
       apiVersions:
         - !ApiVersion 
@@ -873,7 +862,29 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_72
+    - !StringSchema &ref_69
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_71
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_73
       type: string
       apiVersions:
         - !ApiVersion 
@@ -895,7 +906,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_76
+    - !StringSchema &ref_75
       type: string
       apiVersions:
         - !ApiVersion 
@@ -904,9 +915,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_77
+    - !StringSchema &ref_76
       type: string
       apiVersions:
         - !ApiVersion 
@@ -983,17 +994,6 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_87
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !Protocols {}
     - !StringSchema &ref_88
       type: string
       apiVersions:
@@ -1025,9 +1025,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_97
+    - !StringSchema &ref_95
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1036,7 +1036,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_98
       type: string
@@ -1047,9 +1047,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_101
+    - !StringSchema &ref_99
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1058,7 +1058,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_102
       type: string
@@ -1069,9 +1069,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_105
+    - !StringSchema &ref_103
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1080,7 +1080,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_106
       type: string
@@ -1091,9 +1091,20 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+          header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_107
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_109
+    - !StringSchema &ref_111
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1104,7 +1115,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_110
+    - !StringSchema &ref_112
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1124,29 +1135,29 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_116
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_118
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
           header: Azure-AsyncOperation
-      protocol: !Protocols {}
-    - !StringSchema &ref_115
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_117
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_119
       type: string
@@ -1158,17 +1169,6 @@ schemas: !Schemas
           name: String
           description: ''
           header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_121
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
       protocol: !Protocols {}
     - !StringSchema &ref_122
       type: string
@@ -1190,9 +1190,20 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+          header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_126
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_128
+    - !StringSchema &ref_132
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1203,7 +1214,7 @@ schemas: !Schemas
           description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_129
+    - !StringSchema &ref_133
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1223,29 +1234,29 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_137
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
+      protocol: !Protocols {}
+    - !StringSchema &ref_139
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
           header: Azure-AsyncOperation
-      protocol: !Protocols {}
-    - !StringSchema &ref_136
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_138
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_140
       type: string
@@ -1257,17 +1268,6 @@ schemas: !Schemas
           name: String
           description: ''
           header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_142
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
       protocol: !Protocols {}
     - !StringSchema &ref_143
       type: string
@@ -1300,20 +1300,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_152
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_153
+    - !StringSchema &ref_150
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1324,7 +1313,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_157
+    - !StringSchema &ref_154
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1334,8 +1323,30 @@ schemas: !Schemas
           name: String
           description: ''
           header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_155
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_158
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_159
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1368,17 +1379,6 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_164
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !Protocols {}
     - !StringSchema &ref_165
       type: string
       apiVersions:
@@ -1399,20 +1399,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_171
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_172
+    - !StringSchema &ref_169
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1423,7 +1412,7 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_176
+    - !StringSchema &ref_173
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1433,8 +1422,30 @@ schemas: !Schemas
           name: String
           description: ''
           header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_174
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_177
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+          header: Azure-AsyncOperation
+      protocol: !Protocols {}
+    - !StringSchema &ref_178
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1454,9 +1465,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_181
+    - !StringSchema &ref_182
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1465,7 +1476,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
     - !StringSchema &ref_183
       type: string
@@ -1500,17 +1511,6 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_188
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
-          header: Azure-AsyncOperation
-      protocol: !Protocols {}
     - !StringSchema &ref_189
       type: string
       apiVersions:
@@ -1531,9 +1531,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_195
+    - !StringSchema &ref_193
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1542,7 +1542,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_196
       type: string
@@ -1553,9 +1553,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_199
+    - !StringSchema &ref_197
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1564,7 +1564,7 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
     - !StringSchema &ref_200
       type: string
@@ -1575,9 +1575,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
+          header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_203
+    - !StringSchema &ref_201
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1586,9 +1586,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Azure-AsyncOperation
+          header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_204
+    - !StringSchema &ref_205
       type: string
       apiVersions:
         - !ApiVersion 
@@ -1608,20 +1608,9 @@ schemas: !Schemas
         default:
           name: String
           description: ''
-          header: Location
-      protocol: !Protocols {}
-    - !StringSchema &ref_211
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: String
-          description: ''
           header: Azure-AsyncOperation
       protocol: !Protocols {}
-    - !StringSchema &ref_212
+    - !StringSchema &ref_209
       type: string
       apiVersions:
         - !ApiVersion 
@@ -2054,7 +2043,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_61
+    - !ObjectSchema &ref_58
       type: object
       apiVersions:
         - !ApiVersion 
@@ -2225,7 +2214,7 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_23
   arrays:
-    - !ArraySchema &ref_33
+    - !ArraySchema &ref_31
       type: array
       apiVersions:
         - !ApiVersion 
@@ -2418,7 +2407,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/patch/200/succeeded
+                path: /lro/patch/200/succeeded/ignoreheaders
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -2437,11 +2426,11 @@ operationGroups:
                 headers:
                   - !HttpHeader 
                     schema: *ref_1
-                    header: location
+                    header: Azure-AsyncOperation
                     language:
                       default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/patchasync/noheader/202/200/operationResults, and this should be ignored by the generated code'
+                        name: AzureAsyncOperation
+                        description: This header should be ignored in this case
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -2465,7 +2454,7 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: Patch200Succeeded
+            name: Patch200SucceededIgnoreHeaders
             description: Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
         protocol: !Protocols {}
       - !Operation 
@@ -2497,111 +2486,6 @@ operationGroups:
                 language: !Languages 
                   default:
                     name: product
-                    description: Product to patch
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_30
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /lro/patch/200/succeeded/nostate
-                method: patch
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_5
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Succeeded'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_31
-                    header: location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/patchasync/noheader/202/200/operationResults, and this should be ignored by the generated code'
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Patch200SucceededNoState
-            description: Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_32
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
                     description: Product to put
                 protocol: !Protocols 
                   http: !HttpParameter 
@@ -2621,7 +2505,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -2705,7 +2589,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -2726,14 +2610,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_34
+                    schema: *ref_32
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/list/pollingGet'
                   - !HttpHeader 
-                    schema: *ref_35
+                    schema: *ref_33
                     header: Location
                     language:
                       default:
@@ -2784,7 +2668,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_36
+              - !Parameter &ref_34
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2810,7 +2694,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_36
+              - *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -2881,7 +2765,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_37
+              - !Parameter &ref_35
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -2907,7 +2791,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_37
+              - *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -2978,7 +2862,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_38
+              - !Parameter &ref_36
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3004,7 +2888,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_38
+              - *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -3088,7 +2972,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_39
+              - !Parameter &ref_37
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3114,117 +2998,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_39
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /lro/patch/201/updating/succeeded/200
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_5
-            language: !Languages 
-              default:
-                name: ''
-                description: Response after completion, with ProvisioningState='Succeeded'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-          - !SchemaResponse 
-            schema: *ref_5
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '201'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Patch201UpdatingSucceeded200
-            description: Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_40
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_40
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -3295,7 +3069,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_41
+              - !Parameter &ref_38
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3321,7 +3095,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_41
+              - *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -3405,7 +3179,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_42
+              - !Parameter &ref_39
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3431,7 +3205,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_42
+              - *ref_39
             language: !Languages 
               default:
                 name: ''
@@ -3502,7 +3276,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_43
+              - !Parameter &ref_40
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3528,7 +3302,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_43
+              - *ref_40
             language: !Languages 
               default:
                 name: ''
@@ -3553,7 +3327,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_44
+                    schema: *ref_41
                     header: location
                     language:
                       default:
@@ -3607,7 +3381,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_45
+              - !Parameter &ref_42
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -3633,7 +3407,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_45
+              - *ref_42
             language: !Languages 
               default:
                 name: ''
@@ -3658,21 +3432,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_46
+                    schema: *ref_43
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_47
+                    schema: *ref_44
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_48
+                    schema: *ref_45
                     header: Retry-After
                     language:
                       default:
@@ -3702,6 +3476,118 @@ operationGroups:
         language: !Languages 
           default:
             name: PutAsyncRetrySucceeded
+            description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_46
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_46
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/putasync/noretry/succeeded
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response with ProvisioningState='Updating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_47
+                    header: Azure-AsyncOperation
+                    language:
+                      default:
+                        name: AzureAsyncOperation
+                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200'
+                  - !HttpHeader 
+                    schema: *ref_48
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200'
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: PutAsyncNoRetrySucceeded
             description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
         protocol: !Protocols {}
       - !Operation 
@@ -3759,7 +3645,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/putasync/noretry/succeeded
+                path: /lro/putasync/retry/failed
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -3782,128 +3668,16 @@ operationGroups:
                     language:
                       default:
                         name: AzureAsyncOperation
-                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200'
+                        description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
                     schema: *ref_51
                     header: Location
                     language:
                       default:
                         name: Location
-                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/succeeded/operationResults/200'
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: PutAsyncNoRetrySucceeded
-            description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_52
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_52
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /lro/putasync/retry/failed
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_5
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Updating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_53
-                    header: Azure-AsyncOperation
-                    language:
-                      default:
-                        name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_54
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
-                  - !HttpHeader 
-                    schema: *ref_55
+                    schema: *ref_52
                     header: Retry-After
                     language:
                       default:
@@ -3933,6 +3707,118 @@ operationGroups:
         language: !Languages 
           default:
             name: PutAsyncRetryFailed
+            description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_53
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_53
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/putasync/noretry/canceled
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !SchemaResponse 
+            schema: *ref_5
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response with ProvisioningState='Updating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_54
+                    header: Azure-AsyncOperation
+                    language:
+                      default:
+                        name: AzureAsyncOperation
+                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200'
+                  - !HttpHeader 
+                    schema: *ref_55
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200'
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: PutAsyncNoRetrycanceled
             description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
         protocol: !Protocols {}
       - !Operation 
@@ -3990,118 +3876,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/putasync/noretry/canceled
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_5
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Updating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_57
-                    header: Azure-AsyncOperation
-                    language:
-                      default:
-                        name: AzureAsyncOperation
-                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200'
-                  - !HttpHeader 
-                    schema: *ref_58
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/putasync/noretry/canceled/operationResults/200'
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: PutAsyncNoRetrycanceled
-            description: Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_59
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_59
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/putasync/noheader/201/200
                 method: put
                 knownMediaType: json
@@ -4120,7 +3894,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_60
+                    schema: *ref_57
                     header: Azure-AsyncOperation
                     language:
                       default:
@@ -4174,8 +3948,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_62
-                schema: *ref_61
+              - !Parameter &ref_59
+                schema: *ref_58
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4200,7 +3974,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_62
+              - *ref_59
             language: !Languages 
               default:
                 name: ''
@@ -4216,7 +3990,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_61
+            schema: *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -4271,8 +4045,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_63
-                schema: *ref_61
+              - !Parameter &ref_60
+                schema: *ref_58
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -4297,7 +4071,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_63
+              - *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -4313,7 +4087,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_61
+            schema: *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -4368,7 +4142,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_64
+              - !Parameter &ref_61
                 schema: *ref_18
                 implementation: Method
                 required: false
@@ -4394,7 +4168,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_64
+              - *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -4465,7 +4239,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_65
+              - !Parameter &ref_62
                 schema: *ref_18
                 implementation: Method
                 required: false
@@ -4491,7 +4265,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_65
+              - *ref_62
             language: !Languages 
               default:
                 name: ''
@@ -4597,14 +4371,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_66
+                    schema: *ref_63
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/delete/provisioning/202/accepted/200/succeeded'
                   - !HttpHeader 
-                    schema: *ref_67
+                    schema: *ref_64
                     header: Retry-After
                     language:
                       default:
@@ -4695,14 +4469,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_68
+                    schema: *ref_65
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/delete/provisioning/202/deleting/200/failed'
                   - !HttpHeader 
-                    schema: *ref_69
+                    schema: *ref_66
                     header: Retry-After
                     language:
                       default:
@@ -4791,14 +4565,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_70
+                    schema: *ref_67
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/delete/provisioning/202/deleting/200/canceled'
                   - !HttpHeader 
-                    schema: *ref_71
+                    schema: *ref_68
                     header: Retry-After
                     language:
                       default:
@@ -4952,14 +4726,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_72
+                    schema: *ref_69
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/delete/202/retry/200'
                   - !HttpHeader 
-                    schema: *ref_73
+                    schema: *ref_70
                     header: Retry-After
                     language:
                       default:
@@ -5044,14 +4818,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_74
+                    schema: *ref_71
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/delete/202/noretry/204'
                   - !HttpHeader 
-                    schema: *ref_75
+                    schema: *ref_72
                     header: Retry-After
                     language:
                       default:
@@ -5123,7 +4897,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_76
+                    schema: *ref_73
                     header: Location
                     language:
                       default:
@@ -5204,7 +4978,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_77
+                    schema: *ref_74
                     header: Location
                     language:
                       default:
@@ -5285,21 +5059,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_78
+                    schema: *ref_75
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_79
+                    schema: *ref_76
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_80
+                    schema: *ref_77
                     header: Retry-After
                     language:
                       default:
@@ -5371,21 +5145,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_81
+                    schema: *ref_78
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_82
+                    schema: *ref_79
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/noretry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_83
+                    schema: *ref_80
                     header: Retry-After
                     language:
                       default:
@@ -5457,21 +5231,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_84
+                    schema: *ref_81
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_85
+                    schema: *ref_82
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_86
+                    schema: *ref_83
                     header: Retry-After
                     language:
                       default:
@@ -5543,21 +5317,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_87
+                    schema: *ref_84
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/canceled/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_88
+                    schema: *ref_85
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/canceled/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_89
+                    schema: *ref_86
                     header: Retry-After
                     language:
                       default:
@@ -5621,7 +5395,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_61
+            schema: *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -5634,7 +5408,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_61
+            schema: *ref_58
             language: !Languages 
               default:
                 name: ''
@@ -5666,6 +5440,114 @@ operationGroups:
           default:
             name: Post200WithPayload
             description: Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_87
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_87
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/post/202/retry/200
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response, with ProvisioningState = 'Creating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_88
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /lro/post/202/retry/200'
+                  - !HttpHeader 
+                    schema: *ref_89
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of milliseconds until the next poll should be sent, will be set to zero
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Post202Retry200
+            description: Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -5722,114 +5604,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/post/202/retry/200
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_91
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/post/202/retry/200'
-                  - !HttpHeader 
-                    schema: *ref_92
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of milliseconds until the next poll should be sent, will be set to zero
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Post202Retry200
-            description: Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_93
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/post/202/noretry/204
                 method: post
                 knownMediaType: json
@@ -5848,14 +5622,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_94
+                    schema: *ref_91
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/post/202/noretry/204'
                   - !HttpHeader 
-                    schema: *ref_95
+                    schema: *ref_92
                     header: Retry-After
                     language:
                       default:
@@ -6119,7 +5893,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_96
+              - !Parameter &ref_93
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6145,7 +5919,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_96
+              - *ref_93
             language: !Languages 
               default:
                 name: ''
@@ -6182,21 +5956,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_97
+                    schema: *ref_94
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_98
+                    schema: *ref_95
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_99
+                    schema: *ref_96
                     header: Retry-After
                     language:
                       default:
@@ -6247,7 +6021,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_100
+              - !Parameter &ref_97
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6273,7 +6047,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_100
+              - *ref_97
             language: !Languages 
               default:
                 name: ''
@@ -6310,21 +6084,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_101
+                    schema: *ref_98
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_102
+                    schema: *ref_99
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_103
+                    schema: *ref_100
                     header: Retry-After
                     language:
                       default:
@@ -6375,7 +6149,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_104
+              - !Parameter &ref_101
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6401,7 +6175,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_104
+              - *ref_101
             language: !Languages 
               default:
                 name: ''
@@ -6425,21 +6199,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_105
+                    schema: *ref_102
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_106
+                    schema: *ref_103
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_107
+                    schema: *ref_104
                     header: Retry-After
                     language:
                       default:
@@ -6490,7 +6264,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_108
+              - !Parameter &ref_105
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6516,7 +6290,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_108
+              - *ref_105
             language: !Languages 
               default:
                 name: ''
@@ -6540,21 +6314,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_109
+                    schema: *ref_106
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/canceled/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_110
+                    schema: *ref_107
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/canceled/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_111
+                    schema: *ref_108
                     header: Retry-After
                     language:
                       default:
@@ -6613,7 +6387,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_112
+              - !Parameter &ref_109
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6639,7 +6413,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_112
+              - *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -6725,7 +6499,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_113
+              - !Parameter &ref_110
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -6751,7 +6525,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_113
+              - *ref_110
             language: !Languages 
               default:
                 name: ''
@@ -6776,21 +6550,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_114
+                    schema: *ref_111
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_115
+                    schema: *ref_112
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_116
+                    schema: *ref_113
                     header: Retry-After
                     language:
                       default:
@@ -6879,14 +6653,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_117
+                    schema: *ref_114
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/delete/provisioning/202/accepted/200/succeeded'
                   - !HttpHeader 
-                    schema: *ref_118
+                    schema: *ref_115
                     header: Retry-After
                     language:
                       default:
@@ -6963,14 +6737,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_119
+                    schema: *ref_116
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200'
                   - !HttpHeader 
-                    schema: *ref_120
+                    schema: *ref_117
                     header: Retry-After
                     language:
                       default:
@@ -7042,21 +6816,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_121
+                    schema: *ref_118
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/retryerror/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_122
+                    schema: *ref_119
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_123
+                    schema: *ref_120
                     header: Retry-After
                     language:
                       default:
@@ -7084,6 +6858,114 @@ operationGroups:
           default:
             name: DeleteAsyncRelativeRetrySucceeded
             description: Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_121
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_121
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/retryerror/post/202/retry/200
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response, with ProvisioningState = 'Creating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_122
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200'
+                  - !HttpHeader 
+                    schema: *ref_123
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of milliseconds until the next poll should be sent, will be set to zero
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Post202Retry200
+            description: Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -7140,114 +7022,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/retryerror/post/202/retry/200
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_125
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200'
-                  - !HttpHeader 
-                    schema: *ref_126
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of milliseconds until the next poll should be sent, will be set to zero
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Post202Retry200
-            description: Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_127
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_127
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/retryerror/postasync/retry/succeeded
                 method: post
                 knownMediaType: json
@@ -7265,21 +7039,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_128
+                    schema: *ref_125
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_129
+                    schema: *ref_126
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_130
+                    schema: *ref_127
                     header: Retry-After
                     language:
                       default:
@@ -7340,7 +7114,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_131
+              - !Parameter &ref_128
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7366,7 +7140,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_131
+              - *ref_128
             language: !Languages 
               default:
                 name: ''
@@ -7450,7 +7224,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_132
+              - !Parameter &ref_129
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7476,7 +7250,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_132
+              - *ref_129
             language: !Languages 
               default:
                 name: ''
@@ -7560,7 +7334,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_133
+              - !Parameter &ref_130
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7586,7 +7360,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_133
+              - *ref_130
             language: !Languages 
               default:
                 name: ''
@@ -7670,7 +7444,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_134
+              - !Parameter &ref_131
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -7696,7 +7470,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_134
+              - *ref_131
             language: !Languages 
               default:
                 name: ''
@@ -7721,21 +7495,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_135
+                    schema: *ref_132
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_136
+                    schema: *ref_133
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_137
+                    schema: *ref_134
                     header: Retry-After
                     language:
                       default:
@@ -7810,14 +7584,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_138
+                    schema: *ref_135
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200'
                   - !HttpHeader 
-                    schema: *ref_139
+                    schema: *ref_136
                     header: Retry-After
                     language:
                       default:
@@ -7889,14 +7663,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_140
+                    schema: *ref_137
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/retryerror/delete/202/retry/200'
                   - !HttpHeader 
-                    schema: *ref_141
+                    schema: *ref_138
                     header: Retry-After
                     language:
                       default:
@@ -7968,21 +7742,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_142
+                    schema: *ref_139
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/deleteasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_143
+                    schema: *ref_140
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/deleteasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_144
+                    schema: *ref_141
                     header: Retry-After
                     language:
                       default:
@@ -8010,6 +7784,114 @@ operationGroups:
           default:
             name: DeleteAsyncRelativeRetry400
             description: Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_142
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_142
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/nonretryerror/post/400
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response, with ProvisioningState = 'Creating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_143
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200'
+                  - !HttpHeader 
+                    schema: *ref_144
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of milliseconds until the next poll should be sent, will be set to zero
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: PostNonRetry400
+            description: Long running post request, service returns a 400 with no error body
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -8066,7 +7948,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/nonretryerror/post/400
+                path: /lro/nonretryerror/post/202/retry/400
                 method: post
                 knownMediaType: json
                 mediaTypes:
@@ -8116,8 +7998,8 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: PostNonRetry400
-            description: Long running post request, service returns a 400 with no error body
+            name: Post202NonRetry400
+            description: Long running post request, service returns a 202 with a location header
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -8174,114 +8056,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/nonretryerror/post/202/retry/400
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_149
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /lro/retryerror/post/202/retry/200'
-                  - !HttpHeader 
-                    schema: *ref_150
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of milliseconds until the next poll should be sent, will be set to zero
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Post202NonRetry400
-            description: Long running post request, service returns a 202 with a location header
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_151
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_151
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/nonretryerror/postasync/retry/400
                 method: post
                 knownMediaType: json
@@ -8299,21 +8073,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_152
+                    schema: *ref_149
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_153
+                    schema: *ref_150
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/nonretryerror/putasync/retry/operationResults/400'
                   - !HttpHeader 
-                    schema: *ref_154
+                    schema: *ref_151
                     header: Retry-After
                     language:
                       default:
@@ -8364,7 +8138,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_155
+              - !Parameter &ref_152
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8390,7 +8164,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_155
+              - *ref_152
             language: !Languages 
               default:
                 name: ''
@@ -8474,7 +8248,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_156
+              - !Parameter &ref_153
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8500,7 +8274,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_156
+              - *ref_153
             language: !Languages 
               default:
                 name: ''
@@ -8525,21 +8299,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_157
+                    schema: *ref_154
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_158
+                    schema: *ref_155
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_159
+                    schema: *ref_156
                     header: Retry-After
                     language:
                       default:
@@ -8593,7 +8367,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_160
+              - !Parameter &ref_157
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -8619,7 +8393,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_160
+              - *ref_157
             language: !Languages 
               default:
                 name: ''
@@ -8644,21 +8418,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_161
+                    schema: *ref_158
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_162
+                    schema: *ref_159
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_163
+                    schema: *ref_160
                     header: Retry-After
                     language:
                       default:
@@ -8797,21 +8571,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_164
+                    schema: *ref_161
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_165
+                    schema: *ref_162
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/deleteasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_166
+                    schema: *ref_163
                     header: Retry-After
                     language:
                       default:
@@ -8839,6 +8613,114 @@ operationGroups:
           default:
             name: DeleteAsyncRelativeRetryNoStatus
             description: Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_164
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_164
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/error/post/202/nolocation
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response, with ProvisioningState = 'Creating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_165
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will not be set'
+                  - !HttpHeader 
+                    schema: *ref_166
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of milliseconds until the next poll should be sent, will be set to zero
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Post202NoLocation
+            description: Long running post request, service returns a 202 to the initial request, without a location header.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -8895,114 +8777,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/error/post/202/nolocation
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_168
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will not be set'
-                  - !HttpHeader 
-                    schema: *ref_169
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of milliseconds until the next poll should be sent, will be set to zero
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Post202NoLocation
-            description: Long running post request, service returns a 202 to the initial request, without a location header.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_170
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_170
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/error/postasync/retry/nopayload
                 method: post
                 knownMediaType: json
@@ -9020,21 +8794,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_171
+                    schema: *ref_168
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/error/putasync/retry/failed/operationResults/nopayload'
                   - !HttpHeader 
-                    schema: *ref_172
+                    schema: *ref_169
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/error/putasync/retry/failed/operationResults/nopayload'
                   - !HttpHeader 
-                    schema: *ref_173
+                    schema: *ref_170
                     header: Retry-After
                     language:
                       default:
@@ -9085,7 +8859,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_174
+              - !Parameter &ref_171
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -9111,7 +8885,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_174
+              - *ref_171
             language: !Languages 
               default:
                 name: ''
@@ -9191,7 +8965,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_175
+              - !Parameter &ref_172
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -9217,7 +8991,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_175
+              - *ref_172
             language: !Languages 
               default:
                 name: ''
@@ -9242,21 +9016,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_176
+                    schema: *ref_173
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_177
+                    schema: *ref_174
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_178
+                    schema: *ref_175
                     header: Retry-After
                     language:
                       default:
@@ -9310,7 +9084,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_179
+              - !Parameter &ref_176
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -9336,7 +9110,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_179
+              - *ref_176
             language: !Languages 
               default:
                 name: ''
@@ -9361,21 +9135,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_180
+                    schema: *ref_177
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_181
+                    schema: *ref_178
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/putasync/retry/failed/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_182
+                    schema: *ref_179
                     header: Retry-After
                     language:
                       default:
@@ -9450,14 +9224,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_183
+                    schema: *ref_180
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /foo'
                   - !HttpHeader 
-                    schema: *ref_184
+                    schema: *ref_181
                     header: Retry-After
                     language:
                       default:
@@ -9529,21 +9303,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_185
+                    schema: *ref_182
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /foo'
                   - !HttpHeader 
-                    schema: *ref_186
+                    schema: *ref_183
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /foo'
                   - !HttpHeader 
-                    schema: *ref_187
+                    schema: *ref_184
                     header: Retry-After
                     language:
                       default:
@@ -9615,21 +9389,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_188
+                    schema: *ref_185
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling'
                   - !HttpHeader 
-                    schema: *ref_189
+                    schema: *ref_186
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/error/deleteasync/retry/failed/operationResults/invalidjsonpolling'
                   - !HttpHeader 
-                    schema: *ref_190
+                    schema: *ref_187
                     header: Retry-After
                     language:
                       default:
@@ -9657,6 +9431,114 @@ operationGroups:
           default:
             name: DeleteAsyncRelativeRetryInvalidJsonPolling
             description: Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_24
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_25
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_188
+                schema: *ref_5
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: product
+                    description: Product to put
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_26
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_188
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /lro/error/post/202/retry/invalidheader
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Initial response, with ProvisioningState = 'Creating'
+            protocol: !Protocols 
+              http: !HttpResponse 
+                headers:
+                  - !HttpHeader 
+                    schema: *ref_189
+                    header: Location
+                    language:
+                      default:
+                        name: Location
+                        description: 'Location to poll for result status: will be set to /foo'
+                  - !HttpHeader 
+                    schema: *ref_190
+                    header: Retry-After
+                    language:
+                      default:
+                        name: RetryAfter
+                        description: Number of milliseconds until the next poll should be sent, will be set to /bar
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_28
+            language: !Languages 
+              default:
+                name: ''
+                description: Unexpected error
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-long-running-operation: true
+        language: !Languages 
+          default:
+            name: Post202RetryInvalidHeader
+            description: Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -9713,114 +9595,6 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /lro/error/post/202/retry/invalidheader
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response, with ProvisioningState = 'Creating'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                headers:
-                  - !HttpHeader 
-                    schema: *ref_192
-                    header: Location
-                    language:
-                      default:
-                        name: Location
-                        description: 'Location to poll for result status: will be set to /foo'
-                  - !HttpHeader 
-                    schema: *ref_193
-                    header: Retry-After
-                    language:
-                      default:
-                        name: RetryAfter
-                        description: Number of milliseconds until the next poll should be sent, will be set to /bar
-                statusCodes:
-                  - '202'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_28
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-long-running-operation: true
-        language: !Languages 
-          default:
-            name: Post202RetryInvalidHeader
-            description: Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_24
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_25
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_194
-                schema: *ref_5
-                implementation: Method
-                required: false
-                language: !Languages 
-                  default:
-                    name: product
-                    description: Product to put
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_194
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
                 path: /lro/error/postasync/retry/invalidheader
                 method: post
                 knownMediaType: json
@@ -9838,21 +9612,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_195
+                    schema: *ref_192
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to foo'
                   - !HttpHeader 
-                    schema: *ref_196
+                    schema: *ref_193
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to foo'
                   - !HttpHeader 
-                    schema: *ref_197
+                    schema: *ref_194
                     header: Retry-After
                     language:
                       default:
@@ -9903,7 +9677,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_198
+              - !Parameter &ref_195
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -9929,7 +9703,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_198
+              - *ref_195
             language: !Languages 
               default:
                 name: ''
@@ -9953,21 +9727,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_199
+                    schema: *ref_196
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/error/postasync/retry/failed/operationResults/invalidjsonpolling'
                   - !HttpHeader 
-                    schema: *ref_200
+                    schema: *ref_197
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/error/postasync/retry/failed/operationResults/invalidjsonpolling'
                   - !HttpHeader 
-                    schema: *ref_201
+                    schema: *ref_198
                     header: Retry-After
                     language:
                       default:
@@ -10026,7 +9800,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_202
+              - !Parameter &ref_199
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -10052,7 +9826,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_202
+              - *ref_199
             language: !Languages 
               default:
                 name: ''
@@ -10077,21 +9851,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_203
+                    schema: *ref_200
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_204
+                    schema: *ref_201
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_205
+                    schema: *ref_202
                     header: Retry-After
                     language:
                       default:
@@ -10147,7 +9921,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_206
+              - !Parameter &ref_203
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -10173,7 +9947,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_206
+              - *ref_203
             language: !Languages 
               default:
                 name: ''
@@ -10259,7 +10033,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_207
+              - !Parameter &ref_204
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -10285,7 +10059,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_207
+              - *ref_204
             language: !Languages 
               default:
                 name: ''
@@ -10309,14 +10083,14 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_208
+                    schema: *ref_205
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/customheader/post/202/retry/200'
                   - !HttpHeader 
-                    schema: *ref_209
+                    schema: *ref_206
                     header: Retry-After
                     language:
                       default:
@@ -10369,7 +10143,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_210
+              - !Parameter &ref_207
                 schema: *ref_5
                 implementation: Method
                 required: false
@@ -10395,7 +10169,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_210
+              - *ref_207
             language: !Languages 
               default:
                 name: ''
@@ -10419,21 +10193,21 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: *ref_211
+                    schema: *ref_208
                     header: Azure-AsyncOperation
                     language:
                       default:
                         name: AzureAsyncOperation
                         description: 'Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_212
+                    schema: *ref_209
                     header: Location
                     language:
                       default:
                         name: Location
                         description: 'Location to poll for result status: will be set to /lro/customheader/putasync/retry/succeeded/operationResults/200'
                   - !HttpHeader 
-                    schema: *ref_213
+                    schema: *ref_210
                     header: Retry-After
                     language:
                       default:

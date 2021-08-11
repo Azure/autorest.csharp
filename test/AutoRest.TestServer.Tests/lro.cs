@@ -102,16 +102,16 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROPatchInlineComplete() => Test(async (host, pipeline) =>
+        public Task LROPatchInlineCompleteIgnoreHeaders() => Test(async (host, pipeline) =>
         {
-            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededAsync();
+            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededIgnoreHeadersAsync();
             var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
         });
 
         [Test]
-        public Task LROPatchInlineComplete_Sync() => Test((host, pipeline) =>
+        public Task LROPatchInlineCompleteIgnoreHeaders_Sync() => Test((host, pipeline) =>
         {
-            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200Succeeded();
+            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededIgnoreHeaders();
             var resp = WaitForCompletion(operation);
         });
 
@@ -911,28 +911,6 @@ namespace AutoRest.TestServer.Tests
         {
             var value = new Product();
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPut200SucceededNoState(value);
-            var result = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual(null, result.Value.ProvisioningState);
-        });
-
-        [Test]
-        public Task LROPatch200InlineCompleteNoState() => Test(async (host, pipeline) =>
-        {
-            var value = new Product();
-            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededNoStateAsync(value);
-            var result = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("100", result.Value.Id);
-            Assert.AreEqual("foo", result.Value.Name);
-            Assert.AreEqual(null, result.Value.ProvisioningState);
-        });
-
-        [Test]
-        public Task LROPatch200InlineCompleteNoState_Sync() => Test((host, pipeline) =>
-        {
-            var value = new Product();
-            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededNoState(value);
             var result = WaitForCompletionWithValue(operation);
             Assert.AreEqual("100", result.Value.Id);
             Assert.AreEqual("foo", result.Value.Name);
