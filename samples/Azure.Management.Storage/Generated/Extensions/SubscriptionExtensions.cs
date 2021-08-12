@@ -244,7 +244,7 @@ namespace Azure.Management.Storage
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.GetByLocationAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.GetAllByLocationAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -281,7 +281,7 @@ namespace Azure.Management.Storage
                     scope.Start();
                     try
                     {
-                        var response = restOperations.GetByLocation(location, cancellationToken: cancellationToken);
+                        var response = restOperations.GetAllByLocation(location, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
                     }
                     catch (Exception e)

@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                     var count = resourceOperation.SubscriptionExtensionsListMethods.Count();
                                     if (listMethod.PagingMethod != null)
                                     {
-                                        if (count > 1 && listMethod.PagingMethod.Name == "GetByLocation")
+                                        if (count > 1 && listMethod.PagingMethod.Name == "GetAllByLocation")
                                         {
                                             methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }

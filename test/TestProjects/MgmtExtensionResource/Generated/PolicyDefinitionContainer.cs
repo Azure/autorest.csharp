@@ -416,7 +416,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = _restClient.GetByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetAllByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -452,7 +452,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = _restClient.GetByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetAllByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -498,7 +498,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = await _restClient.GetByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetAllByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -534,7 +534,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
                         {
-                            var response = await _restClient.GetByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetAllByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else

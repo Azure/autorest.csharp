@@ -380,7 +380,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionRequest(string expand)
+        internal HttpMessage CreateGetAllBySubscriptionRequest(string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -403,9 +403,9 @@ namespace MgmtListMethods
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ResGrpParentWithAncestorWithNonResChListResult>> GetBySubscriptionAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ResGrpParentWithAncestorWithNonResChListResult>> GetAllBySubscriptionAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest(expand);
+            using var message = CreateGetAllBySubscriptionRequest(expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -424,9 +424,9 @@ namespace MgmtListMethods
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ResGrpParentWithAncestorWithNonResChListResult> GetBySubscription(string expand = null, CancellationToken cancellationToken = default)
+        public Response<ResGrpParentWithAncestorWithNonResChListResult> GetAllBySubscription(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest(expand);
+            using var message = CreateGetAllBySubscriptionRequest(expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -519,7 +519,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionNextPageRequest(string nextLink, string expand)
+        internal HttpMessage CreateGetAllBySubscriptionNextPageRequest(string nextLink, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -537,14 +537,14 @@ namespace MgmtListMethods
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<ResGrpParentWithAncestorWithNonResChListResult>> GetBySubscriptionNextPageAsync(string nextLink, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ResGrpParentWithAncestorWithNonResChListResult>> GetAllBySubscriptionNextPageAsync(string nextLink, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, expand);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -565,14 +565,14 @@ namespace MgmtListMethods
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<ResGrpParentWithAncestorWithNonResChListResult> GetBySubscriptionNextPage(string nextLink, string expand = null, CancellationToken cancellationToken = default)
+        public Response<ResGrpParentWithAncestorWithNonResChListResult> GetAllBySubscriptionNextPage(string nextLink, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, expand);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
