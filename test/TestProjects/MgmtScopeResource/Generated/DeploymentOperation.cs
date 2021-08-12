@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A Class representing a DeploymentOperation along with the instance operations that can be performed on it. </summary>
-    public partial class DeploymentOperation : ResourceOperations
+    public partial class DeploymentOperation : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeploymentRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "DeploymentOperation"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DeploymentOperation(ResourceOperations options, DeploymentOperationData resource) : base(options, resource.Id)
+        internal DeploymentOperation(ArmResource options, DeploymentOperationData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref="DeploymentOperation"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DeploymentOperation(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal DeploymentOperation(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, BaseUri);

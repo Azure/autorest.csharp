@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A Class representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgrade : SingletonOperations
+    public partial class VirtualMachineScaleSetRollingUpgrade : ArmResource
     {
         private readonly VirtualMachineScaleSetRollingUpgradeData _data;
 
@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetRollingUpgrade"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetRollingUpgrade(ResourceOperations options, VirtualMachineScaleSetRollingUpgradeData resource) : base(options)
+        internal VirtualMachineScaleSetRollingUpgrade(ArmResource options, VirtualMachineScaleSetRollingUpgradeData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetRollingUpgrade"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal VirtualMachineScaleSetRollingUpgrade(ResourceOperations options) : base(options)
+        internal VirtualMachineScaleSetRollingUpgrade(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades";

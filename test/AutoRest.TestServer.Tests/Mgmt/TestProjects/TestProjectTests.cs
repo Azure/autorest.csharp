@@ -56,9 +56,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllResources())
             {
-                var expectedBaseOperationsType = IsSingletonOperation(type.BaseType)
-                    ? typeof(SingletonOperations)
-                    : typeof(ResourceOperations);
+                var expectedBaseOperationsType = typeof(ArmResource);
                 Assert.AreEqual(expectedBaseOperationsType, type.BaseType);
             }
         }
@@ -69,7 +67,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllResources())
             {
-                if (IsSingletonOperation(type.BaseType))
+                if (IsSingletonOperation(type))
                 {
                     continue;
                 }
@@ -85,7 +83,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllResources())
             {
-                if (IsSingletonOperation(type.BaseType))
+                if (IsSingletonOperation(type))
                 {
                     continue;
                 }
@@ -188,18 +186,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
             Assert.NotNull(resourceExtensions);
 
-            var scopeResourceContainers = new HashSet<string>{"PolicyAssignmentContainer"};
+            var scopeResourceContainers = new HashSet<string> { "PolicyAssignmentContainer" };
             foreach (var type in FindAllContainers())
             {
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
                 ResourceType resourceType = GetContainerValidResourceType(type);
-                if (resourceType.Equals(ResourceGroupOperations.ResourceType))
+                if (resourceType.Equals(ResourceGroup.ResourceType))
                 {
                     var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}".ToPlural());
                     Assert.NotNull(getContainerMethod);
                     Assert.AreEqual(1, getContainerMethod.GetParameters().Length);
                     var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
-                    Assert.AreEqual(typeof(ResourceGroupOperations), param.ParameterType);
+                    Assert.AreEqual(typeof(ResourceGroup), param.ParameterType);
                 }
             }
         }
@@ -273,7 +271,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         private bool IsSingletonOperation(Type type)
         {
-            return type == typeof(SingletonOperations);
+            var propertyInfo = type.GetProperty("Parent", BindingFlags.Instance | BindingFlags.Public);
+            if (propertyInfo == null)
+                return false;
+            return type.BaseType == typeof(ArmResource) && propertyInfo.PropertyType == typeof(ArmResource);
         }
 
         private bool IsInheritFromTrackedResource(Type type)
@@ -311,13 +312,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
                 ResourceType resourceType = GetContainerValidResourceType(type);
 
-                if (resourceType.Equals(SubscriptionOperations.ResourceType))
+                if (resourceType.Equals(Subscription.ResourceType))
                 {
                     var methodInfo = subscriptionExtension.GetMethod($"Get{resourceName.ToPlural()}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(methodInfo);
                     Assert.AreEqual(1, methodInfo.GetParameters().Length);
                     var param = TypeAsserts.HasParameter(methodInfo, "subscription");
-                    Assert.AreEqual(typeof(SubscriptionOperations), param.ParameterType);
+                    Assert.AreEqual(typeof(Subscription), param.ParameterType);
                 }
             }
         }
@@ -348,14 +349,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var listAllMethod = restOperation.GetMethod("ListAll");
                 var listBySubscriptionMethod = restOperation.GetMethod("ListBySubscription");
 
-                if (!resourceType.Equals(SubscriptionOperations.ResourceType) &&
+                if (!resourceType.Equals(Subscription.ResourceType) &&
                    (listAllMethod != null || listBySubscriptionMethod != null))
                 {
                     var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}s", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listMethodInfo);
                     Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(SubscriptionOperations), listParam1.ParameterType);
+                    Assert.AreEqual(typeof(Subscription), listParam1.ParameterType);
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listParam2.ParameterType);
 
@@ -363,7 +364,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     Assert.NotNull(listAsyncMethodInfo);
                     Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
-                    Assert.AreEqual(typeof(SubscriptionOperations), listAsyncParam1.ParameterType);
+                    Assert.AreEqual(typeof(Subscription), listAsyncParam1.ParameterType);
                     var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listAsyncParam2.ParameterType);
                 }
@@ -389,7 +390,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var restOperation = GetResourceRestOperationsType(type);
                 var listBySubscriptionMethod = restOperation.GetMethod("GetBySubscription");
 
-                if (!resourceType.Equals(SubscriptionOperations.ResourceType) &&
+                if (!resourceType.Equals(Subscription.ResourceType) &&
                     listBySubscriptionMethod != null)
                 {
                     var listByNameMethodInfo = subscriptionExtension.GetMethod($"Get{resourceName}ByName", BindingFlags.Static | BindingFlags.Public);
@@ -422,7 +423,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                         var name = container.Name.Remove(container.Name.LastIndexOf("Container"));
                         var method = operation.GetMethod($"Get{name.ToPlural()}");
                         Assert.NotNull(method);
-                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
+                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace + "." + container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);
                     }
                 }

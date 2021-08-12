@@ -24,7 +24,7 @@ namespace SupersetFlattenInheritance.Models
         {
         }
 
-        internal WritableSubResourceModel1PutOperation(ResourceOperations operationsBase, Response<WritableSubResourceModel1Data> response)
+        internal WritableSubResourceModel1PutOperation(ArmResource operationsBase, Response<WritableSubResourceModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<WritableSubResourceModel1>(Response.FromValue(new WritableSubResourceModel1(operationsBase, response.Value), response.GetRawResponse()));
         }

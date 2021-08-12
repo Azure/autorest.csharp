@@ -15,9 +15,9 @@ namespace MgmtSingleton
         #region Get SubscriptionParentSingleton operation
         /// <summary> Gets an object representing a SubscriptionParentSingleton along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="SubscriptionParentSingleton" /> object. </returns>
-        public static SubscriptionParentSingleton GetSubscriptionParentSingleton(this SubscriptionOperations subscriptionOperations)
+        public static SubscriptionParentSingleton GetSubscriptionParentSingleton(this Subscription subscription)
         {
-            return new SubscriptionParentSingleton(subscriptionOperations);
+            return new SubscriptionParentSingleton(subscription);
         }
         #endregion
     }

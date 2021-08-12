@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a ManagementPolicy along with the instance operations that can be performed on it. </summary>
-    public partial class ManagementPolicy : ResourceOperations
+    public partial class ManagementPolicy : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ManagementPoliciesRestOperations _restClient;
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "ManagementPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ManagementPolicy(ResourceOperations options, ManagementPolicyData resource) : base(options, resource.Id)
+        internal ManagementPolicy(ArmResource options, ManagementPolicyData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ManagementPolicy(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal ManagementPolicy(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

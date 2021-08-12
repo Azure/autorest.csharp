@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a TenantParentSingleton along with the instance operations that can be performed on it. </summary>
-    public partial class TenantParentSingleton : SingletonOperations
+    public partial class TenantParentSingleton : ArmResource
     {
         private readonly TenantParentSingletonData _data;
 
@@ -25,7 +25,7 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal TenantParentSingleton(ResourceOperations options, TenantParentSingletonData resource) : base(options)
+        internal TenantParentSingleton(ArmResource options, TenantParentSingletonData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal TenantParentSingleton(ResourceOperations options) : base(options)
+        internal TenantParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/TenantParentSingleton/default";

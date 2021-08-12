@@ -24,6 +24,9 @@ using Azure.ResourceManager;
 using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -33,11 +36,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private Resource _resource;
         private BuildContext<MgmtOutputLibrary> _context;
         private ResourceData _resourceData;
-        private bool _inheritResourceOperationsBase = false;
+        private bool _inheritArmResourceBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
 
-        protected virtual Type BaseClass => typeof(Core.ResourceOperations);
+        protected virtual Type BaseClass => typeof(ArmResource);
 
         protected override string ContextProperty => "this";
 
@@ -56,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var config = _context.Configuration.MgmtConfiguration;
             var isSingleton = _resource.OperationGroup.IsSingletonResource(config);
-            var baseClass = isSingleton ? typeof(Core.SingletonOperations) : typeof(Core.ResourceOperations);
+            var baseClass = typeof(ArmResource);
             WriteUsings(_writer);
 
             using (_writer.Namespace(TypeOfThis.Namespace))
@@ -64,11 +67,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary($"{_resource.Description}");
                 _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
-                _inheritResourceOperationsBase = _resource.GetMethod != null;
+                _inheritArmResourceBase = _resource.GetMethod != null;
                 CSharpType type = new CSharpType(baseClass);
                 _writer.Append($"{type}, ");
 
-                if (_resource.GetMethod == null && baseClass == typeof(Core.ResourceOperations))
+                if (_resource.GetMethod == null && baseClass == typeof(ArmResource))
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under operation group '{_resource.OperationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
@@ -94,7 +97,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                         WriteChildRestClients();
                     }
                     WriteClientCtors(isSingleton);
-                    WriteClientProperties(_context.Configuration.MgmtConfiguration);
+                    WriteClientProperties(_context.Configuration.MgmtConfiguration, isSingleton);
                     // TODO Write singleton operations
                     if (!isSingleton)
                     {
@@ -142,9 +145,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var baseConstructorCall = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
             if (!string.IsNullOrEmpty(baseConstructorCall) && isSingleton)
             {
-                baseConstructorCall = " : base(options)";
+                baseConstructorCall = $" : base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)";
             }
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(Core.ResourceOperations)} options, {_resourceData.Type} resource){baseConstructorCall}"))
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource){baseConstructorCall}"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
@@ -168,8 +171,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             }
             var constructorIdParam = isSingleton ? "" : $", {_resource.ResourceIdentifierType} id";
-            baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(Core.ResourceOperations)} options{constructorIdParam}) : {baseConstructorCall}"))
+            baseConstructorCall = isSingleton ? $"base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)" : "base(options, id)";
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options{constructorIdParam}) : {baseConstructorCall}"))
             {
                 if (!isSingleton)
                 {
@@ -184,8 +187,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteClientProperties(MgmtConfiguration config)
+        private void WriteClientProperties(MgmtConfiguration config, bool isSingleton)
         {
+            if (isSingleton)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Gets the parent resource of this resource.");
+                _writer.Line($"public {typeof(ArmResource)} Parent {{ get; }}");
+            }
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(config)}\";");
@@ -214,7 +223,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var clientMethodsList = new List<RestClientMethod>();
 
             _writer.Line();
-            if (_inheritResourceOperationsBase && _resource.GetMethod != null)
+            if (_inheritArmResourceBase && _resource.GetMethod != null)
             {
                 // write inherited get method
                 WriteGetMethod(_resource.GetMethod, true, _resource.GetMethods, "Get");
@@ -434,7 +443,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             {
                                 if (resourceMethod != null)
                                 {
-                                    using (_writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                                    using (_writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                     {
                                         WriteGetMethodBody(resourceGroupMethod, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
                                     }
@@ -473,12 +482,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                                     methodDict.Remove(tenantMethod);
                                     var parent = new CodeWriterDeclaration("parent");
                                     _writer.Line($"var {parent:D} = Id;");
-                                    using (_writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                                    using (_writer.Scope($"while ({parent}.Parent != {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                                     {
                                         _writer.Line($"{parent} = {parent}.Parent;");
                                     }
-                                    _writer.UseNamespace("Azure.ResourceManager.Management");
-                                    using (_writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                                    using (_writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                     {
                                         WriteGetMethodBody(managementGroupMethod, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
                                     }
@@ -519,7 +527,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.UseNamespace("System.Collections.Generic");
                 _writer.Line($"var parent = Id.Parent;");
                 _writer.Line($"var parentParts = new List<string>();");
-                using (_writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                using (_writer.Scope($"while (!parent.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                 {
                     _writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
                     _writer.Line($"parent = parent.Parent;");
@@ -593,7 +601,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue[key] = value;");
                     WriteTaggableCommonMethod(async);
                 });
@@ -633,13 +641,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResourceOperations.{CreateMethodName("Delete", async)}(cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Append($"var originalTags  = ");
                     if (async)
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);");
                     WriteTaggableCommonMethod(async);
                 });
@@ -680,7 +688,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResourceOperations.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Get", async)}(cancellationToken){GetConfigureAwait(async)};");
                     _writer.Line($"originalTags.Value.Data.Properties.TagsValue.Remove(key);");
                     WriteTaggableCommonMethod(async);
                 });

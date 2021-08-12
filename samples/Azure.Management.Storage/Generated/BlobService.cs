@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a BlobService along with the instance operations that can be performed on it. </summary>
-    public partial class BlobService : SingletonOperations
+    public partial class BlobService : ArmResource
     {
         private readonly BlobServiceData _data;
 
@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BlobService(ResourceOperations options, BlobServiceData resource) : base(options)
+        internal BlobService(ArmResource options, BlobServiceData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref="BlobService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal BlobService(ResourceOperations options) : base(options)
+        internal BlobService(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices";

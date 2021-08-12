@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups];
         protected override string ExtensionOperationVariableName => "managementGroup";
 
-        protected override Type ExtensionOperationVariableType => typeof(ManagementGroupOperations);
+        protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
         public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
@@ -49,10 +49,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroupOperations)}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroup)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
 
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(ManagementGroupOperations)} {ExtensionOperationVariableName})"))
+            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(ManagementGroup)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }

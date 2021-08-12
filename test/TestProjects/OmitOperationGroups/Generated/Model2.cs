@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace OmitOperationGroups
 {
     /// <summary> A Class representing a Model2 along with the instance operations that can be performed on it. </summary>
-    public partial class Model2 : ResourceOperations
+    public partial class Model2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model2SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model2(ResourceOperations options, Model2Data resource)
+        internal Model2(ArmResource options, Model2Data resource)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Model2(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal Model2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

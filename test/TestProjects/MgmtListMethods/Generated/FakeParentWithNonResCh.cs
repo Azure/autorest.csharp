@@ -19,7 +19,7 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A Class representing a FakeParentWithNonResCh along with the instance operations that can be performed on it. </summary>
-    public partial class FakeParentWithNonResCh : ResourceOperations
+    public partial class FakeParentWithNonResCh : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly FakeParentWithNonResChesRestOperations _restClient;
@@ -33,7 +33,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "FakeParentWithNonResCh"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal FakeParentWithNonResCh(ResourceOperations options, FakeParentWithNonResChData resource) : base(options, resource.Id)
+        internal FakeParentWithNonResCh(ArmResource options, FakeParentWithNonResChData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -44,7 +44,7 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResCh"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal FakeParentWithNonResCh(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal FakeParentWithNonResCh(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FakeParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -143,7 +143,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -172,7 +172,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
@@ -200,8 +200,8 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -229,8 +229,8 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                TagResourceOperations.Delete(cancellationToken);
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                TagResource.Delete(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
@@ -258,7 +258,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -286,7 +286,7 @@ namespace MgmtListMethods
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);

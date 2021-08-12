@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a BlobContainer along with the instance operations that can be performed on it. </summary>
-    public partial class BlobContainer : ResourceOperations
+    public partial class BlobContainer : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BlobContainersRestOperations _restClient;
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobContainer"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BlobContainer(ResourceOperations options, BlobContainerData resource) : base(options, resource.Id)
+        internal BlobContainer(ArmResource options, BlobContainerData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BlobContainer(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal BlobContainer(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

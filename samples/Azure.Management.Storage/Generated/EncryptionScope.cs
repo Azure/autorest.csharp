@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a EncryptionScope along with the instance operations that can be performed on it. </summary>
-    public partial class EncryptionScope : ResourceOperations
+    public partial class EncryptionScope : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly EncryptionScopesRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "EncryptionScope"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal EncryptionScope(ResourceOperations options, EncryptionScopeData resource) : base(options, resource.Id)
+        internal EncryptionScope(ArmResource options, EncryptionScopeData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="EncryptionScope"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal EncryptionScope(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal EncryptionScope(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

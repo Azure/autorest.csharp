@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeDoubleModel along with the instance operations that can be performed on it. </summary>
-    public partial class PageSizeDoubleModel : ResourceOperations
+    public partial class PageSizeDoubleModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDoubleModelsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeDoubleModel(ResourceOperations options, PageSizeDoubleModelData resource) : base(options, resource.Id)
+        internal PageSizeDoubleModel(ArmResource options, PageSizeDoubleModelData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeDoubleModel(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PageSizeDoubleModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

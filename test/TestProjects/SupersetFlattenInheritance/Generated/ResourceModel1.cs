@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A Class representing a ResourceModel1 along with the instance operations that can be performed on it. </summary>
-    public partial class ResourceModel1 : ResourceOperations
+    public partial class ResourceModel1 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ResourceModel1SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "ResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ResourceModel1(ResourceOperations options, ResourceModel1Data resource) : base(options, resource.Id)
+        internal ResourceModel1(ArmResource options, ResourceModel1Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ResourceModel1(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal ResourceModel1(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

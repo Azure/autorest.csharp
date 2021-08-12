@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a FileService along with the instance operations that can be performed on it. </summary>
-    public partial class FileService : SingletonOperations
+    public partial class FileService : ArmResource
     {
         private readonly FileServiceData _data;
 
@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "FileService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal FileService(ResourceOperations options, FileServiceData resource) : base(options)
+        internal FileService(ArmResource options, FileServiceData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace Azure.Management.Storage
 
         /// <summary> Initializes a new instance of the <see cref="FileService"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal FileService(ResourceOperations options) : base(options)
+        internal FileService(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices";

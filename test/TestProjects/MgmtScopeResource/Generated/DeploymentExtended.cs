@@ -20,7 +20,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A Class representing a DeploymentExtended along with the instance operations that can be performed on it. </summary>
-    public partial class DeploymentExtended : ResourceOperations
+    public partial class DeploymentExtended : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly DeploymentsRestOperations _restClient;
@@ -34,7 +34,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "DeploymentExtended"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DeploymentExtended(ResourceOperations options, DeploymentExtendedData resource) : base(options, resource.Id)
+        internal DeploymentExtended(ArmResource options, DeploymentExtendedData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -45,7 +45,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtended"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal DeploymentExtended(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal DeploymentExtended(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -542,7 +542,7 @@ namespace MgmtScopeResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = await _restClient.WhatIfAtManagementGroupScopeAsync(Id.Parent.Name, Id.Name, properties, location, cancellationToken).ConfigureAwait(false);
                         return new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);
@@ -594,7 +594,7 @@ namespace MgmtScopeResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = _restClient.WhatIfAtManagementGroupScope(Id.Parent.Name, Id.Name, properties, location, cancellationToken);
                         return new DeploymentWhatIfOperation(_clientDiagnostics, Pipeline, _restClient.CreateWhatIfAtManagementGroupScopeRequest(Id.Parent.Name, Id.Name, properties, location).Request, response);

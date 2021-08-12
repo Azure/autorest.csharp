@@ -19,7 +19,7 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A Class representing a Bar along with the instance operations that can be performed on it. </summary>
-    public partial class Bar : ResourceOperations
+    public partial class Bar : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BarsRestOperations _restClient;
@@ -33,7 +33,7 @@ namespace MgmtLRO
         /// <summary> Initializes a new instance of the <see cref = "Bar"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Bar(ResourceOperations options, BarData resource) : base(options, resource.Id)
+        internal Bar(ArmResource options, BarData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -44,7 +44,7 @@ namespace MgmtLRO
         /// <summary> Initializes a new instance of the <see cref="Bar"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Bar(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal Bar(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -215,7 +215,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -244,7 +244,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
@@ -272,8 +272,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -301,8 +301,8 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                TagResourceOperations.Delete(cancellationToken);
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                TagResource.Delete(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
@@ -330,7 +330,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -358,7 +358,7 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);

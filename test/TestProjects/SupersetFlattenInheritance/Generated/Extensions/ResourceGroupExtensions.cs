@@ -22,9 +22,9 @@ namespace SupersetFlattenInheritance
     {
         #region CustomModel1
         /// <summary> Gets an object representing a CustomModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel1Container" /> object. </returns>
-        public static CustomModel1Container GetCustomModel1s(this ResourceGroupOperations resourceGroup)
+        public static CustomModel1Container GetCustomModel1s(this ResourceGroup resourceGroup)
         {
             return new CustomModel1Container(resourceGroup);
         }
@@ -32,9 +32,9 @@ namespace SupersetFlattenInheritance
 
         #region CustomModel2
         /// <summary> Gets an object representing a CustomModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="CustomModel2Container" /> object. </returns>
-        public static CustomModel2Container GetCustomModel2s(this ResourceGroupOperations resourceGroup)
+        public static CustomModel2Container GetCustomModel2s(this ResourceGroup resourceGroup)
         {
             return new CustomModel2Container(resourceGroup);
         }
@@ -42,9 +42,9 @@ namespace SupersetFlattenInheritance
 
         #region SubResourceModel1
         /// <summary> Gets an object representing a SubResourceModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubResourceModel1Container" /> object. </returns>
-        public static SubResourceModel1Container GetSubResourceModel1s(this ResourceGroupOperations resourceGroup)
+        public static SubResourceModel1Container GetSubResourceModel1s(this ResourceGroup resourceGroup)
         {
             return new SubResourceModel1Container(resourceGroup);
         }
@@ -52,9 +52,9 @@ namespace SupersetFlattenInheritance
 
         #region SubResourceModel2
         /// <summary> Gets an object representing a SubResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SubResourceModel2Container" /> object. </returns>
-        public static SubResourceModel2Container GetSubResourceModel2s(this ResourceGroupOperations resourceGroup)
+        public static SubResourceModel2Container GetSubResourceModel2s(this ResourceGroup resourceGroup)
         {
             return new SubResourceModel2Container(resourceGroup);
         }
@@ -62,9 +62,9 @@ namespace SupersetFlattenInheritance
 
         #region WritableSubResourceModel1
         /// <summary> Gets an object representing a WritableSubResourceModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WritableSubResourceModel1Container" /> object. </returns>
-        public static WritableSubResourceModel1Container GetWritableSubResourceModel1s(this ResourceGroupOperations resourceGroup)
+        public static WritableSubResourceModel1Container GetWritableSubResourceModel1s(this ResourceGroup resourceGroup)
         {
             return new WritableSubResourceModel1Container(resourceGroup);
         }
@@ -72,9 +72,9 @@ namespace SupersetFlattenInheritance
 
         #region WritableSubResourceModel2
         /// <summary> Gets an object representing a WritableSubResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WritableSubResourceModel2Container" /> object. </returns>
-        public static WritableSubResourceModel2Container GetWritableSubResourceModel2s(this ResourceGroupOperations resourceGroup)
+        public static WritableSubResourceModel2Container GetWritableSubResourceModel2s(this ResourceGroup resourceGroup)
         {
             return new WritableSubResourceModel2Container(resourceGroup);
         }
@@ -82,9 +82,9 @@ namespace SupersetFlattenInheritance
 
         #region ResourceModel1
         /// <summary> Gets an object representing a ResourceModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceModel1Container" /> object. </returns>
-        public static ResourceModel1Container GetResourceModel1s(this ResourceGroupOperations resourceGroup)
+        public static ResourceModel1Container GetResourceModel1s(this ResourceGroup resourceGroup)
         {
             return new ResourceModel1Container(resourceGroup);
         }
@@ -92,9 +92,9 @@ namespace SupersetFlattenInheritance
 
         #region ResourceModel2
         /// <summary> Gets an object representing a ResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ResourceModel2Container" /> object. </returns>
-        public static ResourceModel2Container GetResourceModel2s(this ResourceGroupOperations resourceGroup)
+        public static ResourceModel2Container GetResourceModel2s(this ResourceGroup resourceGroup)
         {
             return new ResourceModel2Container(resourceGroup);
         }
@@ -102,9 +102,9 @@ namespace SupersetFlattenInheritance
 
         #region TrackedResourceModel1
         /// <summary> Gets an object representing a TrackedResourceModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="TrackedResourceModel1Container" /> object. </returns>
-        public static TrackedResourceModel1Container GetTrackedResourceModel1s(this ResourceGroupOperations resourceGroup)
+        public static TrackedResourceModel1Container GetTrackedResourceModel1s(this ResourceGroup resourceGroup)
         {
             return new TrackedResourceModel1Container(resourceGroup);
         }
@@ -112,9 +112,9 @@ namespace SupersetFlattenInheritance
 
         #region TrackedResourceModel2
         /// <summary> Gets an object representing a TrackedResourceModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="TrackedResourceModel2Container" /> object. </returns>
-        public static TrackedResourceModel2Container GetTrackedResourceModel2s(this ResourceGroupOperations resourceGroup)
+        public static TrackedResourceModel2Container GetTrackedResourceModel2s(this ResourceGroup resourceGroup)
         {
             return new TrackedResourceModel2Container(resourceGroup);
         }
@@ -126,12 +126,12 @@ namespace SupersetFlattenInheritance
             return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -162,12 +162,12 @@ namespace SupersetFlattenInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -198,11 +198,11 @@ namespace SupersetFlattenInheritance
             );
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -229,11 +229,11 @@ namespace SupersetFlattenInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroup resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {

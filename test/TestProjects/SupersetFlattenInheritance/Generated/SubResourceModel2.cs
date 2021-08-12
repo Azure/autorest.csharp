@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A Class representing a SubResourceModel2 along with the instance operations that can be performed on it. </summary>
-    public partial class SubResourceModel2 : ResourceOperations
+    public partial class SubResourceModel2 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly SubResourceModel2SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "SubResourceModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubResourceModel2(ResourceOperations options, SubResourceModel2Data resource) : base(options, resource.Id)
+        internal SubResourceModel2(ArmResource options, SubResourceModel2Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="SubResourceModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubResourceModel2(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal SubResourceModel2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SubResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

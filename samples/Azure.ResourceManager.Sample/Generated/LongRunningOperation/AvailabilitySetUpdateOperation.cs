@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        internal AvailabilitySetUpdateOperation(ResourceOperations operationsBase, Response<AvailabilitySetData> response)
+        internal AvailabilitySetUpdateOperation(ArmResource operationsBase, Response<AvailabilitySetData> response)
         {
             _operation = new OperationOrResponseInternals<AvailabilitySet>(Response.FromValue(new AvailabilitySet(operationsBase, response.Value), response.GetRawResponse()));
         }

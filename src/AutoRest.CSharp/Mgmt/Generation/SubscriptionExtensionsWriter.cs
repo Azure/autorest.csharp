@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions];
         protected override string ExtensionOperationVariableName => "subscription";
 
-        protected override Type ExtensionOperationVariableType => typeof(SubscriptionOperations);
+        protected override Type ExtensionOperationVariableType => typeof(Subscription);
 
         public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
@@ -129,10 +129,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(Subscription)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
 
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(SubscriptionOperations)} {ExtensionOperationVariableName})"))
+            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(Subscription)} {ExtensionOperationVariableName})"))
             {
                 writer.Line($"return new {resourceContainer.Type}({ExtensionOperationVariableName});");
             }
@@ -155,16 +155,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteListResourceByNameMethod(CodeWriter writer, Resource resource, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.ToPlural()} for a <see cref=\"{typeof(SubscriptionOperations)}\" /> represented as generic resources.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resource.ResourceName.ToPlural()} for a <see cref=\"{typeof(Subscription)}\" /> represented as generic resources.");
+            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(Subscription)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("filter", $"The string to filter the list.");
             writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
 
-            var responseType = typeof(GenericResourceExpanded).WrapPageable(async);
-            using (writer.Scope($"public static {responseType} {CreateMethodName($"Get{resource.ResourceName}ByName", async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
+            var responseType = typeof(GenericResource).WrapPageable(async);
+            using (writer.Scope($"public static {responseType} {CreateMethodName($"Get{resource.ResourceName}ByName", async)}(this {typeof(Subscription)} subscription, {typeof(string)} filter, {typeof(string)} expand, {typeof(int?)} top, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 var filters = new CodeWriterDeclaration("filters");
                 writer.Line($"{typeof(ResourceFilterCollection)} {filters:D} = new({resource.Type}.ResourceType);");
@@ -181,9 +181,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
+            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {typeof(Subscription)} subscription)"))
             {
-                writer.Line($"return new {resource.Type.Name}(subscriptionOperations);");
+                writer.Line($"return new {resource.Type.Name}(subscription);");
             }
             writer.LineRaw("#endregion");
             writer.Line();

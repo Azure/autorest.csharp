@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace TenantOnly
 {
     /// <summary> A Class representing a Agreement along with the instance operations that can be performed on it. </summary>
-    public partial class Agreement : ResourceOperations
+    public partial class Agreement : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AgreementsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "Agreement"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Agreement(ResourceOperations options, AgreementData resource) : base(options, resource.Id)
+        internal Agreement(ArmResource options, AgreementData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Agreement(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal Agreement(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, BaseUri);

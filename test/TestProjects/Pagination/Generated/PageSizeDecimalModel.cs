@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeDecimalModel along with the instance operations that can be performed on it. </summary>
-    public partial class PageSizeDecimalModel : ResourceOperations
+    public partial class PageSizeDecimalModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeDecimalModelsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeDecimalModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeDecimalModel(ResourceOperations options, PageSizeDecimalModelData resource) : base(options, resource.Id)
+        internal PageSizeDecimalModel(ArmResource options, PageSizeDecimalModelData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeDecimalModel(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PageSizeDecimalModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeDecimalModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

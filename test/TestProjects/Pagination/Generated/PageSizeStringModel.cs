@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeStringModel along with the instance operations that can be performed on it. </summary>
-    public partial class PageSizeStringModel : ResourceOperations
+    public partial class PageSizeStringModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeStringModelsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeStringModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeStringModel(ResourceOperations options, PageSizeStringModelData resource) : base(options, resource.Id)
+        internal PageSizeStringModel(ArmResource options, PageSizeStringModelData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeStringModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeStringModel(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PageSizeStringModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeStringModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

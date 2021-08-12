@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace TenantOnly
 {
     /// <summary> A Class representing a BillingAccount along with the instance operations that can be performed on it. </summary>
-    public partial class BillingAccount : ResourceOperations
+    public partial class BillingAccount : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly BillingAccountsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref = "BillingAccount"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BillingAccount(ResourceOperations options, BillingAccountData resource) : base(options, resource.Id)
+        internal BillingAccount(ArmResource options, BillingAccountData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal BillingAccount(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal BillingAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -144,7 +144,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
@@ -173,7 +173,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
@@ -201,8 +201,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                await TagResourceOperations.DeleteAsync(cancellationToken).ConfigureAwait(false);
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
@@ -230,8 +230,8 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                TagResourceOperations.Delete(cancellationToken);
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                TagResource.Delete(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);
@@ -259,7 +259,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var originalTags = await TagResourceOperations.GetAsync(cancellationToken).ConfigureAwait(false);
+                var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
@@ -287,7 +287,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var originalTags = TagResourceOperations.Get(cancellationToken);
+                var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.Name, null, cancellationToken);

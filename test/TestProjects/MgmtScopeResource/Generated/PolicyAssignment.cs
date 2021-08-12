@@ -19,7 +19,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A Class representing a PolicyAssignment along with the instance operations that can be performed on it. </summary>
-    public partial class PolicyAssignment : ResourceOperations
+    public partial class PolicyAssignment : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyAssignmentsRestOperations _restClient;
@@ -33,7 +33,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "PolicyAssignment"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PolicyAssignment(ResourceOperations options, PolicyAssignmentData resource) : base(options, resource.Id)
+        internal PolicyAssignment(ArmResource options, PolicyAssignmentData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -44,7 +44,7 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignment"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyAssignment(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PolicyAssignment(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);

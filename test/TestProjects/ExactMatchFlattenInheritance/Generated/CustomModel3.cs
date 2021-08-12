@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A Class representing a CustomModel3 along with the instance operations that can be performed on it. </summary>
-    public partial class CustomModel3 : ResourceOperations
+    public partial class CustomModel3 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly CustomModel3SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal CustomModel3(ResourceOperations options, CustomModel3Data resource) : base(options, resource.Id)
+        internal CustomModel3(ArmResource options, CustomModel3Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="CustomModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal CustomModel3(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal CustomModel3(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace OperationGroupMappings
 {
     /// <summary> A Class representing a AvailabilitySet along with the instance operations that can be performed on it. </summary>
-    public partial class AvailabilitySet : ResourceOperations
+    public partial class AvailabilitySet : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AvailabilitySetsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace OperationGroupMappings
         /// <summary> Initializes a new instance of the <see cref = "AvailabilitySet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AvailabilitySet(ResourceOperations options, AvailabilitySetData resource) : base(options, resource.Id)
+        internal AvailabilitySet(ArmResource options, AvailabilitySetData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace OperationGroupMappings
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal AvailabilitySet(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal AvailabilitySet(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

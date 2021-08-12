@@ -20,7 +20,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A Class representing a PolicyDefinition along with the instance operations that can be performed on it. </summary>
-    public partial class PolicyDefinition : ResourceOperations
+    public partial class PolicyDefinition : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PolicyDefinitionsRestOperations _restClient;
@@ -34,7 +34,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "PolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PolicyDefinition(ResourceOperations options, PolicyDefinitionData resource) : base(options, resource.Id)
+        internal PolicyDefinition(ArmResource options, PolicyDefinitionData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -45,7 +45,7 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref="PolicyDefinition"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PolicyDefinition(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PolicyDefinition(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
@@ -94,7 +94,7 @@ namespace MgmtExtensionResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = await _restClient.GetAtManagementGroupAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                         if (response.Value == null)
@@ -139,7 +139,7 @@ namespace MgmtExtensionResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = _restClient.GetAtManagementGroup(Id.Parent.Name, Id.Name, cancellationToken);
                         if (response.Value == null)

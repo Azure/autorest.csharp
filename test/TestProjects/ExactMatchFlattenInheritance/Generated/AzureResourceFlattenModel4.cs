@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A Class representing a AzureResourceFlattenModel4 along with the instance operations that can be performed on it. </summary>
-    public partial class AzureResourceFlattenModel4 : ResourceOperations
+    public partial class AzureResourceFlattenModel4 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly AzureResourceFlattenModel4SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel4(ResourceOperations options, AzureResourceFlattenModel4Data resource)
+        internal AzureResourceFlattenModel4(ArmResource options, AzureResourceFlattenModel4Data resource)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel4(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal AzureResourceFlattenModel4(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AzureResourceFlattenModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

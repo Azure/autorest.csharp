@@ -25,7 +25,7 @@ namespace SubscriptionExtensions.Models
         {
         }
 
-        internal ToasterCreateOrUpdateOperation(ResourceOperations operationsBase, Response<ToasterData> response)
+        internal ToasterCreateOrUpdateOperation(ArmResource operationsBase, Response<ToasterData> response)
         {
             _operation = new OperationOrResponseInternals<Toaster>(Response.FromValue(new Toaster(operationsBase, response.Value), response.GetRawResponse()));
         }

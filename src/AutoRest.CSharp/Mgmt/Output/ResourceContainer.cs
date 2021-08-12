@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Container";
         private BuildContext<MgmtOutputLibrary> _context;
-        public const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
-        public const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
+        public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
+        public const string SubscriptionResourceType = "Subscription.ResourceType";
         public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
         private const string ResourceGroupCommentName = "ResourceGroup";
         private const string SubscriptionCommentName = "Subscription";
@@ -163,9 +163,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             switch (parentResourceType)
             {
                 case ResourceTypeBuilder.ResourceGroups:
-                    return ResourceGroupOperationsResourceType;
+                    return ResourceGroupResourceType;
                 case ResourceTypeBuilder.Subscriptions:
-                    return SubscriptionOperationsResourceType;
+                    return SubscriptionResourceType;
                 case ResourceTypeBuilder.Tenant:
                     return TenantResourceType;
                 default:

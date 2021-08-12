@@ -93,7 +93,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType))
+                if (IsSingletonOperation(OperationsType))
                 {
                     continue;
                 }
@@ -123,7 +123,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType))
+                if (IsSingletonOperation(OperationsType))
                 {
                     continue;
                 }
@@ -136,7 +136,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
         private bool IsSingletonOperation(Type type)
         {
-            return type == typeof(SingletonOperations);
+            var propertyInfo = type.GetProperty("Parent", BindingFlags.Instance | BindingFlags.Public);
+            if (propertyInfo == null)
+                return false;
+            return type.BaseType == typeof(ArmResource) && propertyInfo.PropertyType == typeof(ArmResource);
         }
 
         private Parameter[] GetNonPathParameters(RestClientMethod clientMethod)

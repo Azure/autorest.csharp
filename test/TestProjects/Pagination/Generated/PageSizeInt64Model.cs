@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeInt64Model along with the instance operations that can be performed on it. </summary>
-    public partial class PageSizeInt64Model : ResourceOperations
+    public partial class PageSizeInt64Model : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeInt64ModelsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeInt64Model"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeInt64Model(ResourceOperations options, PageSizeInt64ModelData resource) : base(options, resource.Id)
+        internal PageSizeInt64Model(ArmResource options, PageSizeInt64ModelData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeInt64Model"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeInt64Model(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PageSizeInt64Model(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeInt64ModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Pagination
 {
     /// <summary> A Class representing a PageSizeFloatModel along with the instance operations that can be performed on it. </summary>
-    public partial class PageSizeFloatModel : ResourceOperations
+    public partial class PageSizeFloatModel : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly PageSizeFloatModelsRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref = "PageSizeFloatModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PageSizeFloatModel(ResourceOperations options, PageSizeFloatModelData resource) : base(options, resource.Id)
+        internal PageSizeFloatModel(ArmResource options, PageSizeFloatModelData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace Pagination
         /// <summary> Initializes a new instance of the <see cref="PageSizeFloatModel"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal PageSizeFloatModel(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal PageSizeFloatModel(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new PageSizeFloatModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

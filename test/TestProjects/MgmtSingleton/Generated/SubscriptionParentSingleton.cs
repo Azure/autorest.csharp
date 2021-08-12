@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a SubscriptionParentSingleton along with the instance operations that can be performed on it. </summary>
-    public partial class SubscriptionParentSingleton : SingletonOperations
+    public partial class SubscriptionParentSingleton : ArmResource
     {
         private readonly SubscriptionParentSingletonData _data;
 
@@ -25,7 +25,7 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubscriptionParentSingleton(ResourceOperations options, SubscriptionParentSingletonData resource) : base(options)
+        internal SubscriptionParentSingleton(ArmResource options, SubscriptionParentSingletonData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace MgmtSingleton
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal SubscriptionParentSingleton(ResourceOperations options) : base(options)
+        internal SubscriptionParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton/default";

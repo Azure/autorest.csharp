@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A Class representing a WritableSubResourceModel1 along with the instance operations that can be performed on it. </summary>
-    public partial class WritableSubResourceModel1 : ResourceOperations
+    public partial class WritableSubResourceModel1 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly WritableSubResourceModel1SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref = "WritableSubResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal WritableSubResourceModel1(ResourceOperations options, WritableSubResourceModel1Data resource) : base(options, resource.Id)
+        internal WritableSubResourceModel1(ArmResource options, WritableSubResourceModel1Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel1"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal WritableSubResourceModel1(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal WritableSubResourceModel1(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new WritableSubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

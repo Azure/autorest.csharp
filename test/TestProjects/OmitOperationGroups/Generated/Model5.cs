@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace OmitOperationGroups
 {
     /// <summary> A Class representing a Model5 along with the instance operations that can be performed on it. </summary>
-    public partial class Model5 : ResourceOperations
+    public partial class Model5 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly Model5SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model5"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model5(ResourceOperations options, Model5Data resource)
+        internal Model5(ArmResource options, Model5Data resource)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref="Model5"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal Model5(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal Model5(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);

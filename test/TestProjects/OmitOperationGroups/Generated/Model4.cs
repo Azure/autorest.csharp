@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace OmitOperationGroups
 {
     /// <summary> A Class representing a Model4 along with the instance operations that can be performed on it. </summary>
-    public partial class Model4 : SingletonOperations
+    public partial class Model4 : ArmResource
     {
         private readonly Model4Data _data;
 
@@ -25,7 +25,7 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model4(ResourceOperations options, Model4Data resource)
+        internal Model4(ArmResource options, Model4Data resource)
         {
             HasData = true;
             _data = resource;
@@ -33,9 +33,12 @@ namespace OmitOperationGroups
 
         /// <summary> Initializes a new instance of the <see cref="Model4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal Model4(ResourceOperations options) : base(options)
+        internal Model4(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s/model4s";

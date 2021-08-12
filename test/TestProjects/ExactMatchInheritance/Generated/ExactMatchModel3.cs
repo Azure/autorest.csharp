@@ -18,7 +18,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace ExactMatchInheritance
 {
     /// <summary> A Class representing a ExactMatchModel3 along with the instance operations that can be performed on it. </summary>
-    public partial class ExactMatchModel3 : ResourceOperations
+    public partial class ExactMatchModel3 : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly ExactMatchModel3SRestOperations _restClient;
@@ -32,7 +32,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ExactMatchModel3(ResourceOperations options, ExactMatchModel3Data resource) : base(options, resource.Id)
+        internal ExactMatchModel3(ArmResource options, ExactMatchModel3Data resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
@@ -43,7 +43,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal ExactMatchModel3(ResourceOperations options, ResourceIdentifier id) : base(options, id)
+        internal ExactMatchModel3(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new ExactMatchModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
