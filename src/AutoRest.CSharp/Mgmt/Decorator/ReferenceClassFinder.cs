@@ -18,9 +18,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string SerializationCtorAttribute = "SerializationConstructor";
         internal const string ReferenceTypeAttribute = "ReferenceType";
 
-        internal const string InitializationCtorAttributeName = $"InitializationConstructorAttribute";
-        internal const string SerializationCtorAttributeName = $"SerializationConstructorAttribute";
-        internal const string ReferenceTypeAttributeName = $"ReferenceTypeAttribute";
+        internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
+        internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
+        internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
 
         private static IList<Type>? _referenceTypes;
 

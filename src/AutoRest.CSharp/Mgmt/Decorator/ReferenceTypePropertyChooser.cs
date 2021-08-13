@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class ReferenceTypePropertyChooser
     {
         internal const string PropertyReferenceAttribute = "PropertyReferenceType";
-        internal const string PropertyReferenceAttributeName = $"PropertyReferenceTypeAttribute";
+        internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
