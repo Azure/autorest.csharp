@@ -24,7 +24,7 @@ namespace OmitOperationGroups.Models
         {
         }
 
-        internal Model5CreateOrUpdateOperation(ResourceOperations operationsBase, Response<Model5Data> response)
+        internal Model5CreateOrUpdateOperation(ArmResource operationsBase, Response<Model5Data> response)
         {
             _operation = new OperationOrResponseInternals<Model5>(Response.FromValue(new Model5(operationsBase, response.Value), response.GetRawResponse()));
         }

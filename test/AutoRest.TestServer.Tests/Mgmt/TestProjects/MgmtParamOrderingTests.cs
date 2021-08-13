@@ -10,14 +10,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase("AvailabilitySetOperations", true)]
-        [TestCase("DedicatedHostGroupOperations", true)]
-        [TestCase("DedicatedHostOperations", true)]
-        [TestCase("VirtualMachineExtensionImageOperations", false)]
-        public void ValidateOperations(string operation, bool isExists)
+        [TestCase("AvailabilitySet", true)]
+        [TestCase("DedicatedHostGroup", true)]
+        [TestCase("DedicatedHost", true)]
+        [TestCase("VirtualMachineExtensionImage", false)]
+        public void ValidateResource(string operation, bool isExists)
         {
-            var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
-            Assert.AreEqual(isExists, operationTypeExists);
+            var resourceTypeExists = FindAllResources().Any(o => o.Name == operation);
+            Assert.AreEqual(isExists, resourceTypeExists);
         }
 
         [TestCase("DedicatedHostContainer", "CreateOrUpdate",  "hostName")]

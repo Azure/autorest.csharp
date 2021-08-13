@@ -22,14 +22,14 @@ namespace TenantOnly.Models
     {
         private readonly OperationInternals<BillingAccount> _operation;
 
-        private readonly ResourceOperations _operationBase;
+        private readonly ArmResource _operationBase;
 
         /// <summary> Initializes a new instance of BillingAccountCreateOperation for mocking. </summary>
         protected BillingAccountCreateOperation()
         {
         }
 
-        internal BillingAccountCreateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BillingAccountCreateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<BillingAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountCreateOperation");
             _operationBase = operationsBase;

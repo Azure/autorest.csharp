@@ -24,7 +24,7 @@ namespace ExactMatchInheritance.Models
         {
         }
 
-        internal ExactMatchModel3PutOperation(ResourceOperations operationsBase, Response<ExactMatchModel3Data> response)
+        internal ExactMatchModel3PutOperation(ArmResource operationsBase, Response<ExactMatchModel3Data> response)
         {
             _operation = new OperationOrResponseInternals<ExactMatchModel3>(Response.FromValue(new ExactMatchModel3(operationsBase, response.Value), response.GetRawResponse()));
         }

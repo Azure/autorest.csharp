@@ -25,7 +25,7 @@ namespace ExactMatchFlattenInheritance.Models
         {
         }
 
-        internal CustomModel3PutOperation(ResourceOperations operationsBase, Response<CustomModel3Data> response)
+        internal CustomModel3PutOperation(ArmResource operationsBase, Response<CustomModel3Data> response)
         {
             _operation = new OperationOrResponseInternals<CustomModel3>(Response.FromValue(new CustomModel3(operationsBase, response.Value), response.GetRawResponse()));
         }

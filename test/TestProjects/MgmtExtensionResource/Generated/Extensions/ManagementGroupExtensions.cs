@@ -14,9 +14,9 @@ namespace MgmtExtensionResource
     {
         #region PolicyDefinition
         /// <summary> Gets an object representing a PolicyDefinitionContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="managementGroup"> The <see cref="ManagementGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="managementGroup"> The <see cref="ManagementGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PolicyDefinitionContainer" /> object. </returns>
-        public static PolicyDefinitionContainer GetPolicyDefinitions(this ManagementGroupOperations managementGroup)
+        public static PolicyDefinitionContainer GetPolicyDefinitions(this ManagementGroup managementGroup)
         {
             return new PolicyDefinitionContainer(managementGroup);
         }

@@ -5,14 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace OmitOperationGroups
 {
     /// <summary> A Class representing a Model4 along with the instance operations that can be performed on it. </summary>
-    public class Model4 : Model4Operations
+    public partial class Model4 : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref = "Model4"/> class for mocking. </summary>
+        private readonly Model4Data _data;
+
+        /// <summary> Initializes a new instance of the <see cref="Model4"/> class for mocking. </summary>
         protected Model4()
         {
         }
@@ -20,12 +25,40 @@ namespace OmitOperationGroups
         /// <summary> Initializes a new instance of the <see cref = "Model4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Model4(ResourceOperations options, Model4Data resource)
+        internal Model4(ArmResource options, Model4Data resource)
         {
-            Data = resource;
+            HasData = true;
+            _data = resource;
         }
 
-        /// <summary> Gets or sets the Model4Data. </summary>
-        public virtual Model4Data Data { get; private set; }
+        /// <summary> Initializes a new instance of the <see cref="Model4"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        internal Model4(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        {
+        }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s/model4s";
+
+        /// <summary> Gets the valid resource type for the operations. </summary>
+        protected override ResourceType ValidResourceType => ResourceType;
+
+        /// <summary> Gets whether or not the current instance has data. </summary>
+        public virtual bool HasData { get; }
+
+        /// <summary> Gets the data representing this Feature. </summary>
+        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
+        public virtual Model4Data Data
+        {
+            get
+            {
+                if (!HasData)
+                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
+                return _data;
+            }
+        }
     }
 }

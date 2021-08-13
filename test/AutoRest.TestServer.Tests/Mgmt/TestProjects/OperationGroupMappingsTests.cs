@@ -23,8 +23,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.NotNull(type);
             type = typeof(AvailabilitySetData);
             Assert.NotNull(type);
-            type = typeof(AvailabilitySetOperations);
-            Assert.NotNull(type);
             type = typeof(AvailabilitySetContainer);
             Assert.NotNull(type);
         }
@@ -34,7 +32,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             Assert.Null(GetType("AvailabilitySets"));
             Assert.Null(GetType("AvailabilitySetsData"));
-            Assert.Null(GetType("AvailabilitySetsOperations"));
             Assert.Null(GetType("AvailabilitySetsContainer"));
         }
 
@@ -42,7 +39,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public void ValidateNonResource()
         {
             Assert.Null(GetType("UsageData"));
-            Assert.Null(GetType("UsageOperations"));
             Assert.Null(GetType("UsageContainer"));
 
             Assert.NotNull(GetType("Usage"));

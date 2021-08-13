@@ -21,8 +21,11 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing collection of PolicyDefinition and their operations over a Tenant. </summary>
-    public partial class PolicyDefinitionContainer : ResourceContainer
+    public partial class PolicyDefinitionContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PolicyDefinitionsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PolicyDefinitionContainer"/> class for mocking. </summary>
         protected PolicyDefinitionContainer()
         {
@@ -30,9 +33,10 @@ namespace MgmtExtensionResource
 
         /// <summary> Initializes a new instance of PolicyDefinitionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PolicyDefinitionContainer(ResourceOperations parent) : base(parent)
+        internal PolicyDefinitionContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -40,11 +44,6 @@ namespace MgmtExtensionResource
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PolicyDefinitionsRestOperations _restClient => new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -215,7 +214,7 @@ namespace MgmtExtensionResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = _restClient.GetAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken: cancellationToken);
                         if (response.Value == null)
@@ -266,7 +265,7 @@ namespace MgmtExtensionResource
                     {
                         parent = parent.Parent;
                     }
-                    if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                    if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                     {
                         var response = await _restClient.GetAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken: cancellationToken).ConfigureAwait(false);
                         if (response.Value == null)
@@ -414,7 +413,7 @@ namespace MgmtExtensionResource
                         {
                             parent = parent.Parent;
                         }
-                        if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                        if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
                             var response = _restClient.GetByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -450,7 +449,7 @@ namespace MgmtExtensionResource
                         {
                             parent = parent.Parent;
                         }
-                        if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                        if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
                             var response = _restClient.GetByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -496,7 +495,7 @@ namespace MgmtExtensionResource
                         {
                             parent = parent.Parent;
                         }
-                        if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                        if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
                             var response = await _restClient.GetByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -532,7 +531,7 @@ namespace MgmtExtensionResource
                         {
                             parent = parent.Parent;
                         }
-                        if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))
+                        if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
                             var response = await _restClient.GetByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -559,15 +558,15 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyDefinitionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyDefinition.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -582,15 +581,15 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyDefinitionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyDefinition.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

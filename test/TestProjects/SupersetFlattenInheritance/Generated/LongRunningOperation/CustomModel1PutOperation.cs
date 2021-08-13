@@ -24,7 +24,7 @@ namespace SupersetFlattenInheritance.Models
         {
         }
 
-        internal CustomModel1PutOperation(ResourceOperations operationsBase, Response<CustomModel1Data> response)
+        internal CustomModel1PutOperation(ArmResource operationsBase, Response<CustomModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<CustomModel1>(Response.FromValue(new CustomModel1(operationsBase, response.Value), response.GetRawResponse()));
         }
