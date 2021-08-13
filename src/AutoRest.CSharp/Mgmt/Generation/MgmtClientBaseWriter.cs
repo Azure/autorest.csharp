@@ -461,7 +461,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             MakeResourceNameParamPassThrough(method, parameterMapping, parentNameStack);
-            MakeByIdParamPassThrough(method, parameterMapping, parentNameStack);
+            UpdateByIdParamType(method, parameterMapping);
 
             // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
             foreach (var parameter in parameterMapping)
@@ -469,8 +469,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (IsMandatory(parameter.Parameter) && !parameter.IsPassThru && string.IsNullOrEmpty(parameter.ValueExpression))
                 {
                     var parentName = parentNameStack.Pop();
-                    // scope is a whole Id, remove ".Name" for it.
-                    parameter.ValueExpression = parameter.Parameter.Name == "scope" ? parentName.Substring(0, parentName.LastIndexOf(".Name")) : parentName;
+                    // {scope} or {resourceId} is a whole Id, remove ".Name" for it.
+                    parameter.ValueExpression = (parameter.Parameter.Name == "scope" || method.IsByIdMethod()) ? parentName.Substring(0, parentName.LastIndexOf(".Name")) : parentName;
                 }
             }
 
@@ -479,15 +479,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected abstract void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack);
 
-        protected virtual void MakeByIdParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        protected virtual void UpdateByIdParamType(RestClientMethod method, List<ParameterMapping> parameterMapping)
         {
-            var request = method.Operation?.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
             if (method.IsByIdMethod())
             {
                 var firstString = parameterMapping.FirstOrDefault(parameter => parameter.Parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase));
                 if (firstString?.Parameter != null)
                 {
-                    firstString.IsPassThru = true;
                     firstString.Parameter = firstString.Parameter with { Type = typeof(ResourceIdentifier) };
                 }
             }
