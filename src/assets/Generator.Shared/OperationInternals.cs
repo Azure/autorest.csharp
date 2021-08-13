@@ -276,9 +276,21 @@ namespace Azure.Core
             Location
         }
 
+        private bool ShouldIgnoreHeader()
+        {
+            return _requestMethod.Method == RequestMethod.Patch.Method && _rawResponse.Status == 200;
+        }
+
         private void InitializeScenarioInfo()
         {
             _originalHasLocation = _rawResponse.Headers.Contains("Location");
+
+            if (ShouldIgnoreHeader())
+            {
+                _pollUri = _originalUri.AbsoluteUri;
+                _headerFrom = HeaderFrom.None;
+                return;
+            }
 
             if (_rawResponse.Headers.Contains("Operation-Location"))
             {
