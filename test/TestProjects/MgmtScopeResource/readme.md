@@ -72,4 +72,5 @@ directive:
   - remove-operation: DeploymentOperations_ListAtSubscriptionScope
   - remove-operation: DeploymentOperations_Get
   - remove-operation: DeploymentOperations_List
+  - remove-operation: ResourceLinks_ListAtSubscription
 ```

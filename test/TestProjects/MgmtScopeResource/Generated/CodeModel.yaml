@@ -1135,7 +1135,7 @@ schemas: !Schemas
           name: ApiVersion20160901
           description: Api Version (2016-09-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_209
+    - !ConstantSchema &ref_207
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -2637,7 +2637,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_81
-    - !ObjectSchema &ref_208
+    - !ObjectSchema &ref_209
       type: object
       apiVersions:
         - !ApiVersion 
@@ -6285,91 +6285,7 @@ operationGroups:
             version: '2016-09-01'
         parameters:
           - *ref_100
-          - !Parameter &ref_207
-            schema: *ref_200
-            implementation: Method
-            language: !Languages 
-              default:
-                name: filter
-                description: The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}
-                serializedName: $filter
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter 
-            schema: *ref_198
-            implementation: Method
-            origin: modelerfour:synthesized/api-version
-            required: true
-            language: !Languages 
-              default:
-                name: apiVersion
-                description: Api Version
-                serializedName: api-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - *ref_115
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_103
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Resources/links
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_207
-        responses:
-          - !SchemaResponse 
-            schema: *ref_208
-            language: !Languages 
-              default:
-                name: ''
-                description: Returns an array of resource links for the subscription.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        extensions:
-          x-ms-odata: '#/components/schemas/ResourceLinkFilter'
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: ListAtSubscription
-            description: Gets all the linked resources for the subscription.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2016-09-01'
-        parameters:
-          - *ref_100
-          - !Parameter &ref_210
+          - !Parameter &ref_208
             schema: *ref_200
             implementation: Method
             required: true
@@ -6386,7 +6302,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_209
+            schema: *ref_207
             implementation: Method
             language: !Languages 
               default:
@@ -6436,10 +6352,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_210
+          - *ref_208
         responses:
           - !SchemaResponse 
-            schema: *ref_208
+            schema: *ref_209
             language: !Languages 
               default:
                 name: ''

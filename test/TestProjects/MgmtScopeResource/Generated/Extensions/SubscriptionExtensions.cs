@@ -21,15 +21,5 @@ namespace MgmtScopeResource
             return new PolicyAssignmentContainer(subscription);
         }
         #endregion
-
-        #region ResourceLink
-        /// <summary> Gets an object representing a ResourceLinkContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceLinkContainer" /> object. </returns>
-        public static ResourceLinkContainer GetResourceLinks(this Subscription subscription)
-        {
-            return new ResourceLinkContainer(subscription);
-        }
-        #endregion
     }
 }

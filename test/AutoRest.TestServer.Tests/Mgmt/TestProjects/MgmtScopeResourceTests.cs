@@ -29,6 +29,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("DeploymentOperationContainer", "Get", true)]
         [TestCase("DeploymentOperationContainer", "GetAll", true)]
         [TestCase("DeploymentOperation", "Get", true)]
+        [TestCase("ResourceLinkContainer", "CreateOrUpdate", true)]
+        [TestCase("ResourceLinkContainer", "Get", true)]
+        [TestCase("ResourceLinkContainer", "GetAll", true)]
+        [TestCase("ResourceLink", "Get", true)]
+        [TestCase("ResourceLink", "Delete", true)]
         public void ValidateScopeResourceMethods(string className, string methodName, bool exist)
         {
             var managementGroupExtensions = Assembly.GetExecutingAssembly().GetType("MgmtScopeResource.ManagementGroupExtensions");
