@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal SubParentWithNonResChCreateOrUpdateOperation(ResourceOperations operationsBase, Response<SubParentWithNonResChData> response)
+        internal SubParentWithNonResChCreateOrUpdateOperation(ArmResource operationsBase, Response<SubParentWithNonResChData> response)
         {
             _operation = new OperationOrResponseInternals<SubParentWithNonResCh>(Response.FromValue(new SubParentWithNonResCh(operationsBase, response.Value), response.GetRawResponse()));
         }

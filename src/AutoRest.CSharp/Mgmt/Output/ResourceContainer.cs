@@ -16,12 +16,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ResourceContainer : ResourceOperation
+    internal class ResourceContainer : Resource
     {
         private const string _suffixValue = "Container";
         private BuildContext<MgmtOutputLibrary> _context;
-        public const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
-        public const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
+        public const string ResourceGroupResourceType = "ResourceGroup.ResourceType";
+        public const string SubscriptionResourceType = "Subscription.ResourceType";
         public const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
         private const string ResourceGroupCommentName = "ResourceGroup";
         private const string SubscriptionCommentName = "Subscription";
@@ -42,7 +42,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != CreateMethod && !IsPutMethod(m.RestClientMethod)
-        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceOperationsListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
+        && !ListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !SubscriptionExtensionsListMethods.Any(s => m.RestClientMethod == s.GetRestClientMethod()) && !ResourceListMethods.Any(r => r.GetRestClientMethod() == m.RestClientMethod));
+
+        public Resource Resource => _context.Library.GetArmResource(OperationGroup);
+
+        public override string ResourceName => Resource.ResourceName;
 
         public RestClientMethod? CreateMethod => _createMethod ??= GetCreateMethod();
 
@@ -52,11 +56,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<ResourceListMethod> ListMethods => FindContainerListMethods(); // TODO: should only call once with lazy init
 
-        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
+        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetArmResource(OperationGroup).GetMethod;
 
-        public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetResourceOperation(OperationGroup).GetMethods;
+        public override List<ClientMethod> GetMethods => _getMethods ??= _context.Library.GetArmResource(OperationGroup).GetMethods;
 
-        public override ClientMethod? GetByIdMethod => _getByIdMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetByIdMethod;
+        public override ClientMethod? GetByIdMethod => _getByIdMethod ??= _context.Library.GetArmResource(OperationGroup).GetByIdMethod;
 
         private IEnumerable<ResourceListMethod> FindContainerListMethods()
         {
@@ -159,9 +163,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             switch (parentResourceType)
             {
                 case ResourceTypeBuilder.ResourceGroups:
-                    return ResourceGroupOperationsResourceType;
+                    return ResourceGroupResourceType;
                 case ResourceTypeBuilder.Subscriptions:
-                    return SubscriptionOperationsResourceType;
+                    return SubscriptionResourceType;
                 case ResourceTypeBuilder.Tenant:
                     return TenantResourceType;
                 default:
@@ -192,8 +196,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO: Throw the below exception after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
             // throw new Exception($"Could not find ResourceType for {parentResourceType}. Please update the swagger");
 
-            var parentOperations = _context.Library.GetResourceOperation(parentOperationGroup);
-            return $"{parentOperations.Declaration.Name}.ResourceType";
+            Resource parentResource = _context.Library.GetArmResource(parentOperationGroup);
+            return $"{parentResource.Type.ToString().Trim('\r', '\n')}.ResourceType";
         }
     }
 }

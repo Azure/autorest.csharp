@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal SubParentWithNonResChWithLocCreateOrUpdateOperation(ResourceOperations operationsBase, Response<SubParentWithNonResChWithLocData> response)
+        internal SubParentWithNonResChWithLocCreateOrUpdateOperation(ArmResource operationsBase, Response<SubParentWithNonResChWithLocData> response)
         {
             _operation = new OperationOrResponseInternals<SubParentWithNonResChWithLoc>(Response.FromValue(new SubParentWithNonResChWithLoc(operationsBase, response.Value), response.GetRawResponse()));
         }

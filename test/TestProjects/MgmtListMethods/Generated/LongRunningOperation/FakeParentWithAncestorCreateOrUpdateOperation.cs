@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal FakeParentWithAncestorCreateOrUpdateOperation(ResourceOperations operationsBase, Response<FakeParentWithAncestorData> response)
+        internal FakeParentWithAncestorCreateOrUpdateOperation(ArmResource operationsBase, Response<FakeParentWithAncestorData> response)
         {
             _operation = new OperationOrResponseInternals<FakeParentWithAncestor>(Response.FromValue(new FakeParentWithAncestor(operationsBase, response.Value), response.GetRawResponse()));
         }

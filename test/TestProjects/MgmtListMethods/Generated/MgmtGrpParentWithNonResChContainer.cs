@@ -20,8 +20,11 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of MgmtGrpParentWithNonResCh and their operations over a ManagementGroup. </summary>
-    public partial class MgmtGrpParentWithNonResChContainer : ResourceContainer
+    public partial class MgmtGrpParentWithNonResChContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly MgmtGrpParentWithNonResChesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChContainer"/> class for mocking. </summary>
         protected MgmtGrpParentWithNonResChContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal MgmtGrpParentWithNonResChContainer(ResourceOperations parent) : base(parent)
+        internal MgmtGrpParentWithNonResChContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new MgmtGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private MgmtGrpParentWithNonResChesRestOperations _restClient => new MgmtGrpParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ManagementGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ManagementGroup.ResourceType;
 
         // Container level operations.
 
@@ -398,15 +397,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -421,15 +420,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MgmtGrpParentWithNonResChContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(MgmtGrpParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
