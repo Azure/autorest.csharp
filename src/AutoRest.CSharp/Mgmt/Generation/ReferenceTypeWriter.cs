@@ -19,9 +19,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _ => new ModelWriter()
         };
 
-        protected override void AddClassAttributes(CodeWriter writer)
+        protected override void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
         {
-            writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
+            var extensions = schema.ObjectSchema.Extensions;
+            if (extensions != null)
+            {
+                if (extensions.MgmtReferenceType)
+                {
+                    writer.Line($"[{ReferenceClassFinder.ReferenceTypeAttribute}]");
+                }
+                else if (extensions.MgmtPropertyReferenceType)
+                {
+                    writer.Line($"[{ReferenceTypePropertyChooser.PropertyReferenceAttribute}]");
+                }
+            }
         }
 
         protected override void AddCtorAttribute(CodeWriter writer, ObjectType schema, ObjectTypeConstructor constructor)

@@ -13,8 +13,20 @@ namespace Azure.ResourceManager.Resources.Models
     {
         /// <summary> Initializes a new instance of ResourceReference. </summary>
         [InitializationConstructor]
-        internal ResourceReference()
+        public ResourceReference()
         {
+        }
+
+        /// <summary> Initializes a new instance of ResourceReference. </summary>
+        /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
+        /// <param name="name"> The name of the resource. </param>
+        /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        [SerializationConstructor]
+        internal ResourceReference(string id, string name, string type)
+        {
+            Id = id;
+            Name = name;
+            Type = type;
         }
 
         /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>

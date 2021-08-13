@@ -643,7 +643,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => schema.Extensions != null && schema.Extensions.MgmtReferenceType ? new MgmtReferenceType(objectSchema, _context) : new MgmtObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ? new MgmtReferenceType(objectSchema, _context)
+            : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 

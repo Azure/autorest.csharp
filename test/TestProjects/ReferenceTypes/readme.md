@@ -14,9 +14,17 @@ namespace: Azure.ReferenceTypes
 
 directive:
   - from: referenceTypes.json
-    where: $.definitions.*
+    where: $.definitions['ResourceReference']
     transform: >
       $["x-ms-mgmt-referenceType"] = true
+  - from: referenceTypes.json
+    where: $.definitions['TrackedResourceReference']
+    transform: >
+      $["x-ms-mgmt-referenceType"] = true
+  - from: referenceTypes.json
+    where: $.definitions.*
+    transform: >
+      $["x-ms-mgmt-propertyReferenceType"] = true
   - from: referenceTypes.json
     where: $.definitions.*
     transform: >
@@ -26,11 +34,19 @@ directive:
     transform: >
       $["x-accessibility"] = "public"
   - from: referenceTypes.json
-    where: $.definitions.*[?(@.enum)]
+    where: $.definitions.*
+    transform: >
+      $["x-csharp-formats"] = "json"
+  - from: referenceTypes.json
+    where: $.definitions.*
+    transform: >
+      $["x-csharp-usage"] = "model,input,output"
+  - from: referenceTypes.json
+    where: $.definitions.*.properties[?(@.enum)]
     transform: >
       $["x-namespace"] = "Azure.ResourceManager.Resources.Models"
   - from: referenceTypes.json
-    where: $.definitions.*[?(@.enum)]
+    where: $.definitions.*.properties[?(@.enum)]
     transform: >
       $["x-accessibility"] = "public"
 ```

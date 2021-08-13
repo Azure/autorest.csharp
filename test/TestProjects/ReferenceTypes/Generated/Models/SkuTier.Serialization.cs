@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ReferenceTypes.Models
+namespace Azure.ResourceManager.Resources.Models
 {
     internal static partial class SkuTierExtensions
     {

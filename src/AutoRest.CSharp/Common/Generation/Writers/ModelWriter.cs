@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.WriteXmlDocumentationSummary($"{schema.Description}");
-                AddClassAttributes(writer);
+                AddClassAttributes(writer, schema);
 
                 if (schema.IsStruct)
                 {
@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        protected virtual void AddClassAttributes(CodeWriter writer)
+        protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)
         {
         }
 

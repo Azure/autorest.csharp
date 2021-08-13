@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Resources.Models
         /// <param name="location"> The geo-location where the resource lives. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         [InitializationConstructor]
-        internal TrackedResourceReference(string location)
+        public TrackedResourceReference(string location)
         {
             if (location == null)
             {
@@ -30,9 +30,22 @@ namespace Azure.ResourceManager.Resources.Models
             Location = location;
         }
 
+        /// <summary> Initializes a new instance of TrackedResourceReference. </summary>
+        /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
+        /// <param name="name"> The name of the resource. </param>
+        /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="location"> The geo-location where the resource lives. </param>
+        [SerializationConstructor]
+        internal TrackedResourceReference(string id, string name, string type, IDictionary<string, string> tags, string location) : base(id, name, type)
+        {
+            Tags = tags;
+            Location = location;
+        }
+
         /// <summary> Resource tags. </summary>
-        public IReadOnlyDictionary<string, string> Tags { get; }
+        public IDictionary<string, string> Tags { get; }
         /// <summary> The geo-location where the resource lives. </summary>
-        public string Location { get; }
+        public string Location { get; set; }
     }
 }

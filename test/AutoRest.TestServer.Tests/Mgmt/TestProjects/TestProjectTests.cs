@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             _projectName = projectName;
         }
 
-        protected IEnumerable<Type> MyTypes()
+        protected virtual IEnumerable<Type> MyTypes()
         {
             foreach (var type in GetType().Assembly.GetTypes())
             {
@@ -449,7 +449,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public async Task ValidateRequiredParamsInCtor()
         {
-            if (_projectName.Equals(""))
+            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes"))
             {
                 return;
             }

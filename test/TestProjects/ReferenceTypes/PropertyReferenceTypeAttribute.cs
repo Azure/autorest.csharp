@@ -5,7 +5,7 @@ using System;
 
 namespace Azure.ResourceManager.Resources.Models
 {
-    internal class PropertyReferenceAttribute : Attribute
+    internal class PropertyReferenceTypeAttribute : Attribute
     {
     }
 }

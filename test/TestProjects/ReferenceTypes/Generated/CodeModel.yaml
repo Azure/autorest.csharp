@@ -191,6 +191,9 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2.0'
       choiceType: *ref_0
+      extensions:
+        x-accessibility: public
+        x-namespace: Azure.ResourceManager.Resources.Models
       language: !Languages 
         default:
           name: SkuTier
@@ -254,6 +257,9 @@ schemas: !Schemas
             summary: Tracked Resource
             extensions:
               x-accessibility: public
+              x-csharp-formats: json
+              x-csharp-usage: model,input,output
+              x-ms-mgmt-propertyReferenceType: true
               x-ms-mgmt-referenceType: true
               x-namespace: Azure.ResourceManager.Resources.Models
             language: !Languages 
@@ -296,7 +302,10 @@ schemas: !Schemas
       summary: Resource
       extensions:
         x-accessibility: public
+        x-csharp-formats: json
+        x-csharp-usage: model,input,output
         x-ms-azure-resource: true
+        x-ms-mgmt-propertyReferenceType: true
         x-ms-mgmt-referenceType: true
         x-namespace: Azure.ResourceManager.Resources.Models
       language: !Languages 
@@ -326,6 +335,9 @@ schemas: !Schemas
           schema: *ref_10
           required: false
           serializedName: tier
+          extensions:
+            x-accessibility: public
+            x-namespace: Azure.ResourceManager.Resources.Models
           language: !Languages 
             default:
               name: tier
@@ -360,7 +372,9 @@ schemas: !Schemas
           protocol: !Protocols {}
       extensions:
         x-accessibility: public
-        x-ms-mgmt-referenceType: true
+        x-csharp-formats: json
+        x-csharp-usage: model,input,output
+        x-ms-mgmt-propertyReferenceType: true
         x-namespace: Azure.ResourceManager.Resources.Models
       language: !Languages 
         default:
