@@ -20,8 +20,11 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of ManagementGroup and their operations over a Tenant. </summary>
-    public partial class ManagementGroupContainer : ResourceContainer
+    public partial class ManagementGroupContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ManagementGroupsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ManagementGroupContainer"/> class for mocking. </summary>
         protected ManagementGroupContainer()
         {
@@ -29,15 +32,11 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of ManagementGroupContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ManagementGroupContainer(ResourceOperations parent) : base(parent)
+        internal ManagementGroupContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ManagementGroupsRestOperations _restClient => new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -121,7 +120,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ManagementGroupsCreateOrUpdateOperation StartCreateOrUpdate(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual ManagementGroupCreateOrUpdateOperation StartCreateOrUpdate(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -137,7 +136,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.CreateOrUpdate(groupId, parameters, cancellationToken);
-                return new ManagementGroupsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                return new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -155,7 +154,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ManagementGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementGroupCreateOrUpdateOperation> StartCreateOrUpdateAsync(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -171,7 +170,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(groupId, parameters, cancellationToken).ConfigureAwait(false);
-                return new ManagementGroupsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                return new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -420,15 +419,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementGroupOperations.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementGroup.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -443,15 +442,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementGroupOperations.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementGroup.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

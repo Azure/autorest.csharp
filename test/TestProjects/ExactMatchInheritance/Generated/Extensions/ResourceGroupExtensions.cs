@@ -14,9 +14,9 @@ namespace ExactMatchInheritance
     {
         #region ExactMatchModel1
         /// <summary> Gets an object representing a ExactMatchModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel1Container" /> object. </returns>
-        public static ExactMatchModel1Container GetExactMatchModel1s(this ResourceGroupOperations resourceGroup)
+        public static ExactMatchModel1Container GetExactMatchModel1s(this ResourceGroup resourceGroup)
         {
             return new ExactMatchModel1Container(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace ExactMatchInheritance
 
         #region ExactMatchModel3
         /// <summary> Gets an object representing a ExactMatchModel3Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel3Container" /> object. </returns>
-        public static ExactMatchModel3Container GetExactMatchModel3s(this ResourceGroupOperations resourceGroup)
+        public static ExactMatchModel3Container GetExactMatchModel3s(this ResourceGroup resourceGroup)
         {
             return new ExactMatchModel3Container(resourceGroup);
         }
@@ -34,9 +34,9 @@ namespace ExactMatchInheritance
 
         #region ExactMatchModel5
         /// <summary> Gets an object representing a ExactMatchModel5Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ExactMatchModel5Container" /> object. </returns>
-        public static ExactMatchModel5Container GetExactMatchModel5s(this ResourceGroupOperations resourceGroup)
+        public static ExactMatchModel5Container GetExactMatchModel5s(this ResourceGroup resourceGroup)
         {
             return new ExactMatchModel5Container(resourceGroup);
         }

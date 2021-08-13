@@ -12,7 +12,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Core = Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 writer.Line();
-                writer.Line($"private readonly {typeof(Core.ResourceOperations)} {_operationBaseField};");
+                writer.Line($"private readonly {typeof(ArmResource)} {_operationBaseField};");
             }
         }
 
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 // pass operationsBase in so that the construction of [Resource] is possible
-                writer.Append($"internal {cs.Name}({typeof(Core.ResourceOperations)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
+                writer.Append($"internal {cs.Name}({typeof(ArmResource)} operationsBase, {typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                 if (pagingResponse != null)
                 {

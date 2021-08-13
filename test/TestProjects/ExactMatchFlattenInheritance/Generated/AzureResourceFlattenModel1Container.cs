@@ -18,8 +18,11 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel1 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel1Container : ResourceContainer
+    public partial class AzureResourceFlattenModel1Container : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AzureResourceFlattenModel1SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel1Container()
         {
@@ -27,18 +30,14 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AzureResourceFlattenModel1Container(ResourceOperations parent) : base(parent)
+        internal AzureResourceFlattenModel1Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AzureResourceFlattenModel1SRestOperations _restClient => new AzureResourceFlattenModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -107,7 +106,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AzureResourceFlattenModel1SPutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual AzureResourceFlattenModel1PutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -123,7 +122,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new AzureResourceFlattenModel1SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -137,7 +136,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AzureResourceFlattenModel1SPutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AzureResourceFlattenModel1PutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -153,7 +152,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new AzureResourceFlattenModel1SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -320,15 +319,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -343,15 +342,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Container.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

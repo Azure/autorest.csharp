@@ -20,8 +20,11 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of FakeParent and their operations over a Fake. </summary>
-    public partial class FakeParentContainer : ResourceContainer
+    public partial class FakeParentContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly FakeParentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentContainer"/> class for mocking. </summary>
         protected FakeParentContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of FakeParentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FakeParentContainer(ResourceOperations parent) : base(parent)
+        internal FakeParentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new FakeParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private FakeParentsRestOperations _restClient => new FakeParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => FakeOperations.ResourceType;
+        protected override ResourceType ValidResourceType => Fake.ResourceType;
 
         // Container level operations.
 
@@ -109,7 +108,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentsCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeParentCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
@@ -125,7 +124,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, fakeParentName, parameters, cancellationToken);
-                return new FakeParentsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentName, FakeParentData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeParentName == null)
             {
@@ -155,7 +154,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakeParentsCreateOrUpdateOperation(Parent, response);
+                return new FakeParentCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -398,15 +397,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(FakeParent.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -421,15 +420,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(FakeParent.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

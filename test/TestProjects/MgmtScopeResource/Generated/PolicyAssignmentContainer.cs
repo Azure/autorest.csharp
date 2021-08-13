@@ -21,8 +21,11 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of PolicyAssignment and their operations over a Tenant. </summary>
-    public partial class PolicyAssignmentContainer : ResourceContainer
+    public partial class PolicyAssignmentContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PolicyAssignmentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PolicyAssignmentContainer"/> class for mocking. </summary>
         protected PolicyAssignmentContainer()
         {
@@ -30,9 +33,10 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of PolicyAssignmentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PolicyAssignmentContainer(ResourceOperations parent) : base(parent)
+        internal PolicyAssignmentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -40,11 +44,6 @@ namespace MgmtScopeResource
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PolicyAssignmentsRestOperations _restClient => new PolicyAssignmentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -116,7 +115,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyAssignmentsCreateOperation StartCreateOrUpdate(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyAssignmentCreateOperation StartCreateOrUpdate(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -132,7 +131,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _restClient.Create(Id, policyAssignmentName, parameters, cancellationToken);
-                return new PolicyAssignmentsCreateOperation(Parent, response);
+                return new PolicyAssignmentCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -146,7 +145,7 @@ namespace MgmtScopeResource
         /// <param name="parameters"> Parameters for the policy assignment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyAssignmentsCreateOperation> StartCreateOrUpdateAsync(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyAssignmentCreateOperation> StartCreateOrUpdateAsync(string policyAssignmentName, PolicyAssignmentData parameters, CancellationToken cancellationToken = default)
         {
             if (policyAssignmentName == null)
             {
@@ -162,7 +161,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _restClient.CreateAsync(Id, policyAssignmentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new PolicyAssignmentsCreateOperation(Parent, response);
+                return new PolicyAssignmentCreateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -338,7 +337,7 @@ namespace MgmtScopeResource
                 {
                     if (Id.TryGetResourceGroupName(out var resourceGroupName))
                     {
-                        if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                        if (Id.ResourceType.Equals(ResourceGroup.ResourceType))
                         {
                             var response = _restClient.GetForResourceGroup(Id.Parent.Name, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -347,7 +346,7 @@ namespace MgmtScopeResource
                         {
                             var parent = Id.Parent;
                             var parentParts = new List<string>();
-                            while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                            while (!parent.ResourceType.Equals(ResourceGroup.ResourceType))
                             {
                                 parentParts.Insert(0, $"{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}/{parent.Name}");
                                 parent = parent.Parent;
@@ -383,7 +382,7 @@ namespace MgmtScopeResource
                 {
                     if (Id.TryGetResourceGroupName(out var resourceGroupName))
                     {
-                        if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                        if (Id.ResourceType.Equals(ResourceGroup.ResourceType))
                         {
                             var response = _restClient.GetForResourceGroupNextPage(nextLink, Id.Parent.Name, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -392,7 +391,7 @@ namespace MgmtScopeResource
                         {
                             var parent = Id.Parent;
                             var parentParts = new List<string>();
-                            while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                            while (!parent.ResourceType.Equals(ResourceGroup.ResourceType))
                             {
                                 parentParts.Insert(0, $"{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}/{parent.Name}");
                                 parent = parent.Parent;
@@ -438,7 +437,7 @@ namespace MgmtScopeResource
                 {
                     if (Id.TryGetResourceGroupName(out var resourceGroupName))
                     {
-                        if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                        if (Id.ResourceType.Equals(ResourceGroup.ResourceType))
                         {
                             var response = await _restClient.GetForResourceGroupAsync(Id.Parent.Name, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -447,7 +446,7 @@ namespace MgmtScopeResource
                         {
                             var parent = Id.Parent;
                             var parentParts = new List<string>();
-                            while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                            while (!parent.ResourceType.Equals(ResourceGroup.ResourceType))
                             {
                                 parentParts.Insert(0, $"{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}/{parent.Name}");
                                 parent = parent.Parent;
@@ -483,7 +482,7 @@ namespace MgmtScopeResource
                 {
                     if (Id.TryGetResourceGroupName(out var resourceGroupName))
                     {
-                        if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                        if (Id.ResourceType.Equals(ResourceGroup.ResourceType))
                         {
                             var response = await _restClient.GetForResourceGroupNextPageAsync(nextLink, Id.Parent.Name, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyAssignment(Parent, value)), response.Value.NextLink, response.GetRawResponse());
@@ -492,7 +491,7 @@ namespace MgmtScopeResource
                         {
                             var parent = Id.Parent;
                             var parentParts = new List<string>();
-                            while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))
+                            while (!parent.ResourceType.Equals(ResourceGroup.ResourceType))
                             {
                                 parentParts.Insert(0, $"{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}/{parent.Name}");
                                 parent = parent.Parent;
@@ -529,15 +528,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyAssignmentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -552,15 +551,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PolicyAssignmentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PolicyAssignment.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

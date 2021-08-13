@@ -44,15 +44,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceOperation in context.Library.ResourceOperations)
-            {
-                var codeWriter = new CodeWriter();
-                var operationWriter = new ResourceOperationWriter(codeWriter, resourceOperation, context);
-                operationWriter.WriteClient();
-
-                project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
-            }
-
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
@@ -75,7 +66,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var resource in context.Library.ArmResource)
+            foreach (var resource in context.Library.ArmResources)
             {
                 var codeWriter = new CodeWriter();
                 var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
@@ -100,13 +91,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)
+            foreach (var tupleResource in context.Library.TupleResources)
             {
                 var codeWriter = new CodeWriter();
-                var resourceOperationWriter = new TupleResourceOperationWriter(codeWriter, tupleResourceOperation, context);
-                resourceOperationWriter.WriteClient();
+                var resourceWriter = new TupleResourceWriter(codeWriter, tupleResource, context);
+                resourceWriter.WriteResource();
 
-                project.AddGeneratedFile($"{tupleResourceOperation.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{tupleResource.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)

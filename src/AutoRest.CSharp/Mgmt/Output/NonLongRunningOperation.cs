@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -39,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ResultDataType = context.Library.GetResourceData(operationGroup).Type;
             }
 
-            DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
+            DefaultName = lroInfo.ClientPrefix.ToSingular() + operation.CSharpName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }

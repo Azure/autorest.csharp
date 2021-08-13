@@ -9,7 +9,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure;
 using Azure.Core;
-using Core = Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operation.ResultDataType != null)
                         {
                             // todo: programmatically get the type of operationBase from the definition of [Resource]
-                            writer.Append($"{typeof(Core.ResourceOperations)} operationsBase, ");
+                            writer.Append($"{typeof(ArmResource)} operationsBase, ");
                             writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
                         }
                         else

@@ -20,8 +20,11 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of TenantParentWithNonResCh and their operations over a TenantTest. </summary>
-    public partial class TenantParentWithNonResChContainer : ResourceContainer
+    public partial class TenantParentWithNonResChContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly TenantParentWithNonResChesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithNonResChContainer"/> class for mocking. </summary>
         protected TenantParentWithNonResChContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of TenantParentWithNonResChContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal TenantParentWithNonResChContainer(ResourceOperations parent) : base(parent)
+        internal TenantParentWithNonResChContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new TenantParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private TenantParentWithNonResChesRestOperations _restClient => new TenantParentWithNonResChesRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => TenantTestOperations.ResourceType;
+        protected override ResourceType ValidResourceType => TenantTest.ResourceType;
 
         // Container level operations.
 
@@ -109,7 +108,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentWithNonResChesCreateOrUpdateOperation StartCreateOrUpdate(string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantParentWithNonResChCreateOrUpdateOperation StartCreateOrUpdate(string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChName == null)
             {
@@ -125,7 +124,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChName, parameters, cancellationToken);
-                return new TenantParentWithNonResChesCreateOrUpdateOperation(Parent, response);
+                return new TenantParentWithNonResChCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtListMethods
         /// <param name="parameters"> Parameters supplied to the Create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentWithNonResChesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentWithNonResChCreateOrUpdateOperation> StartCreateOrUpdateAsync(string tenantParentWithNonResChName, TenantParentWithNonResChData parameters, CancellationToken cancellationToken = default)
         {
             if (tenantParentWithNonResChName == null)
             {
@@ -155,7 +154,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                return new TenantParentWithNonResChesCreateOrUpdateOperation(Parent, response);
+                return new TenantParentWithNonResChCreateOrUpdateOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -398,15 +397,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(TenantParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(TenantParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -421,15 +420,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetAsGenericResources");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentWithNonResChContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(TenantParentWithNonResChOperations.ResourceType);
+                var filters = new ResourceFilterCollection(TenantParentWithNonResCh.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

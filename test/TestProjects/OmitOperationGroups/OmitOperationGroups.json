@@ -294,6 +294,120 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default": {
+            "get": {
+                "tags": [
+                    "Model4s"
+                ],
+                "operationId": "Model4s_GetDefault",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "model2sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Model4"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model5s/{model5sName}": {
+            "put": {
+                "tags": [
+                    "Model5s"
+                ],
+                "operationId": "Model5s_CreateOrUpdate",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "model5sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Model5"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Model5"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Model5s"
+                ],
+                "operationId": "Model5s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "model5sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Model5"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -305,6 +419,18 @@
                 },
                 "modelx": {
                     "$ref": "#/definitions/ModelX"
+                },
+                "modelz": {
+                    "$ref": "#/definitions/ModelZ"
+                },
+                "modelps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ModelP"
+                    }
+                },
+                "modelq": {
+                    "$ref": "#/definitions/ModelQ"
                 }
             },
             "allOf": [
@@ -378,6 +504,61 @@
                 },
                 "g": {
                     "readOnly": true,
+                    "type": "string"
+                }
+            }
+        },
+        "ModelZ": {
+            "type": "object",
+            "properties": {
+                "h": {
+                    "type": "string"
+                },
+                "i": {
+                    "readOnly": true,
+                    "type": "string"
+                }
+            }
+        },
+        "Model4": {
+            "type": "object",
+            "properties": {
+                "j": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "modelz":{
+                    "$ref": "#/definitions/ModelZ"
+                }
+            }
+        },
+        "Model5": {
+            "type": "object",
+            "properties": {
+                "k": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "modelqs":{
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ModelQ"
+                    }
+                }
+            }
+        },
+        "ModelP": {
+            "type": "object",
+            "properties": {
+                "l": {
+                    "type": "string"
+                }
+            }
+        },
+        "ModelQ": {
+            "type": "object",
+            "properties": {
+                "m": {
                     "type": "string"
                 }
             }

@@ -26,13 +26,13 @@ namespace ExactMatchInheritance
             return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel2>> GetExactMatchModel2Async(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this Subscription subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -51,7 +51,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetExactMatchModel2");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
@@ -67,13 +67,13 @@ namespace ExactMatchInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel2> GetExactMatchModel2(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        public static Response<ExactMatchModel2> PutExactMatchModel2(this Subscription subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -92,7 +92,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetExactMatchModel2");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2");
                 scope.Start();
                 try
                 {
@@ -116,13 +116,13 @@ namespace ExactMatchInheritance
             return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<ExactMatchModel4>> GetExactMatchModel4Async(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this Subscription subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -141,7 +141,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetExactMatchModel4");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {
@@ -157,13 +157,13 @@ namespace ExactMatchInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public static Response<ExactMatchModel4> GetExactMatchModel4(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        public static Response<ExactMatchModel4> PutExactMatchModel4(this Subscription subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -182,7 +182,7 @@ namespace ExactMatchInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetExactMatchModel4");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4");
                 scope.Start();
                 try
                 {

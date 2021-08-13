@@ -14,9 +14,9 @@ namespace MgmtPropertyChooser
     {
         #region VirtualMachine
         /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
-        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroupOperations resourceGroup)
+        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroup resourceGroup)
         {
             return new VirtualMachineContainer(resourceGroup);
         }
