@@ -109,6 +109,42 @@ namespace azure_parameter_grouping
             }
         }
 
+        /// <summary> Post a grouped parameters with reserved words. </summary>
+        /// <param name="parameterGroupingPostReservedWordsParameters"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PostReservedWordsAsync(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostReservedWords");
+            scope.Start();
+            try
+            {
+                return await RestClient.PostReservedWordsAsync(parameterGroupingPostReservedWordsParameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Post a grouped parameters with reserved words. </summary>
+        /// <param name="parameterGroupingPostReservedWordsParameters"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PostReservedWords(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ParameterGroupingClient.PostReservedWords");
+            scope.Start();
+            try
+            {
+                return RestClient.PostReservedWords(parameterGroupingPostReservedWordsParameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Post parameters from multiple different parameter groups. </summary>
         /// <param name="firstParameterGroup"> Parameter group. </param>
         /// <param name="parameterGroupingPostMultiParamGroupsSecondParamGroup"> Parameter group. </param>

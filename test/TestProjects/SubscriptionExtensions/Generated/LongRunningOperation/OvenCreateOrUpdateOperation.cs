@@ -22,14 +22,14 @@ namespace SubscriptionExtensions.Models
     {
         private readonly OperationInternals<Oven> _operation;
 
-        private readonly ResourceOperations _operationBase;
+        private readonly ArmResource _operationBase;
 
         /// <summary> Initializes a new instance of OvenCreateOrUpdateOperation for mocking. </summary>
         protected OvenCreateOrUpdateOperation()
         {
         }
 
-        internal OvenCreateOrUpdateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal OvenCreateOrUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<Oven>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "OvenCreateOrUpdateOperation");
             _operationBase = operationsBase;

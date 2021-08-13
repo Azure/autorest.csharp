@@ -14,9 +14,9 @@ namespace MgmtLRO
     {
         #region Fake
         /// <summary> Gets an object representing a FakeContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="FakeContainer" /> object. </returns>
-        public static FakeContainer GetFakes(this ResourceGroupOperations resourceGroup)
+        public static FakeContainer GetFakes(this ResourceGroup resourceGroup)
         {
             return new FakeContainer(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace MgmtLRO
 
         #region Bar
         /// <summary> Gets an object representing a BarContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="BarContainer" /> object. </returns>
-        public static BarContainer GetBars(this ResourceGroupOperations resourceGroup)
+        public static BarContainer GetBars(this ResourceGroup resourceGroup)
         {
             return new BarContainer(resourceGroup);
         }

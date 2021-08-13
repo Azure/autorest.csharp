@@ -22,14 +22,14 @@ namespace MgmtScopeResource.Models
     {
         private readonly OperationInternals<DeploymentExtended> _operation;
 
-        private readonly ResourceOperations _operationBase;
+        private readonly ArmResource _operationBase;
 
         /// <summary> Initializes a new instance of DeploymentCreateOrUpdateAtScopeOperation for mocking. </summary>
         protected DeploymentCreateOrUpdateAtScopeOperation()
         {
         }
 
-        internal DeploymentCreateOrUpdateAtScopeOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal DeploymentCreateOrUpdateAtScopeOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<DeploymentExtended>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentCreateOrUpdateAtScopeOperation");
             _operationBase = operationsBase;

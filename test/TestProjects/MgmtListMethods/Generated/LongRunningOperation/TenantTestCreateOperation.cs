@@ -22,14 +22,14 @@ namespace MgmtListMethods.Models
     {
         private readonly OperationInternals<TenantTest> _operation;
 
-        private readonly ResourceOperations _operationBase;
+        private readonly ArmResource _operationBase;
 
         /// <summary> Initializes a new instance of TenantTestCreateOperation for mocking. </summary>
         protected TenantTestCreateOperation()
         {
         }
 
-        internal TenantTestCreateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TenantTestCreateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<TenantTest>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "TenantTestCreateOperation");
             _operationBase = operationsBase;

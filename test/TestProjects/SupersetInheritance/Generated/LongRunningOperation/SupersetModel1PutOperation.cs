@@ -24,7 +24,7 @@ namespace SupersetInheritance.Models
         {
         }
 
-        internal SupersetModel1PutOperation(ResourceOperations operationsBase, Response<SupersetModel1Data> response)
+        internal SupersetModel1PutOperation(ArmResource operationsBase, Response<SupersetModel1Data> response)
         {
             _operation = new OperationOrResponseInternals<SupersetModel1>(Response.FromValue(new SupersetModel1(operationsBase, response.Value), response.GetRawResponse()));
         }

@@ -89,7 +89,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                         }
                         else if (operation.Language.Default.Name.Equals("WhatIfAtTenantScope"))
                         {
-                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtended.ResourceType));
                             Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
                             Assert.IsFalse(operation.IsParentScope());
                             Assert.IsFalse(operation.IsParentTenant());
@@ -103,14 +103,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                         }
                         else if (operation.Language.Default.Name.Equals("WhatIfAtSubscriptionScope"))
                         {
-                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtended.ResourceType));
                             Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Subscriptions));
                             Assert.IsFalse(operation.IsParentScope());
                             Assert.IsFalse(operation.IsParentTenant());
                         }
                         else if (operation.Language.Default.Name.Equals("WhatIf"))
                         {
-                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtended.ResourceType));
                             Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.ResourceGroups));
                             Assert.IsFalse(operation.IsParentScope());
                             Assert.IsFalse(operation.IsParentTenant());
@@ -121,13 +121,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 {
                     Assert.IsFalse(operations.IsScopeResource(context.Configuration.MgmtConfiguration));
                     Assert.IsTrue(operations.IsAncestorScope());
-                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(DeploymentExtendedOperations.ResourceType));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(DeploymentExtended.ResourceType));
                     Assert.IsTrue(operations.IsAncestorResourceTypeTenant(context));
                     foreach (var operation in operations.Operations)
                     {
                         if (operation.Language.Default.Name.Equals("GetAtScope") || operation.Language.Default.Name.Equals("ListAtScope"))
                         {
-                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtendedOperations.ResourceType));
+                            Assert.IsTrue(operation.ParentResourceType().Equals(DeploymentExtended.ResourceType));
                             Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
                             Assert.IsTrue(operation.IsAncestorScope());
                             Assert.IsFalse(operation.IsParentScope());
