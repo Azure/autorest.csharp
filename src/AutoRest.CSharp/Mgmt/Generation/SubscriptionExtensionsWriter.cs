@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                                     if (listMethod.ClientMethod != null)
                                     {
-                                        if (count > 1 && listMethod.ClientMethod.Name == "GetByLocation")
+                                        if (count > 1 && listMethod.ClientMethod.Name == "GetAllByLocation")
                                         {
                                             methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
