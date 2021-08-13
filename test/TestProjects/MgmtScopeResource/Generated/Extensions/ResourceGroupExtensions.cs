@@ -14,9 +14,9 @@ namespace MgmtScopeResource
     {
         #region PolicyAssignment
         /// <summary> Gets an object representing a PolicyAssignmentContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PolicyAssignmentContainer" /> object. </returns>
-        public static PolicyAssignmentContainer GetPolicyAssignments(this ResourceGroupOperations resourceGroup)
+        public static PolicyAssignmentContainer GetPolicyAssignments(this ResourceGroup resourceGroup)
         {
             return new PolicyAssignmentContainer(resourceGroup);
         }

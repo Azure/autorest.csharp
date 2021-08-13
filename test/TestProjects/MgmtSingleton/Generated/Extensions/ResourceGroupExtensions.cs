@@ -14,9 +14,9 @@ namespace MgmtSingleton
     {
         #region ParentResource
         /// <summary> Gets an object representing a ParentResourceContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ParentResourceContainer" /> object. </returns>
-        public static ParentResourceContainer GetParentResources(this ResourceGroupOperations resourceGroup)
+        public static ParentResourceContainer GetParentResources(this ResourceGroup resourceGroup)
         {
             return new ParentResourceContainer(resourceGroup);
         }

@@ -25,7 +25,7 @@ namespace MgmtParamOrdering.Models
         {
         }
 
-        internal DedicatedHostGroupCreateOrUpdateOperation(ResourceOperations operationsBase, Response<DedicatedHostGroupData> response)
+        internal DedicatedHostGroupCreateOrUpdateOperation(ArmResource operationsBase, Response<DedicatedHostGroupData> response)
         {
             _operation = new OperationOrResponseInternals<DedicatedHostGroup>(Response.FromValue(new DedicatedHostGroup(operationsBase, response.Value), response.GetRawResponse()));
         }

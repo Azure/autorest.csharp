@@ -23,6 +23,8 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -43,18 +45,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.UseNamespace(typeof(Task).Namespace!);
         }
-
-       protected void WriteFields(CodeWriter writer, RestClient restClient)
+        protected void WriteFields(CodeWriter writer, RestClient client)
         {
-            writer.Line();
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
-            // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-            var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
-            writer.Line();
+            writer.Line($"{RestClientAccessibility} readonly {client.Type} {RestClientField};");
         }
 
         protected void WriteEndOfGet(CodeWriter writer, CSharpType resourcetype, bool isAsync)
@@ -64,9 +58,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(Response)}.FromValue(new {resourcetype}({ContextProperty}, response.Value), response.GetRawResponse());");
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, Type contextArgumentType, string parentArguments)
+        protected void WriteContainerCtors(CodeWriter writer, RestClient restClient, Type contextArgumentType, string parentArguments)
         {
             // write protected default constructor
+            writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeNameOfThis}\"/> class for mocking.");
             using (writer.Scope($"protected {TypeNameOfThis}()"))
             { }
@@ -78,6 +73,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"internal {TypeNameOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
+                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
             }
         }
 
@@ -238,7 +235,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         if (resourceMethod != null)
                         {
-                            using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                            using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                             {
                                 WritePageFunctionBody(writer, resourceGroupMethod, restClientName, converter, async, isNextPageFunc);
                             }
@@ -277,12 +274,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             methodDict.Remove(tenantMethod);
                             var parent = new CodeWriterDeclaration("parent");
                             writer.Line($"var {parent:D} = Id;");
-                            using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                            using (writer.Scope($"while ({parent}.Parent != {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                             {
                                 writer.Line($"{parent} = {parent}.Parent;");
                             }
-                            writer.UseNamespace("Azure.ResourceManager.Management");
-                            using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                            using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                             {
                                 WritePageFunctionBody(writer, managementGroupMethod, restClientName, converter, async, isNextPageFunc);
                             }
@@ -325,7 +321,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.UseNamespace("System.Collections.Generic");
                 writer.Line($"var parent = Id.Parent;");
                 writer.Line($"var parentParts = new List<string>();");
-                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                using (writer.Scope($"while (!parent.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                 {
                     writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
                     writer.Line($"parent = parent.Parent;");
@@ -854,7 +850,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             {
                                 if (resourceMethod != null)
                                 {
-                                    using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                                    using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                     {
                                         WriteStartLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
                                     }
@@ -893,12 +889,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                     methodDict.Remove(tenantMethod);
                                     var parent = new CodeWriterDeclaration("parent");
                                     writer.Line($"var {parent:D} = Id;");
-                                    using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                                    using (writer.Scope($"while ({parent}.Parent !=  {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                                     {
                                         writer.Line($"{parent} = {parent}.Parent;");
                                     }
-                                    writer.UseNamespace("Azure.ResourceManager.Management");
-                                    using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                                    using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                     {
                                         WriteStartLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), isAsync);
                                     }
@@ -939,7 +934,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.UseNamespace("System.Collections.Generic");
                 writer.Line($"var parent = Id.Parent;");
                 writer.Line($"var parentParts = new List<string>();");
-                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                using (writer.Scope($"while (!parent.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                 {
                     writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
                     writer.Line($"parent = parent.Parent;");

@@ -25,7 +25,7 @@ namespace MgmtSingleton.Models
         {
         }
 
-        internal SingletonResourceUpdateOperation(ResourceOperations operationsBase, Response<SingletonResourceData> response)
+        internal SingletonResourceUpdateOperation(ArmResource operationsBase, Response<SingletonResourceData> response)
         {
             _operation = new OperationOrResponseInternals<SingletonResource>(Response.FromValue(new SingletonResource(operationsBase, response.Value), response.GetRawResponse()));
         }
