@@ -112,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var returnType = resourceType.WrapPageable(async);
 
-            writer.Append($"public {returnType} {CreateMethodName(methodName, async)}(");
+            writer.Append($"public {GetVirtual(true)} {returnType} {CreateMethodName(methodName, async)}(");
             foreach (var param in nonPathDomainParameters)
             {
                 writer.WriteParameter(param);
@@ -517,7 +517,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            writer.Append($"{restClientMethod.Accessibility} virtual {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
+            writer.Append($"{restClientMethod.Accessibility} {GetVirtual(true)} {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {

@@ -324,7 +324,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets the list of images under a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Image> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<Image> GetAll(CancellationToken cancellationToken = default)
         {
             Page<Image> FirstPageFunc(int? pageSizeHint)
             {
@@ -362,7 +362,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets the list of images under a resource group. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Image> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Image> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<Image>> FirstPageFunc(int? pageSizeHint)
             {
@@ -403,7 +403,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.GetAllAsGenericResources");
             scope.Start();
@@ -426,7 +426,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.GetAllAsGenericResources");
             scope.Start();
