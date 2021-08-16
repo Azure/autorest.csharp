@@ -20,8 +20,11 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSetExtension and their operations over a VirtualMachineScaleSet. </summary>
-    public partial class VirtualMachineScaleSetExtensionContainer : ResourceContainer
+    public partial class VirtualMachineScaleSetExtensionContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly VirtualMachineScaleSetExtensionsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionContainer"/> class for mocking. </summary>
         protected VirtualMachineScaleSetExtensionContainer()
         {
@@ -29,18 +32,14 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal VirtualMachineScaleSetExtensionContainer(ResourceOperations parent) : base(parent)
+        internal VirtualMachineScaleSetExtensionContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new VirtualMachineScaleSetExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineScaleSetExtensionsRestOperations _restClient => new VirtualMachineScaleSetExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => VirtualMachineScaleSetOperations.ResourceType;
+        protected override ResourceType ValidResourceType => VirtualMachineScaleSet.ResourceType;
 
         // Container level operations.
 
@@ -325,7 +324,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of all extensions in a VM scale set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetExtension" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<VirtualMachineScaleSetExtension> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<VirtualMachineScaleSetExtension> GetAll(CancellationToken cancellationToken = default)
         {
             Page<VirtualMachineScaleSetExtension> FirstPageFunc(int? pageSizeHint)
             {
@@ -363,7 +362,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of all extensions in a VM scale set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetExtension" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<VirtualMachineScaleSetExtension> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<VirtualMachineScaleSetExtension> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<VirtualMachineScaleSetExtension>> FirstPageFunc(int? pageSizeHint)
             {
@@ -404,15 +403,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtension.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -427,15 +426,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionOperations.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtension.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

@@ -25,7 +25,7 @@ namespace MgmtParamOrdering.Models
         {
         }
 
-        internal WorkspaceUpdateOperation(ResourceOperations operationsBase, Response<WorkspaceData> response)
+        internal WorkspaceUpdateOperation(ArmResource operationsBase, Response<WorkspaceData> response)
         {
             _operation = new OperationOrResponseInternals<Workspace>(Response.FromValue(new Workspace(operationsBase, response.Value), response.GetRawResponse()));
         }

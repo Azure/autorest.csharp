@@ -17,6 +17,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ModelX", true)]
         [TestCase("ModelY", true)]
         [TestCase("Model3", true)]
+        [TestCase("Model4Data", true)]
+        [TestCase("Model5Data", true)]
+        [TestCase("ModelZ", true)]
+        [TestCase("ModelQ", true)]
+        [TestCase("ModelP", false)]
         public void ValidateOperationGroupExistence(string className, bool isExist)
         {
             Assert.AreEqual(isExist, CheckExistence(className));

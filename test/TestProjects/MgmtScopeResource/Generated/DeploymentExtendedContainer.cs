@@ -20,8 +20,11 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary> A class representing collection of DeploymentExtended and their operations over a Tenant. </summary>
-    public partial class DeploymentExtendedContainer : ResourceContainer
+    public partial class DeploymentExtendedContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DeploymentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedContainer"/> class for mocking. </summary>
         protected DeploymentExtendedContainer()
         {
@@ -29,9 +32,10 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of DeploymentExtendedContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DeploymentExtendedContainer(ResourceOperations parent) : base(parent)
+        internal DeploymentExtendedContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -39,11 +43,6 @@ namespace MgmtScopeResource
         protected override void ValidateResourceType(ResourceIdentifier identifier)
         {
         }
-
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private DeploymentsRestOperations _restClient => new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
@@ -327,7 +326,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DeploymentExtended" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DeploymentExtended> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<DeploymentExtended> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<DeploymentExtended> FirstPageFunc(int? pageSizeHint)
             {
@@ -367,7 +366,7 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DeploymentExtended" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DeploymentExtended> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DeploymentExtended> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<DeploymentExtended>> FirstPageFunc(int? pageSizeHint)
             {
@@ -408,15 +407,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentExtendedOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentExtended.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -431,15 +430,15 @@ namespace MgmtScopeResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DeploymentExtendedContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DeploymentExtendedOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DeploymentExtended.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

@@ -10,15 +10,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtSingletonTests() : base("MgmtSingleton") { }
 
-        [TestCase("ParentResourceOperations", true)]
-        [TestCase("SingletonResourceOperations", true)]
-        [TestCase("SingletonResource2Operations", true)]
-        public void ValidateOperations(string operation, bool isExists)
-        {
-            var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
-            Assert.AreEqual(isExists, operationTypeExists);
-        }
-
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
         [TestCase("SingletonResource2", true)]

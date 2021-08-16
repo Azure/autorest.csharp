@@ -296,7 +296,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionRequest()
+        internal HttpMessage CreateGetAllBySubscriptionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -314,9 +314,9 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<FakeParentWithAncestorWithLocListResult>> GetBySubscriptionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithAncestorWithLocListResult>> GetAllBySubscriptionAsync(CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest();
+            using var message = CreateGetAllBySubscriptionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -334,9 +334,9 @@ namespace MgmtListMethods
 
         /// <summary> Lists all in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FakeParentWithAncestorWithLocListResult> GetBySubscription(CancellationToken cancellationToken = default)
+        public Response<FakeParentWithAncestorWithLocListResult> GetAllBySubscription(CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest();
+            using var message = CreateGetAllBySubscriptionRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -501,7 +501,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetAllBySubscriptionNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -518,14 +518,14 @@ namespace MgmtListMethods
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<FakeParentWithAncestorWithLocListResult>> GetBySubscriptionNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeParentWithAncestorWithLocListResult>> GetAllBySubscriptionNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -545,14 +545,14 @@ namespace MgmtListMethods
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<FakeParentWithAncestorWithLocListResult> GetBySubscriptionNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<FakeParentWithAncestorWithLocListResult> GetAllBySubscriptionNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -14,9 +14,9 @@ namespace Pagination
     {
         #region PageSizeIntegerModel
         /// <summary> Gets an object representing a PageSizeIntegerModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeIntegerModelContainer" /> object. </returns>
-        public static PageSizeIntegerModelContainer GetPageSizeIntegerModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeIntegerModelContainer GetPageSizeIntegerModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeIntegerModelContainer(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace Pagination
 
         #region PageSizeInt64Model
         /// <summary> Gets an object representing a PageSizeInt64ModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeInt64ModelContainer" /> object. </returns>
-        public static PageSizeInt64ModelContainer GetPageSizeInt64Models(this ResourceGroupOperations resourceGroup)
+        public static PageSizeInt64ModelContainer GetPageSizeInt64Models(this ResourceGroup resourceGroup)
         {
             return new PageSizeInt64ModelContainer(resourceGroup);
         }
@@ -34,9 +34,9 @@ namespace Pagination
 
         #region PageSizeInt32Model
         /// <summary> Gets an object representing a PageSizeInt32ModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeInt32ModelContainer" /> object. </returns>
-        public static PageSizeInt32ModelContainer GetPageSizeInt32Models(this ResourceGroupOperations resourceGroup)
+        public static PageSizeInt32ModelContainer GetPageSizeInt32Models(this ResourceGroup resourceGroup)
         {
             return new PageSizeInt32ModelContainer(resourceGroup);
         }
@@ -44,9 +44,9 @@ namespace Pagination
 
         #region PageSizeNumericModel
         /// <summary> Gets an object representing a PageSizeNumericModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeNumericModelContainer" /> object. </returns>
-        public static PageSizeNumericModelContainer GetPageSizeNumericModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeNumericModelContainer GetPageSizeNumericModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeNumericModelContainer(resourceGroup);
         }
@@ -54,9 +54,9 @@ namespace Pagination
 
         #region PageSizeFloatModel
         /// <summary> Gets an object representing a PageSizeFloatModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeFloatModelContainer" /> object. </returns>
-        public static PageSizeFloatModelContainer GetPageSizeFloatModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeFloatModelContainer GetPageSizeFloatModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeFloatModelContainer(resourceGroup);
         }
@@ -64,9 +64,9 @@ namespace Pagination
 
         #region PageSizeDoubleModel
         /// <summary> Gets an object representing a PageSizeDoubleModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeDoubleModelContainer" /> object. </returns>
-        public static PageSizeDoubleModelContainer GetPageSizeDoubleModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeDoubleModelContainer GetPageSizeDoubleModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeDoubleModelContainer(resourceGroup);
         }
@@ -74,9 +74,9 @@ namespace Pagination
 
         #region PageSizeDecimalModel
         /// <summary> Gets an object representing a PageSizeDecimalModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeDecimalModelContainer" /> object. </returns>
-        public static PageSizeDecimalModelContainer GetPageSizeDecimalModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeDecimalModelContainer GetPageSizeDecimalModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeDecimalModelContainer(resourceGroup);
         }
@@ -84,9 +84,9 @@ namespace Pagination
 
         #region PageSizeStringModel
         /// <summary> Gets an object representing a PageSizeStringModelContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="PageSizeStringModelContainer" /> object. </returns>
-        public static PageSizeStringModelContainer GetPageSizeStringModels(this ResourceGroupOperations resourceGroup)
+        public static PageSizeStringModelContainer GetPageSizeStringModels(this ResourceGroup resourceGroup)
         {
             return new PageSizeStringModelContainer(resourceGroup);
         }

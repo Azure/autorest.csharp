@@ -27,13 +27,13 @@ namespace ResourceRename
         }
 
         /// <summary> Creates a new SSH public key resource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
         /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeyAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -61,13 +61,13 @@ namespace ResourceRename
         }
 
         /// <summary> Creates a new SSH public key resource. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
         /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response<SshPublicKeyInfo> CreateSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
+        public static Response<SshPublicKeyInfo> CreateSshPublicKey(this ResourceGroup resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -95,11 +95,11 @@ namespace ResourceRename
         }
 
         /// <summary> Delete an SSH public key. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response> DeleteSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response> DeleteSshPublicKeyAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -127,11 +127,11 @@ namespace ResourceRename
         }
 
         /// <summary> Delete an SSH public key. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response DeleteSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static Response DeleteSshPublicKey(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -159,11 +159,11 @@ namespace ResourceRename
         }
 
         /// <summary> Retrieves information about an SSH public key. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeyAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeyAsync(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
@@ -191,11 +191,11 @@ namespace ResourceRename
         }
 
         /// <summary> Retrieves information about an SSH public key. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
-        public static Response<SshPublicKeyInfo> GetSshPublicKey(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static Response<SshPublicKeyInfo> GetSshPublicKey(this ResourceGroup resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {

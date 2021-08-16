@@ -14,9 +14,9 @@ namespace MgmtParamOrdering
     {
         #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
-        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
+        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
             return new AvailabilitySetContainer(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace MgmtParamOrdering
 
         #region DedicatedHostGroup
         /// <summary> Gets an object representing a DedicatedHostGroupContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="DedicatedHostGroupContainer" /> object. </returns>
-        public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
+        public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroup resourceGroup)
         {
             return new DedicatedHostGroupContainer(resourceGroup);
         }
@@ -34,9 +34,9 @@ namespace MgmtParamOrdering
 
         #region Workspace
         /// <summary> Gets an object representing a WorkspaceContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="WorkspaceContainer" /> object. </returns>
-        public static WorkspaceContainer GetWorkspaces(this ResourceGroupOperations resourceGroup)
+        public static WorkspaceContainer GetWorkspaces(this ResourceGroup resourceGroup)
         {
             return new WorkspaceContainer(resourceGroup);
         }

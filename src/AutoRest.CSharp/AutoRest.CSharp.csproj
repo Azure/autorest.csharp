@@ -15,9 +15,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.16.0" />
+    <PackageReference Include="Azure.Core" Version="1.18.0-alpha.20210811.1" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.12" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20210730.2" />
+    <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20210811.3" />
     <PackageReference Include="Humanizer.Core" Version="2.11.10" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.10.0-1.final" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />

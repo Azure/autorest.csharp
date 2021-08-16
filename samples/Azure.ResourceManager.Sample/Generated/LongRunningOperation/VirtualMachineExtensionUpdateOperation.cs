@@ -22,14 +22,14 @@ namespace Azure.ResourceManager.Sample.Models
     {
         private readonly OperationInternals<VirtualMachineExtension> _operation;
 
-        private readonly ResourceOperations _operationBase;
+        private readonly ArmResource _operationBase;
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionUpdateOperation for mocking. </summary>
         protected VirtualMachineExtensionUpdateOperation()
         {
         }
 
-        internal VirtualMachineExtensionUpdateOperation(ResourceOperations operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachineExtensionUpdateOperation(ArmResource operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<VirtualMachineExtension>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineExtensionUpdateOperation");
             _operationBase = operationsBase;

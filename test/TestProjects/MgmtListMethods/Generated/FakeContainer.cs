@@ -20,8 +20,11 @@ using MgmtListMethods.Models;
 namespace MgmtListMethods
 {
     /// <summary> A class representing collection of Fake and their operations over a Subscription. </summary>
-    public partial class FakeContainer : ResourceContainer
+    public partial class FakeContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly FakesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="FakeContainer"/> class for mocking. </summary>
         protected FakeContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtListMethods
 
         /// <summary> Initializes a new instance of FakeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FakeContainer(ResourceOperations parent) : base(parent)
+        internal FakeContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private FakesRestOperations _restClient => new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
+        protected override ResourceType ValidResourceType => Subscription.ResourceType;
 
         // Container level operations.
 
@@ -327,7 +326,7 @@ namespace MgmtListMethods
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Fake> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<Fake> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             Page<Fake> FirstPageFunc(int? pageSizeHint)
             {
@@ -367,7 +366,7 @@ namespace MgmtListMethods
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Fake" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Fake> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<Fake> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Fake>> FirstPageFunc(int? pageSizeHint)
             {
@@ -408,15 +407,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -431,15 +430,15 @@ namespace MgmtListMethods
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

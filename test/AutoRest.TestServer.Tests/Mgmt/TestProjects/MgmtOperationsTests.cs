@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("TestMethodAsync")]
         public void ValidateTestMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetOperations");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySet");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
@@ -34,7 +34,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("StartTestLROMethodAsync")]
         public void ValidateLROMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetOperations");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySet");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
@@ -52,7 +52,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("TestSetSharedKeyAsync")]
         public void ValidatePutMethod(string methodName)
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySetOperations");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtOperations.AvailabilitySet");
             var method = resourceOpreations.GetMethod(methodName);
             Assert.NotNull(method, $"{resourceOpreations.Name} does not implement the {methodName} method.");
 
