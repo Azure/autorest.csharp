@@ -86,9 +86,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var operation in operationGroup.Operations)
                 {
                     var curName = operation.Language.Default.Name;
-                    if (curName.Equals("List"))
+                    if (curName.Equals("List") || curName.StartsWith("ListBy"))
                     {
-                        operation.Language.Default.Name = "GetAll";
+                        operation.Language.Default.Name = curName.Replace("List", "GetAll");
                     }
                     else if (curName.Equals("ListAll"))
                     {
