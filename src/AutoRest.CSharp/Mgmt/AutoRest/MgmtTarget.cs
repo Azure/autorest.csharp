@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -26,6 +27,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
+                // For the shared models in Core and RP packages, we should generate them in Core package and skip in RP packages.
+                if (context.Configuration.LibraryName != "Core")
+                {
+                    // The full name mapping is needed for some indirectly used models in Resources such as Alias (referenced by ProviderResourceType), so we don't need to mark all involved models with PropertyReferenceType, just the ones directly used by Resources package.
+                    if (context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name) != null)
+                    {
+                        continue;
+                    }
+                    var mgmtObj = model as MgmtObjectType;
+                    if (mgmtObj != null && ReferenceTypePropertyChooser.GetExactMatch(mgmtObj) != null)
+                    {
+                        continue;
+                    }
+                }
                 var codeWriter = new CodeWriter();
                 modelWriter.WriteModel(codeWriter, model);
 
