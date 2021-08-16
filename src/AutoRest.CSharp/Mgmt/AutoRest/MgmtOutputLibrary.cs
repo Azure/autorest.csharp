@@ -58,7 +58,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
-            RemoveOperations(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -121,25 +120,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         operation.Language.Default.Name = curName.Replace("List", "Get");
                     }
                 }
-            }
-        }
-
-        private void RemoveOperations(CodeModel codeModel)
-        {
-            var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
-            if (operations != null)
-            {
-                var listModel = operations.Operations.First(o => o.Language.Default.Name == "List").Responses.First().ResponseSchema as ObjectSchema;
-                if (listModel != null)
-                {
-                    var itemModel = listModel.Properties.First(p => p.SerializedName == "value").Schema as ArraySchema;
-                    if (itemModel != null)
-                    {
-                        codeModel.Schemas.Objects.Remove(itemModel.ElementType as ObjectSchema);
-                    }
-                    codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
-                }
-                codeModel.OperationGroups.Remove(operations);
             }
         }
 
