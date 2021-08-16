@@ -87,7 +87,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_12
+    - !ConstantSchema &ref_16
       type: constant
       value: !ConstantValue 
         value: text/plain
@@ -99,6 +99,16 @@ schemas: !Schemas
       protocol: !Protocols {}
   binaries:
     - !BinarySchema &ref_4
+      type: binary
+      apiVersions:
+        - !ApiVersion 
+          version: 2.0-preview
+      language: !Languages 
+        default:
+          name: binary
+          description: Uri or local path to source data.
+      protocol: !Protocols {}
+    - !BinarySchema &ref_12
       type: binary
       apiVersions:
         - !ApiVersion 
@@ -302,8 +312,8 @@ operationGroups:
         requests:
           - !Request 
             parameters:
-              - !Parameter 
-                schema: *ref_12
+              - !Parameter &ref_13
+                schema: *ref_3
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -315,7 +325,126 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_13
+              - !Parameter &ref_14
+                schema: *ref_12
+                implementation: Method
+                language: !Languages 
+                  default:
+                    name: input
+                    description: Input parameter.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: binary
+            signatureParameters:
+              - *ref_13
+              - *ref_14
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpBinaryRequest 
+                path: /mediatypes/analyzeNoAccept
+                method: post
+                binary: true
+                knownMediaType: binary
+                mediaTypes:
+                  - application/pdf
+                  - image/jpeg
+                  - image/png
+                  - image/tiff
+                uri: '{$host}'
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_8
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_15
+                schema: *ref_9
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: input
+                    description: Input parameter.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_15
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /mediatypes/analyzeNoAccept
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Success
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - default
+        language: !Languages 
+          default:
+            name: AnalyzeBodyNoAcceptHeader
+            description: Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 2.0-preview
+        parameters:
+          - *ref_2
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_16
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Upload file type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_17
                 schema: *ref_0
                 implementation: Method
                 language: !Languages 
@@ -340,7 +469,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_13
+              - *ref_17
             language: !Languages 
               default:
                 name: ''

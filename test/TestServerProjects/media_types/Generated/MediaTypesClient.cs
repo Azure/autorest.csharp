@@ -112,6 +112,80 @@ namespace media_types
             }
         }
 
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                return await RestClient.AnalyzeBodyNoAcceptHeaderAsync(contentType, input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <param name="contentType"> Upload file type. </param>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response AnalyzeBodyNoAcceptHeader(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                return RestClient.AnalyzeBodyNoAcceptHeader(contentType, input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(SourcePath input = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                return await RestClient.AnalyzeBodyNoAcceptHeaderAsync(input, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <param name="input"> Input parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response AnalyzeBodyNoAcceptHeader(SourcePath input = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                return RestClient.AnalyzeBodyNoAcceptHeader(input, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Pass in contentType &apos;text/plain; encoding=UTF-8&apos; to pass test. Value for input does not matter. </summary>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

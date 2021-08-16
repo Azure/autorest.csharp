@@ -155,6 +155,59 @@ namespace azure_parameter_grouping
             }
         }
 
+        internal HttpMessage CreatePostReservedWordsRequest(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/parameterGrouping/postReservedWords", false);
+            if (parameterGroupingPostReservedWordsParameters?.From != null)
+            {
+                uri.AppendQuery("from", parameterGroupingPostReservedWordsParameters.From, true);
+            }
+            if (parameterGroupingPostReservedWordsParameters?.Accept != null)
+            {
+                uri.AppendQuery("accept", parameterGroupingPostReservedWordsParameters.Accept, true);
+            }
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Post a grouped parameters with reserved words. </summary>
+        /// <param name="parameterGroupingPostReservedWordsParameters"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> PostReservedWordsAsync(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePostReservedWordsRequest(parameterGroupingPostReservedWordsParameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Post a grouped parameters with reserved words. </summary>
+        /// <param name="parameterGroupingPostReservedWordsParameters"> Parameter group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response PostReservedWords(ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters = null, CancellationToken cancellationToken = default)
+        {
+            using var message = CreatePostReservedWordsRequest(parameterGroupingPostReservedWordsParameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreatePostMultiParamGroupsRequest(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup)
         {
             var message = _pipeline.CreateMessage();

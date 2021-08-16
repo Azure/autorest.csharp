@@ -393,7 +393,7 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PolicyDefinition> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<PolicyDefinition> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Page<PolicyDefinition> FirstPageFunc(int? pageSizeHint)
             {
@@ -415,7 +415,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
-                            var response = _restClient.GetByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetAllByManagementGroup(Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -451,7 +451,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
-                            var response = _restClient.GetByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
+                            var response = _restClient.GetAllByManagementGroupNextPage(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -475,7 +475,7 @@ namespace MgmtExtensionResource
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PolicyDefinition" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PolicyDefinition> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PolicyDefinition> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<PolicyDefinition>> FirstPageFunc(int? pageSizeHint)
             {
@@ -497,7 +497,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
-                            var response = await _restClient.GetByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetAllByManagementGroupAsync(Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -533,7 +533,7 @@ namespace MgmtExtensionResource
                         }
                         if (parent.ResourceType.Equals(ManagementGroup.ResourceType))
                         {
-                            var response = await _restClient.GetByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
+                            var response = await _restClient.GetAllByManagementGroupNextPageAsync(nextLink, Id.Name, filter, top, cancellationToken: cancellationToken).ConfigureAwait(false);
                             return Page.FromValues(response.Value.Value.Select(value => new PolicyDefinition(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                         }
                         else
@@ -558,7 +558,7 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
@@ -581,7 +581,7 @@ namespace MgmtExtensionResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
             scope.Start();
