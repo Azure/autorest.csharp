@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     }
                     replacementTypeProperties = flattenedReplacementTypeProperties;
                 }
-                if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties))
+                if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType>{{replacementType, typeToReplace.Type}}))
                 {
                     result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
                     _valueCache.TryAdd(typeToReplace, result);
@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
         {
             return new ObjectTypeProperty(
-                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, replacementCSharpType.Name, replacementCSharpType),
+                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
                     originalType.Description,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty

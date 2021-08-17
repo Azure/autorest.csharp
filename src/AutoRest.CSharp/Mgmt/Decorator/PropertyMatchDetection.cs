@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class PropertyMatchDetection
     {
-        internal static bool IsEqual(List<PropertyInfo> parentProperties, List<ObjectTypeProperty> childProperties)
+        internal static bool IsEqual(List<PropertyInfo> parentProperties, List<ObjectTypeProperty> childProperties, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
             if (parentProperties.Count != childProperties.Count)
                 return false;
@@ -32,14 +32,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             foreach (var childProperty in childProperties)
             {
-                if (!DoesPropertyExistInParent(childProperty, parentDict))
+                if (!DoesPropertyExistInParent(childProperty, parentDict, propertiesInComparison))
                     return false;
             }
 
             return true;
         }
 
-        internal static bool DoesPropertyExistInParent(ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict)
+        internal static bool DoesPropertyExistInParent(ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
             PropertyInfo? parentProperty;
             CSharpType childPropertyType = childProperty.Declaration.Type;
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (childProperty.IsReadOnly != (parentProperty.GetSetMethod() == null))
                     return false;
             }
-            else if (!ArePropertyTypesMatch(parentProperty.PropertyType!, childPropertyType))
+            else if (!ArePropertyTypesMatch(parentProperty.PropertyType!, childPropertyType, propertiesInComparison))
             {
                 return false;
             }
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
-        private static bool ArePropertyTypesMatch(System.Type parentPropertyType, CSharpType childPropertyType)
+        private static bool ArePropertyTypesMatch(System.Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
             if (IsGuidAndStringType(parentPropertyType!, childPropertyType!))
             {
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else if (parentPropertyType.IsGenericType)
             {
-                return IsMatchingGenericType(parentPropertyType!, childPropertyType!);
+                return IsMatchingGenericType(parentPropertyType!, childPropertyType!, propertiesInComparison);
             }
             else if (IsAssignable(parentPropertyType!, childPropertyType))
             {
@@ -80,11 +80,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // This branch implies parentPropertyType is not a class because if it is a class, IsEqual() will always be called first and if the comparison for this branch is true, in DoesPropertyExistInParent, the branch for ArePropertyTypesMatch will never be called.
                 return true;
             }
-            // TODO: need to compare subproperties recursively as the property Types may have different names but should avoid infinite loop in cases like ErrorResponse has a property of List<ErrorResponse>.
-            // else if (parentPropertyType.IsClass && matchProperty(parentPropertyType, childPropertyType))
-            // {
-            //     return true;
-            // }
+            // Need to compare subproperties recursively when the property Types have different names but should avoid infinite loop in cases like ErrorResponse has a property of List<ErrorResponse>, so we'll check whether we've compared properties in propertiesInComparison.
+            else if (parentPropertyType.IsClass && matchProperty(parentPropertyType, childPropertyType, propertiesInComparison, fromArePropertyTypesMatch: true))
+            {
+                return true;
+            }
             else if (!(parentPropertyType.IsGenericParameter && IsAssignable(parentPropertyType.BaseType!, childPropertyType)))
             {
                 return false;
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return (isParentGuidType && isChildStringType) || (isParentStringType && isChildGuidType);
         }
 
-        private static bool IsMatchingGenericType(System.Type parentPropertyType, CSharpType childPropertyType)
+        private static bool IsMatchingGenericType(System.Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
             var parentGenericTypeDef = parentPropertyType.GetGenericTypeDefinition();
             if (!(childPropertyType.IsFrameworkType && childPropertyType.FrameworkType.IsGenericType && childPropertyType.FrameworkType.GetGenericTypeDefinition() == parentGenericTypeDef))
@@ -128,27 +128,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 Type parentArgType = parentPropertyType.GetGenericArguments()[i];
                 CSharpType childArgType = childPropertyType.Arguments[i];
-                var isArgMatches = matchProperty(parentArgType, childArgType);
+                var isArgMatches = matchProperty(parentArgType, childArgType, propertiesInComparison);
                 if (!isArgMatches)
                     return false;
             }
             return true;
         }
 
-        private static bool matchProperty(Type parentPropertyType, CSharpType childPropertyType)
+        private static bool matchProperty(Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null, bool fromArePropertyTypesMatch = false)
         {
+            if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val == childPropertyType)
+                return true;
             var isArgMatches = false;
             if (parentPropertyType.IsClass && !childPropertyType.IsFrameworkType && childPropertyType.Implementation as MgmtObjectType != null)
             {
                 var mgmtObjectType = childPropertyType.Implementation as MgmtObjectType;
                 if (mgmtObjectType != null)
                 {
-                    isArgMatches = IsEqual(parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList());
+                    isArgMatches = IsEqual(parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType>{{parentPropertyType, childPropertyType}});
                 }
             }
             else
             {
-                isArgMatches = ArePropertyTypesMatch(parentPropertyType, childPropertyType);
+                if (!fromArePropertyTypesMatch)
+                    isArgMatches = ArePropertyTypesMatch(parentPropertyType, childPropertyType);
             }
             return isArgMatches;
         }
