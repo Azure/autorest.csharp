@@ -18,7 +18,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
     internal static class ClientBuilder
     {
         private const string ClientSuffixValue = "Client";
-        private const string RestClientPrefix = "Rest";
         private const string OperationsSuffixValue = "Operations";
 
         public static string GetClientSuffix(BuildContext context) => context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
