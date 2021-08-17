@@ -200,6 +200,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
+        public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
+
         public OperationGroup? GetOperationGroupForNonResource(string modelName)
         {
             OperationGroup? result = null;
@@ -582,7 +584,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ? new MgmtReferenceType(objectSchema, _context)
+            : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 

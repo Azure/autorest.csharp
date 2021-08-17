@@ -44,14 +44,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
         {
-            writer.WriteXmlDocumentationSummary($"{method.Description}");
-            writer.WriteXmlDocumentationParameters(method.Parameters);
-            writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
-            if (method.ReturnDescription != null)
-            {
-                writer.WriteXmlDocumentationReturns(method.ReturnDescription);
-            }
-
             writer
                 .Append($"{method.Modifiers} ")
                 .AppendIf($"{method.ReturnType} ", method.ReturnType != null)
@@ -77,6 +69,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.Line();
             return writer.Scope();
+        }
+
+        public static void WriteMethodDocumentation(this CodeWriter writer, MethodSignature method)
+        {
+            writer.WriteXmlDocumentationSummary($"{method.Description}");
+            writer.WriteXmlDocumentationParameters(method.Parameters);
+            writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
+            if (method.ReturnDescription != null)
+            {
+                writer.WriteXmlDocumentationReturns(method.ReturnDescription);
+            }
         }
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
