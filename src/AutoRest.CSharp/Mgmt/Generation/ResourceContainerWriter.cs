@@ -240,7 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetFromRestClient(RestClientMethod method, bool isAsync)
         {
-           var parameterMapping = BuildParameterMapping(method);
+            var parameterMapping = BuildParameterMapping(method);
             _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
