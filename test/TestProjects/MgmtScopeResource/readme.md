@@ -9,18 +9,22 @@ require: $(this-folder)/../../../readme.md
 input-file: 
   - $(this-folder)/PolicyAssignments.json
   - $(this-folder)/Deployments.json
+  - $(this-folder)/Links.json
 namespace: MgmtScopeResource
 # Parameter flatten is needed by the merged WhatIf() method of Deployments as the request body parameter is ScopedDeploymentWhatIf for WhatIfAtTenantScope() and WhatIfAtManagementGroupScope() and DeploymentWhatIf for WhatIfAtSubscriptionScope and WhatIf(AtResourceGroupScope). Both parameters contains location and properties of DeploymentWhatIfProperties. The only difference is that location is required in ScopedDeploymentWhatIf and optional in DeploymentWhatIf. After flattened, all WhatIf methods can take the same types of parameters so we can merged them into one method with merge-operations although the requirement of non-null location for WhatIfAtTenantScope() and WhatIfAtManagementGroupScope() is lost.
 payload-flattening-threshold: 2
 operation-group-to-resource-type:
   Deployments: Microsoft.Resources/deployments
   DeploymentOperations: Microsoft.Resources/deployments/operations
+  ResourceLinks: Microsoft.Resources/links
 operation-group-to-resource:
   DeploymentOperations: DeploymentOperation
   Deployments: DeploymentExtended
+  ResourceLinks: ResourceLink
 operation-group-to-parent:
   Deployments: tenant
   PolicyAssignments: tenant
+  ResourceLinks: tenant
 merge-operations:
   WhatIf: Deployments_WhatIf_POST;Deployments_WhatIfAtTenantScope_POST;Deployments_WhatIfAtManagementGroupScope_POST;Deployments_WhatIfAtSubscriptionScope_POST
 directive:
@@ -68,4 +72,5 @@ directive:
   - remove-operation: DeploymentOperations_ListAtSubscriptionScope
   - remove-operation: DeploymentOperations_Get
   - remove-operation: DeploymentOperations_List
+  - remove-operation: ResourceLinks_ListAtSubscription
 ```

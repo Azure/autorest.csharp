@@ -1,0 +1,441 @@
+!CodeModel 
+info: !Info 
+  title: ReferenceTypes
+schemas: !Schemas 
+  numbers:
+    - !NumberSchema &ref_13
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      precision: 32
+      language: !Languages 
+        default:
+          name: SkuReferenceCapacity
+          description: If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceReferenceId
+          description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceReferenceName
+          description: The name of the resource
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceReferenceType
+          description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      extensions:
+        x-ms-mutability:
+          - read
+          - create
+      language: !Languages 
+        default:
+          name: TrackedResourceReferenceLocation
+          description: The geo-location where the resource lives
+      protocol: !Protocols {}
+    - !StringSchema &ref_9
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: SkuReferenceName
+          description: The name of the SKU. Ex - P3. It is typically a letter+number code
+      protocol: !Protocols {}
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: SkuReferenceSize
+          description: 'The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. '
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: SkuReferenceFamily
+          description: If the service has different generations of hardware, for the same SKU, then that can be captured here.
+      protocol: !Protocols {}
+    - !StringSchema 
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      minLength: 1
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema 
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      maxLength: 90
+      minLength: 1
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonId
+          description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonName
+          description: The name of the resource
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      language: !Languages 
+        default:
+          name: ResourceNonType
+          description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+      protocol: !Protocols {}
+  sealedChoices:
+    - !SealedChoiceSchema &ref_10
+      choices:
+        - !ChoiceValue 
+          value: Free
+          language:
+            default:
+              name: Free
+              description: ''
+        - !ChoiceValue 
+          value: Basic
+          language:
+            default:
+              name: Basic
+              description: ''
+        - !ChoiceValue 
+          value: Standard
+          language:
+            default:
+              name: Standard
+              description: ''
+        - !ChoiceValue 
+          value: Premium
+          language:
+            default:
+              name: Premium
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      choiceType: *ref_0
+      extensions:
+        x-accessibility: public
+        x-namespace: Azure.ResourceManager.Resources.Models
+      language: !Languages 
+        default:
+          name: SkuTier
+          description: This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
+      protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_3
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: TrackedResourceReferenceTags
+          description: Resource tags.
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_2
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      children: !Relations 
+        all:
+          - !ObjectSchema &ref_5
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2.0'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_3
+                required: false
+                serializedName: tags
+                extensions:
+                  x-ms-mutability:
+                    - read
+                    - create
+                    - update
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Resource tags.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_4
+                required: true
+                serializedName: location
+                extensions:
+                  x-ms-mutability:
+                    - read
+                    - create
+                language: !Languages 
+                  default:
+                    name: location
+                    description: The geo-location where the resource lives
+                protocol: !Protocols {}
+            summary: Tracked Resource
+            extensions:
+              x-accessibility: public
+              x-csharp-formats: json
+              x-csharp-usage: model,input,output
+              x-ms-mgmt-propertyReferenceType: true
+              x-ms-mgmt-referenceType: true
+              x-namespace: Azure.ResourceManager.Resources.Models
+            language: !Languages 
+              default:
+                name: TrackedResourceReference
+                description: The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
+                namespace: ''
+                summary: Tracked Resource
+            protocol: !Protocols {}
+        immediate:
+          - *ref_5
+      properties:
+        - !Property 
+          schema: *ref_6
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_7
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the resource
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_8
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+          protocol: !Protocols {}
+      summary: Resource
+      extensions:
+        x-accessibility: public
+        x-csharp-formats: json
+        x-csharp-usage: model,input,output
+        x-ms-azure-resource: true
+        x-ms-mgmt-propertyReferenceType: true
+        x-ms-mgmt-referenceType: true
+        x-namespace: Azure.ResourceManager.Resources.Models
+      language: !Languages 
+        default:
+          name: ResourceReference
+          description: Common fields that are returned in the response for all Azure Resource Manager resources
+          namespace: ''
+          summary: Resource
+      protocol: !Protocols {}
+    - *ref_5
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      properties:
+        - !Property 
+          schema: *ref_9
+          required: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the SKU. Ex - P3. It is typically a letter+number code
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_10
+          required: false
+          serializedName: tier
+          extensions:
+            x-accessibility: public
+            x-namespace: Azure.ResourceManager.Resources.Models
+          language: !Languages 
+            default:
+              name: tier
+              description: This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          required: false
+          serializedName: size
+          language: !Languages 
+            default:
+              name: size
+              description: 'The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. '
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          required: false
+          serializedName: family
+          language: !Languages 
+            default:
+              name: family
+              description: If the service has different generations of hardware, for the same SKU, then that can be captured here.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          required: false
+          serializedName: capacity
+          language: !Languages 
+            default:
+              name: capacity
+              description: If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.
+          protocol: !Protocols {}
+      extensions:
+        x-accessibility: public
+        x-csharp-formats: json
+        x-csharp-usage: model,input,output
+        x-ms-mgmt-propertyReferenceType: true
+        x-namespace: Azure.ResourceManager.Resources.Models
+      language: !Languages 
+        default:
+          name: SkuReference
+          description: The resource model definition representing SKU
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema 
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2.0'
+      properties:
+        - !Property 
+          schema: *ref_14
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_15
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: The name of the resource
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_16
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+          protocol: !Protocols {}
+      summary: ResourceNon
+      extensions:
+        x-ms-azure-resource: true
+      language: !Languages 
+        default:
+          name: ResourceNon
+          description: Common fields that are returned in the response for all Azure Resource Manager resources
+          namespace: ''
+          summary: ResourceNon
+      protocol: !Protocols {}
+operationGroups: []
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
+language: !Languages 
+  default:
+    name: ReferenceTypes
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}

@@ -10,23 +10,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 
 namespace MgmtScopeResource.Models
 {
-    /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
-    public partial class DeploymentDeleteAtScopeOperation : Operation
+    /// <summary> Deletes a resource link with the specified ID. </summary>
+    public partial class ResourceLinkDeleteOperation : Operation
     {
-        private readonly OperationInternals _operation;
+        private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of DeploymentDeleteAtScopeOperation for mocking. </summary>
-        protected DeploymentDeleteAtScopeOperation()
+        /// <summary> Initializes a new instance of ResourceLinkDeleteOperation for mocking. </summary>
+        protected ResourceLinkDeleteOperation()
         {
         }
 
-        internal DeploymentDeleteAtScopeOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal ResourceLinkDeleteOperation(Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DeploymentDeleteAtScopeOperation");
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />

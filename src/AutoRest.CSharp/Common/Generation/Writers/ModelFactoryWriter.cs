@@ -35,6 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var initializers = method.Parameters
                 .Select(p => new PropertyInitializer(ctor.FindPropertyInitializedByParameter(p)!, w => w.Identifier($"{p.Name}"), p.Type));
 
+            writer.WriteMethodDocumentation(method);
             using (writer.WriteMethodDeclaration(method))
             {
                 writer.WriteParameterNullChecks(method.Parameters);
