@@ -18,8 +18,11 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Bar and their operations over a ResourceGroup. </summary>
-    public partial class BarContainer : ResourceContainerBase<Bar, BarData>
+    public partial class BarContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly BarsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="BarContainer"/> class for mocking. </summary>
         protected BarContainer()
         {
@@ -27,18 +30,14 @@ namespace MgmtLRO
 
         /// <summary> Initializes a new instance of BarContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal BarContainer(OperationsBase parent) : base(parent)
+        internal BarContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private BarsRestOperations _restClient => new BarsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -107,7 +106,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual BarsCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -123,7 +122,7 @@ namespace MgmtLRO
             try
             {
                 var response = _restClient.Create(Id.ResourceGroupName, barName, body, cancellationToken);
-                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -137,7 +136,7 @@ namespace MgmtLRO
         /// <param name="body"> The Bar to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarsCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -153,7 +152,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _restClient.CreateAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                return new BarsCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
             }
             catch (Exception e)
             {
@@ -177,6 +176,8 @@ namespace MgmtLRO
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +202,8 @@ namespace MgmtLRO
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Bar(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +216,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Bar TryGet(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<Bar> GetIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +227,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return Get(barName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, barName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
+                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +242,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Bar> TryGetAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Bar>> GetIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +253,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return await GetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Bar>(null, response.GetRawResponse())
+                    : Response.FromValue(new Bar(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,9 +268,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string barName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -278,7 +279,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return TryGet(barName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(barName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,9 +292,9 @@ namespace MgmtLRO
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string barName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string barName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -301,7 +303,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(barName));
                 }
 
-                return await TryGetAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(barName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,15 +319,15 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BarOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Bar.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -339,15 +342,15 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(BarOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Bar.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

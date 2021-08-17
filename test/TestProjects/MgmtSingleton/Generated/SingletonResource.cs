@@ -5,27 +5,60 @@
 
 #nullable disable
 
+using System;
+using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a SingletonResource along with the instance operations that can be performed on it. </summary>
-    public class SingletonResource : SingletonResourceOperations
+    public partial class SingletonResource : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class for mocking. </summary>
-        protected SingletonResource() : base()
+        private readonly SingletonResourceData _data;
+
+        /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class for mocking. </summary>
+        protected SingletonResource()
         {
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SingletonResource(OperationsBase options, SingletonResourceData resource) : base(options)
+        internal SingletonResource(ArmResource options, SingletonResourceData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
-            Data = resource;
+            HasData = true;
+            _data = resource;
         }
 
-        /// <summary> Gets or sets the SingletonResourceData. </summary>
-        public virtual SingletonResourceData Data { get; private set; }
+        /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        internal SingletonResource(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        {
+        }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources/singletonResources";
+
+        /// <summary> Gets the valid resource type for the operations. </summary>
+        protected override ResourceType ValidResourceType => ResourceType;
+
+        /// <summary> Gets whether or not the current instance has data. </summary>
+        public virtual bool HasData { get; }
+
+        /// <summary> Gets the data representing this Feature. </summary>
+        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
+        public virtual SingletonResourceData Data
+        {
+            get
+            {
+                if (!HasData)
+                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
+                return _data;
+            }
+        }
     }
 }

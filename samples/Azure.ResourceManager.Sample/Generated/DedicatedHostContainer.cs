@@ -20,8 +20,11 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
-    public partial class DedicatedHostContainer : ResourceContainerBase<DedicatedHost, DedicatedHostData>
+    public partial class DedicatedHostContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly DedicatedHostsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>
         protected DedicatedHostContainer()
         {
@@ -29,18 +32,14 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of DedicatedHostContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal DedicatedHostContainer(OperationsBase parent) : base(parent)
+        internal DedicatedHostContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private DedicatedHostsRestOperations _restClient => new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => DedicatedHostGroup.ResourceType;
 
         // Container level operations.
 
@@ -109,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostsCreateOrUpdateOperation StartCreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostCreateOrUpdateOperation StartCreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -125,7 +124,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken);
-                return new DedicatedHostsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                return new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (hostName == null)
             {
@@ -155,7 +154,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
+                return new DedicatedHostCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, hostName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -179,6 +178,8 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -203,6 +204,8 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHost(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -215,9 +218,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual DedicatedHost TryGet(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<DedicatedHost> GetIfExists(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -226,11 +229,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return Get(hostName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
+                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -242,9 +244,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<DedicatedHost> TryGetAsync(string hostName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DedicatedHost>> GetIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -253,11 +255,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return await GetAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<DedicatedHost>(null, response.GetRawResponse())
+                    : Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -269,9 +270,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string hostName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -280,7 +281,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return TryGet(hostName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(hostName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -292,9 +294,9 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string hostName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -303,7 +305,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return await TryGetAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -315,15 +318,15 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DedicatedHost> List(CancellationToken cancellationToken = default)
+        public virtual Pageable<DedicatedHost> GetAll(CancellationToken cancellationToken = default)
         {
             Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListByHostGroup(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllByHostGroup(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -334,11 +337,11 @@ namespace Azure.ResourceManager.Sample
             }
             Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -353,15 +356,15 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DedicatedHost> ListAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<DedicatedHost> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListByHostGroupAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllByHostGroupAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -372,11 +375,11 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -394,15 +397,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DedicatedHost.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -417,15 +420,15 @@ namespace Azure.ResourceManager.Sample
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                var filters = new ResourceFilterCollection(DedicatedHost.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

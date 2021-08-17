@@ -5,27 +5,60 @@
 
 #nullable disable
 
+using System;
+using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a TenantParentSingleton along with the instance operations that can be performed on it. </summary>
-    public class TenantParentSingleton : TenantParentSingletonOperations
+    public partial class TenantParentSingleton : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class for mocking. </summary>
-        protected TenantParentSingleton() : base()
+        private readonly TenantParentSingletonData _data;
+
+        /// <summary> Initializes a new instance of the <see cref="TenantParentSingleton"/> class for mocking. </summary>
+        protected TenantParentSingleton()
         {
         }
 
         /// <summary> Initializes a new instance of the <see cref = "TenantParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal TenantParentSingleton(OperationsBase options, TenantParentSingletonData resource) : base(options)
+        internal TenantParentSingleton(ArmResource options, TenantParentSingletonData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
-            Data = resource;
+            HasData = true;
+            _data = resource;
         }
 
-        /// <summary> Gets or sets the TenantParentSingletonData. </summary>
-        public virtual TenantParentSingletonData Data { get; private set; }
+        /// <summary> Initializes a new instance of the <see cref="TenantParentSingleton"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        internal TenantParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        {
+        }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/TenantParentSingleton/default";
+
+        /// <summary> Gets the valid resource type for the operations. </summary>
+        protected override ResourceType ValidResourceType => ResourceType;
+
+        /// <summary> Gets whether or not the current instance has data. </summary>
+        public virtual bool HasData { get; }
+
+        /// <summary> Gets the data representing this Feature. </summary>
+        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
+        public virtual TenantParentSingletonData Data
+        {
+            get
+            {
+                if (!HasData)
+                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
+                return _data;
+            }
+        }
     }
 }

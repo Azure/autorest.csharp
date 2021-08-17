@@ -23,8 +23,9 @@ namespace SubscriptionExtensions
     {
         #region Toaster
         /// <summary> Gets an object representing a ToasterContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        public static ToasterContainer GetToasterContainer(this SubscriptionOperations subscription)
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ToasterContainer" /> object. </returns>
+        public static ToasterContainer GetToasters(this Subscription subscription)
         {
             return new ToasterContainer(subscription);
         }
@@ -36,12 +37,12 @@ namespace SubscriptionExtensions
             return new OvensRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Ovens for this <see cref="SubscriptionOperations" />. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <summary> Lists the Ovens for this <see cref="Subscription" />. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Oven> ListOvensAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Oven> GetOvensAsync(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -49,11 +50,11 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOvens");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAllAsync(statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.GetBySubscriptionAsync(statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Oven(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -64,11 +65,11 @@ namespace SubscriptionExtensions
                 }
                 async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOvens");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAllNextPageAsync(nextLink, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.GetBySubscriptionNextPageAsync(nextLink, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new Oven(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -82,12 +83,12 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Lists the Ovens for this <see cref="SubscriptionOperations" />. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <summary> Lists the Ovens for this <see cref="Subscription" />. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Oven> ListOvens(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static Pageable<Oven> GetOvens(this Subscription subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -95,11 +96,11 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Oven> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOvens");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListAll(statusOnly, cancellationToken: cancellationToken);
+                        var response = restOperations.GetBySubscription(statusOnly, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Oven(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -110,11 +111,11 @@ namespace SubscriptionExtensions
                 }
                 Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetOvens");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListAllNextPage(nextLink, statusOnly, cancellationToken: cancellationToken);
+                        var response = restOperations.GetBySubscriptionNextPage(nextLink, statusOnly, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new Oven(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -128,32 +129,32 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Filters the list of Ovens for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <summary> Filters the list of Ovens for a <see cref="Subscription" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<GenericResourceExpanded> ListOvenByNameAsync(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static AsyncPageable<GenericResource> GetOvenByNameAsync(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(OvenOperations.ResourceType);
+            ResourceFilterCollection filters = new(Oven.ResourceType);
             filters.SubstringFilter = filter;
-            return ResourceListOperations.ListAtContextAsync(subscription, filters, expand, top, cancellationToken);
+            return ResourceListOperations.GetAtContextAsync(subscription, filters, expand, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of Ovens for a <see cref="SubscriptionOperations" /> represented as generic resources. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <summary> Filters the list of Ovens for a <see cref="Subscription" /> represented as generic resources. </summary>
+        /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<GenericResourceExpanded> ListOvenByName(this SubscriptionOperations subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
+        public static Pageable<GenericResource> GetOvenByName(this Subscription subscription, string filter, string expand, int? top, CancellationToken cancellationToken = default)
         {
-            ResourceFilterCollection filters = new(OvenOperations.ResourceType);
+            ResourceFilterCollection filters = new(Oven.ResourceType);
             filters.SubstringFilter = filter;
-            return ResourceListOperations.ListAtContext(subscription, filters, expand, top, cancellationToken);
+            return ResourceListOperations.GetAtContext(subscription, filters, expand, top, cancellationToken);
         }
         #endregion
     }

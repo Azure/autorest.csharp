@@ -119,6 +119,10 @@ namespace AutoRest.CSharp.Input
         public bool? BufferResponse => TryGetValue("x-csharp-buffer-response", out object? value) && value != null ? (bool?)Convert.ToBoolean(value) : null;
 
         public bool SkipEncoding => TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
+
+        public bool MgmtReferenceType => TryGetValue("x-ms-mgmt-referenceType", out var value) && Convert.ToBoolean(value);
+
+        public bool MgmtPropertyReferenceType => TryGetValue("x-ms-mgmt-propertyReferenceType", out var value) && Convert.ToBoolean(value);
     }
 
     internal partial class ServiceResponse
@@ -130,6 +134,11 @@ namespace AutoRest.CSharp.Input
     internal partial class RequestParameter
     {
         public ParameterLocation In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : ParameterLocation.None;
+
+        public RequestParameter ShallowCopy()
+        {
+            return (RequestParameter)this.MemberwiseClone();
+        }
     }
 
     internal partial class HttpResponse

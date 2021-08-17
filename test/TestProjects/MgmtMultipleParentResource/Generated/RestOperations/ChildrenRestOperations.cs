@@ -430,6 +430,8 @@ namespace MgmtMultipleParentResource
                         value = ChildBodyData.DeserializeChildBodyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ChildBodyData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -473,12 +475,14 @@ namespace MgmtMultipleParentResource
                         value = ChildBodyData.DeserializeChildBodyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((ChildBodyData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string parentName, string instanceId, string expand)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string parentName, string instanceId, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -511,7 +515,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response<ChildBodiesListResult>> ListAsync(string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodiesListResult>> GetAllAsync(string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -526,7 +530,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateListRequest(resourceGroupName, parentName, instanceId, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, parentName, instanceId, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -549,7 +553,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response<ChildBodiesListResult> List(string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public Response<ChildBodiesListResult> GetAll(string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -564,7 +568,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateListRequest(resourceGroupName, parentName, instanceId, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, parentName, instanceId, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -580,7 +584,7 @@ namespace MgmtMultipleParentResource
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -601,7 +605,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response<ChildBodiesListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ChildBodiesListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -620,7 +624,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, parentName, instanceId, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, parentName, instanceId, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -644,7 +648,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response<ChildBodiesListResult> ListNextPage(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
+        public Response<ChildBodiesListResult> GetAllNextPage(string nextLink, string resourceGroupName, string parentName, string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -663,7 +667,7 @@ namespace MgmtMultipleParentResource
                 throw new ArgumentNullException(nameof(instanceId));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, parentName, instanceId, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, parentName, instanceId, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -19,6 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
 
+        private static ConcurrentDictionary<string, string> _operationPathAncestorCache = new ConcurrentDictionary<string, string>();
+        private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
+
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             string? result = null;
@@ -59,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (operationGroup.IsTenantResource(config))
             {
-                return TenantDetection.TenantName;
+                return ResourceTypeBuilder.Tenant;
             }
             if (operationGroup.IsExtensionResource(config))
             {
@@ -82,6 +85,83 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
             return canidateParent;
+        }
+
+        public static string AncestorResourceType(this Operation operation)
+        {
+            //TODO: use PathSegment to get resource type?
+            string? result = null;
+            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
+            {
+                throw new ArgumentException($"The operation does not have an HttpRequest.");
+            }
+            var path = httpRequest.Path;
+            if (_operationPathAncestorCache.TryGetValue(path, out result))
+                return result;
+
+            if (path.Contains("/resourcegroups/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                result = ResourceTypeBuilder.ResourceGroups;
+            }
+            else if (path.Contains("/subscriptions/", StringComparison.InvariantCultureIgnoreCase))
+            {
+                result = ResourceTypeBuilder.Subscriptions;
+            }
+            else if (path.StartsWith("/providers/Microsoft.Management/managementGroups", StringComparison.InvariantCultureIgnoreCase))
+            {
+                result = ResourceTypeBuilder.ManagementGroups;
+            }
+            else
+            {
+                result = ResourceTypeBuilder.Tenant;
+            }
+            _operationPathAncestorCache.TryAdd(path, result);
+            return result;
+        }
+
+        public static string ParentResourceType(this Operation operation)
+        {
+            string? result = null;
+            if (!(operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest))
+            {
+                throw new ArgumentException($"The operation does not have an HttpRequest.");
+            }
+            var path = httpRequest.Path;
+            if (_operationPathParentCache.TryGetValue(path, out result))
+                return result;
+
+            if (operation.IsParentTenant() || operation.IsParentScope())
+            {
+                result = ResourceTypeBuilder.Tenant;
+            }
+            else if (path.StartsWith("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // TODO: rethink about how to represent and get the resource type for this case
+                result = ResourceTypeBuilder.ResourceGroupResources;
+            }
+            else
+            {
+                var fullProvider = GetFullProvider(httpRequest.ProviderSegments());
+                if (fullProvider == null)
+                {
+                    // fullProvider is null in the case of /{resourceId}
+                    // For other unkown cases, use tenant for now
+                    result = ResourceTypeBuilder.Tenant;
+                }
+                else
+                {
+                    result = ParseMethodForParent(fullProvider, httpRequest.Path, operation.ResourceType());
+                    if (result == string.Empty)
+                    {
+                        // If the parent is unknown, return tenant
+                        // Eventually we should be able to get a parent for every operation
+                        // This also aligns the behavior with AncestorResourceType().
+                        result = ResourceTypeBuilder.Tenant;
+                    }
+                }
+            }
+            _operationPathParentCache.TryAdd(path, result);
+            return result;
         }
 
         public static HttpRequest? GetBestMethod(Dictionary<HttpMethod, List<ServiceRequest>> operations)
@@ -118,11 +198,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static string ParseMethodForParent(ProviderSegment fullProvider, string path, string resourceType)
         {
+            // Microsoft.Resources/deployments/ == lastFullProvider
+            // resourceType = Microsoft.Management/managementGroups/providers/Microsoft.Resources/deployments
+            // TODO: Fix in ResourceType()?
+            var fullProviderToken = fullProvider.TokenValue;
+            if (resourceType.StartsWith("Microsoft.Management/managementGroups/providers/"))
+            {
+                fullProviderToken = $"Microsoft.Management/managementGroups/providers/{fullProvider.TokenValue}";
+            }
             //case 1:
             // Microsoft.Network/virtualNetworks/ == lastFullProvider
             // resourceType = Microsoft.Network/virtualNetworks
             //
-            if (fullProvider.TokenValue.Trim('/').Equals(resourceType))
+            if (fullProviderToken.Trim('/').Equals(resourceType))
             {
                 var lastSlash = path.LastIndexOf('/', fullProvider.IndexFoundAt - 1); //ok because tenant only resources should never get here.
                 var lastClosedBrace = path.LastIndexOf('}', lastSlash);
@@ -137,11 +225,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // Microsoft.Network/virtualNetworks/ == lastFullProvider
             // resourceType = Microsoft.Network/virtualNetwork/subnets
             // expected path to be: Microsoft.Network/virtualNetworks/{}/constant/{}/constant/.... (verfied in construction of type provider)
-            //
-            return resourceType.StartsWith(fullProvider.TokenValue) ? resourceType.Substring(0, resourceType.LastIndexOf('/')) : string.Empty;
+            return resourceType.StartsWith(fullProviderToken) ? resourceType.Substring(0, resourceType.LastIndexOf('/')) : string.Empty;
         }
 
-        public static void VerfiyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes, MgmtConfiguration config)
+        public static void VerifyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes, MgmtConfiguration config)
         {
             foreach (var operationsGroup in operationGroups)
             {

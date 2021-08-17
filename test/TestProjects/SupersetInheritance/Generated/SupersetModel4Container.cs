@@ -18,8 +18,11 @@ using SupersetInheritance.Models;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel4Container : ResourceContainerBase<SupersetModel4, SupersetModel4Data>
+    public partial class SupersetModel4Container : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly SupersetModel4SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>
         protected SupersetModel4Container()
         {
@@ -27,18 +30,14 @@ namespace SupersetInheritance
 
         /// <summary> Initializes a new instance of SupersetModel4Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal SupersetModel4Container(OperationsBase parent) : base(parent)
+        internal SupersetModel4Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private SupersetModel4SRestOperations _restClient => new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -104,7 +103,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual SupersetModel4SPutOperation StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public virtual SupersetModel4PutOperation StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -120,7 +119,7 @@ namespace SupersetInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken);
-                return new SupersetModel4SPutOperation(Parent, response);
+                return new SupersetModel4PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +132,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<SupersetModel4SPutOperation> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<SupersetModel4PutOperation> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel4SName == null)
             {
@@ -149,7 +148,7 @@ namespace SupersetInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new SupersetModel4SPutOperation(Parent, response);
+                return new SupersetModel4PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -173,6 +172,8 @@ namespace SupersetInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -197,6 +198,8 @@ namespace SupersetInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,9 +212,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual SupersetModel4 TryGet(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public virtual Response<SupersetModel4> GetIfExists(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.GetIfExists");
             scope.Start();
             try
             {
@@ -220,11 +223,10 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel4SName));
                 }
 
-                return Get(supersetModel4SName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
+                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,9 +238,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<SupersetModel4> TryGetAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<SupersetModel4>> GetIfExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.GetIfExists");
             scope.Start();
             try
             {
@@ -247,11 +249,10 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel4SName));
                 }
 
-                return await GetAsync(supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<SupersetModel4>(null, response.GetRawResponse())
+                    : Response.FromValue(new SupersetModel4(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,9 +264,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -274,7 +275,8 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel4SName));
                 }
 
-                return TryGet(supersetModel4SName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(supersetModel4SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,9 +288,9 @@ namespace SupersetInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -297,7 +299,8 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(supersetModel4SName));
                 }
 
-                return await TryGetAsync(supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -312,15 +315,15 @@ namespace SupersetInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -335,15 +338,15 @@ namespace SupersetInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(SupersetModel4Operations.ResourceType);
+                var filters = new ResourceFilterCollection(SupersetModel4.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

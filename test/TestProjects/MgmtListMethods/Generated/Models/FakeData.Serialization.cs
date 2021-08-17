@@ -10,7 +10,6 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
-using MgmtListMethods.Models;
 
 namespace MgmtListMethods
 {
@@ -19,10 +18,10 @@ namespace MgmtListMethods
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Properties))
+            if (Optional.IsDefined(Bar))
             {
-                writer.WritePropertyName("properties");
-                writer.WriteObjectValue(Properties);
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
             }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
@@ -39,7 +38,7 @@ namespace MgmtListMethods
 
         internal static FakeData DeserializeFakeData(JsonElement element)
         {
-            Optional<FakeProperties> properties = default;
+            Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -47,14 +46,9 @@ namespace MgmtListMethods
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("bar"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    properties = FakeProperties.DeserializeFakeProperties(property.Value);
+                    bar = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -88,7 +82,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new FakeData(id, name, type, location, tags, properties.Value);
+            return new FakeData(id, name, type, location, tags, bar.Value);
         }
     }
 }

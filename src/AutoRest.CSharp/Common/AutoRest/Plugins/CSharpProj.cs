@@ -23,13 +23,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-{0}
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.16.0"" />
-  </ItemGroup>
+{0}{1}
 
 </Project>
 ";
+        private string _coreCsProjContent = @"
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core"" Version=""1.16.0"" />
+  </ItemGroup>";
+
+        private string _armCoreCsProjContent = @"
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core"" Version=""1.18.0-alpha.20210811.1"" />
+  </ItemGroup>";
 
         private string _armCsProjContent = @"
   <PropertyGroup>
@@ -37,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20210726.2"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20210811.3"" />
   </ItemGroup>
 ";
 
@@ -105,13 +111,21 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                   additionalContent += _llcProjectContent;
                 }
-                csProjContent = string.Format(_csProjContent, additionalContent);
+
+                if (configuration.AzureArm)
+                {
+                    csProjContent = string.Format(_csProjContent, additionalContent, _armCoreCsProjContent);
+                }
+                else
+                {
+                    csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
+                }
             }
             else
             {
                 var version = GetVersion();
                 var csProjPackageReference = string.Format(_csProjPackageReference, version);
-                csProjContent = string.Format(_csProjContent, csProjPackageReference);
+                csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
             await autoRest.WriteFile($"{Configuration.ProjectRelativeDirectory}{context.DefaultNamespace}.csproj", csProjContent, "source-file-csharp");

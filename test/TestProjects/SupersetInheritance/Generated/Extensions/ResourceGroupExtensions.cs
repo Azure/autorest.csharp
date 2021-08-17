@@ -22,9 +22,9 @@ namespace SupersetInheritance
     {
         #region SupersetModel1
         /// <summary> Gets an object representing a SupersetModel1Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SupersetModel1Container" /> object. </returns>
-        public static SupersetModel1Container GetSupersetModel1s(this ResourceGroupOperations resourceGroup)
+        public static SupersetModel1Container GetSupersetModel1s(this ResourceGroup resourceGroup)
         {
             return new SupersetModel1Container(resourceGroup);
         }
@@ -32,9 +32,9 @@ namespace SupersetInheritance
 
         #region SupersetModel4
         /// <summary> Gets an object representing a SupersetModel4Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SupersetModel4Container" /> object. </returns>
-        public static SupersetModel4Container GetSupersetModel4s(this ResourceGroupOperations resourceGroup)
+        public static SupersetModel4Container GetSupersetModel4s(this ResourceGroup resourceGroup)
         {
             return new SupersetModel4Container(resourceGroup);
         }
@@ -46,12 +46,12 @@ namespace SupersetInheritance
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SupersetModel2>> PutSupersetModel2Async(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel2>> PutSupersetModel2Async(this ResourceGroup resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -82,12 +82,12 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SupersetModel2> PutSupersetModel2(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel2> PutSupersetModel2(this ResourceGroup resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -118,11 +118,11 @@ namespace SupersetInheritance
             );
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
-        public static async Task<Response<SupersetModel2>> GetSupersetModel2Async(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel2>> GetSupersetModel2Async(this ResourceGroup resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -149,11 +149,11 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
-        public static Response<SupersetModel2> GetSupersetModel2(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel2> GetSupersetModel2(this ResourceGroup resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -188,12 +188,12 @@ namespace SupersetInheritance
             return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static async Task<Response<SupersetModel3>> PutSupersetModel3Async(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel3>> PutSupersetModel3Async(this ResourceGroup resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -224,12 +224,12 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        public static Response<SupersetModel3> PutSupersetModel3(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel3> PutSupersetModel3(this ResourceGroup resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -260,11 +260,11 @@ namespace SupersetInheritance
             );
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
-        public static async Task<Response<SupersetModel3>> GetSupersetModel3Async(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel3>> GetSupersetModel3Async(this ResourceGroup resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -291,11 +291,11 @@ namespace SupersetInheritance
             ).ConfigureAwait(false);
         }
 
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
-        public static Response<SupersetModel3> GetSupersetModel3(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
+        public static Response<SupersetModel3> GetSupersetModel3(this ResourceGroup resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {

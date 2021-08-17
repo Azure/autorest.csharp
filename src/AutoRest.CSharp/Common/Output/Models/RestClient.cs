@@ -87,11 +87,16 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public"));
+                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
                 }
             }
 
             return requestMethods;
+        }
+
+        protected virtual Func<string?, bool> ShouldReturnNullOn404(Operation operation)
+        {
+            return (responseBodyType) => false;
         }
 
         protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()

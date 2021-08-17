@@ -20,8 +20,11 @@ using Pagination.Models;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeNumericModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeNumericModelContainer : ResourceContainerBase<PageSizeNumericModel, PageSizeNumericModelData>
+    public partial class PageSizeNumericModelContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PageSizeNumericModelsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeNumericModelContainer"/> class for mocking. </summary>
         protected PageSizeNumericModelContainer()
         {
@@ -29,18 +32,14 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of PageSizeNumericModelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PageSizeNumericModelContainer(OperationsBase parent) : base(parent)
+        internal PageSizeNumericModelContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PageSizeNumericModelsRestOperations _restClient => new PageSizeNumericModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -106,7 +105,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeNumericModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeNumericModelsPutOperation StartCreateOrUpdate(string name, PageSizeNumericModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeNumericModelPutOperation StartCreateOrUpdate(string name, PageSizeNumericModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -122,7 +121,7 @@ namespace Pagination
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new PageSizeNumericModelsPutOperation(Parent, response);
+                return new PageSizeNumericModelPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -135,7 +134,7 @@ namespace Pagination
         /// <param name="parameters"> The PageSizeNumericModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeNumericModelsPutOperation> StartCreateOrUpdateAsync(string name, PageSizeNumericModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeNumericModelPutOperation> StartCreateOrUpdateAsync(string name, PageSizeNumericModelData parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -151,7 +150,7 @@ namespace Pagination
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new PageSizeNumericModelsPutOperation(Parent, response);
+                return new PageSizeNumericModelPutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -175,6 +174,8 @@ namespace Pagination
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PageSizeNumericModel(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -199,6 +200,8 @@ namespace Pagination
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PageSizeNumericModel(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -211,9 +214,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual PageSizeNumericModel TryGet(string name, CancellationToken cancellationToken = default)
+        public virtual Response<PageSizeNumericModel> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -222,11 +225,10 @@ namespace Pagination
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return Get(name, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse())
+                    : Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -238,9 +240,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<PageSizeNumericModel> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PageSizeNumericModel>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -249,11 +251,10 @@ namespace Pagination
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return await GetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<PageSizeNumericModel>(null, response.GetRawResponse())
+                    : Response.FromValue(new PageSizeNumericModel(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -265,9 +266,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -276,7 +277,8 @@ namespace Pagination
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return TryGet(name, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(name, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -288,9 +290,9 @@ namespace Pagination
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -299,7 +301,8 @@ namespace Pagination
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return await TryGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -310,15 +313,15 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeNumericModel" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PageSizeNumericModel> List(CancellationToken cancellationToken = default)
+        public virtual Pageable<PageSizeNumericModel> GetAll(CancellationToken cancellationToken = default)
         {
             Page<PageSizeNumericModel> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAll(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeNumericModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -329,11 +332,11 @@ namespace Pagination
             }
             Page<PageSizeNumericModel> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
+                    var response = _restClient.GetAllNextPage(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeNumericModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -347,15 +350,15 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeNumericModel" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PageSizeNumericModel> ListAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PageSizeNumericModel> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<PageSizeNumericModel>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllAsync(Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeNumericModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -366,11 +369,11 @@ namespace Pagination
             }
             async Task<Page<PageSizeNumericModel>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.List");
+                using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAll");
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.GetAllNextPageAsync(nextLink, Id.ResourceGroupName, pageSizeHint, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new PageSizeNumericModel(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -388,15 +391,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeNumericModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeNumericModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -411,15 +414,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeNumericModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeNumericModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeNumericModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

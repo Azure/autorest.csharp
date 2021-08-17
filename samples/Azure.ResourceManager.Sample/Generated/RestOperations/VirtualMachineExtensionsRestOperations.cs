@@ -386,6 +386,8 @@ namespace Azure.ResourceManager.Sample
                         value = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((VirtualMachineExtensionData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -424,12 +426,14 @@ namespace Azure.ResourceManager.Sample
                         value = VirtualMachineExtensionData.DeserializeVirtualMachineExtensionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((VirtualMachineExtensionData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string vmName, string expand)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string vmName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -459,7 +463,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionsListResult>> ListAsync(string resourceGroupName, string vmName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionsListResult>> GetAllAsync(string resourceGroupName, string vmName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -470,7 +474,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, vmName, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, vmName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -492,7 +496,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public Response<VirtualMachineExtensionsListResult> List(string resourceGroupName, string vmName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionsListResult> GetAll(string resourceGroupName, string vmName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -503,7 +507,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, vmName, expand);
+            using var message = CreateGetAllRequest(resourceGroupName, vmName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

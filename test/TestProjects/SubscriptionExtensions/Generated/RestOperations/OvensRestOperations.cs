@@ -174,6 +174,8 @@ namespace SubscriptionExtensions
                         value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((OvenData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -205,12 +207,14 @@ namespace SubscriptionExtensions
                         value = OvenData.DeserializeOvenData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((OvenData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateListAllRequest(string statusOnly)
+        internal HttpMessage CreateGetBySubscriptionRequest(string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -233,9 +237,9 @@ namespace SubscriptionExtensions
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<OvenListResult>> ListAllAsync(string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OvenListResult>> GetBySubscriptionAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAllRequest(statusOnly);
+            using var message = CreateGetBySubscriptionRequest(statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -254,9 +258,9 @@ namespace SubscriptionExtensions
         /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<OvenListResult> ListAll(string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<OvenListResult> GetBySubscription(string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListAllRequest(statusOnly);
+            using var message = CreateGetBySubscriptionRequest(statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -272,7 +276,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        internal HttpMessage CreateListAllNextPageRequest(string nextLink, string statusOnly)
+        internal HttpMessage CreateGetBySubscriptionNextPageRequest(string nextLink, string statusOnly)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -290,14 +294,14 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<OvenListResult>> ListAllNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        public async Task<Response<OvenListResult>> GetBySubscriptionNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, statusOnly);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -318,14 +322,14 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<OvenListResult> ListAllNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
+        public Response<OvenListResult> GetBySubscriptionNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateListAllNextPageRequest(nextLink, statusOnly);
+            using var message = CreateGetBySubscriptionNextPageRequest(nextLink, statusOnly);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

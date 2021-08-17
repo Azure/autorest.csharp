@@ -5,27 +5,60 @@
 
 #nullable disable
 
+using System;
+using System.Threading.Tasks;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a SubscriptionParentSingleton along with the instance operations that can be performed on it. </summary>
-    public class SubscriptionParentSingleton : SubscriptionParentSingletonOperations
+    public partial class SubscriptionParentSingleton : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class for mocking. </summary>
-        protected SubscriptionParentSingleton() : base()
+        private readonly SubscriptionParentSingletonData _data;
+
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class for mocking. </summary>
+        protected SubscriptionParentSingleton()
         {
         }
 
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubscriptionParentSingleton(OperationsBase options, SubscriptionParentSingletonData resource) : base(options)
+        internal SubscriptionParentSingleton(ArmResource options, SubscriptionParentSingletonData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
-            Data = resource;
+            HasData = true;
+            _data = resource;
         }
 
-        /// <summary> Gets or sets the SubscriptionParentSingletonData. </summary>
-        public virtual SubscriptionParentSingletonData Data { get; private set; }
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        internal SubscriptionParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        {
+        }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton/default";
+
+        /// <summary> Gets the valid resource type for the operations. </summary>
+        protected override ResourceType ValidResourceType => ResourceType;
+
+        /// <summary> Gets whether or not the current instance has data. </summary>
+        public virtual bool HasData { get; }
+
+        /// <summary> Gets the data representing this Feature. </summary>
+        /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
+        public virtual SubscriptionParentSingletonData Data
+        {
+            get
+            {
+                if (!HasData)
+                    throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
+                return _data;
+            }
+        }
     }
 }

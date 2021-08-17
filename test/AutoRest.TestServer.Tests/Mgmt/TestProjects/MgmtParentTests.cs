@@ -8,16 +8,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public MgmtParentTests() : base("MgmtParent") { }
 
-        [TestCase("AvailabilitySetOperations", true)]
-        [TestCase("DedicatedHostGroupOperations", true)]
-        [TestCase("DedicatedHostOperations", true)]
-        [TestCase("VirtualMachineExtensionImageOperations", false)]
-        public void ValidateOperations(string operation, bool isExists)
-        {
-            var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
-            Assert.AreEqual(isExists, operationTypeExists);
-        }
-
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
         [TestCase("DedicatedHost", true)]

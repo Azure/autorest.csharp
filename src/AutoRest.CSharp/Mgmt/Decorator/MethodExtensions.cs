@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
@@ -32,15 +33,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static (CSharpType? BodyType, bool IsListFunction, bool WasResourceData) GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             bool wasResourceData = false;
-            var returnType = method.ReturnType;
-            if (returnType == null)
-                return (null, false, wasResourceData);
+            CSharpType? returnType;
+            CSharpType? valueProperty;
+            bool isList = method.IsListMethod(out valueProperty, out returnType);
 
-            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+            if (returnType == null || returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
                 return (returnType, false, wasResourceData);
-
-            var schemaObject = (SchemaObjectType)returnType.Implementation;
-            var valueProperty = GetValueProperty(schemaObject);
 
             //convert returnType if this is the same as the resourceData
             if (context.Library.TryGetResourceData(operationGroup, out var resourceData) &&
@@ -54,10 +52,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 return (returnType, false, wasResourceData);
             }
+
             // first we try to get the resource data - this could be a resource
             if (resourceData != null)
             {
-                if (valueProperty.ValueType.EqualsByName(new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                if (valueProperty.EqualsByName(resourceData.Type))
                 {
                     wasResourceData = true;
                     return (new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type), true, wasResourceData);
@@ -65,8 +64,36 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             // otherwise this must be a non-resource, but still a list
-            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true, wasResourceData);
+            return (new CSharpType(typeof(IReadOnlyList<>), valueProperty), true, wasResourceData);
         }
+
+        public static bool IsListMethod(this RestClientMethod method, out CSharpType? valueProperty, out CSharpType? returnType)
+        {
+            valueProperty = null;
+            returnType = method.ReturnType;
+            if (returnType == null)
+                return false;
+
+            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+            {
+                if (returnType.FrameworkType == typeof(IReadOnlyList<>))
+                {
+                    valueProperty = returnType.Arguments[0];
+                }
+            }
+            else
+            {
+                var schemaObject = (SchemaObjectType)returnType.Implementation;
+                valueProperty = GetValueProperty(schemaObject)?.ValueType.Arguments.FirstOrDefault();
+            }
+            return valueProperty != null;
+        }
+
+        public static bool IsListMethod(this RestClientMethod method)
+        {
+            return IsListMethod(method, out var valueMethod, out var returnType);
+        }
+
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
         {
@@ -119,6 +146,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var isParentExistsInPathParams = false;
             if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest)
             {
+                if (clientMethod.Operation.AncestorResourceType() == ResourceTypeBuilder.Tenant)
+                {
+                    return true;
+                }
                 // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
                 var fullPath = httpRequest.Path;
 
@@ -152,5 +183,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isParentExistsInPathParams;
         }
 
+        public static bool IsByIdMethod(this RestClientMethod clientMethod)
+        {
+            return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);
+        }
+
+        public static bool IsGetResourceMethod(this ClientMethod method, ResourceData resourceData)
+        {
+            return method.RestClientMethod.Operation.IsGetResourceOperation(method.RestClientMethod.Responses[0].ResponseBody?.Type.Name, resourceData);
+        }
+
+        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
+        {
+            return operation.Language.Default.Name.StartsWith("Get") && responseBodyType == resourceData.Type.Name;
+        }
     }
 }

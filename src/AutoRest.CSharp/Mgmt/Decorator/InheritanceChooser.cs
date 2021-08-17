@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -15,9 +16,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
-        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType childType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType childType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
-            foreach (System.Type parentType in ReferenceClassFinder.ReferenceClassCollection)
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
@@ -28,9 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
-            foreach (System.Type parentType in ReferenceClassFinder.ReferenceClassCollection)
+            foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 if (IsSuperset(parentType, properties))
                 {

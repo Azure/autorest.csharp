@@ -18,8 +18,11 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of AzureResourceFlattenModel2 and their operations over a ResourceGroup. </summary>
-    public partial class AzureResourceFlattenModel2Container : ResourceContainerBase<AzureResourceFlattenModel2, AzureResourceFlattenModel2Data>
+    public partial class AzureResourceFlattenModel2Container : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AzureResourceFlattenModel2SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel2Container"/> class for mocking. </summary>
         protected AzureResourceFlattenModel2Container()
         {
@@ -27,18 +30,14 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AzureResourceFlattenModel2Container(OperationsBase parent) : base(parent)
+        internal AzureResourceFlattenModel2Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AzureResourceFlattenModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AzureResourceFlattenModel2SRestOperations _restClient => new AzureResourceFlattenModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -107,7 +106,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AzureResourceFlattenModel2SPutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        public virtual AzureResourceFlattenModel2PutOperation StartCreateOrUpdate(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -123,7 +122,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -137,7 +136,7 @@ namespace ExactMatchFlattenInheritance
         /// <param name="parameters"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AzureResourceFlattenModel2SPutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AzureResourceFlattenModel2PutOperation> StartCreateOrUpdateAsync(string name, AzureResourceFlattenModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -153,7 +152,7 @@ namespace ExactMatchFlattenInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new AzureResourceFlattenModel2SPutOperation(Parent, response);
+                return new AzureResourceFlattenModel2PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -177,6 +176,8 @@ namespace ExactMatchFlattenInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AzureResourceFlattenModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +202,8 @@ namespace ExactMatchFlattenInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AzureResourceFlattenModel2(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +216,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual AzureResourceFlattenModel2 TryGet(string name, CancellationToken cancellationToken = default)
+        public virtual Response<AzureResourceFlattenModel2> GetIfExists(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +227,10 @@ namespace ExactMatchFlattenInheritance
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return Get(name, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, name, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<AzureResourceFlattenModel2>(null, response.GetRawResponse())
+                    : Response.FromValue(new AzureResourceFlattenModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +242,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<AzureResourceFlattenModel2> TryGetAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AzureResourceFlattenModel2>> GetIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +253,10 @@ namespace ExactMatchFlattenInheritance
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return await GetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<AzureResourceFlattenModel2>(null, response.GetRawResponse())
+                    : Response.FromValue(new AzureResourceFlattenModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,9 +268,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string name, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -278,7 +279,8 @@ namespace ExactMatchFlattenInheritance
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return TryGet(name, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(name, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,9 +292,9 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string name, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string name, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -301,7 +303,8 @@ namespace ExactMatchFlattenInheritance
                     throw new ArgumentNullException(nameof(name));
                 }
 
-                return await TryGetAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,15 +319,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel2Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel2.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -339,15 +342,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AzureResourceFlattenModel2Operations.ResourceType);
+                var filters = new ResourceFilterCollection(AzureResourceFlattenModel2.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

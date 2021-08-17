@@ -12,9 +12,11 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -32,10 +34,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
 
-        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>>? _resourceOperations;
+        private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
         private Dictionary<OperationGroup, ResourceData>? _resourceData;
-        private Dictionary<OperationGroup, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
@@ -45,57 +46,136 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
+        private Dictionary<string, string> _mergedOperations;
+
         /// <summary>
         /// A mapping of parent resource type to child operation groups that are not resources.
         /// </summary>
         private Dictionary<string, List<OperationGroup>> _childNonResourceOperationGroups;
 
+        private Dictionary<string, List<Resource>>? _childResources;
+
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
-            RemoveOperations(codeModel);
-            _codeModel = codeModel;
+            OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
+            UpdateSubscriptionIdForTenantIdResource(codeModel);
+            _codeModel = codeModel;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
+            _mergedOperations = _mgmtConfiguration.MergeOperations.SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key))).ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+
+            ReorderOperationParameters();
             DecorateOperationGroup();
+            UpdateListMethodNames();
         }
 
-        private void RemoveOperations(CodeModel codeModel)
+        private void UpdateListMethodNames()
         {
-            var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
-            if (operations != null)
+            foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                var listModel = operations.Operations.First(o => o.Language.Default.Name == "List").Responses.First().ResponseSchema as ObjectSchema;
-                if (listModel != null)
+                foreach (var operation in operationGroup.Operations)
                 {
-                    var itemModel = listModel.Properties.First(p => p.SerializedName == "value").Schema as ArraySchema;
-                    if (itemModel != null)
+                    var curName = operation.Language.Default.Name;
+                    if (curName.Equals("List") || curName.StartsWith("ListBy"))
                     {
-                        codeModel.Schemas.Objects.Remove(itemModel.ElementType as ObjectSchema);
+                        operation.Language.Default.Name = curName.Replace("List", "GetAll");
                     }
-                    codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
+                    else if (curName.Equals("ListAll"))
+                    {
+                        if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "resourcegroupname"))
+                        {
+                            operation.Language.Default.Name = "GetByResourceGroup";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "subscriptionid"))
+                        {
+                            operation.Language.Default.Name = "GetBySubscription";
+                        }
+                        else if (operation.Parameters.Any(p => p.In == ParameterLocation.Path && p.Language.Default.Name.ToLower() == "groupid"))
+                        {
+                            operation.Language.Default.Name = "GetByManagementGroup";
+                        }
+                        else
+                        {
+                            if (operation.Parameters.Any(p => p.In == ParameterLocation.Path))
+                            {
+                                ErrorHelpers.ThrowError($"{operationGroup.Key} has an operation {operation.Language.Default.Name} which isn't using standard path parameter names. Please update in your swagger or an autorest directive.");
+                            }
+                            else
+                            {
+                                operation.Language.Default.Name = "GetByTenant";
+                            }
+                        }
+                    }
+                    else if (curName.StartsWith("List"))
+                    {
+                        operation.Language.Default.Name = curName.Replace("List", "Get");
+                    }
                 }
-                codeModel.OperationGroups.Remove(operations);
             }
         }
 
-        public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
+        private void UpdateSubscriptionIdForTenantIdResource(CodeModel codeModel)
+        {
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                var subscriptionParameters = operationGroup.Operations
+                        .SelectMany(op => op.Parameters)
+                        .Where(p => p.Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase));
+                if (operationGroup.IsAncestorResourceTypeTenant(_context) && subscriptionParameters.Count() > 0)
+                {
+                    // subscriptionParameters all reference to the same object, so we need a copy of it.
+                    // We only need to change enum value of Implementation, ShallowCopy is enough.
+                    var newSubParam = subscriptionParameters.First().ShallowCopy();
+                    newSubParam.Implementation = ImplementationLocation.Method;
+                    foreach (var op in operationGroup.Operations)
+                    {
+                        var newParams = op.Parameters.ToList();
+                        for (int i = 0; i < newParams.Count; i++)
+                        {
+                            if (newParams[i].Language.Default.Name.Equals("subscriptionId", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                newParams[i] = newSubParam;
+                            }
+                        }
+                        op.Parameters = newParams;
+                    }
+                }
+            }
+        }
+
+        public IEnumerable<Resource> ManagementGroupChildResources => GetChildren(ResourceTypeBuilder.ManagementGroups);
+
+        private IEnumerable<Resource> GetChildren(string parent)
+        {
+            if (EnsureChildResources().TryGetValue(parent, out var children))
+            {
+                foreach (var child in children)
+                {
+                    yield return child;
+                }
+            }
+            else
+            {
+                yield break;
+            }
+        }
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
-        public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations()[ResourceType.Default].Values;
+        public IEnumerable<Resource> ArmResources => EnsureArmResources()[ResourceType.Default].Values;
 
-        public IEnumerable<ResourceOperation> TupleResourceOperations => EnsureResourceOperations()[ResourceType.Tuple].Values;
+        public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers()[ResourceType.Default].Values;
 
@@ -120,20 +200,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
+        public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
+
         public OperationGroup? GetOperationGroupForNonResource(string modelName)
         {
             OperationGroup? result = null;
             _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
-            return result;
-        }
-
-        public ResourceOperation GetResourceOperation(OperationGroup operationGroup)
-        {
-            ResourceOperation? result;
-            if (!EnsureResourceOperations()[ResourceType.Default].TryGetValue(operationGroup, out result))
-            {
-                result = EnsureResourceOperations()[ResourceType.Tuple][operationGroup];
-            }
             return result;
         }
 
@@ -165,21 +237,26 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
+        public bool TryGetMethodForMergedOperation(string operationFullName, [MaybeNullWhen(false)] out string methodName) => _mergedOperations.TryGetValue(operationFullName, out methodName);
+
         public bool TryGetResourceData(OperationGroup operationGroup, [MaybeNullWhen(false)] out ResourceData resourceData)
         {
             return EnsureResourceData().TryGetValue(operationGroup, out resourceData);
         }
 
-        /// <summary>
-        /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
-        /// </summary>
-        /// <param name="operationGroup">OperationGroup object.</param>
-        /// <returns>The <see cref="Resource" /> object associated with the operation group.</returns>
-        public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
+        public Resource GetArmResource(OperationGroup operationGroup)
+        {
+            Resource? result;
+            if (!EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            {
+                result = EnsureArmResources()[ResourceType.Tuple][operationGroup];
+            }
+            return result;
+        }
 
         public bool TryGetArmResource(OperationGroup operationGroup, [MaybeNullWhen(false)] out Resource resource)
         {
-            return EnsureArmResource().TryGetValue(operationGroup, out resource);
+            return EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out resource);
         }
 
         /// <summary>
@@ -245,30 +322,30 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return Enumerable.Empty<MgmtNonResourceOperation>();
         }
 
-        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>> EnsureResourceOperations()
+        private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>> EnsureArmResources()
         {
-            if (_resourceOperations != null)
+            if (_armResources != null)
             {
-                return _resourceOperations;
+                return _armResources;
             }
 
-            _resourceOperations = new Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>>();
-            _resourceOperations.Add(ResourceType.Default, new Dictionary<OperationGroup, ResourceOperation>());
-            _resourceOperations.Add(ResourceType.Tuple, new Dictionary<OperationGroup, ResourceOperation>());
+            _armResources = new Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>();
+            _armResources.Add(ResourceType.Default, new Dictionary<OperationGroup, Resource>());
+            _armResources.Add(ResourceType.Tuple, new Dictionary<OperationGroup, Resource>());
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
                 var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
-                var resourceOperation = new ResourceOperation(operationGroup, _context, childOperationGroups);
+                var resource = new Resource(operationGroup, _context, childOperationGroups);
                 // validate to ensure that all the resource operations here have unique names
-                EnsureUniqueName(_resourceOperations, resourceOperation);
-                _resourceOperations[resourceType].Add(operationGroup, resourceOperation);
+                EnsureUniqueName(_armResources, resource);
+                _armResources[resourceType].Add(operationGroup, resource);
             }
 
-            return _resourceOperations;
+            return _armResources;
         }
 
-        private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : ResourceOperation where V : IDictionary<OperationGroup, T>
+        private static void EnsureUniqueName<T, V>(IDictionary<ResourceType, V> mapToSearchIn, T value) where T : Resource where V : IDictionary<OperationGroup, T>
         {
             // we need to iterate over the existing items (including Default resource type and Tuple resource type)
             // to see if there are already any resource operations are returning the same resource as this new one
@@ -336,32 +413,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceData;
         }
 
-        private Dictionary<OperationGroup, Resource> EnsureArmResource()
+        private Dictionary<string, List<Resource>> EnsureChildResources()
         {
-            if (_armResource != null)
+            if (_childResources != null)
             {
-                return _armResource;
+                return _childResources;
             }
 
-            _armResource = new Dictionary<OperationGroup, Resource>();
-            foreach (var entry in ResourceSchemaMap)
+            _childResources = new Dictionary<string, List<Resource>>();
+            var parentResourceTypes = new HashSet<string>{ResourceTypeBuilder.Tenant, ResourceTypeBuilder.ManagementGroups, ResourceTypeBuilder.Subscriptions, ResourceTypeBuilder.ResourceGroups};
+            foreach (var resource in ArmResources)
             {
-                var schema = entry.Key;
-                List<OperationGroup>? operations = _operationGroups[schema.Name];
-
-                if (operations != null)
+                var parents = resource.OperationGroup.Operations.Where(op => parentResourceTypes.Contains(op.ParentResourceType())).Select(op => op.ParentResourceType()).Distinct().ToList();
+                foreach (var parent in parents)
                 {
-                    foreach (var operation in operations)
+                    if (_childResources.TryGetValue(parent, out var resources))
                     {
-                        if (!_armResource.ContainsKey(operation))
-                        {
-                            _armResource.Add(operation, new Resource(operation, _context));
-                        }
+                        resources.Add(resource);
+                    }
+                    else
+                    {
+                        _childResources.Add(parent, new List<Resource>{resource});
                     }
                 }
             }
 
-            return _armResource;
+            return _childResources;
         }
 
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
@@ -507,7 +584,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ? new MgmtReferenceType(objectSchema, _context)
+            : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 
@@ -516,6 +595,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
             _ => throw new NotImplementedException()
         };
+
+        private void ReorderOperationParameters()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    var httpRequest = operation.Requests.FirstOrDefault()?.Protocol.Http as HttpRequest;
+                    if (httpRequest != null)
+                    {
+                        var orderedParams = operation.Parameters
+                            .Where(p => p.In == ParameterLocation.Path)
+                            .OrderBy(
+                                p => httpRequest.Path.IndexOf(
+                                    "{" + p.CSharpName() + "}",
+                                    StringComparison.InvariantCultureIgnoreCase));
+                        operation.Parameters = orderedParams.Concat(operation.Parameters
+                                .Where(p => p.In != ParameterLocation.Path).ToList())
+                            .ToList();
+                    }
+                }
+            }
+        }
 
         private void DecorateOperationGroup()
         {
@@ -526,7 +628,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 string? parent;
                 if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
                 {
-                    // If overriden, add parent to known types list (trusting user input)
+                    // If overridden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
                 if (operationGroup.IsResource(_mgmtConfiguration))
@@ -539,7 +641,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     AddToChildNonResourceOperationGroupMap(operationGroup);
                 }
             }
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
+            ParentDetection.VerifyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
         private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup)

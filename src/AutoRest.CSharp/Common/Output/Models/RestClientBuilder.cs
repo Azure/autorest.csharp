@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientBuilder(OperationGroup operationGroup, BuildContext context)
         {
-            _serializationBuilder = new SerializationBuilder ();
+            _serializationBuilder = new SerializationBuilder();
             _context = context;
             _library = context.BaseLibrary!;
 
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToDictionary(p => p.Language.Default.Name, BuildClientParameter);
         }
 
-        public Parameter[] GetOrderedParameters ()
+        public Parameter[] GetOrderedParameters()
         {
             return OrderParameters(_parameters.Values);
         }
@@ -55,13 +55,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
 
-        private string GetRequestParameterName (RequestParameter requestParameter)
+        private string GetRequestParameterName(RequestParameter requestParameter)
         {
             string defaultName = requestParameter.Language.Default.Name;
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new();
 
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             Request request = BuildRequest(httpRequest, parameters, allParameters);
-            Response[] responses = BuildResponses(operation, request, out var responseType);
+            Response[] responses = BuildResponses(operation, request, out var responseType, returnNullOn404Func);
             Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
 
             return new RestClientMethod(
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private Response[] BuildResponses(Operation operation, Request request, out CSharpType? responseType)
+        private Response[] BuildResponses(Operation operation, Request request, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
         {
             List<Response> clientResponse = new List<Response>();
 
@@ -110,7 +110,11 @@ namespace AutoRest.CSharp.Output.Models
                     operation.IsLongRunning ? null : BuildResponseBody(response),
                     statusCodes.ToArray()
                 ));
+
             }
+
+            if (returnNullOn404Func != null && returnNullOn404Func(clientResponse.FirstOrDefault()?.ResponseBody?.Type.Name))
+                clientResponse.Add(new Response(null, new[] { new StatusCodes(404, null) }));
 
             responseType = ReduceResponses(clientResponse);
 
@@ -380,7 +384,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
                     {
-                        var groupModel = (SchemaObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                        var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
                         var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
 
                         constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -481,9 +485,9 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 else
                 {
-                    if (!parameters.ContainsKey (text))
+                    if (!parameters.ContainsKey(text))
                     {
-                        ErrorHelpers.ThrowError ($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                        ErrorHelpers.ThrowError($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                     }
                     segments.Add(parameters[text]);
                 }

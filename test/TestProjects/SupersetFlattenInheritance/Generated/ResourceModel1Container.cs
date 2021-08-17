@@ -18,8 +18,11 @@ using SupersetFlattenInheritance.Models;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of ResourceModel1 and their operations over a ResourceGroup. </summary>
-    public partial class ResourceModel1Container : ResourceContainerBase<ResourceModel1, ResourceModel1Data>
+    public partial class ResourceModel1Container : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly ResourceModel1SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Container"/> class for mocking. </summary>
         protected ResourceModel1Container()
         {
@@ -27,18 +30,14 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of ResourceModel1Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal ResourceModel1Container(OperationsBase parent) : base(parent)
+        internal ResourceModel1Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private ResourceModel1SRestOperations _restClient => new ResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -104,7 +103,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceModel1SPutOperation StartCreateOrUpdate(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceModel1PutOperation StartCreateOrUpdate(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -120,7 +119,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                return new ResourceModel1SPutOperation(Parent, response);
+                return new ResourceModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -133,7 +132,7 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The ResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceModel1SPutOperation> StartCreateOrUpdateAsync(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceModel1PutOperation> StartCreateOrUpdateAsync(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -149,7 +148,7 @@ namespace SupersetFlattenInheritance
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new ResourceModel1SPutOperation(Parent, response);
+                return new ResourceModel1PutOperation(Parent, response);
             }
             catch (Exception e)
             {
@@ -173,6 +172,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -197,6 +198,8 @@ namespace SupersetFlattenInheritance
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResourceModel1(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -209,9 +212,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual ResourceModel1 TryGet(string resourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceModel1> GetIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -220,11 +223,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(resourceModel1SName));
                 }
 
-                return Get(resourceModel1SName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<ResourceModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -236,9 +238,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<ResourceModel1> TryGetAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceModel1>> GetIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.GetIfExists");
             scope.Start();
             try
             {
@@ -247,11 +249,10 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(resourceModel1SName));
                 }
 
-                return await GetAsync(resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<ResourceModel1>(null, response.GetRawResponse())
+                    : Response.FromValue(new ResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -263,9 +264,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string resourceModel1SName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -274,7 +275,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(resourceModel1SName));
                 }
 
-                return TryGet(resourceModel1SName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(resourceModel1SName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -286,9 +288,9 @@ namespace SupersetFlattenInheritance
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.CheckIfExists");
             scope.Start();
             try
             {
@@ -297,7 +299,8 @@ namespace SupersetFlattenInheritance
                     throw new ArgumentNullException(nameof(resourceModel1SName));
                 }
 
-                return await TryGetAsync(resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(resourceModel1SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -312,15 +315,15 @@ namespace SupersetFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ResourceModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(ResourceModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -335,15 +338,15 @@ namespace SupersetFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ResourceModel1Operations.ResourceType);
+                var filters = new ResourceFilterCollection(ResourceModel1.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

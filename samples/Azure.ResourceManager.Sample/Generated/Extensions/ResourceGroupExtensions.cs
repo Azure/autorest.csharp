@@ -14,9 +14,9 @@ namespace Azure.ResourceManager.Sample
     {
         #region AvailabilitySet
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
-        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
+        public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroup resourceGroup)
         {
             return new AvailabilitySetContainer(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace Azure.ResourceManager.Sample
 
         #region ProximityPlacementGroup
         /// <summary> Gets an object representing a ProximityPlacementGroupContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ProximityPlacementGroupContainer" /> object. </returns>
-        public static ProximityPlacementGroupContainer GetProximityPlacementGroups(this ResourceGroupOperations resourceGroup)
+        public static ProximityPlacementGroupContainer GetProximityPlacementGroups(this ResourceGroup resourceGroup)
         {
             return new ProximityPlacementGroupContainer(resourceGroup);
         }
@@ -34,9 +34,9 @@ namespace Azure.ResourceManager.Sample
 
         #region DedicatedHostGroup
         /// <summary> Gets an object representing a DedicatedHostGroupContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="DedicatedHostGroupContainer" /> object. </returns>
-        public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
+        public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroup resourceGroup)
         {
             return new DedicatedHostGroupContainer(resourceGroup);
         }
@@ -44,9 +44,9 @@ namespace Azure.ResourceManager.Sample
 
         #region SshPublicKey
         /// <summary> Gets an object representing a SshPublicKeyContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="SshPublicKeyContainer" /> object. </returns>
-        public static SshPublicKeyContainer GetSshPublicKeys(this ResourceGroupOperations resourceGroup)
+        public static SshPublicKeyContainer GetSshPublicKeys(this ResourceGroup resourceGroup)
         {
             return new SshPublicKeyContainer(resourceGroup);
         }
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample
 
         #region VirtualMachine
         /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
-        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroupOperations resourceGroup)
+        public static VirtualMachineContainer GetVirtualMachines(this ResourceGroup resourceGroup)
         {
             return new VirtualMachineContainer(resourceGroup);
         }
@@ -64,9 +64,9 @@ namespace Azure.ResourceManager.Sample
 
         #region Image
         /// <summary> Gets an object representing a ImageContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ImageContainer" /> object. </returns>
-        public static ImageContainer GetImages(this ResourceGroupOperations resourceGroup)
+        public static ImageContainer GetImages(this ResourceGroup resourceGroup)
         {
             return new ImageContainer(resourceGroup);
         }
@@ -74,9 +74,9 @@ namespace Azure.ResourceManager.Sample
 
         #region VirtualMachineScaleSet
         /// <summary> Gets an object representing a VirtualMachineScaleSetContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="VirtualMachineScaleSetContainer" /> object. </returns>
-        public static VirtualMachineScaleSetContainer GetVirtualMachineScaleSets(this ResourceGroupOperations resourceGroup)
+        public static VirtualMachineScaleSetContainer GetVirtualMachineScaleSets(this ResourceGroup resourceGroup)
         {
             return new VirtualMachineScaleSetContainer(resourceGroup);
         }

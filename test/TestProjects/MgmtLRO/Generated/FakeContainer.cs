@@ -20,8 +20,11 @@ using MgmtLRO.Models;
 namespace MgmtLRO
 {
     /// <summary> A class representing collection of Fake and their operations over a ResourceGroup. </summary>
-    public partial class FakeContainer : ResourceContainerBase<Fake, FakeData>
+    public partial class FakeContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly FakesRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="FakeContainer"/> class for mocking. </summary>
         protected FakeContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtLRO
 
         /// <summary> Initializes a new instance of FakeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal FakeContainer(OperationsBase parent) : base(parent)
+        internal FakeContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private FakesRestOperations _restClient => new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -109,7 +108,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakesCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -125,7 +124,7 @@ namespace MgmtLRO
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, fakeName, parameters, cancellationToken);
-                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
+                return new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -139,7 +138,7 @@ namespace MgmtLRO
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -155,7 +154,7 @@ namespace MgmtLRO
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakesCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
+                return new FakeCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, fakeName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -180,6 +179,8 @@ namespace MgmtLRO
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -205,6 +206,8 @@ namespace MgmtLRO
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -218,9 +221,9 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Fake TryGet(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<Fake> GetIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -229,11 +232,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                return Get(fakeName, expand, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Fake>(null, response.GetRawResponse())
+                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -246,9 +248,9 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Fake> TryGetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Fake>> GetIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -257,11 +259,10 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                return await GetAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Fake>(null, response.GetRawResponse())
+                    : Response.FromValue(new Fake(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -274,9 +275,9 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -285,7 +286,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                return TryGet(fakeName, expand, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(fakeName, expand, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -298,9 +300,9 @@ namespace MgmtLRO
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -309,7 +311,8 @@ namespace MgmtLRO
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                return await TryGetAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -323,18 +326,18 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IReadOnlyList<Fake>>> ListAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<Fake>>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAll");
             scope.Start();
             try
             {
-                var response = await _restClient.ListAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAllAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value.Value.Select(data => new Fake(Parent, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -349,18 +352,18 @@ namespace MgmtLRO
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IReadOnlyList<Fake>> List(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<Fake>> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.List");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAll");
             scope.Start();
             try
             {
-                var response = _restClient.List(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                var response = _restClient.GetAll(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
                 return Response.FromValue(response.Value.Value.Select(data => new Fake(Parent, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
@@ -376,15 +379,15 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -399,15 +402,15 @@ namespace MgmtLRO
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(FakeOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

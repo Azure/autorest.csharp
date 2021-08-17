@@ -40,7 +40,7 @@ namespace MgmtListMethods
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string fakeName, FakeData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string fakeName, FakeData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -49,8 +49,6 @@ namespace MgmtListMethods
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
             uri.AppendPath(fakeName, true);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -64,17 +62,12 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FakeData>> CreateOrUpdateAsync(string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<FakeData>> CreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -84,7 +77,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateCreateOrUpdateRequest(fakeName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -101,17 +94,12 @@ namespace MgmtListMethods
         }
 
         /// <summary> Create or update an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<FakeData> CreateOrUpdate(string resourceGroupName, string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
+        public Response<FakeData> CreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
@@ -121,7 +109,7 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, parameters);
+            using var message = CreateCreateOrUpdateRequest(fakeName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -137,178 +125,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string fakeName, FakeUpdate parameters)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Patch;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(parameters);
-            request.Content = content;
-            return message;
-        }
-
-        /// <summary> Update an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<FakeData>> UpdateAsync(string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var message = CreateUpdateRequest(resourceGroupName, fakeName, parameters);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeData value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeData.DeserializeFakeData(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Update an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<FakeData> Update(string resourceGroupName, string fakeName, FakeUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var message = CreateUpdateRequest(resourceGroupName, fakeName, parameters);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeData value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeData.DeserializeFakeData(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string fakeName)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Delete;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName, true);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            return message;
-        }
-
-        /// <summary> Delete an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DeleteAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-
-            using var message = CreateDeleteRequest(resourceGroupName, fakeName);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 204:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Delete an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response Delete(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-
-            using var message = CreateDeleteRequest(resourceGroupName, fakeName);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                case 204:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string fakeName, string expand)
+        internal HttpMessage CreateGetRequest(string fakeName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -317,8 +134,6 @@ namespace MgmtListMethods
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
             uri.AppendPath(fakeName, true);
             if (expand != null)
@@ -332,23 +147,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response<FakeData>> GetAsync(string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeData>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, fakeName, expand);
+            using var message = CreateGetRequest(fakeName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -359,29 +169,26 @@ namespace MgmtListMethods
                         value = FakeData.DeserializeFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((FakeData)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
         /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response<FakeData> Get(string resourceGroupName, string fakeName, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeData> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (fakeName == null)
             {
                 throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, fakeName, expand);
+            using var message = CreateGetRequest(fakeName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -392,12 +199,14 @@ namespace MgmtListMethods
                         value = FakeData.DeserializeFakeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
+                case 404:
+                    return Response.FromValue((FakeData)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllRequest(string requiredParam, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -406,8 +215,6 @@ namespace MgmtListMethods
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes", false);
             uri.AppendQuery("requiredParam", requiredParam, true);
             if (optionalParam != null)
@@ -421,23 +228,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListAsync(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
+        public async Task<Response<FakeListResult>> GetAllAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateListRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(requiredParam, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -454,23 +256,18 @@ namespace MgmtListMethods
         }
 
         /// <summary> Lists all fakes in a resource group. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> List(string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
+        public Response<FakeListResult> GetAll(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateListRequest(resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllRequest(requiredParam, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -486,225 +283,7 @@ namespace MgmtListMethods
             }
         }
 
-        internal HttpMessage CreateListBySubscriptionRequest(string statusOnly)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Fake/fakes", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            if (statusOnly != null)
-            {
-                uri.AppendQuery("statusOnly", statusOnly, true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<FakeListResult>> ListBySubscriptionAsync(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateListBySubscriptionRequest(statusOnly);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<FakeListResult> ListBySubscription(string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateListBySubscriptionRequest(statusOnly);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListByLocationRequest(string location)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/fakes", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationAsync(string location, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationRequest(location);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocation(string location, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationRequest(location);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListByLocationsRequest(string resourceGroupName, string location)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/fakes", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationsAsync(string resourceGroupName, string location, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationsRequest(resourceGroupName, location);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocations(string resourceGroupName, string location, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationsRequest(resourceGroupName, location);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string requiredParam, string optionalParam)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string requiredParam, string optionalParam)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -719,27 +298,22 @@ namespace MgmtListMethods
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="requiredParam"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="requiredParam"/> is null. </exception>
+        public async Task<Response<FakeListResult>> GetAllNextPageAsync(string nextLink, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
             }
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, requiredParam, optionalParam);
+            using var message = CreateGetAllNextPageRequest(nextLink, requiredParam, optionalParam);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -757,183 +331,22 @@ namespace MgmtListMethods
 
         /// <summary> Lists all fakes in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="requiredParam"> The expand expression to apply on the operation. </param>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="requiredParam"/> is null. </exception>
-        public Response<FakeListResult> ListNextPage(string nextLink, string resourceGroupName, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="requiredParam"/> is null. </exception>
+        public Response<FakeListResult> GetAllNextPage(string nextLink, string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
             }
             if (requiredParam == null)
             {
                 throw new ArgumentNullException(nameof(requiredParam));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, requiredParam, optionalParam);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListBySubscriptionNextPageRequest(string nextLink, string statusOnly)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListBySubscriptionNextPageAsync(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateListBySubscriptionNextPageRequest(nextLink, statusOnly);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<FakeListResult> ListBySubscriptionNextPage(string nextLink, string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-
-            using var message = CreateListBySubscriptionNextPageRequest(nextLink, statusOnly);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListByLocationsNextPageRequest(string nextLink, string resourceGroupName, string location)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
-        public async Task<Response<FakeListResult>> ListByLocationsNextPageAsync(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationsNextPageRequest(nextLink, resourceGroupName, location);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        FakeListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FakeListResult.DeserializeFakeListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="location"/> is null. </exception>
-        public Response<FakeListResult> ListByLocationsNextPage(string nextLink, string resourceGroupName, string location, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListByLocationsNextPageRequest(nextLink, resourceGroupName, location);
+            using var message = CreateGetAllNextPageRequest(nextLink, requiredParam, optionalParam);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -22,6 +22,7 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
+    [Parallelizable(ParallelScope.All)]
     internal abstract class OutputLibraryTestBase
     {
         private string _projectName;
@@ -56,9 +57,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var singletonCount = context.CodeModel.OperationGroups.Count(
                 c => c.IsSingletonResource(result.Context.Configuration.MgmtConfiguration));
 
-            Assert.AreEqual(count, context.Library.ResourceOperations.Count() + context.Library.TupleResourceOperations.Count(), "Did not find the expected resourceOperations count");
+            Assert.AreEqual(count, context.Library.ArmResources.Count() + context.Library.TupleResources.Count(), "Did not find the expected resource count");
             Assert.AreEqual(count - singletonCount, context.Library.ResourceContainers.Count() + context.Library.TupleResourceContainers.Count(), "Did not find the expected resourceContainers count");
-            Assert.AreEqual(count, context.Library.ArmResource.Count(), "Did not find the expected resource count");
             Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
@@ -89,11 +89,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var result = Generate(_projectName).Result;
             var context = result.Context;
 
-            foreach (var resourceOperation in context.Library.ResourceOperations)
+            foreach (var resourceOperation in context.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType.BaseType))
+                if (IsSingletonOperation(OperationsType))
                 {
                     continue;
                 }
@@ -119,32 +119,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var result = Generate(_projectName).Result;
             var context = result.Context;
 
-            foreach (var resourceOperation in context.Library.ResourceOperations)
+            foreach (var resourceOperation in context.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resourceOperation.Type.Name}";
                 var OperationsType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(OperationsType.BaseType.BaseType))
+                if (IsSingletonOperation(OperationsType))
                 {
                     continue;
                 }
 
                 var restClient = context.Library.GetRestClient(resourceOperation.OperationGroup);
-                var getMethod = restClient.Methods.Where(m => m.Name == "Get").FirstOrDefault();
+                var getMethod = restClient.Methods.Where(m => m.Name == "Get" || m.Name == "GetAtScope").FirstOrDefault();
                 Assert.NotNull(getMethod, $"{restClient.Type.Name} does not implement the Get method.");
-
-                var nonPathParameters = GetNonPathParameters(getMethod);
-                if (nonPathParameters.Length > 0)
-                {
-                    MethodInfo[] methods = OperationsType.GetMethods();
-                    var getMethods = methods.Where(m => m.Name == methodName);
-                    Assert.AreEqual(2, getMethods.Count());
-                }
             }
         }
 
         private bool IsSingletonOperation(Type type)
         {
-            return type == typeof(SingletonOperationsBase);
+            var propertyInfo = type.GetProperty("Parent", BindingFlags.Instance | BindingFlags.Public);
+            if (propertyInfo == null)
+                return false;
+            return type.BaseType == typeof(ArmResource) && propertyInfo.PropertyType == typeof(ArmResource);
         }
 
         private Parameter[] GetNonPathParameters(RestClientMethod clientMethod)

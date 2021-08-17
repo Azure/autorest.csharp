@@ -18,8 +18,11 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ResourceContainerBase<Oven, OvenData>
+    public partial class OvenContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly OvensRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
         {
@@ -27,18 +30,14 @@ namespace SubscriptionExtensions
 
         /// <summary> Initializes a new instance of OvenContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal OvenContainer(OperationsBase parent) : base(parent)
+        internal OvenContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -107,7 +106,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual OvensCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public virtual OvenCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
@@ -123,7 +122,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken);
-                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
+                return new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -137,7 +136,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<OvensCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<OvenCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             if (vmName == null)
             {
@@ -153,7 +152,7 @@ namespace SubscriptionExtensions
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken).ConfigureAwait(false);
-                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
+                return new OvenCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -177,6 +176,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +202,8 @@ namespace SubscriptionExtensions
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +216,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Oven TryGet(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<Oven> GetIfExists(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +227,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return Get(vmName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
+                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +242,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Oven> TryGetAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<Oven>> GetIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +253,10 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return await GetAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<Oven>(null, response.GetRawResponse())
+                    : Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,9 +268,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string vmName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -278,7 +279,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return TryGet(vmName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(vmName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,9 +292,9 @@ namespace SubscriptionExtensions
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string vmName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -301,7 +303,8 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(vmName));
                 }
 
-                return await TryGetAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,15 +319,15 @@ namespace SubscriptionExtensions
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(OvenOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Oven.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -339,15 +342,15 @@ namespace SubscriptionExtensions
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(OvenOperations.ResourceType);
+                var filters = new ResourceFilterCollection(Oven.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

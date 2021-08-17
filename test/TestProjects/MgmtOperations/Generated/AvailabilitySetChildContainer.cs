@@ -18,8 +18,11 @@ using MgmtOperations.Models;
 namespace MgmtOperations
 {
     /// <summary> A class representing collection of AvailabilitySetChild and their operations over a AvailabilitySet. </summary>
-    public partial class AvailabilitySetChildContainer : ResourceContainerBase<AvailabilitySetChild, AvailabilitySetChildData>
+    public partial class AvailabilitySetChildContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AvailabilitySetChildRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildContainer"/> class for mocking. </summary>
         protected AvailabilitySetChildContainer()
         {
@@ -27,18 +30,14 @@ namespace MgmtOperations
 
         /// <summary> Initializes a new instance of AvailabilitySetChildContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AvailabilitySetChildContainer(OperationsBase parent) : base(parent)
+        internal AvailabilitySetChildContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AvailabilitySetChildRestOperations _restClient => new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => AvailabilitySetOperations.ResourceType;
+        protected override ResourceType ValidResourceType => AvailabilitySet.ResourceType;
 
         // Container level operations.
 
@@ -177,6 +176,8 @@ namespace MgmtOperations
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -201,6 +202,8 @@ namespace MgmtOperations
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -213,9 +216,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual AvailabilitySetChild TryGet(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public virtual Response<AvailabilitySetChild> GetIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -224,11 +227,10 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                return Get(availabilitySetChildName, cancellationToken: cancellationToken).Value;
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken);
+                return response.Value == null
+                    ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
+                    : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -240,9 +242,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<AvailabilitySetChild> TryGetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<AvailabilitySetChild>> GetIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.TryGet");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetIfExists");
             scope.Start();
             try
             {
@@ -251,11 +253,10 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                return await GetAsync(availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            catch (RequestFailedException e) when (e.Status == 404)
-            {
-                return null;
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return response.Value == null
+                    ? Response.FromValue<AvailabilitySetChild>(null, response.GetRawResponse())
+                    : Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -267,9 +268,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual bool DoesExist(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -278,7 +279,8 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                return TryGet(availabilitySetChildName, cancellationToken: cancellationToken) != null;
+                var response = GetIfExists(availabilitySetChildName, cancellationToken: cancellationToken);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -290,9 +292,9 @@ namespace MgmtOperations
         /// <summary> Tries to get details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<bool> DoesExistAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.DoesExist");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.CheckIfExists");
             scope.Start();
             try
             {
@@ -301,7 +303,8 @@ namespace MgmtOperations
                     throw new ArgumentNullException(nameof(availabilitySetChildName));
                 }
 
-                return await TryGetAsync(availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false) != null;
+                var response = await GetIfExistsAsync(availabilitySetChildName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -316,15 +319,15 @@ namespace MgmtOperations
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> ListAsGenericResource(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AvailabilitySetChildOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AvailabilitySetChild.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -339,15 +342,15 @@ namespace MgmtOperations
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> ListAsGenericResourceAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.ListAsGenericResource");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AvailabilitySetChildOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AvailabilitySetChild.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

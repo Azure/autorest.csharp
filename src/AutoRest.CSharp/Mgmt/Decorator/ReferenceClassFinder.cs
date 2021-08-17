@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 
@@ -12,6 +14,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     public class ReferenceClassFinder
     {
+        internal const string InitializationCtorAttribute = "InitializationConstructor";
+        internal const string SerializationCtorAttribute = "SerializationConstructor";
+        internal const string ReferenceTypeAttribute = "ReferenceType";
+
+        internal const string InitializationCtorAttributeName = "InitializationConstructorAttribute";
+        internal const string SerializationCtorAttributeName = "SerializationConstructorAttribute";
+        internal const string ReferenceTypeAttributeName = "ReferenceTypeAttribute";
+
+        private static IList<Type>? _referenceTypes;
+
         internal class Node
         {
             public Type Type { get; }
@@ -24,22 +36,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        public static IList<Type> ReferenceClassCollection = GetOrderedList(GetReferenceClassCollection());
+        internal static IList<Type> GetReferenceClassCollection(BuildContext<MgmtOutputLibrary> context) => _referenceTypes ??= GetOrderedList(GetReferenceClassCollectionInternal(context));
 
-        private static IList<Type> GetReferenceClassCollection()
+        private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
         {
+            if (context.Configuration.MgmtConfiguration.IsArmCore)
+                return new List<Type>();
+
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
             if (assembly == null)
             {
                 return new List<Type>();
             }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
+            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == ReferenceTypeAttributeName).Count() > 0).ToList();
         }
 
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {
-            var referenceClasses = ConvertGenericType(referenceTypes);
-            var rootNodes = GetRootNodes(referenceClasses);
+            var rootNodes = GetRootNodes(referenceTypes);
             var output = new List<Type>();
             foreach (var root in rootNodes)
             {
@@ -94,19 +108,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return PromoteGenericType(output);
 
             return output;
-        }
-
-        internal static IList<Type> ConvertGenericType(IList<Type> referenceClassCollection)
-        {
-            for (int i = 0; i < referenceClassCollection.Count; i++)
-            {
-                if (referenceClassCollection[i].IsGenericType)
-                {
-                    var attributeObj = referenceClassCollection[i].GetCustomAttributes().First() as ReferenceTypeAttribute;
-                    referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(attributeObj!.GenericType);
-                }
-            }
-            return referenceClassCollection;
         }
 
         internal static List<Node> GetRootNodes(IList<Type> referenceClassCollection)
