@@ -54,7 +54,7 @@ namespace Azure.Management.Storage
         internal BlobService(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -77,6 +77,9 @@ namespace Azure.Management.Storage
                 return _data;
             }
         }
+
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

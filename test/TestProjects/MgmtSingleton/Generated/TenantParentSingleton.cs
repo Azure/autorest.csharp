@@ -79,6 +79,9 @@ namespace MgmtSingleton
             }
         }
 
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
+
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {

@@ -169,7 +169,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options) : base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                 {
                     _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                    // we cannot use `Id.SubscriptionId` before we actually get a valid `Data`
+                    var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", options.Id.SubscriptionId" : string.Empty;
                     _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                     foreach (var operationGroup in _resource.ChildOperations.Keys)
                     {
@@ -201,6 +202,22 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _writer.Line($"throw new {typeof(InvalidOperationException)}(\"The current instance does not have data, you must call Get first.\");");
                     _writer.Line($"return _data;");
                 }
+            }
+
+            if (IsSingleton)
+            {
+                WriteSingletonResourceClientProperties();
+            }
+        }
+
+        private void WriteSingletonResourceClientProperties()
+        {
+            if (_resourceData.IsResource())
+            {
+                // which means the Data has the property `Id`
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                _writer.Line($"public override {typeof(ResourceIdentifier)} Id => Data.Id;");
             }
         }
 

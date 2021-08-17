@@ -55,7 +55,7 @@ namespace Azure.Management.Storage
         internal BlobContainer(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -78,6 +78,9 @@ namespace Azure.Management.Storage
                 return _data;
             }
         }
+
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

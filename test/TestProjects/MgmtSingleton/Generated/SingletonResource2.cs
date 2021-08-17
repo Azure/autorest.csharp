@@ -55,7 +55,7 @@ namespace MgmtSingleton
         internal SingletonResource2(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -78,6 +78,9 @@ namespace MgmtSingleton
                 return _data;
             }
         }
+
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Singleton Test Example without explicit /default, /latest ending. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

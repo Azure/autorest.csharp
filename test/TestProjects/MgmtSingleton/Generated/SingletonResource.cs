@@ -55,7 +55,7 @@ namespace MgmtSingleton
         internal SingletonResource(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -78,6 +78,9 @@ namespace MgmtSingleton
                 return _data;
             }
         }
+
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Singleton Test Example. See /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default GET,PUT. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

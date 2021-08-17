@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample
         internal VirtualMachineScaleSetRollingUpgrade(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new VirtualMachineScaleSetRollingUpgradesRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -78,6 +78,9 @@ namespace Azure.ResourceManager.Sample
                 return _data;
             }
         }
+
+        /// <inheritdoc />
+        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Gets the status of the latest virtual machine scale set rolling upgrade. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
