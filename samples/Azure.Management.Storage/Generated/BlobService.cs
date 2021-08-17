@@ -60,5 +60,13 @@ namespace Azure.Management.Storage
                 return _data;
             }
         }
+        #region Get BlobContainers operation
+        /// <summary> Gets an object representing a BlobContainer along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="BlobContainer" /> object. </returns>
+        public BlobContainer GetBlobContainers()
+        {
+            return new BlobContainer(this);
+        }
+        #endregion
     }
 }

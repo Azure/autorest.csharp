@@ -7,11 +7,12 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
 
-namespace Azure.Management.Storage.Models
+namespace Azure.Management.Storage
 {
-    public partial class ImmutabilityPolicy : IUtf8JsonSerializable
+    public partial class ImmutabilityPolicyData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -32,7 +33,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static ImmutabilityPolicy DeserializeImmutabilityPolicy(JsonElement element)
+        internal static ImmutabilityPolicyData DeserializeImmutabilityPolicyData(JsonElement element)
         {
             Optional<string> etag = default;
             ResourceIdentifier id = default;
@@ -106,7 +107,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicy(id, name, type, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
+            return new ImmutabilityPolicyData(id, name, type, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
         }
     }
 }

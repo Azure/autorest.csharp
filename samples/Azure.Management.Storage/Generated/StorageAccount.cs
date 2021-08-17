@@ -905,13 +905,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets a list of BlobContainers in the StorageAccount. </summary>
-        /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
-        public BlobContainerContainer GetBlobContainers()
-        {
-            return new BlobContainerContainer(this);
-        }
-
         /// <summary> Gets a list of FileShares in the StorageAccount. </summary>
         /// <returns> An object representing collection of FileShares and their operations over a StorageAccount. </returns>
         public FileShareContainer GetFileShares()

@@ -12,28 +12,28 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A Class representing a BlobContainer along with the instance operations that can be performed on it. </summary>
-    public partial class BlobContainer : ArmResource
+    /// <summary> A Class representing a ImmutabilityPolicy along with the instance operations that can be performed on it. </summary>
+    public partial class ImmutabilityPolicy : ArmResource
     {
-        private readonly BlobContainerData _data;
+        private readonly ImmutabilityPolicyData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class for mocking. </summary>
-        protected BlobContainer()
+        /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicy"/> class for mocking. </summary>
+        protected ImmutabilityPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "BlobContainer"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ImmutabilityPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BlobContainer(ArmResource options, BlobContainerData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        internal ImmutabilityPolicy(ArmResource options, ImmutabilityPolicyData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
             HasData = true;
             _data = resource;
         }
 
-        /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ImmutabilityPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal BlobContainer(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        internal ImmutabilityPolicy(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
         {
         }
 
@@ -41,7 +41,7 @@ namespace Azure.Management.Storage
         public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/default/containers";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/default/containers/immutabilityPolicies";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -51,7 +51,7 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual BlobContainerData Data
+        public virtual ImmutabilityPolicyData Data
         {
             get
             {

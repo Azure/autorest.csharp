@@ -23,12 +23,14 @@ operation-group-to-resource:
   StorageAccounts: StorageAccount
 operation-group-to-parent:
   Skus: subscriptions
-  BlobContainers: Microsoft.Storage/storageAccounts
+  BlobServices: Microsoft.Storage/storageAccounts
+  BlobContainers: Microsoft.Storage/storageAccounts/blobServices
+  ImmutabilityPolicies: Microsoft.Storage/storageAccounts/blobServices/containers
   FileShares: Microsoft.Storage/storageAccounts
   Usages: subscriptions
   StorageAccounts: resourceGroups
   PrivateLinkResources: Microsoft.Storage/storageAccounts
-singleton-resource: BlobService;FileService
+singleton-resource: BlobService;BlobContainer;ImmutabilityPolicy;FileService
 directive:
   - rename-model:
       from: BlobServiceProperties
@@ -49,4 +51,20 @@ directive:
   - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares"].get.parameters[4].type
     transform: return "integer"
+    #one level of resource hierarchy is swallowed, restoring it by introducing a new operation group
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].put.operationId
+    transform: return "ImmutabilityPolicies_CreateOrUpdate"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].get.operationId
+    transform: return "ImmutabilityPolicies_Get"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/{immutabilityPolicyName}"].delete.operationId
+    transform: return "ImmutabilityPolicies_Delete"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/lock"].post.operationId
+    transform: return "ImmutabilityPolicies_Lock"
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/immutabilityPolicies/default/extend"].post.operationId
+    transform: return "ImmutabilityPolicies_Extend"
 ```

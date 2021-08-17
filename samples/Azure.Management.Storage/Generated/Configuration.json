@@ -20,7 +20,9 @@
   },
   "OperationGroupToParent": {
     "Skus": "subscriptions",
-    "BlobContainers": "Microsoft.Storage/storageAccounts",
+    "BlobServices": "Microsoft.Storage/storageAccounts",
+    "BlobContainers": "Microsoft.Storage/storageAccounts/blobServices",
+    "ImmutabilityPolicies": "Microsoft.Storage/storageAccounts/blobServices/containers",
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
     "StorageAccounts": "resourceGroups",
@@ -28,6 +30,8 @@
   },
   "SingletonResource": [
     "BlobService",
+    "BlobContainer",
+    "ImmutabilityPolicy",
     "FileService"
   ]
 }
