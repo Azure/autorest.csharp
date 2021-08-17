@@ -18,6 +18,9 @@ modelerfour:
 operation-group-to-resource-type:
   Skus: Microsoft.Storage/skus
   Usages: Microsoft.Storage/locations/usages
+  BlobContainers: Microsoft.Storage/storageAccounts/blobServices/containers
+  ImmutabilityPolicies: Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies
+  FileShares: Microsoft.Storage/storageAccounts/fileServices/shares
   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
   StorageAccounts: StorageAccount

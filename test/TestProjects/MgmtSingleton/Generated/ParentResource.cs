@@ -297,5 +297,19 @@ namespace MgmtSingleton
                 throw;
             }
         }
+
+        /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        public SingletonResource GetSingletonResource()
+        {
+            return new SingletonResource(this);
+        }
+
+        /// <summary> Gets an object representing a SingletonResource2 along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="SingletonResource2" /> object. </returns>
+        public SingletonResource2 GetSingletonResource2()
+        {
+            return new SingletonResource2(this);
+        }
     }
 }

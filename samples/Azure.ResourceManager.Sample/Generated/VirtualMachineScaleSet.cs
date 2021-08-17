@@ -1666,6 +1666,13 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetExtensionContainer(this);
         }
 
+        /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgrade along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
+        public VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade()
+        {
+            return new VirtualMachineScaleSetRollingUpgrade(this);
+        }
+
         /// <summary> Gets a list of VirtualMachineExtensionVirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>
         /// <returns> An object representing collection of VirtualMachineExtensionVirtualMachineScaleSets and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineExtensionVirtualMachineScaleSetContainer GetVirtualMachineExtensionVirtualMachineScaleSets()

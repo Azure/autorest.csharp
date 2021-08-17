@@ -123,5 +123,12 @@ namespace OmitOperationGroups
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets an object representing a Model4 along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="Model4" /> object. </returns>
+        public Model4 GetModel4()
+        {
+            return new Model4(this);
+        }
     }
 }

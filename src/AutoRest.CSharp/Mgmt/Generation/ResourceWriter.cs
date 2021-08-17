@@ -21,12 +21,11 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
-using Core = Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources.Models;
-using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Resources.Models;
+using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -47,19 +46,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CSharpType TypeOfThis => _resource.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
+        private MgmtConfiguration Config => _context.Configuration.MgmtConfiguration;
+        private bool IsSingleton { get; }
+
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
             _resource = resource;
             _context = context;
             _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
+
+            IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
         }
 
         public void WriteResource()
         {
-            var config = _context.Configuration.MgmtConfiguration;
-            var isSingleton = _resource.OperationGroup.IsSingletonResource(config);
-            var baseClass = typeof(ArmResource);
             WriteUsings(_writer);
 
             using (_writer.Namespace(TypeOfThis.Namespace))
@@ -68,10 +69,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{_resource.Declaration.Accessibility} partial class {TypeNameOfThis}: ");
 
                 _inheritArmResourceBase = _resource.GetMethod != null;
-                CSharpType type = new CSharpType(baseClass);
-                _writer.Append($"{type}, ");
+                _writer.Append($"{BaseClass.Name}, ");
 
-                if (_resource.GetMethod == null && baseClass == typeof(ArmResource))
+                if (_resource.GetMethod == null)
                     ErrorHelpers.ThrowError($@"Get operation is missing for '{TypeOfThis.Name}' resource under operation group '{_resource.OperationGroup.Key}'.
 Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
@@ -91,32 +91,21 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
                 using (_writer.Scope())
                 {
-                    WriteClientFields(_resource.RestClient, isSingleton);
-                    if (!isSingleton)
-                    {
-                        WriteChildRestClients();
-                    }
-                    WriteClientCtors(isSingleton);
-                    WriteClientProperties(_context.Configuration.MgmtConfiguration, isSingleton);
-                    // TODO Write singleton operations
-                    if (!isSingleton)
-                    {
-                        WriteClientMethods();
-                    }
-                    else
-                    {
-                        WriteChildSingletonGetOperationMethods();
-                    }
+                    WriteClientFields();
+                    WriteChildRestClients();
+                    WriteClientCtors();
+                    WriteClientProperties();
+                    WriteClientMethods();
+
+                    // write child
+                    WriteChildResourceEntries();
                 }
             }
         }
 
-        private void WriteClientFields(RestClient client, bool isSingleton)
+        private void WriteClientFields()
         {
-            if (!isSingleton)
-            {
-                WriteFields(_writer, client);
-            }
+            WriteFields(_writer, _resource.RestClient);
             _writer.Line($"private readonly {_resourceData.Type} _data;");
         }
 
@@ -128,7 +117,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteClientCtors(bool isSingleton = false)
+        private void WriteClientCtors()
         {
             _writer.Line();
             // write an internal default constructor
@@ -143,38 +132,41 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("resource", $"The resource that is the target of operations.");
             // inherits the default constructor when it is not a resource
             var baseConstructorCall = _resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
-            if (!string.IsNullOrEmpty(baseConstructorCall) && isSingleton)
-            {
-                baseConstructorCall = $" : base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)";
-            }
             using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resourceData.Type} resource){baseConstructorCall}"))
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
-                if (!isSingleton)
+                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
-                    _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                    _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
-                    foreach (var operationGroup in _resource.ChildOperations.Keys)
-                    {
-                        _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
-                    }
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 }
             }
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
             _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
-            if (!isSingleton)
+            _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
+            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resource.ResourceIdentifierType} id) : base(options, id)"))
             {
-                _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
+                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
+                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                foreach (var operationGroup in _resource.ChildOperations.Keys)
+                {
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                }
             }
-            var constructorIdParam = isSingleton ? "" : $", {_resource.ResourceIdentifierType} id";
-            baseConstructorCall = isSingleton ? $"base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)" : "base(options, id)";
-            using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options{constructorIdParam}) : {baseConstructorCall}"))
+
+            // Singleton resource does not have container, therefore it needs a constructor with one parameter
+            if (IsSingleton)
             {
-                if (!isSingleton)
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
+                _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
+                using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options) : base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                 {
                     _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                     var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
@@ -187,17 +179,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteClientProperties(MgmtConfiguration config, bool isSingleton)
+        private void WriteClientProperties()
         {
-            if (isSingleton)
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Gets the parent resource of this resource.");
-                _writer.Line($"public {typeof(ArmResource)} Parent {{ get; }}");
-            }
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(config)}\";");
+            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(Config)}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
@@ -328,24 +314,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             foreach (var kv in mergedMethods)
             {
                 WriteLRO(kv.Value.OrderBy(m => m.Name.Length).First(), kv.Key, kv.Value);
-            }
-
-            foreach (var item in _context.CodeModel.OperationGroups)
-            {
-                if (item.ParentResourceType(_context.Configuration.MgmtConfiguration).Equals(_resource.OperationGroup.ResourceType(_context.Configuration.MgmtConfiguration))
-                    && !item.IsSingletonResource(_context.Configuration.MgmtConfiguration))
-                {
-                    var container = _context.Library.GetResourceContainer(item);
-                    if (container == null)
-                        continue;
-                    _writer.Line();
-                    _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
-                    _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
-                    using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
-                    {
-                        _writer.Line($"return new {container.Type}(this);");
-                    }
-                }
             }
         }
 
@@ -708,9 +676,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Append($"await ");
             }
-#pragma warning disable CS8602
-            var pathParamNames = GetPathParametersName(_resource.GetMethod.RestClientMethod, _resource.OperationGroup, _context).ToList();
-#pragma warning restore CS8602
+            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, _context).ToList();
             _writer.Append($"{RestClientField}.{CreateMethodName(_resource.GetMethod.Name, async)}( ");
             foreach (string paramNames in pathParamNames)
             {
@@ -740,27 +706,67 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             WriteStartLROMethod(_writer, clientMethod, _context, false, true, methodName: methodName, methods: clientMethods);
         }
 
-        private void WriteChildSingletonGetOperationMethods()
+        private void WriteChildResourceEntries()
         {
-            var config = _context.Configuration.MgmtConfiguration;
-            foreach (var operation in _context.Library.ArmResources)
+            foreach (var item in _context.CodeModel.OperationGroups)
             {
-                if (operation.OperationGroup.IsSingletonResource(config)
-                    && operation.OperationGroup.ParentResourceType(config).Equals(_resource.OperationGroup.ResourceType(config)))
+                if (item.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
                 {
-                    _writer.Line($"#region Get {operation.Type.Name}s operation");
-
-                    _writer.WriteXmlDocumentationSummary($"Gets an object representing a {operation.Type.Name} along with the instance operations that can be performed on it.");
-                    _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{operation.Type.Name}\" /> object.");
-                    using (_writer.Scope($"public {operation.Type} Get{operation.Type.Name}s()"))
+                    if (item.IsSingletonResource(Config))
                     {
-                        _writer.Line($"return new {operation.Type.Name}(this);");
+                        WriteChildSingletonResourceEntry(item);
                     }
-                    _writer.LineRaw("#endregion");
-                    _writer.Line();
+                    else
+                    {
+                        WriteChildNonSingletonResourceEntry(item);
+                    }
                 }
             }
         }
+
+        private void WriteChildNonSingletonResourceEntry(OperationGroup operationGroupOfChildResource)
+        {
+            var container = _context.Library.GetResourceContainer(operationGroupOfChildResource);
+            if (container == null)
+                return;
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {_resource.ResourceName}.");
+            _writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {_resource.ResourceName}.");
+            using (_writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
+            {
+                _writer.Line($"return new {container.Type}(this);");
+            }
+        }
+
+        private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton)
+        {
+            var singletonResource = _context.Library.GetArmResource(operationGroupOfChildSingleton);
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
+            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
+            using (_writer.Scope($"public {singletonResource.Type} Get{singletonResource.Type.Name}()"))
+            {
+                _writer.Line($"return new {singletonResource.Type.Name}(this);");
+            }
+        }
+
+        //private void WriteChildSingletonResourceEntries()
+        //{
+        //    foreach (var operation in _context.Library.ArmResources)
+        //    {
+        //        if (operation.OperationGroup.IsSingletonResource(Config)
+        //            && operation.OperationGroup.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
+        //        {
+        //            _writer.Line();
+        //            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {operation.Type.Name} along with the instance operations that can be performed on it.");
+        //            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{operation.Type.Name}\" /> object.");
+        //            using (_writer.Scope($"public {operation.Type} Get{operation.Type.Name}()"))
+        //            {
+        //                _writer.Line($"return new {operation.Type.Name}(this);");
+        //            }
+        //        }
+        //    }
+        //}
 
         protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {
