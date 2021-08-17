@@ -34,6 +34,29 @@ pipeline:
     scope: output-scope
 ```
 
+```yaml $(testmodeler)
+use-extension:
+  # "@autorest/testmodeler": "D://projects//codegen//azure-sdk-tools//tools//sdk-testgen//packages//autorest.testmodeler"
+  "@autorest/testmodeler": "1.0.1"
+
+
+pipeline:
+  test-modeler:
+    input: modelerfour/identity
+    scope : output-scope
+  test-modeler/identity:
+    input: test-modeler
+  csharpgen:
+    input: test-modeler/identity
+
+modelerfour:
+  emit-yaml-tags: true
+
+testmodeler:
+  use-parents-value: true
+  split-parents-value: false
+```
+
 ## Help
 ```yaml
 help-content:
