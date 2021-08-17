@@ -197,14 +197,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, _context, false, false, true, "CreateOrUpdate");
-            WriteLROMethod(_writer, clientMethod, _context, false, true, true, "CreateOrUpdate");
-
-            //WriteFirstLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
-            //WriteFirstLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
-
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, false, false, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, false, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>
@@ -246,9 +240,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetFromRestClient(RestClientMethod method, bool isAsync)
         {
-           // var parameterMapping = BuildParameterMapping(method);
+           var parameterMapping = BuildParameterMapping(method);
             _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
-            WriteArguments(_writer, method);
+            WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
         }
         private void WriteGetVariants(RestClientMethod method, List<RestClientMethod> methods)

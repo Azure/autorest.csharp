@@ -240,11 +240,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 var deleteMethod = _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
                 var deleteMethods = _resource.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList() : new List<RestClientMethod> { deleteMethod };
                 // write delete method
-                WriteFirstLROMethod(_writer, deleteMethod, _context, true, true, "Delete");
-                WriteFirstLROMethod(_writer, deleteMethod, _context, false, true, "Delete");
-
-                WriteStartLROMethod(_writer, deleteMethod, _context, true, true, "Delete", deleteMethods);
-                WriteStartLROMethod(_writer, deleteMethod, _context, false, true, "Delete", deleteMethods);
+                WriteLRO(deleteMethod, "Delete", deleteMethods);
                 clientMethodsList.AddRange(deleteMethods);
             }
 
@@ -733,11 +729,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(_writer, clientMethod, _context, true, true, methodName: methodName);
-            WriteFirstLROMethod(_writer, clientMethod, _context, false, true, methodName: methodName);
-
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, methodName: methodName, methods: clientMethods);
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName, methods: clientMethods);
         }
 
         private void WriteChildSingletonGetOperationMethods()

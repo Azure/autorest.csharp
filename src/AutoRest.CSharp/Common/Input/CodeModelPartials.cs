@@ -43,8 +43,7 @@ namespace AutoRest.CSharp.Input
         {
             get
             {
-                var test = Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<bool>("x-ms-long-running-reallyLong");
-                return test;
+                return Convert.ToBoolean(Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("x-ms-long-running-reallyLong"));
             }
         }
 

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,7 +10,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -74,95 +72,6 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 writer.Line($"{scopeVariable}.Failed(e);");
                 writer.Line($"throw;");
             }
-        }
-
-        protected void WriteSLROMethod(CodeWriter writer, RestClientMethod clientMethod, Parameter[] parameters, Diagnostic diagnostic, bool isAsync, bool isVirtual, CSharpType? returnType, string? methodName = null)
-        {
-            Debug.Assert(clientMethod.Operation != null);
-
-            methodName = methodName ?? clientMethod.Name;
-
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-
-            //var parameterMapping = BuildParameterMapping(clientMethod);
-            //var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
-
-            foreach (var parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter);
-            }
-
-            writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(parameters.ToArray());
-
-            // CSharpType? returnType = GetLROReturnType(clientMethod, context);
-            CSharpType responseType = returnType != null ?
-                new CSharpType(typeof(Response<>), returnType) :
-                typeof(Response);
-            responseType = responseType.WrapAsync(isAsync);
-
-            writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, isAsync)}(");
-            foreach (var parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters.ToArray());
-
-                // Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
-                {
-                    var operation = new CodeWriterDeclaration("operation");
-                    writer.Append($"var {operation:D} = {GetAwait(isAsync)}");
-                    writer.Append($"{CreateMethodName($"Start{methodName}", isAsync)}(");
-                    WriteArguments(writer, clientMethod);
-                    writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
-
-                    writer.Append($"return {GetAwait(isAsync)}");
-                    var waitForCompletionMethod = returnType == null && isAsync ?
-                    "WaitForCompletionResponse" :
-                    "WaitForCompletion";
-                    writer.Line($"{operation}.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
-                });
-                writer.Line();
-            }
-        }
-
-        protected virtual void WriteArguments(CodeWriter writer, RestClientMethod clientMethod)
-        {
-            foreach (var parameter in clientMethod.Parameters)
-            {
-                writer.Append($"{parameter.Name}, ");
-            }
-        }
-
-        protected internal string GetVirtual(bool isVirtual)
-        {
-            return isVirtual ? "virtual" : string.Empty;
-        }
-
-        protected internal string GetAsyncKeyword(bool isAsync)
-        {
-            return isAsync ? "async" : string.Empty;
-        }
-
-        protected internal string GetAsyncSuffix(bool isAsync)
-        {
-            return isAsync ? "Async" : string.Empty;
-        }
-
-        protected internal string GetAwait(bool isAsync)
-        {
-            return isAsync ? "await " : string.Empty;
-        }
-
-        protected internal string GetConfigureAwait(bool isAsync)
-        {
-            return isAsync ? ".ConfigureAwait(false)" : string.Empty;
         }
     }
 }
