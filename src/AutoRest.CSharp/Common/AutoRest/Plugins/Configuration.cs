@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, bool lowLevelClient, JsonElement? tests, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
             LowLevelClient = lowLevelClient;
+            Tests = tests;
             MgmtConfiguration = mgmtConfiguration;
         }
 
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool SkipCSProjPackageReference { get; }
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
+        public JsonElement? Tests { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
@@ -56,13 +58,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 GetOptionValue(autoRest, "head-as-boolean"),
                 GetOptionValue(autoRest, "skip-csproj-packagereference"),
                 GetOptionValue(autoRest, "low-level-client"),
+                GetJsonOptionValue(autoRest, "tests"),
                 MgmtConfiguration.GetConfiguration(autoRest)
-            );
+            ); ;
         }
 
         private static bool GetOptionValue(IPluginCommunication autoRest, string option)
         {
             return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultOptionValue(option)!.Value;
+        }
+
+        private static JsonElement? GetJsonOptionValue(IPluginCommunication autoRest, string option)
+        {
+            return autoRest.GetValue<JsonElement?>(option).GetAwaiter().GetResult() ?? null;
         }
 
         public static bool? GetDefaultOptionValue(string option)

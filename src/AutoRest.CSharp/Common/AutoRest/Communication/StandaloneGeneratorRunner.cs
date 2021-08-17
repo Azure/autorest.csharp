@@ -96,6 +96,18 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static JsonElement? ReadJsonOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
@@ -119,6 +131,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, "head-as-boolean"),
                 ReadOption(root, "skip-csproj-packagereference"),
                 ReadOption(root, "low-level-client"),
+                ReadJsonOption(root, "tests"),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }
