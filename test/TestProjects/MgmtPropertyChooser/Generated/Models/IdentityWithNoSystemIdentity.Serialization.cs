@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -28,7 +29,7 @@ namespace MgmtPropertyChooser.Models
                 foreach (var item in UserAssignedIdentities)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
+                    JsonSerializer.Serialize(writer, item.Value);
                 }
                 writer.WriteEndObject();
             }
@@ -38,7 +39,7 @@ namespace MgmtPropertyChooser.Models
         internal static IdentityWithNoSystemIdentity DeserializeIdentityWithNoSystemIdentity(JsonElement element)
         {
             Optional<ResourceIdentityType> type = default;
-            Optional<IDictionary<string, ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties>> userAssignedIdentities = default;
+            Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
@@ -58,10 +59,10 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    Dictionary<string, ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties> dictionary = new Dictionary<string, ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties>();
+                    Dictionary<string, UserAssignedIdentity> dictionary = new Dictionary<string, UserAssignedIdentity>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties.DeserializeComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties(property0.Value));
+                        dictionary.Add(property0.Name, JsonSerializer.Deserialize<UserAssignedIdentity>(property0.Value.ToString()));
                     }
                     userAssignedIdentities = dictionary;
                     continue;

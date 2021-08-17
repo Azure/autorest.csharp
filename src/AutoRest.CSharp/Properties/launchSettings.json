@@ -52,14 +52,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
     },
-    "Azure.ResourceManager.Resources": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Resources\\Generated"
-    },
-    "Azure.ResourceManager.ResourcesForCore": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.ResourcesForCore\\Generated"
-    },
     "Azure.ResourceManager.Sample": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"

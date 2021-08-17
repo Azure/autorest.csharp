@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtPropertyChooser.Models
 {
@@ -16,7 +17,7 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
         public IdentityWithRenamedProperty()
         {
-            UserAssignedIdentities = new ChangeTrackingDictionary<string, Components135Hp51SchemasIdentitywithrenamedpropertyPropertiesUserassignedidentitiesAdditionalproperties>();
+            UserAssignedIdentities = new ChangeTrackingDictionary<string, UserAssignedIdentity>();
         }
 
         /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
@@ -24,7 +25,7 @@ namespace MgmtPropertyChooser.Models
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="type"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
         /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </param>
-        internal IdentityWithRenamedProperty(string testPrincipalId, string tenantId, ResourceIdentityType? type, IDictionary<string, Components135Hp51SchemasIdentitywithrenamedpropertyPropertiesUserassignedidentitiesAdditionalproperties> userAssignedIdentities)
+        internal IdentityWithRenamedProperty(string testPrincipalId, string tenantId, ResourceIdentityType? type, IDictionary<string, UserAssignedIdentity> userAssignedIdentities)
         {
             TestPrincipalId = testPrincipalId;
             TenantId = tenantId;
@@ -39,6 +40,6 @@ namespace MgmtPropertyChooser.Models
         /// <summary> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </summary>
         public ResourceIdentityType? Type { get; set; }
         /// <summary> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </summary>
-        public IDictionary<string, Components135Hp51SchemasIdentitywithrenamedpropertyPropertiesUserassignedidentitiesAdditionalproperties> UserAssignedIdentities { get; }
+        public IDictionary<string, UserAssignedIdentity> UserAssignedIdentities { get; }
     }
 }
