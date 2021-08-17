@@ -42,17 +42,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions)
                             || ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
                         {
-                            if (resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                            writer.Line($"#region {resource.Type.Name}");
+                            if (resource.IsSingletonResource)
                             {
-                                WriteChildSingletonGetOperationMethods(writer, resource);
+                                WriteGetSingletonResourceMethod(writer, resource);
                             }
                             else
                             {
-                                writer.Line($"#region {resource.Type.Name}");
-                                var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                                WriteGetResourceContainerMethod(writer, resourceContainer!);
-                                writer.LineRaw("#endregion");
+                                // a non-singleton resource must have a resource container
+                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
                             }
+                            writer.LineRaw("#endregion");
+                            writer.Line();
                         }
                         else
                         {
@@ -126,18 +127,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(Subscription)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
-
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(Subscription)} {ExtensionOperationVariableName})"))
-            {
-                writer.Line($"return new {resourceContainer.Type}({ExtensionOperationVariableName});");
-            }
-        }
-
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, PagingMethod pagingMethod, string methodName, MgmtConfiguration config, bool async)
         {
             if (pagingMethod.PagingResponse.ItemType.Name.Equals(resource.ResourceData.Type.Name))
@@ -171,22 +160,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"{filters}.SubstringFilter = filter;");
                 writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
             }
-        }
-
-        private void WriteChildSingletonGetOperationMethods(CodeWriter writer, Resource resource)
-        {
-            // The resourceOperation already has a suffix "Operations" therefore it is already in plural form
-            // there we do not need to change it to plural again
-            writer.Line($"#region {resource.Type.Name}");
-
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {typeof(Subscription)} subscription)"))
-            {
-                writer.Line($"return new {resource.Type.Name}(subscription);");
-            }
-            writer.LineRaw("#endregion");
-            writer.Line();
         }
 
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)

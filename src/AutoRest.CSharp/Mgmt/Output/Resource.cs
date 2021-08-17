@@ -70,6 +70,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, ResourceName));
 
+        public bool IsSingletonResource => OperationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration);
+
         public ResourceContainer? ResourceContainer => _context.Library.GetResourceContainer(OperationGroup);
 
         public virtual string ResourceName => Type.Name;

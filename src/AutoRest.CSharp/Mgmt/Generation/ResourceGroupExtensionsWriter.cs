@@ -37,23 +37,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
                         {
-                            if (resource.ResourceContainer != null)
+                            writer.Line($"#region {resource.Type.Name}");
+                            if (resource.IsSingletonResource)
                             {
-                                writer.Line($"#region {resource.Type.Name}");
-                                WriteGetContainers(writer, resource.ResourceContainer);
-                                writer.LineRaw("#endregion");
-                                writer.Line();
+                                WriteGetSingletonResourceMethod(writer, resource);
                             }
+                            else
+                            {
+                                // a non-singleton resource must have a resource container
+                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
+                            }
+                            writer.LineRaw("#endregion");
+                            writer.Line();
                         }
                         else if ((resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration) || resource.OperationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration))
                             && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
                         {
-                            if (resource.ResourceContainer != null)
+                            if (resource.IsSingletonResource)
                             {
                                 writer.Line($"#region {resource.Type.Name}");
-                                WriteGetContainers(writer, resource.ResourceContainer);
+                                WriteGetSingletonResourceMethod(writer, resource);
                                 writer.LineRaw("#endregion");
-                                writer.Line();
+                            }
+                            else
+                            {
+                                writer.Line($"#region {resource.Type.Name}");
+                                // a non-singleton resource must have a resource container
+                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
+                                writer.LineRaw("#endregion");
                             }
                         }
                     }
@@ -83,17 +94,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line();
                     }
                 }
-            }
-        }
-
-        private void WriteGetContainers(CodeWriter writer, ResourceContainer container)
-        {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroup)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{container.Resource.Type.Name.ToPlural()} (this {typeof(ResourceGroup)} {ExtensionOperationVariableName})"))
-            {
-                writer.Line($"return new {container.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 
