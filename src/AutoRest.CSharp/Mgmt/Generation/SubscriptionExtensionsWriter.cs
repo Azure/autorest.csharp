@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             // The resourceOperation already has a suffix "Operations" therefore it is already in plural form
             // there we do not need to change it to plural again
-            writer.Line($"#region Get {resource.Type.Name} operation");
+            writer.Line($"#region {resource.Type.Name}");
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");

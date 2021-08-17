@@ -37,29 +37,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
                         {
-                            foreach (var container in context.Library.ResourceContainers)
+                            if (resource.ResourceContainer != null)
                             {
-                                if (container.ResourceName == resource.Type.Name)
-                                {
-                                    writer.Line($"#region {resource.Type.Name}");
-                                    WriteGetContainers(writer, container);
-                                    writer.LineRaw("#endregion");
-                                    writer.Line();
-                                }
+                                writer.Line($"#region {resource.Type.Name}");
+                                WriteGetContainers(writer, resource.ResourceContainer);
+                                writer.LineRaw("#endregion");
+                                writer.Line();
                             }
                         }
                         else if ((resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration) || resource.OperationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration))
                             && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
                         {
-                            foreach (var container in context.Library.ResourceContainers)
+                            if (resource.ResourceContainer != null)
                             {
-                                if (container.ResourceName == resource.Type.Name)
-                                {
-                                    writer.Line($"#region {resource.Type.Name}");
-                                    WriteGetContainers(writer, container);
-                                    writer.LineRaw("#endregion");
-                                    writer.Line();
-                                }
+                                writer.Line($"#region {resource.Type.Name}");
+                                WriteGetContainers(writer, resource.ResourceContainer);
+                                writer.LineRaw("#endregion");
+                                writer.Line();
                             }
                         }
                     }
