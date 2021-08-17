@@ -74,44 +74,6 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
-        /// <param name="product"> Product to patch. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<LROsPatch200SucceededIgnoreHeadersOperation> StartPatch200SucceededIgnoreHeadersAsync(Product product = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch200SucceededIgnoreHeaders");
-            scope.Start();
-            try
-            {
-                var originalResponse = await RestClient.Patch200SucceededIgnoreHeadersAsync(product, cancellationToken).ConfigureAwait(false);
-                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product).Request, originalResponse);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response. </summary>
-        /// <param name="product"> Product to patch. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual LROsPatch200SucceededIgnoreHeadersOperation StartPatch200SucceededIgnoreHeaders(Product product = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("LROsClient.StartPatch200SucceededIgnoreHeaders");
-            scope.Start();
-            try
-            {
-                var originalResponse = RestClient.Patch200SucceededIgnoreHeaders(product, cancellationToken);
-                return new LROsPatch200SucceededIgnoreHeadersOperation(_clientDiagnostics, _pipeline, RestClient.CreatePatch200SucceededIgnoreHeadersRequest(product).Request, originalResponse);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
