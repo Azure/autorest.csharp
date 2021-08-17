@@ -30,6 +30,24 @@ pipeline:
     scope: output-scope
 ```
 
+```yaml $(tests)
+use-extension:
+  # "@autorest/tests": "https://amecodegenstorage.blob.core.windows.net/tools/autorest-tests-0.1.0-preview.tgz"
+  "@autorest/tests": "C:\\ZZ\\projects\\codegen\\autorest.tests"
+
+pipeline:
+  test-modeler:
+    input: modelerfour/identity
+    scope : output-scope
+  test-modeler/identity:
+    input: test-modeler
+  csharpgen:
+    input: test-modeler/identity
+
+modelerfour:
+  emit-yaml-tags: true
+```
+
 ## Help
 ```yaml
 help-content:

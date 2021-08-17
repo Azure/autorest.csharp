@@ -271,5 +271,11 @@ namespace AutoRest.CSharp.Input
             return $"OperationGroup(Key: {Key})";
         }
     }
+
+    internal partial class CodeModel
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "swaggerTests")]
+        public DictionaryOfAny? swaggerTests { get; set; }
+    }
 }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
