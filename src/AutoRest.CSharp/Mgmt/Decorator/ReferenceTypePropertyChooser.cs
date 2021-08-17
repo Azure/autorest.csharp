@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -54,6 +55,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
                 List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
+                if (replacementType == typeof(ResourceIdentity))
+                {
+                    List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
+                    foreach (var parentProperty in replacementTypeProperties)
+                    {
+                        if (parentProperty.PropertyType.IsClass)
+                        {
+                            flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                        }
+                        else
+                        {
+                            flattenedReplacementTypeProperties.Add(parentProperty);
+                        }
+                    }
+                    replacementTypeProperties = flattenedReplacementTypeProperties;
+                }
                 if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties))
                 {
                     result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
