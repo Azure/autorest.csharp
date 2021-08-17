@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.Models)
             {
                 // For the shared models in Core and RP packages, we should generate them in Core package and skip in RP packages.
-                if (context.Configuration.LibraryName != "Core")
+                if (!context.Configuration.MgmtConfiguration.IsArmCore)
                 {
-                    // The full name mapping is needed for some indirectly used models in Resources such as Alias (referenced by ProviderResourceType), so we don't need to mark all involved models with PropertyReferenceType, just the ones directly used by Resources package.
+                    // The full name mapping is needed for some indirectly used models in Resources such as Alias (referenced by ProviderResourceType), so we don't need to mark all indirectly used models with PropertyReferenceType, just the ones directly used by Resources package.
                     if (context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name) != null)
                     {
                         continue;

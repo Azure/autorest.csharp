@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            if (_context.Configuration.LibraryName == "Core")
+            if (_context.Configuration.MgmtConfiguration.IsArmCore)
                 return objectTypeProperty;
             if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
             {
@@ -112,8 +112,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType?.IsFrameworkType == true && !inheritedType.FrameworkType.IsGenericType)
-                return inheritedType;
 
             if (inheritedType != null && inheritedType.IsFrameworkType)
                 return inheritedType;
