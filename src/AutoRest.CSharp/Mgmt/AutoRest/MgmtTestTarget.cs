@@ -18,7 +18,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
-            var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
@@ -28,14 +27,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
-                //var name = model.Type.Name;
-                //project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-                //project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
             foreach (var client in context.Library.RestClients)
@@ -43,16 +42,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
 
-                //project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
+                project.AddGeneratedFile($"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceOperation in context.Library.ResourceOperations)
+            foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
-                var operationWriter = new ResourceOperationWriter(codeWriter, resourceOperation, context);
-                operationWriter.WriteClient();
+                var containerWriter = new ResourceContainerWriter(codeWriter, resourceContainer, context);
+                containerWriter.WriteContainer();
 
-                //project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var resourceContainer in context.Library.ResourceContainers)
@@ -64,76 +63,76 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Mock/{resourceContainer.Type.Name}Test.cs", codeWriter.ToString());
             }
 
-            //foreach (var model in context.Library.ResourceData)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    modelWriter.WriteModel(codeWriter, model);
+            foreach (var model in context.Library.ResourceData)
+            {
+                var codeWriter = new CodeWriter();
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
-            //    var serializerCodeWriter = new CodeWriter();
-            //    serializeWriter.WriteSerialization(serializerCodeWriter, model);
+                var serializerCodeWriter = new CodeWriter();
+                serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
-            //    var name = model.Type.Name;
-            //    project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
-            //    project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
-            //}
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
+                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+            }
 
-            //foreach (var resource in context.Library.ArmResource)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
-            //    armResourceWriter.WriteResource();
+            foreach (var resource in context.Library.ArmResources)
+            {
+                var codeWriter = new CodeWriter();
+                var armResourceWriter = new ResourceWriter(codeWriter, resource, context);
+                armResourceWriter.WriteResource();
 
-            //    project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
-            //}
+                project.AddGeneratedFile($"{resource.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            //foreach (var operation in context.Library.LongRunningOperations)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    mgmtLongRunningOperationWriter.Write(codeWriter, operation);
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                mgmtLongRunningOperationWriter.Write(codeWriter, operation);
 
-            //    project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            //}
+                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            //foreach (var operation in context.Library.NonLongRunningOperations)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    NonLongRunningOperationWriter.Write(codeWriter, operation);
+            foreach (var operation in context.Library.NonLongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                NonLongRunningOperationWriter.Write(codeWriter, operation);
 
-            //    project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
-            //}
+                project.AddGeneratedFile($"LongRunningOperation/{operation.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            //foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    var resourceOperationWriter = new TupleResourceOperationWriter(codeWriter, tupleResourceOperation, context);
-            //    resourceOperationWriter.WriteClient();
+            foreach (var tupleResource in context.Library.TupleResources)
+            {
+                var codeWriter = new CodeWriter();
+                var resourceWriter = new TupleResourceWriter(codeWriter, tupleResource, context);
+                resourceWriter.WriteResource();
 
-            //    project.AddGeneratedFile($"{tupleResourceOperation.Type.Name}.cs", codeWriter.ToString());
-            //}
+                project.AddGeneratedFile($"{tupleResource.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            //foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)
-            //{
-            //    var codeWriter = new CodeWriter();
-            //    new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context).WriteContainer();
+            foreach (var tupleResourceContainer in context.Library.TupleResourceContainers)
+            {
+                var codeWriter = new CodeWriter();
+                new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context).WriteContainer();
 
-            //    project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
-            //}
+                project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
+            }
 
-            //var extensionsWriter = new CodeWriter();
-            //resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, context);
-            //project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", extensionsWriter.ToString());
+            var extensionsWriter = new CodeWriter();
+            resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, context);
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", extensionsWriter.ToString());
 
-            //var subscriptionExtensionsCodeWriter = new CodeWriter();
-            //subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
-            //project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
 
-            //if (context.Library.ManagementGroupChildResources.Count() > 0)
-            //{
-            //    var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
-            //    var managementGroupExtensionsCodeWriter = new CodeWriter();
-            //    managementGroupExtensionsWriter.WriteExtension(managementGroupExtensionsCodeWriter, context);
-            //    project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
-            //}
+            if (context.Library.ManagementGroupChildResources.Count() > 0)
+            {
+                var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
+                var managementGroupExtensionsCodeWriter = new CodeWriter();
+                managementGroupExtensionsWriter.WriteExtension(managementGroupExtensionsCodeWriter, context);
+                project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
+            }
         }
     }
 }
