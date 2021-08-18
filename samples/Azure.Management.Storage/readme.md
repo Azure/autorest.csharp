@@ -33,7 +33,7 @@ operation-group-to-parent:
   Usages: subscriptions
   StorageAccounts: resourceGroups
   PrivateLinkResources: Microsoft.Storage/storageAccounts
-operation-group-to-singleton-resource: 
+operation-group-to-singleton-resource:
   BlobServices: blobServices/default
   ImmutabilityPolicies: immutabilityPolicies/default
   FileServices: fileServices/default
