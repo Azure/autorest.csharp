@@ -25,7 +25,7 @@ namespace Azure.Core.Tests
             new object[] { new Guid ("c6125705-61d7-4cd6-8d6c-f7f247a7a5fa"), @"""c6125705-61d7-4cd6-8d6c-f7f247a7a5fa""" },
             new object[] { new BinaryData (new byte[] { 1, 2, 3, 4}), @"""AQIDBA==""" },
             new object[] { new DateTimeOffset (2001, 1, 1, 1, 1, 1, 1, new TimeSpan ()), @"""2001-01-01T01:01:01.0010000Z""" },
-            //new object[] { new DateTime (2001, 1, 1), @"""2001-01-01T00:00:00.0000000-06:00""" }, https://github.com/Azure/autorest.csharp/issues/1205
+            new object[] { new DateTime (2001, 1, 1, 1, 1, 1, DateTimeKind.Utc), @"""2001-01-01T01:01:01.0000000Z""" },
             new object[] { (IEnumerable<object>)new List<object>() { 1, 2, 3, 4 }, "[1,2,3,4]" },
             new object[] { (IEnumerable<KeyValuePair<string, object>>)new List<KeyValuePair<string, object>>() {
                 KeyValuePair.Create<string, object> ("a", (object)1),
