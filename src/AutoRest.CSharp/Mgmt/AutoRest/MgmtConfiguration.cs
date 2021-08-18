@@ -14,16 +14,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public MgmtConfiguration(
             string[] operationGroupIsTuple,
             string[] operationGroupIsExtension,
-            string[] singletonResource,
             string[] operationGroupsToOmit,
             JsonElement? operationGroupToResourceType = default,
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
+            JsonElement? operationGroupToSingletonResource = default,
             JsonElement? mergeOperations = default)
         {
             OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
             OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
             OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
+            OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -34,7 +35,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var mergeOperationsStrDict = !IsValidJsonElement(mergeOperations) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(mergeOperations.ToString());
                 MergeOperations = mergeOperationsStrDict.ToDictionary(kv => kv.Key, kv => kv.Value.Split(";"));
             }
-            SingletonResource = singletonResource;
             OperationGroupIsTuple = operationGroupIsTuple;
             OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
@@ -43,8 +43,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
+        public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
-        public string[] SingletonResource { get; }
         public string[] OperationGroupIsTuple { get; }
         public string[] OperationGroupIsExtension { get; }
         public string[] OperationGroupsToOmit { get; }
@@ -54,11 +54,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new MgmtConfiguration(
                 autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                autoRest.GetValue<string[]?>("singleton-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("operation-groups-to-omit").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult());
         }
 
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupToResource), OperationGroupToResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
             WriteNonEmptySettings(writer, nameof(MergeOperations), MergeOperations);
-            WriteNonEmptySettings(writer, nameof(SingletonResource), SingletonResource);
+            WriteNonEmptySettings(writer, nameof(OperationGroupToSingletonResource), OperationGroupToSingletonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
@@ -78,11 +78,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             root.TryGetProperty(nameof(OperationGroupIsTuple), out var operationGroupIsTuple);
             root.TryGetProperty(nameof(OperationGroupIsExtension), out var operationGroupIsExtension);
-            root.TryGetProperty(nameof(SingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(OperationGroupsToOmit), out var operationGroupsToOmit);
             root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
             root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
             root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
+            root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
             var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
@@ -93,10 +93,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? operationGroupIsExtension.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
-            var singletonList = singletonResource.ValueKind == JsonValueKind.Array
-                ? singletonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : new string[0];
-
             var operationGroupList = operationGroupsToOmit.ValueKind == JsonValueKind.Array
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
@@ -104,11 +100,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
                 operationGroupIsExtensionList,
-                singletonList,
                 operationGroupList,
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent,
+                singletonResource,
                 mergeOperations);
         }
 

@@ -136,6 +136,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Line($"HasData = true;");
                 _writer.Line($"_data = resource;");
+                if (IsSingleton)
+                    _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
                 _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
@@ -151,31 +153,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationParameter("id", $"The identifier of the resource that is the target of operations.");
             using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options, {_resource.ResourceIdentifierType} id) : base(options, id)"))
             {
+                if (IsSingleton)
+                _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
                 _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
                     _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
-                }
-            }
-
-            // Singleton resource does not have container, therefore it needs a constructor with one parameter
-            if (IsSingleton)
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{TypeOfThis.Name}\"/> class.");
-                _writer.WriteXmlDocumentationParameter("options", $"The client parameters to use in these operations.");
-                using (_writer.Scope($"internal {TypeOfThis.Name}({typeof(ArmResource)} options) : base(options, {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
-                {
-                    _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    // we cannot use `Id.SubscriptionId` before we actually get a valid `Data`
-                    var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", options.Id.SubscriptionId" : string.Empty;
-                    _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
-                    foreach (var operationGroup in _resource.ChildOperations.Keys)
-                    {
-                        _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
-                    }
                 }
             }
         }
@@ -206,18 +191,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             if (IsSingleton)
             {
-                WriteSingletonResourceClientProperties();
-            }
-        }
-
-        private void WriteSingletonResourceClientProperties()
-        {
-            if (_resourceData.IsResource())
-            {
-                // which means the Data has the property `Id`
                 _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                _writer.Line($"public override {typeof(ResourceIdentifier)} Id => Data.Id;");
+                _writer.WriteXmlDocumentationSummary($"Gets the parent resource of this resource.");
+                _writer.Line($"public {typeof(ArmResource)} Parent {{ get; }}");
             }
         }
 
@@ -729,9 +705,9 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (item.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
                 {
-                    if (item.IsSingletonResource(Config))
+                    if (item.TryGetSingletonResourceSuffix(Config, out var singletonResourceSuffix))
                     {
-                        WriteChildSingletonResourceEntry(item);
+                        WriteChildSingletonResourceEntry(item, singletonResourceSuffix);
                     }
                     else
                     {
@@ -755,7 +731,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton)
+        private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton, string singletonResourceSuffix)
         {
             var singletonResource = _context.Library.GetArmResource(operationGroupOfChildSingleton);
             _writer.Line();
@@ -763,27 +739,11 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
             using (_writer.Scope($"public {singletonResource.Type} Get{singletonResource.Type.Name}()"))
             {
-                _writer.Line($"return new {singletonResource.Type.Name}(this);");
+                // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
+                // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
+                _writer.Line($"return new {singletonResource.Type.Name}(this, Id + \"/{singletonResourceSuffix}\");");
             }
         }
-
-        //private void WriteChildSingletonResourceEntries()
-        //{
-        //    foreach (var operation in _context.Library.ArmResources)
-        //    {
-        //        if (operation.OperationGroup.IsSingletonResource(Config)
-        //            && operation.OperationGroup.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
-        //        {
-        //            _writer.Line();
-        //            _writer.WriteXmlDocumentationSummary($"Gets an object representing a {operation.Type.Name} along with the instance operations that can be performed on it.");
-        //            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{operation.Type.Name}\" /> object.");
-        //            using (_writer.Scope($"public {operation.Type} Get{operation.Type.Name}()"))
-        //            {
-        //                _writer.Line($"return new {operation.Type.Name}(this);");
-        //            }
-        //        }
-        //    }
-        //}
 
         protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {

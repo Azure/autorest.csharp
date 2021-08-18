@@ -128,7 +128,7 @@ namespace OmitOperationGroups
         /// <returns> Returns a <see cref="Model4" /> object. </returns>
         public Model4 GetModel4()
         {
-            return new Model4(this);
+            return new Model4(this, Id + "/model4s/default");
         }
     }
 }

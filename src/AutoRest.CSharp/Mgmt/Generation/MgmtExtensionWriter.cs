@@ -73,14 +73,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteGetSingletonResourceMethod(CodeWriter writer, Resource resource)
+        protected void WriteGetSingletonResourceMethod(CodeWriter writer, Resource resource, string singletonResourceSuffix)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName})"))
             {
-                writer.Line($"return new {resource.Type}({ExtensionOperationVariableName});");
+                writer.Line($"return new {resource.Type}({ExtensionOperationVariableName}, {ExtensionOperationVariableName}.Id + \"/{singletonResourceSuffix}\");");
             }
         }
 

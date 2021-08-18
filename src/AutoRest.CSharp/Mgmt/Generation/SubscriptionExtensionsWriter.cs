@@ -43,9 +43,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             || ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
                         {
                             writer.Line($"#region {resource.Type.Name}");
-                            if (resource.IsSingletonResource)
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
                             {
-                                WriteGetSingletonResourceMethod(writer, resource);
+                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
                             }
                             else
                             {

@@ -50,14 +50,6 @@ namespace Azure.Management.Storage
             _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="BlobContainer"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal BlobContainer(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobContainersRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
-        }
-
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/containers";
 
@@ -78,9 +70,6 @@ namespace Azure.Management.Storage
                 return _data;
             }
         }
-
-        /// <inheritdoc />
-        public override ResourceIdentifier Id => Data.Id;
 
         /// <summary> Gets properties of a specified container. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -209,56 +198,6 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
-        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
-        /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual async Task<Response<BlobContainer>> CreateAsync(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
-        {
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Create");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. </summary>
-        /// <param name="blobContainer"> Properties of the blob container to create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="blobContainer"/> is null. </exception>
-        public virtual Response<BlobContainer> Create(BlobContainerData blobContainer, CancellationToken cancellationToken = default)
-        {
-            if (blobContainer == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainer));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.Create");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Create(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken);
-                return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -451,7 +390,7 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
         public ImmutabilityPolicy GetImmutabilityPolicy()
         {
-            return new ImmutabilityPolicy(this);
+            return new ImmutabilityPolicy(this, Id + "/immutabilityPolicies/default");
         }
     }
 }

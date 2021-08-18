@@ -36,6 +36,7 @@ namespace Azure.Management.Storage
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
@@ -45,16 +46,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal BlobService(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="BlobService"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal BlobService(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -78,8 +72,8 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
-        public override ResourceIdentifier Id => Data.Id;
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -186,11 +180,11 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets an object representing a BlobContainer along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="BlobContainer" /> object. </returns>
-        public BlobContainer GetBlobContainer()
+        /// <summary> Gets a list of BlobContainers in the BlobService. </summary>
+        /// <returns> An object representing collection of BlobContainers and their operations over a BlobService. </returns>
+        public BlobContainerContainer GetBlobContainers()
         {
-            return new BlobContainer(this);
+            return new BlobContainerContainer(this);
         }
     }
 }

@@ -21,7 +21,7 @@
   "OperationGroupToParent": {
     "SingletonResources": "Microsoft.Billing/parentResources"
   },
-  "SingletonResource": [
-    "SingletonResource2"
-  ]
+  "OperationGroupToSingletonResource": {
+    "SingletonResources2": "singletonResources2/default"
+  }
 }

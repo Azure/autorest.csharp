@@ -36,9 +36,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     foreach (var resource in context.Library.ManagementGroupChildResources)
                     {
                         writer.Line($"#region {resource.Type.Name}");
-                        if (resource.IsSingletonResource)
+                        if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
                         {
-                            WriteGetSingletonResourceMethod(writer, resource);
+                            WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
                         }
                         else
                         {

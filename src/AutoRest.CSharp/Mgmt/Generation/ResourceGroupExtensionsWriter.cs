@@ -38,9 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
                         {
                             writer.Line($"#region {resource.Type.Name}");
-                            if (resource.IsSingletonResource)
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
                             {
-                                WriteGetSingletonResourceMethod(writer, resource);
+                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
                             }
                             else
                             {
@@ -53,19 +53,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else if ((resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration) || resource.OperationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration))
                             && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
                         {
-                            if (resource.IsSingletonResource)
+                            writer.Line($"#region {resource.Type.Name}");
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
                             {
-                                writer.Line($"#region {resource.Type.Name}");
-                                WriteGetSingletonResourceMethod(writer, resource);
-                                writer.LineRaw("#endregion");
+                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
                             }
                             else
                             {
-                                writer.Line($"#region {resource.Type.Name}");
                                 // a non-singleton resource must have a resource container
                                 WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
-                                writer.LineRaw("#endregion");
                             }
+                            writer.LineRaw("#endregion");
+                            writer.Line();
                         }
                     }
 

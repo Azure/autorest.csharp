@@ -1670,7 +1670,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgrade" /> object. </returns>
         public VirtualMachineScaleSetRollingUpgrade GetVirtualMachineScaleSetRollingUpgrade()
         {
-            return new VirtualMachineScaleSetRollingUpgrade(this);
+            return new VirtualMachineScaleSetRollingUpgrade(this, Id + "/rollingUpgrades/latest");
         }
 
         /// <summary> Gets a list of VirtualMachineExtensionVirtualMachineScaleSets in the VirtualMachineScaleSet. </summary>

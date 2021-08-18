@@ -37,6 +37,7 @@ namespace Azure.Management.Storage
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
@@ -46,16 +47,9 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal FileService(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="FileService"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal FileService(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -79,8 +73,8 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
-        public override ResourceIdentifier Id => Data.Id;
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Gets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

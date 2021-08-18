@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
@@ -12,20 +13,38 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static string[] SingletonKeywords = { "/default", "/latest" };
 
-        private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
+        private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
 
         public static bool IsSingletonResource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
-            if (_valueCache.TryGetValue(operationGroup, out var result))
-                return result;
+            return TryGetSingletonResourceSuffix(operationGroup, config, out _);
+        }
 
-            result = IsSingleton(operationGroup, config);
-            _valueCache.TryAdd(operationGroup, result);
+        public static bool TryGetSingletonResourceSuffix(this OperationGroup operationGroup, MgmtConfiguration config, [MaybeNullWhen(false)] out string resourceSuffix)
+        {
+            resourceSuffix = null;
+            if (_valueCache.TryGetValue(operationGroup, out var suffix))
+            {
+                resourceSuffix = suffix;
+                return resourceSuffix != null;
+            }
+
+            (bool result, resourceSuffix) = IsSingleton(operationGroup, config);
+            _valueCache.TryAdd(operationGroup, resourceSuffix);
             return result;
         }
 
-        private static bool IsSingleton(OperationGroup operationGroup, MgmtConfiguration config)
+        private static (bool IsSingleton, string? ResourceSuffix) IsSingleton(OperationGroup operationGroup, MgmtConfiguration config)
         {
+            // we should first check the configuration for the singleton settings, if we get none, we could try to deduce this from its path
+            if (config.OperationGroupToSingletonResource.TryGetValue(operationGroup.Key, out var resourceSuffix))
+            {
+                // ensure the resourceSuffix does not a slash at the beginning
+                resourceSuffix = resourceSuffix.TrimStart('/');
+                return (true, resourceSuffix);
+            }
+
+            // we cannot find the corresponding operation group in the configuration, trying to deduce from the path
             if (operationGroup.TryGetResourceName(config, out var resourceName))
             {
                 foreach (var operation in operationGroup.Operations)
@@ -38,16 +57,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         && operation.GetSuccessfulQueryResponse()?.ResponseSchema?.Name == resourceName
                         && SingletonKeywords.Any(w => httpRequest.Path.EndsWith(w)))
                     {
-                        return true;
+                        // the path ends with our singleton keyword, now we need to get the last two segments of it
+                        var segments = httpRequest.Path.Split("/");
+                        if (segments.Length < 2)
+                            return (false, null);
+                        return (true, string.Join('/', segments.TakeLast(2)));
                     }
                 }
-
-                // if no match found, we get the resource schema name first
-                // and see if the operation group's resource has been set to singleton in config
-                return config.SingletonResource.Contains(resourceName);
             }
 
-            return false;
+            // if no match found, return false and null
+            return (false, null);
         }
     }
 }

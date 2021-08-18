@@ -31,10 +31,9 @@
     "StorageAccounts": "resourceGroups",
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts"
   },
-  "SingletonResource": [
-    "BlobService",
-    "BlobContainer",
-    "ImmutabilityPolicy",
-    "FileService"
-  ]
+  "OperationGroupToSingletonResource": {
+    "BlobServices": "blobServices/default",
+    "ImmutabilityPolicies": "immutabilityPolicies/default",
+    "FileServices": "fileServices/default"
+  }
 }

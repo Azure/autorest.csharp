@@ -37,6 +37,7 @@ namespace MgmtSingleton
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
@@ -46,16 +47,9 @@ namespace MgmtSingleton
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SingletonResource2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="SingletonResource2"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal SingletonResource2(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SingletonResources2RestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -79,8 +73,8 @@ namespace MgmtSingleton
             }
         }
 
-        /// <inheritdoc />
-        public override ResourceIdentifier Id => Data.Id;
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <summary> Singleton Test Example without explicit /default, /latest ending. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

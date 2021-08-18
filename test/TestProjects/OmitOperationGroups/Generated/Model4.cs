@@ -36,6 +36,7 @@ namespace OmitOperationGroups
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
@@ -45,16 +46,9 @@ namespace OmitOperationGroups
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal Model4(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="Model4"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal Model4(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model4SRestOperations(_clientDiagnostics, Pipeline, options.Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -77,6 +71,9 @@ namespace OmitOperationGroups
                 return _data;
             }
         }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<Model4>> GetAsync(CancellationToken cancellationToken = default)

@@ -33,7 +33,10 @@ operation-group-to-parent:
   Usages: subscriptions
   StorageAccounts: resourceGroups
   PrivateLinkResources: Microsoft.Storage/storageAccounts
-singleton-resource: BlobService;BlobContainer;ImmutabilityPolicy;FileService
+operation-group-to-singleton-resource: 
+  BlobServices: blobServices/default
+  ImmutabilityPolicies: immutabilityPolicies/default
+  FileServices: fileServices/default
 directive:
   - rename-model:
       from: BlobServiceProperties

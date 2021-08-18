@@ -37,6 +37,7 @@ namespace MgmtSingleton
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
@@ -46,14 +47,7 @@ namespace MgmtSingleton
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal TenantParentSingleton(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
-            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, BaseUri);
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="TenantParentSingleton"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        internal TenantParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
-        {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, BaseUri);
         }
@@ -79,8 +73,8 @@ namespace MgmtSingleton
             }
         }
 
-        /// <inheritdoc />
-        public override ResourceIdentifier Id => Data.Id;
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<TenantParentSingleton>> GetAsync(CancellationToken cancellationToken = default)

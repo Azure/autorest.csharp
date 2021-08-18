@@ -909,14 +909,14 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobService" /> object. </returns>
         public BlobService GetBlobService()
         {
-            return new BlobService(this);
+            return new BlobService(this, Id + "/blobServices/default");
         }
 
         /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="FileService" /> object. </returns>
         public FileService GetFileService()
         {
-            return new FileService(this);
+            return new FileService(this, Id + "/fileServices/default");
         }
 
         /// <summary> Gets a list of FileShares in the StorageAccount. </summary>
