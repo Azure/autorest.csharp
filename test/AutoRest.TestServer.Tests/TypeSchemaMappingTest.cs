@@ -100,7 +100,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NullableParamsAsNull()
         {
-            var model = new RenamedModelStruct("test", null, null);
+            var model = new RenamedModelStruct("test", "test", null, null);
             Assert.Null(model.DaysOfWeek);
             Assert.Null(model.Fruit);
         }
