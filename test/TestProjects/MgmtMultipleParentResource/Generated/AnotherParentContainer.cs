@@ -445,6 +445,106 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string anotherName, CancellationToken cancellationToken = default)
+        {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(anotherName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public virtual Response Delete(string anotherName, CancellationToken cancellationToken = default)
+        {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(anotherName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public async virtual Task<AnotherParentDeleteOperation> StartDeleteAsync(string anotherName, CancellationToken cancellationToken = default)
+        {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, anotherName, cancellationToken).ConfigureAwait(false);
+                return new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, anotherName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the run command. </summary>
+        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
+        public virtual AnotherParentDeleteOperation StartDelete(string anotherName, CancellationToken cancellationToken = default)
+        {
+            if (anotherName == null)
+            {
+                throw new ArgumentNullException(nameof(anotherName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, anotherName, cancellationToken);
+                return new AnotherParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, anotherName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, AnotherParent, AnotherParentData> Construct() { }
     }

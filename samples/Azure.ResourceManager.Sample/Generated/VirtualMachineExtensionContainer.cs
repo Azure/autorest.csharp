@@ -405,6 +405,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string vmExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(vmExtensionName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public virtual Response Delete(string vmExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(vmExtensionName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public async virtual Task<VirtualMachineExtensionDeleteOperation> StartDeleteAsync(string vmExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, vmExtensionName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmExtensionName"/> is null. </exception>
+        public virtual VirtualMachineExtensionDeleteOperation StartDelete(string vmExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken);
+                return new VirtualMachineExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, vmExtensionName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData> Construct() { }
     }

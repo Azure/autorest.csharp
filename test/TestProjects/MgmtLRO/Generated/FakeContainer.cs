@@ -419,6 +419,106 @@ namespace MgmtLRO
             }
         }
 
+        /// <summary> Delete an fake. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(fakeName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an fake. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public virtual Response Delete(string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(fakeName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an fake. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public async virtual Task<FakeDeleteOperation> StartDeleteAsync(string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, fakeName, cancellationToken).ConfigureAwait(false);
+                return new FakeDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an fake. </summary>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
+        public virtual FakeDeleteOperation StartDelete(string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, fakeName, cancellationToken);
+                return new FakeDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, Fake, FakeData> Construct() { }
     }

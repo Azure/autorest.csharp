@@ -437,6 +437,110 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> The operation to delete a virtual machine. </summary>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(vmName, forceDeletion, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete a virtual machine. </summary>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public virtual Response Delete(string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(vmName, forceDeletion, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete a virtual machine. </summary>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public async virtual Task<VirtualMachineDeleteOperation> StartDeleteAsync(string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, vmName, forceDeletion, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, vmName, forceDeletion).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete a virtual machine. </summary>
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="forceDeletion"> Optional parameter to force delete virtual machines. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
+        public virtual VirtualMachineDeleteOperation StartDelete(string vmName, bool? forceDeletion = null, CancellationToken cancellationToken = default)
+        {
+            if (vmName == null)
+            {
+                throw new ArgumentNullException(nameof(vmName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, vmName, forceDeletion, cancellationToken);
+                return new VirtualMachineDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, vmName, forceDeletion).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }

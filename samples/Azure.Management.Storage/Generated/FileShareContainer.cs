@@ -439,6 +439,106 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Deletes specified share under its account. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string shareName, CancellationToken cancellationToken = default)
+        {
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(shareName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes specified share under its account. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public virtual Response Delete(string shareName, CancellationToken cancellationToken = default)
+        {
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(shareName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes specified share under its account. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public async virtual Task<FileShareDeleteOperation> StartDeleteAsync(string shareName, CancellationToken cancellationToken = default)
+        {
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken).ConfigureAwait(false);
+                return new FileShareDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes specified share under its account. </summary>
+        /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="shareName"/> is null. </exception>
+        public virtual FileShareDeleteOperation StartDelete(string shareName, CancellationToken cancellationToken = default)
+        {
+            if (shareName == null)
+            {
+                throw new ArgumentNullException(nameof(shareName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, shareName, cancellationToken);
+                return new FileShareDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, FileShare, FileShareData> Construct() { }
     }

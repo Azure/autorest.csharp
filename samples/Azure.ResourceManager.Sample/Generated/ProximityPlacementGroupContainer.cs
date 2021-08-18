@@ -443,6 +443,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(proximityPlacementGroupName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public virtual Response Delete(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(proximityPlacementGroupName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public async virtual Task<ProximityPlacementGroupDeleteOperation> StartDeleteAsync(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken).ConfigureAwait(false);
+                return new ProximityPlacementGroupDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a proximity placement group. </summary>
+        /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
+        public virtual ProximityPlacementGroupDeleteOperation StartDelete(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
+        {
+            if (proximityPlacementGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken);
+                return new ProximityPlacementGroupDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
     }

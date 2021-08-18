@@ -445,6 +445,106 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string parentName, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(parentName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public virtual Response Delete(string parentName, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(parentName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public async virtual Task<ParentDeleteOperation> StartDeleteAsync(string parentName, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
+                return new ParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, parentName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="parentName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
+        public virtual ParentDeleteOperation StartDelete(string parentName, CancellationToken cancellationToken = default)
+        {
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, parentName, cancellationToken);
+                return new ParentDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, parentName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, Parent, ParentData> Construct() { }
     }

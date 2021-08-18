@@ -443,6 +443,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string vmssExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(vmssExtensionName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public virtual Response Delete(string vmssExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(vmssExtensionName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public async virtual Task<VirtualMachineScaleSetExtensionDeleteOperation> StartDeleteAsync(string vmssExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineScaleSetExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, vmssExtensionName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the extension. </summary>
+        /// <param name="vmssExtensionName"> The name of the VM scale set extension. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmssExtensionName"/> is null. </exception>
+        public virtual VirtualMachineScaleSetExtensionDeleteOperation StartDelete(string vmssExtensionName, CancellationToken cancellationToken = default)
+        {
+            if (vmssExtensionName == null)
+            {
+                throw new ArgumentNullException(nameof(vmssExtensionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken);
+                return new VirtualMachineScaleSetExtensionDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, vmssExtensionName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData> Construct() { }
     }

@@ -237,8 +237,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             if (_isDeletableResource)
             {
-                var deleteMethod = _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).OrderBy(m => m.Name.Length).FirstOrDefault();
-                var deleteMethods = _resource.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Delete).ToList() : new List<RestClientMethod> { deleteMethod };
+                var deleteMethod = _resource.RestClient.Methods.Where(m => m.IsDelete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.IsDelete).OrderBy(m => m.Name.Length).FirstOrDefault();
+                var deleteMethods = _resource.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.IsDelete).ToList() : new List<RestClientMethod> { deleteMethod };
                 // write delete method
                 WriteFirstLROMethod(_writer, deleteMethod, _context, true, true, "Delete");
                 WriteFirstLROMethod(_writer, deleteMethod, _context, false, true, "Delete");

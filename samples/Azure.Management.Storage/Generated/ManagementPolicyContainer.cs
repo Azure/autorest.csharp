@@ -313,6 +313,82 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
+        /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response> DeleteAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(managementPolicyName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
+        /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response Delete(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(managementPolicyName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
+        /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<ManagementPolicyDeleteOperation> StartDeleteAsync(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken).ConfigureAwait(false);
+                return new ManagementPolicyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the managementpolicy associated with the specified storage account. </summary>
+        /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual ManagementPolicyDeleteOperation StartDelete(ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken);
+                return new ManagementPolicyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, ManagementPolicy, ManagementPolicyData> Construct() { }
     }

@@ -437,6 +437,106 @@ namespace MgmtParamOrdering
             }
         }
 
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public virtual Response Delete(string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(availabilitySetName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public async virtual Task<AvailabilitySetDeleteOperation> StartDeleteAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken).ConfigureAwait(false);
+                return new AvailabilitySetDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an availability set. </summary>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
+        public virtual AvailabilitySetDeleteOperation StartDelete(string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, availabilitySetName, cancellationToken);
+                return new AvailabilitySetDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
     }

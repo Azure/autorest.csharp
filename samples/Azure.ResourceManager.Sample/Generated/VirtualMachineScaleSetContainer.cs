@@ -437,6 +437,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Deletes a VM scale set. </summary>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(vmScaleSetName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a VM scale set. </summary>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public virtual Response Delete(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(vmScaleSetName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a VM scale set. </summary>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public async virtual Task<VirtualMachineScaleSetDeleteOperation> StartDeleteAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineScaleSetDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, vmScaleSetName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a VM scale set. </summary>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
+        public virtual VirtualMachineScaleSetDeleteOperation StartDelete(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, vmScaleSetName, cancellationToken);
+                return new VirtualMachineScaleSetDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, vmScaleSetName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
     }

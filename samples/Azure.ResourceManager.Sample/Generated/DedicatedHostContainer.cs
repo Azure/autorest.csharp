@@ -437,6 +437,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Delete a dedicated host. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(hostName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public virtual Response Delete(string hostName, CancellationToken cancellationToken = default)
+        {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(hostName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public async virtual Task<DedicatedHostDeleteOperation> StartDeleteAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, hostName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host. </summary>
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostName"/> is null. </exception>
+        public virtual DedicatedHostDeleteOperation StartDelete(string hostName, CancellationToken cancellationToken = default)
+        {
+            if (hostName == null)
+            {
+                throw new ArgumentNullException(nameof(hostName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, hostName, cancellationToken);
+                return new DedicatedHostDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, hostName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }

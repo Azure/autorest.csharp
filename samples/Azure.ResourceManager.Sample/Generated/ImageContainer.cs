@@ -443,6 +443,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Deletes an Image. </summary>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string imageName, CancellationToken cancellationToken = default)
+        {
+            if (imageName == null)
+            {
+                throw new ArgumentNullException(nameof(imageName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(imageName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes an Image. </summary>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public virtual Response Delete(string imageName, CancellationToken cancellationToken = default)
+        {
+            if (imageName == null)
+            {
+                throw new ArgumentNullException(nameof(imageName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(imageName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes an Image. </summary>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public async virtual Task<ImageDeleteOperation> StartDeleteAsync(string imageName, CancellationToken cancellationToken = default)
+        {
+            if (imageName == null)
+            {
+                throw new ArgumentNullException(nameof(imageName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, imageName, cancellationToken).ConfigureAwait(false);
+                return new ImageDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, imageName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes an Image. </summary>
+        /// <param name="imageName"> The name of the image. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
+        public virtual ImageDeleteOperation StartDelete(string imageName, CancellationToken cancellationToken = default)
+        {
+            if (imageName == null)
+            {
+                throw new ArgumentNullException(nameof(imageName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, imageName, cancellationToken);
+                return new ImageDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, imageName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, Image, ImageData> Construct() { }
     }

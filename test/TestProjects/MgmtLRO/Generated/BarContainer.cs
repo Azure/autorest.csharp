@@ -359,6 +359,106 @@ namespace MgmtLRO
             }
         }
 
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string barName, CancellationToken cancellationToken = default)
+        {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(barName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public virtual Response Delete(string barName, CancellationToken cancellationToken = default)
+        {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(barName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public async virtual Task<BarDeleteOperation> StartDeleteAsync(string barName, CancellationToken cancellationToken = default)
+        {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, barName, cancellationToken).ConfigureAwait(false);
+                return new BarDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, barName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="barName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
+        public virtual BarDeleteOperation StartDelete(string barName, CancellationToken cancellationToken = default)
+        {
+            if (barName == null)
+            {
+                throw new ArgumentNullException(nameof(barName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, barName, cancellationToken);
+                return new BarDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, barName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, Bar, BarData> Construct() { }
     }

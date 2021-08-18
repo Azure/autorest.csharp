@@ -598,6 +598,122 @@ namespace MgmtExtensionResource
             }
         }
 
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public virtual Response Delete(string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(policyDefinitionName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public async virtual Task<PolicyDefinitionDeleteOperation> StartDeleteAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                if (Id.TryGetSubscriptionId(out _))
+                {
+                    var response = await _restClient.DeleteAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                    return new PolicyDefinitionDeleteOperation(response);
+                }
+                else
+                {
+                    var response = await _restClient.DeleteAtManagementGroupAsync(Id.Name, policyDefinitionName, cancellationToken).ConfigureAwait(false);
+                    return new PolicyDefinitionDeleteOperation(response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes the policy definition in the given subscription with the given name. </summary>
+        /// <param name="policyDefinitionName"> The name of the policy definition to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        public virtual PolicyDefinitionDeleteOperation StartDelete(string policyDefinitionName, CancellationToken cancellationToken = default)
+        {
+            if (policyDefinitionName == null)
+            {
+                throw new ArgumentNullException(nameof(policyDefinitionName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                if (Id.TryGetSubscriptionId(out _))
+                {
+                    var response = _restClient.Delete(Id.Name, policyDefinitionName, cancellationToken);
+                    return new PolicyDefinitionDeleteOperation(response);
+                }
+                else
+                {
+                    var response = _restClient.DeleteAtManagementGroup(Id.Name, policyDefinitionName, cancellationToken);
+                    return new PolicyDefinitionDeleteOperation(response);
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, PolicyDefinition, PolicyDefinitionData> Construct() { }
     }

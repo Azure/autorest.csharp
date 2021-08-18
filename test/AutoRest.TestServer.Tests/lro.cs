@@ -102,20 +102,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task LROPatchInlineCompleteIgnoreHeaders() => Test(async (host, pipeline) =>
-        {
-            var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededIgnoreHeadersAsync();
-            var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-        });
-
-        [Test]
-        public Task LROPatchInlineCompleteIgnoreHeaders_Sync() => Test((host, pipeline) =>
-        {
-            var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch200SucceededIgnoreHeaders();
-            var resp = WaitForCompletion(operation);
-        });
-
-        [Test]
         public Task LRODelete200() => Test(async (host, pipeline) =>
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartDelete202Retry200Async();

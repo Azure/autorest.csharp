@@ -33,6 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// 3. List (4 variants)
     /// and the following builder methods:
     /// 1. Construct
+    /// and the following optional methods:
+    /// 1. Delete (4 variants)
     /// </summary>
     internal class ResourceContainerWriter : MgmtClientBaseWriter
     {
@@ -124,6 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteCheckIfExistsVariants(_resourceContainer.GetMethod.RestClientMethod);
             }
 
+
             // TODO: Add back code with refactored base method as in WriteCreateOrUpdateVariants
             // if (_resourceContainer.PutByIdMethod != null)
             // {
@@ -136,6 +139,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // }
 
             WriteListVariants();
+
+            WriteDeleteVariants();
         }
 
         private void WriteCheckIfExistsVariants(RestClientMethod getMethod)
@@ -202,6 +207,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
             WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
+        }
+
+        private void WriteDeleteVariants()
+        {
+            var deleteMethod = _resourceContainer.RestClient.Methods.Where(m => m.IsDelete && m.Parameters.FirstOrDefault()?.Name.Equals("scope") == true).FirstOrDefault() ?? _resource.RestClient.Methods.Where(m => m.IsDelete).OrderBy(m => m.Name.Length).FirstOrDefault();
+            if (deleteMethod == null)
+            {
+                return;
+            }
+
+            var deleteMethods = _resourceContainer.IsScopeOrExtension ? _resource.RestClient.Methods.Where(m => m.IsDelete).ToList() : new List<RestClientMethod> { deleteMethod };
+
+            WriteFirstLROMethod(_writer, deleteMethod, _context, true, true, "Delete");
+            WriteFirstLROMethod(_writer, deleteMethod, _context, false, true, "Delete");
+
+            WriteStartLROMethod(_writer, deleteMethod, _context, true, true, "Delete", deleteMethods);
+            WriteStartLROMethod(_writer, deleteMethod, _context, false, true, "Delete", deleteMethods);
         }
 
         /// <summary>

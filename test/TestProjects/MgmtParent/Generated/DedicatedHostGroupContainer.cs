@@ -359,6 +359,106 @@ namespace MgmtParent
             }
         }
 
+        /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(hostGroupName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public virtual Response Delete(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(hostGroupName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public async virtual Task<DedicatedHostGroupDeleteOperation> StartDeleteAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, hostGroupName, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostGroupDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a dedicated host group. </summary>
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
+        public virtual DedicatedHostGroupDeleteOperation StartDelete(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            if (hostGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(hostGroupName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, hostGroupName, cancellationToken);
+                return new DedicatedHostGroupDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }

@@ -445,6 +445,106 @@ namespace MgmtMultipleParentResource
             }
         }
 
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string childName, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(childName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual Response Delete(string childName, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(childName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public async virtual Task<ChildDeleteOperation> StartDeleteAsync(string childName, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, cancellationToken).ConfigureAwait(false);
+                return new ChildDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to delete the VMSS VM run command. </summary>
+        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="childName"/> is null. </exception>
+        public virtual ChildDeleteOperation StartDelete(string childName, CancellationToken cancellationToken = default)
+        {
+            if (childName == null)
+            {
+                throw new ArgumentNullException(nameof(childName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ChildBodySubParentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName, cancellationToken);
+                return new ChildDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, childName).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, ChildBodySubParent, ChildBodyData> Construct() { }
     }

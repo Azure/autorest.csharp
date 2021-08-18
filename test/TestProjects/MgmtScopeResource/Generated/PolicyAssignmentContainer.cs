@@ -568,6 +568,106 @@ namespace MgmtScopeResource
             }
         }
 
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public async virtual Task<Response<PolicyAssignmentData>> DeleteAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public virtual Response<PolicyAssignmentData> Delete(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(policyAssignmentName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public async virtual Task<PolicyAssignmentDeleteOperation> StartDeleteAsync(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id, policyAssignmentName, cancellationToken).ConfigureAwait(false);
+                return new PolicyAssignmentDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This operation deletes a policy assignment, given its name and the scope it was created in. The scope of a policy assignment is the part of its ID preceding &apos;/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}&apos;. </summary>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to delete. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        public virtual PolicyAssignmentDeleteOperation StartDelete(string policyAssignmentName, CancellationToken cancellationToken = default)
+        {
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("PolicyAssignmentContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id, policyAssignmentName, cancellationToken);
+                return new PolicyAssignmentDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, PolicyAssignment, PolicyAssignmentData> Construct() { }
     }

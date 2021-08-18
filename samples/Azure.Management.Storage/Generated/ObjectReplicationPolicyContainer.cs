@@ -407,6 +407,106 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public virtual Response Delete(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(objectReplicationPolicyId, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public async virtual Task<ObjectReplicationPolicyDeleteOperation> StartDeleteAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken).ConfigureAwait(false);
+                return new ObjectReplicationPolicyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the object replication policy associated with the specified storage account. </summary>
+        /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="objectReplicationPolicyId"/> is null. </exception>
+        public virtual ObjectReplicationPolicyDeleteOperation StartDelete(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        {
+            if (objectReplicationPolicyId == null)
+            {
+                throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken);
+                return new ObjectReplicationPolicyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
     }

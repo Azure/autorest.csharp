@@ -21,5 +21,21 @@ namespace AutoRest.CSharp.Output.Models
         public string? Description { get; }
         public Diagnostic Diagnostics { get; }
         public string Accessibility { get; }
+
+        public bool IsPut
+        {
+            get
+            {
+                return this.RestClientMethod.IsPut;
+            }
+        }
+
+        public bool IsDelete
+        {
+            get
+            {
+                return this.RestClientMethod.IsDelete;
+            }
+        }
     }
 }

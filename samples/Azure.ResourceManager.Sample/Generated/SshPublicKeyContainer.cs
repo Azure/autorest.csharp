@@ -437,6 +437,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Delete an SSH public key. </summary>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public async virtual Task<Response> DeleteAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an SSH public key. </summary>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public virtual Response Delete(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(sshPublicKeyName, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an SSH public key. </summary>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public async virtual Task<SshPublicKeyDeleteOperation> StartDeleteAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                return new SshPublicKeyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete an SSH public key. </summary>
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
+        public virtual SshPublicKeyDeleteOperation StartDelete(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            if (sshPublicKeyName == null)
+            {
+                throw new ArgumentNullException(nameof(sshPublicKeyName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(Id.ResourceGroupName, sshPublicKeyName, cancellationToken);
+                return new SshPublicKeyDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         // Builders.
         // public ArmBuilder<ResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
     }

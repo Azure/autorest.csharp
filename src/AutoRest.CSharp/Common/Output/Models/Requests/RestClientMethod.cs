@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -60,6 +61,22 @@ namespace AutoRest.CSharp.Output.Models.Requests
                     pathSegment => pathSegment.Value.Reference.Type.Name == parameter.Type.Name &&
                     pathSegment.Value.Reference.Name == parameter.Name)
                 ).ToList();
+            }
+        }
+
+        public bool IsDelete
+        {
+            get
+            {
+                return this.Request.HttpMethod.Equals(RequestMethod.Delete);
+            }
+        }
+
+        public bool IsPut
+        {
+            get
+            {
+                return this.Request.HttpMethod.Equals(RequestMethod.Put);
             }
         }
     }
