@@ -23,6 +23,11 @@ namespace CustomNamespace
                 writer.WritePropertyName("ModelProperty");
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
+            if (Optional.IsDefined(PropertyToField))
+            {
+                writer.WritePropertyName("PropertyToField");
+                writer.WriteStringValue(PropertyToField);
+            }
             if (Optional.IsDefined(Fruit))
             {
                 writer.WritePropertyName("Fruit");
@@ -40,6 +45,7 @@ namespace CustomNamespace
         internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element)
         {
             Optional<string> modelProperty = default;
+            Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
@@ -56,6 +62,11 @@ namespace CustomNamespace
                         if (property0.NameEquals("ModelProperty"))
                         {
                             modelProperty = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("PropertyToField"))
+                        {
+                            propertyToField = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("Fruit"))
@@ -82,7 +93,7 @@ namespace CustomNamespace
                     continue;
                 }
             }
-            return new RenamedModelStruct(modelProperty.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
+            return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
         }
     }
 }

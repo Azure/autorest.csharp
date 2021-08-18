@@ -15,20 +15,28 @@ namespace CustomNamespace
     {
         /// <summary> Initializes a new instance of RenamedModelStruct. </summary>
         /// <param name="customizedFlattenedStringProperty"> . </param>
+        /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customizedFlattenedStringProperty"/> is null. </exception>
-        public RenamedModelStruct(string customizedFlattenedStringProperty, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
+        /// <exception cref="ArgumentNullException"> <paramref name="customizedFlattenedStringProperty"/> or <paramref name="propertyToField"/> is null. </exception>
+        public RenamedModelStruct(string customizedFlattenedStringProperty, string propertyToField, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
             if (customizedFlattenedStringProperty == null)
             {
                 throw new ArgumentNullException(nameof(customizedFlattenedStringProperty));
             }
+            if (propertyToField == null)
+            {
+                throw new ArgumentNullException(nameof(propertyToField));
+            }
 
             CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
+            PropertyToField = propertyToField;
             Fruit = fruit;
             DaysOfWeek = daysOfWeek;
         }
+        /// <summary> . </summary>
+        public string PropertyToField { get; }
         /// <summary> Fruit. </summary>
         public CustomFruitEnum? Fruit { get; }
         /// <summary> Day of week. </summary>
