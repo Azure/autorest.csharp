@@ -86,7 +86,11 @@
                         }
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location",
+                    "x-ms-long-running-reallyLong": true
+                  }
             },
             "patch": {
                 "tags": [
@@ -139,7 +143,11 @@
                         }
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location",
+                    "x-ms-long-running-reallyLong": true
+                  }
             },
             "delete": {
                 "tags": [
@@ -358,6 +366,59 @@
                 },
                 "x-ms-long-running-operation": true
             },
+            "patch": {
+                "tags": [
+                    "Bars"
+                ],
+                "operationId": "Bars_Update",
+                "description": "Update an Bars.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "barName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the bar."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BarUpdate"
+                        },
+                        "description": "Parameters supplied to the Update Availability Set operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    },
+                    "201": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/Bar"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
             "get": {
                 "tags": [
                     "Bars"
@@ -434,7 +495,11 @@
                         "description": "No Content"
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location",
+                    "x-ms-long-running-reallyLong": true
+                  }
             }
         }
     },
@@ -511,6 +576,20 @@
                 }
             },
             "description": "The instance view of a resource."
+        },
+        "BarUpdate": {
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/BarProperties"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
         },
         "BarProperties": {
             "type": "object",

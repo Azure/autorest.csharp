@@ -46,9 +46,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<MgmtGroupParent> CreateOrUpdate(string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
+        public virtual MgmtGroupParentCreateOrUpdateOperation CreateOrUpdate(string mgmtGroupParentName, MgmtGroupParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
@@ -60,71 +61,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(mgmtGroupParentName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<MgmtGroupParent>> CreateOrUpdateAsync(string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
-        {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="mgmtGroupParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual MgmtGroupParentCreateOrUpdateOperation StartCreateOrUpdate(string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
-        {
-            if (mgmtGroupParentName == null)
-            {
-                throw new ArgumentNullException(nameof(mgmtGroupParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, mgmtGroupParentName, parameters, cancellationToken);
-                return new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
+                var operation = new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -136,9 +80,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> StartCreateOrUpdateAsync(string mgmtGroupParentName, MgmtGroupParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<MgmtGroupParentCreateOrUpdateOperation> CreateOrUpdateAsync(string mgmtGroupParentName, MgmtGroupParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (mgmtGroupParentName == null)
             {
@@ -149,12 +94,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("MgmtGroupParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, mgmtGroupParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
+                var operation = new MgmtGroupParentCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

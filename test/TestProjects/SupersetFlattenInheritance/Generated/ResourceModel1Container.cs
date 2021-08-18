@@ -43,9 +43,10 @@ namespace SupersetFlattenInheritance
 
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ResourceModel1> CreateOrUpdate(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public virtual ResourceModel1PutOperation CreateOrUpdate(string resourceModel1SName, ResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -57,69 +58,14 @@ namespace SupersetFlattenInheritance
             }
 
             using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(resourceModel1SName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="resourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<ResourceModel1>> CreateOrUpdateAsync(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel1SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="resourceModel1SName"> The String to use. </param>
-        /// <param name="parameters"> The ResourceModel1 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ResourceModel1PutOperation StartCreateOrUpdate(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceModel1SName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceModel1SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken);
-                return new ResourceModel1PutOperation(Parent, response);
+                var operation = new ResourceModel1PutOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -130,9 +76,10 @@ namespace SupersetFlattenInheritance
 
         /// <param name="resourceModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ResourceModel1 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ResourceModel1PutOperation> StartCreateOrUpdateAsync(string resourceModel1SName, ResourceModel1Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ResourceModel1PutOperation> CreateOrUpdateAsync(string resourceModel1SName, ResourceModel1Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (resourceModel1SName == null)
             {
@@ -143,12 +90,15 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ResourceModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, resourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new ResourceModel1PutOperation(Parent, response);
+                var operation = new ResourceModel1PutOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

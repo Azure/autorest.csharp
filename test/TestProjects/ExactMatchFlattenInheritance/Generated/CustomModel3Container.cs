@@ -44,9 +44,10 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an CustomModel3. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<CustomModel3> CreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public virtual CustomModel3PutOperation CreateOrUpdate(string name, CustomModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -58,71 +59,14 @@ namespace ExactMatchFlattenInheritance
             }
 
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an CustomModel3. </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<CustomModel3>> CreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an CustomModel3. </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The CustomModel3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual CustomModel3PutOperation StartCreateOrUpdate(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new CustomModel3PutOperation(Parent, response);
+                var operation = new CustomModel3PutOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -134,9 +78,10 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an CustomModel3. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The CustomModel3 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<CustomModel3PutOperation> StartCreateOrUpdateAsync(string name, CustomModel3Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel3PutOperation> CreateOrUpdateAsync(string name, CustomModel3Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -147,12 +92,15 @@ namespace ExactMatchFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new CustomModel3PutOperation(Parent, response);
+                var operation = new CustomModel3PutOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

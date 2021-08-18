@@ -43,9 +43,10 @@ namespace OmitOperationGroups
 
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<Model5> CreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public virtual Model5CreateOrUpdateOperation CreateOrUpdate(string model5SName, Model5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -57,69 +58,14 @@ namespace OmitOperationGroups
             }
 
             using var scope = _clientDiagnostics.CreateScope("Model5Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(model5SName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<Model5>> CreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(model5SName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="model5SName"> The String to use. </param>
-        /// <param name="parameters"> The Model5 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Model5CreateOrUpdateOperation StartCreateOrUpdate(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
-        {
-            if (model5SName == null)
-            {
-                throw new ArgumentNullException(nameof(model5SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, model5SName, parameters, cancellationToken);
-                return new Model5CreateOrUpdateOperation(Parent, response);
+                var operation = new Model5CreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -130,9 +76,10 @@ namespace OmitOperationGroups
 
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="parameters"> The Model5 to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Model5CreateOrUpdateOperation> StartCreateOrUpdateAsync(string model5SName, Model5Data parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<Model5CreateOrUpdateOperation> CreateOrUpdateAsync(string model5SName, Model5Data parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (model5SName == null)
             {
@@ -143,12 +90,15 @@ namespace OmitOperationGroups
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("Model5Container.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("Model5Container.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, model5SName, parameters, cancellationToken).ConfigureAwait(false);
-                return new Model5CreateOrUpdateOperation(Parent, response);
+                var operation = new Model5CreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
