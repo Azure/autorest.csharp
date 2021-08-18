@@ -20,8 +20,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
-            var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
@@ -109,19 +107,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
 
-            var extensionsWriter = new CodeWriter();
-            resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, context);
-            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", extensionsWriter.ToString());
+            var resourceGroupExtensionsCodeWriter = new CodeWriter();
+            new ResourceGroupExtensionsWriter(resourceGroupExtensionsCodeWriter, context).WriteExtension();
+            project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups]}.cs", resourceGroupExtensionsCodeWriter.ToString());
 
             var subscriptionExtensionsCodeWriter = new CodeWriter();
-            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
+            new SubscriptionExtensionsWriter(subscriptionExtensionsCodeWriter, context).WriteExtension();
             project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions]}.cs", subscriptionExtensionsCodeWriter.ToString());
 
             if (context.Library.ManagementGroupChildResources.Count() > 0)
             {
-                var managementGroupExtensionsWriter = new ManagementGroupExtensionsWriter();
                 var managementGroupExtensionsCodeWriter = new CodeWriter();
-                managementGroupExtensionsWriter.WriteExtension(managementGroupExtensionsCodeWriter, context);
+                new ManagementGroupExtensionsWriter(managementGroupExtensionsCodeWriter, context).WriteExtension();
                 project.AddGeneratedFile($"Extensions/{ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups]}.cs", managementGroupExtensionsCodeWriter.ToString());
             }
         }

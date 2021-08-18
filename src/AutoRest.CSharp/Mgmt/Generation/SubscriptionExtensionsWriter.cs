@@ -23,44 +23,49 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class SubscriptionExtensionsWriter : MgmtExtensionWriter
     {
+        private CodeWriter _writer;
+        public SubscriptionExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        {
+            _writer = writer;
+        }
+
         protected override string Description => "A class to add extension methods to Subscription.";
         protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions];
         protected override string ExtensionOperationVariableName => "subscription";
 
         protected override Type ExtensionOperationVariableType => typeof(Subscription);
 
-        public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public override void WriteExtension()
         {
-            var @namespace = context.DefaultNamespace;
-            using (writer.Namespace(@namespace))
+            using (_writer.Namespace(Context.DefaultNamespace))
             {
-                writer.WriteXmlDocumentationSummary($"{Description}");
-                using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                _writer.WriteXmlDocumentationSummary($"{Description}");
+                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    foreach (var resource in context.Library.ArmResources)
+                    foreach (var resource in Context.Library.ArmResources)
                     {
-                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions)
-                            || ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
+                        if (ParentDetection.ParentResourceType(resource.OperationGroup, Configuration).Equals(ResourceTypeBuilder.Subscriptions)
+                            || ParentDetection.ParentResourceType(resource.OperationGroup, Configuration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
                         {
-                            writer.Line($"#region {resource.Type.Name}");
-                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
+                            _writer.Line($"#region {resource.Type.Name}");
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
                             {
-                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
+                                WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
                             }
                             else
                             {
                                 // a non-singleton resource must have a resource container
-                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
+                                WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
                             }
-                            writer.LineRaw("#endregion");
-                            writer.Line();
+                            _writer.LineRaw("#endregion");
+                            _writer.Line();
                         }
                         else
                         {
                             if (resource.SubscriptionExtensionsListMethods != null && resource.SubscriptionExtensionsListMethods.Count() > 0)
                             {
-                                writer.Line($"#region {resource.Type.Name}");
-                                WriteGetRestOperations(writer, resource.RestClient);
+                                _writer.Line($"#region {resource.Type.Name}");
+                                WriteGetRestOperations(_writer, resource.RestClient);
 
                                 foreach (var listMethod in resource.SubscriptionExtensionsListMethods)
                                 {
@@ -73,8 +78,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                             methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
-                                        WriteListResourceMethod(writer, resource, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, true);
-                                        WriteListResourceMethod(writer, resource, listMethod.PagingMethod, methodName, context.Configuration.MgmtConfiguration, false);
+                                        WriteListResourceMethod(_writer, resource, listMethod.PagingMethod, methodName, Configuration, true);
+                                        WriteListResourceMethod(_writer, resource, listMethod.PagingMethod, methodName, Configuration, false);
                                     }
 
                                     if (listMethod.ClientMethod != null)
@@ -84,43 +89,43 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                             methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
-                                        WriteExtensionClientMethod(writer, resource.OperationGroup, listMethod.ClientMethod, methodName, context, true, resource.RestClient);
-                                        WriteExtensionClientMethod(writer, resource.OperationGroup, listMethod.ClientMethod, methodName, context, false, resource.RestClient);
+                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, true, resource.RestClient);
+                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, false, resource.RestClient);
                                     }
 
                                 }
 
-                                WriteListResourceByNameMethod(writer, resource, true);
-                                WriteListResourceByNameMethod(writer, resource, false);
-                                writer.LineRaw("#endregion");
+                                WriteListResourceByNameMethod(_writer, resource, true);
+                                WriteListResourceByNameMethod(_writer, resource, false);
+                                _writer.LineRaw("#endregion");
                             }
                         }
-                        writer.Line();
+                        _writer.Line();
                     }
 
                     // write the standalone list operations with the parent of a subscription
-                    var mgmtExtensionOperations = context.Library.GetNonResourceOperations(ResourceTypeBuilder.Subscriptions);
+                    var mgmtExtensionOperations = Context.Library.GetNonResourceOperations(ResourceTypeBuilder.Subscriptions);
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
-                        writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
-                        WriteGetRestOperations(writer, mgmtExtensionOperation.RestClient);
+                        _writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
+                        WriteGetRestOperations(_writer, mgmtExtensionOperation.RestClient);
 
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
                         }
 
-                        writer.LineRaw("#endregion");
-                        writer.Line();
+                        _writer.LineRaw("#endregion");
+                        _writer.Line();
                     }
 
                 }

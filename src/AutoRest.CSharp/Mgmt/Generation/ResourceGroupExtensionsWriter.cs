@@ -7,17 +7,22 @@ using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceGroupExtensionsWriter : MgmtExtensionWriter
     {
+        private CodeWriter _writer;
+
+        public ResourceGroupExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        {
+            _writer = writer;
+        }
+
         protected override string Description => "A class to add extension methods to ResourceGroup.";
 
         protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups];
@@ -26,71 +31,71 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override Type ExtensionOperationVariableType => typeof(ResourceGroup);
 
-        public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public override void WriteExtension()
         {
-            using (writer.Namespace(context.DefaultNamespace))
+            using (_writer.Namespace(Context.DefaultNamespace))
             {
-                writer.WriteXmlDocumentationSummary($"{Description}");
-                using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                _writer.WriteXmlDocumentationSummary($"{Description}");
+                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    foreach (var resource in context.Library.ArmResources)
+                    foreach (var resource in Context.Library.ArmResources)
                     {
-                        if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
+                        if (resource.OperationGroup.ParentResourceType(Configuration).Equals(ResourceTypeBuilder.ResourceGroups))
                         {
-                            writer.Line($"#region {resource.Type.Name}");
-                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
+                            _writer.Line($"#region {resource.Type.Name}");
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
                             {
-                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
+                                WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
                             }
                             else
                             {
                                 // a non-singleton resource must have a resource container
-                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
+                                WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
                             }
-                            writer.LineRaw("#endregion");
-                            writer.Line();
+                            _writer.LineRaw("#endregion");
+                            _writer.Line();
                         }
-                        else if ((resource.OperationGroup.IsScopeResource(context.Configuration.MgmtConfiguration) || resource.OperationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration))
+                        else if ((resource.OperationGroup.IsScopeResource(Configuration) || resource.OperationGroup.IsExtensionResource(Configuration))
                             && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
                         {
-                            writer.Line($"#region {resource.Type.Name}");
-                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(context.Configuration.MgmtConfiguration, out var singletonResourceSuffix))
+                            _writer.Line($"#region {resource.Type.Name}");
+                            if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
                             {
-                                WriteGetSingletonResourceMethod(writer, resource, singletonResourceSuffix);
+                                WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
                             }
                             else
                             {
                                 // a non-singleton resource must have a resource container
-                                WriteGetResourceContainerMethod(writer, resource.ResourceContainer!);
+                                WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
                             }
-                            writer.LineRaw("#endregion");
-                            writer.Line();
+                            _writer.LineRaw("#endregion");
+                            _writer.Line();
                         }
                     }
 
                     // write the standalone list operations with the parent of a subscription
-                    var mgmtExtensionOperations = context.Library.GetNonResourceOperations(ResourceTypeBuilder.ResourceGroups);
+                    var mgmtExtensionOperations = Context.Library.GetNonResourceOperations(ResourceTypeBuilder.ResourceGroups);
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
-                        writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
-                        WriteGetRestOperations(writer, mgmtExtensionOperation.RestClient);
+                        _writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
+                        WriteGetRestOperations(_writer, mgmtExtensionOperation.RestClient);
 
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, true, mgmtExtensionOperation.RestClient);
-                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, context, false, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
                         }
 
-                        writer.LineRaw("#endregion");
-                        writer.Line();
+                        _writer.LineRaw("#endregion");
+                        _writer.Line();
                     }
                 }
             }

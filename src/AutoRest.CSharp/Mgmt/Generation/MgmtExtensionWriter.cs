@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -23,7 +24,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        public abstract void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context);
+        protected BuildContext<MgmtOutputLibrary> Context { get; }
+        protected MgmtConfiguration Configuration => Context.Configuration.MgmtConfiguration;
+
+        public MgmtExtensionWriter(BuildContext<MgmtOutputLibrary> context)
+        {
+            Context = context;
+        }
+
+        public abstract void WriteExtension();
 
         protected abstract string Description { get; }
         protected virtual string Accessibility => "public";
@@ -84,9 +93,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, BuildContext<MgmtOutputLibrary> context, bool async, MgmtRestClient restClient)
+        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, bool async, MgmtRestClient restClient)
         {
-            (var bodyType, bool isResourceList, bool wasResourceData) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
+            (var bodyType, bool isResourceList, bool wasResourceData) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, Context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -153,12 +162,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             // first we need to validate that is this function listing this resource itself, or list something else
                             var elementType = bodyType!.Arguments.First();
-                            if (context.Library.TryGetArmResource(operationGroup, out var resource)
+                            if (Context.Library.TryGetArmResource(operationGroup, out var resource)
                                 && resource.Type.EqualsByName(elementType))
                             {
                                 writer.UseNamespace("System.Linq");
 
-                                var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}(subscription, data)).ToArray()";
+                                var converter = $".Select(data => new {Context.Library.GetArmResource(operationGroup).Declaration.Name}(subscription, data)).ToArray()";
                                 writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
                             }
                             else
