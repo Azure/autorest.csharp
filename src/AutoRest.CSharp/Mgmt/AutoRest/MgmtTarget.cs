@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
-            var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
@@ -25,7 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
@@ -55,7 +54,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.ResourceData)
             {
                 var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
+                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);

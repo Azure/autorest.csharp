@@ -46,7 +46,7 @@ namespace MgmtParamOrdering
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.GetBySubscriptionAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.GetAllBySubscriptionAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -61,7 +61,7 @@ namespace MgmtParamOrdering
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.GetBySubscriptionNextPageAsync(nextLink, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.GetAllBySubscriptionNextPageAsync(nextLink, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -92,7 +92,7 @@ namespace MgmtParamOrdering
                     scope.Start();
                     try
                     {
-                        var response = restOperations.GetBySubscription(expand, cancellationToken: cancellationToken);
+                        var response = restOperations.GetAllBySubscription(expand, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -107,7 +107,7 @@ namespace MgmtParamOrdering
                     scope.Start();
                     try
                     {
-                        var response = restOperations.GetBySubscriptionNextPage(nextLink, expand, cancellationToken: cancellationToken);
+                        var response = restOperations.GetAllBySubscriptionNextPage(nextLink, expand, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)

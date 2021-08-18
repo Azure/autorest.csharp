@@ -135,6 +135,32 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                         }
                     }
                 }
+                else if (operations.Key.Equals("ResourceLinks"))
+                {
+                    Assert.IsTrue(operations.IsScopeResource(context.Configuration.MgmtConfiguration));
+                    Assert.IsTrue(operations.IsAncestorScope());
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Tenant));
+                    Assert.IsTrue(operations.IsAncestorResourceTypeTenant(context));
+                    foreach (var operation in operations.Operations)
+                    {
+                        if (operation.Language.Default.Name.Equals("Delete") || operation.Language.Default.Name.Equals("CreateOrUpdate") || operation.Language.Default.Name.Equals("Get"))
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsFalse(operation.IsAncestorScope());
+                            Assert.IsFalse(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                        else if (operation.Language.Default.Name.Equals("ListAtSourceScope") )
+                        {
+                            Assert.IsTrue(operation.ParentResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.AncestorResourceType().Equals(ResourceTypeBuilder.Tenant));
+                            Assert.IsTrue(operation.IsAncestorScope());
+                            Assert.IsTrue(operation.IsParentScope());
+                            Assert.IsFalse(operation.IsParentTenant());
+                        }
+                    }
+                }
             }
         }
     }

@@ -19,7 +19,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
             JsonElement? operationGroupToSingletonResource = default,
-            JsonElement? mergeOperations = default)
+            JsonElement? mergeOperations = default,
+            JsonElement? armCore = default)
         {
             OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
             OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
@@ -38,6 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupIsTuple = operationGroupIsTuple;
             OperationGroupIsExtension = operationGroupIsExtension;
             OperationGroupsToOmit = operationGroupsToOmit;
+            IsArmCore = !IsValidJsonElement(armCore) ? false : Convert.ToBoolean(armCore.ToString());
         }
 
         public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
@@ -48,6 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public string[] OperationGroupIsTuple { get; }
         public string[] OperationGroupIsExtension { get; }
         public string[] OperationGroupsToOmit { get; }
+        public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -59,7 +62,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult());
+                autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -72,6 +76,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
+            if (IsArmCore)
+                writer.WriteBoolean("ArmCore", IsArmCore);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -97,6 +103,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? operationGroupsToOmit.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            root.TryGetProperty("ArmCore", out var isArmCore);
+
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
                 operationGroupIsExtensionList,
@@ -105,7 +113,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationGroupToResource,
                 operationGroupToParent,
                 singletonResource,
-                mergeOperations);
+                mergeOperations,
+                isArmCore);
         }
 
         private static bool IsValidJsonElement(JsonElement? element)

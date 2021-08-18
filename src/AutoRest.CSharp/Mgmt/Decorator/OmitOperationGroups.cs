@@ -15,10 +15,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static void RemoveOperationGroups(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context)
         {
-            var operationGroupsToOmit = context.Configuration.MgmtConfiguration.OperationGroupsToOmit;
-            if (operationGroupsToOmit != null)
+            var omitSet = context.Configuration.MgmtConfiguration.OperationGroupsToOmit.ToHashSet();
+            if (codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations") != null)
             {
-                var omitSet = operationGroupsToOmit.ToHashSet();
+                omitSet.Add("Operations");
+            }
+            if (omitSet.Count > 0)
+            {
                 var omittedOGs = codeModel.OperationGroups.Where(og => omitSet.Contains(og.Key)).ToList();
                 var nonOmittedOGs = codeModel.OperationGroups.Where(og => !omitSet.Contains(og.Key)).ToList();
 
@@ -32,10 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 foreach (var operationGroup in omittedOGs)
                 {
-                    if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
-                    {
-                        DetectSchemas(operationGroup, schemasToOmit);
-                    }
+                    DetectSchemas(operationGroup, schemasToOmit);
                 }
                 RemoveSchemas(codeModel, schemasToOmit, schemasToKeep);
             }

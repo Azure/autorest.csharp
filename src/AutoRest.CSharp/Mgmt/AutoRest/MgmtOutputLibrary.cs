@@ -58,7 +58,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             CodeModelValidator.Validate(codeModel);
-            RemoveOperations(codeModel);
             OmitOperationGroups.RemoveOperationGroups(codeModel, context);
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
@@ -86,9 +85,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 foreach (var operation in operationGroup.Operations)
                 {
                     var curName = operation.Language.Default.Name;
-                    if (curName.Equals("List"))
+                    if (curName.Equals("List") || curName.StartsWith("ListBy"))
                     {
-                        operation.Language.Default.Name = "GetAll";
+                        operation.Language.Default.Name = curName.Replace("List", "GetAll");
                     }
                     else if (curName.Equals("ListAll"))
                     {
@@ -121,25 +120,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         operation.Language.Default.Name = curName.Replace("List", "Get");
                     }
                 }
-            }
-        }
-
-        private void RemoveOperations(CodeModel codeModel)
-        {
-            var operations = codeModel.OperationGroups.FirstOrDefault(og => og.Key == "Operations");
-            if (operations != null)
-            {
-                var listModel = operations.Operations.First(o => o.Language.Default.Name == "List").Responses.First().ResponseSchema as ObjectSchema;
-                if (listModel != null)
-                {
-                    var itemModel = listModel.Properties.First(p => p.SerializedName == "value").Schema as ArraySchema;
-                    if (itemModel != null)
-                    {
-                        codeModel.Schemas.Objects.Remove(itemModel.ElementType as ObjectSchema);
-                    }
-                    codeModel.Schemas.Objects.Remove(listModel as ObjectSchema);
-                }
-                codeModel.OperationGroups.Remove(operations);
             }
         }
 
@@ -219,6 +199,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
         public OperationGroup? GetOperationGroupForNonResource(string modelName)
         {
@@ -602,7 +584,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType)
+            ? new MgmtReferenceType(objectSchema, _context)
+            : new MgmtObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 

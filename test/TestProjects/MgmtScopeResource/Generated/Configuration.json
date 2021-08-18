@@ -12,15 +12,18 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "Deployments": "Microsoft.Resources/deployments",
-    "DeploymentOperations": "Microsoft.Resources/deployments/operations"
+    "DeploymentOperations": "Microsoft.Resources/deployments/operations",
+    "ResourceLinks": "Microsoft.Resources/links"
   },
   "OperationGroupToResource": {
     "DeploymentOperations": "DeploymentOperation",
-    "Deployments": "DeploymentExtended"
+    "Deployments": "DeploymentExtended",
+    "ResourceLinks": "ResourceLink"
   },
   "OperationGroupToParent": {
     "Deployments": "tenant",
-    "PolicyAssignments": "tenant"
+    "PolicyAssignments": "tenant",
+    "ResourceLinks": "tenant"
   },
   "MergeOperations": {
     "WhatIf": [
