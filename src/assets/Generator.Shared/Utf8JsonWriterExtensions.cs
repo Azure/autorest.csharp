@@ -16,6 +16,9 @@ namespace Azure.Core
         public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
 
+        public static void WriteStringValue(this Utf8JsonWriter writer, DateTime value, string format) =>
+            writer.WriteStringValue(TypeFormatters.ToString(value, format));
+
         public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format) =>
             writer.WriteStringValue(TypeFormatters.ToString(value, format));
 
