@@ -93,18 +93,23 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
+            if (inheritedType?.IsFrameworkType == true && !inheritedType.FrameworkType.IsGenericType)
+                return inheritedType;
+
+            if (inheritedType != null && inheritedType.IsFrameworkType)
+                return inheritedType;
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
-                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties, _context);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties, _context) : inheritedType;
         }
 
         private OperationGroup? GetOperationGroupFromChildren()

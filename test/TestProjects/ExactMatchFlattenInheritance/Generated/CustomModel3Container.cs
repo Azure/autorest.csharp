@@ -18,8 +18,11 @@ using ExactMatchFlattenInheritance.Models;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel3Container : ResourceContainer
+    public partial class CustomModel3Container : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly CustomModel3SRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Container"/> class for mocking. </summary>
         protected CustomModel3Container()
         {
@@ -27,18 +30,14 @@ namespace ExactMatchFlattenInheritance
 
         /// <summary> Initializes a new instance of CustomModel3Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal CustomModel3Container(ResourceOperations parent) : base(parent)
+        internal CustomModel3Container(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private CustomModel3SRestOperations _restClient => new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -320,15 +319,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(CustomModel3Operations.ResourceType);
+                var filters = new ResourceFilterCollection(CustomModel3.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -343,15 +342,15 @@ namespace ExactMatchFlattenInheritance
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("CustomModel3Container.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(CustomModel3Operations.ResourceType);
+                var filters = new ResourceFilterCollection(CustomModel3.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

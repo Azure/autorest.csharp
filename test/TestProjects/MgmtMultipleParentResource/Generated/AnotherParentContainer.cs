@@ -20,8 +20,11 @@ using MgmtMultipleParentResource.Models;
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class representing collection of AnotherParent and their operations over a ResourceGroup. </summary>
-    public partial class AnotherParentContainer : ResourceContainer
+    public partial class AnotherParentContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly AnotherParentsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="AnotherParentContainer"/> class for mocking. </summary>
         protected AnotherParentContainer()
         {
@@ -29,18 +32,14 @@ namespace MgmtMultipleParentResource
 
         /// <summary> Initializes a new instance of AnotherParentContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal AnotherParentContainer(ResourceOperations parent) : base(parent)
+        internal AnotherParentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private AnotherParentsRestOperations _restClient => new AnotherParentsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -326,7 +325,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="AnotherParent" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<AnotherParent> GetAll(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<AnotherParent> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             Page<AnotherParent> FirstPageFunc(int? pageSizeHint)
             {
@@ -365,7 +364,7 @@ namespace MgmtMultipleParentResource
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="AnotherParent" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<AnotherParent> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<AnotherParent> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<AnotherParent>> FirstPageFunc(int? pageSizeHint)
             {
@@ -406,15 +405,15 @@ namespace MgmtMultipleParentResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AnotherParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AnotherParent.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -429,15 +428,15 @@ namespace MgmtMultipleParentResource
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AnotherParentContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(AnotherParentOperations.ResourceType);
+                var filters = new ResourceFilterCollection(AnotherParent.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

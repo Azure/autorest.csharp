@@ -14,9 +14,9 @@ namespace MgmtMultipleParentResource
     {
         #region AnotherParent
         /// <summary> Gets an object representing a AnotherParentContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="AnotherParentContainer" /> object. </returns>
-        public static AnotherParentContainer GetAnotherParents(this ResourceGroupOperations resourceGroup)
+        public static AnotherParentContainer GetAnotherParents(this ResourceGroup resourceGroup)
         {
             return new AnotherParentContainer(resourceGroup);
         }
@@ -24,9 +24,9 @@ namespace MgmtMultipleParentResource
 
         #region Parent
         /// <summary> Gets an object representing a ParentContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="ParentContainer" /> object. </returns>
-        public static ParentContainer GetParents(this ResourceGroupOperations resourceGroup)
+        public static ParentContainer GetParents(this ResourceGroup resourceGroup)
         {
             return new ParentContainer(resourceGroup);
         }

@@ -24,7 +24,7 @@ namespace Pagination.Models
         {
         }
 
-        internal PageSizeDoubleModelPutOperation(ResourceOperations operationsBase, Response<PageSizeDoubleModelData> response)
+        internal PageSizeDoubleModelPutOperation(ArmResource operationsBase, Response<PageSizeDoubleModelData> response)
         {
             _operation = new OperationOrResponseInternals<PageSizeDoubleModel>(Response.FromValue(new PageSizeDoubleModel(operationsBase, response.Value), response.GetRawResponse()));
         }

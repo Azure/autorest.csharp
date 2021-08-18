@@ -20,8 +20,11 @@ using Pagination.Models;
 namespace Pagination
 {
     /// <summary> A class representing collection of PageSizeDoubleModel and their operations over a ResourceGroup. </summary>
-    public partial class PageSizeDoubleModelContainer : ResourceContainer
+    public partial class PageSizeDoubleModelContainer : ArmContainer
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly PageSizeDoubleModelsRestOperations _restClient;
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModelContainer"/> class for mocking. </summary>
         protected PageSizeDoubleModelContainer()
         {
@@ -29,18 +32,14 @@ namespace Pagination
 
         /// <summary> Initializes a new instance of PageSizeDoubleModelContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal PageSizeDoubleModelContainer(ResourceOperations parent) : base(parent)
+        internal PageSizeDoubleModelContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        private readonly ClientDiagnostics _clientDiagnostics;
-
-        /// <summary> Represents the REST operations. </summary>
-        private PageSizeDoubleModelsRestOperations _restClient => new PageSizeDoubleModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroup.ResourceType;
 
         // Container level operations.
 
@@ -314,7 +313,7 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="PageSizeDoubleModel" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PageSizeDoubleModel> GetAll(CancellationToken cancellationToken = default)
+        public virtual Pageable<PageSizeDoubleModel> GetAll(CancellationToken cancellationToken = default)
         {
             Page<PageSizeDoubleModel> FirstPageFunc(int? pageSizeHint)
             {
@@ -351,7 +350,7 @@ namespace Pagination
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="PageSizeDoubleModel" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PageSizeDoubleModel> GetAllAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<PageSizeDoubleModel> GetAllAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<PageSizeDoubleModel>> FirstPageFunc(int? pageSizeHint)
             {
@@ -392,15 +391,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public Pageable<GenericResourceExpanded> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeDoubleModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeDoubleModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -415,15 +414,15 @@ namespace Pagination
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<GenericResourceExpanded> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PageSizeDoubleModelContainer.GetAllAsGenericResources");
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(PageSizeDoubleModelOperations.ResourceType);
+                var filters = new ResourceFilterCollection(PageSizeDoubleModel.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroupOperations, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

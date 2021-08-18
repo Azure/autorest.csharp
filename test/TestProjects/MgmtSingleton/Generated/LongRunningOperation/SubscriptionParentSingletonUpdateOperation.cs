@@ -25,7 +25,7 @@ namespace MgmtSingleton.Models
         {
         }
 
-        internal SubscriptionParentSingletonUpdateOperation(ResourceOperations operationsBase, Response<SubscriptionParentSingletonData> response)
+        internal SubscriptionParentSingletonUpdateOperation(ArmResource operationsBase, Response<SubscriptionParentSingletonData> response)
         {
             _operation = new OperationOrResponseInternals<SubscriptionParentSingleton>(Response.FromValue(new SubscriptionParentSingleton(operationsBase, response.Value), response.GetRawResponse()));
         }

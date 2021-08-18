@@ -19,8 +19,9 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.ResourceManager;
-using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Management;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -39,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
         private Resource _resource;
-        private ResourceOperation _resourceOperation;
         private BuildContext<MgmtOutputLibrary> _context;
 
         protected override string ContextProperty => "Parent";
@@ -55,7 +55,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resourceData = context.Library.GetResourceData(operationGroup);
             _restClient = context.Library.GetRestClient(operationGroup);
             _resource = context.Library.GetArmResource(operationGroup);
-            _resourceOperation = context.Library.GetResourceOperation(operationGroup);
             _context = context;
         }
 
@@ -67,17 +66,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 _writer.WriteXmlDocumentationSummary($"{_resourceContainer.Description}");
                 _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
-                _writer.Line($"{typeof(Core.ResourceContainer)}");
+                _writer.Line($"{typeof(ArmContainer)}");
                 using (_writer.Scope())
                 {
-                    WriteContainerCtors(_writer, typeof(Core.ResourceOperations), "parent");
+                    WriteFields(_writer, _restClient!);
+                    WriteContainerCtors(_writer, _restClient!, typeof(ArmResource), "parent");
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
                     if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
                     {
                         WriteValidate();
                     }
-                    WriteFields(_writer, _restClient!);
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteRemainingMethods();
@@ -299,7 +298,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             if (resourceMethod != null)
                             {
-                                using (writer.Scope($"if (Id.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                                using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                 {
                                     WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod), async);
                                 }
@@ -338,12 +337,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 methodDict.Remove(tenantMethod);
                                 var parent = new CodeWriterDeclaration("parent");
                                 writer.Line($"var {parent:D} = Id;");
-                                using (writer.Scope($"while ({parent}.Parent != ResourceIdentifier.RootResourceIdentifier)"))
+                                using (writer.Scope($"while ({parent}.Parent != {typeof(ResourceIdentifier)}.RootResourceIdentifier)"))
                                 {
                                     writer.Line($"{parent} = {parent}.Parent;");
                                 }
-                                writer.UseNamespace("Azure.ResourceManager.Management");
-                                using (writer.Scope($"if (parent.ResourceType.Equals(ManagementGroupOperations.ResourceType))"))
+                                using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                 {
                                     WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod), async);
                                 }
@@ -382,7 +380,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.UseNamespace("System.Collections.Generic");
                 writer.Line($"var parent = Id.Parent;");
                 writer.Line($"var parentParts = new List<string>();");
-                using (writer.Scope($"while (!parent.ResourceType.Equals(ResourceGroupOperations.ResourceType))"))
+                using (writer.Scope($"while (!parent.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                 {
                     writer.Line($"parentParts.Insert(0, $\"{{parent.ResourceType.Types[parent.ResourceType.Types.Count - 1]}}/{{parent.Name}}\");");
                     writer.Line($"parent = parent.Parent;");
@@ -471,14 +469,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", $"A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
-            CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResourceExpanded));
-            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResource));
+            using (_writer.Scope($"public {GetVirtual(true)} {returnType} {methodName}(string nameFilter, string expand = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroupOperations)}, filters, expand, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
                 });
             }
         }
@@ -512,7 +510,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            var isAncestorResourceTypeTenant = _resourceOperation.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
             if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";

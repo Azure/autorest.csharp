@@ -401,7 +401,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionRequest()
+        internal HttpMessage CreateGetAllBySubscriptionRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -419,9 +419,9 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ProximityPlacementGroupListResult>> GetBySubscriptionAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupListResult>> GetAllBySubscriptionAsync(CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest();
+            using var message = CreateGetAllBySubscriptionRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -439,9 +439,9 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists all proximity placement groups in a subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ProximityPlacementGroupListResult> GetBySubscription(CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupListResult> GetAllBySubscription(CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetBySubscriptionRequest();
+            using var message = CreateGetAllBySubscriptionRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -457,7 +457,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetByResourceGroupRequest(string resourceGroupName)
+        internal HttpMessage CreateGetAllByResourceGroupRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -479,14 +479,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> GetByResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupListResult>> GetAllByResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupRequest(resourceGroupName);
+            using var message = CreateGetAllByResourceGroupRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -506,14 +506,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> GetByResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupListResult> GetAllByResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupRequest(resourceGroupName);
+            using var message = CreateGetAllByResourceGroupRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -529,7 +529,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetBySubscriptionNextPageRequest(string nextLink)
+        internal HttpMessage CreateGetAllBySubscriptionNextPageRequest(string nextLink)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -546,14 +546,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> GetBySubscriptionNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupListResult>> GetAllBySubscriptionNextPageAsync(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -573,14 +573,14 @@ namespace Azure.ResourceManager.Sample
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> GetBySubscriptionNextPage(string nextLink, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupListResult> GetAllBySubscriptionNextPage(string nextLink, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
 
-            using var message = CreateGetBySubscriptionNextPageRequest(nextLink);
+            using var message = CreateGetAllBySubscriptionNextPageRequest(nextLink);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -596,7 +596,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetByResourceGroupNextPageRequest(string nextLink, string resourceGroupName)
+        internal HttpMessage CreateGetAllByResourceGroupNextPageRequest(string nextLink, string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -614,7 +614,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroupListResult>> GetByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupListResult>> GetAllByResourceGroupNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -625,7 +625,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllByResourceGroupNextPageRequest(nextLink, resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -646,7 +646,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroupListResult> GetByResourceGroupNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupListResult> GetAllByResourceGroupNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -657,7 +657,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
 
-            using var message = CreateGetByResourceGroupNextPageRequest(nextLink, resourceGroupName);
+            using var message = CreateGetAllByResourceGroupNextPageRequest(nextLink, resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

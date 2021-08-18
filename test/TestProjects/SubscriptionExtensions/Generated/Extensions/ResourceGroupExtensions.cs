@@ -14,9 +14,9 @@ namespace SubscriptionExtensions
     {
         #region Oven
         /// <summary> Gets an object representing a OvenContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
         /// <returns> Returns a <see cref="OvenContainer" /> object. </returns>
-        public static OvenContainer GetOvens(this ResourceGroupOperations resourceGroup)
+        public static OvenContainer GetOvens(this ResourceGroup resourceGroup)
         {
             return new OvenContainer(resourceGroup);
         }

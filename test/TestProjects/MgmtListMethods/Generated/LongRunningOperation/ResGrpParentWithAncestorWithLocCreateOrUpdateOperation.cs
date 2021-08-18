@@ -25,7 +25,7 @@ namespace MgmtListMethods.Models
         {
         }
 
-        internal ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ResourceOperations operationsBase, Response<ResGrpParentWithAncestorWithLocData> response)
+        internal ResGrpParentWithAncestorWithLocCreateOrUpdateOperation(ArmResource operationsBase, Response<ResGrpParentWithAncestorWithLocData> response)
         {
             _operation = new OperationOrResponseInternals<ResGrpParentWithAncestorWithLoc>(Response.FromValue(new ResGrpParentWithAncestorWithLoc(operationsBase, response.Value), response.GetRawResponse()));
         }
