@@ -8,7 +8,7 @@ require: $(this-folder)/../../../readme.md
 azure-arm: true
 arm-core: true
 input-file:
-  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/b60aed793a60ad3548d9f8255b7a52564ad6bcb0/specification/common-types/resource-management/v3/types.json
+  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/ac3be41ee22ada179ab7b970e98f1289188b3bae/specification/common-types/resource-management/v2/types.json
   - $(this-folder)/nonReferenceTypes.json
 namespace: Azure.ReferenceTypes
 

@@ -1,9 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -46,12 +43,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"[{ReferenceClassFinder.SerializationCtorAttribute}]");
             }
-        }
-
-        protected override void WriteUsingsForUnknownTypes(CodeWriter writer)
-        {
-            writer.Line($"using Azure.ResourceManager.Core;");
-            writer.LineRaw(string.Empty);
         }
     }
 }

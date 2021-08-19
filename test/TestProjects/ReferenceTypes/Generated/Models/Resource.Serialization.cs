@@ -23,7 +23,6 @@ namespace Azure.ResourceManager.Fake.Models
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -41,18 +40,8 @@ namespace Azure.ResourceManager.Fake.Models
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("systemData"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    systemData = SystemData.DeserializeSystemData(property.Value);
-                    continue;
-                }
             }
-            return new Resource(id.Value, name.Value, type.Value, systemData.Value);
+            return new Resource(id.Value, name.Value, type.Value);
         }
     }
 }

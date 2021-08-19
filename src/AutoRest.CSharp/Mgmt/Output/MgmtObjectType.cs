@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
             if (typeToReplace != null)
             {
-                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties);
+                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties, _context);
                 if (match != null)
                 {
                     propertyType = match;

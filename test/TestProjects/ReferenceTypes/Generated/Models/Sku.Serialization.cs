@@ -5,11 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
+    [JsonConverter(typeof(SkuConverter))]
     public partial class Sku : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -86,6 +89,19 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new Sku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
+        }
+
+        internal partial class SkuConverter : JsonConverter<Sku>
+        {
+            public override void Write(Utf8JsonWriter writer, Sku model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override Sku Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeSku(document.RootElement);
+            }
         }
     }
 }

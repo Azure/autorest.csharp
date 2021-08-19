@@ -5,11 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
+    [JsonConverter(typeof(PlanConverter))]
     public partial class Plan : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -70,6 +73,19 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new Plan(name, publisher, product, promotionCode.Value, version.Value);
+        }
+
+        internal partial class PlanConverter : JsonConverter<Plan>
+        {
+            public override void Write(Utf8JsonWriter writer, Plan model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override Plan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializePlan(document.RootElement);
+            }
         }
     }
 }

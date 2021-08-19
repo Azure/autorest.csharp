@@ -7,11 +7,13 @@
 
 using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 using ReferenceTypes.Models;
 
 namespace Azure.ResourceManager.Fake.Models
 {
+    [JsonConverter(typeof(SystemDataConverter))]
     public partial class SystemData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -112,6 +114,19 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new SystemData(createdBy.Value, Optional.ToNullable(createdByType), Optional.ToNullable(createdAt), lastModifiedBy.Value, Optional.ToNullable(lastModifiedByType), Optional.ToNullable(lastModifiedAt));
+        }
+
+        internal partial class SystemDataConverter : JsonConverter<SystemData>
+        {
+            public override void Write(Utf8JsonWriter writer, SystemData model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override SystemData Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeSystemData(document.RootElement);
+            }
         }
     }
 }

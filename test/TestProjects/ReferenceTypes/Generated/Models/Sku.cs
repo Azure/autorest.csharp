@@ -8,8 +8,6 @@
 using System;
 using Azure.ResourceManager.Core;
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition representing SKU. </summary>

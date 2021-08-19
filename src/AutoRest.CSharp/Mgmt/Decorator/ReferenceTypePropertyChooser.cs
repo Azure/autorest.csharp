@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -33,41 +34,64 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
-        public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties)
+        public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
-            foreach (System.Type replacementType in GetReferenceClassCollection())
+            var referenceTypes = GetReferenceClassCollection();
+
+            if (context.Configuration.MgmtConfiguration.IsArmCore)
             {
-                // flatten properties
-                List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-                List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                foreach (var parentProperty in replacementTypeProperties)
+                return FindSimpleReplacements(originalType, typeToReplace, properties, context);
+            }
+            else
+            {
+                foreach (System.Type replacementType in GetReferenceClassCollection())
                 {
-                    if (parentProperty.PropertyType.IsClass)
+                    // flatten properties
+                    List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+                    List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
+                    foreach (var parentProperty in replacementTypeProperties)
                     {
-                        flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                        if (parentProperty.PropertyType.IsClass)
+                        {
+                            flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                        }
+                        else
+                        {
+                            flattenedReplacementTypeProperties.Add(parentProperty);
+                        }
                     }
-                    else
-                    {
-                        flattenedReplacementTypeProperties.Add(parentProperty);
-                    }
-                }
 
-                var attributeObj = replacementType.GetCustomAttributes()?.First();
-                var propertiesToSkip = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
-                List<ObjectTypeProperty> typeToReplaceProperties = new List<ObjectTypeProperty>();
-                foreach (var property in properties)
-                {
-                    if (propertiesToSkip != null && !propertiesToSkip.Any(p => p.Name == property.ValueType.Name))
+                    var attributeObj = replacementType.GetCustomAttributes()?.First();
+                    var propertiesToSkip = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
+                    List<ObjectTypeProperty> typeToReplaceProperties = new List<ObjectTypeProperty>();
+                    foreach (var property in properties)
                     {
-                        typeToReplaceProperties.Add(property);
+                        if (propertiesToSkip != null && !propertiesToSkip.Any(p => p.Name == property.ValueType.Name))
+                        {
+                            typeToReplaceProperties.Add(property);
+                        }
                     }
-                }
 
-                if (PropertyMatchDetection.IsEqual(flattenedReplacementTypeProperties, typeToReplaceProperties))
-                {
-                    return GetObjectTypeProperty(originalType, typeToReplace, replacementType);
+                    if (PropertyMatchDetection.IsEqual(flattenedReplacementTypeProperties, typeToReplaceProperties))
+                    {
+                        return GetObjectTypeProperty(originalType, typeToReplace, replacementType);
+                    }
                 }
             }
+            return null;
+        }
+
+        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (typeToReplace.Type.Name == "location")
+                return GetObjectTypeProperty(originalType, typeToReplace, typeof(Location));
+
+            if (typeToReplace.Type.Name == "type")
+                return GetObjectTypeProperty(originalType, typeToReplace, typeof(ResourceType));
+
+            if (typeToReplace.Type.Name == "id")
+                return GetObjectTypeProperty(originalType, typeToReplace, typeof(ResourceIdentifier));
+
             return null;
         }
 

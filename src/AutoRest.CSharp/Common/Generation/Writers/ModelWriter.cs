@@ -35,8 +35,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteObjectSchema(CodeWriter writer, SchemaObjectType schema)
         {
-            WriteUsingsForUnknownTypes(writer);
-
             using (writer.Namespace(schema.Declaration.Namespace))
             {
                 List<CSharpType> implementsTypes = new List<CSharpType>();
@@ -84,10 +82,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
-        }
-
-        protected virtual void WriteUsingsForUnknownTypes(CodeWriter writer)
-        {
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)

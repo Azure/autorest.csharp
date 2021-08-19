@@ -5,11 +5,14 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
+    [JsonConverter(typeof(KeyVaultPropertiesConverter))]
     public partial class KeyVaultProperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -46,6 +49,19 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new KeyVaultProperties(keyIdentifier.Value, identity.Value);
+        }
+
+        internal partial class KeyVaultPropertiesConverter : JsonConverter<KeyVaultProperties>
+        {
+            public override void Write(Utf8JsonWriter writer, KeyVaultProperties model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override KeyVaultProperties Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeKeyVaultProperties(document.RootElement);
+            }
         }
     }
 }
