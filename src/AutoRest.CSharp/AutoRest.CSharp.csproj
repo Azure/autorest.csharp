@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.18.0-alpha.20210811.1" />
+    <PackageReference Include="Azure.Core" Version="1.18.0" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.12" />
     <PackageReference Include="Azure.ResourceManager" Version="1.0.0-alpha.20210811.3" />
     <PackageReference Include="Humanizer.Core" Version="2.11.10" />
