@@ -64,20 +64,8 @@ namespace AutoRest.CSharp.Output.Models.Requests
             }
         }
 
-        public bool IsDelete
-        {
-            get
-            {
-                return this.Request.HttpMethod.Equals(RequestMethod.Delete);
-            }
-        }
+        public bool IsDelete => this.Request.HttpMethod.Equals(RequestMethod.Delete);
 
-        public bool IsPut
-        {
-            get
-            {
-                return this.Request.HttpMethod.Equals(RequestMethod.Put);
-            }
-        }
+        public bool IsPut => this.Request.HttpMethod.Equals(RequestMethod.Put);
     }
 }

@@ -84,5 +84,55 @@ namespace lro_parameterized_endpoints
                 throw;
             }
         }
+
+        /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
+        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public virtual async Task<LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation> StartPollWithConstantParameterizedEndpointsAsync(string accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("LROWithParamaterizedEndpointsClient.StartPollWithConstantParameterizedEndpoints");
+            scope.Start();
+            try
+            {
+                var originalResponse = await RestClient.PollWithConstantParameterizedEndpointsAsync(accountName, cancellationToken).ConfigureAwait(false);
+                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
+        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public virtual LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation StartPollWithConstantParameterizedEndpoints(string accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("LROWithParamaterizedEndpointsClient.StartPollWithConstantParameterizedEndpoints");
+            scope.Start();
+            try
+            {
+                var originalResponse = RestClient.PollWithConstantParameterizedEndpoints(accountName, cancellationToken);
+                return new LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsOperation(_clientDiagnostics, _pipeline, RestClient.CreatePollWithConstantParameterizedEndpointsRequest(accountName).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }
