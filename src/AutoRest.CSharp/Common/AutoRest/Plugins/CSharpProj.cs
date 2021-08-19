@@ -29,12 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.16.0"" />
-  </ItemGroup>";
-
-        private string _armCoreCsProjContent = @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.18.0-alpha.20210811.1"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.18.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -114,7 +109,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 if (configuration.AzureArm)
                 {
-                    csProjContent = string.Format(_csProjContent, additionalContent, _armCoreCsProjContent);
+                    csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
                 }
                 else
                 {
