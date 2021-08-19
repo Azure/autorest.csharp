@@ -280,12 +280,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO": {
             "post": {
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "Fakes_DoSomethingSLRO",
+                "operationId": "Fakes_DoSomethingLRO",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
@@ -320,12 +320,12 @@
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO": {
             "post": {
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "Fakes_DoSomethingLRO",
+                "operationId": "Fakes_DoSomethingSLRO",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {

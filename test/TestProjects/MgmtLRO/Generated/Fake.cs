@@ -406,53 +406,9 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDoSomethingSlroOperation> DoSomethingSlroAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeDoSomethingLROOperation> DoSomethingLROAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Fake.DoSomethingSlro");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.DoSomethingSlroAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
-                if (waitForCompletion)
-                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDoSomethingSlroOperation DoSomethingSlro(bool waitForCompletion = true, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("Fake.DoSomethingSlro");
-            scope.Start();
-            try
-            {
-                var response = _restClient.DoSomethingSlro(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
-                if (waitForCompletion)
-                    operation.WaitForCompletion(cancellationToken);
-                return operation;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<FakeDoSomethingLROOperation> StartDoSomethingLROAsync(bool waitForCompletion = false, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("Fake.StartDoSomethingLRO");
+            using var scope = _clientDiagnostics.CreateScope("Fake.DoSomethingLRO");
             scope.Start();
             try
             {
@@ -472,14 +428,58 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual FakeDoSomethingLROOperation StartDoSomethingLRO(bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        public virtual FakeDoSomethingLROOperation DoSomethingLRO(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("Fake.StartDoSomethingLRO");
+            using var scope = _clientDiagnostics.CreateScope("Fake.DoSomethingLRO");
             scope.Start();
             try
             {
                 var response = _restClient.DoSomethingLRO(Id.ResourceGroupName, Id.Name, cancellationToken);
                 var operation = new FakeDoSomethingLROOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingLRORequest(Id.ResourceGroupName, Id.Name).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<FakeDoSomethingSlroOperation> StartDoSomethingSlroAsync(bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Fake.StartDoSomethingSlro");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DoSomethingSlroAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual FakeDoSomethingSlroOperation StartDoSomethingSlro(bool waitForCompletion = false, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("Fake.StartDoSomethingSlro");
+            scope.Start();
+            try
+            {
+                var response = _restClient.DoSomethingSlro(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var operation = new FakeDoSomethingSlroOperation(_clientDiagnostics, Pipeline, _restClient.CreateDoSomethingSlroRequest(Id.ResourceGroupName, Id.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

@@ -727,10 +727,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             Debug.Assert(method.Operation != null);
 
-            bool isSLRO = isLongRunningReallyLong == false;
+            bool isLRO = isLongRunningReallyLong == false;
 
             methodName = methodName ?? method.Name;
-            methodName = isSLRO ? methodName : $"Start{methodName}";
+            methodName = isLRO ? methodName : $"Start{methodName}";
 
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{method.Description}");
@@ -758,7 +758,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteParameter(parameter);
             }
 
-            var defaultWaitForCompletion = isSLRO == true ? "true" : "false";
+            var defaultWaitForCompletion = isLRO == true ? "true" : "false";
             writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {

@@ -1190,7 +1190,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -1214,7 +1214,7 @@ operationGroups:
           x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: DoSomethingSlro
+            name: DoSomethingLRO
             description: Retrieves information about an fake.
         protocol: !Protocols {}
       - !Operation 
@@ -1272,7 +1272,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -1299,7 +1299,7 @@ operationGroups:
             x-ms-long-running-reallyLong: true
         language: !Languages 
           default:
-            name: DoSomethingLRO
+            name: DoSomethingSlro
             description: Retrieves information about an fake.
         protocol: !Protocols {}
     language: !Languages 

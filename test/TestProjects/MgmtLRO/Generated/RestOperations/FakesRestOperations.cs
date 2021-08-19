@@ -476,80 +476,6 @@ namespace MgmtLRO
             }
         }
 
-        internal HttpMessage CreateDoSomethingSlroRequest(string resourceGroupName, string fakeName)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName, true);
-            uri.AppendPath("/doSomethingSLRO", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public async Task<Response> DoSomethingSlroAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-
-            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
-        public Response DoSomethingSlro(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-
-            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
         internal HttpMessage CreateDoSomethingLRORequest(string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
@@ -614,6 +540,80 @@ namespace MgmtLRO
             }
 
             using var message = CreateDoSomethingLRORequest(resourceGroupName, fakeName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDoSomethingSlroRequest(string resourceGroupName, string fakeName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/doSomethingSLRO", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response> DoSomethingSlroAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public Response DoSomethingSlro(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
+            }
+
+            using var message = CreateDoSomethingSlroRequest(resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
