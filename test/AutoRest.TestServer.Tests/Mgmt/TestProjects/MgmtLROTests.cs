@@ -23,6 +23,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("FakeContainer", "CreateOrUpdate")]
         [TestCase("Fake", "Delete")]
+        [TestCase("Fake", "DoSomethingSlro")]
         [TestCase("BarContainer", "CreateOrUpdate")]
         [TestCase("Bar", "Update")]
         public void ValidateSLROMethods(string className, string methodName)
@@ -31,6 +32,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("Fake", "StartUpdate")]
+        [TestCase("Fake", "DoSomethingLro")]
         [TestCase("Bar", "StartDelete")]
         public void ValidateLROMethods(string className, string methodName)
         {

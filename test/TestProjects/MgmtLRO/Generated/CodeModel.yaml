@@ -1190,7 +1190,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomething
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -1210,9 +1210,96 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-long-running-operation: true
         language: !Languages 
           default:
-            name: DoSomething
+            name: DoSomethingSlro
+            description: Retrieves information about an fake.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_47
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: fakeName
+                description: The name of the fake.
+                serializedName: fakeName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_25
+          - *ref_26
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_28
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO
+                method: post
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_47
+          - *ref_48
+        responses:
+          - !SchemaResponse 
+            schema: *ref_46
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+            x-ms-long-running-reallyLong: true
+        language: !Languages 
+          default:
+            name: DoSomethingLRO
             description: Retrieves information about an fake.
         protocol: !Protocols {}
     language: !Languages 
@@ -1229,7 +1316,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_24
-          - !Parameter &ref_48
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             required: true
@@ -1241,7 +1328,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1271,7 +1358,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_47
+              - !Parameter &ref_49
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -1284,7 +1371,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_47
+              - *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1298,8 +1385,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
-          - *ref_49
+          - *ref_50
+          - *ref_51
         responses:
           - !Response 
             language: !Languages 
@@ -1332,7 +1419,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_24
-          - !Parameter &ref_51
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -1344,7 +1431,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
+          - !Parameter &ref_54
             schema: *ref_1
             implementation: Method
             required: true
@@ -1374,7 +1461,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
+              - !Parameter &ref_52
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1400,7 +1487,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1414,8 +1501,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_51
-          - *ref_52
+          - *ref_53
+          - *ref_54
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -1456,7 +1543,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_24
-          - !Parameter &ref_53
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1468,7 +1555,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1509,8 +1596,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_53
-          - *ref_54
+          - *ref_55
+          - *ref_56
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -1536,7 +1623,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_24
-          - !Parameter &ref_55
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1548,7 +1635,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_56
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1574,8 +1661,8 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_55
-          - *ref_56
+          - *ref_57
+          - *ref_58
         responses:
           - !Response 
             language: !Languages 

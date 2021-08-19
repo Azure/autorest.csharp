@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal bool IsLongRunningReallyLong(RestClientMethod clientMethod)
         {
-            return clientMethod.Operation.IsLongRunningReallyLong != null ? clientMethod.Operation.IsLongRunningReallyLong.Value : false;
+            return clientMethod.Operation.IsLongRunningReallyLong ?? false;
         }
 
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()

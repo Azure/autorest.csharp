@@ -280,12 +280,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomething": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingSLRO": {
             "post": {
                 "tags": [
-                    "FakeBars"
+                    "Fakes"
                 ],
-                "operationId": "Fakes_DoSomething",
+                "operationId": "Fakes_DoSomethingSLRO",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
@@ -316,7 +316,52 @@
                             "$ref": "#/definitions/FakePostResult"
                         }
                     }
-                }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/doSomethingLRO": {
+            "post": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "Fakes_DoSomethingLRO",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/FakePostResult"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "location",
+                    "x-ms-long-running-reallyLong": true
+                  }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}": {
