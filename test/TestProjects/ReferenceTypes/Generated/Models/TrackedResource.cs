@@ -9,17 +9,19 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Resources.Models
+using Azure.ResourceManager.Core;
+
+namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition for an Azure Resource Manager tracked top level resource which has &apos;tags&apos; and a &apos;location&apos;. </summary>
     [ReferenceType]
-    public partial class TrackedResourceReference : ResourceReference
+    public partial class TrackedResource : Resource
     {
-        /// <summary> Initializes a new instance of TrackedResourceReference. </summary>
+        /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         [InitializationConstructor]
-        public TrackedResourceReference(string location)
+        public TrackedResource(string location)
         {
             if (location == null)
             {
@@ -30,14 +32,15 @@ namespace Azure.ResourceManager.Resources.Models
             Location = location;
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceReference. </summary>
+        /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        /// <param name="systemData"> Azure Resource Manager metadata containing createdBy and modifiedBy information. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [SerializationConstructor]
-        internal TrackedResourceReference(string id, string name, string type, IDictionary<string, string> tags, string location) : base(id, name, type)
+        internal TrackedResource(string id, string name, string type, SystemData systemData, IDictionary<string, string> tags, string location) : base(id, name, type, systemData)
         {
             Tags = tags;
             Location = location;

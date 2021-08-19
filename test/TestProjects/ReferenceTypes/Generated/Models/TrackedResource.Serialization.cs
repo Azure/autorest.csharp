@@ -9,9 +9,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Resources.Models
+namespace Azure.ResourceManager.Fake.Models
 {
-    public partial class TrackedResourceReference : IUtf8JsonSerializable
+    public partial class TrackedResource : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -32,13 +32,14 @@ namespace Azure.ResourceManager.Resources.Models
             writer.WriteEndObject();
         }
 
-        internal static TrackedResourceReference DeserializeTrackedResourceReference(JsonElement element)
+        internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
             Optional<IDictionary<string, string>> tags = default;
             string location = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
+            Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -76,8 +77,18 @@ namespace Azure.ResourceManager.Resources.Models
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("systemData"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    systemData = SystemData.DeserializeSystemData(property.Value);
+                    continue;
+                }
             }
-            return new TrackedResourceReference(id.Value, name.Value, type.Value, Optional.ToDictionary(tags), location);
+            return new TrackedResource(id.Value, name.Value, type.Value, systemData.Value, Optional.ToDictionary(tags), location);
         }
     }
 }

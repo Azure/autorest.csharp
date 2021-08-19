@@ -46,5 +46,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"[{ReferenceClassFinder.SerializationCtorAttribute}]");
             }
         }
+
+        protected override void WriteUsingsForUnknownTypes(CodeWriter writer)
+        {
+            writer.Line($"using Azure.ResourceManager.Core;");
+            writer.LineRaw(string.Empty);
+        }
     }
 }

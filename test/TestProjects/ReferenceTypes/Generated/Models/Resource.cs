@@ -5,28 +5,32 @@
 
 #nullable disable
 
-namespace Azure.ResourceManager.Resources.Models
+using Azure.ResourceManager.Core;
+
+namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Common fields that are returned in the response for all Azure Resource Manager resources. </summary>
     [ReferenceType]
-    public partial class ResourceReference
+    public partial class Resource
     {
-        /// <summary> Initializes a new instance of ResourceReference. </summary>
+        /// <summary> Initializes a new instance of Resource. </summary>
         [InitializationConstructor]
-        public ResourceReference()
+        public Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceReference. </summary>
+        /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
+        /// <param name="systemData"> Azure Resource Manager metadata containing createdBy and modifiedBy information. </param>
         [SerializationConstructor]
-        internal ResourceReference(string id, string name, string type)
+        internal Resource(string id, string name, string type, SystemData systemData)
         {
             Id = id;
             Name = name;
             Type = type;
+            SystemData = systemData;
         }
 
         /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>
@@ -35,5 +39,7 @@ namespace Azure.ResourceManager.Resources.Models
         public string Name { get; }
         /// <summary> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </summary>
         public string Type { get; }
+        /// <summary> Azure Resource Manager metadata containing createdBy and modifiedBy information. </summary>
+        public SystemData SystemData { get; }
     }
 }
