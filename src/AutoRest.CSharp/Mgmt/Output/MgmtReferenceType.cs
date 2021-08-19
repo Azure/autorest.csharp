@@ -16,5 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(objectSchema, context)
         {
         }
+
+        public override bool IncludeConverter => ObjectSchema.Extensions?.MgmtPropertyReferenceType == true && ObjectSchema.Extensions?.MgmtReferenceType != true || base.IncludeConverter;
     }
 }
