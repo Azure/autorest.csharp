@@ -107,14 +107,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                   additionalContent += _llcProjectContent;
                 }
 
-                if (configuration.AzureArm)
-                {
-                    csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
-                }
-                else
-                {
-                    csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
-                }
+                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
             }
             else
             {
