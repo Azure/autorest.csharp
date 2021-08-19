@@ -82,8 +82,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
         [TestCase("Delete")]
         [TestCase("DeleteAsync")]
-        [TestCase("StartDelete")]
-        [TestCase("StartDeleteAsync")]
         public void ValidateDeleteMethodAsLRO(string methodName)
         {
             var result = Generate(_projectName).Result;
@@ -105,9 +103,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                     var method = OperationsType.GetMethod(methodName);
                     Assert.NotNull(method, $"{OperationsType.Name} does not implement the {methodName} method.");
 
-                    Assert.AreEqual(1, method.GetParameters().Length);
-                    var param1 = TypeAsserts.HasParameter(method, "cancellationToken");
-                    Assert.AreEqual(typeof(CancellationToken), param1.ParameterType);
+                    Assert.AreEqual(2, method.GetParameters().Length);
+                    var param1 = TypeAsserts.HasParameter(method, "waitForCompletion");
+                    Assert.AreEqual(typeof(bool), param1.ParameterType);
+                    var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
+                    Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
                 }
             }
         }

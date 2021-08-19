@@ -197,11 +197,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
-            WriteFirstLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
-
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, false, false, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _context, false, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>

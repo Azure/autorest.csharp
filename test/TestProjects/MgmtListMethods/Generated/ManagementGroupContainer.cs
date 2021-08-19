@@ -50,9 +50,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ManagementGroup> CreateOrUpdate(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual ManagementGroupCreateOrUpdateOperation CreateOrUpdate(string groupId, ManagementGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -64,79 +65,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(groupId, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Create or update a management group.
-        /// If a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.
-        /// 
-        /// </summary>
-        /// <param name="groupId"> Management Group ID. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<ManagementGroup>> CreateOrUpdateAsync(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
-        {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(groupId, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Create or update a management group.
-        /// If a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.
-        /// 
-        /// </summary>
-        /// <param name="groupId"> Management Group ID. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ManagementGroupCreateOrUpdateOperation StartCreateOrUpdate(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
-        {
-            if (groupId == null)
-            {
-                throw new ArgumentNullException(nameof(groupId));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(groupId, parameters, cancellationToken);
-                return new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                var operation = new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -152,9 +88,10 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="groupId"> Management Group ID. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="groupId"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ManagementGroupCreateOrUpdateOperation> StartCreateOrUpdateAsync(string groupId, ManagementGroupData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ManagementGroupCreateOrUpdateOperation> CreateOrUpdateAsync(string groupId, ManagementGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (groupId == null)
             {
@@ -165,12 +102,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ManagementGroupContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(groupId, parameters, cancellationToken).ConfigureAwait(false);
-                return new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                var operation = new ManagementGroupCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(groupId, parameters).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

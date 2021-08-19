@@ -45,9 +45,10 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<PageSizeInt64Model> CreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public virtual PageSizeInt64ModelPutOperation CreateOrUpdate(string name, PageSizeInt64ModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -59,69 +60,14 @@ namespace Pagination
             }
 
             using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(name, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The PageSizeInt64Model to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<PageSizeInt64Model>> CreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(name, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="name"> The String to use. </param>
-        /// <param name="parameters"> The PageSizeInt64Model to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PageSizeInt64ModelPutOperation StartCreateOrUpdate(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, parameters, cancellationToken);
-                return new PageSizeInt64ModelPutOperation(Parent, response);
+                var operation = new PageSizeInt64ModelPutOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -132,9 +78,10 @@ namespace Pagination
 
         /// <param name="name"> The String to use. </param>
         /// <param name="parameters"> The PageSizeInt64Model to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PageSizeInt64ModelPutOperation> StartCreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PageSizeInt64ModelPutOperation> CreateOrUpdateAsync(string name, PageSizeInt64ModelData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -145,12 +92,15 @@ namespace Pagination
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("PageSizeInt64ModelContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, parameters, cancellationToken).ConfigureAwait(false);
-                return new PageSizeInt64ModelPutOperation(Parent, response);
+                var operation = new PageSizeInt64ModelPutOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
