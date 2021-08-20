@@ -807,11 +807,18 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Gets a list of BlobContainers in the StorageAccount. </summary>
-        /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
-        public BlobContainerContainer GetBlobContainers()
+        /// <summary> Gets an object representing a BlobService along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="BlobService" /> object. </returns>
+        public BlobService GetBlobService()
         {
-            return new BlobContainerContainer(this);
+            return new BlobService(this, Id + "/blobServices/default");
+        }
+
+        /// <summary> Gets an object representing a FileService along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="FileService" /> object. </returns>
+        public FileService GetFileService()
+        {
+            return new FileService(this, Id + "/fileServices/default");
         }
 
         /// <summary> Gets a list of FileShares in the StorageAccount. </summary>

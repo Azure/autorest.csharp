@@ -17,5 +17,6 @@ operation-group-to-parent:
 operation-group-to-resource:
   SingletonResources: SingletonResource
   SingletonResources2: SingletonResource2
-singleton-resource: SingletonResource2
+operation-group-to-singleton-resource:
+  SingletonResources2: singletonResources2/default
 ```

@@ -51,7 +51,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices/default/shares";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices/shares";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
