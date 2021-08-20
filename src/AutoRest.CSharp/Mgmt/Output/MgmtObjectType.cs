@@ -93,11 +93,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType?.IsFrameworkType == true && !inheritedType.FrameworkType.IsGenericType)
-                return inheritedType;
-
             if (inheritedType != null && inheritedType.IsFrameworkType)
-                return inheritedType;
+            {
+                var objType = _context.Library.FindTypeByName(inheritedType.FrameworkType.Name);
+                return objType ?? inheritedType;
+            }
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();

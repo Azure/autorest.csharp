@@ -24,6 +24,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string PropertyReferenceAttribute = "PropertyReferenceType";
         internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
 
+        private static readonly Type _locationType = typeof(Location);
+        private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
+        private static readonly Type _resourceTypeType = typeof(ResourceType);
+
         private static IList<System.Type> GetReferenceClassCollection()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
@@ -34,9 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
-        public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, BuildContext context)
+        public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
-            return FindSimpleReplacements(originalType, context);
+            return FindSimpleReplacements(originalType, frameworkType, context);
         }
 
         public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
@@ -81,19 +85,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, BuildContext context)
+        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
             //TODO for core generation this list is small enough we can simply define each of them here.
             //eventually we might want to come up with a more robust way of doing this
 
-            if (originalType.Declaration.Name == "Location")
-                return GetObjectTypeProperty(originalType, typeof(Location), context);
+            bool isString = frameworkType == typeof(string);
 
-            if (originalType.Declaration.Name == "Type")
-                return GetObjectTypeProperty(originalType, typeof(ResourceType), context);
+            if (originalType.Declaration.Name == "Location" && (isString || frameworkType.Name == _locationType.Name))
+                return GetObjectTypeProperty(originalType, _locationType, context);
 
-            if (originalType.Declaration.Name == "Id")
-                return GetObjectTypeProperty(originalType, typeof(ResourceIdentifier), context);
+            if (originalType.Declaration.Name == "Type" && (isString || frameworkType.Name == _resourceTypeType.Name))
+                return GetObjectTypeProperty(originalType, _resourceTypeType, context);
+
+            if (originalType.Declaration.Name == "Id" && (isString || frameworkType.Name == _resourceIdentifierType.Name))
+                return GetObjectTypeProperty(originalType, _resourceIdentifierType, context);
 
             return null;
         }

@@ -57,12 +57,4 @@ directive:
     where: $.definitions.*.properties[?(@.enum)]
     transform: >
       $["x-accessibility"] = "public"
-#  - from: types.json
-#    where: $.definitions.Operation.properties.display
-#    transform: >
-#      $["x-csharp-usage"] = "model,input,output"
-#  - from: types.json
-#    where: $.definitions.Operation.properties.display
-#    transform: >
-#      $["x-namespace"] = "Azure.ResourceManager.Fake.Models"
 ```
