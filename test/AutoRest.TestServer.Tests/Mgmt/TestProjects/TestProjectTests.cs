@@ -182,11 +182,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 return;
             }
 
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-            Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
+            Type resourceExtensions = FindResourceGroupExtensions();
             Assert.NotNull(resourceExtensions);
 
-            var scopeResourceContainers = new HashSet<string> { "PolicyAssignmentContainer" };
             foreach (var type in FindAllContainers())
             {
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
@@ -280,6 +278,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private bool IsInheritFromTrackedResource(Type type)
         {
             return type.BaseType.Name == typeof(TrackedResource).Name;
+        }
+
+        protected Type FindResourceGroupExtensions()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            return allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
         }
 
         protected Type FindSubscriptionExtensions()
