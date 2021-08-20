@@ -55,6 +55,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(TrackedResource), ReferenceNamespace)]
         [TestCase(typeof(Sku), ReferenceNamespace)]
         [TestCase(typeof(SkuTier), ReferenceNamespace)]
+        [TestCase(typeof(CreatedByType), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
         public void ValidateNamespace(Type typeToTest, string expectedNamespace)
         {

@@ -359,6 +359,12 @@ schemas: !Schemas
         - !ApiVersion 
           version: '2.0'
       choiceType: *ref_0
+      extensions:
+        x-accessibility: public
+        x-csharp-formats: json
+        x-csharp-usage: model,input,output
+        x-ms-mgmt-propertyReferenceType: true
+        x-namespace: Azure.ResourceManager.Fake.Models
       language: !Languages 
         default:
           name: CreatedByType
@@ -899,9 +905,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_27
           serializedName: createdByType
-          extensions:
-            x-accessibility: public
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: createdByType
@@ -926,9 +929,6 @@ schemas: !Schemas
         - !Property 
           schema: *ref_27
           serializedName: lastModifiedByType
-          extensions:
-            x-accessibility: public
-            x-namespace: Azure.ResourceManager.Fake.Models
           language: !Languages 
             default:
               name: lastModifiedByType
