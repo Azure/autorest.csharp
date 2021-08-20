@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -22,6 +23,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         internal const string PropertyReferenceAttribute = "PropertyReferenceType";
         internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
+
+        private static readonly Type _locationType = typeof(Location);
+        private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
+        private static readonly Type _resourceTypeType = typeof(ResourceType);
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
@@ -33,8 +38,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType().Name == PropertyReferenceAttributeName).Count() > 0).ToList();
         }
 
-        public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties)
+        public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
         {
+            return FindSimpleReplacements(originalType, frameworkType, context);
+        }
+
+        public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        {
+            var referenceTypes = GetReferenceClassCollection();
+
             foreach (System.Type replacementType in GetReferenceClassCollection())
             {
                 // flatten properties
@@ -65,16 +77,37 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 if (PropertyMatchDetection.IsEqual(flattenedReplacementTypeProperties, typeToReplaceProperties))
                 {
-                    return GetObjectTypeProperty(originalType, typeToReplace, replacementType);
+                    SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema);
+                    return GetObjectTypeProperty(originalType, replacementType, typeToReplace.Context);
                 }
             }
+
             return null;
         }
 
-        private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, Type replacementType)
+        private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
+        {
+            //TODO for core generation this list is small enough we can simply define each of them here.
+            //eventually we might want to come up with a more robust way of doing this
+
+            bool isString = frameworkType == typeof(string);
+
+            if (originalType.Declaration.Name == "Location" && (isString || frameworkType.Name == _locationType.Name))
+                return GetObjectTypeProperty(originalType, _locationType, context);
+
+            if (originalType.Declaration.Name == "Type" && (isString || frameworkType.Name == _resourceTypeType.Name))
+                return GetObjectTypeProperty(originalType, _resourceTypeType, context);
+
+            if (originalType.Declaration.Name == "Id" && (isString || frameworkType.Name == _resourceIdentifierType.Name))
+                return GetObjectTypeProperty(originalType, _resourceIdentifierType, context);
+
+            return null;
+        }
+
+        private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, Type replacementType, BuildContext context)
         {
             return new ObjectTypeProperty(
-                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, replacementType.Name, CSharpType.FromSystemType(typeToReplace.Context, replacementType)),
+                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, CSharpType.FromSystemType(context, replacementType)),
                     originalType.Description,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -23,14 +24,28 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
+                if (model is SchemaObjectType objSchema)
+                {
+                    //skip things that had exact match replacements
+                    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                    if (SchemaMatchTracker.GetExactMatch(objSchema.ObjectSchema))
+                        continue;
+                }
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+
+                if (model is MgmtReferenceType mgmtReferenceType)
+                {
+                    var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                    if (extensions != null && extensions.MgmtReferenceType)
+                        continue;
+                }
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 

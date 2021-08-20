@@ -75,13 +75,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
+        protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
             ObjectTypeProperty propertyType = objectTypeProperty;
             var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
             if (typeToReplace != null)
             {
-                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties);
+                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties, _context);
                 if (match != null)
                 {
                     propertyType = match;
@@ -93,9 +93,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType?.IsFrameworkType == true && !inheritedType.FrameworkType.IsGenericType)
-                return inheritedType;
-
             if (inheritedType != null && inheritedType.IsFrameworkType)
                 return inheritedType;
 

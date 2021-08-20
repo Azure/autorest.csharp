@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
 
+        internal virtual Type? SerializeAs => null;
+
         private TypeDeclarationOptions BuildType()
         {
             return BuilderHelpers.CreateTypeAttributes(

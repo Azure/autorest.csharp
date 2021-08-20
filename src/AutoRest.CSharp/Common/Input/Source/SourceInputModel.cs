@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Input.Source
             if (!_nameMap.TryGetValue(name, out var type) &&
                 !_nameMap.TryGetValue(fullyQualifiedMetadataName, out type))
             {
-                type = _compilation.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                type = _compilation.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
             }
 
             return type;

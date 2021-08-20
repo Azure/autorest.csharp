@@ -8,44 +8,53 @@ require: $(this-folder)/../../../readme.md
 azure-arm: true
 arm-core: true
 input-file:
-  - $(this-folder)/referenceTypes.json
+#  - https://raw.githubusercontent.com/Azure/azure-rest-api-specs/ac3be41ee22ada179ab7b970e98f1289188b3bae/specification/common-types/resource-management/v2/types.json
+  - $(this-folder)/types.json
   - $(this-folder)/nonReferenceTypes.json
 namespace: Azure.ReferenceTypes
 
 directive:
-  - from: referenceTypes.json
-    where: $.definitions['ResourceReference']
+  - remove-model: "AzureEntityResource"
+  - remove-model: "ProxyResource"
+  - remove-model: "ResourceModelWithAllowedPropertySet"
+  - remove-model: "Identity"
+  - remove-model: "Operation"
+  - remove-model: "OperationListResult"
+  - remove-model: "OperationStatusResult"
+  - remove-model: "locationData"
+  - from: types.json
+    where: $.definitions['Resource']
     transform: >
       $["x-ms-mgmt-referenceType"] = true
-  - from: referenceTypes.json
-    where: $.definitions['TrackedResourceReference']
+  - from: types.json
+    where: $.definitions['TrackedResource']
     transform: >
       $["x-ms-mgmt-referenceType"] = true
-  - from: referenceTypes.json
+  - from: types.json
     where: $.definitions.*
     transform: >
       $["x-ms-mgmt-propertyReferenceType"] = true
-  - from: referenceTypes.json
+  - from: types.json
     where: $.definitions.*
     transform: >
-      $["x-namespace"] = "Azure.ResourceManager.Resources.Models"
-  - from: referenceTypes.json
+      $["x-namespace"] = "Azure.ResourceManager.Fake.Models"
+  - from: types.json
     where: $.definitions.*
     transform: >
       $["x-accessibility"] = "public"
-  - from: referenceTypes.json
+  - from: types.json
     where: $.definitions.*
     transform: >
       $["x-csharp-formats"] = "json"
-  - from: referenceTypes.json
+  - from: types.json
     where: $.definitions.*
     transform: >
       $["x-csharp-usage"] = "model,input,output"
-  - from: referenceTypes.json
+  - from: types.json
     where: $.definitions.*.properties[?(@.enum)]
     transform: >
-      $["x-namespace"] = "Azure.ResourceManager.Resources.Models"
-  - from: referenceTypes.json
+      $["x-namespace"] = "Azure.ResourceManager.Fake.Models"
+  - from: types.json
     where: $.definitions.*.properties[?(@.enum)]
     transform: >
       $["x-accessibility"] = "public"

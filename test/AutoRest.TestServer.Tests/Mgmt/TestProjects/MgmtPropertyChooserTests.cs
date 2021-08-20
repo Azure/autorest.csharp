@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.IsFalse(properties.Any(p => p.Name == "VirtualMachineIdentity"));
             Assert.IsFalse(properties.Any(p => p.PropertyType == typeof(VirtualMachineIdentity)));
 
-            Assert.IsTrue(properties.Any(p => p.Name == "ResourceIdentity"));
+            Assert.IsTrue(properties.Any(p => p.Name == "Identity"));
             Assert.IsTrue(properties.Any(p => p.PropertyType == typeof(ResourceIdentity)));
         }
 

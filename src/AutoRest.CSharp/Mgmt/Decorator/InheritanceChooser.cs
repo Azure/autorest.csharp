@@ -16,14 +16,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
-        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType childType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection(context))
             {
                 List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
-                    return GetCSharpType(operationGroup, childType, parentType);
+                    SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema);
+                    return GetCSharpType(operationGroup, originalType, parentType);
                 }
             }
             return null;

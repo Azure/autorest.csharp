@@ -9,17 +9,20 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtSingleton.Models
+namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition for an Azure Resource Manager tracked top level resource which has &apos;tags&apos; and a &apos;location&apos;. </summary>
-    public partial class TrackedResource : Azure.ResourceManager.Resources.Models.Resource
+    [ReferenceType]
+    public abstract partial class TrackedResource : Resource
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public TrackedResource(string location)
+        [InitializationConstructor]
+        protected TrackedResource(Location location)
         {
             if (location == null)
             {
@@ -31,12 +34,13 @@ namespace MgmtSingleton.Models
         }
 
         /// <summary> Initializes a new instance of TrackedResource. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
+        /// <param name="name"> The name of the resource. </param>
+        /// <param name="type"> The type of the resource. E.g. &quot;Microsoft.Compute/virtualMachines&quot; or &quot;Microsoft.Storage/storageAccounts&quot;. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
-        internal TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, string location) : base(id, name, type)
+        [SerializationConstructor]
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location) : base(id, name, type)
         {
             Tags = tags;
             Location = location;
@@ -45,6 +49,6 @@ namespace MgmtSingleton.Models
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> The geo-location where the resource lives. </summary>
-        public string Location { get; set; }
+        public Location Location { get; set; }
     }
 }

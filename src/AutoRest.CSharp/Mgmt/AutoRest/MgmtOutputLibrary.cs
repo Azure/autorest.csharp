@@ -198,7 +198,29 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+        public IEnumerable<TypeProvider> Models => GetModels();
+
+        private IEnumerable<TypeProvider> GetModels()
+        {
+            var models = SchemaMap.Values;
+
+            //force inheritance evaluation on resourceData
+            foreach (var resourceData in ResourceData)
+            {
+                var temp = resourceData.Inherits;
+            }
+
+            //force inheritance evaluation on models
+            foreach (var typeProvider in models)
+            {
+                if (typeProvider is ObjectType objType)
+                {
+                    var temp = objType.Inherits;
+                }
+            }
+
+            return models;
+        }
 
         public IEnumerable<TypeProvider> ReferenceTypes => SchemaMap.Values.Where(v => v is MgmtReferenceType);
 
@@ -531,7 +553,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = _nameToTypeProvider[originalName];
+            _nameToTypeProvider.TryGetValue(originalName, out TypeProvider? provider);
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
         }

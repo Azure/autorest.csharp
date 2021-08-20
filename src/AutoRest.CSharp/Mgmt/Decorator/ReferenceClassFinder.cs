@@ -8,7 +8,6 @@ using System.Reflection;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
