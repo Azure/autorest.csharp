@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Utilities
                 if (nameBuilder.Length == 0)
                 {
                     c = camelCase ? char.ToUpper(c) : char.ToLower(c);
+                    upperCase = false;
                 }
 
                 if (upperCase)

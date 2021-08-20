@@ -39,6 +39,14 @@ namespace AutoRest.CSharp.Input
             }
         }
 
+        public bool? IsLongRunningReallyLong
+        {
+            get
+            {
+                return Convert.ToBoolean(Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("x-ms-long-running-reallyLong"));
+            }
+        }
+
         public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse

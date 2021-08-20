@@ -45,9 +45,10 @@ namespace MgmtSingleton
 
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public virtual ParentResourceCreateOrUpdateOperation CreateOrUpdate(string parentName, ParentResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -59,69 +60,14 @@ namespace MgmtSingleton
             }
 
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(parentName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="parentName"> The String to use. </param>
-        /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
-        {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(parentName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <param name="parentName"> The String to use. </param>
-        /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual ParentResourceCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
-        {
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, parameters, cancellationToken);
-                return new ParentResourceCreateOrUpdateOperation(Parent, response);
+                var operation = new ParentResourceCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -132,9 +78,10 @@ namespace MgmtSingleton
 
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<ParentResourceCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<ParentResourceCreateOrUpdateOperation> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parentName == null)
             {
@@ -145,12 +92,15 @@ namespace MgmtSingleton
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new ParentResourceCreateOrUpdateOperation(Parent, response);
+                var operation = new ParentResourceCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

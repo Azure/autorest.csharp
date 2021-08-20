@@ -44,9 +44,10 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an CustomModel2. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual Response<CustomModel2> CreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
+        public virtual CustomModel2PutOperation CreateOrUpdate(string name, string foo = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -54,63 +55,14 @@ namespace ExactMatchFlattenInheritance
             }
 
             using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(name, foo, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an CustomModel2. </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<Response<CustomModel2>> CreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(name, foo, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an CustomModel2. </summary>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public virtual CustomModel2PutOperation StartCreateOrUpdate(string name, string foo = null, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Put(Id.ResourceGroupName, name, foo, cancellationToken);
-                return new CustomModel2PutOperation(Parent, response);
+                var operation = new CustomModel2PutOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -122,21 +74,25 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Create or update an CustomModel2. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public async virtual Task<CustomModel2PutOperation> StartCreateOrUpdateAsync(string name, string foo = null, CancellationToken cancellationToken = default)
+        public async virtual Task<CustomModel2PutOperation> CreateOrUpdateAsync(string name, string foo = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("CustomModel2Container.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.PutAsync(Id.ResourceGroupName, name, foo, cancellationToken).ConfigureAwait(false);
-                return new CustomModel2PutOperation(Parent, response);
+                var operation = new CustomModel2PutOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

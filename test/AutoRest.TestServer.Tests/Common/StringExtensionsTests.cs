@@ -49,10 +49,10 @@ namespace AutoRest.CSharp.Utilities
             Assert.AreEqual(expected, plural);
         }
 
-        [TestCase("CamelCase", new string[] { "Camel", "Case" })]
-        [TestCase("IPAddress", new string[] { "IP", "Address" })]
-        [TestCase("HTTPIsURL", new string[] { "HTTP", "Is", "URL" })]
-        [TestCase("GetAllByLocation", new string[] { "Get", "All", "By", "Location" })]
+        [TestCase("CamelCase", new[] { "Camel", "Case" })]
+        [TestCase("IPAddress", new[] { "IP", "Address" })]
+        [TestCase("HTTPIsURL", new[] { "HTTP", "Is", "URL" })]
+        [TestCase("GetAllByLocation", new[] { "Get", "All", "By", "Location" })]
         public void ValidateSplitByCamelCase(string camelCase, string[] expected)
         {
             var result = camelCase.SplitByCamelCase().ToArray();
@@ -61,6 +61,18 @@ namespace AutoRest.CSharp.Utilities
             {
                 Assert.AreEqual(expected[i], result[i]);
             }
+        }
+
+        [TestCase("PropertyName", false, "propertyName")]
+        [TestCase("PropertyName", true, "PropertyName")]
+        [TestCase("_propertyName", false, "propertyName")]
+        [TestCase("_propertyName", true, "PropertyName")]
+        [TestCase("_property_name", false, "propertyName")]
+        [TestCase("_property_name", true, "PropertyName")]
+        public void ValidateToCleanName(string name, bool camelCase, string expected)
+        {
+            var result = name.ToCleanName(camelCase);
+            Assert.AreEqual(expected, result);
         }
     }
 }

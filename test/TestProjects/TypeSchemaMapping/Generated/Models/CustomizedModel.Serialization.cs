@@ -21,6 +21,11 @@ namespace CustomNamespace
                 writer.WritePropertyName("ModelProperty");
                 writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
+            if (Optional.IsDefined(_field))
+            {
+                writer.WritePropertyName("PropertyToField");
+                writer.WriteStringValue(_field);
+            }
             writer.WritePropertyName("Fruit");
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek");

@@ -303,6 +303,10 @@
                     "type": "string",
                     "description": "."
                 },
+                "PropertyToField": {
+                    "type": "string",
+                    "description": "."
+                },
                 "Fruit": {
                     "type": "string",
                     "description": "Fruit",

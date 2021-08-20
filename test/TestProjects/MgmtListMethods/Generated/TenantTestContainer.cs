@@ -46,9 +46,10 @@ namespace MgmtListMethods
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<TenantTest> CreateOrUpdate(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantTestCreateOperation CreateOrUpdate(string tenantTestName, TenantTestData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -60,71 +61,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(tenantTestName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<TenantTest>> CreateOrUpdateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
-        {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
-        /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
-        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantTestCreateOperation StartCreateOrUpdate(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
-        {
-            if (tenantTestName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantTestName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Create(tenantTestName, parameters, cancellationToken);
-                return new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -136,9 +80,10 @@ namespace MgmtListMethods
         /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
         /// <param name="tenantTestName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantTestName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantTestCreateOperation> StartCreateOrUpdateAsync(string tenantTestName, TenantTestData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantTestCreateOperation> CreateOrUpdateAsync(string tenantTestName, TenantTestData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (tenantTestName == null)
             {
@@ -149,12 +94,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("TenantTestContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateAsync(tenantTestName, parameters, cancellationToken).ConfigureAwait(false);
-                return new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                var operation = new TenantTestCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(tenantTestName, parameters).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

@@ -44,9 +44,10 @@ namespace MgmtOperations
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<AvailabilitySet> CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetCreateOrUpdateOperation CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -58,71 +59,14 @@ namespace MgmtOperations
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an availability set. </summary>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
-        {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an availability set. </summary>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
-        {
-            if (availabilitySetName == null)
-            {
-                throw new ArgumentNullException(nameof(availabilitySetName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken);
-                return new AvailabilitySetCreateOrUpdateOperation(Parent, response);
+                var operation = new AvailabilitySetCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -134,9 +78,10 @@ namespace MgmtOperations
         /// <summary> Create or update an availability set. </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetCreateOrUpdateOperation> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (availabilitySetName == null)
             {
@@ -147,12 +92,15 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetCreateOrUpdateOperation(Parent, response);
+                var operation = new AvailabilitySetCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

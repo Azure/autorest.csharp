@@ -44,9 +44,10 @@ namespace MgmtParent
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public virtual DedicatedHostGroupCreateOrUpdateOperation CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
@@ -58,71 +59,14 @@ namespace MgmtParent
             }
 
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(hostGroupName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
-        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
-        {
-            if (hostGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(hostGroupName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
-        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual DedicatedHostGroupCreateOrUpdateOperation StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
-        {
-            if (hostGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(hostGroupName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken);
-                return new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -134,9 +78,10 @@ namespace MgmtParent
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<DedicatedHostGroupCreateOrUpdateOperation> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (hostGroupName == null)
             {
@@ -147,12 +92,15 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
+                var operation = new DedicatedHostGroupCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
