@@ -51,7 +51,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/default/containers";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/containers";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -320,236 +320,6 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.CreateOrUpdateImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.CreateOrUpdateImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.CreateOrUpdateImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ImmutabilityPolicy>> GetImmutabilityPolicyAsync(string ifMatch = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.GetImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.GetImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Gets the existing immutability policy along with the corresponding ETag in response headers and body. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ImmutabilityPolicy> GetImmutabilityPolicy(string ifMatch = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.GetImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.GetImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicy>> DeleteImmutabilityPolicyAsync(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.DeleteImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.DeleteImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicy> DeleteImmutabilityPolicy(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.DeleteImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.DeleteImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicy>> LockImmutabilityPolicyAsync(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.LockImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.LockImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Sets the ImmutabilityPolicy to Locked state. The only action allowed on a Locked policy is ExtendImmutabilityPolicy action. ETag in If-Match is required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicy> LockImmutabilityPolicy(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.LockImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.LockImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual async Task<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string ifMatch, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ExtendImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.ExtendImmutabilityPolicyAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a Locked policy will be this action. ETag in If-Match is required for this operation. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string ifMatch, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BlobContainer.ExtendImmutabilityPolicy");
-            scope.Start();
-            try
-            {
-                var response = _restClient.ExtendImmutabilityPolicy(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, parameters, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> The Lease Container operation establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite. </summary>
         /// <param name="parameters"> Lease Container request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -586,6 +356,13 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Gets an object representing a ImmutabilityPolicy along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="ImmutabilityPolicy" /> object. </returns>
+        public ImmutabilityPolicy GetImmutabilityPolicy()
+        {
+            return new ImmutabilityPolicy(this, Id + "/immutabilityPolicies/default");
         }
     }
 }

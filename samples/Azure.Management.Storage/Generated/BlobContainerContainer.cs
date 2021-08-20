@@ -19,7 +19,7 @@ using Azure.ResourceManager.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
+    /// <summary> A class representing collection of BlobContainer and their operations over a BlobService. </summary>
     public partial class BlobContainerContainer : ArmContainer
     {
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => StorageAccount.ResourceType;
+        protected override ResourceType ValidResourceType => BlobService.ResourceType;
 
         // Container level operations.
 
