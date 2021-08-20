@@ -16,13 +16,13 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition for an Azure Resource Manager tracked top level resource which has &apos;tags&apos; and a &apos;location&apos;. </summary>
     [ReferenceType]
-    public partial class TrackedResource : Resource
+    public abstract partial class TrackedResource : Resource
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         [InitializationConstructor]
-        public TrackedResource(Location location)
+        protected TrackedResource(Location location)
         {
             if (location == null)
             {
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [SerializationConstructor]
-        internal TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location) : base(id, name, type)
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location) : base(id, name, type)
         {
             Tags = tags;
             Location = location;
