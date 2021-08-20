@@ -83,6 +83,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ObjectTypeProperty? FindSimpleReplacements(ObjectTypeProperty originalType, BuildContext context)
         {
+            //TODO for core generation this list is small enough we can simply define each of them here.
+            //eventually we might want to come up with a more robust way of doing this
+
             if (originalType.Declaration.Name == "Location")
                 return GetObjectTypeProperty(originalType, typeof(Location), context);
 

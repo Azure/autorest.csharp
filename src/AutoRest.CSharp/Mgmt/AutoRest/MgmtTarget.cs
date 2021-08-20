@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (model is SchemaObjectType objSchema)
                 {
                     //skip things that had exact match replacements
+                    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                     if (SchemaMatchTracker.GetExactMatch(objSchema.ObjectSchema))
                         continue;
                 }

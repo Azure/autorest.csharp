@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool ShouldSkipTemp(Schema schema)
         {
+            //TODO: we need to add logic to replace SubResource with ResourceIdentifier where appropriate until then we won't remove these types
             return schema.Name.StartsWith("SubResource");
         }
 
