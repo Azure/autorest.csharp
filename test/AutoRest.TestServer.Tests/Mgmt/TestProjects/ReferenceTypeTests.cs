@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Fake.Models;
 using NUnit.Framework;
 using ReferenceTypes.Models;
 
@@ -18,15 +19,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        private const string ReferenceNamespace = "Azure.ResourceManager.Resources.Models";
+        private const string ReferenceNamespace = "Azure.ResourceManager.Fake.Models";
         private const string ProjectNamespace = "ReferenceTypes.Models";
         private IEnumerable<Type>? _referenceTypes;
         private IEnumerable<Type>? _projectTypes;
-        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(ResourceReference)).GetTypes().Where(
+        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ReferenceNamespace &&
             !t.IsEnum);
-        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(ResourceReference)).GetTypes().Where(
+        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(Resource)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ProjectNamespace &&
             !t.IsEnum);
@@ -39,14 +40,17 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             //all should have serialization
             foreach (var type in ReferenceTypes)
             {
+                if (type.IsValueType)
+                    continue;
+
                 Assert.IsNotNull(type.GetInterface("IUtf8JsonSerializable", true), $"IUtf8JsonSerializable interface was not found for {type.Name}");
                 Assert.IsNotNull(type.GetMethod($"Deserialize{type.Name}", BindingFlags.NonPublic | BindingFlags.Static), $"Deserialize{type.Name} method was not found for {type.Name}");
             }
         }
 
-        [TestCase(typeof(ResourceReference), ReferenceNamespace)]
-        [TestCase(typeof(TrackedResourceReference), ReferenceNamespace)]
-        [TestCase(typeof(SkuReference), ReferenceNamespace)]
+        [TestCase(typeof(Resource), ReferenceNamespace)]
+        [TestCase(typeof(TrackedResource), ReferenceNamespace)]
+        [TestCase(typeof(Sku), ReferenceNamespace)]
         [TestCase(typeof(SkuTier), ReferenceNamespace)]
         [TestCase(typeof(ResourceNon), ProjectNamespace)]
         public void ValidateNamespace(Type typeToTest, string expectedNamespace)
@@ -56,9 +60,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedNamespace, typeToTest.Namespace);
         }
 
-        [TestCase(typeof(ResourceReference), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(TrackedResourceReference), typeof(ReferenceTypeAttribute))]
-        [TestCase(typeof(SkuReference), typeof(PropertyReferenceTypeAttribute))]
+        [TestCase(typeof(Resource), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(Sku), typeof(PropertyReferenceTypeAttribute))]
         public void ValidateAttributes(Type referenceType, Type attributeType)
         {
             Assert.IsNotNull(referenceType.GetCustomAttribute(attributeType), $"ReferenceType attribute was not found for {referenceType.Name}");

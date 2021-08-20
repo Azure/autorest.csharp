@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
                 if (PropertyMatchDetection.IsEqual(parentProperties, properties.ToList()))
                 {
-                    originalType.ObjectSchema.SetExactMatch();
+                    SchemaMatchTracker.SetExactMatch(originalType.ObjectSchema);
                     return GetCSharpType(operationGroup, originalType, parentType);
                 }
             }

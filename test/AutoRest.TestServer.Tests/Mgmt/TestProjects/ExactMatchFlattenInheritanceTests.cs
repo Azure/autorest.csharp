@@ -22,7 +22,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(TrackedResource), typeof(AzureResourceFlattenModel3Data))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
         [TestCase(typeof(Resource), typeof(AzureResourceFlattenModel5Data))]
-        [TestCase(typeof(SubResource), typeof(AzureResourceFlattenModel6))]
         [TestCase(typeof(WritableSubResource), typeof(AzureResourceFlattenModel7))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
@@ -38,7 +37,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(AzureResourceFlattenModel3Data), new string[] { "location", "new" }, new Type[] { typeof(Location), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel4Data), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
         [TestCase(typeof(AzureResourceFlattenModel5Data), new string[] { "id", "name", "type", "foo" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
-        // [TestCase(typeof(AzureResourceFlattenModel6), new string[] {}, new Type[] {})]
         [TestCase(typeof(AzureResourceFlattenModel7), new string[] { "id", "name", "type" }, new Type[] { typeof(string), typeof(string), typeof(string) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

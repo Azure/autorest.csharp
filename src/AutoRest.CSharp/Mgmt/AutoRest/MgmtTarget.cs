@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (model is SchemaObjectType objSchema)
                 {
                     //skip things that had exact match replacements
-                    if (objSchema.ObjectSchema.GetExactMatch())
+                    if (SchemaMatchTracker.GetExactMatch(objSchema.ObjectSchema))
                         continue;
                 }
 
