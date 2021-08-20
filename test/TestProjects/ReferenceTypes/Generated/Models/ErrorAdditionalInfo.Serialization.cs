@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -23,13 +24,18 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element)
         {
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             Optional<object> info = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("info"))
@@ -43,7 +49,7 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new ErrorAdditionalInfo(type.Value, info.Value);
+            return new ErrorAdditionalInfo(type, info.Value);
         }
 
         internal partial class ErrorAdditionalInfoConverter : JsonConverter<ErrorAdditionalInfo>

@@ -131,10 +131,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 case JsonValueSerialization valueSerialization:
                     writer.UseNamespace(typeof(Utf8JsonWriterExtensions).Namespace!);
 
-                    if (valueSerialization.Type.IsFrameworkType)
+                    Type? frameworkType = valueSerialization.Type.IsFrameworkType ? valueSerialization.Type.FrameworkType : valueSerialization.Type.SerializeAs != null ? valueSerialization.Type.SerializeAs : null;
+                    if (frameworkType != null)
                     {
-                        var frameworkType = valueSerialization.Type.FrameworkType;
-
                         if (frameworkType == typeof(JsonElement))
                         {
                             writer.Line($"{name}.WriteTo({writerName});");
@@ -159,8 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid) ||
-                                 ReferenceTypes.IsMgmtReferenceType(frameworkType))
+                                 frameworkType == typeof(Guid))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -338,7 +336,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (obj.Type != null)
                 {
-                    var objectType = (ObjectType) obj.Type.Implementation;
+                    var objectType = (ObjectType)obj.Type.Implementation;
 
                     var initializers = new List<PropertyInitializer>();
                     foreach (var variable in propertyVariables)
@@ -497,13 +495,17 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
             }
+            else if (serialization.Type.SerializeAs != null)
+            {
+                DeserializeFrameworkTypeValue(writer, element, serialization.Type.SerializeAs, serialization.Format, serialization.Type);
+            }
             else
             {
                 writer.DeserializeImplementation(serialization.Type.Implementation, element);
             }
         }
 
-        private static void DeserializeFrameworkTypeValue(CodeWriter writer, CodeWriterDelegate element, Type frameworkType, SerializationFormat serializationFormat)
+        private static void DeserializeFrameworkTypeValue(CodeWriter writer, CodeWriterDelegate element, Type frameworkType, SerializationFormat serializationFormat, CSharpType? serializeFromType = null)
         {
             bool includeFormat = false;
 
@@ -517,13 +519,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"new {typeof(Uri)}({element}.GetString())");
                 return;
             }
-            else if (ReferenceTypes.IsMgmtReferenceType(frameworkType))
-            {
-                writer.Append($"({frameworkType}){element}.GetString()");
-                return;
-            }
             else
+            {
+                if (serializeFromType != null)
+                    writer.Append($"({serializeFromType})");
                 writer.Append($"{element}.");
+            }
 
             if (frameworkType == typeof(JsonElement))
                 writer.AppendRaw("Clone");
@@ -604,7 +605,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer.Append($"{implementation.Type}.Deserialize{objectType.Declaration.Name}({element})");
                         }
-                    break;
+                        break;
                     }
 
                 case EnumType clientEnum:

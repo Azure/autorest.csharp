@@ -8,6 +8,8 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -35,10 +37,10 @@ namespace Azure.ResourceManager.Fake.Models
         internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
             Optional<IDictionary<string, string>> tags = default;
-            string location = default;
-            Optional<string> id = default;
+            Location location = default;
+            Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -63,7 +65,12 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("id"))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    id = (ResourceIdentifier)property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -73,11 +80,16 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
             }
-            return new TrackedResource(id.Value, name.Value, type.Value, Optional.ToDictionary(tags), location);
+            return new TrackedResource(id, name.Value, type, Optional.ToDictionary(tags), location);
         }
     }
 }

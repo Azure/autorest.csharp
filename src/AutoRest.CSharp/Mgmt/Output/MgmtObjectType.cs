@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
+        protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
             ObjectTypeProperty propertyType = objectTypeProperty;
             var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;

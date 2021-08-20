@@ -8,7 +8,9 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -20,7 +22,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="location"> The geo-location where the resource lives. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         [InitializationConstructor]
-        public TrackedResource(string location)
+        public TrackedResource(Location location)
         {
             if (location == null)
             {
@@ -38,7 +40,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [SerializationConstructor]
-        internal TrackedResource(string id, string name, string type, IDictionary<string, string> tags, string location) : base(id, name, type)
+        internal TrackedResource(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location) : base(id, name, type)
         {
             Tags = tags;
             Location = location;
@@ -47,6 +49,6 @@ namespace Azure.ResourceManager.Fake.Models
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
         /// <summary> The geo-location where the resource lives. </summary>
-        public string Location { get; set; }
+        public Location Location { get; set; }
     }
 }

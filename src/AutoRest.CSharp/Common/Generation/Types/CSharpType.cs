@@ -62,6 +62,8 @@ namespace AutoRest.CSharp.Generation.Types
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
+        public Type? SerializeAs => _implementation?.SerializeAs;
+
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&
                _type == other._type &&

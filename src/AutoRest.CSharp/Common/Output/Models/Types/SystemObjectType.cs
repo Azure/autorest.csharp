@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
+        internal override Type? SerializeAs => ReferenceTypes.IsMgmtReferenceType(_type) ? typeof(string) : base.SerializeAs;
+
         protected override string DefaultName => GetNameWithoutGeneric(_type);
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace => _type.Namespace ?? base.DefaultNamespace;

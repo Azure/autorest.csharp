@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Fake.Models
 {
@@ -34,7 +35,7 @@ namespace Azure.ResourceManager.Fake.Models
         internal static CheckNameAvailabilityRequest DeserializeCheckNameAvailabilityRequest(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<ResourceType> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -44,11 +45,16 @@ namespace Azure.ResourceManager.Fake.Models
                 }
                 if (property.NameEquals("type"))
                 {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    type = (ResourceType)property.Value.GetString();
                     continue;
                 }
             }
-            return new CheckNameAvailabilityRequest(name.Value, type.Value);
+            return new CheckNameAvailabilityRequest(name.Value, type);
         }
 
         internal partial class CheckNameAvailabilityRequestConverter : JsonConverter<CheckNameAvailabilityRequest>
