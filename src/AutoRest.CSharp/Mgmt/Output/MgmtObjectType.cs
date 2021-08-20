@@ -95,8 +95,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             CSharpType? inheritedType = base.CreateInheritedType();
             if (inheritedType != null && inheritedType.IsFrameworkType)
             {
-                var objType = _context.Library.FindTypeByName(inheritedType.FrameworkType.Name);
-                return objType ?? inheritedType;
+                return inheritedType;
+                //var objType = _context.Library.FindTypeByName(inheritedType.FrameworkType.Name);
+                //return objType ?? inheritedType;
             }
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
