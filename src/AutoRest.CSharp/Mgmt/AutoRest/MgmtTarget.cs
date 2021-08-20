@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -33,12 +34,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+
+                if (model is MgmtReferenceType mgmtReferenceType)
+                {
+                    var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                    if (extensions != null && extensions.MgmtReferenceType)
+                        continue;
+                }
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
