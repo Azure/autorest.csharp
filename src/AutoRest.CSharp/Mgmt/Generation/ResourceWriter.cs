@@ -49,6 +49,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtConfiguration Config => _context.Configuration.MgmtConfiguration;
         private bool IsSingleton { get; }
 
+        protected override string ContextualPath => _resource.ContextualPath;
+
+        protected void BuildContextualParameterMappings()
+        {
+            // first we need to find the parameters from the given path
+            var contextualParameters = GetParametersOfContextualOperation(ContextualPath);
+            // recursive get this from its parent?????
+        }
+
+        private IEnumerable<Parameter> GetParametersOfContextualOperation(string contextualPath)
+        {
+            foreach (var method in _resource.RestClient.Methods)
+            {
+                if (method.Operation.Protocol.Http is HttpRequest request
+                    && request.Path == contextualPath)
+                {
+                    return method.Parameters;
+                }
+            }
+
+            throw new Exception($"Cannot get the contextual path '{ContextualPath}' from all the operations in operation group {_resource.OperationGroup.Key}");
+        }
+
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;

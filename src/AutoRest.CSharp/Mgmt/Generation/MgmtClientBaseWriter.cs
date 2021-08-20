@@ -41,6 +41,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// </summary>
         protected abstract string TypeNameOfThis { get; }
 
+        protected abstract string ContextualPath { get; }
+
         protected void WriteUsings(CodeWriter writer)
         {
             writer.UseNamespace(typeof(Task).Namespace!);

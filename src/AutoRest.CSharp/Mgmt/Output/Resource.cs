@@ -58,11 +58,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                 parentValue = parentOperationGroup?.Key.ToSingular(false) ?? string.Empty;
             }
 
+            ContextualPath = operationGroup.ContextualPath(context.Configuration.MgmtConfiguration);
+
             IsScopeOrExtension = isScope || isExtension;
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration) + parentValue + SuffixValue;
             _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
                 operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
         }
+
+        public string ContextualPath { get; }
 
         protected override string DefaultName { get; }
 

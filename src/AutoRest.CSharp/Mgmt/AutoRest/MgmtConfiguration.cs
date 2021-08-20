@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default,
             JsonElement? operationGroupToSingletonResource = default,
+            JsonElement? operationGroupToContextualPath = default,
             JsonElement? mergeOperations = default,
             JsonElement? armCore = default)
         {
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
             OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
             OperationGroupToSingletonResource = !IsValidJsonElement(operationGroupToSingletonResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToSingletonResource.ToString());
+            OperationGroupToContextualPath = !IsValidJsonElement(operationGroupToContextualPath) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToContextualPath.ToString());
             // TODO: A unified way to load from both readme and configuration.json
             try
             {
@@ -46,6 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
         public IReadOnlyDictionary<string, string> OperationGroupToSingletonResource { get; }
+        public IReadOnlyDictionary<string, string> OperationGroupToContextualPath { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
         public string[] OperationGroupIsTuple { get; }
         public string[] OperationGroupIsExtension { get; }
@@ -62,6 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-singleton-resource").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("operation-group-to-contextual-path").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("merge-operations").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("arm-core").GetAwaiter().GetResult());
         }
@@ -88,7 +92,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
             root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
             root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
-            root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var singletonResource);
+            root.TryGetProperty(nameof(OperationGroupToSingletonResource), out var operationGroupToSingletonResource);
+            root.TryGetProperty(nameof(OperationGroupToContextualPath), out var operationGroupToContextualPath);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
 
             var operationGroupIsTupleList = operationGroupIsTuple.ValueKind == JsonValueKind.Array
@@ -112,7 +117,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent,
-                singletonResource,
+                operationGroupToSingletonResource,
+                operationGroupToContextualPath,
                 mergeOperations,
                 isArmCore);
         }
