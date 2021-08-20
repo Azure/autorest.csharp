@@ -6,15 +6,23 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Resources.Models;
+using MgmtSingleton.Models;
 
 namespace MgmtSingleton
 {
     /// <summary> A Class representing a SubscriptionParentSingleton along with the instance operations that can be performed on it. </summary>
     public partial class SubscriptionParentSingleton : ArmResource
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly SubscriptionParentSingletonRestOperations _restClient;
         private readonly SubscriptionParentSingletonData _data;
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class for mocking. </summary>
@@ -25,20 +33,24 @@ namespace MgmtSingleton
         /// <summary> Initializes a new instance of the <see cref = "SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SubscriptionParentSingleton(ArmResource options, SubscriptionParentSingletonData resource) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        internal SubscriptionParentSingleton(ArmResource options, SubscriptionParentSingletonData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
+            Parent = options;
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
-        internal SubscriptionParentSingleton(ArmResource options) : base(options, ResourceIdentifier.RootResourceIdentifier)
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        internal SubscriptionParentSingleton(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
-
-        /// <summary> Gets the parent resource of this resource. </summary>
-        public ArmResource Parent { get; }
 
         /// <summary> Gets the resource type for the operations. </summary>
         public static readonly ResourceType ResourceType = "Microsoft.Billing/SubscriptionParentSingleton/default";
@@ -58,6 +70,250 @@ namespace MgmtSingleton
                 if (!HasData)
                     throw new InvalidOperationException("The current instance does not have data, you must call Get first.");
                 return _data;
+            }
+        }
+
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<Response<SubscriptionParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.GetDefaultAsync(cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<SubscriptionParentSingleton> Get(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            scope.Start();
+            try
+            {
+                var response = _restClient.GetDefault(cancellationToken);
+                if (response.Value == null)
+                    throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        public async virtual Task<IEnumerable<Location>> GetAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
+        {
+            return ListAvailableLocations(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Delete a SubscriptionParentSingleton. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<SubscriptionParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Delete a SubscriptionParentSingleton. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual SubscriptionParentSingletonDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Delete(cancellationToken);
+                var operation = new SubscriptionParentSingletonDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<SubscriptionParentSingleton>> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.CreateOrUpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<SubscriptionParentSingleton> CreateOrUpdate(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.CreateOrUpdate(parameters, cancellationToken);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an SubscriptionParentSingleton. </summary>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<SubscriptionParentSingleton>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Update");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.UpdateAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Update an SubscriptionParentSingleton. </summary>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<SubscriptionParentSingleton> Update(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Update");
+            scope.Start();
+            try
+            {
+                var response = _restClient.Update(parameters, cancellationToken);
+                return Response.FromValue(new SubscriptionParentSingleton(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to do POST request. </summary>
+        /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async virtual Task<SubscriptionParentSingletonPostTestOperation> PostTestAsync(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to do POST request. </summary>
+        /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual SubscriptionParentSingletonPostTestOperation PostTest(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
+            scope.Start();
+            try
+            {
+                var response = _restClient.PostTest(postParameter, cancellationToken);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
             }
         }
     }

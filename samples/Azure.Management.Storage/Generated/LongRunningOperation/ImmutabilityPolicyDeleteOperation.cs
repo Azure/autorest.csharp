@@ -10,29 +10,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Management.Storage;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-    public partial class BlobContainerDeleteImmutabilityPolicyOperation : Operation<ImmutabilityPolicy>
+    public partial class ImmutabilityPolicyDeleteOperation : Operation<ImmutabilityPolicyData>
     {
-        private readonly OperationOrResponseInternals<ImmutabilityPolicy> _operation;
+        private readonly OperationOrResponseInternals<ImmutabilityPolicyData> _operation;
 
-        /// <summary> Initializes a new instance of BlobContainerDeleteImmutabilityPolicyOperation for mocking. </summary>
-        protected BlobContainerDeleteImmutabilityPolicyOperation()
+        /// <summary> Initializes a new instance of ImmutabilityPolicyDeleteOperation for mocking. </summary>
+        protected ImmutabilityPolicyDeleteOperation()
         {
         }
 
-        internal BlobContainerDeleteImmutabilityPolicyOperation(Response<ImmutabilityPolicy> response)
+        internal ImmutabilityPolicyDeleteOperation(Response<ImmutabilityPolicyData> response)
         {
-            _operation = new OperationOrResponseInternals<ImmutabilityPolicy>(response);
+            _operation = new OperationOrResponseInternals<ImmutabilityPolicyData>(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ImmutabilityPolicy Value => _operation.Value;
+        public override ImmutabilityPolicyData Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -50,9 +51,9 @@ namespace Azure.Management.Storage.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ImmutabilityPolicy>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ImmutabilityPolicyData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ImmutabilityPolicy>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ImmutabilityPolicyData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

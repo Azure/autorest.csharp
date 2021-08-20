@@ -441,6 +441,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _childResources;
         }
 
+        internal bool IsLongRunningReallyLong(RestClientMethod clientMethod)
+        {
+            return clientMethod.Operation.IsLongRunningReallyLong ?? false;
+        }
+
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
         {
             if (_longRunningOperations != null)

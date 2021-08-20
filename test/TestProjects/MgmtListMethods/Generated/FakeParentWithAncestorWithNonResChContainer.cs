@@ -46,9 +46,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<FakeParentWithAncestorWithNonResCh> CreateOrUpdate(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeParentWithAncestorWithNonResChCreateOrUpdateOperation CreateOrUpdate(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChName == null)
             {
@@ -60,71 +61,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(fakeParentWithAncestorWithNonResChName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<FakeParentWithAncestorWithNonResCh>> CreateOrUpdateAsync(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
-        {
-            if (fakeParentWithAncestorWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(fakeParentWithAncestorWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeParentWithAncestorWithNonResChCreateOrUpdateOperation StartCreateOrUpdate(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
-        {
-            if (fakeParentWithAncestorWithNonResChName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeParentWithAncestorWithNonResChName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, fakeParentWithAncestorWithNonResChName, parameters, cancellationToken);
-                return new FakeParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
+                var operation = new FakeParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -136,9 +80,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="fakeParentWithAncestorWithNonResChName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeParentWithAncestorWithNonResChName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeParentWithAncestorWithNonResChCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeParentWithAncestorWithNonResChCreateOrUpdateOperation> CreateOrUpdateAsync(string fakeParentWithAncestorWithNonResChName, FakeParentWithAncestorWithNonResChData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (fakeParentWithAncestorWithNonResChName == null)
             {
@@ -149,12 +94,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("FakeParentWithAncestorWithNonResChContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, fakeParentWithAncestorWithNonResChName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakeParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
+                var operation = new FakeParentWithAncestorWithNonResChCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

@@ -21,11 +21,15 @@ namespace CustomNamespace
         [CodeGenMember("ModelProperty")]
         internal int? PropertyRenamedAndTypeChanged { get; set; }
 
+        [CodeGenMember("PropertyToField")]
+        private readonly string _field;
+
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
         {
             int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
+            string field = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"))
@@ -47,8 +51,13 @@ namespace CustomNamespace
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("PropertyToField"))
+                {
+                    field = property.Value.GetString();
+                    continue;
+                }
             }
-            return new CustomizedModel(propertyRenamedAndTypeChanged, fruit, daysOfWeek);
+            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek);
         }
     }
 }

@@ -19,42 +19,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
+        private CodeWriter _writer;
+        public ManagementGroupExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        {
+            _writer = writer;
+        }
+
         protected override string Description => "A class to add extension methods to ManagementGroup.";
         protected override string TypeNameOfThis => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ManagementGroups];
         protected override string ExtensionOperationVariableName => "managementGroup";
 
         protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
-        public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public override void WriteExtension()
         {
-            var @namespace = context.DefaultNamespace;
-            using (writer.Namespace(@namespace))
+            using (_writer.Namespace(Context.DefaultNamespace))
             {
-                writer.WriteXmlDocumentationSummary($"{Description}");
-                using (writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                _writer.WriteXmlDocumentationSummary($"{Description}");
+                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
                 {
-                    foreach (var resource in context.Library.ManagementGroupChildResources)
+                    foreach (var resource in Context.Library.ManagementGroupChildResources)
                     {
-                        writer.Line($"#region {resource.Type.Name}");
-                        var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                        WriteGetResourceContainerMethod(writer, resourceContainer!);
-                        writer.LineRaw("#endregion");
-                        writer.Line();
+                        _writer.Line($"#region {resource.Type.Name}");
+                        if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
+                        {
+                            WriteGetSingletonResourceMethod(_writer, resource, singletonResourceSuffix);
+                        }
+                        else
+                        {
+                            // a non-singleton resource must have a resource container
+                            WriteGetResourceContainerMethod(_writer, resource.ResourceContainer!);
+                        }
+                        _writer.LineRaw("#endregion");
+                        _writer.Line();
                     }
 
                 }
-            }
-        }
-
-        private void WriteGetResourceContainerMethod(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceContainer.Type.Name} along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter(ExtensionOperationVariableName, $"The <see cref=\"{typeof(ManagementGroup)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceContainer.Type.Name}\" /> object.");
-
-            using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Resource.Type.Name.ToPlural()}(this {typeof(ManagementGroup)} {ExtensionOperationVariableName})"))
-            {
-                writer.Line($"return new {resourceContainer.Type.Name}({ExtensionOperationVariableName});");
             }
         }
 

@@ -44,9 +44,10 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual Response CreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
+        public virtual BarCreateOperation CreateOrUpdate(string barName, BarData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -58,71 +59,14 @@ namespace MgmtLRO
             }
 
             using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(barName, body, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="barName"> The name of the fake. </param>
-        /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<Response> CreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
-        {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(barName, body, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an fake. </summary>
-        /// <param name="barName"> The name of the fake. </param>
-        /// <param name="body"> The Bar to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public virtual BarCreateOperation StartCreateOrUpdate(string barName, BarData body, CancellationToken cancellationToken = default)
-        {
-            if (barName == null)
-            {
-                throw new ArgumentNullException(nameof(barName));
-            }
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.Create(Id.ResourceGroupName, barName, body, cancellationToken);
-                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -134,9 +78,10 @@ namespace MgmtLRO
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="body"> The Bar to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<BarCreateOperation> StartCreateOrUpdateAsync(string barName, BarData body, CancellationToken cancellationToken = default)
+        public async virtual Task<BarCreateOperation> CreateOrUpdateAsync(string barName, BarData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (barName == null)
             {
@@ -147,12 +92,15 @@ namespace MgmtLRO
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BarContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("BarContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                return new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {

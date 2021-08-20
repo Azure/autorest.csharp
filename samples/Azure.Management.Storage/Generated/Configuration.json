@@ -13,6 +13,9 @@
   "OperationGroupToResourceType": {
     "Skus": "Microsoft.Storage/skus",
     "Usages": "Microsoft.Storage/locations/usages",
+    "BlobContainers": "Microsoft.Storage/storageAccounts/blobServices/containers",
+    "ImmutabilityPolicies": "Microsoft.Storage/storageAccounts/blobServices/containers/immutabilityPolicies",
+    "FileShares": "Microsoft.Storage/storageAccounts/fileServices/shares",
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources"
   },
   "OperationGroupToResource": {
@@ -20,14 +23,17 @@
   },
   "OperationGroupToParent": {
     "Skus": "subscriptions",
-    "BlobContainers": "Microsoft.Storage/storageAccounts",
+    "BlobServices": "Microsoft.Storage/storageAccounts",
+    "BlobContainers": "Microsoft.Storage/storageAccounts/blobServices",
+    "ImmutabilityPolicies": "Microsoft.Storage/storageAccounts/blobServices/containers",
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
     "StorageAccounts": "resourceGroups",
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts"
   },
-  "SingletonResource": [
-    "BlobService",
-    "FileService"
-  ]
+  "OperationGroupToSingletonResource": {
+    "BlobServices": "blobServices/default",
+    "ImmutabilityPolicies": "immutabilityPolicies/default",
+    "FileServices": "fileServices/default"
+  }
 }

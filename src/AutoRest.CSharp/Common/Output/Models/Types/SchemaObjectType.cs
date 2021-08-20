@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
         public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
-        public bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
