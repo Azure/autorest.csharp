@@ -36,7 +36,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(parentType, properties))
                 {
-                    originalType.ObjectSchema.SetExactMatch();
                     return GetCSharpType(operationGroup, originalType, parentType);
                 }
             }

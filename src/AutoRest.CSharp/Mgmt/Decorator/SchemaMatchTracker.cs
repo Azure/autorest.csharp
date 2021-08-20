@@ -18,8 +18,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _exactMatchCache.TryGetValue(schema, out bool result) && result;
         }
 
+        private static bool ShouldSkipTemp(Schema schema)
+        {
+            return schema.Name.StartsWith("SubResource");
+        }
+
         public static void SetExactMatch(this Schema schema)
         {
+            if (ShouldSkipTemp(schema))
+                return;
+
             _exactMatchCache.TryAdd(schema, true);
         }
     }
