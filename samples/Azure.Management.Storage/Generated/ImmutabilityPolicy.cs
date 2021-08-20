@@ -136,9 +136,10 @@ namespace Azure.Management.Storage
 
         /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<Response<ImmutabilityPolicyData>> DeleteAsync(string ifMatch, CancellationToken cancellationToken = default)
+        public async virtual Task<ImmutabilityPolicyDeleteOperation> DeleteAsync(string ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
@@ -146,61 +147,14 @@ namespace Azure.Management.Storage
             }
 
             using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
-            scope.Start();
-            try
-            {
-                var operation = await StartDeleteAsync(ifMatch, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual Response<ImmutabilityPolicyData> Delete(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
-            scope.Start();
-            try
-            {
-                var operation = StartDelete(ifMatch, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-        /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public async virtual Task<ImmutabilityPolicyDeleteOperation> StartDeleteAsync(string ifMatch, CancellationToken cancellationToken = default)
-        {
-            if (ifMatch == null)
-            {
-                throw new ArgumentNullException(nameof(ifMatch));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken).ConfigureAwait(false);
-                return new ImmutabilityPolicyDeleteOperation(response);
+                var operation = new ImmutabilityPolicyDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -211,21 +165,25 @@ namespace Azure.Management.Storage
 
         /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ifMatch"/> is null. </exception>
-        public virtual ImmutabilityPolicyDeleteOperation StartDelete(string ifMatch, CancellationToken cancellationToken = default)
+        public virtual ImmutabilityPolicyDeleteOperation Delete(string ifMatch, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (ifMatch == null)
             {
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("ImmutabilityPolicy.Delete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, ifMatch, cancellationToken);
-                return new ImmutabilityPolicyDeleteOperation(response);
+                var operation = new ImmutabilityPolicyDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {

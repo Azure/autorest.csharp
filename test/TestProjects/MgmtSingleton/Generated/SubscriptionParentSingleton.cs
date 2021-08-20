@@ -131,51 +131,19 @@ namespace MgmtSingleton
         }
 
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
-            scope.Start();
-            try
-            {
-                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete a SubscriptionParentSingleton. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
-            scope.Start();
-            try
-            {
-                var operation = StartDelete(cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete a SubscriptionParentSingleton. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubscriptionParentSingletonDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(cancellationToken).ConfigureAwait(false);
-                return new SubscriptionParentSingletonDeleteOperation(response);
+                var operation = new SubscriptionParentSingletonDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -185,15 +153,19 @@ namespace MgmtSingleton
         }
 
         /// <summary> Delete a SubscriptionParentSingleton. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubscriptionParentSingletonDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Delete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(cancellationToken);
-                return new SubscriptionParentSingletonDeleteOperation(response);
+                var operation = new SubscriptionParentSingletonDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -301,53 +273,19 @@ namespace MgmtSingleton
 
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> PostTestAsync(bool? postParameter = null, CancellationToken cancellationToken = default)
+        public async virtual Task<SubscriptionParentSingletonPostTestOperation> PostTestAsync(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
-            scope.Start();
-            try
-            {
-                var operation = await StartPostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> The operation to do POST request. </summary>
-        /// <param name="postParameter"> The Boolean to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PostTest(bool? postParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
-            scope.Start();
-            try
-            {
-                var operation = StartPostTest(postParameter, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> The operation to do POST request. </summary>
-        /// <param name="postParameter"> The Boolean to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<SubscriptionParentSingletonPostTestOperation> StartPostTestAsync(bool? postParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.StartPostTest");
             scope.Start();
             try
             {
                 var response = await _restClient.PostTestAsync(postParameter, cancellationToken).ConfigureAwait(false);
-                return new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -358,15 +296,19 @@ namespace MgmtSingleton
 
         /// <summary> The operation to do POST request. </summary>
         /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual SubscriptionParentSingletonPostTestOperation StartPostTest(bool? postParameter = null, CancellationToken cancellationToken = default)
+        public virtual SubscriptionParentSingletonPostTestOperation PostTest(bool? postParameter = null, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.StartPostTest");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.PostTest");
             scope.Start();
             try
             {
                 var response = _restClient.PostTest(postParameter, cancellationToken);
-                return new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                var operation = new SubscriptionParentSingletonPostTestOperation(_clientDiagnostics, Pipeline, _restClient.CreatePostTestRequest(postParameter).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
