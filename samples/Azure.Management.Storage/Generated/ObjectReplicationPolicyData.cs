@@ -15,7 +15,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the ObjectReplicationPolicy data model. </summary>
-    public partial class ObjectReplicationPolicyData : ResourceManager.Resources.Models.Resource
+    public partial class ObjectReplicationPolicyData : Resource
     {
         /// <summary> Initializes a new instance of ObjectReplicationPolicyData. </summary>
         public ObjectReplicationPolicyData()

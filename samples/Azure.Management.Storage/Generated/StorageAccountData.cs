@@ -15,7 +15,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData : ResourceManager.Resources.Models.TrackedResource
+    public partial class StorageAccountData : TrackedResource
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
         /// <param name="location"> The location. </param>
