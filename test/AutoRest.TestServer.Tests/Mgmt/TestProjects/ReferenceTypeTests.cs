@@ -43,6 +43,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 if (type.IsValueType)
                     continue;
 
+                if (type.GetCustomAttributes(typeof(ReferenceTypeAttribute), false).Any())
+                    continue;
+
                 Assert.IsNotNull(type.GetInterface("IUtf8JsonSerializable", true), $"IUtf8JsonSerializable interface was not found for {type.Name}");
                 Assert.IsNotNull(type.GetMethod($"Deserialize{type.Name}", BindingFlags.NonPublic | BindingFlags.Static), $"Deserialize{type.Name} method was not found for {type.Name}");
             }
