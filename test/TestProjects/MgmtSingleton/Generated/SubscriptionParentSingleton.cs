@@ -79,7 +79,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubscriptionParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Get");
             scope.Start();
             try
             {
@@ -98,7 +98,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionParentSingleton> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Get");
             scope.Start();
             try
             {
