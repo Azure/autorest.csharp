@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case JsonValueSerialization valueSerialization:
                     writer.UseNamespace(typeof(Utf8JsonWriterExtensions).Namespace!);
 
-                    Type? frameworkType = valueSerialization.Type.IsFrameworkType ? valueSerialization.Type.FrameworkType : valueSerialization.Type.SerializeAs != null ? valueSerialization.Type.SerializeAs : null;
+                    Type? frameworkType = valueSerialization.Type.SerializeAs != null ? valueSerialization.Type.SerializeAs : valueSerialization.Type.IsFrameworkType ? valueSerialization.Type.FrameworkType : null;
                     if (frameworkType != null)
                     {
                         if (frameworkType == typeof(JsonElement))
@@ -491,13 +491,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
 
-            if (serialization.Type.IsFrameworkType)
-            {
-                DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
-            }
-            else if (serialization.Type.SerializeAs != null)
+            if (serialization.Type.SerializeAs != null)
             {
                 DeserializeFrameworkTypeValue(writer, element, serialization.Type.SerializeAs, serialization.Format, serialization.Type);
+            }
+            else if (serialization.Type.IsFrameworkType)
+            {
+                DeserializeFrameworkTypeValue(writer, element, serialization.Type.FrameworkType, serialization.Format);
             }
             else
             {

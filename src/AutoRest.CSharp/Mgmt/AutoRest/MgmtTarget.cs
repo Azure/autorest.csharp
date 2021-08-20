@@ -25,6 +25,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
+                if (model is SchemaObjectType objSchema)
+                {
+                    //skip things that had exact match replacements
+                    if (objSchema.ObjectSchema.GetExactMatch())
+                        continue;
+                }
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 

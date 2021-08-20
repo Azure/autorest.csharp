@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
-        internal override Type? SerializeAs => ReferenceTypes.IsMgmtReferenceType(_type) ? typeof(string) : base.SerializeAs;
+        internal override Type? SerializeAs => GetSerializeAs(_type);
 
         protected override string DefaultName => GetNameWithoutGeneric(_type);
         protected override string DefaultAccessibility { get; } = "public";
@@ -53,6 +53,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new List<ParameterInfo>();
         }
+
+        private Type? GetSerializeAs(Type type) => ReferenceTypes.IsMgmtReferenceType(type) ? typeof(string) : null;
 
         internal IEnumerable<Attribute> GetCustomAttributes()
         {
@@ -128,7 +130,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     prop.Schema.Type = AllSchemaTypes.Dictionary;
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType));
+                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
         }
 

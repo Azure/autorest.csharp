@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 if (PropertyMatchDetection.IsEqual(flattenedReplacementTypeProperties, typeToReplaceProperties))
                 {
+                    typeToReplace.ObjectSchema.SetExactMatch();
                     return GetObjectTypeProperty(originalType, replacementType, typeToReplace.Context);
                 }
             }

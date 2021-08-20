@@ -21,6 +21,13 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
+        public CSharpType(Type type, Type? serializeAs) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+            SerializeAs = serializeAs;
+        }
+
         public CSharpType(Type type, params CSharpType[] arguments) : this(type, false, arguments)
         {
         }
@@ -47,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Types
             Namespace = ns;
             if (arguments != null)
                 Arguments = arguments;
-
+            SerializeAs = _implementation?.SerializeAs;
             IsPublic = implementation.Declaration.Accessibility == "public"
                 && Arguments.All(t => t.IsPublic);
         }
@@ -62,7 +69,7 @@ namespace AutoRest.CSharp.Generation.Types
         public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
-        public Type? SerializeAs => _implementation?.SerializeAs;
+        public Type? SerializeAs { get; }
 
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&

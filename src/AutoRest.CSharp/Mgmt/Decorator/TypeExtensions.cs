@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType WrapPageable(this Type type, bool isAsync)
         {
-            return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
+            return isAsync ? new CSharpType(typeof(AsyncPageable<>), new CSharpType(type)) : new CSharpType(typeof(Pageable<>), new CSharpType(type));
         }
 
         public static CSharpType WrapAsync(this CSharpType type, bool isAsync)
@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType WrapResponse(this Type type, bool isAsync)
         {
-            var response = new CSharpType(typeof(Response<>), type);
+            var response = new CSharpType(typeof(Response<>), new CSharpType(type));
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
     }
