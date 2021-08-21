@@ -76,7 +76,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {
@@ -96,7 +96,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExtended> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {

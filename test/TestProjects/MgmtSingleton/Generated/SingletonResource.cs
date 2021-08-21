@@ -80,7 +80,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonResource.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {
@@ -100,7 +100,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SingletonResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonResource.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {

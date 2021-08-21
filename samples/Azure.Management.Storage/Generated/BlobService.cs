@@ -79,7 +79,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<BlobService>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobService.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("BlobService.Get");
             scope.Start();
             try
             {
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<BlobService> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobService.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("BlobService.Get");
             scope.Start();
             try
             {
