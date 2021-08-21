@@ -77,7 +77,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else if (parentPropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}")
             {
-                // This branch implies parentPropertyType is not a class because if it is a class, IsEqual() will always be called first and if the comparison for this branch is true, in DoesPropertyExistInParent, the branch for ArePropertyTypesMatch will never be called.
+                // This condition branch implies parentPropertyType is not a class because if it is a class, IsEqual() will always be called first and if the comparison for this branch is true, in DoesPropertyExistInParent, the branch for ArePropertyTypesMatch will never be called.
+                // It can be used to match strings.
                 return true;
             }
             // Need to compare subproperties recursively when the property Types have different names but should avoid infinite loop in cases like ErrorResponse has a property of List<ErrorResponse>, so we'll check whether we've compared properties in propertiesInComparison.
