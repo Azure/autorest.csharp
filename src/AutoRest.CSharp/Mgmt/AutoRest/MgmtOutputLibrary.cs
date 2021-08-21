@@ -216,6 +216,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 if (typeProvider is ObjectType objType)
                 {
                     var temp = objType.Inherits;
+                    //force property reference type evaluation on MgmtObjectType
+                    if (typeProvider is MgmtObjectType mgmtObjectType)
+                    {
+                        var propTemp = mgmtObjectType.Properties;
+                    }
                 }
             }
 

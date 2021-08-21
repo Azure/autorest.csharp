@@ -43,45 +43,42 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return FindSimpleReplacements(originalType, frameworkType, context);
         }
 
-        public static ObjectTypeProperty? GetExactMatch(ObjectTypeProperty originalType, MgmtObjectType typeToReplace, ObjectTypeProperty[] properties, BuildContext<MgmtOutputLibrary> context)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, BuildContext<MgmtOutputLibrary> context)
         {
-            var referenceTypes = GetReferenceClassCollection();
-
+            if (SchemaMatchTracker.TryGetExactMatch(typeToReplace.ObjectSchema, out var result))
+                return result;
             foreach (System.Type replacementType in GetReferenceClassCollection())
             {
-                // flatten properties
-                List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
-                List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
-                foreach (var parentProperty in replacementTypeProperties)
-                {
-                    if (parentProperty.PropertyType.IsClass)
-                    {
-                        flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
-                    }
-                    else
-                    {
-                        flattenedReplacementTypeProperties.Add(parentProperty);
-                    }
-                }
+                var attributeObj = replacementType.GetCustomAttributes()?.Where(a => a.GetType().Name == PropertyReferenceAttributeName).First();
+                var propertiesToSkipArray = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
+                var propertiesToSkip = propertiesToSkipArray.Select(p => p.Name).ToHashSet();
+                List<PropertyInfo> replacementTypeProperties = replacementType.GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(p => !propertiesToSkip.Contains(p.PropertyType.Name)).ToList();
+                List<ObjectTypeProperty> typeToReplaceProperties = typeToReplace.MyProperties.Where(p => !propertiesToSkip.Contains(p.ValueType.Name)).ToList();
 
-                var attributeObj = replacementType.GetCustomAttributes()?.First();
-                var propertiesToSkip = attributeObj?.GetType().GetProperty("SkipTypes")?.GetValue(attributeObj) as Type[];
-                List<ObjectTypeProperty> typeToReplaceProperties = new List<ObjectTypeProperty>();
-                foreach (var property in properties)
+                if (replacementType == typeof(ResourceIdentity))
                 {
-                    if (propertiesToSkip != null && !propertiesToSkip.Any(p => p.Name == property.ValueType.Name))
+                    List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
+                    foreach (var parentProperty in replacementTypeProperties)
                     {
-                        typeToReplaceProperties.Add(property);
+                        if (parentProperty.PropertyType.IsClass)
+                        {
+                            flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
+                        }
+                        else
+                        {
+                            flattenedReplacementTypeProperties.Add(parentProperty);
+                        }
                     }
+                    replacementTypeProperties = flattenedReplacementTypeProperties;
                 }
-
-                if (PropertyMatchDetection.IsEqual(flattenedReplacementTypeProperties, typeToReplaceProperties))
+                if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType>{{replacementType, typeToReplace.Type}}))
                 {
-                    SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema);
-                    return GetObjectTypeProperty(originalType, replacementType, typeToReplace.Context);
+                    result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
+                    SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, result);
+                    return result;
                 }
             }
-
+            SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, null);
             return null;
         }
 
@@ -108,6 +105,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return new ObjectTypeProperty(
                     new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, CSharpType.FromSystemType(context, replacementType)),
+                    originalType.Description,
+                    originalType.IsReadOnly,
+                    originalType.SchemaProperty
+                    );
+        }
+
+        public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
+        {
+            return new ObjectTypeProperty(
+                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, replacementCSharpType),
                     originalType.Description,
                     originalType.IsReadOnly,
                     originalType.SchemaProperty
