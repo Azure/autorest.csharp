@@ -103,12 +103,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, Type replacementType, BuildContext context)
         {
-            return new ObjectTypeProperty(
-                    new MemberDeclarationOptions(originalType.Declaration.Accessibility, originalType.Declaration.Name, CSharpType.FromSystemType(context, replacementType)),
-                    originalType.Description,
-                    originalType.IsReadOnly,
-                    originalType.SchemaProperty
-                    );
+            var replacementCSharpType = CSharpType.FromSystemType(context, replacementType);
+            return GetObjectTypeProperty(originalType, replacementCSharpType);
         }
 
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
