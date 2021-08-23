@@ -82,7 +82,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, location, tags, foo.Value);
+            return new DedicatedHostGroupData(id, name, type, tags, location, foo.Value);
         }
     }
 }

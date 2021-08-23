@@ -26,22 +26,12 @@ namespace SupersetInheritance
 
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element)
         {
+            Optional<string> name = default;
+            Optional<string> type = default;
             Optional<string> @new = default;
             ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
-                {
-                    @new = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -52,8 +42,18 @@ namespace SupersetInheritance
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("new"))
+                {
+                    @new = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
             }
-            return new SupersetModel1Data(id, name, type, @new.Value);
+            return new SupersetModel1Data(id, name.Value, type.Value, @new.Value);
         }
     }
 }

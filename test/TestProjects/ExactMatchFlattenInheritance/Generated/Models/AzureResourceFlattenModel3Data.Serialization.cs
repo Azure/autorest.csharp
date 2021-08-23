@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -23,27 +22,36 @@ namespace ExactMatchFlattenInheritance
                 writer.WritePropertyName("foo");
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("tags");
+            writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            foreach (var item in Tags)
+            if (Optional.IsDefined(Location))
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                writer.WritePropertyName("location");
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
         internal static AzureResourceFlattenModel3Data DeserializeAzureResourceFlattenModel3Data(JsonElement element)
         {
             Optional<int> foo = default;
-            IDictionary<string, string> tags = default;
-            Location location = default;
             ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
+            Optional<string> location = default;
+            Optional<IDictionary<string, string>> tags = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -56,38 +64,55 @@ namespace ExactMatchFlattenInheritance
                     foo = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("tags"))
-                {
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
-                    }
-                    tags = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("location"))
-                {
-                    location = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("properties"))
                 {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("name"))
+                        {
+                            name = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("type"))
+                        {
+                            type = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("location"))
+                        {
+                            location = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("tags"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                            foreach (var property1 in property0.Value.EnumerateObject())
+                            {
+                                dictionary.Add(property1.Name, property1.Value.GetString());
+                            }
+                            tags = dictionary;
+                            continue;
+                        }
+                    }
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel3Data(id, name, type, location, tags, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel3Data(id, Optional.ToNullable(foo), name.Value, type.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

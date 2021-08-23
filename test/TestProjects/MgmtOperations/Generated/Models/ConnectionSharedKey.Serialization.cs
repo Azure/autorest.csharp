@@ -79,7 +79,7 @@ namespace MgmtOperations.Models
                     continue;
                 }
             }
-            return new ConnectionSharedKey(id, name, type, location, tags, value);
+            return new ConnectionSharedKey(id, name, type, tags, location, value);
         }
     }
 }

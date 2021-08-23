@@ -6,36 +6,48 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel1 data model. </summary>
-    public partial class AzureResourceFlattenModel1Data : TrackedResource
+    public partial class AzureResourceFlattenModel1Data : SubResource
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
-        /// <param name="location"> The location. </param>
-        public AzureResourceFlattenModel1Data(Location location) : base(location)
+        public AzureResourceFlattenModel1Data()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="tags"> The tags. </param>
+        /// <param name="name"> Resource name. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="fooPropertiesFoo"></param>
         /// <param name="idPropertiesId"> ID in CustomModel1. </param>
-        internal AzureResourceFlattenModel1Data(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id, name, type, location, tags)
+        internal AzureResourceFlattenModel1Data(string id, string name, string type, string location, IDictionary<string, string> tags, int? foo, string fooPropertiesFoo, string idPropertiesId) : base(id)
         {
+            Name = name;
+            Type = type;
+            Location = location;
+            Tags = tags;
             Foo = foo;
             FooPropertiesFoo = fooPropertiesFoo;
             IdPropertiesId = idPropertiesId;
         }
 
+        /// <summary> Resource name. </summary>
+        public string Name { get; }
+        /// <summary> Resource type. </summary>
+        public string Type { get; }
+        /// <summary> Resource location. </summary>
+        public string Location { get; set; }
+        /// <summary> Resource tags. </summary>
+        public IDictionary<string, string> Tags { get; }
         /// <summary> New property. </summary>
         public int? Foo { get; set; }
         public string FooPropertiesFoo { get; set; }

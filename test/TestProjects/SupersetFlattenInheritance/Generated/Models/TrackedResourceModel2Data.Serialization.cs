@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
@@ -18,6 +17,22 @@ namespace SupersetFlattenInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location");
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
@@ -28,16 +43,6 @@ namespace SupersetFlattenInheritance
                 writer.WritePropertyName("bar");
                 writer.WriteStringValue(Bar);
             }
-            writer.WritePropertyName("tags");
-            writer.WriteStartObject();
-            foreach (var item in Tags)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
-            }
-            writer.WriteEndObject();
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(FooPropertiesFoo))
@@ -51,16 +56,36 @@ namespace SupersetFlattenInheritance
 
         internal static TrackedResourceModel2Data DeserializeTrackedResourceModel2Data(JsonElement element)
         {
+            Optional<string> location = default;
+            Optional<IDictionary<string, string>> tags = default;
             Optional<string> foo = default;
             Optional<string> bar = default;
-            IDictionary<string, string> tags = default;
-            Location location = default;
             ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
             Optional<string> foo0 = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
                 if (property.NameEquals("foo"))
                 {
                     foo = property.Value.GetString();
@@ -71,34 +96,9 @@ namespace SupersetFlattenInheritance
                     bar = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("tags"))
-                {
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
-                    }
-                    tags = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("location"))
-                {
-                    location = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -110,6 +110,16 @@ namespace SupersetFlattenInheritance
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
+                        if (property0.NameEquals("name"))
+                        {
+                            name = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("type"))
+                        {
+                            type = property0.Value.GetString();
+                            continue;
+                        }
                         if (property0.NameEquals("foo"))
                         {
                             foo0 = property0.Value.GetString();
@@ -119,7 +129,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new TrackedResourceModel2Data(id, name, type, location, tags, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2Data(id, location.Value, Optional.ToDictionary(tags), foo.Value, bar.Value, name.Value, type.Value, foo0.Value);
         }
     }
 }

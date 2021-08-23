@@ -6,32 +6,41 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager;
+using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the TrackedResourceModel1 data model. </summary>
-    public partial class TrackedResourceModel1Data : TrackedResource
+    public partial class TrackedResourceModel1Data : SubResource
     {
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
-        /// <param name="location"> The location. </param>
-        public TrackedResourceModel1Data(Location location) : base(location)
+        public TrackedResourceModel1Data()
         {
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="tags"> The tags. </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <param name="location"></param>
+        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="foo"></param>
-        internal TrackedResourceModel1Data(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
+        internal TrackedResourceModel1Data(string id, string name, string type, string location, IDictionary<string, string> tags, string foo) : base(id)
         {
+            Name = name;
+            Type = type;
+            Location = location;
+            Tags = tags;
             Foo = foo;
         }
 
+        public string Name { get; }
+        public string Type { get; }
+        public string Location { get; set; }
+        /// <summary> Dictionary of &lt;string&gt;. </summary>
+        public IDictionary<string, string> Tags { get; }
         public string Foo { get; set; }
     }
 }

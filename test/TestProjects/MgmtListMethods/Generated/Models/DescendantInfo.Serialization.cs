@@ -15,16 +15,21 @@ namespace MgmtListMethods.Models
     {
         internal static DescendantInfo DeserializeDescendantInfo(JsonElement element)
         {
+            Optional<string> type = default;
+            Optional<string> name = default;
             ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
             Optional<string> displayName = default;
             Optional<DescendantParentGroupInfo> parent = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("type"))
                 {
-                    id = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        type = null;
+                        continue;
+                    }
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -32,9 +37,9 @@ namespace MgmtListMethods.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("id"))
                 {
-                    type = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -70,7 +75,7 @@ namespace MgmtListMethods.Models
                     continue;
                 }
             }
-            return new DescendantInfo(id, name, type, displayName.Value, parent.Value);
+            return new DescendantInfo(id, type.Value, name.Value, displayName.Value, parent.Value);
         }
     }
 }

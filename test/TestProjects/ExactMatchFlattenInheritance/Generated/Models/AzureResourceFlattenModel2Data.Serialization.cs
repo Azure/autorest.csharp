@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchFlattenInheritance
 {
@@ -18,34 +17,63 @@ namespace ExactMatchFlattenInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location");
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
             if (Optional.IsDefined(Foo))
             {
                 writer.WritePropertyName("foo");
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("tags");
+            writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            foreach (var item in Tags)
-            {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
-            }
             writer.WriteEndObject();
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
         internal static AzureResourceFlattenModel2Data DeserializeAzureResourceFlattenModel2Data(JsonElement element)
         {
+            Optional<string> location = default;
+            Optional<IDictionary<string, string>> tags = default;
             Optional<int> foo = default;
-            IDictionary<string, string> tags = default;
-            Location location = default;
             ResourceIdentifier id = default;
-            string name = default;
-            ResourceType type = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
                 if (property.NameEquals("foo"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -56,38 +84,35 @@ namespace ExactMatchFlattenInheritance
                     foo = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("tags"))
-                {
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
-                    }
-                    tags = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("location"))
-                {
-                    location = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("properties"))
                 {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("name"))
+                        {
+                            name = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("type"))
+                        {
+                            type = property0.Value.GetString();
+                            continue;
+                        }
+                    }
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel2Data(id, name, type, location, tags, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel2Data(id, location.Value, Optional.ToDictionary(tags), Optional.ToNullable(foo), name.Value, type.Value);
         }
     }
 }

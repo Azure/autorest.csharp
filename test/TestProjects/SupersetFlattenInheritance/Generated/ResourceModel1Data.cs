@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the ResourceModel1 data model. </summary>
-    public partial class ResourceModel1Data : Resource
+    public partial class ResourceModel1Data : SubResource
     {
         /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
         public ResourceModel1Data()
@@ -20,14 +19,18 @@ namespace SupersetFlattenInheritance
 
         /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
         /// <param name="foo"></param>
-        internal ResourceModel1Data(ResourceIdentifier id, string name, ResourceType type, string foo) : base(id, name, type)
+        internal ResourceModel1Data(string id, string name, string type, string foo) : base(id)
         {
+            Name = name;
+            Type = type;
             Foo = foo;
         }
 
+        public string Name { get; }
+        public string Type { get; }
         public string Foo { get; set; }
     }
 }
