@@ -7,13 +7,14 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
     /// <summary> A class representing the PolicyDefinition data model. </summary>
-    public partial class PolicyDefinitionData : SubResource
+    public partial class PolicyDefinitionData : Resource
     {
         /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
         public PolicyDefinitionData()
@@ -23,8 +24,8 @@ namespace MgmtExtensionResource
 
         /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> The name of the policy definition. </param>
-        /// <param name="type"> The type of the resource (Microsoft.Authorization/policyDefinitions). </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="policyType"> The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static. </param>
         /// <param name="mode"> The policy definition mode. Some examples are All, Indexed, Microsoft.KeyVault.Data. </param>
         /// <param name="displayName"> The display name of the policy definition. </param>
@@ -32,10 +33,8 @@ namespace MgmtExtensionResource
         /// <param name="policyRule"> The policy rule. </param>
         /// <param name="metadata"> The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs. </param>
         /// <param name="parameters"> The parameter definitions for parameters used in the policy rule. The keys are the parameter names. </param>
-        internal PolicyDefinitionData(string id, string name, string type, PolicyType? policyType, string mode, string displayName, string description, object policyRule, object metadata, IDictionary<string, ParameterDefinitionsValue> parameters) : base(id)
+        internal PolicyDefinitionData(ResourceIdentifier id, string name, ResourceType type, PolicyType? policyType, string mode, string displayName, string description, object policyRule, object metadata, IDictionary<string, ParameterDefinitionsValue> parameters) : base(id, name, type)
         {
-            Name = name;
-            Type = type;
             PolicyType = policyType;
             Mode = mode;
             DisplayName = displayName;
@@ -45,10 +44,6 @@ namespace MgmtExtensionResource
             Parameters = parameters;
         }
 
-        /// <summary> The name of the policy definition. </summary>
-        public string Name { get; }
-        /// <summary> The type of the resource (Microsoft.Authorization/policyDefinitions). </summary>
-        public string Type { get; }
         /// <summary> The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static. </summary>
         public PolicyType? PolicyType { get; set; }
         /// <summary> The policy definition mode. Some examples are All, Indexed, Microsoft.KeyVault.Data. </summary>

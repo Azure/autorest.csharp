@@ -29,12 +29,17 @@ namespace SupersetFlattenInheritance
 
         internal static ResourceModel2Data DeserializeResourceModel2Data(JsonElement element)
         {
-            Optional<string> name = default;
-            Optional<string> type = default;
             ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -43,11 +48,6 @@ namespace SupersetFlattenInheritance
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -68,7 +68,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new ResourceModel2Data(id, name.Value, type.Value, foo.Value);
+            return new ResourceModel2Data(id, name, type, foo.Value);
         }
     }
 }

@@ -5,12 +5,13 @@
 
 #nullable disable
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtListMethods.Models
 {
     /// <summary> The descendant. </summary>
-    public partial class DescendantInfo : SubResource
+    public partial class DescendantInfo : Resource
     {
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         internal DescendantInfo()
@@ -19,22 +20,16 @@ namespace MgmtListMethods.Models
 
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="type"> The type of the resource. For example, Microsoft.Management/managementGroups or /subscriptions. </param>
-        /// <param name="name"> The name of the descendant. For example, 00000000-0000-0000-0000-000000000000. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="displayName"> The friendly name of the management group. </param>
         /// <param name="parent"> The ID of the parent management group. </param>
-        internal DescendantInfo(string id, string type, string name, string displayName, DescendantParentGroupInfo parent) : base(id)
+        internal DescendantInfo(ResourceIdentifier id, string name, ResourceType type, string displayName, DescendantParentGroupInfo parent) : base(id, name, type)
         {
-            Type = type;
-            Name = name;
             DisplayName = displayName;
             Parent = parent;
         }
 
-        /// <summary> The type of the resource. For example, Microsoft.Management/managementGroups or /subscriptions. </summary>
-        public string Type { get; }
-        /// <summary> The name of the descendant. For example, 00000000-0000-0000-0000-000000000000. </summary>
-        public string Name { get; }
         /// <summary> The friendly name of the management group. </summary>
         public string DisplayName { get; }
         /// <summary> The ID of the parent management group. </summary>

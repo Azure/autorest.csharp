@@ -8,12 +8,13 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace OperationGroupMappings.Models
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : SubResource
+    public partial class Resource : Azure.ResourceManager.Resources.Models.Resource
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="location"> Resource location. </param>
@@ -31,22 +32,16 @@ namespace OperationGroupMappings.Models
 
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(string id, string name, string type, string location, IReadOnlyDictionary<string, string> tags) : base(id)
+        internal Resource(ResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
         {
-            Name = name;
-            Type = type;
             Location = location;
             Tags = tags;
         }
 
-        /// <summary> Resource name. </summary>
-        public string Name { get; }
-        /// <summary> Resource type. </summary>
-        public string Type { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }
         /// <summary> Resource tags. </summary>

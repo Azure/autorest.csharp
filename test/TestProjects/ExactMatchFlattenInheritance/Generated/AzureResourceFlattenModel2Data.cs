@@ -6,43 +6,33 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel2 data model. </summary>
-    public partial class AzureResourceFlattenModel2Data : SubResource
+    public partial class AzureResourceFlattenModel2Data : TrackedResource
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2Data. </summary>
-        public AzureResourceFlattenModel2Data()
+        /// <param name="location"> The location. </param>
+        public AzureResourceFlattenModel2Data(Location location) : base(location)
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="foo"> New property. </param>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        internal AzureResourceFlattenModel2Data(string id, string location, IDictionary<string, string> tags, int? foo, string name, string type) : base(id)
+        internal AzureResourceFlattenModel2Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, int? foo) : base(id, name, type, tags, location)
         {
-            Location = location;
-            Tags = tags;
             Foo = foo;
-            Name = name;
-            Type = type;
         }
 
-        /// <summary> Resource location. </summary>
-        public string Location { get; set; }
-        /// <summary> Resource tags. </summary>
-        public IDictionary<string, string> Tags { get; }
         /// <summary> New property. </summary>
         public int? Foo { get; set; }
-        public string Name { get; }
-        public string Type { get; }
     }
 }

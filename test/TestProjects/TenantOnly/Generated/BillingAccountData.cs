@@ -6,44 +6,32 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData : SubResource
+    public partial class BillingAccountData : TrackedResource
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
-        public BillingAccountData()
+        /// <param name="location"> The location. </param>
+        public BillingAccountData(Location location) : base(location)
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
         /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="bar"></param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
-        internal BillingAccountData(string id, string bar, string name, string type, string location, IDictionary<string, string> tags) : base(id)
+        internal BillingAccountData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
-            Name = name;
-            Type = type;
-            Location = location;
-            Tags = tags;
         }
 
         public string Bar { get; set; }
-        /// <summary> Resource name. </summary>
-        public string Name { get; }
-        /// <summary> Resource type. </summary>
-        public string Type { get; }
-        /// <summary> Resource location. </summary>
-        public string Location { get; set; }
-        /// <summary> Resource tags. </summary>
-        public IDictionary<string, string> Tags { get; }
     }
 }

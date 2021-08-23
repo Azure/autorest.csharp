@@ -7,13 +7,14 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the DeploymentExtended data model. </summary>
-    public partial class DeploymentExtendedData : SubResource
+    public partial class DeploymentExtendedData : Resource
     {
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
         internal DeploymentExtendedData()
@@ -23,24 +24,18 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> The name of the deployment. </param>
-        /// <param name="type"> The type of the deployment. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="location"> the location of the deployment. </param>
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        internal DeploymentExtendedData(string id, string name, string type, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id)
+        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType type, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
         {
-            Name = name;
-            Type = type;
             Location = location;
             Properties = properties;
             Tags = tags;
         }
 
-        /// <summary> The name of the deployment. </summary>
-        public string Name { get; }
-        /// <summary> The type of the deployment. </summary>
-        public string Type { get; }
         /// <summary> the location of the deployment. </summary>
         public string Location { get; }
         /// <summary> Deployment properties. </summary>

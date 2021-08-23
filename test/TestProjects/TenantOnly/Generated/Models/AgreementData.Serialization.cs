@@ -17,26 +17,16 @@ namespace TenantOnly
         internal static AgreementData DeserializeAgreementData(JsonElement element)
         {
             Optional<string> foo = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
                 {
                     foo = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -64,8 +54,18 @@ namespace TenantOnly
                     id = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new AgreementData(id, foo.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags));
+            return new AgreementData(id, name, type, foo.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

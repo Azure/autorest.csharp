@@ -7,12 +7,13 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the Agreement data model. </summary>
-    public partial class AgreementData : SubResource
+    public partial class AgreementData : Resource
     {
         /// <summary> Initializes a new instance of AgreementData. </summary>
         internal AgreementData()
@@ -22,25 +23,19 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of AgreementData. </summary>
         /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="foo"></param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal AgreementData(string id, string foo, string name, string type, string location, IReadOnlyDictionary<string, string> tags) : base(id)
+        internal AgreementData(ResourceIdentifier id, string name, ResourceType type, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
         {
             Foo = foo;
-            Name = name;
-            Type = type;
             Location = location;
             Tags = tags;
         }
 
         public string Foo { get; }
-        /// <summary> Resource name. </summary>
-        public string Name { get; }
-        /// <summary> Resource type. </summary>
-        public string Type { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }
         /// <summary> Resource tags. </summary>

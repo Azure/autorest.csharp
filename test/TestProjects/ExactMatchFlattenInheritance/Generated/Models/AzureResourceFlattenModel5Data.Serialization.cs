@@ -21,9 +21,6 @@ namespace ExactMatchFlattenInheritance
                 writer.WritePropertyName("foo");
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("properties");
-            writer.WriteStartObject();
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
@@ -31,8 +28,8 @@ namespace ExactMatchFlattenInheritance
         {
             Optional<int> foo = default;
             ResourceIdentifier id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -50,30 +47,18 @@ namespace ExactMatchFlattenInheritance
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("name"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("name"))
-                        {
-                            name = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("type"))
-                        {
-                            type = property0.Value.GetString();
-                            continue;
-                        }
-                    }
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel5Data(id, Optional.ToNullable(foo), name.Value, type.Value);
+            return new AzureResourceFlattenModel5Data(id, name, type, Optional.ToNullable(foo));
         }
     }
 }

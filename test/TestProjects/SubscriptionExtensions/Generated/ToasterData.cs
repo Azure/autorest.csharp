@@ -6,45 +6,33 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Toaster data model. </summary>
-    public partial class ToasterData : SubResource
+    public partial class ToasterData : TrackedResource
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
-        public ToasterData()
+        /// <param name="location"> The location. </param>
+        public ToasterData(Location location) : base(location)
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
-        internal ToasterData(string id, string foo, string name, string type, string location, IDictionary<string, string> tags) : base(id)
+        internal ToasterData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo) : base(id, name, type, tags, location)
         {
             Foo = foo;
-            Name = name;
-            Type = type;
-            Location = location;
-            Tags = tags;
         }
 
         /// <summary> specifies the foo. </summary>
         public string Foo { get; set; }
-        /// <summary> Resource name. </summary>
-        public string Name { get; }
-        /// <summary> Resource type. </summary>
-        public string Type { get; }
-        /// <summary> Resource location. </summary>
-        public string Location { get; set; }
-        /// <summary> Resource tags. </summary>
-        public IDictionary<string, string> Tags { get; }
     }
 }

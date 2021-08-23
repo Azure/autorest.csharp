@@ -7,13 +7,14 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Resources.Models;
 using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
     /// <summary> A class representing the PolicyAssignment data model. </summary>
-    public partial class PolicyAssignmentData : SubResource
+    public partial class PolicyAssignmentData : Resource
     {
         /// <summary> Initializes a new instance of PolicyAssignmentData. </summary>
         public PolicyAssignmentData()
@@ -25,8 +26,8 @@ namespace MgmtScopeResource
 
         /// <summary> Initializes a new instance of PolicyAssignmentData. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="type"> The type of the policy assignment. </param>
-        /// <param name="name"> The name of the policy assignment. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="location"> The location of the policy assignment. Only required when utilizing managed identity. </param>
         /// <param name="identity"> The managed identity associated with the policy assignment. </param>
         /// <param name="displayName"> The display name of the policy assignment. </param>
@@ -38,10 +39,8 @@ namespace MgmtScopeResource
         /// <param name="metadata"> The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs. </param>
         /// <param name="enforcementMode"> The policy assignment enforcement mode. Possible values are Default and DoNotEnforce. </param>
         /// <param name="nonComplianceMessages"> The messages that describe why a resource is non-compliant with the policy. </param>
-        internal PolicyAssignmentData(string id, string type, string name, string location, Identity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, object metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages) : base(id)
+        internal PolicyAssignmentData(ResourceIdentifier id, string name, ResourceType type, string location, Identity identity, string displayName, string policyDefinitionId, string scope, IList<string> notScopes, IDictionary<string, ParameterValuesValue> parameters, string description, object metadata, EnforcementMode? enforcementMode, IList<NonComplianceMessage> nonComplianceMessages) : base(id, name, type)
         {
-            Type = type;
-            Name = name;
             Location = location;
             Identity = identity;
             DisplayName = displayName;
@@ -55,10 +54,6 @@ namespace MgmtScopeResource
             NonComplianceMessages = nonComplianceMessages;
         }
 
-        /// <summary> The type of the policy assignment. </summary>
-        public string Type { get; }
-        /// <summary> The name of the policy assignment. </summary>
-        public string Name { get; }
         /// <summary> The location of the policy assignment. Only required when utilizing managed identity. </summary>
         public string Location { get; set; }
         /// <summary> The managed identity associated with the policy assignment. </summary>

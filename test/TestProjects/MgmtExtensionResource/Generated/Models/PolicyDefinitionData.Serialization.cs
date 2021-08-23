@@ -67,9 +67,9 @@ namespace MgmtExtensionResource
 
         internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element)
         {
-            Optional<string> name = default;
-            Optional<string> type = default;
             ResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<PolicyType> policyType = default;
             Optional<string> mode = default;
             Optional<string> displayName = default;
@@ -79,6 +79,11 @@ namespace MgmtExtensionResource
             Optional<IDictionary<string, ParameterDefinitionsValue>> parameters = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -87,11 +92,6 @@ namespace MgmtExtensionResource
                 if (property.NameEquals("type"))
                 {
                     type = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -167,7 +167,7 @@ namespace MgmtExtensionResource
                     continue;
                 }
             }
-            return new PolicyDefinitionData(id, name.Value, type.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
+            return new PolicyDefinitionData(id, name, type, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
         }
     }
 }
