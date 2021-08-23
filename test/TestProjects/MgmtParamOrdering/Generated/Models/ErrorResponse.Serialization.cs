@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            Optional<Azure.ResourceManager.Resources.Models.ErrorResponse> error = default;
+            Optional<ErrorDetail> error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -25,7 +25,7 @@ namespace MgmtParamOrdering.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.ErrorResponse>(property.Value.ToString());
+                    error = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
                     continue;
                 }
             }

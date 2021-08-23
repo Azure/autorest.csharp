@@ -15,8 +15,8 @@ namespace MgmtPropertyChooser.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
-            Optional<ErrorResponse> error = default;
-            Optional<ErrorResponse> anotherError = default;
+            Optional<ErrorDetail> error = default;
+            Optional<ErrorDetail> anotherError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -26,7 +26,7 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    error = JsonSerializer.Deserialize<ErrorResponse>(property.Value.ToString());
+                    error = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("anotherError"))
@@ -36,7 +36,7 @@ namespace MgmtPropertyChooser.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    anotherError = JsonSerializer.Deserialize<ErrorResponse>(property.Value.ToString());
+                    anotherError = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
                     continue;
                 }
             }

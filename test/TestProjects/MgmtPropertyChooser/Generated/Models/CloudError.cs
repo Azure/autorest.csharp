@@ -20,15 +20,15 @@ namespace MgmtPropertyChooser.Models
         /// <summary> Initializes a new instance of CloudError. </summary>
         /// <param name="error"> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </param>
         /// <param name="anotherError"> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </param>
-        internal CloudError(ErrorResponse error, ErrorResponse anotherError)
+        internal CloudError(ErrorDetail error, ErrorDetail anotherError)
         {
             Error = error;
             AnotherError = anotherError;
         }
 
         /// <summary> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </summary>
-        public ErrorResponse Error { get; }
+        public ErrorDetail Error { get; }
         /// <summary> Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.). </summary>
-        public ErrorResponse AnotherError { get; }
+        public ErrorDetail AnotherError { get; }
     }
 }

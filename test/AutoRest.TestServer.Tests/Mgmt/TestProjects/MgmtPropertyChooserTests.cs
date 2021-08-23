@@ -52,14 +52,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var errorProperty = properties[0];
             Assert.NotNull(errorProperty);
             Assert.AreEqual("Error", errorProperty.Name);
-            Assert.AreEqual(typeof(ErrorResponse), errorProperty.PropertyType);
+            Assert.AreEqual(typeof(ErrorDetail), errorProperty.PropertyType);
 
             var errorResponseWithAnotherNameModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponseWithAnotherName");
             Assert.Null(errorResponseWithAnotherNameModel);
             var anotherErrorProperty = properties[1];
             Assert.NotNull(anotherErrorProperty);
             Assert.AreEqual("AnotherError", anotherErrorProperty.Name);
-            Assert.AreEqual(typeof(ErrorResponse), anotherErrorProperty.PropertyType);
+            Assert.AreEqual(typeof(ErrorDetail), anotherErrorProperty.PropertyType);
         }
 
         [TestCase]

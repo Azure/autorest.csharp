@@ -19,12 +19,12 @@ namespace MgmtParamOrdering.Models
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> The error object. </param>
-        internal ErrorResponse(Azure.ResourceManager.Resources.Models.ErrorResponse error)
+        internal ErrorResponse(ErrorDetail error)
         {
             Error = error;
         }
 
         /// <summary> The error object. </summary>
-        public Azure.ResourceManager.Resources.Models.ErrorResponse Error { get; }
+        public ErrorDetail Error { get; }
     }
 }
