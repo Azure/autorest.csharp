@@ -119,7 +119,7 @@ namespace SupersetFlattenInheritance
                     continue;
                 }
             }
-            return new TrackedResourceModel2Data(id, name, type, location, tags, foo.Value, bar.Value, foo0.Value);
+            return new TrackedResourceModel2Data(id, name, type, tags, location, foo.Value, bar.Value, foo0.Value);
         }
     }
 }

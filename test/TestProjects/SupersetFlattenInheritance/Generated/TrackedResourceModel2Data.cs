@@ -24,12 +24,12 @@ namespace SupersetFlattenInheritance
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="foo"></param>
         /// <param name="bar"></param>
         /// <param name="fooPropertiesFoo"></param>
-        internal TrackedResourceModel2Data(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string foo, string bar, string fooPropertiesFoo) : base(id, name, type, location, tags)
+        internal TrackedResourceModel2Data(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string foo, string bar, string fooPropertiesFoo) : base(id, name, type, tags, location)
         {
             Foo = foo;
             Bar = bar;

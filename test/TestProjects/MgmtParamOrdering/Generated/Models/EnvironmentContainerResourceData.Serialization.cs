@@ -37,7 +37,7 @@ namespace MgmtParamOrdering
         internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element)
         {
             EnvironmentContainer properties = default;
-            Optional<SystemData> systemData = default;
+            Optional<Models.SystemData> systemData = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -57,7 +57,7 @@ namespace MgmtParamOrdering
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = SystemData.DeserializeSystemData(property.Value);
+                    systemData = Models.SystemData.DeserializeSystemData(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -91,7 +91,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, location, tags, properties, systemData.Value);
+            return new EnvironmentContainerResourceData(id, name, type, tags, location, properties, systemData.Value);
         }
     }
 }

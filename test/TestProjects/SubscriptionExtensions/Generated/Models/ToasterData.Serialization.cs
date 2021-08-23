@@ -82,7 +82,7 @@ namespace SubscriptionExtensions
                     continue;
                 }
             }
-            return new ToasterData(id, name, type, location, tags, foo.Value);
+            return new ToasterData(id, name, type, tags, location, foo.Value);
         }
     }
 }

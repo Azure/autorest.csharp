@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ImageData(id, name, type, location, tags, sourceVirtualMachine.Value, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(id, name, type, tags, location, sourceVirtualMachine.Value, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
         }
     }
 }
