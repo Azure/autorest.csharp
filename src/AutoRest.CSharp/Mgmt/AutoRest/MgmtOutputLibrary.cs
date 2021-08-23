@@ -246,12 +246,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public Resource GetArmResource(OperationGroup operationGroup)
         {
-            Resource? result;
-            if (!EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            if (EnsureArmResources()[ResourceType.Default].TryGetValue(operationGroup, out var result))
             {
-                result = EnsureArmResources()[ResourceType.Tuple][operationGroup];
+                return result;
             }
-            return result;
+            if (EnsureArmResources()[ResourceType.Tuple].TryGetValue(operationGroup, out result))
+            {
+                return result;
+            }
+            throw new Exception($"Cannot find ArmResource that corresponds to operation group {operationGroup.Key}");
         }
 
         public bool TryGetArmResource(OperationGroup operationGroup, [MaybeNullWhen(false)] out Resource resource)

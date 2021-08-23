@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override Type ExtensionOperationVariableType => typeof(ManagementGroup);
 
+        protected override string ContextualPath => ResourceTypeBuilder.TypeToContextualPath[ResourceTypeBuilder.ManagementGroups];
+
         public override void WriteExtension()
         {
             using (_writer.Namespace(Context.DefaultNamespace))

@@ -47,6 +47,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CSharpType TypeOfThis => _resourceContainer.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
+        protected override string ContextualPath => ""; // TODO -- placeholder
+
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;

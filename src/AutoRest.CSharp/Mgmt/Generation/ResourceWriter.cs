@@ -25,6 +25,7 @@ using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -51,26 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextualPath => _resource.ContextualPath;
 
-        protected void BuildContextualParameterMappings()
-        {
-            // first we need to find the parameters from the given path
-            var contextualParameters = GetParametersOfContextualOperation(ContextualPath);
-            // recursive get this from its parent?????
-        }
-
-        private IEnumerable<Parameter> GetParametersOfContextualOperation(string contextualPath)
-        {
-            foreach (var method in _resource.RestClient.Methods)
-            {
-                if (method.Operation.Protocol.Http is HttpRequest request
-                    && request.Path == contextualPath)
-                {
-                    return method.Parameters;
-                }
-            }
-
-            throw new Exception($"Cannot get the contextual path '{ContextualPath}' from all the operations in operation group {_resource.OperationGroup.Key}");
-        }
+        private IEnumerable<NewParameterMapping> _newParameterMappings;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
@@ -80,6 +62,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
 
             IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
+
+            _newParameterMappings = resource.BuildContextualParameterMapping(context);
         }
 
         public void WriteResource()

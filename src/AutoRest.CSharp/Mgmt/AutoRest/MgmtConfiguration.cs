@@ -77,6 +77,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
             WriteNonEmptySettings(writer, nameof(MergeOperations), MergeOperations);
             WriteNonEmptySettings(writer, nameof(OperationGroupToSingletonResource), OperationGroupToSingletonResource);
+            WriteNonEmptySettings(writer, nameof(OperationGroupToContextualPath), OperationGroupToContextualPath);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
