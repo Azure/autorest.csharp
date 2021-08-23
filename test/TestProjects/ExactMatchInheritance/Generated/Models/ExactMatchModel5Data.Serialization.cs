@@ -82,7 +82,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel5Data(id, name, type, location, tags, @new.Value);
+            return new ExactMatchModel5Data(id, name, type, tags, location, @new.Value);
         }
     }
 }

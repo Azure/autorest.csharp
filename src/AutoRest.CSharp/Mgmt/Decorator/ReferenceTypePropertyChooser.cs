@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     List<PropertyInfo> flattenedReplacementTypeProperties = new List<PropertyInfo>();
                     foreach (var parentProperty in replacementTypeProperties)
                     {
-                        if (parentProperty.PropertyType.IsClass)
+                        if (parentProperty.PropertyType.IsClass && parentProperty.PropertyType != typeof(string))
                         {
                             flattenedReplacementTypeProperties.AddRange(parentProperty.PropertyType.GetProperties());
                         }

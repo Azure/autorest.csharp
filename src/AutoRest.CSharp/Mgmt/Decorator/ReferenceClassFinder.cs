@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal static List<Type> GetOrderedList(IList<Type> referenceTypes)
         {
             var rootNodes = GetRootNodes(referenceTypes);
+            rootNodes.Sort((a, b) => a.Type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Length.CompareTo(b.Type.GetProperties(BindingFlags.Instance | BindingFlags.Public).Length) * -1);
             var output = new List<Type>();
             foreach (var root in rootNodes)
             {

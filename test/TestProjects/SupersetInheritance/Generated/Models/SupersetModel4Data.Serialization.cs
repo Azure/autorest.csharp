@@ -82,7 +82,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel4Data(id, name, type, location, tags, @new.Value);
+            return new SupersetModel4Data(id, name, type, tags, location, @new.Value);
         }
     }
 }

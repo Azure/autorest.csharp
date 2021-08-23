@@ -25,10 +25,10 @@ namespace MgmtLRO
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal BarData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, BarProperties properties) : base(id, name, type, location, tags)
+        internal BarData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, BarProperties properties) : base(id, name, type, tags, location)
         {
             Properties = properties;
         }

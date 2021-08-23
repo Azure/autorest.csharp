@@ -168,7 +168,7 @@ namespace MgmtMultipleParentResource
                     continue;
                 }
             }
-            return new AnotherParentData(id, name, type, location, tags, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+            return new AnotherParentData(id, name, type, tags, location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
         }
     }
 }

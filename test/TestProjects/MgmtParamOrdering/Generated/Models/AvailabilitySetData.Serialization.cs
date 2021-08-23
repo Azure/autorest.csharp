@@ -82,7 +82,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, location, tags, bar.Value);
+            return new AvailabilitySetData(id, name, type, tags, location, bar.Value);
         }
     }
 }
