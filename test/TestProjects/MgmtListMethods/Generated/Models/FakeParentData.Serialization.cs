@@ -82,7 +82,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new FakeParentData(id, name, type, location, tags, bar.Value);
+            return new FakeParentData(id, name, type, tags, location, bar.Value);
         }
     }
 }

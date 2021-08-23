@@ -88,7 +88,7 @@ namespace MgmtLRO
                     continue;
                 }
             }
-            return new BarData(id, name, type, location, tags, properties.Value);
+            return new BarData(id, name, type, tags, location, properties.Value);
         }
     }
 }

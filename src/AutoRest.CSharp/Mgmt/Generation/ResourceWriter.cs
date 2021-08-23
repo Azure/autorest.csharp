@@ -373,8 +373,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             using (_writer.Scope())
             {
                 _writer.WriteParameterNullChecks(nonPathParameters);
-
-                WriteDiagnosticScope(_writer, method.Diagnostics, ClientDiagnosticsField, _writer =>
+                Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
+                WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
                     response.SetActualName(response.RequestedName);

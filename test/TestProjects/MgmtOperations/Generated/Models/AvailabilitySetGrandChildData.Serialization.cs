@@ -82,7 +82,7 @@ namespace MgmtOperations
                     continue;
                 }
             }
-            return new AvailabilitySetGrandChildData(id, name, type, location, tags, bar.Value);
+            return new AvailabilitySetGrandChildData(id, name, type, tags, location, bar.Value);
         }
     }
 }

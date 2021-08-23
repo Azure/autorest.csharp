@@ -24,10 +24,10 @@ namespace MgmtListMethods
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal FakeParentWithAncestorWithNonResChWithLocData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        internal FakeParentWithAncestorWithNonResChWithLocData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

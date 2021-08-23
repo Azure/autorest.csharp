@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Azure.ResourceManager.Resources.Models
+namespace Azure.ResourceManager.Core
 {
     internal class ReferenceTypeAttribute : Attribute
     {

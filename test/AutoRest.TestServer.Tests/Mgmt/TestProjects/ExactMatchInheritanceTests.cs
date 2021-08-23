@@ -19,12 +19,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase(typeof(Resource), typeof(ExactMatchModel1Data))]
         [TestCase(typeof(TrackedResource), typeof(ExactMatchModel5Data))]
-        [TestCase(typeof(SubResource), typeof(ExactMatchModel6))]
         [TestCase(typeof(WritableSubResource), typeof(ExactMatchModel8))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]
-        [TestCase(typeof(ExactMatchModel11), typeof(ExactMatchModel10))]
         [TestCase(typeof(object), typeof(ExactMatchModel9))]
         [TestCase(typeof(object), typeof(ExactMatchModel7))]
         [TestCase(typeof(object), typeof(ExactMatchModel11))]
@@ -42,11 +40,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel3Data), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel4), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(Location) })]
-        [TestCase(typeof(ExactMatchModel6), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel7), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel8), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
-        [TestCase(typeof(ExactMatchModel10), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }

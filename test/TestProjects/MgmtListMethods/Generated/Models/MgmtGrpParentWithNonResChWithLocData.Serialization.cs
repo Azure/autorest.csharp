@@ -82,7 +82,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new MgmtGrpParentWithNonResChWithLocData(id, name, type, location, tags, bar.Value);
+            return new MgmtGrpParentWithNonResChWithLocData(id, name, type, tags, location, bar.Value);
         }
     }
 }

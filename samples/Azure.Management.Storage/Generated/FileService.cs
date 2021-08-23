@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<FileService>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileService.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileService.Get");
             scope.Start();
             try
             {
@@ -100,7 +100,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<FileService> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileService.GetServiceProperties");
+            using var scope = _clientDiagnostics.CreateScope("FileService.Get");
             scope.Start();
             try
             {
