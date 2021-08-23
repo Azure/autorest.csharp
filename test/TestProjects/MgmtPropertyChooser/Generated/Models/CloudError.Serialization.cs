@@ -9,13 +9,14 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
-namespace MgmtParamOrdering.Models
+namespace MgmtPropertyChooser.Models
 {
-    internal partial class ErrorResponse
+    internal partial class CloudError
     {
-        internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
+        internal static CloudError DeserializeCloudError(JsonElement element)
         {
             Optional<ErrorDetail> error = default;
+            Optional<ErrorDetail> anotherError = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
@@ -28,8 +29,18 @@ namespace MgmtParamOrdering.Models
                     error = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
                     continue;
                 }
+                if (property.NameEquals("anotherError"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    anotherError = JsonSerializer.Deserialize<ErrorDetail>(property.Value.ToString());
+                    continue;
+                }
             }
-            return new ErrorResponse(error);
+            return new CloudError(error, anotherError);
         }
     }
 }

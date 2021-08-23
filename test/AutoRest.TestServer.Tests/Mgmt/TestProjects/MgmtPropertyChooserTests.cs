@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Azure.ResourceManager.Resources.Models;
@@ -13,48 +14,52 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         public MgmtPropertyChooserTests() : base("MgmtPropertyChooser") { }
 
         [TestCase]
-        public void ValidateModelUsingSystemIdentities()
-        {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
-            var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            var principalIdProperty = properties[0];
-            Assert.NotNull(principalIdProperty);
-            Assert.AreEqual("PrincipalId", principalIdProperty.Name);
-            Assert.AreEqual(typeof(string), principalIdProperty.PropertyType);
-
-            var tenantIdProperty = properties[1];
-            Assert.NotNull(tenantIdProperty);
-            Assert.AreEqual("TenantId", tenantIdProperty.Name);
-            Assert.AreEqual(typeof(string), tenantIdProperty.PropertyType);
-        }
-
-        [TestCase]
         public void ValidateModelUsingUserIdentities()
         {
-            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
+            var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             var userAssignedProperty = properties[3];
             Assert.NotNull(userAssignedProperty);
             Assert.AreEqual("UserAssignedIdentities", userAssignedProperty.Name);
-            Assert.AreEqual(typeof(IDictionary<string, Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties>), userAssignedProperty.PropertyType);
+            Assert.AreEqual(typeof(IDictionary<string, UserAssignedIdentity>), userAssignedProperty.PropertyType);
 
             var keyType = userAssignedProperty.PropertyType.GetGenericArguments()[0];
             Assert.AreEqual(typeof(string), keyType);
             var valueType = userAssignedProperty.PropertyType.GetGenericArguments()[1];
-            Assert.AreEqual(typeof(Components1H8M3EpSchemasVirtualmachineidentityPropertiesUserassignedidentitiesAdditionalproperties), valueType);
+            Assert.AreEqual(typeof(UserAssignedIdentity), valueType);
 
             var valueProperties = valueType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            var principalIdProperty = valueProperties[0];
+            var principalIdProperty = valueProperties[1];
             Assert.NotNull(principalIdProperty);
             Assert.AreEqual("PrincipalId", principalIdProperty.Name);
-            Assert.AreEqual(typeof(string), principalIdProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), principalIdProperty.PropertyType);
 
-            var clientIdProperty = valueProperties[1];
+            var clientIdProperty = valueProperties[0];
             Assert.NotNull(clientIdProperty);
             Assert.AreEqual("ClientId", clientIdProperty.Name);
-            Assert.AreEqual(typeof(string), clientIdProperty.PropertyType);
+            Assert.AreEqual(typeof(Guid), clientIdProperty.PropertyType);
+        }
+
+        [TestCase]
+        public void ValidateModelUsingErrorResponse()
+        {
+            var cloudErrorModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.CloudError");
+            var properties = cloudErrorModel.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            var errorResponseModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponse");
+            Assert.Null(errorResponseModel);
+            var errorProperty = properties[0];
+            Assert.NotNull(errorProperty);
+            Assert.AreEqual("Error", errorProperty.Name);
+            Assert.AreEqual(typeof(ErrorDetail), errorProperty.PropertyType);
+
+            var errorResponseWithAnotherNameModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.ErrorResponseWithAnotherName");
+            Assert.Null(errorResponseWithAnotherNameModel);
+            var anotherErrorProperty = properties[1];
+            Assert.NotNull(anotherErrorProperty);
+            Assert.AreEqual("AnotherError", anotherErrorProperty.Name);
+            Assert.AreEqual(typeof(ErrorDetail), anotherErrorProperty.PropertyType);
         }
 
         [TestCase]
@@ -62,12 +67,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             var resourceOpreations = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.VirtualMachineData");
             var properties = resourceOpreations.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            Assert.IsFalse(properties.Any(p => p.Name == "VirtualMachineIdentity"));
-            Assert.IsFalse(properties.Any(p => p.PropertyType == typeof(VirtualMachineIdentity)));
-
+            // VirtualMachineIdentity is replaced by ResourceIdentity, property name is unchanged, still called Identity.
+            Assert.IsFalse(properties.Any(p => p.Name == "ResourceIdentity"));
             Assert.IsTrue(properties.Any(p => p.Name == "Identity"));
             Assert.IsTrue(properties.Any(p => p.PropertyType == typeof(ResourceIdentity)));
+            // VirtualMachineIdentity is not generated
+            var virtualMachineIdentityModel = Assembly.GetExecutingAssembly().GetType("MgmtPropertyChooser.Models.VirtualMachineIdentity");
+            Assert.Null(virtualMachineIdentityModel);
         }
 
         [TestCase]
@@ -89,7 +95,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var userAssignedProperty = properties[3];
             Assert.NotNull(userAssignedProperty);
             Assert.AreEqual("UserAssignedIdentities", userAssignedProperty.Name);
-            Assert.AreEqual(typeof(IDictionary<string, Components135Hp51SchemasIdentitywithrenamedpropertyPropertiesUserassignedidentitiesAdditionalproperties>), userAssignedProperty.PropertyType);
+            Assert.AreEqual(typeof(IDictionary<string, UserAssignedIdentity>), userAssignedProperty.PropertyType);
         }
 
         [TestCase]
@@ -121,7 +127,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var userAssignedProperty = properties[3];
             Assert.NotNull(userAssignedProperty);
             Assert.AreEqual("UserAssignedIdentities", userAssignedProperty.Name);
-            Assert.AreEqual(typeof(IDictionary<string, ComponentsTq4QocSchemasIdentitywithdifferentpropertytypePropertiesUserassignedidentitiesAdditionalproperties>), userAssignedProperty.PropertyType);
+            Assert.AreEqual(typeof(IDictionary<string, UserAssignedIdentity>), userAssignedProperty.PropertyType);
         }
 
         [TestCase]
@@ -175,7 +181,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var userAssignedProperty = properties[1];
             Assert.NotNull(userAssignedProperty);
             Assert.AreEqual("UserAssignedIdentities", userAssignedProperty.Name);
-            Assert.AreEqual(typeof(IDictionary<string, ComponentsX9YfnoSchemasIdentitywithnosystemidentityPropertiesUserassignedidentitiesAdditionalproperties>), userAssignedProperty.PropertyType);
+            Assert.AreEqual(typeof(IDictionary<string, UserAssignedIdentity>), userAssignedProperty.PropertyType);
         }
 
         [TestCase]

@@ -24,12 +24,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
-                if (model is SchemaObjectType objSchema)
+                if (!context.Configuration.MgmtConfiguration.IsArmCore)
                 {
-                    //skip things that had exact match replacements
-                    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                    if (SchemaMatchTracker.GetExactMatch(objSchema.ObjectSchema))
+                    // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
+                    // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                    // The includeArmCore parameter should also be removed in FindForType() then.
+                    if (context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
+                    {
                         continue;
+                    }
+                    if (model is SchemaObjectType objSchema)
+                    {
+                        //skip things that had exact match replacements
+                        //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                        if (SchemaMatchTracker.TryGetExactMatch(objSchema.ObjectSchema, out var result) && result != null)
+                            continue;
+                    }
                 }
 
                 var codeWriter = new CodeWriter();

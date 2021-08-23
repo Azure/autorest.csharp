@@ -45,13 +45,13 @@ namespace AutoRest.CSharp.Input.Source
             return new ModelTypeMapping(_modelAttribute, _schemaMemberNameAttribute, symbol);
         }
 
-        public INamedTypeSymbol? FindForType(string ns, string name)
+        public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)
         {
             var fullyQualifiedMetadataName = $"{ns}.{name}";
             if (!_nameMap.TryGetValue(name, out var type) &&
                 !_nameMap.TryGetValue(fullyQualifiedMetadataName, out type))
             {
-                type = _compilation.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                type = includeArmCore ? _compilation.GetTypeByMetadataName(fullyQualifiedMetadataName) : _compilation.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
             }
 
             return type;

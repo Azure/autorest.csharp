@@ -5,17 +5,18 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class SchemaMatchTracker
     {
-        private static readonly ConcurrentDictionary<Schema, bool> _exactMatchCache = new ConcurrentDictionary<Schema, bool>();
+        private static readonly ConcurrentDictionary<Schema, CSharpType?> _exactMatchCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
-        public static bool GetExactMatch(this Schema schema)
+        public static bool TryGetExactMatch(this Schema schema, out CSharpType? result)
         {
-            return _exactMatchCache.TryGetValue(schema, out bool result) && result;
+            return _exactMatchCache.TryGetValue(schema, out result);
         }
 
         private static bool ShouldSkipTemp(Schema schema)
@@ -24,12 +25,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return schema.Name.StartsWith("SubResource");
         }
 
-        public static void SetExactMatch(this Schema schema)
+        public static void SetExactMatch(this Schema schema, CSharpType? replacementType)
         {
             if (ShouldSkipTemp(schema))
                 return;
 
-            _exactMatchCache.TryAdd(schema, true);
+            _exactMatchCache.TryAdd(schema, replacementType);
         }
     }
 }
