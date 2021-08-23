@@ -47,6 +47,9 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         protected CSharpType TypeOfThis => _resourceContainer.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
+        protected string TestNamespace => TypeOfThis.Namespace + ".Tests";
+        protected string TypeNameOfTester => TypeOfThis.Name + "Tests";
+
         public ResourceContainerTestWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
@@ -61,16 +64,21 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         public void WriteContainerTest()
         {
             WriteUsings(_writer);
+            _writer.UseNamespace(TypeOfThis.Namespace);
+            _writer.UseNamespace("Azure.Core.TestFramework");
+            _writer.UseNamespace("Azure.ResourceManager.TestFramework");
 
-            using (_writer.Namespace(TypeOfThis.Namespace))
+            using (_writer.Namespace(TypeNameOfTester))
             {
                 _writer.WriteXmlDocumentationSummary($"Test for {_resourceContainer.ResourceName}");
-                _writer.Append($"{_resourceContainer.Declaration.Accessibility} partial class {TypeNameOfThis:D} : ");
-                _writer.Line($"{typeof(ArmContainer)}");
+                _writer.Append($"public class {TypeNameOfThis:D}Tests : ");
+                _writer.Line($"ManagementRecordedTestBase<TestEnvironment>");
                 using (_writer.Scope())
                 {
                     WriteFields(_writer, _restClient!);
-                    WriteContainerCtors(_writer, _restClient!, typeof(ArmResource), "parent");
+                    WriteContainerTesterCtors();
+
+                    WriteCreateContainerFromResourceGroup();
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
                     if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
@@ -81,6 +89,43 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                     WriteResourceOperations();
                     WriteRemainingMethods();
                     WriteBuilders();
+                }
+            }
+        }
+
+        protected void WriteContainerTesterCtors()
+        {
+            // write protected default constructor
+            _writer.Line();
+            using (_writer.Scope($"public {TypeNameOfTester}(bool isAsync): base(isAsync)"))
+            { }
+        }
+
+        protected void WriteCreateContainerFromResourceGroup()
+        {
+            // write protected default constructor
+            _writer.Line();
+            using (_writer.Scope($"private async Task<{TypeNameOfThis}> Get{TypeNameOfThis}Async()"))
+            {
+                _writer.Line($"var resourceGroup = await CreateResourceGroupAsync();");
+                _writer.Line($"return resourceGroup.Get{_resourceContainer.Resource.Type.Name.ToPlural()}();");
+            }
+        }
+
+        protected void WriteCreateResourceGroup()
+        {
+            // write protected default constructor
+            _writer.Line();
+            using (_writer.Scope($"protected async Task<ResourceGroup> CreateResourceGroupAsync()"))
+            {
+                _writer.Line($"var resourceGroupName = Recording.GenerateAssetName(\"testRG - \");");
+                _writer.Append($"return await DefaultSubscription.GetResourceGroups().CreateOrUpdateAsync(resourceGroupName");
+                using (_writer.Scope($"new ResourceGroupData(DefaultLocation)"))
+                {
+                    using (_writer.Scope($"Tags ="))
+                    {
+                        _writer.Line($"{{ \"test\", \"env\" }}");
+                    }
                 }
             }
         }

@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             else if (configuration.AzureArm)
             {
-                if (configuration.Tests is not null)
+                if (configuration.Tests?.ValueKind != JsonValueKind.Null)
                 {
                     MgmtTestTarget.Execute(project, codeModel, sourceInputModel, configuration);
                 }

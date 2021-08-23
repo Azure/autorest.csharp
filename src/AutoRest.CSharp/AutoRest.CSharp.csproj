@@ -42,6 +42,10 @@
     <None Include="readme.md" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MgmtTest\Output\" />
+  </ItemGroup>
+
   <Target Name="PreparePropsFile" BeforeTargets="GenerateNuspec;_GetPackageFiles" DependsOnTargets="GenerateSourceLinkFile" Condition="'$(TargetFrameworks)' == '' or '$(IsCrossTargetingBuild)' == 'true'" Outputs="$(_SourcePackagePropsFilePath)">
 
     <PropertyGroup>
