@@ -126,6 +126,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties, _context) : inheritedType;
         }
 
+        protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
+        {
+            return base.CreateInheritedType();
+        }
+
         private OperationGroup? GetOperationGroupFromChildren()
         {
             OperationGroup? operationGroup = null;

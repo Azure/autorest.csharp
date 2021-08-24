@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override CSharpType? CreateInheritedType()
         {
-            return ObjectSchema.Extensions?.MgmtReferenceType == true ? null : base.CreateInheritedType();
+            return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
         }
     }
 }
