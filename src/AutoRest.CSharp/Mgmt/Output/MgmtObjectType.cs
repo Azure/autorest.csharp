@@ -77,8 +77,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            if (_context.Configuration.MgmtConfiguration.IsArmCore)
-                return objectTypeProperty;
             if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
             {
                 for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
