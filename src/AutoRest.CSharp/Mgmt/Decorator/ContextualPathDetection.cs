@@ -57,6 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static string? FindContextualPath(OperationGroup operationGroup, MgmtConfiguration config)
         {
+            // TODO -- WIP
             return null;
         }
 
@@ -68,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(Resource currentResource, string currentContextualPath, BuildContext<MgmtOutputLibrary> context, Stack<NewParameterMapping> parameterMappingStack)
+        private static void BuildContextualParameterMappingHierarchy(Resource currentResource, string currentContextualPath, BuildContext<MgmtOutputLibrary> context, Stack<NewParameterMapping> parameterMappingStack, string invocationSuffix = "")
         {
             var current = currentResource.OperationGroup;
             var parentContextualPath = GetParentContextualPath(current, context);
@@ -81,7 +82,28 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // now we find the parameter that is defined in this segment, or do nothing if we find none
             var method = GetMethodOfContextualOperation(currentResource, currentContextualPath);
             // try to get the correct parameter
-            var segments = method.Request.PathSegments;
+            var segments = suffix.Split("/");
+            var parameterToFind = new Stack<Parameter>();
+            // TODO -- reverse this loop, and direct add the result to stack, instead of using a temp here
+            for (int i = 1; i < segments.Length; i += 2)
+            {
+                (var isReference, var parameterName) = IsReference(segments[i]);
+                if (isReference)
+                {
+                    var parameter = method.Parameters.First(p => p.Name == parameterName!);
+                    parameterToFind.Push(parameter);
+                }
+            }
+            // adds the result to stack
+        }
+
+        private static (bool IsReference, string? ReferenceName) IsReference(string segment)
+        {
+            if (segment.StartsWith("{") && segment.EndsWith("}"))
+            {
+                return (true, segment.Trim('{', '}'));
+            }
+            return (false, null);
         }
 
         private static string GetParentContextualPath(OperationGroup current, BuildContext<MgmtOutputLibrary> context)
