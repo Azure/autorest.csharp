@@ -82,7 +82,7 @@ namespace MgmtContextualPath.Models
                     continue;
                 }
             }
-            return new TenantParent(id, name, type, location, tags, bar.Value);
+            return new TenantParent(id, name, type, tags, location, bar.Value);
         }
     }
 }

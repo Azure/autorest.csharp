@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(Resource currentResource, string currentContextualPath, BuildContext<MgmtOutputLibrary> context, Stack<NewParameterMapping> parameterMappingStack, string invocationSuffix = "")
+        private static void BuildContextualParameterMappingHierarchy(Resource currentResource, string currentContextualPath, BuildContext<MgmtOutputLibrary> context, Stack<NewParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
             var current = currentResource.OperationGroup;
             var parentContextualPath = GetParentContextualPath(current, context);
@@ -79,22 +79,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 throw new Exception($"The contextual path of the parent is not a prefix of current operation group {current.Key}");
             }
             var suffix = currentContextualPath.Substring(parentContextualPath.Length).TrimStart('/'); // we get the difference between current and its parent
-            // now we find the parameter that is defined in this segment, or do nothing if we find none
-            var method = GetMethodOfContextualOperation(currentResource, currentContextualPath);
+            // considering some rare conditions, we do not require we have to have a method that corresponds to the contextual path, the path can be virtual to ensure we get correct parameter invocation around the Id
             // try to get the correct parameter
             var segments = suffix.Split("/");
-            var parameterToFind = new Stack<Parameter>();
-            // TODO -- reverse this loop, and direct add the result to stack, instead of using a temp here
-            for (int i = 1; i < segments.Length; i += 2)
+            // we get the last odd index
+            var lastOddIndex = segments.Length % 2 == 1 ? segments.Length - 1 : segments.Length - 2;
+            for (int i = lastOddIndex; i >= 0; i -= 2)
             {
                 (var isReference, var parameterName) = IsReference(segments[i]);
                 if (isReference)
                 {
-                    var parameter = method.Parameters.First(p => p.Name == parameterName!);
-                    parameterToFind.Push(parameter);
+                    parameterMappingStack.Push(new NewParameterMapping(parameterName!, false, $"{idVariableName}{invocationSuffix}.Name"));
                 }
+                invocationSuffix += ".Parent";
             }
-            // adds the result to stack
         }
 
         private static (bool IsReference, string? ReferenceName) IsReference(string segment)
@@ -137,12 +135,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
         /// </summary>
-        public class NewParameterMapping
+        public record NewParameterMapping
         {
             /// <summary>
-            /// The parameter object in <see cref="RestClientMethod"/>.
+            /// The parameter name.
             /// </summary>
-            public Parameter Parameter;
+            public string ParameterName;
             /// <summary>
             /// Should the parameter be passed through from the method in container class?
             /// </summary>
@@ -152,12 +150,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             /// </summary>
             public string ValueExpression;
 
-            public NewParameterMapping(Parameter parameter, bool isPassThru) : this(parameter, isPassThru, string.Empty)
+            public NewParameterMapping(string parameterName, bool isPassThru) : this(parameterName, isPassThru, string.Empty)
             { }
 
-            public NewParameterMapping(Parameter parameter, bool isPassThru, string valueExpression)
+            public NewParameterMapping(string parameterName, bool isPassThru, string valueExpression)
             {
-                Parameter = parameter;
+                ParameterName = parameterName;
                 IsPassThru = isPassThru;
                 ValueExpression = valueExpression;
             }

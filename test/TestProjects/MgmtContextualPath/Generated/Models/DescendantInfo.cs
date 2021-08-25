@@ -10,7 +10,7 @@ using Azure.ResourceManager.Resources.Models;
 namespace MgmtContextualPath.Models
 {
     /// <summary> The descendant. </summary>
-    internal partial class DescendantInfo : Azure.ResourceManager.Resources.Models.Resource
+    internal partial class DescendantInfo : Resource
     {
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         internal DescendantInfo()

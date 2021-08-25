@@ -82,7 +82,7 @@ namespace MgmtContextualPath.Models
                     continue;
                 }
             }
-            return new ResGrpParentWithNonResCh(id, name, type, location, tags, bar.Value);
+            return new ResGrpParentWithNonResCh(id, name, type, tags, location, bar.Value);
         }
     }
 }

@@ -82,7 +82,7 @@ namespace MgmtContextualPath.Models
                     continue;
                 }
             }
-            return new SubParentWithLoc(id, name, type, location, tags, bar.Value);
+            return new SubParentWithLoc(id, name, type, tags, location, bar.Value);
         }
     }
 }

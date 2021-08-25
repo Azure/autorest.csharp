@@ -82,7 +82,7 @@ namespace MgmtContextualPath.Models
                     continue;
                 }
             }
-            return new FakeParentWithAncestor(id, name, type, location, tags, bar.Value);
+            return new FakeParentWithAncestor(id, name, type, tags, location, bar.Value);
         }
     }
 }

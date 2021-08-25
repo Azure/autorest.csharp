@@ -82,7 +82,7 @@ namespace MgmtContextualPath
                     continue;
                 }
             }
-            return new FakeData(id, name, type, location, tags, bar.Value);
+            return new FakeData(id, name, type, tags, location, bar.Value);
         }
     }
 }
