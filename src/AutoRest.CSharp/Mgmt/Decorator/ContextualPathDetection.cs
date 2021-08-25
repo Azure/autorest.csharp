@@ -10,15 +10,15 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ContextualPathDetection
     {
+        private const string ProviderSegment = "providers";
+
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         public static string ContextualPath(this OperationGroup operationGroup, MgmtConfiguration config)
@@ -61,38 +61,73 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static IEnumerable<NewParameterMapping> BuildContextualParameterMapping(this Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameterMapping(this Resource resource, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
         {
-            // TODO -- add implementation
-            var stack = new Stack<NewParameterMapping>();
-            BuildContextualParameterMappingHierarchy(resource, resource.ContextualPath, context, stack);
+            var stack = new Stack<ContextualParameterMapping>();
+            BuildContextualParameterMappingHierarchy(resource.OperationGroup, resource.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration),
+                resource.ContextualPath, context, stack, idVariableName);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(Resource currentResource, string currentContextualPath, BuildContext<MgmtOutputLibrary> context, Stack<NewParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
+        private static void BuildContextualParameterMappingHierarchy(OperationGroup? current, string currentResourceType, string currentContextualPath,
+            BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
-            var current = currentResource.OperationGroup;
-            var parentContextualPath = GetParentContextualPath(current, context);
+            if (current == null)
+            {
+                switch (currentResourceType)
+                {
+                    case ResourceTypeBuilder.Subscriptions:
+                    case ResourceTypeBuilder.Tenant:
+                        return;
+                    case ResourceTypeBuilder.ResourceGroups:
+                        parameterMappingStack.Push(new ContextualParameterMapping("resourceGroupName", $"{idVariableName}.ResourceGroupName"));
+                        return;
+                    case ResourceTypeBuilder.ManagementGroups:
+                        parameterMappingStack.Push(new ContextualParameterMapping("managementGroupId", $"{idVariableName}{invocationSuffix}.Parent.Name"));
+                        return;
+                    default:
+                        throw new Exception($"Unhandled case of terminal resource type {currentResourceType}");
+                }
+            }
+            var parent = current.ParentOperationGroup(context);
+            var parentType = current.ParentResourceType(context.Configuration.MgmtConfiguration);
+            var parentContextualPath = GetParentContextualPath(parent, parentType, context);
+            var suffixSegments = GetPathSuffixSegments(currentContextualPath, parentContextualPath);
             // the contextual path of the parent should be a prefix of the current
-            if (!currentContextualPath.StartsWith(parentContextualPath))
+            if (suffixSegments == null)
             {
                 throw new Exception($"The contextual path of the parent is not a prefix of current operation group {current.Key}");
             }
-            var suffix = currentContextualPath.Substring(parentContextualPath.Length).TrimStart('/'); // we get the difference between current and its parent
             // considering some rare conditions, we do not require we have to have a method that corresponds to the contextual path, the path can be virtual to ensure we get correct parameter invocation around the Id
-            // try to get the correct parameter
-            var segments = suffix.Split("/");
-            // we get the last odd index
-            var lastOddIndex = segments.Length % 2 == 1 ? segments.Length - 1 : segments.Length - 2;
+            // we always need to get the "value" of the key value pair in the path
+            var lastOddIndex = suffixSegments.Length % 2 == 0 ? suffixSegments.Length - 1 : suffixSegments.Length - 2;
             for (int i = lastOddIndex; i >= 0; i -= 2)
             {
-                (var isReference, var parameterName) = IsReference(segments[i]);
+                (var isReference, var parameterName) = IsReference(suffixSegments[i]);
                 if (isReference)
                 {
-                    parameterMappingStack.Push(new NewParameterMapping(parameterName!, false, $"{idVariableName}{invocationSuffix}.Name"));
+                    parameterMappingStack.Push(new ContextualParameterMapping(parameterName!, $"{idVariableName}{invocationSuffix}.Name"));
                 }
                 invocationSuffix += ".Parent";
             }
+            // recursively get the parameters of its parent
+            BuildContextualParameterMappingHierarchy(parent, parentType, parentContextualPath, context, parameterMappingStack, idVariableName, invocationSuffix);
+        }
+
+        private static string[]? GetPathSuffixSegments(string currentPath, string parentPath)
+        {
+            if (!currentPath.StartsWith(parentPath))
+                return null;
+            // we get the difference between currentPath and parentPath and remove leading slashes
+            var suffixSegments = currentPath.Substring(parentPath.Length).TrimStart('/').Split("/");
+            // we should not have 0 segments here
+            if (suffixSegments.Length == 0)
+                return null;
+            // remove the leading providers, the providers will be ignored by the ResourceIdentifier's parenting hierarchy
+            if (suffixSegments[0].Equals(ProviderSegment, StringComparison.InvariantCultureIgnoreCase))
+                return suffixSegments.Skip(2).ToArray();
+            // this suffix does not start with providers, directly return the segments
+            return suffixSegments;
         }
 
         private static (bool IsReference, string? ReferenceName) IsReference(string segment)
@@ -104,16 +139,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return (false, null);
         }
 
-        private static string GetParentContextualPath(OperationGroup current, BuildContext<MgmtOutputLibrary> context)
+        private static string GetParentContextualPath(OperationGroup? parent, string parentType, BuildContext<MgmtOutputLibrary> context)
         {
-            var parent = current.ParentOperationGroup(context);
-            if (parent == null)
-            {
-                var parentType = current.ParentResourceType(context.Configuration.MgmtConfiguration);
-                // The parentType here is guaranteed to be one of the Extensions
-                return ResourceTypeBuilder.TypeToContextualPath[parentType];
-            }
-            return parent.ContextualPath(context.Configuration.MgmtConfiguration);
+            return parent?.ContextualPath(context.Configuration.MgmtConfiguration) ?? ResourceTypeBuilder.TypeToContextualPath[parentType];
         }
 
         private static RestClientMethod GetMethodOfContextualOperation(Resource resource, string contextualPath)
@@ -135,28 +163,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
         /// </summary>
-        public record NewParameterMapping
+        public record ContextualParameterMapping
         {
             /// <summary>
             /// The parameter name.
             /// </summary>
             public string ParameterName;
             /// <summary>
-            /// Should the parameter be passed through from the method in container class?
-            /// </summary>
-            public bool IsPassThru;
-            /// <summary>
             /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
             /// </summary>
             public string ValueExpression;
 
-            public NewParameterMapping(string parameterName, bool isPassThru) : this(parameterName, isPassThru, string.Empty)
-            { }
-
-            public NewParameterMapping(string parameterName, bool isPassThru, string valueExpression)
+            public ContextualParameterMapping(string parameterName, string valueExpression)
             {
                 ParameterName = parameterName;
-                IsPassThru = isPassThru;
                 ValueExpression = valueExpression;
             }
         }

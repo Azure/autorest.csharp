@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextualPath => _resource.ContextualPath;
 
-        private IEnumerable<NewParameterMapping> _newParameterMappings;
+        private IEnumerable<ContextualParameterMapping> _newParameterMappings;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
