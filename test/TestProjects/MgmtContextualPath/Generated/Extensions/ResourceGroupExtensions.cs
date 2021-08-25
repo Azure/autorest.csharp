@@ -5,10 +5,21 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Resources;
+
 namespace MgmtContextualPath
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
+        #region RGFake
+        /// <summary> Gets an object representing a RGFakeContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="RGFakeContainer" /> object. </returns>
+        public static RGFakeContainer GetRGFakes(this ResourceGroup resourceGroup)
+        {
+            return new RGFakeContainer(resourceGroup);
+        }
+        #endregion
     }
 }
