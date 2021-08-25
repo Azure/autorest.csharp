@@ -174,28 +174,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (parentPropertyType.Name != childPropertyType.Declaration.Name)
                 return false;
             var parentProperties = parentPropertyType.GetProperties().ToList();
-            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
-            foreach (var parentProperty in parentProperties)
-            {
-                parentDict.Add(parentProperty.Name, parentProperty);
-            }
-
+            if (parentProperties.Count != childPropertyType.Values.Count)
+                return false;
+            Dictionary<string, PropertyInfo> parentDict = parentProperties.ToDictionary(p => p.Name, p => p);
             foreach (var enumValue in childPropertyType.Values)
             {
-                PropertyInfo? parentProperty;
-
-                if (!parentDict.TryGetValue(enumValue.Declaration.Name, out parentProperty))
+                if (!parentDict.TryGetValue(enumValue.Declaration.Name, out var parentProperty))
                     return false;
-                else
-                    parentDict.Remove(enumValue.Declaration.Name);
-
                 if (parentProperty.Name != enumValue.Declaration.Name)
-                {
                     return false;
-                }
             }
-            if (parentDict.Count > 0)
-                return false;
 
             return true;
         }
