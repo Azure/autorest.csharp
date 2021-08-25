@@ -151,7 +151,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     return true;
                 }
                 // Example - "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children"
-                var fullPath = httpRequest.Path;
+                var fullPath = httpRequest.Path.ToLower();
+                parentResourceType = parentResourceType.ToLower();
 
                 // This will replace -
                 // "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/parents/{parentName}/subParents/{instanceId}/children" with
@@ -170,7 +171,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         {
                             char[] charsToTrim = { '{', '}' };
                             var parentParamName = fullPathArr[index + 1].Trim(charsToTrim);
-                            isParentExistsInPathParams = clientMethod.Request.PathParameterSegments.Any(p => p.Value.Reference.Name == parentParamName);
+                            isParentExistsInPathParams = clientMethod.Request.PathParameterSegments.Any(p => p.Value.Reference.Name.Equals(parentParamName, StringComparison.InvariantCultureIgnoreCase));
                             if (isParentExistsInPathParams)
                             {
                                 break;

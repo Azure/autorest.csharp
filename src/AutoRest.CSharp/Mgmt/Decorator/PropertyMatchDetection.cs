@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
             // Need to compare subproperties recursively when the property Types have different names but should avoid infinite loop in cases like ErrorResponse has a property of List<ErrorResponse>, so we'll check whether we've compared properties in propertiesInComparison.
-            else if (parentPropertyType.IsClass && matchProperty(parentPropertyType, childPropertyType, propertiesInComparison, fromArePropertyTypesMatch: true))
+            else if (parentPropertyType.IsClass && MatchProperty(parentPropertyType, childPropertyType, propertiesInComparison, fromArePropertyTypesMatch: true))
             {
                 return true;
             }
@@ -123,20 +123,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool IsMatchingGenericType(System.Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null)
         {
             var parentGenericTypeDef = parentPropertyType.GetGenericTypeDefinition();
-            if (!(childPropertyType.IsFrameworkType && childPropertyType.FrameworkType.IsGenericType && childPropertyType.FrameworkType.GetGenericTypeDefinition() == parentGenericTypeDef))
+            if (parentGenericTypeDef == typeof(Nullable<>))
+            {
+                if (!childPropertyType.IsNullable)
+                    return false;
+                else
+                {
+                    Type parentArgType = parentPropertyType.GetGenericArguments()[0];
+                    var isArgMatches = MatchProperty(parentArgType, childPropertyType, propertiesInComparison);
+                    return isArgMatches;
+                }
+            }
+            else if (!(childPropertyType.IsFrameworkType && childPropertyType.FrameworkType.IsGenericType && childPropertyType.FrameworkType.GetGenericTypeDefinition() == parentGenericTypeDef))
                 return false;
             for (int i = 0; i < parentPropertyType.GetGenericArguments().Length; i++)
             {
                 Type parentArgType = parentPropertyType.GetGenericArguments()[i];
                 CSharpType childArgType = childPropertyType.Arguments[i];
-                var isArgMatches = matchProperty(parentArgType, childArgType, propertiesInComparison);
+                var isArgMatches = MatchProperty(parentArgType, childArgType, propertiesInComparison);
                 if (!isArgMatches)
                     return false;
             }
             return true;
         }
 
-        private static bool matchProperty(Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null, bool fromArePropertyTypesMatch = false)
+        private static bool MatchProperty(Type parentPropertyType, CSharpType childPropertyType, Dictionary<Type, CSharpType>? propertiesInComparison = null, bool fromArePropertyTypesMatch = false)
         {
             if (propertiesInComparison != null && propertiesInComparison.TryGetValue(parentPropertyType, out var val) && val == childPropertyType)
                 return true;
@@ -145,16 +156,36 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 var mgmtObjectType = childPropertyType.Implementation as MgmtObjectType;
                 if (mgmtObjectType != null)
-                {
                     isArgMatches = IsEqual(parentPropertyType.GetProperties().ToList(), mgmtObjectType.MyProperties.ToList(), new Dictionary<Type, CSharpType>{{parentPropertyType, childPropertyType}});
-                }
             }
-            else
+            else if (!childPropertyType.IsFrameworkType && childPropertyType.Implementation as EnumType != null)
             {
-                if (!fromArePropertyTypesMatch)
-                    isArgMatches = ArePropertyTypesMatch(parentPropertyType, childPropertyType);
+                var childEnumType = childPropertyType.Implementation as EnumType;
+                if (childEnumType != null)
+                    isArgMatches = MatchEnum(parentPropertyType, childEnumType);
             }
+            else if (!fromArePropertyTypesMatch)
+                isArgMatches = ArePropertyTypesMatch(parentPropertyType, childPropertyType);
             return isArgMatches;
+        }
+
+        private static bool MatchEnum(Type parentPropertyType, EnumType childPropertyType)
+        {
+            if (parentPropertyType.Name != childPropertyType.Declaration.Name)
+                return false;
+            var parentProperties = parentPropertyType.GetProperties().ToList();
+            if (parentProperties.Count != childPropertyType.Values.Count)
+                return false;
+            Dictionary<string, PropertyInfo> parentDict = parentProperties.ToDictionary(p => p.Name, p => p);
+            foreach (var enumValue in childPropertyType.Values)
+            {
+                if (!parentDict.TryGetValue(enumValue.Declaration.Name, out var parentProperty))
+                    return false;
+                if (parentProperty.Name != enumValue.Declaration.Name)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

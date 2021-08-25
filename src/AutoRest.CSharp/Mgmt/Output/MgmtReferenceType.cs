@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -30,6 +31,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return propertyTypeToUse;
+        }
+
+        protected override CSharpType? CreateInheritedType()
+        {
+            return ObjectSchema.Extensions?.MgmtReferenceType == true ? CreateInheritedTypeWithNoExtraMatch() : base.CreateInheritedType();
         }
     }
 }
