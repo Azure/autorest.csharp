@@ -624,10 +624,10 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default": {
             "put": {
                 "tags": ["Fakes"],
-                "operationId": "ExplicitSingletonResources_CreateOrUpdate",
+                "operationId": "ImplicitSingletonResources_CreateOrUpdate",
                 "description": "Create or update an fake.",
                 "parameters": [
                     {
@@ -649,7 +649,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ExplicitSingletonResource"
+                            "$ref": "#/definitions/ImplicitSingletonResource"
                         },
                         "description": "Parameters supplied to the Create Availability Set operation."
                     },
@@ -664,7 +664,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ExplicitSingletonResource"
+                            "$ref": "#/definitions/ImplicitSingletonResource"
                         }
                     }
                 }
@@ -673,7 +673,7 @@
                 "tags": [
                     "Fakes"
                 ],
-                "operationId": "ExplicitSingletonResources_Get",
+                "operationId": "ImplicitSingletonResources_Get",
                 "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
@@ -708,7 +708,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ExplicitSingletonResource"
+                            "$ref": "#/definitions/ImplicitSingletonResource"
                         }
                     }
                 }
@@ -848,7 +848,7 @@
             ],
             "description": "The List Availability Set operation response."
         },
-        "ExplicitSingletonResource": {
+        "ImplicitSingletonResource": {
             "properties": {
                 "bar": {
                     "type": "string",

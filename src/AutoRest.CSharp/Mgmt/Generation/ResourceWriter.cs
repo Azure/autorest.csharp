@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override string ContextualPath => _resource.ContextualPath;
 
-        private IEnumerable<ContextualParameterMapping> _newParameterMappings;
+        private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
 
         public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
 
-            _newParameterMappings = resource.BuildContextualParameterMapping(context);
+            _contextualParameterMappings = resource.BuildContextualParameterMapping(context);
         }
 
         public void WriteResource()
@@ -355,9 +355,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             methodName = methodName ?? method.Name;
             _writer.Line();
-            var nonPathParameters = method.RestClientMethod.NonPathParameters;
+            var parameterMappings = BuildParameterMapping(method.RestClientMethod, _contextualParameterMappings);
+            var methodParameters = parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
             _writer.WriteXmlDocumentationSummary($"{method.Description}");
-            foreach (Parameter parameter in nonPathParameters)
+            foreach (Parameter parameter in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
@@ -365,14 +366,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             var responseType = TypeOfThis.WrapResponse(async);
             _writer.Append($"public {GetAsyncKeyword(async)} {GetOverride(false, true)} {responseType} {CreateMethodName($"{methodName}", async)}(");
 
-            foreach (Parameter parameter in nonPathParameters)
+            foreach (Parameter parameter in methodParameters)
             {
                 _writer.WriteParameter(parameter);
             }
             _writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
             using (_writer.Scope())
             {
-                _writer.WriteParameterNullChecks(nonPathParameters);
+                _writer.WriteParameterNullChecks(methodParameters);
                 Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(_writer, diagnostic, ClientDiagnosticsField, _writer =>
                 {
@@ -380,7 +381,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     response.SetActualName(response.RequestedName);
                     if (method.RestClientMethod.Operation.IsAncestorScope() || methods.Count < 2)
                     {
-                        WriteGetMethodBody(method, response, async, nonPathParameters);
+                        WriteGetMethodBody(method, response, async, methodParameters, parameterMappings);
                     }
                     else
                     {
@@ -484,7 +485,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteGetMethodBody(ClientMethod clientMethod, CodeWriterDeclaration response, bool async, List<Parameter> nonPathParameters, bool isResourceLevel = false)
+        private void WriteGetMethodBody(ClientMethod clientMethod, CodeWriterDeclaration response, bool async, List<Parameter> nonPathParameters, IEnumerable<ParameterMapping>? parameterMappings = null, bool isResourceLevel = false)
         {
             if (isResourceLevel)
             {
@@ -505,7 +506,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Append($"await ");
             }
             _writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            BuildAndWriteParameters(_writer, clientMethod.RestClientMethod, isResourceLevel: isResourceLevel);
+            BuildAndWriteParameters(_writer, clientMethod.RestClientMethod, parameterMappings, isResourceLevel: isResourceLevel);
             _writer.Append($"cancellationToken)");
 
             if (async)

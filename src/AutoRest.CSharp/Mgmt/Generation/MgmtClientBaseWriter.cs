@@ -25,6 +25,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Management;
 using Azure.ResourceManager.Resources;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -426,6 +427,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var parameterMapping = BuildParameterMapping(method);
             return parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+        }
+
+        protected IEnumerable<ParameterMapping> BuildParameterMapping(RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
+        {
+            foreach (var parameter in method.Parameters)
+            {
+                // find this parameter name in the contextual parameter mappings
+                // if there is one, this parameter should use the same value expression
+                // if there is none of this, this parameter should be a pass through parameter
+                var mapping = contextualParameterMappings.FirstOrDefault(mapping => mapping.ParameterName.Equals(parameter.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (mapping == null)
+                {
+                    yield return new ParameterMapping(parameter, true, "");
+                }
+                else
+                {
+                    yield return new ParameterMapping(parameter, false, mapping.ValueExpression);
+                }
+            }
         }
 
         /// <summary>

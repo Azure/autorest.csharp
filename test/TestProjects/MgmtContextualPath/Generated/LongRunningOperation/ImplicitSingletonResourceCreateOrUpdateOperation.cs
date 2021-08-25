@@ -16,25 +16,25 @@ using MgmtContextualPath;
 namespace MgmtContextualPath.Models
 {
     /// <summary> Create or update an fake. </summary>
-    public partial class ExplicitSingletonResourceCreateOrUpdateOperation : Operation<ExplicitSingletonResource>
+    public partial class ImplicitSingletonResourceCreateOrUpdateOperation : Operation<ImplicitSingletonResource>
     {
-        private readonly OperationOrResponseInternals<ExplicitSingletonResource> _operation;
+        private readonly OperationOrResponseInternals<ImplicitSingletonResource> _operation;
 
-        /// <summary> Initializes a new instance of ExplicitSingletonResourceCreateOrUpdateOperation for mocking. </summary>
-        protected ExplicitSingletonResourceCreateOrUpdateOperation()
+        /// <summary> Initializes a new instance of ImplicitSingletonResourceCreateOrUpdateOperation for mocking. </summary>
+        protected ImplicitSingletonResourceCreateOrUpdateOperation()
         {
         }
 
-        internal ExplicitSingletonResourceCreateOrUpdateOperation(ArmResource operationsBase, Response<ExplicitSingletonResourceData> response)
+        internal ImplicitSingletonResourceCreateOrUpdateOperation(ArmResource operationsBase, Response<ImplicitSingletonResourceData> response)
         {
-            _operation = new OperationOrResponseInternals<ExplicitSingletonResource>(Response.FromValue(new ExplicitSingletonResource(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ImplicitSingletonResource>(Response.FromValue(new ImplicitSingletonResource(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ExplicitSingletonResource Value => _operation.Value;
+        public override ImplicitSingletonResource Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,9 +52,9 @@ namespace MgmtContextualPath.Models
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ExplicitSingletonResource>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ImplicitSingletonResource>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ExplicitSingletonResource>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ImplicitSingletonResource>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

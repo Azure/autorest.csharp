@@ -13,7 +13,7 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtContextualPath
 {
-    public partial class ExplicitSingletonResourceData : IUtf8JsonSerializable
+    public partial class ImplicitSingletonResourceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace MgmtContextualPath
             writer.WriteEndObject();
         }
 
-        internal static ExplicitSingletonResourceData DeserializeExplicitSingletonResourceData(JsonElement element)
+        internal static ImplicitSingletonResourceData DeserializeImplicitSingletonResourceData(JsonElement element)
         {
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
@@ -82,7 +82,7 @@ namespace MgmtContextualPath
                     continue;
                 }
             }
-            return new ExplicitSingletonResourceData(id, name, type, tags, location, bar.Value);
+            return new ImplicitSingletonResourceData(id, name, type, tags, location, bar.Value);
         }
     }
 }

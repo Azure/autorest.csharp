@@ -15,12 +15,12 @@ operation-group-to-contextual-path:
   RGFakes: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}
   RGChildResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/childResources/{childName}
   FakeTupleResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/versions/{version}/tupleResources/{tupleName}
-  ExplicitSingletonResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default
+  ImplicitSingletonResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default
 # operation-group-to-resource-type:
 #   Quotas: something
 # operation-group-to-resource:
 #   Quotas: NonResource
 operation-group-to-parent:
   FakeTupleResources: Microsoft.Fake/rgFakes
-  ExplicitSingletonResources: Microsoft.Fake/rgFakes
+  ImplicitSingletonResources: Microsoft.Fake/rgFakes
 ```

@@ -11,23 +11,23 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtContextualPath
 {
-    /// <summary> A class representing the ExplicitSingletonResource data model. </summary>
-    public partial class ExplicitSingletonResourceData : TrackedResource
+    /// <summary> A class representing the ImplicitSingletonResource data model. </summary>
+    public partial class ImplicitSingletonResourceData : TrackedResource
     {
-        /// <summary> Initializes a new instance of ExplicitSingletonResourceData. </summary>
+        /// <summary> Initializes a new instance of ImplicitSingletonResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public ExplicitSingletonResourceData(Location location) : base(location)
+        public ImplicitSingletonResourceData(Location location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ExplicitSingletonResourceData. </summary>
+        /// <summary> Initializes a new instance of ImplicitSingletonResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal ExplicitSingletonResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
+        internal ImplicitSingletonResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

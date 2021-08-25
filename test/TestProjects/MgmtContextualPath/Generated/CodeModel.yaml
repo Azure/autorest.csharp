@@ -148,7 +148,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExplicitSingletonResourceBar
+          name: ImplicitSingletonResourceBar
           description: specifies the bar
       protocol: !Protocols {}
   constants:
@@ -365,7 +365,7 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ExplicitSingletonResource
+                name: ImplicitSingletonResource
                 description: >-
                   Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes,
                   see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more
@@ -1976,7 +1976,7 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: ExplicitSingletonResources
+    $key: ImplicitSingletonResources
     operations:
       - !Operation 
         apiVersions:
@@ -2059,7 +2059,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -2153,7 +2153,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default
                 method: get
                 uri: '{$host}'
         signatureParameters:
@@ -2181,7 +2181,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: ExplicitSingletonResources
+        name: ImplicitSingletonResources
         description: ''
     protocol: !Protocols {}
 security: !Security 

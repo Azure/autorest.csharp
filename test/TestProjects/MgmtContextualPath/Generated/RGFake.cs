@@ -314,11 +314,11 @@ namespace MgmtContextualPath
             return new FakeTupleResourceContainer(this);
         }
 
-        /// <summary> Gets an object representing a ExplicitSingletonResource along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="ExplicitSingletonResource" /> object. </returns>
-        public ExplicitSingletonResource GetExplicitSingletonResource()
+        /// <summary> Gets an object representing a ImplicitSingletonResource along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="ImplicitSingletonResource" /> object. </returns>
+        public ImplicitSingletonResource GetImplicitSingletonResource()
         {
-            return new ExplicitSingletonResource(this, Id + "/explicitSingletonResources/default");
+            return new ImplicitSingletonResource(this, Id + "/implicitSingletonResources/default");
         }
     }
 }
