@@ -69,6 +69,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return stack;
         }
 
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameterMapping(this ResourceContainer container, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
+        {
+            var stack = new Stack<ContextualParameterMapping>();
+            // for resource container, the contextual path should be the parent of the corresponding resource
+            var parent = container.OperationGroup.ParentOperationGroup(context);
+            var parentType = container.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
+            BuildContextualParameterMappingHierarchy(parent, parentType, GetParentContextualPath(parent, parentType, context),
+                context, stack, idVariableName);
+            return stack;
+        }
+
         private static void BuildContextualParameterMappingHierarchy(OperationGroup? current, string currentResourceType, string currentContextualPath,
             BuildContext<MgmtOutputLibrary> context, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
