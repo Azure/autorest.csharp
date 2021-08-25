@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     {
                         //There could be orphaned models that are not a direct property of another model and SchemaMatchTracker haven't tracked them.
                         //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                        if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType, context) != null)
+                        if (!context.Configuration.MgmtConfiguration.IsArmCore && ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType, context) != null)
                             continue;
                     }
                 }
