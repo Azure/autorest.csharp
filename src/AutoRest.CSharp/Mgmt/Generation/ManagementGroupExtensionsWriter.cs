@@ -14,15 +14,21 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Management;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ManagementGroupExtensionsWriter : MgmtExtensionWriter
     {
         private CodeWriter _writer;
+
+        private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
+
         public ManagementGroupExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
+
+            _contextualParameterMappings = ResourceTypeBuilder.ManagementGroups.BuildContextualParameterMapping(context);
         }
 
         protected override string Description => "A class to add extension methods to ManagementGroup.";

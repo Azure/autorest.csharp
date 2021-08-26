@@ -62,6 +62,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return request?.Path;
         }
 
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameterMapping(this string resourceType, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
+        {
+            var stack = new Stack<ContextualParameterMapping>();
+            BuildContextualParameterMappingHierarchy(null, resourceType, ResourceTypeBuilder.TypeToContextualPath[resourceType], context, stack, idVariableName);
+            return stack;
+        }
+
         public static IEnumerable<ContextualParameterMapping> BuildContextualParameterMapping(this Resource resource, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
         {
             var stack = new Stack<ContextualParameterMapping>();

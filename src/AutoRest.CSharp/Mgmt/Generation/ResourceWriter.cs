@@ -376,7 +376,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     response.SetActualName(response.RequestedName);
                     if (method.RestClientMethod.Operation.IsAncestorScope() || methods.Count < 2)
                     {
-                        WriteGetMethodBody(method, response, async, methodParameters, parameterMappings);
+                        WriteGetMethodBody(method, response, async, parameterMappings);
                     }
                     else
                     {
@@ -405,16 +405,16 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                                 {
                                     using (_writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                     {
-                                        WriteGetMethodBody(resourceGroupMethod, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(resourceGroupMethod, response, async, BuildParameterMapping(resourceGroupMethod.RestClientMethod, _contextualParameterMappings));
                                     }
                                     using (_writer.Scope($"else"))
                                     {
-                                        WriteGetMethodBody(resourceMethod, response, async, resourceMethod.RestClientMethod.NonPathParameters, isResourceLevel: true);
+                                        WriteGetMethodBody(resourceMethod, response, async, BuildParameterMapping(resourceMethod.RestClientMethod, _contextualParameterMappings), isResourceLevel: true);
                                     }
                                 }
                                 else
                                 {
-                                    WriteGetMethodBody(resourceGroupMethod, response, async, resourceGroupMethod.RestClientMethod.NonPathParameters);
+                                    WriteGetMethodBody(resourceGroupMethod, response, async, BuildParameterMapping(resourceGroupMethod.RestClientMethod, _contextualParameterMappings));
                                 }
                             }
                         } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
@@ -427,7 +427,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             methodDict.Remove(subscriptionMethod);
                             using (_writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
                             {
-                                WriteGetMethodBody(subscriptionMethod, response, async, subscriptionMethod.RestClientMethod.NonPathParameters);
+                                WriteGetMethodBody(subscriptionMethod, response, async, BuildParameterMapping(subscriptionMethod.RestClientMethod, _contextualParameterMappings));
                             }
                         }
 
@@ -448,16 +448,16 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                                     }
                                     using (_writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                     {
-                                        WriteGetMethodBody(managementGroupMethod, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(managementGroupMethod, response, async, BuildParameterMapping(managementGroupMethod.RestClientMethod, _contextualParameterMappings));
                                     }
                                     using (_writer.Scope($"else"))
                                     {
-                                        WriteGetMethodBody(tenantMethod, response, async, tenantMethod.RestClientMethod.NonPathParameters);
+                                        WriteGetMethodBody(tenantMethod, response, async, BuildParameterMapping(tenantMethod.RestClientMethod, _contextualParameterMappings));
                                     }
                                 }
                                 else
                                 {
-                                    WriteGetMethodBody(managementGroupMethod, response, async, managementGroupMethod.RestClientMethod.NonPathParameters);
+                                    WriteGetMethodBody(managementGroupMethod, response, async, BuildParameterMapping(managementGroupMethod.RestClientMethod, _contextualParameterMappings));
                                 }
                             }
                         }
@@ -466,7 +466,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                             methodDict.Remove(tenantMethod);
                             using (_writer.Scope($"{elseStr}"))
                             {
-                                WriteGetMethodBody(tenantMethod, response, async, tenantMethod.RestClientMethod.NonPathParameters);
+                                WriteGetMethodBody(tenantMethod, response, async, BuildParameterMapping(tenantMethod.RestClientMethod, _contextualParameterMappings));
                             }
                         }
 
@@ -480,7 +480,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WriteGetMethodBody(ClientMethod clientMethod, CodeWriterDeclaration response, bool async, List<Parameter> nonPathParameters, IEnumerable<ParameterMapping>? parameterMappings = null, bool isResourceLevel = false)
+        private void WriteGetMethodBody(ClientMethod clientMethod, CodeWriterDeclaration response, bool async, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
         {
             if (isResourceLevel)
             {

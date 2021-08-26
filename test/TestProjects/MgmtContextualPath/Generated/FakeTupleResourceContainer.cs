@@ -120,21 +120,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Gets details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<FakeTupleResource> Get(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<FakeTupleResource> Get(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.Get");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, tupleName, expand, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, version, tupleName, expand, cancellationToken: cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new FakeTupleResource(Parent, response.Value), response.GetRawResponse());
@@ -147,21 +152,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Gets details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<FakeTupleResource>> GetAsync(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FakeTupleResource>> GetAsync(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.Get");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, version, tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new FakeTupleResource(Parent, response.Value), response.GetRawResponse());
@@ -174,21 +184,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<FakeTupleResource> GetIfExists(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<FakeTupleResource> GetIfExists(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.GetIfExists");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, tupleName, expand, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, version, tupleName, expand, cancellationToken: cancellationToken);
                 return response.Value == null
                     ? Response.FromValue<FakeTupleResource>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeTupleResource(this, response.Value), response.GetRawResponse());
@@ -201,21 +216,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<FakeTupleResource>> GetIfExistsAsync(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<FakeTupleResource>> GetIfExistsAsync(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.GetIfExists");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, version, tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return response.Value == null
                     ? Response.FromValue<FakeTupleResource>(null, response.GetRawResponse())
                     : Response.FromValue(new FakeTupleResource(this, response.Value), response.GetRawResponse());
@@ -228,21 +248,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public virtual Response<bool> CheckIfExists(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<bool> CheckIfExists(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.CheckIfExists");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = GetIfExists(tupleName, expand, cancellationToken: cancellationToken);
+                var response = GetIfExists(version, tupleName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)
@@ -253,21 +278,26 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Tries to get details for this resource from the service. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the child resource. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async virtual Task<Response<bool>> CheckIfExistsAsync(string tupleName, string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<bool>> CheckIfExistsAsync(string version, string tupleName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeTupleResourceContainer.CheckIfExists");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
                 if (tupleName == null)
                 {
                     throw new ArgumentNullException(nameof(tupleName));
                 }
 
-                var response = await GetIfExistsAsync(tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await GetIfExistsAsync(version, tupleName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
             }
             catch (Exception e)

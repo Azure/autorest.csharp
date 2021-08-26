@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -19,6 +20,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -89,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, string methodName, bool async, MgmtRestClient restClient)
+        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, MgmtRestClient restClient, ClientMethod clientMethod, string methodName, IEnumerable<ContextualParameterMapping> contextualParameterMappings, bool async)
         {
             (var bodyType, bool isResourceList, bool wasResourceData) = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, Context);
             var responseType = bodyType != null ?
@@ -97,7 +99,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            var methodParameters = BuildParameterMapping(clientMethod.RestClientMethod).Where(m => m.IsPassThru).Select(m => m.Parameter);
+            var parameterMappings = BuildParameterMapping(clientMethod.RestClientMethod, contextualParameterMappings);
+            var methodParameters = GetPassThroughParameters(parameterMappings);
 
             writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -139,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($"var response = {GetAwait(async)} ");
 
                         writer.Append($"{restOperations}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                        BuildAndWriteParameters(writer, clientMethod.RestClientMethod);
+                        WriteArguments(writer, parameterMappings);
                         writer.Append($"cancellationToken)");
 
                         if (async)
@@ -185,13 +188,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, string methodName, FormattableString converter, bool async)
+        protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, string methodName, FormattableString converter, IEnumerable<ContextualParameterMapping> contextualParameterMappings, bool async)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
-            var parameterMappings = BuildParameterMapping(pagingMethod.Method);
-            var methodParameters = parameterMappings.Where(m => m.IsPassThru).Select(m => m.Parameter);
+            var parameterMappings = BuildParameterMapping(pagingMethod.Method, contextualParameterMappings);
+            var methodParameters = GetPassThroughParameters(parameterMappings);
             foreach (var parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);

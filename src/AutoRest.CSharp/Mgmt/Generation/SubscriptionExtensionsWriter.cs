@@ -18,15 +18,21 @@ using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using Core = Azure.ResourceManager.Core;
 using Azure.ResourceManager.Resources;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class SubscriptionExtensionsWriter : MgmtExtensionWriter
     {
         private CodeWriter _writer;
+
+        private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
+
         public SubscriptionExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
+
+            _contextualParameterMappings = ResourceTypeBuilder.Subscriptions.BuildContextualParameterMapping(context);
         }
 
         protected override string Description => "A class to add extension methods to Subscription.";
@@ -89,8 +95,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                             methodName = $"Get{resource.Type.Name.ToPlural()}ByLocation";
                                         }
 
-                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, true, resource.RestClient);
-                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, listMethod.ClientMethod, methodName, false, resource.RestClient);
+                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, resource.RestClient, listMethod.ClientMethod, methodName, _contextualParameterMappings, true);
+                                        WriteExtensionClientMethod(_writer, resource.OperationGroup, resource.RestClient, listMethod.ClientMethod, methodName, _contextualParameterMappings, false);
                                     }
 
                                 }
@@ -114,14 +120,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", _contextualParameterMappings, true);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", _contextualParameterMappings, false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
-                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, mgmtExtensionOperation.RestClient, clientMethod, clientMethod.Name, _contextualParameterMappings, true);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, mgmtExtensionOperation.RestClient, clientMethod, clientMethod.Name, _contextualParameterMappings, false);
                         }
 
                         _writer.LineRaw("#endregion");
@@ -137,12 +143,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (pagingMethod.PagingResponse.ItemType.Name.Equals(resource.ResourceData.Type.Name))
             {
                 WriteExtensionPagingMethod(writer, resource.Type, resource.RestClient, pagingMethod, methodName,
-                $".Select(value => new {resource.Type.Name}(subscription, value))", async);
+                $".Select(value => new {resource.Type.Name}(subscription, value))", _contextualParameterMappings, async);
             }
             else
             {
                 WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, resource.RestClient, pagingMethod, methodName,
-                $"", async);
+                $"", _contextualParameterMappings, async);
             }
         }
 

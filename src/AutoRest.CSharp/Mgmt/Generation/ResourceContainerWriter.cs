@@ -143,59 +143,50 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCheckIfExistsVariants(RestClientMethod getMethod)
         {
-            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(getMethod);
+            var parameterMapping = BuildParameterMapping(getMethod, _contextualParameterMappings);
 
-            WriteCheckIfExists(getMethod, passThruParameters, false);
-            WriteCheckIfExists(getMethod, passThruParameters, true);
+            WriteCheckIfExists(getMethod, parameterMapping, false);
+            WriteCheckIfExists(getMethod, parameterMapping, true);
         }
 
-        private void WriteCheckIfExists(RestClientMethod getMethod, IEnumerable<Parameter> passThruParameters, bool isAsync)
+        private void WriteCheckIfExists(RestClientMethod getMethod, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(isAsync, $"{typeof(bool).WrapResponse(isAsync)}", $"CheckIfExists", passThruParameters, writer =>
+            WriteContainerMethodScope(isAsync, $"{typeof(bool).WrapResponse(isAsync)}", $"CheckIfExists", GetPassThroughParameters(parameterMapping), writer =>
             {
-                WriteCheckIfExistsBody(getMethod, isAsync);
+                writer.Append($"var response = {GetAwait(isAsync)} GetIfExists{GetAsyncSuffix(isAsync)}(");
+                foreach (var parameter in GetPassThroughParameters(parameterMapping))
+                {
+                    writer.AppendRaw(parameter.Name);
+                    writer.AppendRaw(", ");
+                }
+                writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
+                writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
             }, isOverride: false);
-        }
-
-        private void WriteCheckIfExistsBody(RestClientMethod method, bool isAsync)
-        {
-            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(method);
-            _writer.Append($"var response = {GetAwait(isAsync)} GetIfExists{GetAsyncSuffix(isAsync)}(");
-            foreach (var parameter in passThruParameters)
-            {
-                _writer.AppendRaw(parameter.Name);
-                _writer.AppendRaw(", ");
-            }
-            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-            _writer.Line($"return Response.FromValue(response.Value != null, response.GetRawResponse());");
         }
 
         private void WriteGetIfExistsVariants(RestClientMethod getMethod)
         {
-            IEnumerable<Parameter> passThruParameters = BuildPassThroughParameters(getMethod);
+            var parameterMapping = BuildParameterMapping(getMethod, _contextualParameterMappings);
 
-            WriteGetIfExists(getMethod, passThruParameters, false);
-            WriteGetIfExists(getMethod, passThruParameters, true);
+            WriteGetIfExists(getMethod, parameterMapping, false);
+            WriteGetIfExists(getMethod, parameterMapping, true);
         }
 
-        private void WriteGetIfExists(RestClientMethod getMethod, IEnumerable<Parameter> passThruParameters, bool isAsync)
+        private void WriteGetIfExists(RestClientMethod getMethod, IEnumerable<ParameterMapping> parameterMapping, bool isAsync)
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Tries to get details for this resource from the service.");
-            WriteContainerMethodScope(isAsync, $"{_resource.Type.WrapResponse(isAsync)}", "GetIfExists", passThruParameters, writer =>
+            WriteContainerMethodScope(isAsync, $"{_resource.Type.WrapResponse(isAsync)}", "GetIfExists", GetPassThroughParameters(parameterMapping), writer =>
             {
-                WriteGetFromRestClient(getMethod, isAsync);
-                WriteEndOfGetIfExists();
+                writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{getMethod.Name}{GetAsyncSuffix(isAsync)}(");
+                WriteArguments(writer, parameterMapping);
+                writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
+                writer.Line($"return response.Value == null");
+                writer.Line($"\t? Response.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
+                writer.Line($"\t: Response.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
             }, isOverride: false);
-        }
-
-        private void WriteEndOfGetIfExists()
-        {
-            _writer.Line($"return response.Value == null");
-            _writer.Line($"\t? Response.FromValue<{_resource.Type.Name}>(null, response.GetRawResponse())");
-            _writer.Line($"\t: Response.FromValue(new {_resource.Type.Name}(this, response.Value), response.GetRawResponse());");
         }
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
@@ -241,16 +232,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }, catch404);
         }
 
-        private void WriteGetFromRestClient(RestClientMethod method, bool isAsync)
-        {
-            var parameterMapping = BuildParameterMapping(method);
-            _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
-            WriteArguments(_writer, parameterMapping);
-            _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
-        }
         private void WriteGetVariants(RestClientMethod method, List<RestClientMethod> methods)
         {
-            IEnumerable<ParameterMapping> parameterMapping = BuildParameterMapping(method);
+            IEnumerable<ParameterMapping> parameterMapping = BuildParameterMapping(method, _contextualParameterMappings);
             WriteGetMethod(method, parameterMapping, false, methods, "Get");
             WriteGetMethod(method, parameterMapping, true, methods, "Get");
         }
@@ -258,7 +242,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteGetMethod(RestClientMethod method, IEnumerable<ParameterMapping> parameterMapping, bool async, List<RestClientMethod> methods, string? methodName = null)
         {
             methodName = methodName ?? method.Name;
-            parameterMapping = parameterMapping ?? BuildParameterMapping(method);
             var scopeName = methodName;
 
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
@@ -300,16 +283,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             {
                                 using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                 {
-                                    WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod), async);
+                                    WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod, _contextualParameterMappings), async);
                                 }
                                 using (writer.Scope($"else"))
                                 {
-                                    WriteGetMethodBody(writer, resourceMethod, BuildParameterMapping(resourceMethod), async, isResourceLevel: true);
+                                    WriteGetMethodBody(writer, resourceMethod, BuildParameterMapping(resourceMethod, _contextualParameterMappings), async, isResourceLevel: true);
                                 }
                             }
                             else
                             {
-                                WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod), async);
+                                WriteGetMethodBody(writer, resourceGroupMethod, BuildParameterMapping(resourceGroupMethod, _contextualParameterMappings), async);
                             }
                         }
                     } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
@@ -322,7 +305,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         methodDict.Remove(subscriptionMethod);
                         using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
                         {
-                            WriteGetMethodBody(writer, subscriptionMethod, BuildParameterMapping(subscriptionMethod), async);
+                            WriteGetMethodBody(writer, subscriptionMethod, BuildParameterMapping(subscriptionMethod, _contextualParameterMappings), async);
                         }
                     }
 
@@ -343,16 +326,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 }
                                 using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                 {
-                                    WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod), async);
+                                    WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod, _contextualParameterMappings), async);
                                 }
                                 using (writer.Scope($"else"))
                                 {
-                                    WriteGetMethodBody(writer, tenantMethod, BuildParameterMapping(tenantMethod), async);
+                                    WriteGetMethodBody(writer, tenantMethod, BuildParameterMapping(tenantMethod, _contextualParameterMappings), async);
                                 }
                             }
                             else
                             {
-                                WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod), async);
+                                WriteGetMethodBody(writer, managementGroupMethod, BuildParameterMapping(managementGroupMethod, _contextualParameterMappings), async);
                             }
                         }
                     }
@@ -361,7 +344,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         methodDict.Remove(tenantMethod);
                         using (writer.Scope($"{elseStr}"))
                         {
-                            WriteGetMethodBody(writer, tenantMethod, BuildParameterMapping(tenantMethod), async);
+                            WriteGetMethodBody(writer, tenantMethod, BuildParameterMapping(tenantMethod, _contextualParameterMappings), async);
                         }
                     }
 
@@ -396,12 +379,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteGetByIdVariants(RestClientMethod method, bool isAsync)
         {
-            var parameterMapping = BuildParameterMapping(method);
+            var parameterMapping = BuildParameterMapping(method, _contextualParameterMappings);
 
             var methodName = "GetById";
             var scopeName = methodName;
 
-            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+            IEnumerable<Parameter> passThruParameters = GetPassThroughParameters(parameterMapping);
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets details for this resource from the service by ID.");
@@ -424,8 +407,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (pagingMethod != null)
                 {
-                    WriteList(_writer, false, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
-                    WriteList(_writer, true, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", pagingMethods);
+                    WriteList(_writer, false, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", _contextualParameterMappings, pagingMethods);
+                    WriteList(_writer, true, _resource.Type, pagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", _contextualParameterMappings, pagingMethods);
                 }
 
                 _writer.Line();
@@ -442,8 +425,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (listMethod.PagingMethod != null)
                     {
-                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
-                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))");
+                        WriteList(_writer, false, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", _contextualParameterMappings);
+                        WriteList(_writer, true, _resource.Type, listMethod.PagingMethod, "GetAll", $".Select(value => new {_resource.Type.Name}({ContextProperty}, value))", _contextualParameterMappings);
                     }
 
                     if (listMethod.ClientMethod != null)

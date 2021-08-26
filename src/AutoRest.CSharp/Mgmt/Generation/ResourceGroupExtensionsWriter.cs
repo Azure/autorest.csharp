@@ -11,6 +11,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Resources;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -18,9 +19,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private CodeWriter _writer;
 
+        private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
+
         public ResourceGroupExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
+            _contextualParameterMappings = ResourceTypeBuilder.ResourceGroups.BuildContextualParameterMapping(context);
         }
 
         protected override string Description => "A class to add extension methods to ResourceGroup.";
@@ -84,14 +88,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", true);
-                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", false);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", _contextualParameterMappings, true);
+                            WriteExtensionPagingMethod(_writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, pagingMethod.Name, $"", _contextualParameterMappings, false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, true, mgmtExtensionOperation.RestClient);
-                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, clientMethod, clientMethod.Name, false, mgmtExtensionOperation.RestClient);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, mgmtExtensionOperation.RestClient, clientMethod, clientMethod.Name, _contextualParameterMappings, true);
+                            WriteExtensionClientMethod(_writer, mgmtExtensionOperation.OperationGroup, mgmtExtensionOperation.RestClient, clientMethod, clientMethod.Name, _contextualParameterMappings, false);
                         }
 
                         _writer.LineRaw("#endregion");

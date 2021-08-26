@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
 
-        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, List<PagingMethod>? listMethods = null)
+        protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, IEnumerable<ContextualParameterMapping> contextualParameterMappings, List<PagingMethod>? listMethods = null)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
@@ -110,8 +110,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
-            var nonPathDomainParameters = listMethod.NonPathDomainParameters;
-            foreach (var param in nonPathDomainParameters)
+            var parameterMappings = BuildParameterMapping(listMethod.Method, contextualParameterMappings);
+            var methodParameters = GetPassThroughParameters(parameterMappings);
+            foreach (var param in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
             }
@@ -122,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var returnType = resourceType.WrapPageable(async);
 
             writer.Append($"public {GetVirtual(true)} {returnType} {CreateMethodName(methodName, async)}(");
-            foreach (var param in nonPathDomainParameters)
+            foreach (var param in methodParameters)
             {
                 writer.WriteParameter(param);
             }
@@ -130,7 +131,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                var parameterMappings = BuildParameterMapping(listMethod.Method);
                 WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>()),
                     ClientDiagnosticsField, converter, parameterMappings, async, listMethods);
             }
@@ -384,9 +384,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping>? parameterMappings = null, bool isResourceLevel = false)
+        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
         {
-            parameterMappings = parameterMappings ?? BuildParameterMapping(method);
             if (isResourceLevel)
             {
                 // Parameter mapping for a path like /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}
@@ -432,10 +431,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected IEnumerable<Parameter> BuildPassThroughParameters(RestClientMethod method)
+        protected IEnumerable<Parameter> GetPassThroughParameters(IEnumerable<ParameterMapping> parameterMappings)
         {
-            var parameterMapping = BuildParameterMapping(method);
-            return parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+            return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter);
         }
 
         protected IEnumerable<ParameterMapping> BuildParameterMapping(RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings)
@@ -467,69 +465,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             return parameter;
-        }
-
-        protected virtual void UpdateByIdParamType(RestClientMethod method, List<ParameterMapping> parameterMapping)
-        {
-            if (method.IsByIdMethod())
-            {
-                var firstString = parameterMapping.FirstOrDefault(parameter => parameter.Parameter.Name.Equals(method.Parameters[0].Name, StringComparison.InvariantCultureIgnoreCase));
-                if (firstString?.Parameter != null)
-                {
-                    firstString.Parameter = firstString.Parameter with { Type = typeof(ResourceIdentifier) };
-                }
-            }
-        }
-
-        /// <summary>
-        /// Builds the mapping between parameters of the rest client method and its caller.
-        /// Decides which parameters should pass through, which should be evaluated with what expressions.
-        /// For example `DedicatedHostRestClient.CreateOrUpdate()` <br/>
-        /// | resourceGroupName      | hostGroupName    | hostName | parameters | <br/>
-        /// | ---------------------- | ---------------- | -------- | ---------- | <br/>
-        /// | "Id.ResourceGroupName" | "Id.Parent.Name" | hostName | parameters | <br/>
-        /// </summary>
-        /// <param name="method">Represents a method in RestOperations class.</param>
-        protected IEnumerable<ParameterMapping> BuildParameterMapping(RestClientMethod method)
-        {
-            var parameterMapping = new List<ParameterMapping>();
-            var dotParent = string.Empty;
-            var parentNameStack = new Stack<string>();
-
-            // loop through parameters of REST client method, map the leading string-like parameters to
-            // Id.ResourceGroupName, Id.Name, Id.Parent.Name...
-            // special case: type is enum and you can convert string to it (model-as-string), we should handle it as string
-            // special case 2: in paging scenarios, `nextLink` needs to be handled specially, so here we just ignore it
-            foreach (var parameter in method.Parameters)
-            {
-                bool passThru = true;
-                string valueExpression = string.Empty;
-                if (string.Equals(parameter.Name, "nextLink", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    continue;
-                }
-                else if (parameter.Type.IsStringLike() && IsMandatory(parameter) && (method.Name.EndsWith("NextPage") || method.PathParameters.Contains(parameter))) // in a ListNextPage method, all parameters are nonpath parameters.
-                {
-                    passThru = ShouldPassThrough(ref dotParent, parentNameStack, parameter, ref valueExpression);
-                }
-                parameterMapping.Add(new ParameterMapping(parameter, passThru, valueExpression));
-            }
-
-            MakeResourceNameParamPassThrough(method, parameterMapping, parentNameStack);
-            UpdateByIdParamType(method, parameterMapping);
-
-            // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
-            foreach (var parameter in parameterMapping)
-            {
-                if (IsMandatory(parameter.Parameter) && !parameter.IsPassThru && string.IsNullOrEmpty(parameter.ValueExpression))
-                {
-                    var parentName = parentNameStack.Pop();
-                    // {scope} or {resourceId} is a whole Id, remove ".Name" for it.
-                    parameter.ValueExpression = (parameter.Parameter.Name == "scope" || method.IsByIdMethod()) ? parentName.Substring(0, parentName.LastIndexOf(".Name")) : parentName;
-                }
-            }
-
-            return parameterMapping;
         }
 
         protected abstract void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack);
@@ -779,8 +714,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{method.Description}");
 
-            var parameterMapping = contextualParameterMappings == null ? BuildParameterMapping(method) : BuildParameterMapping(method, contextualParameterMappings);
-            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+            var parameterMappings = BuildParameterMapping(method, contextualParameterMappings);
+            var passThruParameters = GetPassThroughParameters(parameterMappings);
 
             foreach (var parameter in passThruParameters)
             {
@@ -815,7 +750,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     response.SetActualName(response.RequestedName);
                     if (method.Operation.IsAncestorScope() || methods == null || methods.Count < 2)
                     {
-                        WriteLROMethodBody(writer, method, lroObjectType, Context, response, parameterMapping, isAsync);
+                        WriteLROMethodBody(writer, method, lroObjectType, Context, response, parameterMappings, isAsync);
                     }
                     else
                     {
@@ -844,16 +779,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 {
                                     using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                     {
-                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod, contextualParameterMappings), isAsync);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync, isResourceLevel: true);
+                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod, contextualParameterMappings), isAsync, isResourceLevel: true);
                                     }
                                 }
                                 else
                                 {
-                                    WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                    WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod, contextualParameterMappings), isAsync);
                                 }
                             }
                         } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
@@ -866,7 +801,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             methodDict.Remove(subscriptionMethod);
                             using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
                             {
-                                WriteLROMethodBody(writer, subscriptionMethod, lroObjectType, Context, response, BuildParameterMapping(subscriptionMethod), isAsync);
+                                WriteLROMethodBody(writer, subscriptionMethod, lroObjectType, Context, response, BuildParameterMapping(subscriptionMethod, contextualParameterMappings), isAsync);
                             }
                         }
 
@@ -887,16 +822,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                     }
                                     using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                     {
-                                        WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                        WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod, contextualParameterMappings), isAsync);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod), isAsync);
+                                        WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod, contextualParameterMappings), isAsync);
                                     }
                                 }
                                 else
                                 {
-                                    WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                    WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod, contextualParameterMappings), isAsync);
                                 }
                             }
                         }
@@ -905,7 +840,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             methodDict.Remove(tenantMethod);
                             using (writer.Scope($"{elseStr}"))
                             {
-                                WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod), isAsync);
+                                WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod, contextualParameterMappings), isAsync);
                             }
                         }
 
