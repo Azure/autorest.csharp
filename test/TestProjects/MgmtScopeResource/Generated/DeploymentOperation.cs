@@ -71,41 +71,63 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a deployments operation. </summary>
+        /// <param name="scope"> The resource scope. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeploymentOperation>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentOperation>> GetAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperation.Get");
-            scope.Start();
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
+            using var scope0 = _clientDiagnostics.CreateScope("DeploymentOperation.Get");
+            scope0.Start();
             try
             {
-                var response = await _restClient.GetAtScopeAsync(Id.Parent.Parent, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtScopeAsync(scope, deploymentName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
 
         /// <summary> Gets a deployments operation. </summary>
+        /// <param name="scope"> The resource scope. </param>
+        /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentOperation> Get(CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentOperation> Get(string scope, string deploymentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentOperation.Get");
-            scope.Start();
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (deploymentName == null)
+            {
+                throw new ArgumentNullException(nameof(deploymentName));
+            }
+
+            using var scope0 = _clientDiagnostics.CreateScope("DeploymentOperation.Get");
+            scope0.Start();
             try
             {
-                var response = _restClient.GetAtScope(Id.Parent.Parent, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.GetAtScope(scope, deploymentName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentOperation(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }

@@ -72,41 +72,63 @@ namespace MgmtScopeResource
         }
 
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <param name="scope"> The scope of the policy assignment. Valid scopes are: management group (format: &apos;/providers/Microsoft.Management/managementGroups/{managementGroup}&apos;), subscription (format: &apos;/subscriptions/{subscriptionId}&apos;), resource group (format: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}&apos;, or resource (format: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}&apos;. </param>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<PolicyAssignment>> GetAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<Response<PolicyAssignment>> GetAsync(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
-            scope.Start();
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope0 = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
+            scope0.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(scope, policyAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
 
         /// <summary> This operation retrieves a single policy assignment, given its name and the scope it was created at. </summary>
+        /// <param name="scope"> The scope of the policy assignment. Valid scopes are: management group (format: &apos;/providers/Microsoft.Management/managementGroups/{managementGroup}&apos;), subscription (format: &apos;/subscriptions/{subscriptionId}&apos;), resource group (format: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}&apos;, or resource (format: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}&apos;. </param>
+        /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<PolicyAssignment> Get(CancellationToken cancellationToken = default)
+        public virtual Response<PolicyAssignment> Get(string scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
-            scope.Start();
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+            if (policyAssignmentName == null)
+            {
+                throw new ArgumentNullException(nameof(policyAssignmentName));
+            }
+
+            using var scope0 = _clientDiagnostics.CreateScope("PolicyAssignment.Get");
+            scope0.Start();
             try
             {
-                var response = _restClient.Get(Id.Parent, Id.Name, cancellationToken);
+                var response = _restClient.Get(scope, policyAssignmentName, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new PolicyAssignment(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -132,8 +154,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<PolicyAssignmentDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
-            scope.Start();
+            using var scope0 = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
+            scope0.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -144,7 +166,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
@@ -154,8 +176,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual PolicyAssignmentDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
-            scope.Start();
+            using var scope0 = _clientDiagnostics.CreateScope("PolicyAssignment.Delete");
+            scope0.Start();
             try
             {
                 var response = _restClient.Delete(Id.Parent, Id.Name, cancellationToken);
@@ -166,7 +188,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope.Failed(e);
+                scope0.Failed(e);
                 throw;
             }
         }
