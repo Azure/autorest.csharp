@@ -17,40 +17,42 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtContextualPath
 {
-    /// <summary> A Class representing a RGFake along with the instance operations that can be performed on it. </summary>
-    public partial class RGFake : ArmResource
+    /// <summary> A Class representing a ExplicitSingletonResource along with the instance operations that can be performed on it. </summary>
+    public partial class ExplicitSingletonResource : ArmResource
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly RGFakesRestOperations _restClient;
-        private readonly RGFakeData _data;
+        private readonly ExplicitSingletonResourcesRestOperations _restClient;
+        private readonly ExplicitSingletonResourceData _data;
 
-        /// <summary> Initializes a new instance of the <see cref="RGFake"/> class for mocking. </summary>
-        protected RGFake()
+        /// <summary> Initializes a new instance of the <see cref="ExplicitSingletonResource"/> class for mocking. </summary>
+        protected ExplicitSingletonResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "RGFake"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "ExplicitSingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal RGFake(ArmResource options, RGFakeData resource) : base(options, resource.Id)
+        internal ExplicitSingletonResource(ArmResource options, ExplicitSingletonResourceData resource) : base(options, resource.Id)
         {
             HasData = true;
             _data = resource;
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new RGFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        /// <summary> Initializes a new instance of the <see cref="RGFake"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExplicitSingletonResource"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal RGFake(ArmResource options, ResourceIdentifier id) : base(options, id)
+        internal ExplicitSingletonResource(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
+            Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new RGFakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/rgFakes";
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/rgFakes/explicitSingletonResources";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
@@ -60,7 +62,7 @@ namespace MgmtContextualPath
 
         /// <summary> Gets the data representing this Feature. </summary>
         /// <exception cref="InvalidOperationException"> Throws if there is no data loaded in the current instance. </exception>
-        public virtual RGFakeData Data
+        public virtual ExplicitSingletonResourceData Data
         {
             get
             {
@@ -70,19 +72,22 @@ namespace MgmtContextualPath
             }
         }
 
+        /// <summary> Gets the parent resource of this resource. </summary>
+        public ArmResource Parent { get; }
+
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<RGFake>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExplicitSingletonResource>> GetAsync(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RGFake.Get");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
-                return Response.FromValue(new RGFake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -94,16 +99,16 @@ namespace MgmtContextualPath
         /// <summary> Retrieves information about an fake. </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RGFake> Get(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<ExplicitSingletonResource> Get(string expand = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("RGFake.Get");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RGFake(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -133,14 +138,14 @@ namespace MgmtContextualPath
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async virtual Task<Response<RGFake>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExplicitSingletonResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.AddTag");
             scope.Start();
             try
             {
@@ -148,7 +153,7 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -162,14 +167,14 @@ namespace MgmtContextualPath
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public virtual Response<RGFake> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public virtual Response<ExplicitSingletonResource> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.AddTag");
             scope.Start();
             try
             {
@@ -177,7 +182,7 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,14 +195,14 @@ namespace MgmtContextualPath
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async virtual Task<Response<RGFake>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExplicitSingletonResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.SetTags");
             scope.Start();
             try
             {
@@ -206,7 +211,7 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -219,14 +224,14 @@ namespace MgmtContextualPath
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public virtual Response<RGFake> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public virtual Response<ExplicitSingletonResource> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException($"{nameof(tags)} provided cannot be null.", nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.SetTags");
             scope.Start();
             try
             {
@@ -235,7 +240,7 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -248,14 +253,14 @@ namespace MgmtContextualPath
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async virtual Task<Response<RGFake>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ExplicitSingletonResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.RemoveTag");
             scope.Start();
             try
             {
@@ -263,7 +268,7 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -276,14 +281,14 @@ namespace MgmtContextualPath
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public virtual Response<RGFake> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public virtual Response<ExplicitSingletonResource> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
                 throw new ArgumentNullException($"{nameof(key)} provided cannot be null or a whitespace.", nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("RGFake.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.RemoveTag");
             scope.Start();
             try
             {
@@ -291,7 +296,31 @@ namespace MgmtContextualPath
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                return Response.FromValue(new RGFake(this, originalResponse.Value), originalResponse.GetRawResponse());
+                return Response.FromValue(new ExplicitSingletonResource(this, originalResponse.Value), originalResponse.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Create or update an fake. </summary>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ExplicitSingletonResource>> CreateOrUpdateAsync(ExplicitSingletonResourceData parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ExplicitSingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -300,32 +329,29 @@ namespace MgmtContextualPath
             }
         }
 
-        /// <summary> Gets a list of RGChildResources in the RGFake. </summary>
-        /// <returns> An object representing collection of RGChildResources and their operations over a RGFake. </returns>
-        public RGChildResourceContainer GetRGChildResources()
+        /// <summary> Create or update an fake. </summary>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ExplicitSingletonResource> CreateOrUpdate(ExplicitSingletonResourceData parameters, CancellationToken cancellationToken = default)
         {
-            return new RGChildResourceContainer(this);
-        }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-        /// <summary> Gets a list of FakeTupleResources in the RGFake. </summary>
-        /// <returns> An object representing collection of FakeTupleResources and their operations over a RGFake. </returns>
-        public FakeTupleResourceContainer GetFakeTupleResources()
-        {
-            return new FakeTupleResourceContainer(this);
-        }
-
-        /// <summary> Gets an object representing a ImplicitSingletonResource along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="ImplicitSingletonResource" /> object. </returns>
-        public ImplicitSingletonResource GetImplicitSingletonResource()
-        {
-            return new ImplicitSingletonResource(this, Id + "/implicitSingletonResources/default");
-        }
-
-        /// <summary> Gets an object representing a ExplicitSingletonResource along with the instance operations that can be performed on it. </summary>
-        /// <returns> Returns a <see cref="ExplicitSingletonResource" /> object. </returns>
-        public ExplicitSingletonResource GetExplicitSingletonResource()
-        {
-            return new ExplicitSingletonResource(this, Id + "/explicitSingletonResources/default");
+            using var scope = _clientDiagnostics.CreateScope("ExplicitSingletonResource.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
+                return Response.FromValue(new ExplicitSingletonResource(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

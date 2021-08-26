@@ -921,7 +921,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Append($"var {response} = {GetAwait(isAsync)}");
             writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
-            BuildAndWriteParameters(writer, clientMethod, isResourceLevel: isResourceLevel);
+            BuildAndWriteParameters(writer, clientMethod, parameterMapping, isResourceLevel: isResourceLevel);
             writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             WriteLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping, isAsync);

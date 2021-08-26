@@ -13,5 +13,8 @@
   "OperationGroupToParent": {
     "FakeTupleResources": "Microsoft.Fake/rgFakes",
     "ImplicitSingletonResources": "Microsoft.Fake/rgFakes"
+  },
+  "OperationGroupToSingletonResource": {
+    "ExplicitSingletonResources": "explicitSingletonResources/default"
   }
 }

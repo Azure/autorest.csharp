@@ -16,4 +16,6 @@ namespace: MgmtContextualPath
 operation-group-to-parent:
   FakeTupleResources: Microsoft.Fake/rgFakes
   ImplicitSingletonResources: Microsoft.Fake/rgFakes
+operation-group-to-singleton-resource:
+  ExplicitSingletonResources: explicitSingletonResources/default
 ```
