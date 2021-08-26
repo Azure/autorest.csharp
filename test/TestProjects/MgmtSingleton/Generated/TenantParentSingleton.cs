@@ -39,7 +39,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentSingleton"/> class. </summary>
@@ -49,7 +49,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>

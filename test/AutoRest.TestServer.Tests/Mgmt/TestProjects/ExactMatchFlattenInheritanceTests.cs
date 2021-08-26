@@ -3,6 +3,7 @@
 
 using System;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using ExactMatchFlattenInheritance;
 using ExactMatchFlattenInheritance.Models;

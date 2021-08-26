@@ -37,7 +37,7 @@ namespace TenantOnly
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
@@ -46,7 +46,7 @@ namespace TenantOnly
         internal BillingAccount(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>

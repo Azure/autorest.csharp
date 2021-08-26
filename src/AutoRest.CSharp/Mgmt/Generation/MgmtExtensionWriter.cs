@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                writer.Append($"return new {restClient.Type}(clientDiagnostics, pipeline, ");
+                writer.Append($"return new {restClient.Type}(clientDiagnostics, pipeline, clientOptions, ");
                 foreach (var parameter in restClient.Parameters)
                 {
                     if (parameter.IsApiVersionParameter)

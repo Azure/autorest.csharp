@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
-            var restClientWriter = new RestClientWriter();
+            var restClientWriter = new MgmtRestClientWriter();
             var serializeWriter = new SerializationWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 

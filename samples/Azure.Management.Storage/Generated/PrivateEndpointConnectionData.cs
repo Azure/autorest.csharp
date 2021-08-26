@@ -7,7 +7,7 @@
 
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {

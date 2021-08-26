@@ -23,7 +23,7 @@ namespace ResourceRename
         #region SshPublicKey
         private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Creates a new SSH public key resource. </summary>
