@@ -42,13 +42,18 @@ namespace MgmtContextualPath
         // Container level operations.
 
         /// <summary> Create or update an fake. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the tuple resource. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tupleName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeTupleResourceCreateOrUpdateOperation CreateOrUpdate(string tupleName, FakeTupleResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="version"/>, <paramref name="tupleName"/>, or <paramref name="parameters"/> is null. </exception>
+        public virtual FakeTupleResourceCreateOrUpdateOperation CreateOrUpdate(string version, string tupleName, FakeTupleResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
             if (tupleName == null)
             {
                 throw new ArgumentNullException(nameof(tupleName));
@@ -76,13 +81,18 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Create or update an fake. </summary>
+        /// <param name="version"> The version. </param>
         /// <param name="tupleName"> The name of the tuple resource. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tupleName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeTupleResourceCreateOrUpdateOperation> CreateOrUpdateAsync(string tupleName, FakeTupleResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="version"/>, <paramref name="tupleName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async virtual Task<FakeTupleResourceCreateOrUpdateOperation> CreateOrUpdateAsync(string version, string tupleName, FakeTupleResourceData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
             if (tupleName == null)
             {
                 throw new ArgumentNullException(nameof(tupleName));

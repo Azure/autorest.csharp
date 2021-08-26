@@ -35,8 +35,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override Type ExtensionOperationVariableType => typeof(Subscription);
 
-        protected override string ContextualPath => ResourceTypeBuilder.TypeToContextualPath[ResourceTypeBuilder.Subscriptions];
-
         public override void WriteExtension()
         {
             using (_writer.Namespace(Context.DefaultNamespace))

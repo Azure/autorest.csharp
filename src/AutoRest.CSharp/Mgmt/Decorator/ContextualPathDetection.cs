@@ -111,6 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // considering some rare conditions, we do not require we have to have a method that corresponds to the contextual path, the path can be virtual to ensure we get correct parameter invocation around the Id
             // we always need to get the "value" of the key value pair in the path
+            // TODO -- we have issues on the scope resources
             var lastOddIndex = suffixSegments.Length % 2 == 0 ? suffixSegments.Length - 1 : suffixSegments.Length - 2;
             for (int i = lastOddIndex; i >= 0; i -= 2)
             {

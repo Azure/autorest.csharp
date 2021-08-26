@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private CodeWriter _writer;
         private Resource _resource;
-        private BuildContext<MgmtOutputLibrary> _context;
         private ResourceData _resourceData;
         private bool _inheritArmResourceBase = false;
         private bool _isITaggableResource = false;
@@ -47,21 +46,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected CSharpType TypeOfThis => _resource.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
-        private MgmtConfiguration Config => _context.Configuration.MgmtConfiguration;
         private bool IsSingleton { get; }
-
-        protected override string ContextualPath => _resource.ContextualPath;
 
         private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
 
-        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
+        public ResourceWriter(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
             _resource = resource;
-            _context = context;
-            _resourceData = _context.Library.GetResourceData(_resource.OperationGroup);
+            _resourceData = Context.Library.GetResourceData(_resource.OperationGroup);
 
-            IsSingleton = _resource.OperationGroup.IsSingletonResource(Config);
+            IsSingleton = _resource.OperationGroup.IsSingletonResource(Configuration);
 
             _contextualParameterMappings = resource.BuildContextualParameterMapping(context);
         }
@@ -120,7 +115,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             foreach (var operationGroup in _resource.ChildOperations.Keys)
             {
-                _writer.Append($"private {_context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
+                _writer.Append($"private {Context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
             }
         }
 
@@ -150,7 +145,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 }
             }
 
@@ -167,7 +162,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {_context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
                 }
             }
         }
@@ -176,7 +171,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         {
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(Config)}\";");
+            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{_resource.OperationGroup.ResourceType(Configuration)}\";");
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for the operations");
             _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
@@ -243,13 +238,13 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
-            var resourceContainer = _context.Library.GetResourceContainer(_resource.OperationGroup);
+            var resourceContainer = Context.Library.GetResourceContainer(_resource.OperationGroup);
             foreach (var clientMethod in _resource.ResourceClientMethods)
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, true);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, false);
                 }
             }
 
@@ -272,8 +267,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     var originalName = clientMethod.Name;
                     var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
                     Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, true, restClientName);
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, _context, false, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, true, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
@@ -291,7 +286,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (!clientMethodsList.Contains(clientMethod))
                 {
-                    if (_context.Library.TryGetMethodForMergedOperation($"{_resource.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
+                    if (Context.Library.TryGetMethodForMergedOperation($"{_resource.OperationGroup.Key}_{clientMethod.Name}_{clientMethod.Request.HttpMethod}", out var mergedMethodName))
                     {
                         if (mergedMethods.TryGetValue(mergedMethodName, out var methods))
                         {
@@ -673,7 +668,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Append($"await ");
             }
-            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup, _context).ToList();
+            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup).ToList();
             _writer.Append($"{RestClientField}.{CreateMethodName(_resource.GetMethod.Name, async)}( ");
             foreach (string paramNames in pathParamNames)
             {
@@ -696,17 +691,17 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), true, true, methodName: methodName, methods: clientMethods);
-            WriteLROMethod(_writer, clientMethod, _context, _context.Library.IsLongRunningReallyLong(clientMethod), false, true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: true, isVirtual: true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: false, isVirtual: true, methodName: methodName, methods: clientMethods);
         }
 
         private void WriteChildResourceEntries()
         {
-            foreach (var item in _context.CodeModel.OperationGroups)
+            foreach (var item in Context.CodeModel.OperationGroups)
             {
-                if (item.ParentResourceType(Config).Equals(_resource.OperationGroup.ResourceType(Config)))
+                if (item.ParentResourceType(Configuration).Equals(_resource.OperationGroup.ResourceType(Configuration)))
                 {
-                    if (item.TryGetSingletonResourceSuffix(Config, out var singletonResourceSuffix))
+                    if (item.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
                     {
                         WriteChildSingletonResourceEntry(item, singletonResourceSuffix);
                     }
@@ -720,7 +715,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteChildNonSingletonResourceEntry(OperationGroup operationGroupOfChildResource)
         {
-            var container = _context.Library.GetResourceContainer(operationGroupOfChildResource);
+            var container = Context.Library.GetResourceContainer(operationGroupOfChildResource);
             if (container == null)
                 return;
             _writer.Line();
@@ -734,7 +729,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteChildSingletonResourceEntry(OperationGroup operationGroupOfChildSingleton, string singletonResourceSuffix)
         {
-            var singletonResource = _context.Library.GetArmResource(operationGroupOfChildSingleton);
+            var singletonResource = Context.Library.GetArmResource(operationGroupOfChildSingleton);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets an object representing a {singletonResource.Type.Name} along with the instance operations that can be performed on it.");
             _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{singletonResource.Type.Name}\" /> object.");
@@ -754,7 +749,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(Context);
             if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";

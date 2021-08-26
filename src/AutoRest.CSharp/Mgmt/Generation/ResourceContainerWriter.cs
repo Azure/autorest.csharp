@@ -22,6 +22,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
+using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -40,16 +41,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
         private Resource _resource;
-        private BuildContext<MgmtOutputLibrary> _context;
 
         protected override string ContextProperty => "Parent";
 
         protected CSharpType TypeOfThis => _resourceContainer.Type;
         protected override string TypeNameOfThis => TypeOfThis.Name;
 
-        protected override string ContextualPath => ""; // TODO -- placeholder
+        private IEnumerable<ContextualParameterMapping> _contextualParameterMappings;
 
-        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
+        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _writer = writer;
             _resourceContainer = resourceContainer;
@@ -57,7 +57,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _resourceData = context.Library.GetResourceData(operationGroup);
             _restClient = context.Library.GetRestClient(operationGroup);
             _resource = context.Library.GetArmResource(operationGroup);
-            _context = context;
+
+            _contextualParameterMappings = resourceContainer.BuildContextualParameterMapping(context);
         }
 
         public void WriteContainer()
@@ -75,7 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteContainerCtors(_writer, _restClient!, typeof(ArmResource), "parent");
                     //TODO: this is a workaround to allow resource container to accept multiple parent resource types
                     //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
-                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
+                    if (_resourceContainer.OperationGroup.IsScopeResource(Configuration) || _resourceContainer.OperationGroup.IsExtensionResource(Configuration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
                     {
                         WriteValidate();
                     }
@@ -103,8 +104,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, true);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, false);
             }
         }
 
@@ -199,8 +200,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, _context, false, false, true, "CreateOrUpdate", clientMethods);
-            WriteLROMethod(_writer, clientMethod, _context, false, true, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _contextualParameterMappings, false, false, true, "CreateOrUpdate", clientMethods);
+            WriteLROMethod(_writer, clientMethod, _contextualParameterMappings, false, true, true, "CreateOrUpdate", clientMethods);
         }
 
         /// <summary>
@@ -431,8 +432,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (clientMethod != null)
                 {
                     //TODO: merge methods like WriteList
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
                 }
             }
             else
@@ -448,8 +449,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (listMethod.ClientMethod != null)
                     {
                         _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
                     }
                 }
             }
@@ -509,7 +510,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(_context);
+            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(Context);
             if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
             {
                 valueExpression = "Id.ResourceGroupName";

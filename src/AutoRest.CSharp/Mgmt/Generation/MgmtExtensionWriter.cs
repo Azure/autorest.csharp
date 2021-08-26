@@ -24,12 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        protected BuildContext<MgmtOutputLibrary> Context { get; }
-        protected MgmtConfiguration Configuration => Context.Configuration.MgmtConfiguration;
-
-        public MgmtExtensionWriter(BuildContext<MgmtOutputLibrary> context)
+        public MgmtExtensionWriter(BuildContext<MgmtOutputLibrary> context) : base(context)
         {
-            Context = context;
         }
 
         public abstract void WriteExtension();

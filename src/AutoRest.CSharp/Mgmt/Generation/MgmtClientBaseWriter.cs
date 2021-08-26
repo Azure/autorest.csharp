@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -36,13 +37,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override string RestClientAccessibility => "private";
         protected virtual string ContextProperty => "";
         protected const string BaseUriField = "BaseUri";
+        protected BuildContext<MgmtOutputLibrary> Context { get; }
+        protected MgmtConfiguration Configuration => Context.Configuration.MgmtConfiguration;
 
         /// <summary>
         /// ClassName is the name of the class which this writer is writing
         /// </summary>
         protected abstract string TypeNameOfThis { get; }
 
-        protected abstract string ContextualPath { get; }
+        protected MgmtClientBaseWriter(BuildContext<MgmtOutputLibrary> context)
+        {
+            Context = context;
+        }
 
         protected void WriteUsings(CodeWriter writer)
         {
@@ -517,10 +523,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool isAsync, string? restClientName = null)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, bool isAsync, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, context);
+            (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, Context);
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -559,12 +565,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         // first we need to validate that is this function listing this resource itself, or list something else
                         var elementType = bodyType!.Arguments.First();
-                        if (context.Library.TryGetArmResource(operationGroup, out var resource)
+                        if (Context.Library.TryGetArmResource(operationGroup, out var resource)
                             && resource.Type.EqualsByName(elementType))
                         {
                             writer.UseNamespace("System.Linq");
 
-                            var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
+                            var converter = $".Select(data => new {Context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
                             writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value{converter} as {bodyType}, response.GetRawResponse())");
                         }
                         else
@@ -574,7 +580,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     else
                     {
-                        context.Library.TryGetArmResource(operationGroup, out var resource);
+                        Context.Library.TryGetArmResource(operationGroup, out var resource);
                         if (wasResourceData && resource != null && bodyType != null)
                         {
                             writer.Append($"return Response.FromValue(new {bodyType}(this, response.Value), response.GetRawResponse())");
@@ -599,9 +605,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         // This method returns an array of path and non-path parameters name
         // TODO: this method has some bugs for methods in MgmtListMethods and is no longer used, we should consistently use BuildParameterMapping().
-        protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup)
         {
-            var paramNames = GetPathParametersName(clientMethod, operationGroup, context).ToList();
+            var paramNames = GetPathParametersName(clientMethod, operationGroup).ToList();
             var nonPathParams = clientMethod.NonPathParameters;
             foreach (Parameter parameter in nonPathParams)
             {
@@ -611,7 +617,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return paramNames.ToArray();
         }
 
-        protected string[] GetPathParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        protected string[] GetPathParametersName(RestClientMethod clientMethod, OperationGroup operationGroup)
         {
             List<string> paramNameList = new List<string>();
             var pathParamsLength = clientMethod.PathParameters.Count;
@@ -622,7 +628,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
-                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context, clientMethod);
+                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, clientMethod);
                 paramNameList.Reverse();
             }
 
@@ -637,42 +643,42 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         // This method builds the path parameters names
-        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, RestClientMethod clientMethod)
+        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, RestClientMethod clientMethod)
         {
-            if (IsTerminalState(operationGroup, context) && paramLength == 1)
+            if (IsTerminalState(operationGroup, Context) && paramLength == 1)
             {
-                paramNames.Add(GetParentValue(operationGroup, context, name, clientMethod));
+                paramNames.Add(GetParentValue(operationGroup, name, clientMethod));
                 paramLength--;
             }
             else if (paramLength == 1)
             {
-                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
+                var parentOperationGroup = operationGroup.ParentOperationGroup(Context);
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, clientMethod);
             }
             else
             {
-                var parentOperationGroup = operationGroup.ParentOperationGroup(context);
+                var parentOperationGroup = operationGroup.ParentOperationGroup(Context);
                 name = $"{name}.Parent";
                 paramNames.Add($"{name}.Name");
                 paramLength--;
 
                 if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context, clientMethod);
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, clientMethod);
                 else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context, clientMethod);
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, clientMethod);
             }
         }
 
-        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string name, RestClientMethod clientMethod)
+        public string GetParentValue(OperationGroup operationGroup, string name, RestClientMethod clientMethod)
         {
-            if (operationGroup.IsTupleResource(context))
+            if (operationGroup.IsTupleResource(Context))
             {
                 return $"{name}.Parent.Name";
             }
-            var parentResourceType = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
+            var parentResourceType = operationGroup.ParentResourceType(Configuration);
 
             switch (parentResourceType)
             {
@@ -710,27 +716,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected CSharpType GetLROObjectType(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        protected CSharpType GetLROObjectType(RestClientMethod clientMethod)
         {
             return clientMethod.Operation!.IsLongRunning
-                ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
+                ? Context.Library.GetLongRunningOperation(clientMethod.Operation).Type
+                : Context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
         }
 
-        protected CSharpType? GetLROResultType(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        protected CSharpType? GetLROResultType(RestClientMethod clientMethod)
         {
             Debug.Assert(clientMethod.Operation != null);
 
             CSharpType? returnType = null;
             if (clientMethod.Operation.IsLongRunning)
             {
-                LongRunningOperation operation = context.Library.GetLongRunningOperation(clientMethod.Operation);
+                LongRunningOperation operation = Context.Library.GetLongRunningOperation(clientMethod.Operation);
                 MgmtLongRunningOperation longRunningOperation = AsMgmtOperation(operation);
                 returnType = longRunningOperation.WrapperType != null ? longRunningOperation.WrapperType : longRunningOperation.ResultType;
             }
             else
             {
-                NonLongRunningOperation nonLongRunningOperation = context.Library.GetNonLongRunningOperation(clientMethod.Operation);
+                NonLongRunningOperation nonLongRunningOperation = Context.Library.GetNonLongRunningOperation(clientMethod.Operation);
                 returnType = nonLongRunningOperation.ResultType;
             }
 
@@ -744,8 +750,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        protected void WriteLROMethod(CodeWriter writer, RestClientMethod method, BuildContext<MgmtOutputLibrary> context, bool isLongRunningReallyLong,
-            bool isAsync, bool isVirtual = false, string? methodName = null, List<RestClientMethod>? methods = null)
+        protected void WriteLROMethod(CodeWriter writer, RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings,
+            bool isLongRunningReallyLong, bool isAsync, bool isVirtual = false, string? methodName = null, List<RestClientMethod>? methods = null)
         {
             Debug.Assert(method.Operation != null);
 
@@ -757,7 +763,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{method.Description}");
 
-            var parameterMapping = BuildParameterMapping(method);
+            var parameterMapping = contextualParameterMappings == null ? BuildParameterMapping(method) : BuildParameterMapping(method, contextualParameterMappings);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             foreach (var parameter in passThruParameters)
@@ -770,8 +776,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
 
             CSharpType lroObjectType = method.Operation.IsLongRunning
-                ? context.Library.GetLongRunningOperation(method.Operation).Type
-                : context.Library.GetNonLongRunningOperation(method.Operation).Type;
+                ? Context.Library.GetLongRunningOperation(method.Operation).Type
+                : Context.Library.GetNonLongRunningOperation(method.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(isAsync);
 
             writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName($"{methodName}", isAsync)}(");
@@ -793,7 +799,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     response.SetActualName(response.RequestedName);
                     if (method.Operation.IsAncestorScope() || methods == null || methods.Count < 2)
                     {
-                        WriteLROMethodBody(writer, method, lroObjectType, context, response, parameterMapping, isAsync);
+                        WriteLROMethodBody(writer, method, lroObjectType, Context, response, parameterMapping, isAsync);
                     }
                     else
                     {
@@ -822,16 +828,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 {
                                     using (writer.Scope($"if (Id.ResourceType.Equals({typeof(ResourceGroup)}.ResourceType))"))
                                     {
-                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync, isResourceLevel: true);
+                                        WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync, isResourceLevel: true);
                                     }
                                 }
                                 else
                                 {
-                                    WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
+                                    WriteLROMethodBody(writer, resourceGroupMethod, lroObjectType, Context, response, BuildParameterMapping(resourceGroupMethod), isAsync);
                                 }
                             }
                         } // No else clause with the assumption that resourceMethod only exists when resourceGroupMethod exists.
@@ -844,7 +850,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             methodDict.Remove(subscriptionMethod);
                             using (writer.Scope($"{elseStr} (Id.TryGetSubscriptionId(out _))"))
                             {
-                                WriteLROMethodBody(writer, subscriptionMethod, lroObjectType, context, response, BuildParameterMapping(subscriptionMethod), isAsync);
+                                WriteLROMethodBody(writer, subscriptionMethod, lroObjectType, Context, response, BuildParameterMapping(subscriptionMethod), isAsync);
                             }
                         }
 
@@ -865,16 +871,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                     }
                                     using (writer.Scope($"if (parent.ResourceType.Equals({typeof(ManagementGroup)}.ResourceType))"))
                                     {
-                                        WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                        WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod), isAsync);
                                     }
                                     using (writer.Scope($"else"))
                                     {
-                                        WriteLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), isAsync);
+                                        WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod), isAsync);
                                     }
                                 }
                                 else
                                 {
-                                    WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, context, response, BuildParameterMapping(managementGroupMethod), isAsync);
+                                    WriteLROMethodBody(writer, managementGroupMethod, lroObjectType, Context, response, BuildParameterMapping(managementGroupMethod), isAsync);
                                 }
                             }
                         }
@@ -883,7 +889,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             methodDict.Remove(tenantMethod);
                             using (writer.Scope($"{elseStr}"))
                             {
-                                WriteLROMethodBody(writer, tenantMethod, lroObjectType, context, response, BuildParameterMapping(tenantMethod), isAsync);
+                                WriteLROMethodBody(writer, tenantMethod, lroObjectType, Context, response, BuildParameterMapping(tenantMethod), isAsync);
                             }
                         }
 
@@ -949,7 +955,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
             writer.Line($"{response});");
-            CSharpType? lroResultType = GetLROResultType(clientMethod, context);
+            CSharpType? lroResultType = GetLROResultType(clientMethod);
             var waitForCompletionMethod = lroResultType == null && isAsync ?
                     "WaitForCompletionResponse" :
                     "WaitForCompletion";
