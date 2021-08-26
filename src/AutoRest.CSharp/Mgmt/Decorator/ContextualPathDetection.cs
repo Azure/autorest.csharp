@@ -133,6 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             BuildContextualParameterMappingHierarchy(parent, parentType, parentContextualPath, context, parameterMappingStack, idVariableName, invocationSuffix);
         }
 
+        // TODO -- our current implementation of removing the provider segment is not completely correct
         private static string[]? GetPathSuffixSegments(string currentPath, string parentPath)
         {
             if (!currentPath.StartsWith(parentPath))
