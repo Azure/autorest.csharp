@@ -751,7 +751,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteLROMethod(CodeWriter writer, RestClientMethod method, IEnumerable<ContextualParameterMapping> contextualParameterMappings,
-            bool isLongRunningReallyLong, bool isAsync, bool isVirtual = false, string? methodName = null, List<RestClientMethod>? methods = null)
+            bool isLongRunningReallyLong, bool isAsync, string? methodName = null, List<RestClientMethod>? methods = null)
         {
             Debug.Assert(method.Operation != null);
 
@@ -780,7 +780,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : Context.Library.GetNonLongRunningOperation(method.Operation).Type;
             CSharpType responseType = lroObjectType.WrapAsync(isAsync);
 
-            writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName($"{methodName}", isAsync)}(");
+            writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(true)} {responseType} {CreateMethodName($"{methodName}", isAsync)}(");
             foreach (var parameter in passThruParameters)
             {
                 writer.WriteParameter(parameter);

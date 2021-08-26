@@ -691,8 +691,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: true, isVirtual: true, methodName: methodName, methods: clientMethods);
-            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: false, isVirtual: true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: true, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: false, methodName: methodName, methods: clientMethods);
         }
 
         private void WriteChildResourceEntries()
