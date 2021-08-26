@@ -319,7 +319,7 @@ namespace MgmtContextualPath
             scope.Start();
             try
             {
-                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ImplicitSingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -344,7 +344,7 @@ namespace MgmtContextualPath
             scope.Start();
             try
             {
-                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, parameters, cancellationToken);
                 return Response.FromValue(new ImplicitSingletonResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

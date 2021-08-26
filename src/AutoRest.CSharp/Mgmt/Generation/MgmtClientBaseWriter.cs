@@ -523,7 +523,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, bool isAsync, string? restClientName = null)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, Diagnostic diagnostic, OperationGroup operationGroup, bool isAsync, string? restClientName = null, IEnumerable<ContextualParameterMapping>? contextualParameterMappings = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
             (var bodyType, bool isListFunction, bool wasResourceData) = restClientMethod.GetBodyTypeForList(operationGroup, Context);
@@ -534,18 +534,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.WriteXmlDocumentationSummary($"{restClientMethod.Description}");
 
-            var nonPathParameters = restClientMethod.NonPathParameters;
-            foreach (Parameter parameter in nonPathParameters)
+            var parameterMapping = contextualParameterMappings == null ? BuildParameterMapping(restClientMethod) : BuildParameterMapping(restClientMethod, contextualParameterMappings);
+            var methodParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
+            foreach (Parameter parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
+            writer.WriteXmlDocumentationRequiredParametersException(methodParameters);
 
             writer.Append($"{restClientMethod.Accessibility} {GetVirtual(true)} {GetAsyncKeyword(isAsync)} {responseType} {CreateMethodName(methodName, isAsync)}(");
 
-            foreach (Parameter parameter in nonPathParameters)
+            foreach (Parameter parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
             }
@@ -553,12 +554,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks(nonPathParameters);
+                writer.WriteParameterNullChecks(methodParameters);
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     writer.Append($"var response = {GetAwait(isAsync)}");
                     writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, isAsync)}(");
-                    BuildAndWriteParameters(writer, restClientMethod);
+                    WriteArguments(writer, parameterMapping);
                     writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
                     if (isListFunction)

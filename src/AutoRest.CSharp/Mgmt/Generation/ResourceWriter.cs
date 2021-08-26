@@ -238,13 +238,12 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             // 3. Listing children (might be resource or not) -> on the operations
 
             // write rest of the methods
-            var resourceContainer = Context.Library.GetResourceContainer(_resource.OperationGroup);
             foreach (var clientMethod in _resource.ResourceClientMethods)
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, true);
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, false);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, true, contextualParameterMappings: _contextualParameterMappings);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, false, contextualParameterMappings: _contextualParameterMappings);
                 }
             }
 
@@ -267,8 +266,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     var originalName = clientMethod.Name;
                     var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
                     Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, true, restClientName);
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, false, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, true, restClientName, _contextualParameterMappings);
+                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, false, restClientName, _contextualParameterMappings);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
