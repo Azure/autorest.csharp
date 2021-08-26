@@ -13,12 +13,5 @@
   "OperationGroupToParent": {
     "FakeTupleResources": "Microsoft.Fake/rgFakes",
     "ImplicitSingletonResources": "Microsoft.Fake/rgFakes"
-  },
-  "OperationGroupToContextualPath": {
-    "Fakes": "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}",
-    "RGFakes": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}",
-    "RGChildResources": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/childResources/{childName}",
-    "FakeTupleResources": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/versions/{version}/tupleResources/{tupleName}",
-    "ImplicitSingletonResources": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default"
   }
 }

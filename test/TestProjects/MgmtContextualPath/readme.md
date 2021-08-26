@@ -9,13 +9,6 @@ azure-arm: true
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtContextualPath.json
 namespace: MgmtContextualPath
-# temp
-operation-group-to-contextual-path:
-  Fakes: /subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}
-  RGFakes: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}
-  RGChildResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/childResources/{childName}
-  FakeTupleResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/versions/{version}/tupleResources/{tupleName}
-  ImplicitSingletonResources: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/implicitSingletonResources/default
 # operation-group-to-resource-type:
 #   Quotas: something
 # operation-group-to-resource:
