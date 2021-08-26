@@ -190,7 +190,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this <see cref=\"{ExtensionOperationVariableType}\" />.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
-            var methodParameters = BuildParameterMapping(pagingMethod.Method).Where(m => m.IsPassThru).Select(m => m.Parameter);
+            var parameterMappings = BuildParameterMapping(pagingMethod.Method);
+            var methodParameters = parameterMappings.Where(m => m.IsPassThru).Select(m => m.Parameter);
             foreach (var parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
@@ -226,7 +227,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     WritePagingOperationBody(writer, pagingMethod, pageType, restOperations.ActualName,
                         new Diagnostic($"{TypeNameOfThis}.{methodName}"), clientDiagnostics.ActualName,
-                            converter, async);
+                            converter, parameterMappings, async);
                 }
                 writer.Append($");");
             }

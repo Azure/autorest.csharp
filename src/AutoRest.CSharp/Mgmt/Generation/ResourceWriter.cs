@@ -242,8 +242,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (!clientMethodsList.Contains(clientMethod.RestClientMethod))
                 {
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, true, contextualParameterMappings: _contextualParameterMappings);
-                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, clientMethod.Diagnostics, _resource.OperationGroup, false, contextualParameterMappings: _contextualParameterMappings);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, _resource.OperationGroup, _contextualParameterMappings, clientMethod.Diagnostics, true);
+                    WriteClientMethod(_writer, clientMethod, clientMethod.Name, _resource.OperationGroup, _contextualParameterMappings, clientMethod.Diagnostics, false);
                 }
             }
 
@@ -252,8 +252,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 if (listMethod.PagingMethod != null)
                 {
-                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, false);
-                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, true);
+                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, _contextualParameterMappings, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, false);
+                    WritePagingMethod(_resource.OperationGroup, listMethod.PagingMethod, _contextualParameterMappings, listMethod.PagingMethod.Diagnostics, listMethod.PagingMethod.Name, RestClientField, true);
                 }
             }
 
@@ -266,16 +266,16 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     var originalName = clientMethod.Name;
                     var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
                     Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, true, restClientName, _contextualParameterMappings);
-                    WriteClientMethod(_writer, clientMethod, methodName, diagnostic, pair.Key, false, restClientName, _contextualParameterMappings);
+                    WriteClientMethod(_writer, clientMethod, methodName, pair.Key, _contextualParameterMappings, diagnostic, true, restClientName);
+                    WriteClientMethod(_writer, clientMethod, methodName, pair.Key, _contextualParameterMappings, diagnostic, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
                     var originalName = pagingMethod.Name;
                     var methodName = originalName.EndsWith($"By{TypeOfThis.Name}") ? originalName.Substring(0, originalName.IndexOf("By")) : originalName;
                     Diagnostic diagnostic = new Diagnostic($"{TypeOfThis.Name}.{methodName}", Array.Empty<DiagnosticAttribute>());
-                    WritePagingMethod(pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), false);
-                    WritePagingMethod(pair.Key, pagingMethod, diagnostic, methodName, GetRestClientName(pair.Key), true);
+                    WritePagingMethod(pair.Key, pagingMethod, _contextualParameterMappings, diagnostic, methodName, GetRestClientName(pair.Key), false);
+                    WritePagingMethod(pair.Key, pagingMethod, _contextualParameterMappings, diagnostic, methodName, GetRestClientName(pair.Key), true);
                 }
             }
 
@@ -307,13 +307,14 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             }
         }
 
-        private void WritePagingMethod(OperationGroup operationGroup, PagingMethod pagingMethod, Diagnostic diagnostic, string clientMethodName, string restClientName, bool async)
+        private void WritePagingMethod(OperationGroup operationGroup, PagingMethod pagingMethod, IEnumerable<ContextualParameterMapping> contextualParameterMappings, Diagnostic diagnostic, string clientMethodName, string restClientName, bool async)
         {
             _writer.Line();
-            var nonPathParameters = pagingMethod.Method.NonPathParameters;
+            var parameterMapping = BuildParameterMapping(pagingMethod.Method, contextualParameterMappings);
+            var methodParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             _writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.Description}");
-            foreach (var param in nonPathParameters)
+            foreach (var param in methodParameters)
             {
                 _writer.WriteXmlDocumentationParameter(param);
             }
@@ -327,7 +328,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
             var methodName = CreateMethodName(clientMethodName, async);
             _writer.Append($"public virtual {returnType} {methodName}(");
-            foreach (var param in nonPathParameters)
+            foreach (var param in methodParameters)
             {
                 _writer.WriteParameter(param);
             }
@@ -336,7 +337,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             using (_writer.Scope())
             {
                 WritePagingOperationBody(_writer, pagingMethod, itemType, restClientName, diagnostic,
-                    ClientDiagnosticsField, $"", async);
+                    ClientDiagnosticsField, $"", parameterMapping, async);
             }
         }
 
@@ -690,8 +691,8 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
 
         private void WriteLRO(RestClientMethod clientMethod, string? methodName = null, List<RestClientMethod>? clientMethods = null)
         {
-            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: true, methodName: methodName, methods: clientMethods);
-            WriteLROMethod(_writer, clientMethod, contextualParameterMappings: _contextualParameterMappings, isLongRunningReallyLong: Context.Library.IsLongRunningReallyLong(clientMethod), isAsync: false, methodName: methodName, methods: clientMethods);
+            WriteLROMethod(_writer, clientMethod, _contextualParameterMappings, Context.Library.IsLongRunningReallyLong(clientMethod), true, methodName, clientMethods);
+            WriteLROMethod(_writer, clientMethod, _contextualParameterMappings, Context.Library.IsLongRunningReallyLong(clientMethod), false, methodName, clientMethods);
         }
 
         private void WriteChildResourceEntries()

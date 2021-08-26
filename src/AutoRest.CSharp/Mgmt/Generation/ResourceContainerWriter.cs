@@ -104,8 +104,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, true);
-                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, false);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.OperationGroup, _contextualParameterMappings, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), true);
+                WriteClientMethod(_writer, restMethod, restMethod.Name, _resourceContainer.OperationGroup, _contextualParameterMappings, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), false);
             }
         }
 
@@ -432,8 +432,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (clientMethod != null)
                 {
                     //TODO: merge methods like WriteList
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", _resourceContainer.OperationGroup, _contextualParameterMappings, new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), true);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", _resourceContainer.OperationGroup, _contextualParameterMappings, new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), false);
                 }
             }
             else
@@ -449,8 +449,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (listMethod.ClientMethod != null)
                     {
                         _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, false);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", _resourceContainer.OperationGroup, _contextualParameterMappings, new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), true);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", _resourceContainer.OperationGroup, _contextualParameterMappings, new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), false);
                     }
                 }
             }
