@@ -25,6 +25,11 @@ operation-group-to-parent:
   Deployments: tenant
   PolicyAssignments: tenant
   ResourceLinks: tenant
+operation-group-to-contextual-path:
+#   PolicyAssignments: /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
+#   ResourceLinks: /{linkId}
+  DeploymentOperations: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}
+#   Deployments: /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
 merge-operations:
   WhatIf: Deployments_WhatIf_POST;Deployments_WhatIfAtTenantScope_POST;Deployments_WhatIfAtManagementGroupScope_POST;Deployments_WhatIfAtSubscriptionScope_POST
 directive:
