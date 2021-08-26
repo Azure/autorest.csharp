@@ -35,7 +35,7 @@ namespace MgmtListMethods
         internal TenantParentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

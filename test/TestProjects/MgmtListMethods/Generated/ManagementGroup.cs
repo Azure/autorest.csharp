@@ -39,7 +39,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ManagementGroup"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtListMethods
         internal ManagementGroup(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new ManagementGroupsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>

@@ -25,7 +25,7 @@ namespace Azure.Management.Storage
         #region StorageAccount
         private static StorageAccountsRestOperations GetStorageAccountsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new StorageAccountsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new StorageAccountsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the StorageAccounts for this <see cref="Subscription" />. </summary>
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
         #region Sku
         private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new SkusRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new SkusRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the SkuInformations for this <see cref="Subscription" />. </summary>
@@ -218,7 +218,7 @@ namespace Azure.Management.Storage
         #region Usage
         private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new UsagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>

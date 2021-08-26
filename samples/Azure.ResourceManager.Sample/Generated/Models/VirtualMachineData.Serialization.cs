@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Models.Plan> plan = default;
+            Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
@@ -180,7 +180,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))

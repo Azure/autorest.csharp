@@ -23,7 +23,7 @@ namespace OperationGroupMappings
         #region Usage
         private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new UsageRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>

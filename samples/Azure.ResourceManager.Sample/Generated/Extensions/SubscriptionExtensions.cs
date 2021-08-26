@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
         #region AvailabilitySet
         private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
@@ -153,7 +153,7 @@ namespace Azure.ResourceManager.Sample
         #region ProximityPlacementGroup
         private static ProximityPlacementGroupsRestOperations GetProximityPlacementGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the ProximityPlacementGroups for this <see cref="Subscription" />. </summary>
@@ -278,7 +278,7 @@ namespace Azure.ResourceManager.Sample
         #region DedicatedHostGroup
         private static DedicatedHostGroupsRestOperations GetDedicatedHostGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new DedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new DedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the DedicatedHostGroups for this <see cref="Subscription" />. </summary>
@@ -403,7 +403,7 @@ namespace Azure.ResourceManager.Sample
         #region SshPublicKey
         private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the SshPublicKeys for this <see cref="Subscription" />. </summary>
@@ -528,7 +528,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachine
         private static VirtualMachinesRestOperations GetVirtualMachinesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachinesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachinesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the VirtualMachines for this <see cref="Subscription" />. </summary>
@@ -759,7 +759,7 @@ namespace Azure.ResourceManager.Sample
         #region Image
         private static ImagesRestOperations GetImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ImagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Images for this <see cref="Subscription" />. </summary>
@@ -884,7 +884,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachineScaleSet
         private static VirtualMachineScaleSetsRestOperations GetVirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the VirtualMachineScaleSets for this <see cref="Subscription" />. </summary>
@@ -1009,7 +1009,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachineExtensionImage
         private static VirtualMachineExtensionImagesRestOperations GetVirtualMachineExtensionImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachineExtensionImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachineExtensionImagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Gets a virtual machine extension image. </summary>
@@ -1275,7 +1275,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachineImage
         private static VirtualMachineImagesRestOperations GetVirtualMachineImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachineImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachineImagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Gets a virtual machine image. </summary>
@@ -1709,7 +1709,7 @@ namespace Azure.ResourceManager.Sample
         #region Usage
         private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new UsageRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Usages for this <see cref="Subscription" />. </summary>
@@ -1821,7 +1821,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachineSize
         private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the VirtualMachineSizes for this <see cref="Subscription" />. </summary>
@@ -1903,7 +1903,7 @@ namespace Azure.ResourceManager.Sample
         #region LogAnalytic
         private static LogAnalyticsRestOperations GetLogAnalyticsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         #endregion

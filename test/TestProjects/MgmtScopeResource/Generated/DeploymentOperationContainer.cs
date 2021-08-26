@@ -34,7 +34,7 @@ namespace MgmtScopeResource
         internal DeploymentOperationContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new DeploymentRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

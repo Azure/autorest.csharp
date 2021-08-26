@@ -36,7 +36,7 @@ namespace MgmtListMethods
         #region FakeParentWithAncestorWithNonResChWithLoc
         private static FakeParentWithAncestorWithNonResChWithLocsRestOperations GetFakeParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new FakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the FakeParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
@@ -235,7 +235,7 @@ namespace MgmtListMethods
         #region FakeParentWithAncestorWithNonResCh
         private static FakeParentWithAncestorWithNonResChesRestOperations GetFakeParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new FakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the FakeParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
@@ -360,7 +360,7 @@ namespace MgmtListMethods
         #region FakeParentWithAncestorWithLoc
         private static FakeParentWithAncestorWithLocsRestOperations GetFakeParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new FakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the FakeParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
@@ -589,7 +589,7 @@ namespace MgmtListMethods
         #region FakeParentWithAncestor
         private static FakeParentWithAncestorsRestOperations GetFakeParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new FakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the FakeParentWithAncestors for this <see cref="Subscription" />. </summary>
@@ -714,7 +714,7 @@ namespace MgmtListMethods
         #region ResGrpParentWithAncestorWithNonResChWithLoc
         private static ResGrpParentWithAncestorWithNonResChWithLocsRestOperations GetResGrpParentWithAncestorWithNonResChWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ResGrpParentWithAncestorWithNonResChWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChWithLocs for this <see cref="Subscription" />. </summary>
@@ -945,7 +945,7 @@ namespace MgmtListMethods
         #region ResGrpParentWithAncestorWithNonResCh
         private static ResGrpParentWithAncestorWithNonResChesRestOperations GetResGrpParentWithAncestorWithNonResChesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ResGrpParentWithAncestorWithNonResChesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the ResGrpParentWithAncestorWithNonResChes for this <see cref="Subscription" />. </summary>
@@ -1072,7 +1072,7 @@ namespace MgmtListMethods
         #region ResGrpParentWithAncestorWithLoc
         private static ResGrpParentWithAncestorWithLocsRestOperations GetResGrpParentWithAncestorWithLocsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ResGrpParentWithAncestorWithLocsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the ResGrpParentWithAncestorWithLocs for this <see cref="Subscription" />. </summary>
@@ -1301,7 +1301,7 @@ namespace MgmtListMethods
         #region ResGrpParentWithAncestor
         private static ResGrpParentWithAncestorsRestOperations GetResGrpParentWithAncestorsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ResGrpParentWithAncestorsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists all in a subscription. </summary>
@@ -1426,7 +1426,7 @@ namespace MgmtListMethods
         #region Quota
         private static QuotasRestOperations GetQuotasRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new QuotasRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new QuotasRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Update quota for each VM family in workspace. </summary>
