@@ -72,20 +72,14 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a resource link with the specified ID. </summary>
-        /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<ResourceLink>> GetAsync(string linkId, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<ResourceLink>> GetAsync(CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ResourceLink.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(linkId, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());
@@ -98,20 +92,14 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a resource link with the specified ID. </summary>
-        /// <param name="linkId"> The fully qualified Id of the resource link. For example, /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup/Microsoft.Web/sites/mySite/Microsoft.Resources/links/myLink. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResourceLink> Get(string linkId, CancellationToken cancellationToken = default)
+        public virtual Response<ResourceLink> Get(CancellationToken cancellationToken = default)
         {
-            if (linkId == null)
-            {
-                throw new ArgumentNullException(nameof(linkId));
-            }
-
             using var scope = _clientDiagnostics.CreateScope("ResourceLink.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(linkId, cancellationToken);
+                var response = _restClient.Get(Id, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new ResourceLink(this, response.Value), response.GetRawResponse());

@@ -73,63 +73,41 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Gets a deployment. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response<DeploymentExtended>> GetAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        public async virtual Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
-
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
+            scope.Start();
             try
             {
-                var response = await _restClient.GetAtScopeAsync(scope, deploymentName, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
 
         /// <summary> Gets a deployment. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DeploymentExtended> Get(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        public virtual Response<DeploymentExtended> Get(CancellationToken cancellationToken = default)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException(nameof(scope));
-            }
-            if (deploymentName == null)
-            {
-                throw new ArgumentNullException(nameof(deploymentName));
-            }
-
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
+            scope.Start();
             try
             {
-                var response = _restClient.GetAtScope(scope, deploymentName, cancellationToken);
+                var response = _restClient.GetAtScope(Id.Parent, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new DeploymentExtended(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -155,8 +133,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<DeploymentDeleteAtScopeOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
+            scope.Start();
             try
             {
                 var response = await _restClient.DeleteAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -167,7 +145,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -177,8 +155,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual DeploymentDeleteAtScopeOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Delete");
+            scope.Start();
             try
             {
                 var response = _restClient.DeleteAtScope(Id.Parent, Id.Name, cancellationToken);
@@ -189,7 +167,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -197,8 +175,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<bool>> CheckExistenceAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
+            scope.Start();
             try
             {
                 var response = await _restClient.CheckExistenceAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -206,7 +184,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -215,8 +193,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<bool> CheckExistenceAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CheckExistenceAtScope");
+            scope.Start();
             try
             {
                 var response = _restClient.CheckExistenceAtScope(Id.Parent, Id.Name, cancellationToken);
@@ -224,7 +202,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -233,8 +211,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> CancelAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
+            scope.Start();
             try
             {
                 var response = await _restClient.CancelAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -242,7 +220,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -251,8 +229,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response CancelAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CancelAtScope");
+            scope.Start();
             try
             {
                 var response = _restClient.CancelAtScope(Id.Parent, Id.Name, cancellationToken);
@@ -260,7 +238,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -269,8 +247,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DeploymentExportResult>> ExportTemplateAtScopeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
+            scope.Start();
             try
             {
                 var response = await _restClient.ExportTemplateAtScopeAsync(Id.Parent, Id.Name, cancellationToken).ConfigureAwait(false);
@@ -278,7 +256,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -287,8 +265,8 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExportResult> ExportTemplateAtScope(CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ExportTemplateAtScope");
+            scope.Start();
             try
             {
                 var response = _restClient.ExportTemplateAtScope(Id.Parent, Id.Name, cancellationToken);
@@ -296,7 +274,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -312,8 +290,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(template));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CalculateTemplateHash");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CalculateTemplateHash");
+            scope.Start();
             try
             {
                 var response = await _restClient.CalculateTemplateHashAsync(template, cancellationToken).ConfigureAwait(false);
@@ -321,7 +299,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -337,8 +315,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(template));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.CalculateTemplateHash");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.CalculateTemplateHash");
+            scope.Start();
             try
             {
                 var response = _restClient.CalculateTemplateHash(template, cancellationToken);
@@ -346,7 +324,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -363,8 +341,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
+            scope.Start();
             try
             {
                 var response = await _restClient.ValidateAtScopeAsync(Id.Parent, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
@@ -375,7 +353,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -392,8 +370,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.ValidateAtScope");
+            scope.Start();
             try
             {
                 var response = _restClient.ValidateAtScope(Id.Parent, Id.Name, parameters, cancellationToken);
@@ -404,7 +382,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -422,8 +400,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
+            scope.Start();
             try
             {
                 if (Id.TryGetResourceGroupName(out _))
@@ -469,7 +447,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -487,8 +465,8 @@ namespace MgmtScopeResource
                 throw new ArgumentNullException(nameof(properties));
             }
 
-            using var scope0 = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.WhatIf");
+            scope.Start();
             try
             {
                 if (Id.TryGetResourceGroupName(out _))
@@ -534,7 +512,7 @@ namespace MgmtScopeResource
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }

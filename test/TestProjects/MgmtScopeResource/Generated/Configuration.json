@@ -32,11 +32,5 @@
       "Deployments_WhatIfAtManagementGroupScope_POST",
       "Deployments_WhatIfAtSubscriptionScope_POST"
     ]
-  },
-  "OperationGroupToContextualPath": {
-    "PolicyAssignments": "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
-    "ResourceLinks": "/{linkId}",
-    "DeploymentOperations": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}",
-    "Deployments": "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}"
   }
 }
