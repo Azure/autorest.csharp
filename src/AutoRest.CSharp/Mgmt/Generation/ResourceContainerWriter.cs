@@ -451,16 +451,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
             }
-            WriteListAsGenericResource(isAsync: false);
-            WriteListAsGenericResource(isAsync: true);
+            if (_resourceContainer.GetValidResourceValue().Equals(ResourceContainer.ResourceGroupResourceType) || _resourceContainer.GetValidResourceValue().Equals(ResourceContainer.SubscriptionResourceType))
+            {
+                WriteListAsGenericResource(isAsync: false);
+                WriteListAsGenericResource(isAsync: true);
+            }
         }
 
         private void WriteListAsGenericResource(bool isAsync)
         {
             const string syncMethodName = "GetAllAsGenericResources";
+            string listScope = _resourceContainer.GetValidResourceValue() == ResourceContainer.ResourceGroupResourceType ? "resource group" : "subscription";
             var methodName = CreateMethodName(syncMethodName, isAsync);
             _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this resource group represented as generic resources.");
+            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type}\" /> for this {listScope} represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", $"The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("expand", $"Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`.");
             _writer.WriteXmlDocumentationParameter("top", $"The number of results to return.");
@@ -473,7 +477,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
+                    if (listScope.Equals("resource group"))
+                    {
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(ResourceGroup)}, filters, expand, top, cancellationToken);");
+                    }
+                    else
+                    {
+                        _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("GetAtContext", isAsync)}({ContextProperty} as {typeof(Subscription)}, filters, expand, top, cancellationToken);");
+                    }
                 });
             }
         }
