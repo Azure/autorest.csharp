@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return returnString.ToString();
         }
 
-        private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
+        internal static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
             List<ServiceRequest>? requests;
             if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out requests))

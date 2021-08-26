@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private const string ProviderSegment = "providers";
 
-        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+        private static ConcurrentDictionary<OperationGroup, string?> _valueCache = new ConcurrentDictionary<OperationGroup, string?>();
 
         public static string ContextualPath(this OperationGroup operationGroup, MgmtConfiguration config)
         {
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             contextualPath = null;
             if (_valueCache.TryGetValue(operationGroup, out contextualPath))
             {
-                return true;
+                return contextualPath != null;
             }
 
             // if this operationGroup does not correspond to a resource, return false immediately
@@ -51,14 +51,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             // configuration does not set this, we should find a way to calculate this
             contextualPath = FindContextualPath(operationGroup, config);
+            _valueCache.TryAdd(operationGroup, contextualPath);
 
             return contextualPath != null;
         }
 
         private static string? FindContextualPath(OperationGroup operationGroup, MgmtConfiguration config)
         {
-            // TODO -- WIP
-            return null;
+            var request = ResourceTypeBuilder.GetBestMethod(operationGroup);
+            return request?.Path;
         }
 
         public static IEnumerable<ContextualParameterMapping> BuildContextualParameterMapping(this Resource resource, BuildContext<MgmtOutputLibrary> context, string idVariableName = "Id")
@@ -111,9 +112,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // considering some rare conditions, we do not require we have to have a method that corresponds to the contextual path, the path can be virtual to ensure we get correct parameter invocation around the Id
             // we always need to get the "value" of the key value pair in the path
-            // TODO -- we have issues on the scope resources
-            var lastOddIndex = suffixSegments.Length % 2 == 0 ? suffixSegments.Length - 1 : suffixSegments.Length - 2;
-            for (int i = lastOddIndex; i >= 0; i -= 2)
+            // and we always requires the last segment of the contextual path should be the name of the resource which can be a constant or reference
+            for (int i = suffixSegments.Length - 1; i >= 0; i -= 2)
             {
                 (var isReference, var parameterName) = IsReference(suffixSegments[i]);
                 if (isReference)
