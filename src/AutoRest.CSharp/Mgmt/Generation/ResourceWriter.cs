@@ -742,31 +742,5 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line($"return new {singletonResource.Type.Name}(this, Id + \"/{singletonResourceSuffix}\");");
             }
         }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // operations.Id is the ID of the resource itself, therefore we do not need to make the resource name pass through
-        }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(Context);
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.ResourceGroupName";
-            }
-            else if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.SubscriptionId";
-            }
-            else
-            {
-                parentNameStack.Push($"Id{dotParent}.Name");
-                dotParent += ".Parent";
-            }
-
-            return passThru;
-        }
     }
 }

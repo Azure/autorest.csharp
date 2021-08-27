@@ -481,42 +481,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"// Builders.");
             _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType.Name}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
         }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod restMethod, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru by
-            // making the last string-like mandatory parameter (typically the resource name) pass-through
-            if (!restMethod.IsListMethod())
-            {
-                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null)
-                {
-                    var paramName = lastString.Parameter.Name;
-                    if (!paramName.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        lastString.IsPassThru = true;
-                        parentNameStack.Pop();
-                    }
-                }
-            }
-        }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            bool passThru = false;
-            var isAncestorResourceTypeTenant = _resource.OperationGroup.IsAncestorResourceTypeTenant(Context);
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase) && !isAncestorResourceTypeTenant)
-            {
-                valueExpression = "Id.ResourceGroupName";
-            }
-            else
-            {
-                // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                parentNameStack.Push($"Id{dotParent}.Name");
-                dotParent += ".Parent";
-            }
-
-            return passThru;
-        }
     }
 }

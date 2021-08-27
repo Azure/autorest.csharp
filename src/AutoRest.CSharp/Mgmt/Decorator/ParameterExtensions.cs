@@ -15,5 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return method.PathParameters.Contains(parameter);
         }
+
+        public static bool IsMandatory(this Parameter parameter) => parameter.DefaultValue is null;
     }
 }

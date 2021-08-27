@@ -104,22 +104,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
         }
-
-        // we need to pass the first parameter as `resourceGroup.Id.Name` because we are in an extension class
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-            {
-                valueExpression = $"{ExtensionOperationVariableName}.Id.Name";
-                return false;
-            }
-
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // override to do nothing since we have passed the resourceGroupName in `ShouldPassThrough` function
-        }
     }
 }

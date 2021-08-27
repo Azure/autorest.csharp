@@ -17,14 +17,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
             : base(writer, resourceContainer, context)
         {
         }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-        }
     }
 }

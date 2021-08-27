@@ -466,12 +466,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return parameter;
         }
 
-        protected abstract void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack);
-
-        protected abstract bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression);
-
-        protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
-
         protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, string methodName, OperationGroup operationGroup, IEnumerable<ContextualParameterMapping> contextualParameterMappings, Diagnostic diagnostic, bool isAsync, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;

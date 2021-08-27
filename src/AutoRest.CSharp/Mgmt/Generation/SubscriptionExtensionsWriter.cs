@@ -172,20 +172,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"return {typeof(Core.ResourceListOperations)}.{CreateMethodName("GetAtContext", async)}(subscription, {filters}, expand, top, cancellationToken);");
             }
         }
-
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
-        {
-            if (string.Equals(parameter.Name, "subscriptionId", StringComparison.InvariantCultureIgnoreCase))
-            {
-                valueExpression = $"{ExtensionOperationVariableName}.Id.Name";
-                return false;
-            }
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // override to do nothing since we do not need anything from subscription.Id in the SubscriptionExtensions class
-        }
     }
 }
