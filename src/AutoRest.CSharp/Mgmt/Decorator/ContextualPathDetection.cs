@@ -143,11 +143,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // we should not have 0 segments here
             if (suffixSegments.Length == 0)
                 return null;
-            // remove the leading providers, the providers will be ignored by the ResourceIdentifier's parenting hierarchy
-            if (suffixSegments[0].Equals(ProviderSegment, StringComparison.InvariantCultureIgnoreCase))
-                return suffixSegments.Skip(2).ToArray();
-            // this suffix does not start with providers, directly return the segments
-            return suffixSegments;
+            // find the providers segment, remove it and its follower
+            var indexOfProvidersSegment = Array.IndexOf(suffixSegments, ProviderSegment);
+            if (indexOfProvidersSegment < 0)
+                return suffixSegments;
+            return suffixSegments.Take(indexOfProvidersSegment).Concat(suffixSegments.Skip(indexOfProvidersSegment + 2)).ToArray();
         }
 
         private static (bool IsReference, string? ReferenceName) IsReference(string segment)
