@@ -10,11 +10,18 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "ImplicitSingletonResources": "Microsoft.Fake/rgFakes/implicitSingletonResources"
+  },
   "OperationGroupToParent": {
     "FakeTupleResources": "Microsoft.Fake/rgFakes",
-    "ImplicitSingletonResources": "Microsoft.Fake/rgFakes"
+    "ImplicitSingletonResources": "Microsoft.Fake/rgFakes",
+    "ImplicitChildOfExplicitSingletonResources": "Microsoft.Fake/rgFakes/explicitSingletonResources"
   },
   "OperationGroupToSingletonResource": {
     "ExplicitSingletonResources": "explicitSingletonResources/default"
+  },
+  "OperationGroupToContextualPath": {
+    "ExplicitSingletonResources": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default"
   }
 }

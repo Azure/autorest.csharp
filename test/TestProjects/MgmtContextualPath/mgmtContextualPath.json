@@ -823,6 +823,188 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default/implicitChildOfExplicitSingletonResources/{childName}": {
+            "put": {
+                "tags": ["Fakes"],
+                "operationId": "ImplicitChildOfExplicitSingletonResources_CreateOrUpdate",
+                "description": "Create or update an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of resource group"
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "childName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the child resource"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ImplicitChildOfExplicitSingletonResource"
+                        },
+                        "description": "Parameters supplied to the Create Availability Set operation."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImplicitChildOfExplicitSingletonResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "ImplicitChildOfExplicitSingletonResources_Get",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of resource group"
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "childName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of singletonResource"
+                    },
+                    {
+                        "name": "$expand",
+                        "description": "May be used to expand the participants.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImplicitChildOfExplicitSingletonResource"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Fakes"
+                ],
+                "operationId": "ImplicitChildOfExplicitSingletonResources_Delete",
+                "description": "Retrieves information about an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of resource group"
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "name": "childName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of singletonResource"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/rgFakes/{fakeName}/explicitSingletonResources/default/implicitChildOfExplicitSingletonResources": {
+            "get": {
+                "tags": ["Fakes"],
+                "operationId": "ImplicitChildOfExplicitSingletonResources_List",
+                "description": "Create or update an fake.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of resource group"
+                    },
+                    {
+                        "name": "fakeName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the fake."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImplicitChildOfExplicitSingletonResourceListResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -985,6 +1167,39 @@
                 }
             ],
             "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "ImplicitChildOfExplicitSingletonResource": {
+            "properties": {
+                "bar": {
+                    "type": "string",
+                    "description": "specifies the bar"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
+        },
+        "ImplicitChildOfExplicitSingletonResourceListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ImplicitChildOfExplicitSingletonResource"
+                    },
+                    "description": "The list of fakes"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set operation response."
         },
         "Resource": {
             "description": "The Resource model definition.",

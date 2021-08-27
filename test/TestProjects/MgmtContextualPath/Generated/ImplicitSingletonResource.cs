@@ -52,7 +52,7 @@ namespace MgmtContextualPath
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/rgFakes/implicitSingletonResources/default";
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/rgFakes/implicitSingletonResources";
 
         /// <summary> Gets the valid resource type for the operations. </summary>
         protected override ResourceType ValidResourceType => ResourceType;
