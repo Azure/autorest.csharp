@@ -668,21 +668,22 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Append($"await ");
             }
-            var pathParamNames = GetPathParametersName(_resource.GetMethod!.RestClientMethod, _resource.OperationGroup).ToList();
+            var parameterMappings = BuildParameterMapping(_resource.GetMethod!.RestClientMethod, _contextualParameterMappings);
             _writer.Append($"{RestClientField}.{CreateMethodName(_resource.GetMethod.Name, async)}( ");
-            foreach (string paramNames in pathParamNames)
+            // TODO -- temporary solution -- we need to assign all optional parameters as null
+            foreach (var mapping in parameterMappings)
             {
-                _writer.Append($"{paramNames:I}, ");
-            }
-            foreach (Parameter parameter in _resource.GetMethod.RestClientMethod.NonPathParameters)
-            {
-                if (parameter.ValidateNotNull)
+                // We should not have any pass through parameters here, since we will not pass any parameters defined in the tag related functions to the Get function
+                if (mapping.IsPassThru)
                 {
-                    _writer.Append($"{parameter.Name}, ");
+                    if (mapping.Parameter.ValidateNotNull)
+                        _writer.Append($"{mapping.Parameter.Name}, ");
+                    else
+                        _writer.Append($"null, ");
                 }
                 else
                 {
-                    _writer.Append($"null, ");
+                    _writer.Append($"{mapping.ValueExpression}, ");
                 }
             }
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");

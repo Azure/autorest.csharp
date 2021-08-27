@@ -357,6 +357,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
+                    // TODO -- move this to BuildParameterMapping?
                     if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
                     {
                         // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
@@ -550,126 +551,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
-        }
-
-        // This method returns an array of path and non-path parameters name
-        // TODO: this method has some bugs for methods in MgmtListMethods and is no longer used, we should consistently use BuildParameterMapping().
-        protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup)
-        {
-            var paramNames = GetPathParametersName(clientMethod, operationGroup).ToList();
-            var nonPathParams = clientMethod.NonPathParameters;
-            foreach (Parameter parameter in nonPathParams)
-            {
-                paramNames.Add(parameter.Name);
-            }
-
-            return paramNames.ToArray();
-        }
-
-        protected string[] GetPathParametersName(RestClientMethod clientMethod, OperationGroup operationGroup)
-        {
-            List<string> paramNameList = new List<string>();
-            var pathParamsLength = clientMethod.PathParameters.Count;
-            if (pathParamsLength > 0)
-            {
-                if (pathParamsLength > 1)
-                {
-                    paramNameList.Add("Id.Name");
-                    pathParamsLength--;
-                }
-                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, clientMethod);
-                paramNameList.Reverse();
-            }
-
-            return paramNameList.ToArray();
-        }
-
-
-
-        private static bool IsTerminalState(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            return operationGroup.ParentOperationGroup(context) == null;
-        }
-
-        // This method builds the path parameters names
-        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, RestClientMethod clientMethod)
-        {
-            if (IsTerminalState(operationGroup, Context) && paramLength == 1)
-            {
-                paramNames.Add(GetParentValue(operationGroup, name, clientMethod));
-                paramLength--;
-            }
-            else if (paramLength == 1)
-            {
-                var parentOperationGroup = operationGroup.ParentOperationGroup(Context);
-                if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, clientMethod);
-                else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, clientMethod);
-            }
-            else
-            {
-                var parentOperationGroup = operationGroup.ParentOperationGroup(Context);
-                name = $"{name}.Parent";
-                paramNames.Add($"{name}.Name");
-                paramLength--;
-
-                if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, clientMethod);
-                else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, clientMethod);
-            }
-        }
-
-        public string GetParentValue(OperationGroup operationGroup, string name, RestClientMethod clientMethod)
-        {
-            if (operationGroup.IsTupleResource(Context))
-            {
-                return $"{name}.Parent.Name";
-            }
-            var parentResourceType = operationGroup.ParentResourceType(Configuration);
-
-            switch (parentResourceType)
-            {
-                case ResourceTypeBuilder.ResourceGroups:
-                    return "Id.ResourceGroupName";
-                case ResourceTypeBuilder.Subscriptions:
-                    return "Id.SubscriptionId";
-                case ResourceTypeBuilder.Locations:
-                    return "Id.Location";
-                case ResourceTypeBuilder.ManagementGroups:
-                    return $"{name}.Parent.Name";
-                case ResourceTypeBuilder.Tenant:
-                    // There are multiple cases when parent resource type is tenant:
-                    // 1. Tenant resource.
-                    // 2. Scope resource. The clientMethod may have a path starting with /{scope} or a path at any specific scope (tenant/management group/subscription/resource group) or a /{resourceId} path.
-                    // 3. Extension resource in the same operation group. The clientMethod may have a path at any scope (tenant/management group/subscription/resource group).
-                    if (clientMethod.IsByIdMethod())
-                    {
-                        return $"{name}"; // For /{resourceId} operations, there is only 1 parameter and name will always be "Id".
-                    }
-                    if (clientMethod.Operation?.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpReq && httpReq.Path.StartsWith("/{scope}"))
-                    {
-                        return $"{name}.Parent";
-                    }
-                    else if (clientMethod.Operation?.IsParentTenant() == true) // If the operation is a main resource directly under tenant, there is only 1 parameter and returns "Id.name".
-                    {
-                        return $"{name}.Name";
-                    }
-                    else
-                    {
-                        return $"{name}.Parent.Name";
-                    }
-                default:
-                    throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
-            }
-        }
-
-        protected CSharpType GetLROObjectType(RestClientMethod clientMethod)
-        {
-            return clientMethod.Operation!.IsLongRunning
-                ? Context.Library.GetLongRunningOperation(clientMethod.Operation).Type
-                : Context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
         }
 
         protected CSharpType? GetLROResultType(RestClientMethod clientMethod)
