@@ -502,7 +502,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Append($"await ");
             }
             _writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}( ");
-            WriteParameters(_writer, clientMethod.RestClientMethod, parameterMappings, isResourceLevel: isResourceLevel);
+            WriteParameters(_writer, parameterMappings, isResourceLevel: isResourceLevel);
             _writer.Append($"cancellationToken)");
 
             if (async)

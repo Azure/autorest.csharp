@@ -100,6 +100,32 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
+        private IEnumerable<ParameterMapping> DecorateParameterMappingsForPagingMethod(IEnumerable<ParameterMapping> parameterMappings)
+        {
+            var result = new List<ParameterMapping>();
+            foreach (var parameter in parameterMappings)
+            {
+                var valueToAdd = parameter;
+                if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
+                {
+                    // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
+                    if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
+                    {
+                        valueToAdd = parameter with
+                        {
+                            IsPassThru = false,
+                            ValueExpression = "pageSizeHint"
+                        };
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
+                    }
+                }
+                result.Add(valueToAdd);
+            }
+            return result;
+        }
 
         protected void WriteList(CodeWriter writer, bool async, CSharpType resourceType, PagingMethod listMethod, string methodName, FormattableString converter, IEnumerable<ContextualParameterMapping> contextualParameterMappings, List<PagingMethod>? listMethods = null)
         {
@@ -110,8 +136,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
-            var parameterMappings = BuildParameterMapping(listMethod.Method, contextualParameterMappings);
-            // the list method should exclude the pagesize parameters
+            var parameterMappings = DecorateParameterMappingsForPagingMethod(BuildParameterMapping(listMethod.Method, contextualParameterMappings));
+            // the list method signature should exclude the pagesize parameters
             var methodParameters = GetPassThroughParameters(parameterMappings).Where(p => !PagingMethod.IsPageSizeParameter(p));
             foreach (var param in methodParameters)
             {
@@ -340,7 +366,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
             }
             writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            WriteParameters(writer, pagingMethod.Method, parameterMappings, isResourceLevel: isResourceLevel);
+            WriteParameters(writer, parameterMappings, isResourceLevel: isResourceLevel);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             // need the Select() for converting XXXResourceData to XXXResource
@@ -357,24 +383,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (parameter.IsPassThru)
                 {
-                    // TODO -- move this to BuildParameterMapping?
-                    if (PagingMethod.IsPageSizeName(parameter.Parameter.Name))
-                    {
-                        // alway use the `pageSizeHint` parameter from `AsPages(pageSizeHint)`
-                        if (PagingMethod.IsPageSizeType(parameter.Parameter.Type.FrameworkType))
-                        {
-                            writer.AppendRaw($"pageSizeHint, ");
-                        }
-                        else
-                        {
-                            Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            writer.Append($"{parameter.Parameter.Name}, ");
-                        }
-                    }
-                    else
-                    {
-                        writer.Append($"{parameter.Parameter.Name}, ");
-                    }
+                    writer.Append($"{parameter.Parameter.Name}, ");
                 }
                 else
                 {
@@ -383,7 +392,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
+        protected void WriteParameters(CodeWriter writer, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
         {
             if (isResourceLevel)
             {
@@ -407,7 +416,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <summary>
         /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
         /// </summary>
-        protected class ParameterMapping
+        protected record ParameterMapping
         {
             /// <summary>
             /// The parameter object in <see cref="RestClientMethod"/>.
@@ -744,7 +753,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Append($"var {response} = {GetAwait(isAsync)}");
             writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
-            WriteParameters(writer, clientMethod, parameterMapping, isResourceLevel: isResourceLevel);
+            WriteParameters(writer, parameterMapping, isResourceLevel: isResourceLevel);
             writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             WriteLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping, isAsync);
