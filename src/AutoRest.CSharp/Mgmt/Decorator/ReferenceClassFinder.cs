@@ -39,9 +39,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<Type> GetReferenceClassCollectionInternal(BuildContext<MgmtOutputLibrary> context)
         {
-            if (context.Configuration.MgmtConfiguration.IsArmCore)
-                return new List<Type>();
-
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
             if (assembly == null)
             {

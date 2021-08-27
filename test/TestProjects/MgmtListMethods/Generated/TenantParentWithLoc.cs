@@ -37,7 +37,7 @@ namespace MgmtListMethods
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="TenantParentWithLoc"/> class. </summary>
@@ -46,7 +46,7 @@ namespace MgmtListMethods
         internal TenantParentWithLoc(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentWithLocsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>

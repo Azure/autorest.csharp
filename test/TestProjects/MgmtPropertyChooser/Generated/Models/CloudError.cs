@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {

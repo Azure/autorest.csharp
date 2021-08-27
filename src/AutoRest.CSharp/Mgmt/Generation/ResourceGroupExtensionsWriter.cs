@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line();
                         }
                         else if ((resource.OperationGroup.IsScopeResource(Configuration) || resource.OperationGroup.IsExtensionResource(Configuration))
-                            && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.ResourceGroups))
+                            && resource.OperationGroup.Operations.Any(op => op.ParentResourceType().Equals(ResourceTypeBuilder.ResourceGroups, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             _writer.Line($"#region {resource.Type.Name}");
                             if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))

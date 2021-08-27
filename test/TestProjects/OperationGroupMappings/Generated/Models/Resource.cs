@@ -9,12 +9,12 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace OperationGroupMappings.Models
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : Azure.ResourceManager.Resources.Models.Resource
+    public partial class Resource : Azure.ResourceManager.Models.Resource
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="location"> Resource location. </param>

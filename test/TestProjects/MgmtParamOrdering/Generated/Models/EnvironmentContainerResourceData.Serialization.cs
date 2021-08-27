@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
@@ -37,7 +38,7 @@ namespace MgmtParamOrdering
         internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element)
         {
             EnvironmentContainer properties = default;
-            Optional<Models.SystemData> systemData = default;
+            Optional<SystemData> systemData = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -57,7 +58,7 @@ namespace MgmtParamOrdering
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = Models.SystemData.DeserializeSystemData(property.Value);
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -91,7 +92,7 @@ namespace MgmtParamOrdering
                     continue;
                 }
             }
-            return new EnvironmentContainerResourceData(id, name, type, tags, location, properties, systemData.Value);
+            return new EnvironmentContainerResourceData(id, name, type, tags, location, properties, systemData);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace MgmtParent
         #region AvailabilitySet
         private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the AvailabilitySets for this <see cref="Subscription" />. </summary>
@@ -153,7 +153,7 @@ namespace MgmtParent
         #region VirtualMachineExtensionImage
         private static VirtualMachineExtensionImagesRestOperations GetVirtualMachineExtensionImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new VirtualMachineExtensionImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new VirtualMachineExtensionImagesRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Gets a virtual machine extension image. </summary>

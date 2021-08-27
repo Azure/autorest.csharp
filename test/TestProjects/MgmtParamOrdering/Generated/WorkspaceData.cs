@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
@@ -44,7 +45,7 @@ namespace MgmtParamOrdering
         /// <param name="allowPublicAccessWhenBehindVnet"> The flag to indicate whether to allow public access when behind VNet. </param>
         /// <param name="primaryUserAssignedIdentity"> The user assigned identity resource id that represents the workspace identity. </param>
         /// <param name="tenantId"> The tenant id associated with this workspace. </param>
-        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, Models.SystemData systemData, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, string discoveryUrl, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, string tenantId) : base(id, name, type, tags, location)
+        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, SystemData systemData, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, string discoveryUrl, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, string tenantId) : base(id, name, type, tags, location)
         {
             SystemData = systemData;
             WorkspaceId = workspaceId;
@@ -66,7 +67,7 @@ namespace MgmtParamOrdering
         }
 
         /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
-        public Models.SystemData SystemData { get; }
+        public SystemData SystemData { get; }
         /// <summary> The immutable id associated with this workspace. </summary>
         public string WorkspaceId { get; }
         /// <summary> The description of this workspace. </summary>

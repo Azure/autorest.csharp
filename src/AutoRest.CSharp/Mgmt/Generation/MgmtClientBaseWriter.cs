@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
+                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subIdIfNeeded}, {BaseUriField});");
             }
         }
 

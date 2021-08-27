@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
@@ -38,7 +39,7 @@ namespace MgmtParamOrdering
         /// <param name="location"> The location. </param>
         /// <param name="properties"> Additional attributes of the entity. </param>
         /// <param name="systemData"> System data associated with resource provider. </param>
-        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, EnvironmentContainer properties, Models.SystemData systemData) : base(id, name, type, tags, location)
+        internal EnvironmentContainerResourceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, EnvironmentContainer properties, SystemData systemData) : base(id, name, type, tags, location)
         {
             Properties = properties;
             SystemData = systemData;
@@ -47,6 +48,6 @@ namespace MgmtParamOrdering
         /// <summary> Additional attributes of the entity. </summary>
         public EnvironmentContainer Properties { get; set; }
         /// <summary> System data associated with resource provider. </summary>
-        public Models.SystemData SystemData { get; }
+        public SystemData SystemData { get; }
     }
 }

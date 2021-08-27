@@ -33,7 +33,7 @@ namespace SubscriptionExtensions
         internal ToasterContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -261,7 +261,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Filters the list of <see cref="Toaster" /> for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Toaster" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -275,7 +275,7 @@ namespace SubscriptionExtensions
             {
                 var filters = new ResourceFilterCollection(Toaster.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as Subscription, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -284,7 +284,7 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Filters the list of <see cref="Toaster" /> for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Toaster" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -298,7 +298,7 @@ namespace SubscriptionExtensions
             {
                 var filters = new ResourceFilterCollection(Toaster.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as Subscription, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

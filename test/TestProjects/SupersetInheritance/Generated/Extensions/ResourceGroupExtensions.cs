@@ -43,7 +43,7 @@ namespace SupersetInheritance
         #region SupersetModel2
         private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
@@ -185,7 +185,7 @@ namespace SupersetInheritance
         #region SupersetModel3
         private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>

@@ -23,6 +23,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using static AutoRest.CSharp.Mgmt.Decorator.ContextualPathDetection;
@@ -142,10 +143,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
                 foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
                 }
             }
 
@@ -159,10 +160,10 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                 _writer.Line($"Parent = options;");
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subscriptionParamString = _resource.RestClient.Parameters.Any(p => p.Name.Equals("subscriptionId")) ? ", Id.SubscriptionId" : string.Empty;
-                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                _writer.Line($"{RestClientField} = new {_resource.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
                 foreach (var operationGroup in _resource.ChildOperations.Keys)
                 {
-                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}{subscriptionParamString}, BaseUri);");
+                    _writer.Line($"{GetRestClientName(operationGroup)} = new {Context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subscriptionParamString}, BaseUri);");
                 }
             }
         }

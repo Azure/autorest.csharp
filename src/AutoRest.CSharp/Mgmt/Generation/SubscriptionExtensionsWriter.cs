@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     foreach (var resource in Context.Library.ArmResources)
                     {
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, Configuration).Equals(ResourceTypeBuilder.Subscriptions)
-                            || ParentDetection.ParentResourceType(resource.OperationGroup, Configuration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType() == ResourceTypeBuilder.Subscriptions))
+                            || ParentDetection.ParentResourceType(resource.OperationGroup, Configuration).Equals(ResourceTypeBuilder.Tenant) && resource.OperationGroup.Operations.Any(op => op.ParentResourceType().Equals(ResourceTypeBuilder.Subscriptions, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             _writer.Line($"#region {resource.Type.Name}");
                             if (resource.OperationGroup.TryGetSingletonResourceSuffix(Configuration, out var singletonResourceSuffix))
