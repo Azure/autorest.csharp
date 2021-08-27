@@ -38,7 +38,7 @@ namespace MgmtContextualPath
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ImplicitChildOfExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ImplicitChildOfExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="ImplicitChildOfExplicitSingletonResource"/> class. </summary>
@@ -47,7 +47,7 @@ namespace MgmtContextualPath
         internal ImplicitChildOfExplicitSingletonResource(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new ImplicitChildOfExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ImplicitChildOfExplicitSingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
