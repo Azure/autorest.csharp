@@ -79,7 +79,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
@@ -136,7 +136,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
@@ -158,7 +158,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, cancellationToken);
                 var operation = new BlobContainerDeleteOperation(response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
@@ -185,7 +185,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -210,7 +210,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, blobContainer, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, blobContainer, cancellationToken);
                 return Response.FromValue(new BlobContainer(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -235,7 +235,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.SetLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -260,7 +260,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _restClient.SetLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -285,7 +285,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ClearLegalHoldAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -310,7 +310,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Name, Id.Name, legalHold, cancellationToken);
+                var response = _restClient.ClearLegalHold(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, legalHold, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -329,7 +329,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await _restClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.LeaseAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -348,7 +348,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = _restClient.Lease(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                var response = _restClient.Lease(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Name, parameters, cancellationToken);
                 return response;
             }
             catch (Exception e)

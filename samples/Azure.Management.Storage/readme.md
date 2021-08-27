@@ -37,6 +37,8 @@ operation-group-to-singleton-resource:
   BlobServices: blobServices/default
   ImmutabilityPolicies: immutabilityPolicies/default
   FileServices: fileServices/default
+operation-group-to-contextual-path:
+  BlobServices: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default
 directive:
   - rename-model:
       from: BlobServiceProperties

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
@@ -178,6 +179,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             throw new Exception($"Cannot get the contextual path '{contextualPath}' from all the operations in operation group {resource.OperationGroup.Key}");
+        }
+
+        public static ContextualParameterMapping? FindContextualParameterForMethod(this IEnumerable<ContextualParameterMapping> contextualParameterMappings,
+            Parameter pathParameter, RestClientMethod method)
+        {
+            if (!pathParameter.IsInPathOf(method))
+                return null;
+            return contextualParameterMappings.FirstOrDefault(mapping => mapping.ParameterName.Equals(pathParameter.Name, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>

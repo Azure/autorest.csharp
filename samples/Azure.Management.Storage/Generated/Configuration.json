@@ -35,5 +35,8 @@
     "BlobServices": "blobServices/default",
     "ImmutabilityPolicies": "immutabilityPolicies/default",
     "FileServices": "fileServices/default"
+  },
+  "OperationGroupToContextualPath": {
+    "BlobServices": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default"
   }
 }

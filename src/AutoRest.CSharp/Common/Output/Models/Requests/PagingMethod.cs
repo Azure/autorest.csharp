@@ -26,18 +26,16 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public Diagnostic Diagnostics { get; }
         public string Accessibility => "public";
 
+        public List<Parameter> PathParameters => Method.PathParameters;
+
+        public List<Parameter> NonPathParameters => Method.NonPathParameters;
+
         /// <summary>
         /// Service domain parameters are:
         /// 1. not in URL path
         /// 2. not defined for Azure platform features, like pagination
         /// </summary>
-        public List<Parameter> NonPathDomainParameters
-        {
-            get
-            {
-                return Method.NonPathParameters.Where(p => !IsPageSizeParameter(p)).ToList();
-            }
-        }
+        public List<Parameter> NonPathDomainParameters => Method.NonPathParameters.Where(p => !IsPageSizeParameter(p)).ToList();
 
         /// <summary>
         /// Check whether the given parameter name is like page size

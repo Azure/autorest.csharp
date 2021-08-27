@@ -111,7 +111,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"{listMethod.Method.Description}");
 
             var parameterMappings = BuildParameterMapping(listMethod.Method, contextualParameterMappings);
-            var methodParameters = GetPassThroughParameters(parameterMappings);
+            // the list method should exclude the pagesize parameters
+            var methodParameters = GetPassThroughParameters(parameterMappings).Where(p => !PagingMethod.IsPageSizeParameter(p));
             foreach (var param in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(param);
@@ -183,8 +184,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, IEnumerable<ParameterMapping> parameterMappings,
             bool isAsync, List<PagingMethod>? pagingMethods = null)
         {
-            var parameters = pagingMethod.Method.Parameters;
-
             var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(isAsync);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
@@ -204,7 +203,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (pagingMethod.NextPageMethod != null)
             {
                 nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{GetAsyncKeyword(isAsync)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
@@ -445,7 +443,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // find this parameter name in the contextual parameter mappings
                 // if there is one, this parameter should use the same value expression
                 // if there is none of this, this parameter should be a pass through parameter
-                var mapping = contextualParameterMappings.FirstOrDefault(mapping => mapping.ParameterName.Equals(p.Name, StringComparison.InvariantCultureIgnoreCase));
+                var mapping = contextualParameterMappings.FindContextualParameterForMethod(p, method);
                 if (mapping == null)
                 {
                     yield return new ParameterMapping(p, true, "");
