@@ -23,23 +23,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("FakeContainer", "CreateOrUpdate")]
         [TestCase("Fake", "Delete")]
-        [TestCase("Fake", "DoSomethingLRO")]
+        [TestCase("Fake", "DoSomethingSlro")]
         [TestCase("BarContainer", "CreateOrUpdate")]
         [TestCase("Bar", "Update")]
-        public void ValidateLROMethods(string className, string methodName)
+        public void ValidateSLROMethods(string className, string methodName)
         {
             ValidateMethods(className, methodName, true, true);
         }
 
         [TestCase("Fake", "StartUpdate")]
-        [TestCase("Fake", "StartDoSomethingSlro")]
+        [TestCase("Fake", "StartDoSomethingLRO")]
         [TestCase("Bar", "StartDelete")]
-        public void ValidateSLROMethods(string className, string methodName)
+        public void ValidateLROMethods(string className, string methodName)
         {
             ValidateMethods(className, methodName, true, false);
         }
 
-        public void ValidateMethods(string className, string methodName, bool exist, bool isLRO)
+        public void ValidateMethods(string className, string methodName, bool exist, bool isSLRO)
         {
             var classesToCheck = FindAllContainers().Concat(FindAllResources());
             var classToCheck = classesToCheck.First(t => t.Name == className);
@@ -48,7 +48,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             var waitForCompletionParam = methodInfo.GetParameters().Where(P => P.Name == "waitForCompletion").First();
             Assert.NotNull(waitForCompletionParam);
-            if (isLRO)
+            if (isSLRO)
             {
                 Assert.False(methodInfo.Name.StartsWith("Start"));
                 Assert.AreEqual(true, waitForCompletionParam.DefaultValue);
