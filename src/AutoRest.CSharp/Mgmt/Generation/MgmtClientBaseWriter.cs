@@ -340,7 +340,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
             }
             writer.Append($"var response = {GetAwait(isAsync)} {restClientName}.{CreateMethodName(isNextPageFunc ? pagingMethod.NextPageMethod!.Name : pagingMethod.Method.Name, isAsync)}({GetNextLink(isNextPageFunc)}");
-            BuildAndWriteParameters(writer, pagingMethod.Method, parameterMappings, isResourceLevel: isResourceLevel);
+            WriteParameters(writer, pagingMethod.Method, parameterMappings, isResourceLevel: isResourceLevel);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
             // need the Select() for converting XXXResourceData to XXXResource
@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
+        protected void WriteParameters(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> parameterMappings, bool isResourceLevel = false)
         {
             if (isResourceLevel)
             {
@@ -744,7 +744,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Append($"var {response} = {GetAwait(isAsync)}");
             writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, isAsync)}( ");
-            BuildAndWriteParameters(writer, clientMethod, parameterMapping, isResourceLevel: isResourceLevel);
+            WriteParameters(writer, clientMethod, parameterMapping, isResourceLevel: isResourceLevel);
             writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             WriteLROResponse(writer, clientMethod, lroObjectType, context, response, parameterMapping, isAsync);

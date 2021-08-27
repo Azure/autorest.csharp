@@ -372,7 +372,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
             }
             _writer.Append($"var response = {GetAwait(async)} {RestClientField}.{CreateMethodName($"{method.Name}", async)}(");
-            BuildAndWriteParameters(writer, method, parameterMapping, isResourceLevel);
+            WriteParameters(writer, method, parameterMapping, isResourceLevel);
             _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             WriteEndOfGet(_writer, _resource.Type, async);
         }
@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteContainerMethodScope(isAsync, $"{_resource.Type.WrapResponse(isAsync)}", methodName, passThruParameters, writer =>
             {
                 _writer.Append($"var response = {GetAwait(isAsync)} {RestClientField}.{method.Name}{GetAsyncSuffix(isAsync)}(");
-                BuildAndWriteParameters(writer, method, parameterMapping);
+                WriteParameters(writer, method, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
                 WriteEndOfGet(_writer, _resource.Type, isAsync);
             }, isOverride: false);
