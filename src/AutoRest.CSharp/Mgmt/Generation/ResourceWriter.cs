@@ -599,7 +599,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
                     {
                         _writer.Append($"await ");
                     }
-                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(cancellationToken){GetConfigureAwait(async)};");
+                    _writer.Line($"TagResource.{CreateMethodName("Delete", async)}(cancellationToken: cancellationToken){GetConfigureAwait(async)};");
                     _writer.Append($"var originalTags  = ");
                     if (async)
                     {
@@ -660,7 +660,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             {
                 _writer.Append($"await ");
             }
-            _writer.Line($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken){GetConfigureAwait(async)};");
+            _writer.Line($"TagContainer.{CreateMethodName("CreateOrUpdate", async)}(originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(async)};");
             _writer.Append($"var originalResponse = ");
             if (async)
             {
