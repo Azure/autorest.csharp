@@ -59,7 +59,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -100,7 +100,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -160,7 +160,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -201,7 +201,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -259,7 +259,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
+            using HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -299,7 +299,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
+            using HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

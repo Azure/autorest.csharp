@@ -58,7 +58,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -98,7 +98,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -154,7 +154,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            using HttpMessage message = CreateResponseExistingKeyRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -193,7 +193,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            using HttpMessage message = CreateResponseExistingKeyRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -248,7 +248,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -288,7 +288,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -343,7 +343,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            using HttpMessage message = CreateResponseProtectedKeyRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -382,7 +382,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            using HttpMessage message = CreateResponseProtectedKeyRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -438,7 +438,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -479,7 +479,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -538,7 +538,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -578,7 +578,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -636,7 +636,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            using HttpMessage message = CreateParamLongRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -677,7 +677,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            using HttpMessage message = CreateParamLongRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -736,7 +736,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            using HttpMessage message = CreateResponseLongRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -776,7 +776,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            using HttpMessage message = CreateResponseLongRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -834,7 +834,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -875,7 +875,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -934,7 +934,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            using HttpMessage message = CreateResponseFloatRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -974,7 +974,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            using HttpMessage message = CreateResponseFloatRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1032,7 +1032,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1073,7 +1073,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1132,7 +1132,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1172,7 +1172,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1230,7 +1230,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1271,7 +1271,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1330,7 +1330,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            using HttpMessage message = CreateResponseBoolRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1370,7 +1370,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            using HttpMessage message = CreateResponseBoolRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1428,7 +1428,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            using HttpMessage message = CreateParamStringRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1469,7 +1469,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            using HttpMessage message = CreateParamStringRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1531,7 +1531,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            using HttpMessage message = CreateResponseStringRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1571,7 +1571,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            using HttpMessage message = CreateResponseStringRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1629,7 +1629,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDateRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1670,7 +1670,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDateRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1729,7 +1729,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            using HttpMessage message = CreateResponseDateRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1769,7 +1769,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            using HttpMessage message = CreateResponseDateRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1827,7 +1827,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1868,7 +1868,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1927,7 +1927,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1967,7 +1967,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2025,7 +2025,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2066,7 +2066,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2128,7 +2128,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2168,7 +2168,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2226,7 +2226,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2267,7 +2267,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2326,7 +2326,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            using HttpMessage message = CreateResponseDurationRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2366,7 +2366,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            using HttpMessage message = CreateResponseDurationRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2424,7 +2424,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            using HttpMessage message = CreateParamByteRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2465,7 +2465,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            using HttpMessage message = CreateParamByteRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2524,7 +2524,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            using HttpMessage message = CreateResponseByteRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2564,7 +2564,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            using HttpMessage message = CreateResponseByteRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2622,7 +2622,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2663,7 +2663,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2725,7 +2725,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            using HttpMessage message = CreateResponseEnumRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2765,7 +2765,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            using HttpMessage message = CreateResponseEnumRequest(scenario, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2821,7 +2821,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(options);
+            using HttpMessage message = CreateCustomRequestIdRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2860,7 +2860,7 @@ namespace header_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(options);
+            using HttpMessage message = CreateCustomRequestIdRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

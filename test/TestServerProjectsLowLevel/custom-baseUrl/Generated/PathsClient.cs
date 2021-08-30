@@ -61,7 +61,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            using HttpMessage message = CreateGetEmptyRequest(accountName, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -101,7 +101,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            using HttpMessage message = CreateGetEmptyRequest(accountName, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

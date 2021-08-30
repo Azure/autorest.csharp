@@ -60,7 +60,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content, options);
+            using HttpMessage message = CreateCreateRequest(itemName, content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -101,7 +101,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content, options);
+            using HttpMessage message = CreateCreateRequest(itemName, content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -163,7 +163,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -206,7 +206,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
