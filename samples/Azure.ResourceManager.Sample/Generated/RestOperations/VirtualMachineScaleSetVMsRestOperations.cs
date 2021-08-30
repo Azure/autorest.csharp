@@ -44,6 +44,92 @@ namespace Azure.ResourceManager.Sample
             _userAgent = HttpMessageUtilities.GetUserAgentName(this, options);
         }
 
+        internal HttpMessage CreateSimulateEvictionRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
+            uri.AppendPath(vmScaleSetName, true);
+            uri.AppendPath("/virtualMachines/", false);
+            uri.AppendPath(instanceId, true);
+            uri.AppendPath("/simulateEviction", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            message.SetProperty("UserAgentOverride", _userAgent);
+            return message;
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public async Task<Response> SimulateEvictionAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
+        public Response SimulateEviction(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (vmScaleSetName == null)
+            {
+                throw new ArgumentNullException(nameof(vmScaleSetName));
+            }
+            if (instanceId == null)
+            {
+                throw new ArgumentNullException(nameof(instanceId));
+            }
+
+            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
         internal HttpMessage CreateReimageRequest(string resourceGroupName, string vmScaleSetName, string instanceId, VirtualMachineScaleSetVMReimageParameters vmScaleSetVMReimageInput)
         {
             var message = _pipeline.CreateMessage();
@@ -57,7 +143,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/reimage", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -154,7 +240,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/reimageall", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -242,7 +328,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/deallocate", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -330,7 +416,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -432,7 +518,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -521,7 +607,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendQuery("$expand", "instanceView", true);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -622,7 +708,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/instanceView", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -706,109 +792,6 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
-            uri.AppendPath(virtualMachineScaleSetName, true);
-            uri.AppendPath("/virtualMachines", false);
-            if (filter != null)
-            {
-                uri.AppendQuery("$filter", filter, true);
-            }
-            if (select != null)
-            {
-                uri.AppendQuery("$select", select, true);
-            }
-            if (expand != null)
-            {
-                uri.AppendQuery("$expand", expand, true);
-            }
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            message.SetProperty("UserAgentOverride", _userAgent);
-            return message;
-        }
-
-        /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
-        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllAsync(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (virtualMachineScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
-            }
-
-            using var message = CreateGetAllRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineScaleSetVMListResult.DeserializeVirtualMachineScaleSetVMListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
-        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMListResult> GetAll(string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (virtualMachineScaleSetName == null)
-            {
-                throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
-            }
-
-            using var message = CreateGetAllRequest(resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        VirtualMachineScaleSetVMListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineScaleSetVMListResult.DeserializeVirtualMachineScaleSetVMListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
         internal HttpMessage CreatePowerOffRequest(string resourceGroupName, string vmScaleSetName, string instanceId, bool? skipShutdown)
         {
             var message = _pipeline.CreateMessage();
@@ -822,7 +805,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/poweroff", false);
             if (skipShutdown != null)
@@ -916,7 +899,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1004,7 +987,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1092,7 +1075,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1180,7 +1163,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/retrieveBootDiagnosticsData", false);
             if (sasUriExpirationTimeInMinutes != null)
@@ -1283,7 +1266,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualmachines/", false);
+            uri.AppendPath("/virtualMachines/", false);
             uri.AppendPath(instanceId, true);
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -1358,11 +1341,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateSimulateEvictionRequest(string resourceGroupName, string vmScaleSetName, string instanceId)
+        internal HttpMessage CreateGetAllRequest(string resourceGroupName, string vmScaleSetName, string filter, string select, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Post;
+            request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
@@ -1371,22 +1354,35 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachineScaleSets/", false);
             uri.AppendPath(vmScaleSetName, true);
-            uri.AppendPath("/virtualMachines/", false);
-            uri.AppendPath(instanceId, true);
-            uri.AppendPath("/simulateEviction", false);
+            uri.AppendPath("/virtualMachines", false);
+            if (filter != null)
+            {
+                uri.AppendQuery("$filter", filter, true);
+            }
+            if (select != null)
+            {
+                uri.AppendQuery("$select", select, true);
+            }
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             message.SetProperty("UserAgentOverride", _userAgent);
             return message;
         }
 
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
+        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public async Task<Response> SimulateEvictionAsync(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
+        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllAsync(string resourceGroupName, string vmScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1396,29 +1392,32 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
 
-            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            using var message = CreateGetAllRequest(resourceGroupName, vmScaleSetName, filter, select, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
-                case 204:
-                    return message.Response;
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMListResult value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = VirtualMachineScaleSetVMListResult.DeserializeVirtualMachineScaleSetVMListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
         }
 
-        /// <summary> The operation to simulate the eviction of spot virtual machine in a VM scale set. </summary>
+        /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
-        /// <param name="instanceId"> The instance ID of the virtual machine. </param>
+        /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
+        /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmScaleSetName"/>, or <paramref name="instanceId"/> is null. </exception>
-        public Response SimulateEviction(string resourceGroupName, string vmScaleSetName, string instanceId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
+        public Response<VirtualMachineScaleSetVMListResult> GetAll(string resourceGroupName, string vmScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1428,23 +1427,24 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(vmScaleSetName));
             }
-            if (instanceId == null)
-            {
-                throw new ArgumentNullException(nameof(instanceId));
-            }
 
-            using var message = CreateSimulateEvictionRequest(resourceGroupName, vmScaleSetName, instanceId);
+            using var message = CreateGetAllRequest(resourceGroupName, vmScaleSetName, filter, select, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
-                case 204:
-                    return message.Response;
+                case 200:
+                    {
+                        VirtualMachineScaleSetVMListResult value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = VirtualMachineScaleSetVMListResult.DeserializeVirtualMachineScaleSetVMListResult(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
 
-        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter, string select, string expand)
+        internal HttpMessage CreateGetAllNextPageRequest(string nextLink, string resourceGroupName, string vmScaleSetName, string filter, string select, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1461,13 +1461,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
         /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        public async Task<Response<VirtualMachineScaleSetVMListResult>> GetAllNextPageAsync(string nextLink, string resourceGroupName, string vmScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1477,12 +1477,12 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (virtualMachineScaleSetName == null)
+            if (vmScaleSetName == null)
             {
-                throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
+                throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, vmScaleSetName, filter, select, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1501,13 +1501,13 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Gets a list of all virtual machines in a VM scale sets. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="virtualMachineScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="filter"> The filter to apply to the operation. Allowed values are &apos;startswith(instanceView/statuses/code, &apos;PowerState&apos;) eq true&apos;, &apos;properties/latestModelApplied eq true&apos;, &apos;properties/latestModelApplied eq false&apos;. </param>
         /// <param name="select"> The list parameters. Allowed values are &apos;instanceView&apos;, &apos;instanceView/statuses&apos;. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="virtualMachineScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetVMListResult> GetAllNextPage(string nextLink, string resourceGroupName, string virtualMachineScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="vmScaleSetName"/> is null. </exception>
+        public Response<VirtualMachineScaleSetVMListResult> GetAllNextPage(string nextLink, string resourceGroupName, string vmScaleSetName, string filter = null, string select = null, string expand = null, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
@@ -1517,12 +1517,12 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (virtualMachineScaleSetName == null)
+            if (vmScaleSetName == null)
             {
-                throw new ArgumentNullException(nameof(virtualMachineScaleSetName));
+                throw new ArgumentNullException(nameof(vmScaleSetName));
             }
 
-            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, virtualMachineScaleSetName, filter, select, expand);
+            using var message = CreateGetAllNextPageRequest(nextLink, resourceGroupName, vmScaleSetName, filter, select, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

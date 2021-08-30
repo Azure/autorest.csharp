@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(response.GetRawResponse()).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, response.Value), response.GetRawResponse());
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.GetLatest(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.GetLatest(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 if (response.Value == null)
                     throw _clientDiagnostics.CreateRequestFailedException(response.GetRawResponse());
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, response.Value), response.GetRawResponse());
@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -180,7 +180,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -209,7 +209,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -238,7 +238,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -266,7 +266,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
-                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.GetLatestAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Sample
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
                 TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
-                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var originalResponse = _restClient.GetLatest(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetRollingUpgrade(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
             catch (Exception e)
@@ -313,8 +313,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.CancelAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _restClient.CreateCancelRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _restClient.CancelAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _restClient.CreateCancelRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -335,8 +335,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.Cancel(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _restClient.CreateCancelRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _restClient.Cancel(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var operation = new VirtualMachineScaleSetRollingUpgradeCancelOperation(_clientDiagnostics, Pipeline, _restClient.CreateCancelRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -357,8 +357,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.StartOSUpgradeAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartOSUpgradeRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _restClient.StartOSUpgradeAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartOSUpgradeRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -379,8 +379,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.StartOSUpgrade(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartOSUpgradeRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _restClient.StartOSUpgrade(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var operation = new VirtualMachineScaleSetRollingUpgradeStartOSUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartOSUpgradeRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -401,8 +401,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.StartExtensionUpgradeAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartExtensionUpgradeRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _restClient.StartExtensionUpgradeAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartExtensionUpgradeRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -423,8 +423,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.StartExtensionUpgrade(Id.ResourceGroupName, Id.Name, cancellationToken);
-                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartExtensionUpgradeRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _restClient.StartExtensionUpgrade(Id.ResourceGroupName, Id.Parent.Name, cancellationToken);
+                var operation = new VirtualMachineScaleSetRollingUpgradeStartExtensionUpgradeOperation(_clientDiagnostics, Pipeline, _restClient.CreateStartExtensionUpgradeRequest(Id.ResourceGroupName, Id.Parent.Name).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

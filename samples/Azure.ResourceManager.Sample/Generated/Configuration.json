@@ -30,12 +30,12 @@
     "VirtualMachineExtensionImages": "subscriptions",
     "VirtualMachineImages": "subscriptions",
     "VirtualMachineSizes": "subscriptions",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
-    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
+    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets",
+    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines"
   },
-  "OperationGroupIsTuple": [
-    "VirtualMachineImages"
-  ],
+  "OperationGroupToContextualPath": {
+    "VirtualMachineScaleSetRollingUpgrades": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest"
+  },
   "OperationGroupIsExtension": [
     "VirtualMachineScaleSetVMExtensions"
   ]
