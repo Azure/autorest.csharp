@@ -15,6 +15,8 @@ using Azure.Core.Pipeline;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -123,6 +125,34 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        private string buildJsonFromSchemaDocs(LowLevelClientMethod.SchemaDocumentation[] docs)
+        {
+            var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
+            IDictionary<string, Object> jsonObject = buildObjectFromSchemaDoc(docs.FirstOrDefault(), docDict);
+            var options = new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            };
+            string jsonString = JsonSerializer.Serialize(jsonObject, options);
+            return jsonString;
+        }
+
+        private IDictionary<string, Object> buildObjectFromSchemaDoc(LowLevelClientMethod.SchemaDocumentation doc, IReadOnlyDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict)
+        {
+            var jsonObject = new Dictionary<string, Object>();
+            foreach (var row in doc.DocumentationRows)
+            {
+                var required = row.Required ? " (required)" : "";
+                var isArray = row.Type.EndsWith("[]");
+                var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
+                if (docDict.ContainsKey(rowType))
+                    jsonObject[row.Name] = isArray ? new List<IDictionary<string, Object>> { buildObjectFromSchemaDoc(docDict[rowType], docDict) } : buildObjectFromSchemaDoc(docDict[rowType], docDict);
+                else
+                    jsonObject[row.Name] = isArray ? new List<string> { $"{rowType}{required}" } : $"{rowType}{required}";
+            }
+            return jsonObject;
+        }
+
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
             var parameters = clientMethod.Parameters;
@@ -139,22 +169,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (clientMethod.SchemaDocumentations != null)
             {
-                var schemas = clientMethod.SchemaDocumentations.Select(schemaDoc => (FormattableString)$@"
-Schema for <c>{schemaDoc.SchemaName}</c>:
-<list type=""table"">
-  <listheader>
-    <term>Name</term>
-    <term>Type</term>
-    <term>Required</term>
-    <term>Description</term>
-  </listheader>{schemaDoc.DocumentationRows.Select(row => (FormattableString)$@"
-  <item>
-    <term>{row.Name}</term>
-    <term>{row.Type}</term>
-    <term>{(row.Required ? "Yes" : "")}</term>
-    <term>{row.Description}</term>
-  </item>")}
-</list>");
+                var schemas = (FormattableString)$@"
+Schema for <c>{clientMethod.SchemaDocumentations.FirstOrDefault().SchemaName}</c>:
+<c>
+{buildJsonFromSchemaDocs(clientMethod.SchemaDocumentations)}
+</c>
+";
 
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
@@ -191,7 +211,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
                     {
                         if (statusCode.Code != null)
                         {
-                           writer.Line($"case {statusCode.Code}:");
+                            writer.Line($"case {statusCode.Code}:");
                         }
                         else
                         {
@@ -275,7 +295,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             }
         }
 
-        private void WriteEmptyConstructor (CodeWriter writer, LowLevelRestClient client)
+        private void WriteEmptyConstructor(CodeWriter writer, LowLevelRestClient client)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
@@ -284,7 +304,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             writer.Line();
         }
 
-        private CSharpType? GetCredentialType (SecurityScheme scheme)
+        private CSharpType? GetCredentialType(SecurityScheme scheme)
         {
             switch (scheme)
             {
@@ -295,13 +315,13 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
                 case NoAuthSecurity noAuthSecurityScheme:
                     return null;
                 default:
-                    throw new NotImplementedException ($"Unknown security scheme: {scheme.GetType()}");
+                    throw new NotImplementedException($"Unknown security scheme: {scheme.GetType()}");
             }
         }
 
-        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
+        private void WriteConstructor(CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
         {
-            var ctorParams = client.GetConstructorParameters(GetCredentialType (securityScheme));
+            var ctorParams = client.GetConstructorParameters(GetCredentialType(securityScheme));
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -320,7 +340,7 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks (ctorParams);
+                writer.WriteParameterNullChecks(ctorParams);
                 writer.Line();
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
