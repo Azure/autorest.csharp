@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     inputType,
                     defaultValue,
                     ctorParameter.ValidateNotNull,
-                    ctorParameter.IsApiVersionParameter
+                    IsApiVersionParameter: ctorParameter.IsApiVersionParameter
                 );
 
                 methodParameters[i] = methodParameter;

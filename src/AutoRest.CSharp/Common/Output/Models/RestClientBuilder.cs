@@ -566,8 +566,8 @@ namespace AutoRest.CSharp.Output.Models
                 TypeFactory.GetInputType(type),
                 defaultValue,
                 isRequired,
-                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version");
+                IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>
