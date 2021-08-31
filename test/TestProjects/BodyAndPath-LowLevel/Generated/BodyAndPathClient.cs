@@ -61,7 +61,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content);
+            using HttpMessage message = CreateCreateRequest(itemName, content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -102,7 +102,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, content);
+            using HttpMessage message = CreateCreateRequest(itemName, content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -160,7 +160,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -203,7 +203,7 @@ namespace BodyAndPath_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
+            using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

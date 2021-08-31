@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string PipelineVariable = "pipeline";
         protected const string PipelineProperty = "Pipeline";
         protected const string PipelineField = "_" + PipelineVariable;
+        protected const string ClientOptionsProperty = "ClientOptions";
 
         protected virtual string RestClientAccessibility => "internal";
 

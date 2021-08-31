@@ -112,7 +112,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
+            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -206,7 +206,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
+            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -315,7 +315,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content);
+            using HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -408,7 +408,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content);
+            using HttpMessage message = CreatePutAsyncRelativeRetrySucceededRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -462,7 +462,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
+            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -502,7 +502,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
+            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -555,7 +555,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202Retry200Request();
+            using HttpMessage message = CreateDelete202Retry200Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -594,7 +594,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDelete202Retry200Request();
+            using HttpMessage message = CreateDelete202Retry200Request();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -646,7 +646,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest();
+            using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -685,7 +685,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest();
+            using HttpMessage message = CreateDeleteAsyncRelativeRetrySucceededRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -791,7 +791,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202Retry200Request(content);
+            using HttpMessage message = CreatePost202Retry200Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -884,7 +884,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePost202Retry200Request(content);
+            using HttpMessage message = CreatePost202Retry200Request(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -992,7 +992,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content);
+            using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1085,7 +1085,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content);
+            using HttpMessage message = CreatePostAsyncRelativeRetrySucceededRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

@@ -29,10 +29,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("plan");
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(ResourceIdentity))
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity");
-                JsonSerializer.Serialize(writer, ResourceIdentity);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
@@ -122,8 +122,8 @@ namespace Azure.ResourceManager.Sample
 
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
-            Optional<Models.Sku> sku = default;
-            Optional<Models.Plan> plan = default;
+            Optional<Sku> sku = default;
+            Optional<Plan> plan = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IList<string>> zones = default;
             IDictionary<string, string> tags = default;
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
@@ -164,7 +164,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("identity"))
@@ -365,7 +365,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetData(id, name, type, location, tags, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup.Value, hostGroup.Value, additionalCapabilities.Value, scaleInPolicy.Value);
+            return new VirtualMachineScaleSetData(id, name, type, tags, location, sku.Value, plan.Value, identity, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup.Value, hostGroup.Value, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

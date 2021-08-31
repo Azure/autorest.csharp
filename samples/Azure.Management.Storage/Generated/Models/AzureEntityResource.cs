@@ -6,12 +6,12 @@
 #nullable disable
 
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a Azure Resource Manager resource with an etag. </summary>
-    public partial class AzureEntityResource : ResourceManager.Resources.Models.Resource
+    public partial class AzureEntityResource : Resource
     {
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
         public AzureEntityResource()

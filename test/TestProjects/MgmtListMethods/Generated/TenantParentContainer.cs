@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
@@ -35,7 +34,7 @@ namespace MgmtListMethods
         internal TenantParentContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new TenantParentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -46,9 +45,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<TenantParent> CreateOrUpdate(string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
+        public virtual TenantParentCreateOrUpdateOperation CreateOrUpdate(string tenantParentName, TenantParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (tenantParentName == null)
             {
@@ -60,71 +60,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(tenantParentName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="tenantParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<TenantParent>> CreateOrUpdateAsync(string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
-        {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(tenantParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update. </summary>
-        /// <param name="tenantParentName"> Name. </param>
-        /// <param name="parameters"> Parameters supplied to the Create. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual TenantParentCreateOrUpdateOperation StartCreateOrUpdate(string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
-        {
-            if (tenantParentName == null)
-            {
-                throw new ArgumentNullException(nameof(tenantParentName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.Name, tenantParentName, parameters, cancellationToken);
-                return new TenantParentCreateOrUpdateOperation(Parent, response);
+                var operation = new TenantParentCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -136,9 +79,10 @@ namespace MgmtListMethods
         /// <summary> Create or update. </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="parameters"> Parameters supplied to the Create. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<TenantParentCreateOrUpdateOperation> StartCreateOrUpdateAsync(string tenantParentName, TenantParentData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<TenantParentCreateOrUpdateOperation> CreateOrUpdateAsync(string tenantParentName, TenantParentData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (tenantParentName == null)
             {
@@ -149,12 +93,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.Name, tenantParentName, parameters, cancellationToken).ConfigureAwait(false);
-                return new TenantParentCreateOrUpdateOperation(Parent, response);
+                var operation = new TenantParentCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -389,52 +336,6 @@ namespace MgmtListMethods
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of <see cref="TenantParent" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(TenantParent.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="TenantParent" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("TenantParentContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(TenantParent.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         // Builders.

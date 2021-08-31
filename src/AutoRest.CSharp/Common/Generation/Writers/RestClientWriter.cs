@@ -56,7 +56,29 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.Line($"private {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
+            WriteAdditionalFields(writer);
             writer.Line();
+        }
+
+        protected virtual void WriteAdditionalFields(CodeWriter writer)
+        {
+        }
+
+        protected virtual void WriteAdditionalParameters(CodeWriter writer)
+        {
+        }
+
+        protected virtual void WriteAdditionalXmlDocumentationParameters(CodeWriter writer)
+        {
+        }
+
+        protected virtual void WriteAdditionalCtorBody(CodeWriter writer)
+        {
+        }
+
+        protected virtual bool UseUserAgentOverride()
+        {
+            return false;
         }
 
         private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
@@ -64,6 +86,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, $"The handler for diagnostic messaging in the client.");
             writer.WriteXmlDocumentationParameter(PipelineVariable, $"The HTTP pipeline for sending and receiving REST requests and responses.");
+            WriteAdditionalXmlDocumentationParameters(writer);
             foreach (Parameter parameter in restClient.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
@@ -72,6 +95,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationRequiredParametersException(restClient.Parameters);
 
             writer.Append($"public {cs.Name:D}({typeof(ClientDiagnostics)} {ClientDiagnosticsVariable}, {typeof(HttpPipeline)} {PipelineVariable},");
+            WriteAdditionalParameters(writer);
             foreach (Parameter clientParameter in restClient.Parameters)
             {
                 writer.WriteParameter(clientParameter);
@@ -88,6 +112,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{ClientDiagnosticsField} = {ClientDiagnosticsVariable};");
                 writer.Line($"{PipelineField} = {PipelineVariable};");
+                WriteAdditionalCtorBody(writer);
             }
             writer.Line();
         }
@@ -96,7 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal");
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "internal", UseUserAgentOverride());
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)

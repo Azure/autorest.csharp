@@ -166,5 +166,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
             }
         }
+
+        [TestCase("FakeContainer", "GetAllAsGenericResources", true)]
+        [TestCase("SubParentContainer", "GetAllAsGenericResources", true)]
+        public void ValidateMethods(string className, string methodName, bool exist)
+        {
+            var classesToCheck = FindAllContainers();
+            var classToCheck = classesToCheck.First(t => t.Name == className);
+            Assert.AreEqual(exist, classToCheck.GetMethod(methodName) != null, $"can{(exist ? "not" : string.Empty)} find {className}.{methodName}");
+        }
     }
 }

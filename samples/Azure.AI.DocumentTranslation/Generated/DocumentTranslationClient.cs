@@ -249,7 +249,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStartTranslationRequest(content);
+            using HttpMessage message = CreateStartTranslationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -475,7 +475,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStartTranslationRequest(content);
+            using HttpMessage message = CreateStartTranslationRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -580,7 +580,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -669,7 +669,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+            using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -756,7 +756,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -797,7 +797,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
+            using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -857,7 +857,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationStatusRequest(id);
+            using HttpMessage message = CreateGetTranslationStatusRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -900,7 +900,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTranslationStatusRequest(id);
+            using HttpMessage message = CreateGetTranslationStatusRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -961,7 +961,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCancelTranslationRequest(id);
+            using HttpMessage message = CreateCancelTranslationRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1007,7 +1007,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCancelTranslationRequest(id);
+            using HttpMessage message = CreateCancelTranslationRequest(id);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1109,7 +1109,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1196,7 +1196,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
+            using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1286,7 +1286,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1328,7 +1328,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
+            using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1384,7 +1384,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1426,7 +1426,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
+            using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1479,7 +1479,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+            using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1518,7 +1518,7 @@ namespace Azure.AI.DocumentTranslation
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetSupportedStorageSourcesRequest();
+            using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

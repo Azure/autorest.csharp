@@ -60,7 +60,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -100,7 +100,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -157,7 +157,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -197,7 +197,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -254,7 +254,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -294,7 +294,7 @@ namespace url_multi_collectionFormat_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
+            using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

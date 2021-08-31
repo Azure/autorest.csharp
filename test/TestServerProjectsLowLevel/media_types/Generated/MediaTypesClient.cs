@@ -60,7 +60,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -101,7 +101,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -173,7 +173,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -230,7 +230,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyRequest(content);
+            using HttpMessage message = CreateAnalyzeBodyRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -286,7 +286,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -327,7 +327,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -359,13 +359,9 @@ namespace media_types_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="AnalyzeBodyNoAcceptHeader"/> and <see cref="AnalyzeBodyNoAcceptHeaderAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(RequestContent content, ContentType contentType, RequestOptions options = null)
+        private HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(RequestContent content, ContentType contentType)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -373,6 +369,134 @@ namespace media_types_LowLevel
             uri.AppendPath("/mediatypes/analyzeNoAccept", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", contentType.ToString());
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listheader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listheader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>File source path.</term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            options ??= new RequestOptions();
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content);
+            if (options.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listheader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listheader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>File source path.</term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="options"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, RequestOptions options = null)
+#pragma warning restore AZC0002
+        {
+            options ??= new RequestOptions();
+            using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content);
+            if (options.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        private HttpMessage CreateAnalyzeBodyNoAcceptHeaderRequest(RequestContent content)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/mediatypes/analyzeNoAccept", false);
+            request.Uri = uri;
+            request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
         }
@@ -385,7 +509,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content);
+            using HttpMessage message = CreateContentTypeWithEncodingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -425,7 +549,7 @@ namespace media_types_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateContentTypeWithEncodingRequest(content);
+            using HttpMessage message = CreateContentTypeWithEncodingRequest(content);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

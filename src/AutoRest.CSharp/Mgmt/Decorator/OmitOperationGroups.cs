@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static void AddResponseSchemas(Operation operation, HashSet<Schema> setToProcess)
         {
-            foreach (var response in operation.Responses)
+            foreach (var response in operation.Responses.Concat(operation.Exceptions))
             {
                 var schema = response.ResponseSchema;
                 if (schema != null && schema is ObjectSchema objSchema)

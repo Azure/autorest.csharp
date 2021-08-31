@@ -15,7 +15,6 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
-using Azure.ResourceManager.Resources;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
@@ -36,7 +35,7 @@ namespace MgmtExtensionResource
         internal PolicyDefinitionContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new PolicyDefinitionsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Verify that the input resource Id is a valid container for this type. </summary>
@@ -53,9 +52,10 @@ namespace MgmtExtensionResource
         /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<PolicyDefinition> CreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public virtual PolicyDefinitionCreateOrUpdateOperation CreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -67,78 +67,24 @@ namespace MgmtExtensionResource
             }
 
             using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(policyDefinitionName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
-        /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
-        /// <param name="parameters"> The policy definition properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<PolicyDefinition>> CreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
-        {
-            if (policyDefinitionName == null)
-            {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
-        /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
-        /// <param name="parameters"> The policy definition properties. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual PolicyDefinitionCreateOrUpdateOperation StartCreateOrUpdate(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
-        {
-            if (policyDefinitionName == null)
-            {
-                throw new ArgumentNullException(nameof(policyDefinitionName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = _restClient.CreateOrUpdate(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    if (waitForCompletion)
+                        operation.WaitForCompletion(cancellationToken);
+                    return operation;
                 }
                 else
                 {
                     var response = _restClient.CreateOrUpdateAtManagementGroup(Id.Name, policyDefinitionName, parameters, cancellationToken);
-                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    if (waitForCompletion)
+                        operation.WaitForCompletion(cancellationToken);
+                    return operation;
                 }
             }
             catch (Exception e)
@@ -151,9 +97,10 @@ namespace MgmtExtensionResource
         /// <summary> This operation creates or updates a policy definition in the given subscription with the given name. </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to create. </param>
         /// <param name="parameters"> The policy definition properties. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<PolicyDefinitionCreateOrUpdateOperation> StartCreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<PolicyDefinitionCreateOrUpdateOperation> CreateOrUpdateAsync(string policyDefinitionName, PolicyDefinitionData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (policyDefinitionName == null)
             {
@@ -164,19 +111,25 @@ namespace MgmtExtensionResource
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 if (Id.TryGetSubscriptionId(out _))
                 {
                     var response = await _restClient.CreateOrUpdateAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    if (waitForCompletion)
+                        await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                    return operation;
                 }
                 else
                 {
                     var response = await _restClient.CreateOrUpdateAtManagementGroupAsync(Id.Name, policyDefinitionName, parameters, cancellationToken).ConfigureAwait(false);
-                    return new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    var operation = new PolicyDefinitionCreateOrUpdateOperation(Parent, response);
+                    if (waitForCompletion)
+                        await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                    return operation;
                 }
             }
             catch (Exception e)
@@ -550,52 +503,6 @@ namespace MgmtExtensionResource
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-        }
-
-        /// <summary> Filters the list of <see cref="PolicyDefinition" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(PolicyDefinition.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="PolicyDefinition" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("PolicyDefinitionContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(PolicyDefinition.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         // Builders.

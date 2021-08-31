@@ -37,7 +37,7 @@ namespace OmitOperationGroups
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="Model2"/> class. </summary>
@@ -46,7 +46,7 @@ namespace OmitOperationGroups
         internal Model2(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new Model2SRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -122,6 +122,13 @@ namespace OmitOperationGroups
         public virtual IEnumerable<Location> GetAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets an object representing a Model4 along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="Model4" /> object. </returns>
+        public Model4 GetModel4()
+        {
+            return new Model4(this, Id + "/model4s/default");
         }
     }
 }

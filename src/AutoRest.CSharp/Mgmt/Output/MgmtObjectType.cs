@@ -75,27 +75,41 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
+        protected virtual ObjectTypeProperty CreatePropertyType(ObjectTypeProperty objectTypeProperty)
         {
-            ObjectTypeProperty propertyType = objectTypeProperty;
-            var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
-            if (typeToReplace != null)
+            if (objectTypeProperty.ValueType.IsFrameworkType && objectTypeProperty.ValueType.FrameworkType.IsGenericType)
             {
-                var match = ReferenceTypePropertyChooser.GetExactMatch(objectTypeProperty, typeToReplace, typeToReplace.MyProperties);
-                if (match != null)
+                for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
                 {
-                    propertyType = match;
+                    var argType = objectTypeProperty.ValueType.Arguments[i];
+                    var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
+                    if (typeToReplace != null)
+                    {
+                        var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _context);
+                        objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
+                    }
                 }
+                return objectTypeProperty;
             }
-            return propertyType;
+            else
+            {
+                ObjectTypeProperty propertyType = objectTypeProperty;
+                var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
+                if (typeToReplace != null)
+                {
+                    var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _context);
+                    if (match != null)
+                    {
+                        propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                    }
+                }
+                return propertyType;
+            }
         }
 
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType?.IsFrameworkType == true && !inheritedType.FrameworkType.IsGenericType)
-                return inheritedType;
-
             if (inheritedType != null && inheritedType.IsFrameworkType)
                 return inheritedType;
 
@@ -110,6 +124,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
             return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties, _context) : inheritedType;
+        }
+
+        protected CSharpType? CreateInheritedTypeWithNoExtraMatch()
+        {
+            return base.CreateInheritedType();
         }
 
         private OperationGroup? GetOperationGroupFromChildren()

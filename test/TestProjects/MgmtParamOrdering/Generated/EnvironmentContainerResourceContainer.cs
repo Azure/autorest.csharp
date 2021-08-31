@@ -12,7 +12,6 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Resources;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
@@ -33,7 +32,7 @@ namespace MgmtParamOrdering
         internal EnvironmentContainerResourceContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new EnvironmentContainersRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -44,9 +43,10 @@ namespace MgmtParamOrdering
         /// <summary> Create or update container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual Response<EnvironmentContainerResource> CreateOrUpdate(string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public virtual EnvironmentContainerCreateOrUpdateOperation CreateOrUpdate(string name, EnvironmentContainerResourceData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -58,71 +58,14 @@ namespace MgmtParamOrdering
             }
 
             using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(name, body, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update container. </summary>
-        /// <param name="name"> Container name. </param>
-        /// <param name="body"> Container entity to create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<Response<EnvironmentContainerResource>> CreateOrUpdateAsync(string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(name, body, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update container. </summary>
-        /// <param name="name"> Container name. </param>
-        /// <param name="body"> Container entity to create or update. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public virtual EnvironmentContainerCreateOrUpdateOperation StartCreateOrUpdate(string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
-        {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            if (body == null)
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, name, body, cancellationToken);
-                return new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
+                var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -134,9 +77,10 @@ namespace MgmtParamOrdering
         /// <summary> Create or update container. </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="body"> Container entity to create or update. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="body"/> is null. </exception>
-        public async virtual Task<EnvironmentContainerCreateOrUpdateOperation> StartCreateOrUpdateAsync(string name, EnvironmentContainerResourceData body, CancellationToken cancellationToken = default)
+        public async virtual Task<EnvironmentContainerCreateOrUpdateOperation> CreateOrUpdateAsync(string name, EnvironmentContainerResourceData body, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (name == null)
             {
@@ -147,12 +91,15 @@ namespace MgmtParamOrdering
                 throw new ArgumentNullException(nameof(body));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, name, body, cancellationToken).ConfigureAwait(false);
-                return new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
+                var operation = new EnvironmentContainerCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -305,52 +252,6 @@ namespace MgmtParamOrdering
 
                 var response = await GetIfExistsAsync(name, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(response.Value != null, response.GetRawResponse());
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="EnvironmentContainerResource" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<GenericResource> GetAllAsGenericResources(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(EnvironmentContainerResource.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="EnvironmentContainerResource" /> for this resource group represented as generic resources. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<GenericResource> GetAllAsGenericResourcesAsync(string nameFilter, string expand = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("EnvironmentContainerResourceContainer.GetAllAsGenericResources");
-            scope.Start();
-            try
-            {
-                var filters = new ResourceFilterCollection(EnvironmentContainerResource.ResourceType);
-                filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

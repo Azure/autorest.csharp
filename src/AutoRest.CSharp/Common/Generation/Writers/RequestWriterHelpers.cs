@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, bool writeUserAgentOverride)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -188,6 +188,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     default:
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
+
+                if (writeUserAgentOverride)
+                    writer.Line($"message.SetProperty(\"UserAgentOverride\", _userAgent);");
 
                 writer.Line($"return {message};");
             }

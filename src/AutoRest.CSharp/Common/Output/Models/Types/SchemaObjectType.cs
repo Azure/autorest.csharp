@@ -66,6 +66,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
+        public bool IsAbstract => ObjectSchema != null &&
+            ObjectSchema.Extensions != null &&
+            ObjectSchema.Extensions.MgmtReferenceType;
+
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
             get
@@ -143,7 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                "internal",
+                IsAbstract ? "protected" : "internal",
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -246,7 +250,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type.Name,
-                _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
+                IsAbstract ? "protected" : _usage.HasFlag(SchemaTypeUsage.Input) ? "public" : "internal",
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
@@ -254,7 +258,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
         public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
-        public bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

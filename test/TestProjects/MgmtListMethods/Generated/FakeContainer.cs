@@ -35,7 +35,7 @@ namespace MgmtListMethods
         internal FakeContainer(ArmResource parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new FakesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
@@ -46,9 +46,10 @@ namespace MgmtListMethods
         /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual Response<Fake> CreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public virtual FakeCreateOrUpdateOperation CreateOrUpdate(string fakeName, FakeData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -60,71 +61,14 @@ namespace MgmtListMethods
             }
 
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = StartCreateOrUpdate(fakeName, parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an fake. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<Fake>> CreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
-        {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.CreateOrUpdate");
-            scope.Start();
-            try
-            {
-                var operation = await StartCreateOrUpdateAsync(fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Create or update an fake. </summary>
-        /// <param name="fakeName"> The name of the fake. </param>
-        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public virtual FakeCreateOrUpdateOperation StartCreateOrUpdate(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
-        {
-            if (fakeName == null)
-            {
-                throw new ArgumentNullException(nameof(fakeName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var response = _restClient.CreateOrUpdate(fakeName, parameters, cancellationToken);
-                return new FakeCreateOrUpdateOperation(Parent, response);
+                var operation = new FakeCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -136,9 +80,10 @@ namespace MgmtListMethods
         /// <summary> Create or update an fake. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> or <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<FakeCreateOrUpdateOperation> StartCreateOrUpdateAsync(string fakeName, FakeData parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<FakeCreateOrUpdateOperation> CreateOrUpdateAsync(string fakeName, FakeData parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (fakeName == null)
             {
@@ -149,12 +94,15 @@ namespace MgmtListMethods
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("FakeContainer.StartCreateOrUpdate");
+            using var scope = _clientDiagnostics.CreateScope("FakeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var response = await _restClient.CreateOrUpdateAsync(fakeName, parameters, cancellationToken).ConfigureAwait(false);
-                return new FakeCreateOrUpdateOperation(Parent, response);
+                var operation = new FakeCreateOrUpdateOperation(Parent, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -401,7 +349,7 @@ namespace MgmtListMethods
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of <see cref="Fake" /> for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Fake" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -415,7 +363,7 @@ namespace MgmtListMethods
             {
                 var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContext(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContext(Parent as Subscription, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {
@@ -424,7 +372,7 @@ namespace MgmtListMethods
             }
         }
 
-        /// <summary> Filters the list of <see cref="Fake" /> for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of <see cref="Fake" /> for this subscription represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="expand"> Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -438,7 +386,7 @@ namespace MgmtListMethods
             {
                 var filters = new ResourceFilterCollection(Fake.ResourceType);
                 filters.SubstringFilter = nameFilter;
-                return ResourceListOperations.GetAtContextAsync(Parent as ResourceGroup, filters, expand, top, cancellationToken);
+                return ResourceListOperations.GetAtContextAsync(Parent as Subscription, filters, expand, top, cancellationToken);
             }
             catch (Exception e)
             {

@@ -82,7 +82,7 @@ namespace MgmtParamOrdering.Models
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImage(id, name, type, location, tags, bar.Value);
+            return new VirtualMachineExtensionImage(id, name, type, tags, location, bar.Value);
         }
     }
 }

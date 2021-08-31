@@ -98,8 +98,8 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetVMData DeserializeVirtualMachineScaleSetVMData(JsonElement element)
         {
             Optional<string> instanceId = default;
-            Optional<Models.Sku> sku = default;
-            Optional<Models.Plan> plan = default;
+            Optional<Sku> sku = default;
+            Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<IReadOnlyList<string>> zones = default;
             IDictionary<string, string> tags = default;
@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("plan"))
@@ -147,7 +147,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -363,7 +363,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMData(id, name, type, location, tags, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet.Value, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVMData(id, name, type, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet.Value, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

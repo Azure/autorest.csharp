@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
-            Models.Sku sku = default;
+            Sku sku = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample
             {
                 if (property.NameEquals("sku"))
                 {
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -194,7 +194,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostData(id, name, type, location, tags, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
+            return new DedicatedHostData(id, name, type, tags, location, sku, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
         }
     }
 }

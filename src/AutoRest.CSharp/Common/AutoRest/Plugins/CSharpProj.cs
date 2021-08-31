@@ -29,12 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.16.0"" />
-  </ItemGroup>";
-
-        private string _armCoreCsProjContent = @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.18.0-alpha.20210811.1"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.18.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -43,7 +38,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-alpha.20210811.3"" />
+    <PackageReference Include=""Azure.ResourceManager"" Version=""1.0.0-beta.1"" />
   </ItemGroup>
 ";
 
@@ -112,14 +107,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                   additionalContent += _llcProjectContent;
                 }
 
-                if (configuration.AzureArm)
-                {
-                    csProjContent = string.Format(_csProjContent, additionalContent, _armCoreCsProjContent);
-                }
-                else
-                {
-                    csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
-                }
+                csProjContent = string.Format(_csProjContent, additionalContent, _coreCsProjContent);
             }
             else
             {

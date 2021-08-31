@@ -87,7 +87,7 @@ namespace ExactMatchFlattenInheritance
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel3Data(id, name, type, location, tags, Optional.ToNullable(foo));
+            return new AzureResourceFlattenModel3Data(id, name, type, tags, location, Optional.ToNullable(foo));
         }
     }
 }

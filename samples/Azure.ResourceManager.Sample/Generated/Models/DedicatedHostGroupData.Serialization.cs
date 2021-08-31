@@ -172,7 +172,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, location, tags, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
+            return new DedicatedHostGroupData(id, name, type, tags, location, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
         }
     }
 }

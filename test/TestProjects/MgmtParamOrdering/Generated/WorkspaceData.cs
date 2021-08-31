@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 using MgmtParamOrdering.Models;
 
@@ -25,8 +26,8 @@ namespace MgmtParamOrdering
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
         /// <param name="workspaceId"> The immutable id associated with this workspace. </param>
         /// <param name="description"> The description of this workspace. </param>
@@ -44,7 +45,7 @@ namespace MgmtParamOrdering
         /// <param name="allowPublicAccessWhenBehindVnet"> The flag to indicate whether to allow public access when behind VNet. </param>
         /// <param name="primaryUserAssignedIdentity"> The user assigned identity resource id that represents the workspace identity. </param>
         /// <param name="tenantId"> The tenant id associated with this workspace. </param>
-        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, SystemData systemData, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, string discoveryUrl, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, string tenantId) : base(id, name, type, location, tags)
+        internal WorkspaceData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, SystemData systemData, string workspaceId, string description, string friendlyName, string keyVault, string applicationInsights, string containerRegistry, string storageAccount, string discoveryUrl, ProvisioningState? provisioningState, bool? hbiWorkspace, string serviceProvisionedResourceGroup, int? privateLinkCount, string imageBuildCompute, bool? allowPublicAccessWhenBehindVnet, string primaryUserAssignedIdentity, string tenantId) : base(id, name, type, tags, location)
         {
             SystemData = systemData;
             WorkspaceId = workspaceId;

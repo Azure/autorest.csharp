@@ -82,7 +82,7 @@ namespace TenantOnly
                     continue;
                 }
             }
-            return new BillingAccountData(id, name, type, location, tags, bar.Value);
+            return new BillingAccountData(id, name, type, tags, location, bar.Value);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.Append($"{schema.Declaration.Accessibility} partial class {schema.Declaration.Name}");
+                    writer.Append($"{schema.Declaration.Accessibility} {GetAbstract(schema)}partial class {schema.Declaration.Name}");
                 }
 
                 if (implementsTypes.Any())
@@ -82,6 +82,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
             }
+        }
+
+        private string GetAbstract(SchemaObjectType schema)
+        {
+            return schema.IsAbstract ? "abstract " : string.Empty;
         }
 
         protected virtual void AddClassAttributes(CodeWriter writer, SchemaObjectType schema)

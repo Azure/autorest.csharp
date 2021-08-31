@@ -23,7 +23,7 @@ namespace ExactMatchInheritance
         #region ExactMatchModel2
         private static ExactMatchModel2SRestOperations GetExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ExactMatchModel2SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>
@@ -113,7 +113,7 @@ namespace ExactMatchInheritance
         #region ExactMatchModel4
         private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new ExactMatchModel4SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="subscription"> The <see cref="Subscription" /> instance the method will execute against. </param>

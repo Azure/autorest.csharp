@@ -82,7 +82,7 @@ namespace MgmtListMethods
                     continue;
                 }
             }
-            return new SubParentWithNonResChWithLocData(id, name, type, location, tags, bar.Value);
+            return new SubParentWithNonResChWithLocData(id, name, type, tags, location, bar.Value);
         }
     }
 }

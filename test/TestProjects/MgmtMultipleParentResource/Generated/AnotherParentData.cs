@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtMultipleParentResource
@@ -24,8 +25,8 @@ namespace MgmtMultipleParentResource
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
         /// <param name="runAsPassword"> Specifies the user account password on the VM when executing the run command. </param>
@@ -33,7 +34,7 @@ namespace MgmtMultipleParentResource
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal AnotherParentData(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, location, tags)
+        internal AnotherParentData(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, string outputBlobUri, string errorBlobUri, string provisioningState) : base(id, name, type, tags, location)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

@@ -82,7 +82,7 @@ namespace MgmtSingleton
                     continue;
                 }
             }
-            return new ParentResourceData(id, name, type, location, tags, @new.Value);
+            return new ParentResourceData(id, name, type, tags, location, @new.Value);
         }
     }
 }

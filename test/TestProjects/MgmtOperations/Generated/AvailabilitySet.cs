@@ -39,7 +39,7 @@ namespace MgmtOperations
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySet"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtOperations
         internal AvailabilitySet(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -131,51 +131,19 @@ namespace MgmtOperations
         }
 
         /// <summary> Delete an availability set. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetDeleteOperation> DeleteAsync(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.Delete");
-            scope.Start();
-            try
-            {
-                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.Delete");
-            scope.Start();
-            try
-            {
-                var operation = StartDelete(cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async virtual Task<AvailabilitySetDeleteOperation> StartDeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartDelete");
             scope.Start();
             try
             {
                 var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetDeleteOperation(response);
+                var operation = new AvailabilitySetDeleteOperation(response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -185,15 +153,19 @@ namespace MgmtOperations
         }
 
         /// <summary> Delete an availability set. </summary>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AvailabilitySetDeleteOperation StartDelete(CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetDeleteOperation Delete(bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.Delete");
             scope.Start();
             try
             {
                 var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new AvailabilitySetDeleteOperation(response);
+                var operation = new AvailabilitySetDeleteOperation(response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -220,7 +192,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -249,7 +221,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue[key] = value;
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -275,10 +247,10 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                await TagResource.DeleteAsync(cancellationToken).ConfigureAwait(false);
+                await TagResource.DeleteAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -304,10 +276,10 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                TagResource.Delete(cancellationToken);
+                TagResource.Delete(cancellationToken: cancellationToken);
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.ReplaceWith(tags);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -335,7 +307,7 @@ namespace MgmtOperations
             {
                 var originalTags = await TagResource.GetAsync(cancellationToken).ConfigureAwait(false);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken).ConfigureAwait(false);
+                await TagContainer.CreateOrUpdateAsync(originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var originalResponse = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -363,7 +335,7 @@ namespace MgmtOperations
             {
                 var originalTags = TagResource.Get(cancellationToken);
                 originalTags.Value.Data.Properties.TagsValue.Remove(key);
-                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken);
+                TagContainer.CreateOrUpdate(originalTags.Value.Data, cancellationToken: cancellationToken);
                 var originalResponse = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, originalResponse.Value), originalResponse.GetRawResponse());
             }
@@ -477,9 +449,10 @@ namespace MgmtOperations
 
         /// <summary> Testing description. </summary>
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<ConnectionSharedKey>> TestSetSharedKeyAsync(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> TestSetSharedKeyAsync(ConnectionSharedKey parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -487,61 +460,14 @@ namespace MgmtOperations
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestSetSharedKey");
-            scope.Start();
-            try
-            {
-                var operation = await StartTestSetSharedKeyAsync(parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Testing description. </summary>
-        /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ConnectionSharedKey> TestSetSharedKey(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestSetSharedKey");
-            scope.Start();
-            try
-            {
-                var operation = StartTestSetSharedKey(parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Testing description. </summary>
-        /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetTestSetSharedKeyOperation> StartTestSetSharedKeyAsync(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartTestSetSharedKey");
             scope.Start();
             try
             {
                 var response = await _restClient.TestSetSharedKeyAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -552,21 +478,25 @@ namespace MgmtOperations
 
         /// <summary> Testing description. </summary>
         /// <param name="parameters"> Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetTestSetSharedKeyOperation StartTestSetSharedKey(ConnectionSharedKey parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetTestSetSharedKeyOperation TestSetSharedKey(ConnectionSharedKey parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartTestSetSharedKey");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestSetSharedKey");
             scope.Start();
             try
             {
                 var response = _restClient.TestSetSharedKey(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var operation = new AvailabilitySetTestSetSharedKeyOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestSetSharedKeyRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {
@@ -577,9 +507,10 @@ namespace MgmtOperations
 
         /// <summary> Update an availability set. </summary>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<Response<TestAvailabilitySet>> TestLROMethodAsync(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async virtual Task<AvailabilitySetTestLROMethodOperation> TestLROMethodAsync(AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -587,61 +518,14 @@ namespace MgmtOperations
             }
 
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestLROMethod");
-            scope.Start();
-            try
-            {
-                var operation = await StartTestLROMethodAsync(parameters, cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Update an availability set. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<TestAvailabilitySet> TestLROMethod(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestLROMethod");
-            scope.Start();
-            try
-            {
-                var operation = StartTestLROMethod(parameters, cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Update an availability set. </summary>
-        /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async virtual Task<AvailabilitySetTestLROMethodOperation> StartTestLROMethodAsync(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartTestLROMethod");
             scope.Start();
             try
             {
                 var response = await _restClient.TestLROMethodAsync(Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                var operation = new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                if (waitForCompletion)
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return operation;
             }
             catch (Exception e)
             {
@@ -652,21 +536,25 @@ namespace MgmtOperations
 
         /// <summary> Update an availability set. </summary>
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
+        /// <param name="waitForCompletion"> Waits for the completion of the long running operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual AvailabilitySetTestLROMethodOperation StartTestLROMethod(AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public virtual AvailabilitySetTestLROMethodOperation TestLROMethod(AvailabilitySetUpdate parameters, bool waitForCompletion = true, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.StartTestLROMethod");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySet.TestLROMethod");
             scope.Start();
             try
             {
                 var response = _restClient.TestLROMethod(Id.ResourceGroupName, parameters, cancellationToken);
-                return new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                var operation = new AvailabilitySetTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                if (waitForCompletion)
+                    operation.WaitForCompletion(cancellationToken);
+                return operation;
             }
             catch (Exception e)
             {

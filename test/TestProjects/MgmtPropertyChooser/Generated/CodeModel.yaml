@@ -20,7 +20,7 @@ schemas: !Schemas
           name: Boolean
           description: Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_76
+    - !BooleanSchema &ref_91
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -365,7 +365,77 @@ schemas: !Schemas
           name: VirtualMachineZonesItem
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_55
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseCode
+          description: The error code.
+      protocol: !Protocols {}
     - !StringSchema &ref_56
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseMessage
+          description: The error message.
+      protocol: !Protocols {}
+    - !StringSchema &ref_57
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseTarget
+          description: The error target.
+      protocol: !Protocols {}
+    - !StringSchema &ref_59
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorAdditionalInfoType
+          description: The additional info type.
+      protocol: !Protocols {}
+    - !StringSchema &ref_60
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseWithAnotherNameCode
+          description: The error code.
+      protocol: !Protocols {}
+    - !StringSchema &ref_61
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseWithAnotherNameMessage
+          description: The error message.
+      protocol: !Protocols {}
+    - !StringSchema &ref_62
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ErrorResponseWithAnotherNameTarget
+          description: The error target.
+      protocol: !Protocols {}
+    - !StringSchema &ref_66
       type: string
       apiVersions:
         - !ApiVersion 
@@ -375,7 +445,7 @@ schemas: !Schemas
           name: VirtualMachineUpdateZonesItem
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_59
+    - !StringSchema &ref_69
       type: string
       apiVersions:
         - !ApiVersion 
@@ -425,7 +495,7 @@ schemas: !Schemas
             virtual machine.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_64
+    - !ConstantSchema &ref_78
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -435,7 +505,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_68
+    - !ConstantSchema &ref_82
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -445,7 +515,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_69
+    - !ConstantSchema &ref_83
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -455,7 +525,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_80
+    - !ConstantSchema &ref_95
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -653,7 +723,7 @@ schemas: !Schemas
             The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_58
+    - !DictionarySchema &ref_68
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -873,7 +943,7 @@ schemas: !Schemas
                       programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_60
+                schema: !ArraySchema &ref_70
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -1174,7 +1244,7 @@ schemas: !Schemas
                     description: The identity of the virtual machine, if configured.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_61
+                schema: !ArraySchema &ref_71
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -1331,23 +1401,257 @@ schemas: !Schemas
     - *ref_52
     - *ref_53
     - *ref_54
-    - !ObjectSchema &ref_55
+    - !ObjectSchema &ref_87
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_58
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_55
+                readOnly: true
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: The error code.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_56
+                readOnly: true
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The error message.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_57
+                readOnly: true
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: The error target.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_72
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_58
+                  language: !Languages 
+                    default:
+                      name: ErrorResponseDetails
+                      description: The error details.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: details
+                language: !Languages 
+                  default:
+                    name: details
+                    description: The error details.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_73
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: !ObjectSchema &ref_64
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_59
+                        readOnly: true
+                        serializedName: type
+                        language: !Languages 
+                          default:
+                            name: type
+                            description: The additional info type.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_14
+                        readOnly: true
+                        serializedName: info
+                        language: !Languages 
+                          default:
+                            name: info
+                            description: The additional info.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - exception
+                    language: !Languages 
+                      default:
+                        name: ErrorAdditionalInfo
+                        description: The resource management error additional info.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  language: !Languages 
+                    default:
+                      name: ErrorResponseAdditionalInfo
+                      description: The error additional info.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: additionalInfo
+                language: !Languages 
+                  default:
+                    name: additionalInfo
+                    description: The error additional info.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            summary: Error Response
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: ErrorResponse
+                description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+                namespace: ''
+                summary: Error Response
+            protocol: !Protocols {}
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ObjectSchema &ref_63
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            properties:
+              - !Property 
+                schema: *ref_60
+                readOnly: true
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: The error code.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_61
+                readOnly: true
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: The error message.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_62
+                readOnly: true
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: The error target.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_74
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_63
+                  language: !Languages 
+                    default:
+                      name: ErrorResponseWithAnotherNameDetails
+                      description: The error details.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: details
+                language: !Languages 
+                  default:
+                    name: details
+                    description: The error details.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_75
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_64
+                  language: !Languages 
+                    default:
+                      name: ErrorResponseWithAnotherNameAdditionalInfo
+                      description: The error additional info.
+                  protocol: !Protocols {}
+                readOnly: true
+                serializedName: additionalInfo
+                language: !Languages 
+                  default:
+                    name: additionalInfo
+                    description: The error additional info.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            summary: Error Response
+            usage:
+              - exception
+            language: !Languages 
+              default:
+                name: ErrorResponseWithAnotherName
+                description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+                namespace: ''
+                summary: Error Response
+            protocol: !Protocols {}
+          serializedName: anotherError
+          language: !Languages 
+            default:
+              name: anotherError
+              description: Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      extensions:
+        x-ms-external: true
+      language: !Languages 
+        default:
+          name: CloudError
+          description: An error response for a resource management request.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_58
+    - *ref_64
+    - *ref_63
+    - !ObjectSchema &ref_65
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_57
+          - !ObjectSchema &ref_67
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_55
+                - *ref_65
               immediate:
-                - *ref_55
+                - *ref_65
             properties:
               - !Property 
                 schema: *ref_45
@@ -1368,12 +1672,12 @@ schemas: !Schemas
                     description: The identity of the virtual machine, if configured.
                 protocol: !Protocols {}
               - !Property 
-                schema: !ArraySchema &ref_62
+                schema: !ArraySchema &ref_76
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_56
+                  elementType: *ref_66
                   language: !Languages 
                     default:
                       name: VirtualMachineUpdateZones
@@ -1448,10 +1752,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_57
+          - *ref_67
       properties:
         - !Property 
-          schema: *ref_58
+          schema: *ref_68
           serializedName: tags
           language: !Languages 
             default:
@@ -1468,7 +1772,7 @@ schemas: !Schemas
           description: The Update Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_57
+    - *ref_67
     - !ObjectSchema 
       type: object
       apiVersions:
@@ -1476,7 +1780,7 @@ schemas: !Schemas
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_63
+          schema: !ArraySchema &ref_77
             type: array
             apiVersions:
               - !ApiVersion 
@@ -1495,7 +1799,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_59
+          schema: *ref_69
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -1510,12 +1814,16 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_60
-    - *ref_61
-    - *ref_62
-    - *ref_63
+    - *ref_70
+    - *ref_71
+    - *ref_72
+    - *ref_73
+    - *ref_74
+    - *ref_75
+    - *ref_76
+    - *ref_77
 globalParameters:
-  - !Parameter &ref_67
+  - !Parameter &ref_81
     schema: *ref_1
     implementation: Client
     required: true
@@ -1529,7 +1837,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_65
+  - !Parameter &ref_79
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -1545,8 +1853,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_66
-    schema: *ref_64
+  - !Parameter &ref_80
+    schema: *ref_78
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -1567,8 +1875,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_65
-          - !Parameter &ref_71
+          - *ref_79
+          - !Parameter &ref_85
             schema: *ref_1
             implementation: Method
             required: true
@@ -1580,7 +1888,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
+          - !Parameter &ref_86
             schema: *ref_1
             implementation: Method
             required: true
@@ -1592,13 +1900,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_66
-          - *ref_67
+          - *ref_80
+          - *ref_81
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_68
+                schema: *ref_82
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1610,7 +1918,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_70
+              - !Parameter &ref_84
                 schema: *ref_39
                 implementation: Method
                 required: true
@@ -1623,7 +1931,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_83
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1636,7 +1944,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_70
+              - *ref_84
             language: !Languages 
               default:
                 name: ''
@@ -1650,8 +1958,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
-          - *ref_72
+          - *ref_85
+          - *ref_86
         responses:
           - !SchemaResponse 
             schema: *ref_39
@@ -1679,6 +1987,20 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '201'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_87
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
         extensions:
           x-ms-long-running-operation: true
         language: !Languages 
@@ -1691,8 +2013,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_65
-          - !Parameter &ref_74
+          - *ref_79
+          - !Parameter &ref_89
             schema: *ref_1
             implementation: Method
             required: true
@@ -1704,7 +2026,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_75
+          - !Parameter &ref_90
             schema: *ref_1
             implementation: Method
             required: true
@@ -1716,13 +2038,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_66
-          - *ref_67
+          - *ref_80
+          - *ref_81
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_68
+                schema: *ref_82
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1734,8 +2056,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_73
-                schema: *ref_57
+              - !Parameter &ref_88
+                schema: *ref_67
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1747,7 +2069,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_83
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1760,7 +2082,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_73
+              - *ref_88
             language: !Languages 
               default:
                 name: ''
@@ -1774,8 +2096,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_74
-          - *ref_75
+          - *ref_89
+          - *ref_90
         responses:
           - !SchemaResponse 
             schema: *ref_39
@@ -1815,8 +2137,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_65
-          - !Parameter &ref_77
+          - *ref_79
+          - !Parameter &ref_92
             schema: *ref_1
             implementation: Method
             required: true
@@ -1828,7 +2150,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_78
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -1840,8 +2162,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_79
-            schema: *ref_76
+          - !Parameter &ref_94
+            schema: *ref_91
             implementation: Method
             language: !Languages 
               default:
@@ -1851,8 +2173,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_66
-          - *ref_67
+          - *ref_80
+          - *ref_81
         requests:
           - !Request 
             language: !Languages 
@@ -1865,9 +2187,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_77
-          - *ref_78
-          - *ref_79
+          - *ref_92
+          - *ref_93
+          - *ref_94
         responses:
           - !Response 
             language: !Languages 
@@ -1908,8 +2230,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_65
-          - !Parameter &ref_81
+          - *ref_79
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -1921,7 +2243,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_82
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -1934,7 +2256,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_80
+            schema: *ref_95
             implementation: Method
             language: !Languages 
               default:
@@ -1944,13 +2266,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_66
-          - *ref_67
+          - *ref_80
+          - *ref_81
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_69
+                schema: *ref_83
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1973,8 +2295,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_81
-          - *ref_82
+          - *ref_96
+          - *ref_97
         responses:
           - !SchemaResponse 
             schema: *ref_39
