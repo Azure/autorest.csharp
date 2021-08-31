@@ -102,6 +102,23 @@ namespace Azure.AI.DocumentTranslation
         /// }
         /// </c>
         /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -190,6 +207,23 @@ namespace Azure.AI.DocumentTranslation
         /// }
         /// </c>
         /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -274,6 +308,60 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "id": "TranslationStatusId",
+        ///       "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///       "error": {
+        ///         "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///         "message": "string",
+        ///         "target": "string",
+        ///         "innerError": {
+        ///           "code": "string",
+        ///           "message": "string",
+        ///           "target": "string",
+        ///           "innerError": "InnerTranslationError"
+        ///         }
+        ///       },
+        ///       "summary": {
+        ///         "total": "number",
+        ///         "failed": "number",
+        ///         "success": "number",
+        ///         "inProgress": "number",
+        ///         "notYetStarted": "number",
+        ///         "cancelled": "number",
+        ///         "totalCharacterCharged": "number"
+        ///       }
+        ///     }
+        ///   ],
+        ///   "@nextLink": "string"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -363,6 +451,60 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "id": "TranslationStatusId",
+        ///       "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///       "error": {
+        ///         "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///         "message": "string",
+        ///         "target": "string",
+        ///         "innerError": {
+        ///           "code": "string",
+        ///           "message": "string",
+        ///           "target": "string",
+        ///           "innerError": "InnerTranslationError"
+        ///         }
+        ///       },
+        ///       "summary": {
+        ///         "total": "number",
+        ///         "failed": "number",
+        ///         "success": "number",
+        ///         "inProgress": "number",
+        ///         "notYetStarted": "number",
+        ///         "cancelled": "number",
+        ///         "totalCharacterCharged": "number"
+        ///       }
+        ///     }
+        ///   ],
+        ///   "@nextLink": "string"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -502,6 +644,51 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "path": "string",
+        ///   "sourcePath": "string",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "to": "string",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "progress": "number",
+        ///   "id": "DocumentStatusId",
+        ///   "characterCharged": "number"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="options"> The request options. </param>
@@ -543,6 +730,51 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "path": "string",
+        ///   "sourcePath": "string",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "to": "string",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "progress": "number",
+        ///   "id": "DocumentStatusId",
+        ///   "characterCharged": "number"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="options"> The request options. </param>
@@ -608,6 +840,55 @@ namespace Azure.AI.DocumentTranslation
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "id": "TranslationStatusId",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "summary": {
+        ///     "total": "number",
+        ///     "failed": "number",
+        ///     "success": "number",
+        ///     "inProgress": "number",
+        ///     "notYetStarted": "number",
+        ///     "cancelled": "number",
+        ///     "totalCharacterCharged": "number"
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -651,6 +932,55 @@ namespace Azure.AI.DocumentTranslation
         /// Returns the status for a document translation request.
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "id": "TranslationStatusId",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "summary": {
+        ///     "total": "number",
+        ///     "failed": "number",
+        ///     "success": "number",
+        ///     "inProgress": "number",
+        ///     "notYetStarted": "number",
+        ///     "cancelled": "number",
+        ///     "totalCharacterCharged": "number"
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -715,6 +1045,55 @@ namespace Azure.AI.DocumentTranslation
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "id": "TranslationStatusId",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "summary": {
+        ///     "total": "number",
+        ///     "failed": "number",
+        ///     "success": "number",
+        ///     "inProgress": "number",
+        ///     "notYetStarted": "number",
+        ///     "cancelled": "number",
+        ///     "totalCharacterCharged": "number"
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -761,6 +1140,55 @@ namespace Azure.AI.DocumentTranslation
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// All pending documents will be cancelled if possible.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "id": "TranslationStatusId",
+        ///   "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///   "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   },
+        ///   "summary": {
+        ///     "total": "number",
+        ///     "failed": "number",
+        ///     "success": "number",
+        ///     "inProgress": "number",
+        ///     "notYetStarted": "number",
+        ///     "cancelled": "number",
+        ///     "totalCharacterCharged": "number"
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -840,6 +1268,56 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "path": "string",
+        ///       "sourcePath": "string",
+        ///       "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///       "to": "string",
+        ///       "error": {
+        ///         "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///         "message": "string",
+        ///         "target": "string",
+        ///         "innerError": {
+        ///           "code": "string",
+        ///           "message": "string",
+        ///           "target": "string",
+        ///           "innerError": "InnerTranslationError"
+        ///         }
+        ///       },
+        ///       "progress": "number",
+        ///       "id": "DocumentStatusId",
+        ///       "characterCharged": "number"
+        ///     }
+        ///   ],
+        ///   "@nextLink": "string"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -927,6 +1405,56 @@ namespace Azure.AI.DocumentTranslation
         /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "path": "string",
+        ///       "sourcePath": "string",
+        ///       "createdDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "lastActionDateTimeUtc": "string (ISO 8601 Format)",
+        ///       "status": "\u0026quot;NotStarted\u0026quot; | \u0026quot;Running\u0026quot; | \u0026quot;Succeeded\u0026quot; | \u0026quot;Failed\u0026quot; | \u0026quot;Cancelled\u0026quot; | \u0026quot;Cancelling\u0026quot; | \u0026quot;ValidationFailed\u0026quot;",
+        ///       "to": "string",
+        ///       "error": {
+        ///         "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///         "message": "string",
+        ///         "target": "string",
+        ///         "innerError": {
+        ///           "code": "string",
+        ///           "message": "string",
+        ///           "target": "string",
+        ///           "innerError": "InnerTranslationError"
+        ///         }
+        ///       },
+        ///       "progress": "number",
+        ///       "id": "DocumentStatusId",
+        ///       "characterCharged": "number"
+        ///     }
+        ///   ],
+        ///   "@nextLink": "string"
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -1073,6 +1601,46 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "format": "string",
+        ///       "fileExtensions": [
+        ///         "string"
+        ///       ],
+        ///       "contentTypes": [
+        ///         "string"
+        ///       ],
+        ///       "defaultVersion": "string",
+        ///       "versions": [
+        ///         "string"
+        ///       ]
+        ///     }
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions options = null)
@@ -1115,6 +1683,46 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported document formats supported by the Document Translation service.
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "format": "string",
+        ///       "fileExtensions": [
+        ///         "string"
+        ///       ],
+        ///       "contentTypes": [
+        ///         "string"
+        ///       ],
+        ///       "defaultVersion": "string",
+        ///       "versions": [
+        ///         "string"
+        ///       ]
+        ///     }
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedDocumentFormats(RequestOptions options = null)
@@ -1173,6 +1781,46 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "format": "string",
+        ///       "fileExtensions": [
+        ///         "string"
+        ///       ],
+        ///       "contentTypes": [
+        ///         "string"
+        ///       ],
+        ///       "defaultVersion": "string",
+        ///       "versions": [
+        ///         "string"
+        ///       ]
+        ///     }
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions options = null)
@@ -1215,6 +1863,46 @@ namespace Azure.AI.DocumentTranslation
         /// The list of supported glossary formats supported by the Document Translation service.
         /// The list includes the common file extension used.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     {
+        ///       "format": "string",
+        ///       "fileExtensions": [
+        ///         "string"
+        ///       ],
+        ///       "contentTypes": [
+        ///         "string"
+        ///       ],
+        ///       "defaultVersion": "string",
+        ///       "versions": [
+        ///         "string"
+        ///       ]
+        ///     }
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedGlossaryFormats(RequestOptions options = null)
@@ -1270,6 +1958,34 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     "\u0026quot;AzureBlob\u0026quot;"
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions options = null)
@@ -1309,6 +2025,34 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <c>
+        /// {
+        ///   "value": [
+        ///     "\u0026quot;AzureBlob\u0026quot;"
+        ///   ]
+        /// }
+        /// </c>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <c>
+        /// {
+        ///   "error": {
+        ///     "code": "\u0026quot;InvalidRequest\u0026quot; | \u0026quot;InvalidArgument\u0026quot; | \u0026quot;InternalServerError\u0026quot; | \u0026quot;ServiceUnavailable\u0026quot; | \u0026quot;ResourceNotFound\u0026quot; | \u0026quot;Unauthorized\u0026quot; | \u0026quot;RequestRateTooHigh\u0026quot;",
+        ///     "message": "string",
+        ///     "target": "string",
+        ///     "innerError": {
+        ///       "code": "string",
+        ///       "message": "string",
+        ///       "target": "string",
+        ///       "innerError": "InnerTranslationError"
+        ///     }
+        ///   }
+        /// }
+        /// </c>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetSupportedStorageSources(RequestOptions options = null)

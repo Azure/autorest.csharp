@@ -125,10 +125,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private string buildJsonFromSchemaDocs(LowLevelClientMethod.SchemaDocumentation[] docs)
+        private string buildJsonFromSchemaDocs(string schemaName, LowLevelClientMethod.SchemaDocumentation[] docs)
         {
             var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
-            IDictionary<string, Object> jsonObject = buildObjectFromSchemaDoc(docs.FirstOrDefault(), docDict);
+            IDictionary<string, Object> jsonObject = buildObjectFromSchemaDoc(docs.FirstOrDefault(), docDict, schemaName == LowLevelClientMethod.SchemaDocumentation.RequestBody);
             var options = new JsonSerializerOptions()
             {
                 WriteIndented = true
@@ -137,16 +137,20 @@ namespace AutoRest.CSharp.Generation.Writers
             return jsonString;
         }
 
-        private IDictionary<string, Object> buildObjectFromSchemaDoc(LowLevelClientMethod.SchemaDocumentation doc, IReadOnlyDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict)
+        private IDictionary<string, Object> buildObjectFromSchemaDoc(LowLevelClientMethod.SchemaDocumentation doc, IDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict, bool showRequired)
         {
             var jsonObject = new Dictionary<string, Object>();
             foreach (var row in doc.DocumentationRows)
             {
-                var required = row.Required ? " (required)" : "";
+                var required = showRequired && row.Required ? " (required)" : "";
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
                 if (docDict.ContainsKey(rowType))
-                    jsonObject[row.Name] = isArray ? new List<IDictionary<string, Object>> { buildObjectFromSchemaDoc(docDict[rowType], docDict) } : buildObjectFromSchemaDoc(docDict[rowType], docDict);
+                {
+                    var docToProcess = docDict[rowType];
+                    docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
+                    jsonObject[row.Name] = isArray ? new List<IDictionary<string, Object>> { buildObjectFromSchemaDoc(docToProcess, docDict, showRequired) } : buildObjectFromSchemaDoc(docToProcess, docDict, showRequired);
+                }
                 else
                     jsonObject[row.Name] = isArray ? new List<string> { $"{rowType}{required}" } : $"{rowType}{required}";
             }
@@ -167,14 +171,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
 
-            if (clientMethod.SchemaDocumentations != null)
+            if (clientMethod.SchemaDocumentations.Count > 0)
             {
-                var schemas = (FormattableString)$@"
-Schema for <c>{clientMethod.SchemaDocumentations.FirstOrDefault().SchemaName}</c>:
+                var schemas = clientMethod.SchemaDocumentations.OrderBy(item => item.Key).Select(item => (FormattableString)$@"
+Schema for <c>{item.Key}</c>:
 <c>
-{buildJsonFromSchemaDocs(clientMethod.SchemaDocumentations)}
+{buildJsonFromSchemaDocs(item.Key, item.Value)}
 </c>
-";
+");
 
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
