@@ -57,7 +57,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -98,7 +98,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -154,7 +154,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -195,7 +195,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -251,7 +251,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -292,7 +292,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -348,7 +348,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -389,7 +389,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -445,7 +445,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -486,7 +486,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -542,7 +542,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -582,7 +582,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -637,7 +637,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -677,7 +677,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -732,7 +732,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -772,7 +772,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -827,7 +827,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -868,7 +868,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -924,7 +924,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -965,7 +965,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1021,7 +1021,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1062,7 +1062,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1118,7 +1118,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1159,7 +1159,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1215,7 +1215,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1255,7 +1255,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1310,7 +1310,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1350,7 +1350,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1405,7 +1405,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1445,7 +1445,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1500,7 +1500,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1540,7 +1540,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1594,7 +1594,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1634,7 +1634,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1688,7 +1688,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1728,7 +1728,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1782,7 +1782,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1822,7 +1822,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1876,7 +1876,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1915,7 +1915,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1969,7 +1969,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2008,7 +2008,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2062,7 +2062,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2101,7 +2101,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2155,7 +2155,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2194,7 +2194,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultModelA400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2248,7 +2248,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2287,7 +2287,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2340,7 +2340,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2379,7 +2379,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2432,7 +2432,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2471,7 +2471,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2524,7 +2524,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2563,7 +2563,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
+            using HttpMessage message = CreateGetDefaultNone400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2616,7 +2616,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2655,7 +2655,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA200NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2709,7 +2709,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2748,7 +2748,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2802,7 +2802,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2841,7 +2841,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA200InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2895,7 +2895,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2934,7 +2934,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400NoneRequest(options);
+            using HttpMessage message = CreateGet200ModelA400NoneRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2988,7 +2988,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3027,7 +3027,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3081,7 +3081,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3120,7 +3120,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
+            using HttpMessage message = CreateGet200ModelA400InvalidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3174,7 +3174,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA202ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -3213,7 +3213,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGet200ModelA202ValidRequest(options);
+            using HttpMessage message = CreateGet200ModelA202ValidRequest(options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);

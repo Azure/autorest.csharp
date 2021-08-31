@@ -57,7 +57,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(content, options);
+            using HttpMessage message = CreateOperationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -96,7 +96,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(content, options);
+            using HttpMessage message = CreateOperationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -152,7 +152,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(content, options);
+            using HttpMessage message = CreateOperationInternalRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -191,7 +191,7 @@ namespace Accessibility_LowLevel_TokenAuth
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(content, options);
+            using HttpMessage message = CreateOperationInternalRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
