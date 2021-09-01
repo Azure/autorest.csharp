@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models
                             }
                         }
 
-                        documentationObjects.Add(new(schema == o ? schemaName : StringifyTypeForTable(o), propertyDocumentation));
+                        documentationObjects.Add(new(schema == o ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(o)), propertyDocumentation));
                         break;
                 }
 
@@ -233,7 +233,7 @@ namespace AutoRest.CSharp.Output.Models
                 case DateTimeSchema:
                     return "string (ISO 8601 Format)";
                 case ChoiceSchema c:
-                    return string.Join(" | ", c.Choices.Select(c => $"\"{c.Value}\""));
+                    return string.Join(" | ", c.Choices.Select(c => $"{c.Value}"));
                 case DictionarySchema d:
                     return $"Dictionary<string, {StringifyTypeForTable(d.ElementType)}>";
                 case ArraySchema a:

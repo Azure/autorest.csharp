@@ -17,6 +17,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Encodings.Web;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -131,6 +132,7 @@ namespace AutoRest.CSharp.Generation.Writers
             IDictionary<string, Object> jsonObject = buildObjectFromSchemaDoc(docs.FirstOrDefault(), docDict, schemaName == LowLevelClientMethod.SchemaDocumentation.RequestBody);
             var options = new JsonSerializerOptions()
             {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 WriteIndented = true
             };
             string jsonString = JsonSerializer.Serialize(jsonObject, options);
@@ -175,9 +177,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var schemas = clientMethod.SchemaDocumentations.OrderBy(item => item.Key).Select(item => (FormattableString)$@"
 Schema for <c>{item.Key}</c>:
-<c>
+<pre><c>
 {buildJsonFromSchemaDocs(item.Key, item.Value)}
-</c>
+</c></pre>
 ");
 
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
