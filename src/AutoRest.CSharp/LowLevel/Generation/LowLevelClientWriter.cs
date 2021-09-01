@@ -81,7 +81,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($");");
-                writer.Line();
 
                 writer.Line($"{typeof(RequestOptions)}.{nameof(RequestOptions.Apply)}(options, {messageVariable});");
 

@@ -58,7 +58,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -95,7 +94,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -177,7 +175,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
@@ -244,7 +241,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
@@ -300,7 +296,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetInvalidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -337,7 +332,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetInvalidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -389,7 +383,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -426,7 +419,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -478,7 +470,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -515,7 +506,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -567,7 +557,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
@@ -604,7 +593,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();

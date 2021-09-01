@@ -112,7 +112,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200SucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -204,7 +203,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200SucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -314,7 +312,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -405,7 +402,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -514,7 +510,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201SucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -605,7 +600,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201SucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -660,7 +654,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202ListRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -698,7 +691,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202ListRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -805,7 +797,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200SucceededNoStateRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -896,7 +887,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200SucceededNoStateRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -1005,7 +995,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut202Retry200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -1096,7 +1085,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut202Retry200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -1205,7 +1193,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1297,7 +1284,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1407,7 +1393,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1498,7 +1483,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1607,7 +1591,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingFailed200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1699,7 +1682,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingFailed200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1809,7 +1791,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200Acceptedcanceled200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -1900,7 +1881,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200Acceptedcanceled200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -2009,7 +1989,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNoHeaderInRetryRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -2100,7 +2079,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNoHeaderInRetryRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -2209,7 +2187,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -2300,7 +2277,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -2409,7 +2385,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -2500,7 +2475,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -2609,7 +2583,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetryFailedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -2700,7 +2673,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetryFailedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -2809,7 +2781,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -2900,7 +2871,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -3009,7 +2979,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -3100,7 +3069,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -3179,7 +3147,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -3240,7 +3207,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -3319,7 +3285,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNonResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -3380,7 +3345,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncNonResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -3465,7 +3429,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutSubResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -3532,7 +3495,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutSubResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -3617,7 +3579,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncSubResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -3684,7 +3645,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncSubResourceRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -3739,7 +3699,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -3777,7 +3736,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -3830,7 +3788,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -3868,7 +3825,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -3921,7 +3877,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -3959,7 +3914,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -4012,7 +3966,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete204SucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -4049,7 +4002,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete204SucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -4101,7 +4053,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202Retry200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -4139,7 +4090,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202Retry200Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -4192,7 +4142,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202NoRetry204Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -4230,7 +4179,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202NoRetry204Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -4283,7 +4231,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteNoHeaderInRetryRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -4321,7 +4268,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteNoHeaderInRetryRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -4374,7 +4320,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -4412,7 +4357,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -4465,7 +4409,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -4502,7 +4445,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -4554,7 +4496,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -4591,7 +4532,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -4643,7 +4583,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetryFailedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -4680,7 +4619,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetryFailedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -4732,7 +4670,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -4769,7 +4706,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -4821,7 +4757,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost200WithPayloadRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -4859,7 +4794,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost200WithPayloadRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -4966,7 +4900,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202Retry200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -5057,7 +4990,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202Retry200Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -5166,7 +5098,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NoRetry204Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -5257,7 +5188,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NoRetry204Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -5312,7 +5242,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -5349,7 +5278,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -5401,7 +5329,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -5438,7 +5365,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -5490,7 +5416,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -5527,7 +5452,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -5633,7 +5557,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -5725,7 +5648,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -5835,7 +5757,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -5927,7 +5848,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -6037,7 +5957,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetryFailedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -6128,7 +6047,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetryFailedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -6237,7 +6155,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();
@@ -6328,7 +6245,6 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();

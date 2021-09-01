@@ -58,7 +58,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead408Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
@@ -95,7 +94,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead408Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
@@ -148,7 +146,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut500Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -186,7 +183,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut500Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -242,7 +238,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch500Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -280,7 +275,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch500Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -335,7 +329,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet502Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
@@ -372,7 +365,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet502Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
@@ -424,7 +416,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions502Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
@@ -461,7 +452,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions502Request(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
@@ -514,7 +504,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost503Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -552,7 +541,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost503Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -608,7 +596,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete503Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -646,7 +633,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete503Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -702,7 +688,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut504Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -740,7 +725,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut504Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -796,7 +780,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch504Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
@@ -834,7 +817,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch504Request(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();

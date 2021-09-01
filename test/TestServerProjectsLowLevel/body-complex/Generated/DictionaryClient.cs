@@ -58,7 +58,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
             scope.Start();
@@ -95,7 +94,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
             scope.Start();
@@ -165,7 +163,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
             scope.Start();
@@ -220,7 +217,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
             scope.Start();
@@ -275,7 +271,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
             scope.Start();
@@ -312,7 +307,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
             scope.Start();
@@ -382,7 +376,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutEmptyRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
@@ -437,7 +430,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutEmptyRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
             scope.Start();
@@ -492,7 +484,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
             scope.Start();
@@ -529,7 +520,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
             scope.Start();
@@ -581,7 +571,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
             scope.Start();
@@ -618,7 +607,6 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
             scope.Start();

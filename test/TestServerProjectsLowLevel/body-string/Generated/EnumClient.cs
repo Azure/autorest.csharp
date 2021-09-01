@@ -58,7 +58,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotExpandableRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -95,7 +94,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotExpandableRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -148,7 +146,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNotExpandableRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -186,7 +183,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNotExpandableRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -241,7 +237,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -278,7 +273,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -331,7 +325,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -369,7 +362,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -424,7 +416,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedConstantRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
@@ -461,7 +452,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedConstantRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
@@ -537,7 +527,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
@@ -598,7 +587,6 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();

@@ -58,7 +58,6 @@ namespace Accessibility_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -95,7 +94,6 @@ namespace Accessibility_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
@@ -149,7 +147,6 @@ namespace Accessibility_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationInternalRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
@@ -186,7 +183,6 @@ namespace Accessibility_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationInternalRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();

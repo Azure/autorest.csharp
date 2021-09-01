@@ -59,7 +59,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -97,7 +96,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
@@ -151,7 +149,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseExistingKeyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -188,7 +185,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseExistingKeyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
@@ -241,7 +237,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -279,7 +274,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
@@ -332,7 +326,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseProtectedKeyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -369,7 +362,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseProtectedKeyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
@@ -423,7 +415,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -462,7 +453,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
@@ -519,7 +509,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -557,7 +546,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
@@ -613,7 +601,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamLongRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -652,7 +639,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamLongRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
@@ -709,7 +695,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseLongRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -747,7 +732,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseLongRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
@@ -803,7 +787,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -842,7 +825,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
@@ -899,7 +881,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseFloatRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -937,7 +918,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseFloatRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
@@ -993,7 +973,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -1032,7 +1011,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
@@ -1089,7 +1067,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -1127,7 +1104,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
@@ -1183,7 +1159,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -1222,7 +1197,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
@@ -1279,7 +1253,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseBoolRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -1317,7 +1290,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseBoolRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
@@ -1373,7 +1345,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamStringRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1412,7 +1383,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamStringRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
@@ -1472,7 +1442,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseStringRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1510,7 +1479,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseStringRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
@@ -1566,7 +1534,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDateRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1605,7 +1572,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDateRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
@@ -1662,7 +1628,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDateRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1700,7 +1665,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDateRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
@@ -1756,7 +1720,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1795,7 +1758,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
@@ -1852,7 +1814,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1890,7 +1851,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
@@ -1946,7 +1906,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -1985,7 +1944,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
@@ -2045,7 +2003,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -2083,7 +2040,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
@@ -2139,7 +2095,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -2178,7 +2133,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
@@ -2235,7 +2189,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDurationRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -2273,7 +2226,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDurationRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
@@ -2329,7 +2281,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamByteRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -2368,7 +2319,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamByteRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
@@ -2425,7 +2375,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseByteRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -2463,7 +2412,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseByteRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
@@ -2519,7 +2467,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -2558,7 +2505,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
@@ -2618,7 +2564,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseEnumRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
@@ -2656,7 +2601,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseEnumRequest(scenario, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
@@ -2710,7 +2654,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCustomRequestIdRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
@@ -2747,7 +2690,6 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCustomRequestIdRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();

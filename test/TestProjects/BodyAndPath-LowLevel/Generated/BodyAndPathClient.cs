@@ -61,7 +61,6 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateRequest(itemName, content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -100,7 +99,6 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateRequest(itemName, content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
@@ -160,7 +158,6 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
@@ -201,7 +198,6 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();

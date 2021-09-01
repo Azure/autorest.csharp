@@ -59,7 +59,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -96,7 +95,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
@@ -149,7 +147,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -186,7 +183,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
@@ -239,7 +235,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -276,7 +271,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
@@ -329,7 +323,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -366,7 +359,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -419,7 +411,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -456,7 +447,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
@@ -509,7 +499,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -546,7 +535,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
@@ -599,7 +587,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -636,7 +623,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
@@ -689,7 +675,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -726,7 +711,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
@@ -779,7 +763,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -816,7 +799,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
@@ -869,7 +851,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -906,7 +887,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
@@ -959,7 +939,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -996,7 +975,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
@@ -1049,7 +1027,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -1086,7 +1063,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
@@ -1139,7 +1115,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -1176,7 +1151,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
@@ -1229,7 +1203,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -1266,7 +1239,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
@@ -1320,7 +1292,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -1358,7 +1329,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
@@ -1413,7 +1383,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1451,7 +1420,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
@@ -1506,7 +1474,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1544,7 +1511,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
@@ -1599,7 +1565,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1637,7 +1602,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
@@ -1691,7 +1655,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1728,7 +1691,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
@@ -1782,7 +1744,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(bytePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1820,7 +1781,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(bytePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
@@ -1874,7 +1834,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1911,7 +1870,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
@@ -1965,7 +1923,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(datePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -2003,7 +1960,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(datePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
@@ -2057,7 +2013,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -2094,7 +2049,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
@@ -2148,7 +2102,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -2186,7 +2139,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
@@ -2241,7 +2193,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -2279,7 +2230,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
@@ -2334,7 +2284,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -2372,7 +2321,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
@@ -2427,7 +2375,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
@@ -2465,7 +2412,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();

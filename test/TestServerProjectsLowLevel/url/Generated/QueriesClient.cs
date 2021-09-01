@@ -59,7 +59,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -96,7 +95,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -149,7 +147,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -186,7 +183,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -240,7 +236,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanNullRequest(boolQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -278,7 +273,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanNullRequest(boolQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -335,7 +329,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -372,7 +365,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -425,7 +417,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -462,7 +453,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -516,7 +506,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNullRequest(intQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -554,7 +543,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNullRequest(intQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -611,7 +599,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -648,7 +635,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -701,7 +687,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -738,7 +723,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -792,7 +776,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetLongNullRequest(longQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -830,7 +813,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetLongNullRequest(longQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -887,7 +869,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -924,7 +905,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -977,7 +957,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -1014,7 +993,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -1068,7 +1046,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatNullRequest(floatQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -1106,7 +1083,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatNullRequest(floatQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -1163,7 +1139,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -1200,7 +1175,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -1253,7 +1227,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -1290,7 +1263,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -1344,7 +1316,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleNullRequest(doubleQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -1382,7 +1353,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleNullRequest(doubleQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -1439,7 +1409,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -1476,7 +1445,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -1529,7 +1497,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1566,7 +1533,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1619,7 +1585,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1656,7 +1621,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1710,7 +1674,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1748,7 +1711,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -1806,7 +1768,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1844,7 +1805,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -1902,7 +1862,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1940,7 +1899,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -1998,7 +1956,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(byteQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -2036,7 +1993,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(byteQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -2093,7 +2049,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -2130,7 +2085,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -2184,7 +2138,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(byteQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -2222,7 +2175,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(byteQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -2279,7 +2231,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -2316,7 +2267,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -2370,7 +2320,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(dateQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -2408,7 +2357,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(dateQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -2465,7 +2413,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -2502,7 +2449,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -2556,7 +2502,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -2594,7 +2539,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -2652,7 +2596,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -2690,7 +2633,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -2748,7 +2690,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -2786,7 +2727,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -2844,7 +2784,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -2882,7 +2821,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -2940,7 +2878,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -2978,7 +2915,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -3036,7 +2972,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -3074,7 +3009,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -3132,7 +3066,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -3170,7 +3103,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -3228,7 +3160,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
@@ -3266,7 +3197,6 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();

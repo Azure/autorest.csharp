@@ -249,7 +249,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStartTranslationRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -473,7 +472,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStartTranslationRequest(content, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
@@ -579,7 +577,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
@@ -666,7 +663,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
@@ -779,7 +775,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -818,7 +813,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
@@ -880,7 +874,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationStatusRequest(id, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -921,7 +914,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationStatusRequest(id, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
@@ -983,7 +975,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCancelTranslationRequest(id, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -1027,7 +1018,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCancelTranslationRequest(id, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
@@ -1130,7 +1120,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
@@ -1215,7 +1204,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
@@ -1332,7 +1320,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -1372,7 +1359,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedDocumentFormatsRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
@@ -1428,7 +1414,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -1468,7 +1453,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
@@ -1521,7 +1505,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
@@ -1558,7 +1541,6 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedStorageSourcesRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();

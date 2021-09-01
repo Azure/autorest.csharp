@@ -58,7 +58,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -95,7 +94,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -147,7 +145,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileLargeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -184,7 +181,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileLargeRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -236,7 +232,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyFileRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
@@ -273,7 +268,6 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyFileRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();

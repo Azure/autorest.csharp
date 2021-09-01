@@ -58,7 +58,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyErrorRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -95,7 +94,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyErrorRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -147,7 +145,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelErrorRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -184,7 +181,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelErrorRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -236,7 +232,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
@@ -273,7 +268,6 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelEmptyRequest(options);
-
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
