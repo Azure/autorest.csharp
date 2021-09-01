@@ -58,10 +58,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
@@ -97,10 +94,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
             try
@@ -151,10 +145,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileLargeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
@@ -190,10 +181,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetFileLargeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
             try
@@ -244,10 +232,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyFileRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try
@@ -283,10 +268,7 @@ namespace body_file_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyFileRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
             try

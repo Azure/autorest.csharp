@@ -58,10 +58,7 @@ namespace Accessibility_LowLevel_TokenAuth
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
@@ -97,10 +94,7 @@ namespace Accessibility_LowLevel_TokenAuth
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.Operation");
             scope.Start();
             try
@@ -153,10 +147,7 @@ namespace Accessibility_LowLevel_TokenAuth
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationInternalRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try
@@ -192,10 +183,7 @@ namespace Accessibility_LowLevel_TokenAuth
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOperationInternalRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
             scope.Start();
             try

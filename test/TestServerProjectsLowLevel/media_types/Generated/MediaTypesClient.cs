@@ -60,10 +60,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
             try
@@ -101,10 +98,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateAnalyzeBodyRequest(content, contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
             try
@@ -161,10 +155,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
             try
@@ -202,10 +193,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateAnalyzeBodyNoAcceptHeaderRequest(content, contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
             try
@@ -260,10 +248,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
             try
@@ -300,10 +285,7 @@ namespace media_types_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateContentTypeWithEncodingRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
             try

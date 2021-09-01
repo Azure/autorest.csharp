@@ -61,10 +61,7 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateRequest(itemName, content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
@@ -102,10 +99,7 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateRequest(itemName, content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
@@ -164,10 +158,7 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try
@@ -207,10 +198,7 @@ namespace BodyAndPath_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCreateStreamRequest(itemNameStream, content, contentType, excluded, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.CreateStream");
             scope.Start();
             try

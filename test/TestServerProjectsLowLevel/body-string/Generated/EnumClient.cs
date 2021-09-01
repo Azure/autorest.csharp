@@ -58,10 +58,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotExpandableRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
@@ -97,10 +94,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotExpandableRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
             try
@@ -152,10 +146,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNotExpandableRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -192,10 +183,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNotExpandableRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
             try
@@ -249,10 +237,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
@@ -288,10 +273,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
             try
@@ -343,10 +325,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
@@ -383,10 +362,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
             try
@@ -440,10 +416,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedConstantRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
@@ -479,10 +452,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetReferencedConstantRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
             try
@@ -557,10 +527,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
@@ -620,10 +587,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
             try
