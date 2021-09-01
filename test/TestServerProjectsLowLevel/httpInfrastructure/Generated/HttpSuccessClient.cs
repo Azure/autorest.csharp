@@ -51,6 +51,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head200Async(RequestOptions options = null)
@@ -90,6 +100,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 200 status code if successful. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head200(RequestOptions options = null)
@@ -144,6 +164,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Async(RequestOptions options = null)
@@ -183,6 +213,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Get 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200(RequestOptions options = null)
@@ -237,6 +277,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Options200Async(RequestOptions options = null)
@@ -276,6 +326,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Options 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Options200(RequestOptions options = null)
@@ -330,6 +390,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -370,6 +440,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -428,6 +508,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -468,6 +558,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -526,6 +626,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -566,6 +676,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -624,6 +744,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -664,6 +794,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -722,6 +862,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -762,6 +912,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -820,6 +980,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -860,6 +1030,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -918,6 +1098,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -958,6 +1148,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1016,6 +1216,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1056,6 +1266,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1114,6 +1334,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1154,6 +1384,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1212,6 +1452,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1252,6 +1502,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1310,6 +1570,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head204Async(RequestOptions options = null)
@@ -1349,6 +1619,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 204 status code if successful. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head204(RequestOptions options = null)
@@ -1403,6 +1683,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1443,6 +1733,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1501,6 +1801,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1541,6 +1851,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1599,6 +1919,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1639,6 +1969,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1697,6 +2037,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1737,6 +2087,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1795,6 +2155,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head404Async(RequestOptions options = null)
@@ -1835,6 +2205,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head404(RequestOptions options = null)

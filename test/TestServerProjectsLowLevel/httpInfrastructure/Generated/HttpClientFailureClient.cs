@@ -51,6 +51,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head400Async(RequestOptions options = null)
@@ -88,6 +98,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head400(RequestOptions options = null)
@@ -140,6 +160,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get400Async(RequestOptions options = null)
@@ -177,6 +207,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get400(RequestOptions options = null)
@@ -229,6 +269,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Options400Async(RequestOptions options = null)
@@ -266,6 +316,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Options400(RequestOptions options = null)
@@ -318,6 +378,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -356,6 +426,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -412,6 +492,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -450,6 +540,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -506,6 +606,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -544,6 +654,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -600,6 +720,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -638,6 +768,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 400 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -694,6 +834,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head401Async(RequestOptions options = null)
@@ -731,6 +881,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 401 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head401(RequestOptions options = null)
@@ -783,6 +943,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get402Async(RequestOptions options = null)
@@ -820,6 +990,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 402 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get402(RequestOptions options = null)
@@ -872,6 +1052,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Options403Async(RequestOptions options = null)
@@ -909,6 +1099,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Options403(RequestOptions options = null)
@@ -961,6 +1161,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get403Async(RequestOptions options = null)
@@ -998,6 +1208,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 403 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get403(RequestOptions options = null)
@@ -1050,6 +1270,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1088,6 +1318,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 404 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1144,6 +1384,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1182,6 +1432,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 405 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1238,6 +1498,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1276,6 +1546,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 406 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1332,6 +1612,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1370,6 +1660,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 407 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1426,6 +1726,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1464,6 +1774,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 409 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1520,6 +1840,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head410Async(RequestOptions options = null)
@@ -1557,6 +1887,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 410 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head410(RequestOptions options = null)
@@ -1609,6 +1949,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get411Async(RequestOptions options = null)
@@ -1646,6 +1996,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 411 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get411(RequestOptions options = null)
@@ -1698,6 +2058,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Options412Async(RequestOptions options = null)
@@ -1735,6 +2105,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Options412(RequestOptions options = null)
@@ -1787,6 +2167,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get412Async(RequestOptions options = null)
@@ -1824,6 +2214,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 412 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get412(RequestOptions options = null)
@@ -1876,6 +2276,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1914,6 +2324,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 413 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -1970,6 +2390,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2008,6 +2438,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 414 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2064,6 +2504,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2102,6 +2552,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 415 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2158,6 +2618,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get416Async(RequestOptions options = null)
@@ -2195,6 +2665,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 416 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get416(RequestOptions options = null)
@@ -2247,6 +2727,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2285,6 +2775,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 417 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -2341,6 +2841,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head429Async(RequestOptions options = null)
@@ -2378,6 +2888,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 429 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head429(RequestOptions options = null)

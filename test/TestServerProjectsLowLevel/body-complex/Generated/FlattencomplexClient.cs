@@ -50,6 +50,17 @@ namespace body_complex_LowLevel
             apiVersion = options.Version;
         }
 
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "kind": "Kind1",
+        ///   "propB1": "string",
+        ///   "propBH1": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
@@ -88,6 +99,17 @@ namespace body_complex_LowLevel
             }
         }
 
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "kind": "Kind1",
+        ///   "propB1": "string",
+        ///   "propBH1": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions options = null)

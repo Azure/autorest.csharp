@@ -51,6 +51,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
@@ -90,6 +109,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions options = null)
@@ -146,32 +184,22 @@ namespace body_complex_LowLevel
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>id</term>
-        ///     <term>number</term>
-        ///     <term></term>
-        ///     <term>Basic Id</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>name</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Name property with a very long description that does not fit on a single line and a line break.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>color</term>
-        ///     <term>&quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -215,32 +243,22 @@ namespace body_complex_LowLevel
         /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>id</term>
-        ///     <term>number</term>
-        ///     <term></term>
-        ///     <term>Basic Id</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>name</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term>Name property with a very long description that does not fit on a single line and a line break.</term>
-        ///   </item>
-        ///   <item>
-        ///     <term>color</term>
-        ///     <term>&quot;cyan&quot; | &quot;Magenta&quot; | &quot;YELLOW&quot; | &quot;blacK&quot;</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -301,6 +319,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetInvalidAsync(RequestOptions options = null)
@@ -340,6 +377,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetInvalid(RequestOptions options = null)
@@ -394,6 +450,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(RequestOptions options = null)
@@ -433,6 +508,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type that is empty. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetEmpty(RequestOptions options = null)
@@ -487,6 +581,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNullAsync(RequestOptions options = null)
@@ -526,6 +639,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNull(RequestOptions options = null)
@@ -580,6 +712,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetNotProvidedAsync(RequestOptions options = null)
@@ -619,6 +770,25 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "id": "number",
+        ///   "name": "string",
+        ///   "color": "cyan | Magenta | YELLOW | blacK"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetNotProvided(RequestOptions options = null)

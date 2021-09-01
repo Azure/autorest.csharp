@@ -51,6 +51,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head408Async(RequestOptions options = null)
@@ -90,6 +100,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 408 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head408(RequestOptions options = null)
@@ -144,6 +164,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -184,6 +214,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -242,6 +282,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -282,6 +332,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -340,6 +400,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get502Async(RequestOptions options = null)
@@ -379,6 +449,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get502(RequestOptions options = null)
@@ -433,6 +513,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Options502Async(RequestOptions options = null)
@@ -472,6 +562,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 502 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Options502(RequestOptions options = null)
@@ -526,6 +626,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -566,6 +676,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -624,6 +744,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -664,6 +794,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -722,6 +862,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -762,6 +912,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -820,6 +980,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -860,6 +1030,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002

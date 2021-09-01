@@ -51,6 +51,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestOptions options = null)
@@ -92,6 +109,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestOptions options = null)
@@ -148,6 +182,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestOptions options = null)
@@ -189,6 +240,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestOptions options = null)
@@ -245,6 +313,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestOptions options = null)
@@ -286,6 +371,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestOptions options = null)
@@ -342,6 +444,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestOptions options = null)
@@ -383,6 +502,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload:. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError202None(RequestOptions options = null)
@@ -439,6 +575,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestOptions options = null)
@@ -480,6 +633,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestOptions options = null)
@@ -536,6 +706,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestOptions options = null)
@@ -576,6 +763,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestOptions options = null)
@@ -631,6 +835,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestOptions options = null)
@@ -671,6 +892,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestOptions options = null)
@@ -726,6 +964,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestOptions options = null)
@@ -766,6 +1021,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestOptions options = null)
@@ -821,6 +1093,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestOptions options = null)
@@ -862,6 +1151,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestOptions options = null)
@@ -918,6 +1224,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestOptions options = null)
@@ -959,6 +1282,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestOptions options = null)
@@ -1015,6 +1355,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestOptions options = null)
@@ -1056,6 +1413,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestOptions options = null)
@@ -1112,6 +1486,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestOptions options = null)
@@ -1153,6 +1544,23 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestOptions options = null)
@@ -1209,6 +1617,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestOptions options = null)
@@ -1249,6 +1667,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError202None(RequestOptions options = null)
@@ -1304,6 +1732,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestOptions options = null)
@@ -1344,6 +1782,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 204 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError204None(RequestOptions options = null)
@@ -1399,6 +1847,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestOptions options = null)
@@ -1439,6 +1897,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get202None204NoneDefaultError400Valid(RequestOptions options = null)
@@ -1870,6 +2338,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestOptions options = null)
@@ -1909,6 +2386,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA200Valid(RequestOptions options = null)
@@ -1963,6 +2449,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestOptions options = null)
@@ -2002,6 +2497,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA200None(RequestOptions options = null)
@@ -2056,6 +2560,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestOptions options = null)
@@ -2095,6 +2608,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA400Valid(RequestOptions options = null)
@@ -2149,6 +2671,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestOptions options = null)
@@ -2188,6 +2719,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDefaultModelA400None(RequestOptions options = null)
@@ -2610,6 +3150,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestOptions options = null)
@@ -2649,6 +3198,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200None(RequestOptions options = null)
@@ -2703,6 +3261,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestOptions options = null)
@@ -2742,6 +3309,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200Valid(RequestOptions options = null)
@@ -2796,6 +3372,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestOptions options = null)
@@ -2835,6 +3420,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA200Invalid(RequestOptions options = null)
@@ -2889,6 +3483,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestOptions options = null)
@@ -2928,6 +3531,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400None(RequestOptions options = null)
@@ -2982,6 +3594,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestOptions options = null)
@@ -3021,6 +3642,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400Valid(RequestOptions options = null)
@@ -3075,6 +3705,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestOptions options = null)
@@ -3114,6 +3753,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA400Invalid(RequestOptions options = null)
@@ -3168,6 +3816,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestOptions options = null)
@@ -3207,6 +3864,15 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <pre><c>
+        /// {
+        ///   "statusCode": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get200ModelA202Valid(RequestOptions options = null)

@@ -51,6 +51,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Head501Async(RequestOptions options = null)
@@ -88,6 +98,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Head501(RequestOptions options = null)
@@ -140,6 +160,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> Get501Async(RequestOptions options = null)
@@ -177,6 +207,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response Get501(RequestOptions options = null)
@@ -229,6 +269,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -267,6 +317,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -323,6 +383,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -361,6 +431,16 @@ namespace httpInfrastructure_LowLevel
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <pre><c>
+        /// {
+        ///   "status": "number",
+        ///   "message": "string"
+        /// }
+        /// </c></pre>
+        /// 
+        /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
