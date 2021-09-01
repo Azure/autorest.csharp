@@ -57,10 +57,8 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();
             try
@@ -95,10 +93,8 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();
             try

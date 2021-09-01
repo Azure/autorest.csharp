@@ -80,13 +80,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"{parameter.Name:I}, ");
                 }
                 writer.RemoveTrailingComma();
-                writer.Append($");");
+                writer.Line($");");
                 writer.Line();
 
-                using (writer.Scope($"if (options.PerCallPolicy != null)"))
-                {
-                    writer.Line($"{messageVariable}.SetProperty(\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
-                }
+                writer.Line($"{typeof(RequestOptions)}.{nameof(RequestOptions.Apply)}(options, {messageVariable});");
 
                 var scopeVariable = new CodeWriterDeclaration("scope");
                 writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");

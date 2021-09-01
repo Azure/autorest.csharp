@@ -58,10 +58,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
@@ -95,10 +93,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
             try
@@ -147,10 +143,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
@@ -184,10 +178,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
             try
@@ -236,10 +228,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
@@ -273,10 +263,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions400Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
             try
@@ -326,10 +314,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
@@ -364,10 +350,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
             try
@@ -420,10 +404,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
@@ -458,10 +440,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
             try
@@ -514,10 +494,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
@@ -552,10 +530,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
             try
@@ -608,10 +584,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
@@ -646,10 +620,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete400Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
             try
@@ -701,10 +673,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead401Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
@@ -738,10 +708,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead401Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
             try
@@ -790,10 +758,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet402Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
@@ -827,10 +793,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet402Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
             try
@@ -879,10 +843,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions403Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
@@ -916,10 +878,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions403Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
             try
@@ -968,10 +928,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet403Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
@@ -1005,10 +963,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet403Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
             try
@@ -1058,10 +1014,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut404Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
@@ -1096,10 +1050,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut404Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
             try
@@ -1152,10 +1104,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch405Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
@@ -1190,10 +1140,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch405Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
             try
@@ -1246,10 +1194,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost406Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
@@ -1284,10 +1230,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost406Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
             try
@@ -1340,10 +1284,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete407Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
@@ -1378,10 +1320,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete407Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
             try
@@ -1434,10 +1374,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut409Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
@@ -1472,10 +1410,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut409Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
             try
@@ -1527,10 +1463,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead410Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
@@ -1564,10 +1498,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead410Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
             try
@@ -1616,10 +1548,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet411Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
@@ -1653,10 +1583,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet411Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
             try
@@ -1705,10 +1633,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions412Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
@@ -1742,10 +1668,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateOptions412Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
             try
@@ -1794,10 +1718,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet412Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
@@ -1831,10 +1753,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet412Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
             try
@@ -1884,10 +1804,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut413Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
@@ -1922,10 +1840,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut413Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
             try
@@ -1978,10 +1894,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch414Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
@@ -2016,10 +1930,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePatch414Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
             try
@@ -2072,10 +1984,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost415Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
@@ -2110,10 +2020,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost415Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
             try
@@ -2165,10 +2073,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet416Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
@@ -2202,10 +2108,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet416Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
             try
@@ -2255,10 +2159,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete417Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
@@ -2293,10 +2195,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete417Request(content, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
             try
@@ -2348,10 +2248,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead429Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try
@@ -2385,10 +2283,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateHead429Request(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
             try

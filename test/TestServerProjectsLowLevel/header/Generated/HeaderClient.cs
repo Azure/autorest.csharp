@@ -59,10 +59,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
@@ -99,10 +97,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
@@ -155,10 +151,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseExistingKeyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
@@ -194,10 +188,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseExistingKeyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
@@ -249,10 +241,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
@@ -289,10 +279,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
@@ -344,10 +332,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseProtectedKeyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
@@ -383,10 +369,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseProtectedKeyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
@@ -439,10 +423,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
@@ -480,10 +462,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
@@ -539,10 +519,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
@@ -579,10 +557,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseIntegerRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
@@ -637,10 +613,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamLongRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
@@ -678,10 +652,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamLongRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
@@ -737,10 +709,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseLongRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
@@ -777,10 +747,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseLongRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
@@ -835,10 +803,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
@@ -876,10 +842,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamFloatRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
@@ -935,10 +899,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseFloatRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
@@ -975,10 +937,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseFloatRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
@@ -1033,10 +993,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
@@ -1074,10 +1032,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
@@ -1133,10 +1089,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
@@ -1173,10 +1127,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDoubleRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
@@ -1231,10 +1183,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
@@ -1272,10 +1222,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamBoolRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
@@ -1331,10 +1279,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseBoolRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
@@ -1371,10 +1317,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseBoolRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
@@ -1429,10 +1373,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamStringRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
@@ -1470,10 +1412,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamStringRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
@@ -1532,10 +1472,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseStringRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
@@ -1572,10 +1510,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseStringRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
@@ -1630,10 +1566,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDateRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
@@ -1671,10 +1605,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDateRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
@@ -1730,10 +1662,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDateRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
@@ -1770,10 +1700,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDateRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
@@ -1828,10 +1756,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
@@ -1869,10 +1795,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
@@ -1928,10 +1852,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
@@ -1968,10 +1890,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
@@ -2026,10 +1946,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
@@ -2067,10 +1985,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
@@ -2129,10 +2045,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
@@ -2169,10 +2083,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
@@ -2227,10 +2139,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
@@ -2268,10 +2178,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamDurationRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
@@ -2327,10 +2235,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDurationRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
@@ -2367,10 +2273,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseDurationRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
@@ -2425,10 +2329,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamByteRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
@@ -2466,10 +2368,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamByteRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
@@ -2525,10 +2425,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseByteRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
@@ -2565,10 +2463,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseByteRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
@@ -2623,10 +2519,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
@@ -2664,10 +2558,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateParamEnumRequest(scenario, value, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
@@ -2726,10 +2618,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseEnumRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
@@ -2766,10 +2656,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateResponseEnumRequest(scenario, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
@@ -2822,10 +2710,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCustomRequestIdRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
@@ -2861,10 +2747,8 @@ namespace header_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCustomRequestIdRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try

@@ -58,10 +58,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyErrorRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
@@ -97,10 +95,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyErrorRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
             try
@@ -151,10 +147,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelErrorRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
             try
@@ -190,10 +184,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelErrorRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
             try
@@ -244,10 +236,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
             try
@@ -283,10 +273,8 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNoModelEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
             try
