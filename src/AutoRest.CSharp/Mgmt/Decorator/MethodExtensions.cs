@@ -184,6 +184,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isParentExistsInPathParams;
         }
 
+        public static HttpRequest? GetHttpRequest(this RestClientMethod method)
+        {
+            return method.Operation.Requests.First().Protocol.Http as HttpRequest;
+        }
+
         public static bool IsByIdMethod(this RestClientMethod clientMethod)
         {
             return clientMethod.Operation?.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest && clientMethod.Parameters.Count() > 0 && $"/{{{clientMethod.Parameters[0].Name}}}".Equals(httpRequest.Path);

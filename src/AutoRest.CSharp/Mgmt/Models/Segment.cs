@@ -15,6 +15,11 @@ namespace AutoRest.CSharp.Mgmt.Models
         private ReferenceOrConstant _value;
         private string _stringValue;
 
+        //public Segment(ReferenceOrConstant value)
+        //{
+        //    _value = value;
+        //}
+
         public Segment(string value)
         {
             _stringValue = value;
