@@ -118,9 +118,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        private static readonly CSharpType RequestOptionsParameterType = new CSharpType(typeof(RequestOptions), true);
+        private static readonly Parameter RequestOptionsParameter = new Parameter("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.Parameters;
+            var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
             {
@@ -158,8 +161,6 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            writer.WriteXmlDocumentationParameter("options", $"The request options.");
-
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
@@ -170,7 +171,8 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             {
                 writer.WriteParameter(parameter);
             }
-            writer.Line($"{typeof(RequestOptions)} options = null)");
+            writer.RemoveTrailingComma();
+            writer.Line($")");
             writer.Line($"#pragma warning restore AZC0002");
         }
 
