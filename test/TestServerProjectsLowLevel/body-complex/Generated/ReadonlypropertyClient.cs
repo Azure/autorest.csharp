@@ -59,10 +59,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
             scope.Start();
             try
@@ -98,10 +95,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.GetValid");
             scope.Start();
             try
@@ -174,10 +168,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
             scope.Start();
             try
@@ -237,10 +228,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("ReadonlypropertyClient.PutValid");
             scope.Start();
             try

@@ -250,10 +250,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStartTranslationRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
@@ -476,10 +473,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStartTranslationRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
             scope.Start();
             try
@@ -581,10 +575,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
             try
@@ -670,10 +661,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
             scope.Start();
             try
@@ -757,10 +745,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
             try
@@ -798,10 +783,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentStatusRequest(id, documentId);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
             scope.Start();
             try
@@ -858,10 +840,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationStatusRequest(id);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
             try
@@ -901,10 +880,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTranslationStatusRequest(id);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
             scope.Start();
             try
@@ -962,10 +938,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCancelTranslationRequest(id);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
             try
@@ -1008,10 +981,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateCancelTranslationRequest(id);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
             scope.Start();
             try
@@ -1110,10 +1080,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
             try
@@ -1197,10 +1164,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
             scope.Start();
             try
@@ -1287,10 +1251,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
             try
@@ -1329,10 +1290,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedDocumentFormatsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
             scope.Start();
             try
@@ -1385,10 +1343,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
             try
@@ -1427,10 +1382,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedGlossaryFormatsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
             scope.Start();
             try
@@ -1480,10 +1432,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
             try
@@ -1519,10 +1468,7 @@ namespace Azure.AI.DocumentTranslation
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetSupportedStorageSourcesRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
             scope.Start();
             try

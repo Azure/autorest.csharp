@@ -60,10 +60,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
@@ -99,10 +96,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
             try
@@ -152,10 +146,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
@@ -191,10 +182,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
             try
@@ -245,10 +233,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
@@ -285,10 +270,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
             try
@@ -341,10 +323,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
             try
@@ -380,10 +359,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
             try
@@ -433,10 +409,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -472,10 +445,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -526,10 +496,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNullRequest(intQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
@@ -566,10 +533,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNullRequest(intQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
             try
@@ -622,10 +586,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
             try
@@ -661,10 +622,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
             try
@@ -714,10 +672,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -753,10 +708,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -807,10 +759,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetLongNullRequest(longQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
@@ -847,10 +796,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetLongNullRequest(longQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
             try
@@ -903,10 +849,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
             try
@@ -942,10 +885,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
             try
@@ -995,10 +935,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
             try
@@ -1034,10 +971,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
             try
@@ -1088,10 +1022,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatNullRequest(floatQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
@@ -1128,10 +1059,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatNullRequest(floatQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
             try
@@ -1184,10 +1112,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -1223,10 +1148,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -1276,10 +1198,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -1315,10 +1234,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -1369,10 +1285,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
@@ -1409,10 +1322,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
             try
@@ -1465,10 +1375,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
             try
@@ -1504,10 +1411,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
             try
@@ -1557,10 +1461,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1596,10 +1497,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1649,10 +1547,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
             try
@@ -1688,10 +1583,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
             try
@@ -1742,10 +1634,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
@@ -1782,10 +1671,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
             try
@@ -1839,10 +1725,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
@@ -1879,10 +1762,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
             try
@@ -1936,10 +1816,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
@@ -1976,10 +1853,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
             try
@@ -2033,10 +1907,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
@@ -2073,10 +1944,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
             try
@@ -2129,10 +1997,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
             try
@@ -2168,10 +2033,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
             try
@@ -2222,10 +2084,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(byteQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
@@ -2262,10 +2121,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(byteQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
             try
@@ -2318,10 +2174,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
             try
@@ -2357,10 +2210,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
             try
@@ -2411,10 +2261,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(dateQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
@@ -2451,10 +2298,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(dateQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
             try
@@ -2507,10 +2351,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
             try
@@ -2546,10 +2387,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
             try
@@ -2600,10 +2438,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
@@ -2640,10 +2475,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
             try
@@ -2697,10 +2529,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
@@ -2737,10 +2566,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
             try
@@ -2794,10 +2620,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
@@ -2834,10 +2657,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
             try
@@ -2891,10 +2711,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
@@ -2931,10 +2748,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
             try
@@ -2988,10 +2802,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
             try
@@ -3028,10 +2839,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
             try
@@ -3085,10 +2893,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
@@ -3125,10 +2930,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
             try
@@ -3182,10 +2984,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
@@ -3222,10 +3021,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
             try
@@ -3279,10 +3075,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try
@@ -3319,10 +3112,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
             try

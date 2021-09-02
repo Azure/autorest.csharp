@@ -113,10 +113,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -206,10 +203,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
             try
@@ -314,10 +308,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -408,10 +399,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
             try
@@ -517,10 +505,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202Retry200Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
@@ -610,10 +595,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202Retry200Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
             try
@@ -718,10 +700,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try
@@ -811,10 +790,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
             try

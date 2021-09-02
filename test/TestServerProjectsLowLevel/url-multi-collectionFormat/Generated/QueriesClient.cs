@@ -61,10 +61,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
@@ -101,10 +98,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
             scope.Start();
             try
@@ -158,10 +152,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
@@ -198,10 +189,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
             scope.Start();
             try
@@ -255,10 +243,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try
@@ -295,10 +280,7 @@ namespace url_multi_collectionFormat_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
             scope.Start();
             try

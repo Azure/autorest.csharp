@@ -60,10 +60,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
@@ -99,10 +96,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanTrueRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
@@ -152,10 +146,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
@@ -191,10 +182,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBooleanFalseRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
@@ -244,10 +232,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
@@ -283,10 +268,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
@@ -336,10 +318,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -375,10 +354,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -428,10 +404,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
@@ -467,10 +440,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
@@ -520,10 +490,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -559,10 +526,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNegativeTenBillionRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -612,10 +576,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
@@ -651,10 +612,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
@@ -704,10 +662,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
@@ -743,10 +698,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateFloatScientificNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
@@ -796,10 +748,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -835,10 +784,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalPositiveRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -888,10 +834,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -927,10 +870,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDoubleDecimalNegativeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -980,10 +920,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
@@ -1019,10 +956,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUnicodeRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
@@ -1072,10 +1006,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1111,10 +1042,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1164,10 +1092,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlNonEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
@@ -1203,10 +1128,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringUrlNonEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
@@ -1256,10 +1178,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
@@ -1295,10 +1214,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
@@ -1349,10 +1265,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
@@ -1389,10 +1302,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateStringNullRequest(stringPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
@@ -1443,10 +1353,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1483,10 +1390,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumValidRequest(enumPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1537,10 +1441,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1577,10 +1478,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateEnumNullRequest(enumPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1631,10 +1529,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(bytePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
@@ -1671,10 +1566,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteMultiByteRequest(bytePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
@@ -1724,10 +1616,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
@@ -1763,10 +1652,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
@@ -1817,10 +1703,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(bytePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
@@ -1857,10 +1740,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateByteNullRequest(bytePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
@@ -1910,10 +1790,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
@@ -1949,10 +1826,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
@@ -2003,10 +1877,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(datePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -2043,10 +1914,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateNullRequest(datePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -2096,10 +1964,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
@@ -2135,10 +2000,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
@@ -2189,10 +2051,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -2229,10 +2088,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDateTimeNullRequest(dateTimePath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -2283,10 +2139,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
@@ -2323,10 +2176,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateBase64UrlRequest(base64UrlPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
@@ -2377,10 +2227,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
@@ -2417,10 +2264,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
@@ -2471,10 +2315,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
@@ -2511,10 +2352,7 @@ namespace url_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try

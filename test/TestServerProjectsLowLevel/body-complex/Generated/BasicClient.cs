@@ -59,10 +59,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
             try
@@ -98,10 +95,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
             try
@@ -180,10 +174,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
             try
@@ -249,10 +240,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutValidRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
             try
@@ -304,10 +292,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetInvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
             try
@@ -343,10 +328,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetInvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
             try
@@ -395,10 +377,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
             try
@@ -434,10 +413,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
             try
@@ -486,10 +462,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
             try
@@ -525,10 +498,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
             try
@@ -577,10 +547,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
             try
@@ -616,10 +583,7 @@ namespace body_complex_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
             try

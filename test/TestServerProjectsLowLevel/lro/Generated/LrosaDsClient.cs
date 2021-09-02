@@ -113,10 +113,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
@@ -207,10 +204,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
             scope.Start();
             try
@@ -316,10 +310,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
@@ -410,10 +401,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry201Creating400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
             scope.Start();
             try
@@ -519,10 +507,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
@@ -613,10 +598,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNonRetry201Creating400InvalidJsonRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
             scope.Start();
             try
@@ -722,10 +704,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
@@ -815,10 +794,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
             scope.Start();
             try
@@ -869,10 +845,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteNonRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
             scope.Start();
             try
@@ -908,10 +881,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteNonRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
             scope.Start();
             try
@@ -960,10 +930,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202NonRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
             scope.Start();
             try
@@ -999,10 +966,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202NonRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
             scope.Start();
             try
@@ -1051,10 +1015,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
@@ -1090,10 +1051,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetry400Request();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
             scope.Start();
             try
@@ -1196,10 +1154,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostNonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
@@ -1289,10 +1244,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostNonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
             scope.Start();
             try
@@ -1397,10 +1349,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
@@ -1490,10 +1439,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NonRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
             scope.Start();
             try
@@ -1598,10 +1544,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
@@ -1691,10 +1634,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetry400Request(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
             scope.Start();
             try
@@ -1799,10 +1739,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
@@ -1893,10 +1830,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutError201NoProvisioningStatePayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
             scope.Start();
             try
@@ -2002,10 +1936,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -2095,10 +2026,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -2203,10 +2131,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
@@ -2296,10 +2221,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryNoStatusPayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
             scope.Start();
             try
@@ -2350,10 +2272,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete204SucceededRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
             scope.Start();
             try
@@ -2389,10 +2308,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete204SucceededRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
             scope.Start();
             try
@@ -2441,10 +2357,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -2480,10 +2393,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryNoStatusRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
             scope.Start();
             try
@@ -2586,10 +2496,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NoLocationRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
@@ -2679,10 +2586,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202NoLocationRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
             scope.Start();
             try
@@ -2787,10 +2691,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
@@ -2880,10 +2781,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryNoPayloadRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
             scope.Start();
             try
@@ -2988,10 +2886,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200InvalidJsonRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
@@ -3082,10 +2977,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePut200InvalidJsonRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
             scope.Start();
             try
@@ -3191,10 +3083,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -3284,10 +3173,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -3392,10 +3278,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -3485,10 +3368,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -3539,10 +3419,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
             scope.Start();
             try
@@ -3578,10 +3455,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDelete202RetryInvalidHeaderRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
             scope.Start();
             try
@@ -3630,10 +3504,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -3669,10 +3540,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidHeaderRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -3721,10 +3589,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -3760,10 +3625,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateDeleteAsyncRelativeRetryInvalidJsonPollingRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -3866,10 +3728,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
@@ -3959,10 +3818,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePost202RetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
             scope.Start();
             try
@@ -4067,10 +3923,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -4160,10 +4013,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryInvalidHeaderRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
             scope.Start();
             try
@@ -4268,10 +4118,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try
@@ -4361,10 +4208,7 @@ namespace lro_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePostAsyncRelativeRetryInvalidJsonPollingRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
             scope.Start();
             try

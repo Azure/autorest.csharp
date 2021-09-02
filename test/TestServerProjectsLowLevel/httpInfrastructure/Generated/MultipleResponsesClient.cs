@@ -59,10 +59,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
@@ -100,10 +97,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
             scope.Start();
             try
@@ -154,10 +148,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
@@ -195,10 +186,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError204ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
             scope.Start();
             try
@@ -249,10 +237,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
@@ -290,10 +275,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError201InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
             scope.Start();
             try
@@ -344,10 +326,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
@@ -385,10 +364,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError202NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
             scope.Start();
             try
@@ -439,10 +415,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
@@ -480,10 +453,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model204NoModelDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
             scope.Start();
             try
@@ -534,10 +504,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
@@ -574,10 +541,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
             scope.Start();
             try
@@ -627,10 +591,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
@@ -667,10 +628,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError201ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
             scope.Start();
             try
@@ -720,10 +678,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
@@ -760,10 +715,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200Model201ModelDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
             scope.Start();
             try
@@ -813,10 +765,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
@@ -854,10 +803,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
             scope.Start();
             try
@@ -908,10 +854,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
@@ -949,10 +892,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError201ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
             scope.Start();
             try
@@ -1003,10 +943,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
@@ -1044,10 +981,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError404ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
             scope.Start();
             try
@@ -1098,10 +1032,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
@@ -1139,10 +1070,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA201ModelC404ModelDDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
             scope.Start();
             try
@@ -1193,10 +1121,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
             try
@@ -1233,10 +1158,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError202NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
             scope.Start();
             try
@@ -1286,10 +1208,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
             try
@@ -1326,10 +1245,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError204NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
             scope.Start();
             try
@@ -1379,10 +1295,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
@@ -1419,10 +1332,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultError400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
             scope.Start();
             try
@@ -1472,10 +1382,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
@@ -1512,10 +1419,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone202InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
             scope.Start();
             try
@@ -1564,10 +1468,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
@@ -1604,10 +1505,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone204NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
             scope.Start();
             try
@@ -1656,10 +1554,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
@@ -1696,10 +1591,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
             scope.Start();
             try
@@ -1748,10 +1640,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
@@ -1788,10 +1677,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet202None204NoneDefaultNone400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
             scope.Start();
             try
@@ -1840,10 +1726,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
             try
@@ -1879,10 +1762,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
             scope.Start();
             try
@@ -1931,10 +1811,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
             try
@@ -1970,10 +1847,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
             scope.Start();
             try
@@ -2022,10 +1896,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
             try
@@ -2061,10 +1932,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
             scope.Start();
             try
@@ -2113,10 +1981,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
             try
@@ -2152,10 +2017,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultModelA400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
             scope.Start();
             try
@@ -2204,10 +2066,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone200InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
             try
@@ -2243,10 +2102,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone200InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
             scope.Start();
             try
@@ -2294,10 +2150,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
             try
@@ -2333,10 +2186,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
             scope.Start();
             try
@@ -2384,10 +2234,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
             try
@@ -2423,10 +2270,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
             scope.Start();
             try
@@ -2474,10 +2318,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
             try
@@ -2513,10 +2354,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetDefaultNone400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
             scope.Start();
             try
@@ -2564,10 +2402,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
             try
@@ -2603,10 +2438,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
             scope.Start();
             try
@@ -2655,10 +2487,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
             try
@@ -2694,10 +2523,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
             scope.Start();
             try
@@ -2746,10 +2572,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
             try
@@ -2785,10 +2608,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA200InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
             scope.Start();
             try
@@ -2837,10 +2657,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
             try
@@ -2876,10 +2693,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400NoneRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
             scope.Start();
             try
@@ -2928,10 +2742,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
             try
@@ -2967,10 +2778,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
             scope.Start();
             try
@@ -3019,10 +2827,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
             try
@@ -3058,10 +2863,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA400InvalidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
             scope.Start();
             try
@@ -3110,10 +2912,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA202ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
             try
@@ -3149,10 +2948,7 @@ namespace httpInfrastructure_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGet200ModelA202ValidRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
             scope.Start();
             try

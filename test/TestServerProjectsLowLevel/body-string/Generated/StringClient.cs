@@ -59,10 +59,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
             try
@@ -98,10 +95,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
             try
@@ -151,10 +145,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNullRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
@@ -191,10 +182,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutNullRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
             try
@@ -245,10 +233,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
             try
@@ -284,10 +269,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetEmptyRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
             try
@@ -337,10 +319,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutEmptyRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
@@ -377,10 +356,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutEmptyRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
             try
@@ -431,10 +407,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetMbcsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
             try
@@ -470,10 +443,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetMbcsRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
             try
@@ -523,10 +493,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutMbcsRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
@@ -563,10 +530,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutMbcsRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
             try
@@ -617,10 +581,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetWhitespaceRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
             try
@@ -656,10 +617,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetWhitespaceRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
             try
@@ -709,10 +667,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutWhitespaceRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
@@ -749,10 +704,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutWhitespaceRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
             try
@@ -803,10 +755,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
             try
@@ -842,10 +791,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNotProvidedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
             try
@@ -894,10 +840,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBase64EncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
             try
@@ -933,10 +876,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBase64EncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
             try
@@ -985,10 +925,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
             try
@@ -1024,10 +961,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetBase64UrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
             try
@@ -1077,10 +1011,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
             try
@@ -1117,10 +1048,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
             try
@@ -1171,10 +1099,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
             try
@@ -1210,10 +1135,7 @@ namespace body_string_LowLevel
         {
             options ??= new RequestOptions();
             using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
             try
