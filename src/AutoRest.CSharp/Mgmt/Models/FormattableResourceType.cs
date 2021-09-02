@@ -13,69 +13,64 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class FormattableResourceType
     {
-        public static ReferenceOrConstant ParseString(string value)
-        {
-            return new Constant(value, typeof(string));
-        }
+        //public static FormattableResourceType RootResourceType => new FormattableResourceType(string.Empty, string.Empty);
 
-        public static FormattableResourceType RootResourceType => new FormattableResourceType(string.Empty, string.Empty);
+        //public FormattableResourceType(string path)
+        //{
+        //    if (string.IsNullOrWhiteSpace(path))
+        //        throw new ArgumentException($"{nameof(path)} cannot be null or whitespace", nameof(path));
 
-        public FormattableResourceType(string path)
-        {
-            if (string.IsNullOrWhiteSpace(path))
-                throw new ArgumentException($"{nameof(path)} cannot be null or whitespace", nameof(path));
+        //    Parse(path);
+        //    Types = Type!.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Select(t => t.ParseToReferenceOrConstant()).ToArray();
+        //}
 
-            Parse(path);
-            Types = Type!.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Select(t => ParseString(t)).ToArray();
-        }
+        //internal FormattableResourceType(string providerNamespace, string name)
+        //{
+        //    Namespace = providerNamespace.ParseToReferenceOrConstant();
+        //    Type = name;
+        //    Types = Type.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Select(t => t.ParseToReferenceOrConstant()).ToArray();
+        //}
 
-        internal FormattableResourceType(string providerNamespace, string name)
-        {
-            Namespace = ParseString(providerNamespace);
-            Type = name;
-            Types = Type.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries).Select(t => ParseString(t)).ToArray();
-        }
+        //public static implicit operator FormattableResourceType(string other)
+        //{
+        //    return new FormattableResourceType(other);
+        //}
 
-        public static implicit operator FormattableResourceType(string other)
-        {
-            return new FormattableResourceType(other);
-        }
+        //public static implicit operator string(FormattableResourceType other)
+        //{
+        //    return other.ToString() ?? string.Empty;
+        //}
 
-        public static implicit operator string(FormattableResourceType other)
-        {
-            return other.ToString() ?? string.Empty;
-        }
+        //internal ReferenceOrConstant LastType => Types[Types.Count - 1];
 
-        internal ReferenceOrConstant LastType => Types[Types.Count - 1];
+        ///// <summary>
+        ///// Gets the resource type Namespace.
+        ///// </summary>
+        //public ReferenceOrConstant Namespace { get; private set; }
 
-        /// <summary>
-        /// Gets the resource type Namespace.
-        /// </summary>
-        public ReferenceOrConstant Namespace { get; private set; }
+        ///// <summary>
+        ///// Gets the resource Type.
+        ///// </summary>
+        //public string Type { get; private set; }
 
-        /// <summary>
-        /// Gets the resource Type.
-        /// </summary>
-        public string Type { get; private set; }
+        ///// <summary>
+        ///// Gets the resource Types.
+        ///// </summary>
+        //public IReadOnlyList<ReferenceOrConstant> Types { get; } = new List<ReferenceOrConstant>();
 
-        /// <summary>
-        /// Gets the resource Types.
-        /// </summary>
-        public IReadOnlyList<ReferenceOrConstant> Types { get; } = new List<ReferenceOrConstant>();
+        //private void Parse(string path)
+        //{
+        //    // split the path into segments
+        //    var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
 
-        private void Parse(string path)
-        {
-            // split the path into segments
-            var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries).ToList();
+        //    // There must be at least one of the segments exists
+        //    if (segments.Count < 1)
+        //        throw new ArgumentOutOfRangeException(nameof(path));
 
-            // There must be at least one of the segments exists
-            if (segments.Count < 1)
-                throw new ArgumentOutOfRangeException(nameof(path));
+        //    // if the type is just
 
-            // if the type is just 
+        //    // TODO
 
-            // TODO
-
-        }
+        //}
     }
 }
