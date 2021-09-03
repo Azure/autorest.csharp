@@ -27,5 +27,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IEnumerator<RestClientMethod> GetEnumerator() => RestClientMethods.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => RestClientMethods.GetEnumerator();
+
+        public override string? ToString()
+        {
+            return RequestPath.ToString();
+        }
     }
 }

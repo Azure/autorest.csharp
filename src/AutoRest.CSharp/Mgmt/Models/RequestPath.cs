@@ -16,31 +16,59 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
     {
-        private IReadOnlyList<Segment> segments;
+        public static readonly RequestPath ResourceGroup = new RequestPath(new[] {
+            new Segment("subscriptions"),
+            new Segment(new Reference("subscriptionId", typeof(string))),
+            new Segment("resourceGroups"),
+            new Segment(new Reference("resourceGroupName", typeof(string)))
+        });
+
+        public static readonly RequestPath Subscription = new RequestPath(new[] {
+            new Segment("subscriptions"),
+            new Segment(new Reference("subscriptionId", typeof(string)))
+        });
+
+        public static readonly RequestPath Tenant = new RequestPath(new Segment[] { });
+
+        public static readonly RequestPath ManagementGroup = new RequestPath(new[] {
+            new Segment("providers"),
+            new Segment("Microsoft.ManagementGroups"),
+            new Segment("managementGroups"),
+            new Segment(new Reference("managementGroupId", typeof(string)))
+        });
+
+        private IReadOnlyList<Segment> _segments;
         private string _stringValue;
 
         public RequestPath(RestClientMethod method)
         {
-            segments = method.Request.PathSegments
+            _segments = method.Request.PathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment))
                 .ToList();
-            _stringValue = $"/{string.Join('/', segments)}";
+            _stringValue = $"/{string.Join('/', _segments)}";
             SerializedPath = GetHttpRequest(method.Operation.Requests.First()!)!.Path;
+        }
+
+        private RequestPath(IReadOnlyList<Segment> segments)
+        {
+            _segments = segments;
+            _stringValue = $"/{string.Join('/', _segments)}";
+            SerializedPath = _stringValue; // TODO -- fix this
         }
 
         public string SerializedPath { get; }
 
-        public int Count => segments.Count;
+        public int Count => _segments.Count;
 
-        public Segment this[int index] => segments[index];
+        public Segment this[int index] => _segments[index];
 
-        public bool IsChildOf(RequestPath other)
+        public bool IsParentOf(RequestPath other)
         {
-            if (other.Count >= Count)
+            if (other.Count <= Count)
                 return false;
-            for (int i = 0; i < other.Count; i++)
+            for (int i = 0; i < Count; i++)
             {
-                if (!other[i].Equals(this[i]))
+                if (!this[i].Equals(other[i]))
                     return false;
             }
             return true;
@@ -70,10 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return new Segment(pathSegment.Value).SingleItemAsIEnumerate();
         }
 
-        public bool Equals(RequestPath other)
-        {
-            return this._stringValue == other._stringValue;
-        }
+        public bool Equals(RequestPath other) => _stringValue.Equals(other._stringValue, StringComparison.InvariantCultureIgnoreCase);
 
         public override bool Equals(object? obj)
         {
@@ -83,9 +108,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             return other.Equals(this);
         }
 
-        public IEnumerator<Segment> GetEnumerator() => segments.GetEnumerator();
+        public IEnumerator<Segment> GetEnumerator() => _segments.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator() => segments.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => _segments.GetEnumerator();
 
         public override int GetHashCode() => _stringValue.GetHashCode();
 

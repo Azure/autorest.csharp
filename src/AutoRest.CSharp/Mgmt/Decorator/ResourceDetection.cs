@@ -14,6 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class ResourceDetection
     {
         private static ConcurrentDictionary<RequestPath, string?> _cache = new ConcurrentDictionary<RequestPath, string?>();
+
         public static bool IsResource(this OperationSet set, MgmtConfiguration config)
         {
             return set.TryGetResourceName(config, out _);

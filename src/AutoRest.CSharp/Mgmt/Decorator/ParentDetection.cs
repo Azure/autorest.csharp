@@ -8,6 +8,7 @@ using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -15,12 +16,55 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
+        private static ConcurrentDictionary<RequestPath, RequestPath> _requestPathToParentCache = new ConcurrentDictionary<RequestPath, RequestPath>();
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         private static ConcurrentDictionary<OperationGroup, OperationGroup?> _parentCache = new ConcurrentDictionary<OperationGroup, OperationGroup?>();
 
         private static ConcurrentDictionary<string, string> _operationPathAncestorCache = new ConcurrentDictionary<string, string>();
         private static ConcurrentDictionary<string, string> _operationPathParentCache = new ConcurrentDictionary<string, string>();
+
+        public static RequestPath ParentRequestPath(this RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
+            {
+                return result;
+            }
+
+            result = GetParent(requestPath, context);
+            _requestPathToParentCache.TryAdd(requestPath, result);
+
+            return result;
+        }
+
+        public static RequestPath ParentRequestPath(this OperationSet operationSet, BuildContext<MgmtOutputLibrary> context)
+        {
+            return operationSet.RequestPath.ParentRequestPath(context);
+        }
+
+        private static RequestPath GetParent(RequestPath requestPath, BuildContext<MgmtOutputLibrary> context)
+        {
+            // find a parent resource in the resource list
+            // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
+            // or null if none matched
+            var parent = context.Library.ArmResourcesOfRequestPath
+                .Where(resource => resource.RequestPath.IsParentOf(requestPath))
+                .OrderBy(resource => resource.RequestPath.Count).LastOrDefault();
+            if (parent != null)
+                return parent.RequestPath;
+            // if we cannot find one, we try the 4 extensions
+            // first try management group
+            if (RequestPath.ManagementGroup.IsParentOf(requestPath))
+                return RequestPath.ManagementGroup;
+            // then try resourceGroup
+            if (RequestPath.ResourceGroup.IsParentOf(requestPath))
+                return RequestPath.ResourceGroup;
+            // then try subscriptions
+            if (RequestPath.Subscription.IsParentOf(requestPath))
+                return RequestPath.Subscription;
+            // we do not have much choice to make, return tenant as the parent
+            return RequestPath.Tenant;
+        }
 
         public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {

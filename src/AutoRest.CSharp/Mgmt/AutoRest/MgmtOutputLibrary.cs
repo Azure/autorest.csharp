@@ -331,6 +331,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return result;
         }
 
+        public ResourceOfRequestPath? GetResource(RequestPath path)
+        {
+            if (EnsureArmResourcesFromRequestPath().TryGetValue(path, out var result))
+                return result;
+            return null;
+        }
+
         public ResourceContainer? GetResourceContainer(OperationGroup operationGroup)
         {
             if (EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out var result))

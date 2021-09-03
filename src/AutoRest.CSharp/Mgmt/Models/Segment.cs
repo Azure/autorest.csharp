@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public string ReferenceName => _value.Reference.Name;
 
-        public bool Equals(Segment other) => _stringValue == other._stringValue;
+        public bool Equals(Segment other) => _stringValue.Equals(other._stringValue, StringComparison.InvariantCultureIgnoreCase);
 
         public override bool Equals(object? obj)
         {
