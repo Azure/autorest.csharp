@@ -206,7 +206,6 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.Line();
             if (_inheritArmResourceBase && _resource.GetMethod != null)
             {
-                var _ = new RequestPath(_resource.GetMethod);
                 // write inherited get method
                 WriteGetMethod(_resource.GetMethod, true, _resource.GetMethods, "Get");
                 WriteGetMethod(_resource.GetMethod, false, _resource.GetMethods, "Get");
