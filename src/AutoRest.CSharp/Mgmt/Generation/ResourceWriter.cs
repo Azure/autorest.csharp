@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -205,6 +206,7 @@ Check the swagger definition, and use 'operation-group-to-resource' directive to
             _writer.Line();
             if (_inheritArmResourceBase && _resource.GetMethod != null)
             {
+                var _ = new RequestPath(_resource.GetMethod);
                 // write inherited get method
                 WriteGetMethod(_resource.GetMethod, true, _resource.GetMethods, "Get");
                 WriteGetMethod(_resource.GetMethod, false, _resource.GetMethods, "Get");

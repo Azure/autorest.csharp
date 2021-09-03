@@ -7,10 +7,12 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
@@ -76,6 +78,81 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ReorderOperationParameters();
             DecorateOperationGroup();
             UpdateListMethodNames();
+        }
+
+        public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
+        public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
+        public IDictionary<RequestPath, IList<RestClientMethod>> OperationSets => EnsureOperationSets();
+
+        private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
+        private IDictionary<RestClientMethod, PagingMethod>? _pagingMethods;
+
+        private IDictionary<RestClientMethod, ClientMethod> EnsureClientMethods()
+        {
+            if (_clientMethods != null)
+                return _clientMethods;
+
+            _clientMethods = new Dictionary<RestClientMethod, ClientMethod>();
+            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            foreach (var restClient in RestClients)
+            {
+                var methods = ClientBuilder.BuildMethods(restClient.OperationGroup, restClient, placeholder);
+                foreach (var method in methods)
+                {
+                    _clientMethods.Add(method.RestClientMethod, method);
+                }
+            }
+
+            return _clientMethods;
+        }
+
+        private IDictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
+        {
+            if (_pagingMethods != null)
+                return _pagingMethods;
+
+            _pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
+            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
+            foreach (var restClient in RestClients)
+            {
+                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
+                foreach (var method in methods)
+                {
+                    _pagingMethods.Add(method.Method, method);
+                }
+            }
+
+            return _pagingMethods;
+        }
+
+        private IDictionary<RequestPath, IList<RestClientMethod>>? _operationSets;
+
+        private IDictionary<RequestPath, IList<RestClientMethod>> EnsureOperationSets()
+        {
+            if (_operationSets != null)
+                return _operationSets;
+
+            _operationSets = new Dictionary<RequestPath, IList<RestClientMethod>>();
+
+            foreach (var restClient in RestClients)
+            {
+                foreach (var restClientMethod in restClient.Methods)
+                {
+                    // skip all the internal methods
+                    if (restClientMethod.Accessibility != "public")
+                        continue;
+                    var requestPath = new RequestPath(restClientMethod);
+                    if (_operationSets.TryGetValue(requestPath, out var restClientMethods))
+                    {
+                        restClientMethods.Add(restClientMethod);
+                    }
+                    else
+                    {
+                        _operationSets.Add(requestPath, new List<RestClientMethod> { restClientMethod });
+                    }
+                }
+            }
+            return _operationSets;
         }
 
         private void UpdateListMethodNames()

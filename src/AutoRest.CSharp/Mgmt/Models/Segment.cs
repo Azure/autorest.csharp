@@ -10,20 +10,22 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
-    public struct Segment : IEquatable<Segment>
+    internal struct Segment : IEquatable<Segment>
     {
         private ReferenceOrConstant _value;
         private string _stringValue;
 
-        //public Segment(ReferenceOrConstant value)
-        //{
-        //    _value = value;
-        //}
+        public Segment(ReferenceOrConstant value)
+        {
+            _value = value;
+            _stringValue = value.IsConstant ? value.Constant.Value?.ToString() ?? "null"
+                : $"({value.Reference.Type.Name}){value.Reference.Name}";
+        }
 
         public Segment(string value)
         {
             _stringValue = value;
-            _value = ParseToReferenceOrConstant(value);
+            _value = new Constant(value, typeof(string));
         }
 
         public bool IsConstant => _value.IsConstant;
@@ -33,62 +35,18 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public string ReferenceName => _value.Reference.Name;
 
-        public bool Equals(Segment other)
-        {
-            return _stringValue == other._stringValue;
-        }
+        public bool Equals(Segment other) => _stringValue == other._stringValue;
 
         public override bool Equals(object? obj)
         {
-            var other = obj as Segment?;
-            if (other is not null)
-                return other.Equals(this);
-            return false;
+            if (obj == null)
+                return false;
+            var other = (Segment)obj;
+            return other.Equals(this);
         }
 
-        public override int GetHashCode()
-        {
-            return _stringValue.GetHashCode();
-        }
+        public override int GetHashCode() => _stringValue.GetHashCode();
 
-        public override string? ToString()
-        {
-            return _stringValue;
-        }
-
-        public static implicit operator string(Segment other)
-        {
-            return other._stringValue;
-        }
-
-        public static implicit operator Segment(string other)
-        {
-            return new Segment(other);
-        }
-
-        internal static ReferenceOrConstant ParseToReferenceOrConstant(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentNullException(nameof(value));
-
-            if (value.Contains('/'))
-                throw new InvalidOperationException($"{nameof(value)} cannot contain '/'");
-
-            if (TryParseReference(value, out var referenceName))
-                return new Reference(referenceName, typeof(string));
-            return new Constant(value, typeof(string));
-        }
-
-        private static bool TryParseReference(string value, [MaybeNullWhen(false)] out string referenceName)
-        {
-            referenceName = null;
-            if (value.StartsWith('{') && value.EndsWith('}'))
-            {
-                referenceName = value.TrimStart('{').TrimEnd('}');
-                return true;
-            }
-
-            return false;
-        }
+        public override string? ToString() => _stringValue;
     }
 }
