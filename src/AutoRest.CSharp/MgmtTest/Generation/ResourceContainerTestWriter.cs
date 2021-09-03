@@ -262,10 +262,10 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 
         protected string WriteParameter(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, ExampleParameter exampleParameter, Parameter parameter) {
             var variableName = WriteExampleParameterDeclaration(exampleParameter, parameter);
-            if (parameter.Type.ToString() == _resourceData.Declaration.Name)
-            {
-                WriteDataPropertyAssignments(exampleParameter.ExampleValue, variableName, _resourceData.Properties);
-            }
+            //if (parameter.Type.ToString() == _resourceData.Declaration.Name)
+            //{
+            //    WriteDataPropertyAssignments(exampleParameter.ExampleValue, variableName, _resourceData.Properties);
+            //}
             return variableName;
         }
 
@@ -291,24 +291,28 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             var variableName = exampleParameter.Parameter.CSharpName();
             if (parameter.Type.ToString()==_resourceData.Declaration.Name)
             {
-                foreach (var constructor in _resourceData.Constructors)
+                var constructor = _resourceData.Constructors[0];
+                foreach (var c in _resourceData.Constructors)
                 {
-                    var signature = constructor.Signature;
-                    _writer.Append($"var {variableName} = new {signature.Name}(");
-                    foreach (var p in signature.Parameters)
-                    {
-                        // _writer.WriteParameter(parameter);
-                        var property = _resourceData.Properties.Where(x=>x.Declaration.Name.ToVariableName()==p.Name).FirstOrDefault().SchemaProperty;
-
-                        if (exampleParameter.ExampleValue.CSharpName()==property?.CSharpName())
-                        {
-                            _writer.Append($"{BuildValueString(exampleParameter.ExampleValue.Value, exampleParameter.ExampleValue.Schema)},");
-                        }
-                    }
-                    _writer.RemoveTrailingComma();
-                    _writer.Line($");");
-                    break;
+                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                        constructor = c;
                 }
+
+                var signature = constructor.Signature;
+                _writer.Append($"var {variableName} = new {signature.Name}(");
+                foreach (var p in signature.Parameters)
+                {
+                    // _writer.WriteParameter(parameter);
+                    var property = _resourceData.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
+
+                    if (exampleParameter.ExampleValue.CSharpName() == property?.CSharpName())
+                    {
+                        _writer.Append($"{BuildValueString(exampleParameter.ExampleValue, exampleParameter.ExampleValue.Schema)},");
+                    }
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
+
             }
             else if (parameter.Type== new CSharpType(typeof(string)))
             {
@@ -321,9 +325,9 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             return variableName;
         }
 
-        protected string BuildValueString(object value, Schema schema)
+        protected string BuildValueString(ExampleValue exampleValue, Schema schema)
         {
-            return $"\"{value}\"";
+            return $"\"{exampleValue.Value}\"";
         }
 
         protected void WriteFirstLROMethodTest(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual, string? methodName = null)
@@ -336,7 +340,8 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             WriteTestDecorator(_writer);
-            _writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {returnType} {CreateMethodName(methodName, isAsync)}()");
+            var testMethodName = CreateMethodName(methodName, isAsync);
+            _writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {returnType} {testMethodName}()");
             var paramNames = new string[] { };
             using (_writer.Scope())
             {
@@ -371,6 +376,14 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                         paramNames.Append(paramName);
                     }
                 }
+
+                _writer.Append($"{(isAsync ? ("await ") : "")}container.${testMethodName}(");
+                foreach (var paramName in paramNames)
+                {
+                    _writer.Append($"{paramName},");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.LineRaw(");");
             }
 
             // ///////////////////
