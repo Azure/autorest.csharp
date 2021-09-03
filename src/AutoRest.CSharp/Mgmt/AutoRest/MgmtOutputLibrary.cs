@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>>? _armResources;
+        private IDictionary<RequestPath, ResourceOfRequestPath>? _armResurcesFromRequestPath;
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
         private Dictionary<OperationGroup, ResourceData>? _resourceData;
 
@@ -82,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IDictionary<RestClientMethod, ClientMethod> ClientMethods => EnsureClientMethods();
         public IDictionary<RestClientMethod, PagingMethod> PagingMethods => EnsurePagingMethods();
-        public IDictionary<RequestPath, IList<RestClientMethod>> OperationSets => EnsureOperationSets();
+        public IEnumerable<OperationSet> OperationSets => EnsureOperationSets();
 
         private IDictionary<RestClientMethod, ClientMethod>? _clientMethods;
         private IDictionary<RestClientMethod, PagingMethod>? _pagingMethods;
@@ -125,14 +126,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _pagingMethods;
         }
 
-        private IDictionary<RequestPath, IList<RestClientMethod>>? _operationSets;
+        private IDictionary<RequestPath, IList<RestClientMethod>>? _requestPathToRestClientMethods;
+        private List<OperationSet>? _operationSets;
 
-        private IDictionary<RequestPath, IList<RestClientMethod>> EnsureOperationSets()
+        private IDictionary<RequestPath, IList<RestClientMethod>> EnsureRequestPathToRestClientMethods()
         {
-            if (_operationSets != null)
-                return _operationSets;
+            if (_requestPathToRestClientMethods != null)
+                return _requestPathToRestClientMethods;
 
-            _operationSets = new Dictionary<RequestPath, IList<RestClientMethod>>();
+            _requestPathToRestClientMethods = new Dictionary<RequestPath, IList<RestClientMethod>>();
 
             foreach (var restClient in RestClients)
             {
@@ -142,16 +144,30 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     if (restClientMethod.Accessibility != "public")
                         continue;
                     var requestPath = new RequestPath(restClientMethod);
-                    if (_operationSets.TryGetValue(requestPath, out var restClientMethods))
+                    if (_requestPathToRestClientMethods.TryGetValue(requestPath, out var restClientMethods))
                     {
                         restClientMethods.Add(restClientMethod);
                     }
                     else
                     {
-                        _operationSets.Add(requestPath, new List<RestClientMethod> { restClientMethod });
+                        _requestPathToRestClientMethods.Add(requestPath, new List<RestClientMethod> { restClientMethod });
                     }
                 }
             }
+            return _requestPathToRestClientMethods;
+        }
+
+        private IEnumerable<OperationSet> EnsureOperationSets()
+        {
+            if (_operationSets != null)
+                return _operationSets;
+
+            _operationSets = new List<OperationSet>();
+            foreach (var pair in EnsureRequestPathToRestClientMethods())
+            {
+                _operationSets.Add(new OperationSet(pair.Key, pair.Value.ToArray()));
+            }
+
             return _operationSets;
         }
 
@@ -251,6 +267,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
         public IEnumerable<Resource> ArmResources => EnsureArmResources()[ResourceType.Default].Values;
+
+        public IEnumerable<ResourceOfRequestPath> ArmResourcesOfRequestPath => EnsureArmResourcesFromRequestPath().Values;
 
         public IEnumerable<Resource> TupleResources => EnsureArmResources()[ResourceType.Tuple].Values;
 
@@ -424,6 +442,26 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return Enumerable.Empty<MgmtNonResourceOperation>();
+        }
+
+        private IDictionary<RequestPath, ResourceOfRequestPath> EnsureArmResourcesFromRequestPath()
+        {
+            if (_armResurcesFromRequestPath != null)
+            {
+                return _armResurcesFromRequestPath;
+            }
+
+            _armResurcesFromRequestPath = new Dictionary<RequestPath, ResourceOfRequestPath>();
+
+            foreach (var operationSet in OperationSets)
+            {
+                if (operationSet.TryGetResourceName(_mgmtConfiguration, out var resourceName))
+                {
+                    _armResurcesFromRequestPath.Add(operationSet.RequestPath, new ResourceOfRequestPath(operationSet.RequestPath, resourceName, _context));
+                }
+            }
+
+            return _armResurcesFromRequestPath;
         }
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, Resource>> EnsureArmResources()

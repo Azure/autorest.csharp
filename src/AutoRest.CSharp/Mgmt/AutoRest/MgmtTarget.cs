@@ -22,6 +22,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
+            var _ = context.Library.ArmResourcesOfRequestPath;
+
             foreach (var model in context.Library.Models)
             {
                 // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.

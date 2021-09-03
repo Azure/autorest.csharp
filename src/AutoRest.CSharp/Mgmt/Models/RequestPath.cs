@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -18,17 +19,16 @@ namespace AutoRest.CSharp.Mgmt.Models
         private IReadOnlyList<Segment> segments;
         private string _stringValue;
 
-        public RequestPath(ClientMethod clientMethod) : this(clientMethod.RestClientMethod)
-        {
-        }
-
         public RequestPath(RestClientMethod method)
         {
             segments = method.Request.PathSegments
                 .SelectMany(pathSegment => ParsePathSegment(pathSegment))
                 .ToList();
             _stringValue = $"/{string.Join('/', segments)}";
+            SerializedPath = GetHttpRequest(method.Operation.Requests.First()!)!.Path;
         }
+
+        public string SerializedPath { get; }
 
         public int Count => segments.Count;
 
@@ -90,5 +90,10 @@ namespace AutoRest.CSharp.Mgmt.Models
         public override int GetHashCode() => _stringValue.GetHashCode();
 
         public override string? ToString() => _stringValue;
+
+        private static HttpRequest? GetHttpRequest(ServiceRequest request)
+        {
+            return request.Protocol.Http as HttpRequest;
+        }
     }
 }
