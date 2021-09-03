@@ -123,6 +123,13 @@ namespace AutoRest.CSharp.Input
         public bool MgmtReferenceType => TryGetValue("x-ms-mgmt-referenceType", out var value) && Convert.ToBoolean(value);
 
         public bool MgmtPropertyReferenceType => TryGetValue("x-ms-mgmt-propertyReferenceType", out var value) && Convert.ToBoolean(value);
+
+        public DictionaryOfExampleModel? exampleModels => TryGetValue("example-models", out var value) ? (DictionaryOfExampleModel)value : null;
+    }
+
+    internal partial class DictionaryOfExampleModel: System.Collections.Generic.Dictionary<string, ExampleModel>
+    {
+
     }
 
     internal partial class ServiceResponse
@@ -274,8 +281,73 @@ namespace AutoRest.CSharp.Input
 
     internal partial class CodeModel
     {
-        [YamlDotNet.Serialization.YamlMember(Alias = "swaggerTests")]
-        public DictionaryOfAny? swaggerTests { get; set; }
+        [YamlDotNet.Serialization.YamlMember(Alias = "testLayout")]
+        public DictionaryOfAny? TestLayout { get; set; }
+    }
+
+    internal partial class ExampleModel
+    {
+        [YamlMember(Alias = "name")]
+        public string Name; /** Key in x-ms-examples */
+
+        [YamlMember(Alias = "operationGroup")]
+        public OperationGroup OperationGroup;
+
+        [YamlMember(Alias = "operation")]
+        public Operation Operation;
+
+        [YamlMember(Alias = "clientParameters")]
+        public System.Collections.Generic.ICollection<ExampleParameter> ClientParameters;
+
+        [YamlMember(Alias = "methodParameters")]
+        public System.Collections.Generic.ICollection<ExampleParameter> MethodParameters;
+
+        [YamlMember(Alias = "responses")]
+        public System.Collections.Generic.Dictionary<string, ExampleResponse> Responses; // statusCode-->ExampleResponse
+    }
+
+    internal partial class ExampleResponse
+    {
+        [YamlMember(Alias = "body")]
+        public ExampleValue Body;
+
+        [YamlMember(Alias = "headers")]
+        public DictionaryOfAny Headers;
+    }
+
+    internal partial class ExampleParameter
+    {
+        /** Ref to the Parameter of operations in codeModel */
+        [YamlMember(Alias = "parameter")]
+        public RequestParameter Parameter;
+
+        /** Can be object, list, primitive data, ParameterModel*/
+        [YamlMember(Alias = "exampleValue")]
+        public ExampleValue ExampleValue;
+    }
+
+    internal partial class ExampleValue
+    {
+        [YamlMember(Alias = "language")]
+        public Languages Language;
+
+        [YamlMember(Alias = "schema")]
+        public Schema Schema;
+
+        /**The value is {string:ExampleValue}/[ExampleValue] instance if schema.type==Object/Array, otherwise it's rawValue */
+        [YamlMember(Alias = "value")]
+        public object Value;
+
+        [YamlMember(Alias = "parentsValue")]
+        public DictionaryOfExamplValue ParentsValue; // parent class Name--> value
+
+        public string CSharpName() =>
+            (this.Language.Default.Name == null || this.Language.Default.Name == "null") ? "NullProperty" : this.Language.Default.Name.ToCleanName();
+    }
+
+    internal partial class DictionaryOfExamplValue : System.Collections.Generic.Dictionary<string, ExampleValue>
+    {
+
     }
 }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.

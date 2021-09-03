@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
+using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.TestGeneration
 {
@@ -44,11 +46,13 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 
         protected override string ContextProperty => "Parent";
 
-        protected CSharpType TypeOfThis => _resourceContainer.Type;
-        protected override string TypeNameOfThis => TypeOfThis.Name;
+        protected CSharpType TypeOfContainer => _resourceContainer.Type;
+        protected string TypeNameOfContainer => TypeOfContainer.Name;
 
-        protected string TestNamespace => TypeOfThis.Namespace + ".Tests";
-        protected string TypeNameOfTester => TypeOfThis.Name + "Tests";
+        protected string TestNamespace => TypeOfContainer.Namespace + ".Tests";
+        protected override string TypeNameOfThis => TypeOfContainer.Name + "MockTests";
+        protected string TestEnvironmentName => _context.DefaultLibraryName + "TestEnvironment";
+        protected string TestBaseName => _context.DefaultLibraryName + "TestBase";
 
         public ResourceContainerTestWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
         {
@@ -64,31 +68,24 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         public void WriteContainerTest()
         {
             WriteUsings(_writer);
-            _writer.UseNamespace(TypeOfThis.Namespace);
+            _writer.UseNamespace(TypeOfContainer.Namespace);
             _writer.UseNamespace("Azure.Core.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.TestFramework");
+            _writer.UseNamespace("Azure.ResourceManager.Resources");
 
-            using (_writer.Namespace(TypeNameOfTester))
+            using (_writer.Namespace(TestNamespace))
             {
                 _writer.WriteXmlDocumentationSummary($"Test for {_resourceContainer.ResourceName}");
-                _writer.Append($"public class {TypeNameOfThis:D}Tests : ");
-                _writer.Line($"ManagementRecordedTestBase<TestEnvironment>");
+                _writer.Append($"public partial class {TypeNameOfThis:D} : ");
+                _writer.Line($"{TestBaseName}");
                 using (_writer.Scope())
                 {
                     WriteFields(_writer, _restClient!);
                     WriteContainerTesterCtors();
 
                     WriteCreateContainerFromResourceGroup();
-                    //TODO: this is a workaround to allow resource container to accept multiple parent resource types
-                    //Eventually we can change ValidResourceType to become ValidResourceTypes and rewrite the base Validate().
-                    if (_resourceContainer.OperationGroup.IsScopeResource(_context.Configuration.MgmtConfiguration) || _resourceContainer.OperationGroup.IsExtensionResource(_context.Configuration.MgmtConfiguration) && _resourceContainer.GetValidResourceValue() == ResourceContainer.TenantResourceType)
-                    {
-                        WriteValidate();
-                    }
-                    WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
-                    WriteResourceOperations();
-                    WriteRemainingMethods();
-                    WriteBuilders();
+                    WriteCreateOrUpdate();
+                    // WriteCreateResourceGroup();
                 }
             }
         }
@@ -97,7 +94,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             // write protected default constructor
             _writer.Line();
-            using (_writer.Scope($"public {TypeNameOfTester}(bool isAsync): base(isAsync)"))
+            using (_writer.Scope($"public {TypeNameOfThis}(bool isAsync): base(isAsync)"))
             { }
         }
 
@@ -105,10 +102,19 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             // write protected default constructor
             _writer.Line();
-            using (_writer.Scope($"private async Task<{TypeNameOfThis}> Get{TypeNameOfThis}Async()"))
+            using (_writer.Scope($"private async Task<{TypeNameOfContainer}> Get{TypeNameOfContainer}Async()"))
             {
                 _writer.Line($"var resourceGroup = await CreateResourceGroupAsync();");
                 _writer.Line($"return resourceGroup.Get{_resourceContainer.Resource.Type.Name.ToPlural()}();");
+            }
+        }
+
+        protected void WriteCreateOrUpdate()
+        {
+            _writer.Line();
+            if (_resourceContainer.CreateMethod != null)
+            {
+                WriteCreateOrUpdateVariants(_resourceContainer.CreateMethod, _resourceContainer.PutMethods);
             }
         }
 
@@ -242,11 +248,182 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 
         private void WriteCreateOrUpdateVariants(RestClientMethod clientMethod, List<RestClientMethod>? clientMethods = null)
         {
-            WriteFirstLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate");
-            WriteFirstLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate");
+            WriteFirstLROMethodTest(clientMethod, _context, false, true, "CreateOrUpdate");
+            WriteFirstLROMethodTest(clientMethod, _context, true, true, "CreateOrUpdate");
 
-            WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
-            WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
+            //WriteStartLROMethod(_writer, clientMethod, _context, false, true, "CreateOrUpdate", clientMethods);
+            //WriteStartLROMethod(_writer, clientMethod, _context, true, true, "CreateOrUpdate", clientMethods);
+        }
+
+        protected void WriteGetContainer()
+        {
+            _writer.Line($"var container = Get{TypeNameOfContainer}Async();");
+        }
+
+        protected string WriteParameter(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, ExampleParameter exampleParameter, Parameter parameter) {
+            var variableName = WriteExampleParameterDeclaration(exampleParameter, parameter);
+            if (parameter.Type.ToString() == _resourceData.Declaration.Name)
+            {
+                WriteDataPropertyAssignments(exampleParameter.ExampleValue, variableName, _resourceData.Properties);
+            }
+            return variableName;
+        }
+
+        protected void WriteDataPropertyAssignments(ExampleValue exampleValue, string variableName, ObjectTypeProperty[] objectTypeProperties)
+        {
+            if (exampleValue.Schema?.Type == AllSchemaTypes.Array)
+            {
+            }
+            foreach (var property in (DictionaryOfExamplValue)exampleValue.Value)
+            {
+                // find the target ObjectTypeProperty
+                var objectTypeProperty = objectTypeProperties.Where(x => x.SchemaProperty?.Language.Default.Name == property.Value.Language.Default.Name);
+            }
+        }
+
+        protected void WriteExampleValueAssignment(string variableName, ExampleValue exampleValue)
+        {
+
+        }
+
+        protected string WriteExampleParameterDeclaration(ExampleParameter exampleParameter, Parameter parameter)
+        {
+            var variableName = exampleParameter.Parameter.CSharpName();
+            if (parameter.Type.ToString()==_resourceData.Declaration.Name)
+            {
+                foreach (var constructor in _resourceData.Constructors)
+                {
+                    var signature = constructor.Signature;
+                    _writer.Append($"var {variableName} = new {signature.Name}(");
+                    foreach (var p in signature.Parameters)
+                    {
+                        // _writer.WriteParameter(parameter);
+                        var property = _resourceData.Properties.Where(x=>x.Declaration.Name.ToVariableName()==p.Name).FirstOrDefault().SchemaProperty;
+
+                        if (exampleParameter.ExampleValue.CSharpName()==property?.CSharpName())
+                        {
+                            _writer.Append($"{BuildValueString(exampleParameter.ExampleValue.Value, exampleParameter.ExampleValue.Schema)},");
+                        }
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($");");
+                    break;
+                }
+            }
+            else if (parameter.Type== new CSharpType(typeof(string)))
+            {
+                _writer.LineRaw($"var {variableName} = \"{exampleParameter.ExampleValue.Value}\";");
+            }
+            else
+            {
+                _writer.LineRaw($"var {variableName} = {exampleParameter.ExampleValue.Value};");
+            }
+            return variableName;
+        }
+
+        protected string BuildValueString(object value, Schema schema)
+        {
+            return $"\"{value}\"";
+        }
+
+        protected void WriteFirstLROMethodTest(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual, string? methodName = null)
+        {
+            Debug.Assert(clientMethod.Operation != null);
+
+            methodName = methodName ?? clientMethod.Name;
+            CSharpType returnType = isAsync? typeof(Task): typeof(void);
+            var parameterMapping = BuildParameterMapping(clientMethod);
+            var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            WriteTestDecorator(_writer);
+            _writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {returnType} {CreateMethodName(methodName, isAsync)}()");
+            var paramNames = new string[] { };
+            using (_writer.Scope())
+            {
+                WriteGetContainer();
+
+                foreach (KeyValuePair<string, ExampleModel> entry in clientMethod.Operation.Extensions?.exampleModels ?? new DictionaryOfExampleModel())
+                {
+                    // do something with entry.Value or entry.Key
+                    _writer.LineRaw($"// Example: {entry.Key}");
+                    foreach (var passThruParameter in passThruParameters)
+                    {
+                        string? paramName = null;
+                        foreach (ExampleParameter exampleParameter in entry.Value.MethodParameters)
+                        {
+                            if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
+                            {
+                                paramName = WriteParameter(clientMethod, context, exampleParameter, passThruParameter);
+                            }
+                        }
+                        if (paramName is null)
+                        {
+                            if (passThruParameter.ValidateNotNull)
+                            {
+                                throw new Exception($"parameter {passThruParameter.Name} not found in example {entry.Key}");
+                            }
+                            else
+                            {
+                                paramName = passThruParameter.Name;
+                                _writer.LineRaw($"var {paramName} = null;");
+                            }
+                        }
+                        paramNames.Append(paramName);
+                    }
+                }
+            }
+
+            // ///////////////////
+
+
+            //writer.Line();
+            //writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
+
+            //var parameterMapping = BuildParameterMapping(clientMethod);
+            //var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
+
+            //foreach (var parameter in passThruParameters)
+            //{
+            //    writer.WriteXmlDocumentationParameter(parameter);
+            //}
+
+            //writer.WriteXmlDocumentationParameter("cancellationToken", $"The cancellation token to use.");
+            //writer.WriteXmlDocumentationRequiredParametersException(passThruParameters.ToArray());
+
+            //CSharpType? returnType = GetLROReturnType(clientMethod, context);
+            //CSharpType responseType = returnType != null ?
+            //    new CSharpType(typeof(Response<>), returnType) :
+            //    typeof(Response);
+            //responseType = responseType.WrapAsync(isAsync);
+
+            //writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {responseType} {CreateMethodName(methodName, isAsync)}(");
+            //foreach (var parameter in passThruParameters)
+            //{
+            //    writer.WriteParameter(parameter);
+            //}
+            //writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            //using (writer.Scope())
+            //{
+            //    writer.WriteParameterNullChecks(passThruParameters.ToArray());
+
+            //    Diagnostic diagnostic = new Diagnostic($"{TypeNameOfThis}.{methodName}", Array.Empty<DiagnosticAttribute>());
+            //    WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+            //    {
+            //        var operation = new CodeWriterDeclaration("operation");
+            //        writer.Append($"var {operation:D} = {GetAwait(isAsync)}");
+            //        writer.Append($"{CreateMethodName($"Start{methodName}", isAsync)}(");
+            //        WriteArguments(writer, parameterMapping.Where(p => p.IsPassThru));
+            //        writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
+
+            //        writer.Append($"return {GetAwait(isAsync)}");
+            //        var waitForCompletionMethod = returnType == null && isAsync ?
+            //        "WaitForCompletionResponse" :
+            //        "WaitForCompletion";
+            //        writer.Line($"{operation}.{CreateMethodName(waitForCompletionMethod, isAsync)}(cancellationToken){GetConfigureAwait(isAsync)};");
+            //    });
+            //    writer.Line();
+            //}
         }
 
         /// <summary>
@@ -477,8 +654,8 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                 if (clientMethod != null)
                 {
                     //TODO: merge methods like WriteList
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfContainer}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
+                    WriteClientMethod(_writer, clientMethod, "GetAll", new Diagnostic($"{TypeNameOfContainer}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
                 }
             }
             else
@@ -494,8 +671,8 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                     if (listMethod.ClientMethod != null)
                     {
                         _writer.Line();
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
-                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfThis}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfContainer}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, true);
+                        WriteClientMethod(_writer, listMethod.ClientMethod, "GetAll", new Diagnostic($"{TypeNameOfContainer}.GetAll", Array.Empty<DiagnosticAttribute>()), _resourceContainer.OperationGroup, _context, false);
                     }
                 }
             }

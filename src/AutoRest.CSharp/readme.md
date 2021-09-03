@@ -46,6 +46,9 @@ pipeline:
 
 modelerfour:
   emit-yaml-tags: true
+
+test-modeler:
+  use-parents-value: false
 ```
 
 ## Help

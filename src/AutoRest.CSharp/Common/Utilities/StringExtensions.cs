@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -301,6 +302,11 @@ namespace AutoRest.CSharp.Utilities
         public static IEnumerable<string> SplitByCamelCase(this string camelCase)
         {
             return camelCase.Humanize().Split(' ').Select(w => w.FirstCharToUpperCase());
+        }
+
+        public static string ToCamelCase(string name)
+        {
+            return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
         }
     }
 }

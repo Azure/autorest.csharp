@@ -29,8 +29,7 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 {
     internal abstract class MgmtTestBaseWriter : MgmtClientBaseWriter
     {
-
-       protected void WriteTestDecorator(CodeWriter writer)
+        protected void WriteTestDecorator(CodeWriter writer)
         {
             writer.Line($"[TestCase]");
             writer.Line($"[RecordedTest]");
