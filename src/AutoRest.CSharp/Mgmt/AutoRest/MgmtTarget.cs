@@ -22,23 +22,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
-            foreach (var resource in context.Library.ArmResourcesOfRequestPath)
-            {
-                foreach (var childResource in resource.ChildResources)
-                {
-                    var name = childResource.Type.Name;
-                }
+            //foreach (var resource in context.Library.ArmResourcesOfRequestPath)
+            //{
+            //    foreach (var childResource in resource.ChildResources)
+            //    {
+            //        var name = childResource.Type.Name;
+            //    }
 
-                foreach (var operationSet in resource.ChildOperations)
-                {
-                    var name = operationSet.ToString();
-                }
-            }
+            //    foreach (var operationSet in resource.ChildOperations)
+            //    {
+            //        var name = operationSet.ToString();
+            //    }
+            //}
 
-            foreach (var resourceData in context.Library.ResourceDataForRequestPath)
-            {
-                var name = resourceData.Type.Name;
-            }
+            //foreach (var resourceData in context.Library.ResourceDataForRequestPath)
+            //{
+            //    var name = resourceData.Type.Name;
+            //}
 
             foreach (var model in context.Library.Models)
             {

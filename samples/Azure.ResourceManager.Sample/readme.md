@@ -31,6 +31,8 @@ operation-group-to-parent:
    VirtualMachineSizes: subscriptions
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
+request-path-to-resource:
+   /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest: VirtualMachineScaleSetRollingUpgrade
 operation-group-is-tuple: VirtualMachineImages
 operation-group-is-extension: VirtualMachineScaleSetVMExtensions
 modelerfour:

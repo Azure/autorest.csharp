@@ -63,7 +63,7 @@ namespace MgmtLRO
             try
             {
                 var response = _restClient.Create(Id.ResourceGroupName, barName, body, cancellationToken);
-                var operation = new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -97,9 +97,9 @@ namespace MgmtLRO
             try
             {
                 var response = await _restClient.CreateAsync(Id.ResourceGroupName, barName, body, cancellationToken).ConfigureAwait(false);
-                var operation = new BarCreateOperation(_clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
+                var operation = new BarCreateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, barName, body).Request, response);
                 if (waitForCompletion)
-                    await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+                    await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
             }
             catch (Exception e)
