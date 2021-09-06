@@ -35,6 +35,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
+            foreach (var resourceData in context.Library.ResourceDataForRequestPath)
+            {
+                var name = resourceData.Type.Name;
+            }
+
             foreach (var model in context.Library.Models)
             {
                 // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
