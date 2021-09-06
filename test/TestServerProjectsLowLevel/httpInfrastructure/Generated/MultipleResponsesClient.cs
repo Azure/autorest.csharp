@@ -53,19 +53,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -111,19 +109,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -184,19 +180,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -242,19 +236,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -315,19 +307,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -373,19 +363,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -446,19 +434,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -504,19 +490,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload:. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -577,19 +561,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -635,19 +617,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid error payload: {&apos;status&apos;: 400, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -708,19 +688,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -765,19 +743,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -837,19 +813,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -894,19 +868,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 201 response with valid payload: {&apos;statusCode&apos;: &apos;201&apos;, &apos;textStatusCode&apos;: &apos;Created&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -966,19 +938,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1023,19 +993,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1095,19 +1063,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1153,19 +1119,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1226,19 +1190,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1284,19 +1246,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpCode&apos;: &apos;201&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1357,19 +1317,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1415,19 +1373,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;httpStatusCode&apos;: &apos;404&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1488,19 +1444,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1546,19 +1500,17 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1619,12 +1571,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1669,12 +1620,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1734,12 +1684,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1784,12 +1733,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 204 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1849,12 +1797,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -1899,12 +1846,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;code&apos;: &apos;400&apos;, &apos;message&apos;: &apos;client error&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2340,11 +2286,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2388,11 +2333,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with valid payload: {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2451,11 +2395,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2499,11 +2442,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2562,11 +2504,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2610,11 +2551,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with valid payload: {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2673,11 +2613,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -2721,11 +2660,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3152,11 +3090,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3200,11 +3137,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3263,11 +3199,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3311,11 +3246,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3374,11 +3308,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3422,11 +3355,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;200&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3485,11 +3417,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3533,11 +3464,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 400 response with no payload client should treat as an http error with no error model. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3596,11 +3526,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3644,11 +3573,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with payload {&apos;statusCode&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3707,11 +3635,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3755,11 +3682,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 200 response with invalid payload {&apos;statusCodeInvalid&apos;: &apos;400&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3818,11 +3744,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -3866,11 +3791,10 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Send a 202 response with payload {&apos;statusCode&apos;: &apos;202&apos;}. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "statusCode": "string"
+        /// <code>{
+        ///   statusCode: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>

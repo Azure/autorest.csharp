@@ -53,20 +53,18 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "size": "number"
+        /// <code>{
+        ///   id: string,
+        ///   size: number
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -110,20 +108,18 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that have readonly properties. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "size": "number"
+        /// <code>{
+        ///   id: string,
+        ///   size: number
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -182,20 +178,18 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "size": "number"
+        /// <code>{
+        ///   id: string,
+        ///   size: number
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -240,20 +234,18 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that have readonly properties. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "size": "number"
+        /// <code>{
+        ///   id: string,
+        ///   size: number
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>

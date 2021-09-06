@@ -53,19 +53,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -109,19 +107,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -180,19 +176,17 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -237,19 +231,17 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -312,19 +304,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -368,19 +358,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -439,19 +427,17 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -496,19 +482,17 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -571,19 +555,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -627,19 +609,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -698,19 +678,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -754,19 +732,17 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "defaultProgram": "Dictionary&lt;string, string&gt;"
+        /// <code>{
+        ///   defaultProgram: Dictionary&lt;string, string&gt;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>

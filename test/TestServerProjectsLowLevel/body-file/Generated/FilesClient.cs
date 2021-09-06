@@ -53,12 +53,11 @@ namespace body_file_LowLevel
         /// <summary> Get file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -102,12 +101,11 @@ namespace body_file_LowLevel
         /// <summary> Get file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -166,12 +164,11 @@ namespace body_file_LowLevel
         /// <summary> Get a large file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -215,12 +212,11 @@ namespace body_file_LowLevel
         /// <summary> Get a large file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -279,12 +275,11 @@ namespace body_file_LowLevel
         /// <summary> Get empty file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -328,12 +323,11 @@ namespace body_file_LowLevel
         /// <summary> Get empty file. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>

@@ -53,12 +53,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -102,12 +101,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Get empty error form server. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>

@@ -53,24 +53,20 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "fishtype": "string",
-        ///   "species": "string",
-        ///   "length": "number",
-        ///   "siblings": [
-        ///     "Fish"
-        ///   ]
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [Fish]
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -114,24 +110,20 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that are polymorphic and have recursive references. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "fishtype": "string",
-        ///   "species": "string",
-        ///   "length": "number",
-        ///   "siblings": [
-        ///     "Fish"
-        ///   ]
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [Fish]
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -190,24 +182,20 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "fishtype": "string (required)",
-        ///   "species": "string",
-        ///   "length": "number (required)",
-        ///   "siblings": [
-        ///     "Fish"
-        ///   ]
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -252,24 +240,20 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "fishtype": "string (required)",
-        ///   "species": "string",
-        ///   "length": "number (required)",
-        ///   "siblings": [
-        ///     "Fish"
-        ///   ]
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>

@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
                     RequestHeader[] requestHeaders = method.Request.Headers;
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
-                    IDictionary<string, LowLevelClientMethod.SchemaDocumentation[]> schemaDocumentationDict = new Dictionary<string, LowLevelClientMethod.SchemaDocumentation[]>{ };
+                    LowLevelClientMethod.SchemaDocumentation[]? requestBodyDoc = null;
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
@@ -78,9 +78,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         parameters.Insert(bodyIndex, bodyParam);
                         body = new RequestContentRequestBody(bodyParam);
-                        var requestDoc = GetSchemaDocumentationsForSchema(bodyParameter.Schema, LowLevelClientMethod.SchemaDocumentation.RequestBody);
-                        if (requestDoc != null)
-                            schemaDocumentationDict.Add(LowLevelClientMethod.SchemaDocumentation.RequestBody, requestDoc);
+                        requestBodyDoc = GetSchemaDocumentationsForSchema(bodyParameter.Schema, LowLevelClientMethod.SchemaDocumentation.RequestBody);
 
                         // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body, and change the
                         // type to be `Content-Type`
@@ -97,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
 
                                 parameters.RemoveAt(contentTypeParamIndex);
 
-                                // If the Content-Type paramter came before the the body, the removal of it above shifted the body parameter
+                                // If the Content-Type parameter came before the the body, the removal of it above shifted the body parameter
                                 // closer to the start of the list.
                                 if (contentTypeParamIndex < bodyIndex)
                                 {
@@ -128,20 +126,19 @@ namespace AutoRest.CSharp.Output.Models
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
 
                     var response = operation.Responses.FirstOrDefault(r => r.ResponseSchema != null);
+                    LowLevelClientMethod.SchemaDocumentation[]? responseBodyDoc = null;
                     if (response != null)
                     {
-                        var responseDoc = GetSchemaDocumentationsForSchema(response.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseBody);
-                        if (responseDoc != null)
-                            schemaDocumentationDict.Add(LowLevelClientMethod.SchemaDocumentation.ResponseBody, responseDoc);
+                        responseBodyDoc = GetSchemaDocumentationsForSchema(response.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseBody);
                     }
                     var errorResponse = operation.Exceptions.FirstOrDefault(r => r.ResponseSchema != null);
+                    LowLevelClientMethod.SchemaDocumentation[]? responseErrorDoc = null;
                     if (errorResponse != null)
                     {
-                        var responseErrorDoc = GetSchemaDocumentationsForSchema(errorResponse.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseError);
-                        if (responseErrorDoc != null)
-                            schemaDocumentationDict.Add(LowLevelClientMethod.SchemaDocumentation.ResponseError, responseErrorDoc);
+                        responseErrorDoc = GetSchemaDocumentationsForSchema(errorResponse.ResponseSchema!, LowLevelClientMethod.SchemaDocumentation.ResponseError);
                     }
-                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation, (IReadOnlyDictionary<string, LowLevelClientMethod.SchemaDocumentation[]>)schemaDocumentationDict, diagnostic);
+                    LowLevelClientMethod.SchemaDocs schemaDocs = new LowLevelClientMethod.SchemaDocs(requestBodyDoc, responseBodyDoc, responseErrorDoc);
+                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, operation, schemaDocs, diagnostic);
                 }
             }
         }
@@ -233,7 +230,7 @@ namespace AutoRest.CSharp.Output.Models
                 case DateTimeSchema:
                     return "string (ISO 8601 Format)";
                 case ChoiceSchema c:
-                    return string.Join(" | ", c.Choices.Select(c => $"{c.Value}"));
+                    return string.Join(" | ", c.Choices.Select(c => $"\"{c.Value}\""));
                 case DictionarySchema d:
                     return $"Dictionary<string, {StringifyTypeForTable(d.ElementType)}>";
                 case ArraySchema a:

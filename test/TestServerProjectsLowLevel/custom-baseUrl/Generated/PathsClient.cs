@@ -56,12 +56,11 @@ namespace custom_baseUrl_LowLevel
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="accountName"> Account Name. </param>
@@ -106,12 +105,11 @@ namespace custom_baseUrl_LowLevel
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="accountName"> Account Name. </param>

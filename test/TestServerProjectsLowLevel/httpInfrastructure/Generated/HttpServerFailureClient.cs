@@ -53,12 +53,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -100,12 +99,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -162,12 +160,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -209,12 +206,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -271,12 +267,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -319,12 +314,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -385,12 +379,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -433,12 +426,11 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
         /// <remarks>
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>

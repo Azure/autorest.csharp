@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
@@ -9,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -126,37 +128,56 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private string buildJsonFromSchemaDocs(string schemaName, LowLevelClientMethod.SchemaDocumentation[] docs)
+        private string BuildSchemaFromDocs(LowLevelClientMethod.SchemaDocumentation[] docs, bool showRequired)
         {
             var docDict = docs.ToDictionary(d => d.SchemaName, d => d);
-            IDictionary<string, Object> jsonObject = buildObjectFromSchemaDoc(docs.FirstOrDefault(), docDict, schemaName == LowLevelClientMethod.SchemaDocumentation.RequestBody);
-            var options = new JsonSerializerOptions()
-            {
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                WriteIndented = true
-            };
-            string jsonString = JsonSerializer.Serialize(jsonObject, options);
-            return jsonString;
+            var builder = new StringBuilder();
+            builder.AppendLine("{");
+            BuildSchemaFromDoc(builder, docs.FirstOrDefault(), docDict, showRequired, 2);
+            builder.AppendLine("}");
+            return builder.ToString();
         }
 
-        private IDictionary<string, Object> buildObjectFromSchemaDoc(LowLevelClientMethod.SchemaDocumentation doc, IDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict, bool showRequired)
+        private void BuildSchemaFromDoc(StringBuilder builder, LowLevelClientMethod.SchemaDocumentation doc, IDictionary<string, LowLevelClientMethod.SchemaDocumentation> docDict, bool showRequired, int indentation = 0)
         {
-            var jsonObject = new Dictionary<string, Object>();
             foreach (var row in doc.DocumentationRows)
             {
-                var required = showRequired && row.Required ? " (required)" : "";
+                var required = showRequired && row.Required ? " (required)" : string.Empty;
                 var isArray = row.Type.EndsWith("[]");
                 var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
-                if (docDict.ContainsKey(rowType))
+                builder.AppendIndentation(indentation).Append($"{row.Name}: ");
+                if (isArray)
                 {
-                    var docToProcess = docDict[rowType];
-                    docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                    jsonObject[row.Name] = isArray ? new List<IDictionary<string, Object>> { buildObjectFromSchemaDoc(docToProcess, docDict, showRequired) } : buildObjectFromSchemaDoc(docToProcess, docDict, showRequired);
+                    if (docDict.ContainsKey(rowType))
+                    {
+                        builder.AppendLine("[");
+                        var docToProcess = docDict[rowType];
+                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
+                        builder.AppendIndentation(indentation + 2).AppendLine("{");
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 4);
+                        builder.AppendIndentation(indentation + 2).AppendLine("}");
+                        builder.AppendIndentation(indentation).AppendLine($"]{required},");
+                    }
+                    else
+                        builder.AppendLine($"[{rowType}]{required},");
                 }
                 else
-                    jsonObject[row.Name] = isArray ? new List<string> { $"{rowType}{required}" } : $"{rowType}{required}";
+                {
+                    if (docDict.ContainsKey(rowType))
+                    {
+                        builder.AppendLine("{");
+                        var docToProcess = docDict[rowType];
+                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
+                        BuildSchemaFromDoc(builder, docToProcess, docDict, showRequired, indentation + 2);
+                        builder.AppendIndentation(indentation).Append("}").AppendLine($"{required},");
+                    }
+                    else
+                        builder.AppendLine($"{rowType}{required},");
+                }
             }
-            return jsonObject;
+            // Remove the last "," by first removing ",\n", then add back "\n".
+            builder.Length -= 3;
+            builder.AppendLine();
         }
 
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
@@ -172,16 +193,34 @@ namespace AutoRest.CSharp.Generation.Writers
             });
 
             writer.WriteXmlDocumentationSummary($"{clientMethod.Description}");
-
-            if (clientMethod.SchemaDocumentations.Count > 0)
+            var schemas = new List<FormattableString>();
+            if (clientMethod.SchemaDocumentations.RequestBody != null)
             {
-                var schemas = clientMethod.SchemaDocumentations.OrderBy(item => item.Key).Select(item => (FormattableString)$@"
-Schema for <c>{item.Key}</c>:
-<pre><c>
-{buildJsonFromSchemaDocs(item.Key, item.Value)}
-</c></pre>
-");
+                var schema = (FormattableString)$@"
+Schema for <c>Request Body</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.RequestBody, true)}</code>
+";
+                schemas.Add(schema);
+            }
+            if (clientMethod.SchemaDocumentations.ResponseBody != null)
+            {
+                var schema = (FormattableString)$@"
+Schema for <c>Response Body</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.ResponseBody, false)}</code>
+";
+                schemas.Add(schema);
+            }
+            if (clientMethod.SchemaDocumentations.ResponseError != null)
+            {
+                var schema = (FormattableString)$@"
+Schema for <c>Response Error</c>:
+<code>{BuildSchemaFromDocs(clientMethod.SchemaDocumentations.ResponseError, false)}</code>
+";
+                schemas.Add(schema);
+            }
 
+            if (schemas.Count > 0)
+            {
                 writer.WriteXmlDocumentation("remarks", $"{schemas}");
             }
 

@@ -53,29 +53,27 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "color": "string",
-        ///   "hates": [
+        /// <code>{
+        ///   color: string,
+        ///   hates: [
         ///     {
-        ///       "id": "number",
-        ///       "name": "string",
-        ///       "food": "string"
+        ///       id: number,
+        ///       name: string,
+        ///       food: string
         ///     }
         ///   ],
-        ///   "id": "number",
-        ///   "name": "string",
-        ///   "breed": "string"
+        ///   id: number,
+        ///   name: string,
+        ///   breed: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -119,29 +117,27 @@ namespace body_complex_LowLevel
         /// <summary> Get complex types that extend others. </summary>
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "color": "string",
-        ///   "hates": [
+        /// <code>{
+        ///   color: string,
+        ///   hates: [
         ///     {
-        ///       "id": "number",
-        ///       "name": "string",
-        ///       "food": "string"
+        ///       id: number,
+        ///       name: string,
+        ///       food: string
         ///     }
         ///   ],
-        ///   "id": "number",
-        ///   "name": "string",
-        ///   "breed": "string"
+        ///   id: number,
+        ///   name: string,
+        ///   breed: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -200,29 +196,27 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that extend others. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "color": "string",
-        ///   "hates": [
+        /// <code>{
+        ///   color: string,
+        ///   hates: [
         ///     {
-        ///       "id": "number",
-        ///       "name": "string",
-        ///       "food": "string"
+        ///       id: number,
+        ///       name: string,
+        ///       food: string
         ///     }
         ///   ],
-        ///   "id": "number",
-        ///   "name": "string",
-        ///   "breed": "string"
+        ///   id: number,
+        ///   name: string,
+        ///   breed: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -267,29 +261,27 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that extend others. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "color": "string",
-        ///   "hates": [
+        /// <code>{
+        ///   color: string,
+        ///   hates: [
         ///     {
-        ///       "id": "number",
-        ///       "name": "string",
-        ///       "food": "string"
+        ///       id: number,
+        ///       name: string,
+        ///       food: string
         ///     }
         ///   ],
-        ///   "id": "number",
-        ///   "name": "string",
-        ///   "breed": "string"
+        ///   id: number,
+        ///   name: string,
+        ///   breed: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "status": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   status: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>

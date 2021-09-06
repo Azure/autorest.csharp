@@ -53,38 +53,35 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -129,38 +126,35 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -223,38 +217,35 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -300,38 +291,35 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -395,25 +383,23 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -458,25 +444,23 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -539,25 +523,23 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
@@ -602,25 +584,23 @@ namespace lro_LowLevel
         /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "id": "string",
-        ///   "type": "string",
-        ///   "tags": "Dictionary&lt;string, string&gt;",
-        ///   "location": "string",
-        ///   "name": "string",
-        ///   "provisioningState": "string",
-        ///   "provisioningStateValues": "Succeeded | Failed | canceled | Accepted | Creating | Created | Updating | Updated | Deleting | Deleted | OK"
+        /// <code>{
+        ///   id: string,
+        ///   type: string,
+        ///   tags: Dictionary&lt;string, string&gt;,
+        ///   location: string,
+        ///   name: string,
+        ///   provisioningState: string,
+        ///   provisioningStateValues: &quot;Succeeded&quot; | &quot;Failed&quot; | &quot;canceled&quot; | &quot;Accepted&quot; | &quot;Creating&quot; | &quot;Created&quot; | &quot;Updating&quot; | &quot;Updated&quot; | &quot;Deleting&quot; | &quot;Deleted&quot; | &quot;OK&quot;
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// Schema for <c>Response Error</c>:
-        /// <pre><c>
-        /// {
-        ///   "code": "number",
-        ///   "message": "string"
+        /// <code>{
+        ///   code: number,
+        ///   message: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>

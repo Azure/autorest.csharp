@@ -52,13 +52,12 @@ namespace body_complex_LowLevel
 
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "kind": "Kind1",
-        ///   "propB1": "string",
-        ///   "propBH1": "string"
+        /// <code>{
+        ///   kind: &quot;Kind1&quot;,
+        ///   propB1: string,
+        ///   propBH1: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>
@@ -101,13 +100,12 @@ namespace body_complex_LowLevel
 
         /// <remarks>
         /// Schema for <c>Response Body</c>:
-        /// <pre><c>
-        /// {
-        ///   "kind": "Kind1",
-        ///   "propB1": "string",
-        ///   "propBH1": "string"
+        /// <code>{
+        ///   kind: &quot;Kind1&quot;,
+        ///   propB1: string,
+        ///   propBH1: string
         /// }
-        /// </c></pre>
+        /// </code>
         /// 
         /// </remarks>
         /// <param name="options"> The request options. </param>

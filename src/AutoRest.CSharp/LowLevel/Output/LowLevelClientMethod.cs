@@ -30,7 +30,9 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public LowLevelClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, IReadOnlyDictionary<string, SchemaDocumentation[]> schemaDocumentations, Diagnostic diagnostics) :
+        internal record SchemaDocs(SchemaDocumentation[]? RequestBody, SchemaDocumentation[]? ResponseBody, SchemaDocumentation[]? ResponseError);
+
+        public LowLevelClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, Operation operation, SchemaDocs schemaDocumentations, Diagnostic diagnostics) :
             base (name, description, returnType, request, parameters, responses, headerModel, bufferResponse, accessibility, operation)
         {
             Diagnostics = diagnostics;
@@ -38,6 +40,6 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public Diagnostic Diagnostics { get; }
-        public IReadOnlyDictionary<string, SchemaDocumentation[]> SchemaDocumentations { get; }
+        public SchemaDocs SchemaDocumentations { get; }
     }
 }
