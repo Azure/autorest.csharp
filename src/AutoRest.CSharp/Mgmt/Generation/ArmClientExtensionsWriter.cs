@@ -1,0 +1,74 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
+
+namespace AutoRest.CSharp.Mgmt.Generation
+{
+    internal class ArmClientExtensionsWriter : MgmtExtensionWriter
+    {
+        private CodeWriter _writer;
+        public ArmClientExtensionsWriter(CodeWriter writer, BuildContext<MgmtOutputLibrary> context) : base(context)
+        {
+            _writer = writer;
+        }
+
+        protected override string Description => "A class to add extension methods to ArmClient.";
+        protected override string TypeNameOfThis => "ArmClientExtensions";
+        protected override string ExtensionOperationVariableName => "armClient";
+
+        protected override Type ExtensionOperationVariableType => typeof(ArmClient);
+
+        public override void WriteExtension()
+        {
+            using (_writer.Namespace(Context.DefaultNamespace))
+            {
+                _writer.WriteXmlDocumentationSummary($"{Description}");
+                using (_writer.Scope($"{Accessibility} static partial class {TypeNameOfThis}"))
+                {
+                    foreach (var resource in Context.Library.ArmResources)
+                    {
+                        _writer.Line($"#region {resource.Type.Name}");
+                        WriteExtensionGetResourceFromIdMethod(_writer, resource);
+                        _writer.LineRaw("#endregion");
+                        _writer.Line();
+                    }
+
+                }
+            }
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            return true;
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+        }
+
+        protected override void WriteExtensionGetResourceFromIdMethod(CodeWriter writer, Resource resource)
+        {
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it but with no data.");
+            writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(ResourceIdentifier)} id)"))
+            {
+                writer.Line($"return {ExtensionOperationVariableName}.GetResourceWithTenant(tenant => tenant.Get{resource.Type.Name}(id));");
+            }
+        }
+    }
+}
