@@ -502,8 +502,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         if (!_rawRequestPathToResourceData.ContainsKey(requestPath))
                         {
-                            var operationGroup = _rawRequestPathToOperations[requestPath].First().Item2;
-                            var resourceData = new ResourceData((ObjectSchema)schema, operationGroup, _context);
+                            var resourceData = new ResourceData((ObjectSchema)schema, _context);
                             _rawRequestPathToResourceData.Add(requestPath, resourceData);
                         }
                     }
@@ -697,7 +696,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            ObjectSchema objectSchema => new ResourceData(objectSchema, GetOperationGroupBySchema(objectSchema)!, _context),
+            ObjectSchema objectSchema => new ResourceData(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
 
