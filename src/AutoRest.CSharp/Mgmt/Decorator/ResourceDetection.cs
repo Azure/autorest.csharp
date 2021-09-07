@@ -58,7 +58,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (putOperation != null)
             {
                 // we get the response schema name as the resource name
-                var response = putOperation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(Input.StatusCodes._200));
+                var response = putOperation.Responses.FirstOrDefault(r =>
+                {
+                    var statusCodes = r.HttpResponse.StatusCodes;
+                    return statusCodes.Contains(Input.StatusCodes._200)
+                        || statusCodes.Contains(Input.StatusCodes._201)
+                        || statusCodes.Contains(Input.StatusCodes._202);
+                });
                 resourceName = response?.ResponseSchema?.Name;
             }
 
