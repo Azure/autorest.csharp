@@ -193,10 +193,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return method.RestClientMethod.Operation.IsGetResourceOperation(method.RestClientMethod.Responses[0].ResponseBody?.Type.Name, resourceData);
         }
-
-        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
-        {
-            return operation.Language.Default.Name.StartsWith("Get") && responseBodyType == resourceData.Type.Name;
-        }
     }
 }
