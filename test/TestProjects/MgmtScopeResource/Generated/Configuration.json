@@ -32,5 +32,8 @@
       "Deployments_WhatIfAtManagementGroupScope_POST",
       "Deployments_WhatIfAtSubscriptionScope_POST"
     ]
+  },
+  "RequestPathToResource": {
+    "/{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": "DeploymentOperation"
   }
 }
