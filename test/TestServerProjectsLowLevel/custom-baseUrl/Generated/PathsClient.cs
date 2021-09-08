@@ -55,6 +55,15 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -92,6 +101,15 @@ namespace custom_baseUrl_LowLevel
         }
 
         /// <summary> Get a 200 to test a valid base uri. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
