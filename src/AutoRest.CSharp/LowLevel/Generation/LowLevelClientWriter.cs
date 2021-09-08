@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
             // Remove the last "," by first removing ",\n", then add back "\n".
-            builder.Length -= 3;
+            builder.Length -= 1 + Environment.NewLine.Length;
             builder.AppendLine();
         }
 
