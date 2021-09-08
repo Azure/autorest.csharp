@@ -58,11 +58,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBooleanTrueRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
@@ -97,11 +94,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBooleanTrueRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
             scope.Start();
             try
@@ -152,11 +146,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBooleanFalseRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
@@ -191,11 +182,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetBooleanFalseRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
             scope.Start();
             try
@@ -246,11 +234,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetIntOneMillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
@@ -285,11 +270,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetIntOneMillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
             scope.Start();
             try
@@ -340,11 +322,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -379,11 +358,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
             scope.Start();
             try
@@ -434,11 +410,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTenBillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetTenBillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
@@ -473,11 +446,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetTenBillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetTenBillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
             scope.Start();
             try
@@ -528,11 +498,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -567,11 +534,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetNegativeTenBillionRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
             scope.Start();
             try
@@ -622,11 +586,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateFloatScientificPositiveRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
@@ -661,11 +622,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateFloatScientificPositiveRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
             scope.Start();
             try
@@ -716,11 +674,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateFloatScientificNegativeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
@@ -755,11 +710,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateFloatScientificNegativeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
             scope.Start();
             try
@@ -810,11 +762,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -849,11 +798,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
             scope.Start();
             try
@@ -904,11 +850,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -943,11 +886,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
             scope.Start();
             try
@@ -998,11 +938,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUnicodeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUnicodeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
@@ -1037,11 +974,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUnicodeRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUnicodeRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
             scope.Start();
             try
@@ -1092,11 +1026,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUrlEncodedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1131,11 +1062,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUrlEncodedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
             scope.Start();
             try
@@ -1186,11 +1114,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUrlNonEncodedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
@@ -1225,11 +1150,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringUrlNonEncodedRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringUrlNonEncodedRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
             scope.Start();
             try
@@ -1280,11 +1202,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringEmptyRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
@@ -1319,11 +1238,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringEmptyRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
             scope.Start();
             try
@@ -1375,11 +1291,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringNullRequest(stringPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringNullRequest(stringPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
@@ -1415,11 +1328,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateStringNullRequest(stringPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateStringNullRequest(stringPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
             scope.Start();
             try
@@ -1472,11 +1382,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateEnumValidRequest(enumPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateEnumValidRequest(enumPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1512,11 +1419,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateEnumValidRequest(enumPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateEnumValidRequest(enumPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
             scope.Start();
             try
@@ -1569,11 +1473,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateEnumNullRequest(enumPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateEnumNullRequest(enumPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1609,11 +1510,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateEnumNullRequest(enumPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateEnumNullRequest(enumPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
             scope.Start();
             try
@@ -1666,11 +1564,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
@@ -1706,11 +1601,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteMultiByteRequest(bytePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
             scope.Start();
             try
@@ -1762,11 +1654,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteEmptyRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
@@ -1801,11 +1690,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteEmptyRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteEmptyRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
             scope.Start();
             try
@@ -1857,11 +1743,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteNullRequest(bytePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteNullRequest(bytePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
@@ -1897,11 +1780,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateByteNullRequest(bytePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateByteNullRequest(bytePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
             scope.Start();
             try
@@ -1953,11 +1833,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
@@ -1992,11 +1869,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
             scope.Start();
             try
@@ -2048,11 +1922,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateNullRequest(datePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateNullRequest(datePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -2088,11 +1959,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateNullRequest(datePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateNullRequest(datePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
             scope.Start();
             try
@@ -2144,11 +2012,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateTimeValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateTimeValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
@@ -2183,11 +2048,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateTimeValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateTimeValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
             scope.Start();
             try
@@ -2239,11 +2101,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -2279,11 +2138,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimePath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
             scope.Start();
             try
@@ -2336,11 +2192,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
@@ -2376,11 +2229,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateBase64UrlRequest(base64UrlPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
             scope.Start();
             try
@@ -2433,11 +2283,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
@@ -2473,11 +2320,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
             scope.Start();
             try
@@ -2530,11 +2374,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try
@@ -2570,11 +2411,8 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
             scope.Start();
             try

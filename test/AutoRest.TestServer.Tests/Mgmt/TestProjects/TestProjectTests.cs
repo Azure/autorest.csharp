@@ -11,6 +11,7 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
 using NUnit.Framework;
@@ -204,9 +205,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
+            HashSet<string> resourceNames = new HashSet<string>(FindAllResourceNames());
+
             foreach (Type t in allTypes)
             {
-                var resourceNames = FindAllResourceNames();
                 if (resourceNames.Contains(t.Name) && t.Namespace == _projectName)
                 {
                     // Only [Resource] types for the specified test project are going to be tested.
@@ -446,7 +448,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var library = output.Context.Library;
             foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
             {
-                ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
+                if (!SchemaMatchTracker.TryGetExactMatch(mgmtObject.ObjectSchema, out var result) || result == null)
+                {
+                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
+                }
             }
             foreach (var resourceData in library.ResourceData)
             {
@@ -459,6 +464,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var requiredParams = objectSchema.Properties.Where(p => p.Schema is not ConstantSchema && p.Required.HasValue && p.Required.Value);
 
             Type generatedModel = GetType(objectSchema.Name + "Data") ?? GetType(objectSchema.Name);
+            if (generatedModel == null)
+                return; //for some reason we are losing the cache during generation to know which models were removed
             Assert.NotNull(generatedModel, $"Generated type not found for {objectSchema.Name}");
             ConstructorInfo leastParamCtor = GetLeastParamCtor(generatedModel);
             ConstructorInfo baseLeastParamCtor = GetLeastParamCtor(generatedModel.BaseType);

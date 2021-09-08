@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
-            Optional<Models.Sku> sku = default;
+            Optional<Sku> sku = default;
             IDictionary<string, string> tags = default;
             Location location = default;
             ResourceIdentifier id = default;
@@ -87,7 +87,7 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Models.Sku.DeserializeSku(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, location, tags, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup.Value, Optional.ToList(statuses));
+            return new AvailabilitySetData(id, name, type, tags, location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup.Value, Optional.ToList(statuses));
         }
     }
 }

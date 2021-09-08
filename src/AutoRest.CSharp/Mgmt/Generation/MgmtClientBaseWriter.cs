@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded}, {BaseUriField});");
+                writer.Line($"{RestClientField} = new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {ClientOptionsProperty}{subIdIfNeeded}, {BaseUriField});");
             }
         }
 
@@ -727,10 +727,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             Debug.Assert(method.Operation != null);
 
-            bool isLRO = isLongRunningReallyLong == false;
+            bool isSLRO = isLongRunningReallyLong == false;
 
             methodName = methodName ?? method.Name;
-            methodName = isLRO ? methodName : $"Start{methodName}";
+            methodName = isSLRO ? methodName : $"Start{methodName}";
 
             writer.Line();
             writer.WriteXmlDocumentationSummary($"{method.Description}");
@@ -758,7 +758,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteParameter(parameter);
             }
 
-            var defaultWaitForCompletion = isLRO == true ? "true" : "false";
+            var defaultWaitForCompletion = isSLRO == true ? "true" : "false";
             writer.Line($"bool waitForCompletion = {defaultWaitForCompletion}, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {

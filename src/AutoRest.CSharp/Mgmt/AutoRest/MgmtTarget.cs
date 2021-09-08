@@ -8,6 +8,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -17,20 +18,51 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
-            var restClientWriter = new RestClientWriter();
+            var restClientWriter = new MgmtRestClientWriter();
             var serializeWriter = new SerializationWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
+                // TODO: A temporay fix for orphaned models in Resources SDK. These models are usually not directly used by ResourceData, but a descendant property of a PropertyReferenceType.
+                // Can go way after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                // The includeArmCore parameter should also be removed in FindForType() then.
+                if (!context.Configuration.MgmtConfiguration.IsArmCore && context.SourceInputModel?.FindForType(model.Declaration.Namespace, model.Declaration.Name, includeArmCore: true) != null)
+                {
+                    continue;
+                }
+                if (model is SchemaObjectType objSchema)
+                {
+                    //skip things that had exact match replacements
+                    //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                    if (SchemaMatchTracker.TryGetExactMatch(objSchema.ObjectSchema, out var result))
+                    {
+                        if (result != null)
+                            continue;
+                    }
+                    else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
+                    {
+                        //There could be orphaned models that are not a direct property of another model and SchemaMatchTracker haven't tracked them.
+                        //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
+                        if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType, context) != null)
+                            continue;
+                    }
+                }
+
                 var codeWriter = new CodeWriter();
                 ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+                var name = model.Type.Name;
+                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+
+                if (model is MgmtReferenceType mgmtReferenceType)
+                {
+                    var extensions = mgmtReferenceType.ObjectSchema.Extensions;
+                    if (extensions != null && extensions.MgmtReferenceType)
+                        continue;
+                }
 
                 var serializerCodeWriter = new CodeWriter();
                 serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 

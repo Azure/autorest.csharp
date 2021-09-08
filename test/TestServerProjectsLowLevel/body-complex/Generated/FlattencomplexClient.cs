@@ -56,11 +56,8 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();
             try
@@ -94,11 +91,8 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(options);
-            if (options.PerCallPolicy != null)
-            {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
-            }
+            using HttpMessage message = CreateGetValidRequest(options);
+            RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
             scope.Start();
             try

@@ -82,7 +82,7 @@ namespace SubscriptionExtensions
                     continue;
                 }
             }
-            return new OvenData(id, name, type, location, tags, bar.Value);
+            return new OvenData(id, name, type, tags, location, bar.Value);
         }
     }
 }

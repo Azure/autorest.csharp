@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private", false);
         }
 
         private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
@@ -72,20 +72,17 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
 
-                writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+                var messageVariable = new CodeWriterDeclaration("message");
+                writer.Append($"using {typeof(Azure.Core.HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
 
                 foreach (var parameter in clientMethod.Parameters)
                 {
                     writer.Append($"{parameter.Name:I}, ");
                 }
                 writer.RemoveTrailingComma();
-                writer.Append($");");
-                writer.Line();
+                writer.Line($");");
 
-                using (writer.Scope($"if (options.PerCallPolicy != null)"))
-                {
-                    writer.Line($"message.SetProperty(\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
-                }
+                writer.Line($"{typeof(RequestOptions)}.{nameof(RequestOptions.Apply)}(options, {messageVariable});");
 
                 var scopeVariable = new CodeWriterDeclaration("scope");
                 writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
@@ -96,16 +93,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await {PipelineField:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
+                        writer.Line($"{PipelineField:I}.Send({messageVariable}, options.CancellationToken);");
                     }
 
                     using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
                     {
-                        WriteStatusCodeSwitch(writer, clientMethod, async, returnExpression);
+                        WriteStatusCodeSwitch(writer, clientMethod, async, returnExpression, messageVariable);
                     }
                     using (writer.Scope($"else"))
                     {
@@ -178,9 +175,9 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
             writer.Line($"#pragma warning restore AZC0002");
         }
 
-        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, FormattableString returnExpression)
+        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async, FormattableString returnExpression, CodeWriterDeclaration messageVariable)
         {
-            using (writer.Scope($"switch (message.Response.Status)"))
+            using (writer.Scope($"switch ({messageVariable}.Response.Status)"))
             {
                 foreach (var response in clientMethod.Responses)
                 {
@@ -204,11 +201,11 @@ Schema for <c>{schemaDoc.SchemaName}</c>:
                 writer.Line($"default:");
                 if (async)
                 {
-                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
+                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync({messageVariable}.Response).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException(message.Response);");
+                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException({messageVariable}.Response);");
                 }
             }
         }

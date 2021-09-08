@@ -34,7 +34,7 @@ namespace SubscriptionExtensions
         #region Oven
         private static OvensRestOperations GetOvensRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new OvensRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new OvensRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Ovens for this <see cref="Subscription" />. </summary>

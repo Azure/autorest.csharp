@@ -7,12 +7,12 @@
 
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the PrivateEndpointConnection data model. </summary>
-    public partial class PrivateEndpointConnectionData : ResourceManager.Resources.Models.Resource
+    public partial class PrivateEndpointConnectionData : Resource
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
         public PrivateEndpointConnectionData()

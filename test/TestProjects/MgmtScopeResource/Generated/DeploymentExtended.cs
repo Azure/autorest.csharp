@@ -39,7 +39,7 @@ namespace MgmtScopeResource
             HasData = true;
             _data = resource;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtended"/> class. </summary>
@@ -48,7 +48,7 @@ namespace MgmtScopeResource
         internal DeploymentExtended(ArmResource options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, BaseUri);
+            _restClient = new DeploymentsRestOperations(_clientDiagnostics, Pipeline, ClientOptions, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -76,7 +76,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<DeploymentExtended>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {
@@ -96,7 +96,7 @@ namespace MgmtScopeResource
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DeploymentExtended> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.GetAtScope");
+            using var scope = _clientDiagnostics.CreateScope("DeploymentExtended.Get");
             scope.Start();
             try
             {

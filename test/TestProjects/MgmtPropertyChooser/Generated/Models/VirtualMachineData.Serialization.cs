@@ -24,10 +24,10 @@ namespace MgmtPropertyChooser
                 writer.WritePropertyName("plan");
                 writer.WriteObjectValue(Plan);
             }
-            if (Optional.IsDefined(ResourceIdentity))
+            if (Optional.IsDefined(Identity))
             {
                 writer.WritePropertyName("identity");
-                JsonSerializer.Serialize(writer, ResourceIdentity);
+                JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsDefined(IdentityWithRenamedProperty))
             {
@@ -87,7 +87,7 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
-            Optional<Models.Plan> plan = default;
+            Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ResourceIdentity> identity = default;
             Optional<IdentityWithRenamedProperty> identityWithRenamedProperty = default;
@@ -113,7 +113,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    plan = Models.Plan.DeserializePlan(property.Value);
+                    plan = Plan.DeserializePlan(property.Value);
                     continue;
                 }
                 if (property.NameEquals("resources"))
@@ -259,7 +259,7 @@ namespace MgmtPropertyChooser
                     continue;
                 }
             }
-            return new VirtualMachineData(id, name, type, location, tags, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+            return new VirtualMachineData(id, name, type, tags, location, plan.Value, Optional.ToList(resources), identity, identityWithRenamedProperty.Value, identityWithDifferentPropertyType.Value, identityWithNoUserIdentity.Value, identityWithNoSystemIdentity.Value, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
     }
 }

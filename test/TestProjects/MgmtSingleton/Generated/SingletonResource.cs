@@ -39,7 +39,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SingletonResource"/> class. </summary>
@@ -49,7 +49,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SingletonResourcesRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -80,7 +80,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SingletonResource>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonResource.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {
@@ -100,7 +100,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SingletonResource> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SingletonResource.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SingletonResource.Get");
             scope.Start();
             try
             {

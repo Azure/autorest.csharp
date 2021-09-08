@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static string GetPipeline (bool lowLevel) => lowLevel ? "Pipeline" : "_pipeline";
 
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel, string methodAccessibility)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel, string methodAccessibility, bool writeUserAgentOverride)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
@@ -197,6 +197,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     default:
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
+
+                if (writeUserAgentOverride)
+                    writer.Line($"message.SetProperty(\"UserAgentOverride\", _userAgent);");
 
                 writer.Line($"return {message};");
             }

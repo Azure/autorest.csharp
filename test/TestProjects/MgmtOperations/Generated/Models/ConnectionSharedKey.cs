@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtOperations.Models
@@ -33,10 +34,10 @@ namespace MgmtOperations.Models
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
-        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, Location location, IDictionary<string, string> tags, string value) : base(id, name, type, location, tags)
+        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, Location location, string value) : base(id, name, type, tags, location)
         {
             Value = value;
         }

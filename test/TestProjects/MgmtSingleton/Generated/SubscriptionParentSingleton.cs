@@ -39,7 +39,7 @@ namespace MgmtSingleton
             _data = resource;
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionParentSingleton"/> class. </summary>
@@ -49,7 +49,7 @@ namespace MgmtSingleton
         {
             Parent = options;
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new SubscriptionParentSingletonRestOperations(_clientDiagnostics, Pipeline, ClientOptions, Id.SubscriptionId, BaseUri);
         }
 
         /// <summary> Gets the resource type for the operations. </summary>
@@ -79,7 +79,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async virtual Task<Response<SubscriptionParentSingleton>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Get");
             scope.Start();
             try
             {
@@ -98,7 +98,7 @@ namespace MgmtSingleton
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<SubscriptionParentSingleton> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.GetDefault");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionParentSingleton.Get");
             scope.Start();
             try
             {

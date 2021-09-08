@@ -6,12 +6,12 @@
 #nullable disable
 
 using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
+using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods.Models
 {
     /// <summary> The descendant. </summary>
-    public partial class DescendantInfo : Azure.ResourceManager.Resources.Models.Resource
+    public partial class DescendantInfo : Resource
     {
         /// <summary> Initializes a new instance of DescendantInfo. </summary>
         internal DescendantInfo()

@@ -123,7 +123,7 @@ namespace SupersetFlattenInheritance
         #region NonResourceModel1
         private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, clientOptions, subscriptionId, endpoint);
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroup" /> instance the method will execute against. </param>
