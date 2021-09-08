@@ -51,6 +51,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetFileAsync(RequestOptions options = null)
@@ -87,6 +96,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetFile(RequestOptions options = null)
@@ -138,6 +156,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetFileLargeAsync(RequestOptions options = null)
@@ -174,6 +201,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get a large file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetFileLarge(RequestOptions options = null)
@@ -225,6 +261,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyFileAsync(RequestOptions options = null)
@@ -261,6 +306,15 @@ namespace body_file_LowLevel
         }
 
         /// <summary> Get empty file. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetEmptyFile(RequestOptions options = null)

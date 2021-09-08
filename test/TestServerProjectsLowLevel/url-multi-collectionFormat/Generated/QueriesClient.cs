@@ -52,6 +52,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -89,6 +98,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get a null array of string using the multi-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -146,6 +164,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -183,6 +210,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -240,6 +276,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
@@ -277,6 +322,15 @@ namespace url_multi_collectionFormat_LowLevel
         }
 
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002

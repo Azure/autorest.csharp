@@ -51,6 +51,24 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions options = null)
@@ -87,6 +105,24 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions options = null)
@@ -140,38 +176,21 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -212,38 +231,21 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -300,6 +302,22 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fish.type: string,
+        ///   species: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions options = null)
@@ -336,6 +354,22 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fish.type: string,
+        ///   species: string
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetDotSyntax(RequestOptions options = null)
@@ -387,6 +421,32 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   sampleSalmon: {
+        ///     fish.type: string,
+        ///     species: string,
+        ///     location: string,
+        ///     iswild: boolean
+        ///   },
+        ///   salmons: [DotSalmon],
+        ///   sampleFish: {
+        ///     fish.type: string,
+        ///     species: string
+        ///   },
+        ///   fishes: [DotFish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions options = null)
@@ -423,6 +483,32 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   sampleSalmon: {
+        ///     fish.type: string,
+        ///     species: string,
+        ///     location: string,
+        ///     iswild: boolean
+        ///   },
+        ///   salmons: [DotSalmon],
+        ///   sampleFish: {
+        ///     fish.type: string,
+        ///     species: string
+        ///   },
+        ///   fishes: [DotFish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetComposedWithDiscriminator(RequestOptions options = null)
@@ -474,6 +560,32 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   sampleSalmon: {
+        ///     fish.type: string,
+        ///     species: string,
+        ///     location: string,
+        ///     iswild: boolean
+        ///   },
+        ///   salmons: [DotSalmon],
+        ///   sampleFish: {
+        ///     fish.type: string,
+        ///     species: string
+        ///   },
+        ///   fishes: [DotFish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions options = null)
@@ -510,6 +622,32 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   sampleSalmon: {
+        ///     fish.type: string,
+        ///     species: string,
+        ///     location: string,
+        ///     iswild: boolean
+        ///   },
+        ///   salmons: [DotSalmon],
+        ///   sampleFish: {
+        ///     fish.type: string,
+        ///     species: string
+        ///   },
+        ///   fishes: [DotFish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetComposedWithoutDiscriminator(RequestOptions options = null)
@@ -561,6 +699,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string,
+        ///       species: string,
+        ///       length: number,
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual async Task<Response> GetComplicatedAsync(RequestOptions options = null)
@@ -597,6 +762,33 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string,
+        ///       species: string,
+        ///       length: number,
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
+        /// </remarks>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
         public virtual Response GetComplicated(RequestOptions options = null)
@@ -650,83 +842,30 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>location</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>iswild</term>
-        ///     <term>boolean</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Fish</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string (required),
+        ///       species: string,
+        ///       length: number (required),
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -767,83 +906,30 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>location</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>iswild</term>
-        ///     <term>boolean</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Fish</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string (required),
+        ///       species: string,
+        ///       length: number (required),
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -902,83 +988,48 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>location</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>iswild</term>
-        ///     <term>boolean</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Fish</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string (required),
+        ///       species: string,
+        ///       length: number (required),
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string,
+        ///       species: string,
+        ///       length: number,
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -1019,83 +1070,48 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>location</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>iswild</term>
-        ///     <term>boolean</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
-        /// Schema for <c>Fish</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string (required),
+        ///       species: string,
+        ///       length: number (required),
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Body</c>:
+        /// <code>{
+        ///   fishtype: string,
+        ///   species: string,
+        ///   length: number,
+        ///   siblings: [
+        ///     {
+        ///       fishtype: string,
+        ///       species: string,
+        ///       length: number,
+        ///       siblings: [Fish]
+        ///     }
+        ///   ],
+        ///   location: string,
+        ///   iswild: boolean
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -1154,38 +1170,21 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
@@ -1226,38 +1225,21 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <remarks>
         /// Schema for <c>Request Body</c>:
-        /// <list type="table">
-        ///   <listheader>
-        ///     <term>Name</term>
-        ///     <term>Type</term>
-        ///     <term>Required</term>
-        ///     <term>Description</term>
-        ///   </listheader>
-        ///   <item>
-        ///     <term>fishtype</term>
-        ///     <term>string</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>species</term>
-        ///     <term>string</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>length</term>
-        ///     <term>number</term>
-        ///     <term>Yes</term>
-        ///     <term></term>
-        ///   </item>
-        ///   <item>
-        ///     <term>siblings</term>
-        ///     <term>Fish[]</term>
-        ///     <term></term>
-        ///     <term></term>
-        ///   </item>
-        /// </list>
+        /// <code>{
+        ///   fishtype: string (required),
+        ///   species: string,
+        ///   length: number (required),
+        ///   siblings: [Fish]
+        /// }
+        /// </code>
+        /// 
+        /// Schema for <c>Response Error</c>:
+        /// <code>{
+        ///   status: number,
+        ///   message: string
+        /// }
+        /// </code>
+        /// 
         /// </remarks>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
