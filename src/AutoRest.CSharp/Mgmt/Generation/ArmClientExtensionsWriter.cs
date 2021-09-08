@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
             using (writer.Scope($"public static {resource.Type} Get{resource.Type.Name}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, {typeof(ResourceIdentifier)} id)"))
             {
-                writer.Line($"return {ExtensionOperationVariableName}.GetResourceWithTenant(tenant => tenant.Get{resource.Type.Name}(id));");
+                writer.Line($"return {ExtensionOperationVariableName}.UseClientContext((uri, credential, clientOptions, pipeline) => new {resource.Type.Name}(clientOptions, credential, uri, pipeline, id));");
             }
         }
     }
