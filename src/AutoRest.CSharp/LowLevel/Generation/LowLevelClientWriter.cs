@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.Parameters.Concat(new Parameter[] { RequestOptionsParameter });
+            var parameters = clientMethod.Parameters.Append(RequestOptionsParameter);
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
             {
