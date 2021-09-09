@@ -448,7 +448,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var library = output.Context.Library;
             foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
             {
-                if (!SchemaMatchTracker.TryGetExactMatch(mgmtObject.ObjectSchema, out var result) || result == null)
+                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, output.Context) == null)
                 {
                     ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
                 }

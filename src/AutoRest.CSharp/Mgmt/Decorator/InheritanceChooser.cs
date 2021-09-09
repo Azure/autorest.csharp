@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
 
-        public static CSharpType? TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
         {
             return _valueCache.TryGetValue(schema, out result);
         }

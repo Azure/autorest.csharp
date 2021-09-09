@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return FindSimpleReplacements(originalType, frameworkType, context);
         }
 
-        public static CSharpType? TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        public static bool TryGetCachedExactMatch(Schema schema, out CSharpType? result)
         {
             return _valueCache.TryGetValue(schema, out result);
         }
