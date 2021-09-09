@@ -36,7 +36,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client, context);
                     WriteClientCtors(writer, client, context);
 
-                    foreach (var clientMethod in client.Methods)
+                    // TODO(ellismg): The `OfType` here is unfortunate, but `Methods` contains a mix of `LowLevelClientMethods` and `RestClientMethods`
+                    // the later is for the next page operations that we synthesize for some pageables.  This should be cleaned up as part of pagable
+                    // support in azure/autorest.csharp#1329
+                    foreach (var clientMethod in client.Methods.OfType<LowLevelClientMethod>())
                     {
                         WriteClientMethod(writer, clientMethod, true);
                         WriteClientMethod(writer, clientMethod, false);
@@ -48,12 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
-            foreach (Parameter parameter in clientMethod.Parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
-            }
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private", false);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, "private", false);
         }
 
         private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
@@ -98,11 +96,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"await {PipelineField:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await {PipelineProperty:I}.SendAsync({messageVariable}, options.CancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"{PipelineField:I}.Send({messageVariable}, options.CancellationToken);");
+                        writer.Line($"{PipelineProperty:I}.Send({messageVariable}, options.CancellationToken);");
                     }
 
                     using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
@@ -177,9 +175,12 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine();
         }
 
+        private static readonly CSharpType RequestOptionsParameterType = new CSharpType(typeof(RequestOptions), true);
+        private static readonly Parameter RequestOptionsParameter = new Parameter("options", "The request options", RequestOptionsParameterType, Constant.Default(RequestOptionsParameterType), false);
+
         private void WriteClientMethodDecleration(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.Parameters;
+            var parameters = clientMethod.Parameters.Append(RequestOptionsParameter);
 
             var responseType = new CSharpType((async, clientMethod.Operation.IsLongRunning) switch
             {
@@ -277,7 +278,8 @@ Schema for <c>Response Error</c>:
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private const string PipelineField = "Pipeline";
+        private const string PipelineProperty = "Pipeline";
+        private const string PipelineField = "_pipeline";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
         private const string APIVersionField = "apiVersion";
@@ -291,8 +293,9 @@ Schema for <c>Response Error</c>:
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             writer.WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.");
-            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
-            writer.AppendRaw("{ get; }\n");
+            writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineProperty}");
+            writer.LineRaw("{ get => _pipeline; }");
+            writer.Line($"private {typeof(HttpPipeline)} {PipelineField};");
 
             foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {

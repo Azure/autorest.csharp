@@ -17,7 +17,8 @@ namespace custom_baseUrl_LowLevel
     public partial class PathsClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private string host;
@@ -48,7 +49,7 @@ namespace custom_baseUrl_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.host = host;
             apiVersion = options.Version;
         }
@@ -70,7 +71,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            using HttpMessage message = CreateGetEmptyRequest(accountName);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -116,7 +117,7 @@ namespace custom_baseUrl_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(accountName, options);
+            using HttpMessage message = CreateGetEmptyRequest(accountName);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
             scope.Start();
@@ -145,12 +146,9 @@ namespace custom_baseUrl_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        /// <param name="accountName"> Account Name. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyRequest(string accountName, RequestOptions options = null)
+        private HttpMessage CreateGetEmptyRequest(string accountName)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class HttpRetryClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -66,7 +67,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead408Request(options);
+            using HttpMessage message = CreateHead408Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
@@ -111,7 +112,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead408Request(options);
+            using HttpMessage message = CreateHead408Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Head408");
             scope.Start();
@@ -140,11 +141,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head408"/> and <see cref="Head408Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead408Request(RequestOptions options = null)
+        private HttpMessage CreateHead408Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -172,7 +171,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut500Request(content, options);
+            using HttpMessage message = CreatePut500Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -218,7 +217,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut500Request(content, options);
+            using HttpMessage message = CreatePut500Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
@@ -247,12 +246,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put500"/> and <see cref="Put500Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut500Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut500Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -282,7 +278,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch500Request(content, options);
+            using HttpMessage message = CreatePatch500Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -328,7 +324,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch500Request(content, options);
+            using HttpMessage message = CreatePatch500Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
@@ -357,12 +353,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch500"/> and <see cref="Patch500Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch500Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch500Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -391,7 +384,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet502Request(options);
+            using HttpMessage message = CreateGet502Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
@@ -436,7 +429,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet502Request(options);
+            using HttpMessage message = CreateGet502Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Get502");
             scope.Start();
@@ -465,11 +458,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get502"/> and <see cref="Get502Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet502Request(RequestOptions options = null)
+        private HttpMessage CreateGet502Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -496,7 +487,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions502Request(options);
+            using HttpMessage message = CreateOptions502Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
@@ -541,7 +532,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions502Request(options);
+            using HttpMessage message = CreateOptions502Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
@@ -570,11 +561,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options502"/> and <see cref="Options502Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOptions502Request(RequestOptions options = null)
+        private HttpMessage CreateOptions502Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -602,7 +591,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost503Request(content, options);
+            using HttpMessage message = CreatePost503Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -648,7 +637,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost503Request(content, options);
+            using HttpMessage message = CreatePost503Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
@@ -677,12 +666,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post503"/> and <see cref="Post503Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost503Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost503Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -712,7 +698,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete503Request(content, options);
+            using HttpMessage message = CreateDelete503Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -758,7 +744,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete503Request(content, options);
+            using HttpMessage message = CreateDelete503Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
@@ -787,12 +773,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete503"/> and <see cref="Delete503Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete503Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete503Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -822,7 +805,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut504Request(content, options);
+            using HttpMessage message = CreatePut504Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -868,7 +851,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut504Request(content, options);
+            using HttpMessage message = CreatePut504Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
@@ -897,12 +880,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put504"/> and <see cref="Put504Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut504Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut504Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -932,7 +912,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch504Request(content, options);
+            using HttpMessage message = CreatePatch504Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
@@ -978,7 +958,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch504Request(content, options);
+            using HttpMessage message = CreatePatch504Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
@@ -1007,12 +987,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch504"/> and <see cref="Patch504Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch504Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch504Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();

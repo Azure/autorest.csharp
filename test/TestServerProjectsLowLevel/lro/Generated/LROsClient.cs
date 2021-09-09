@@ -17,7 +17,8 @@ namespace lro_LowLevel
     public partial class LROsClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace lro_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -91,7 +92,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200SucceededRequest(content, options);
+            using HttpMessage message = CreatePut200SucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -162,7 +163,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200SucceededRequest(content, options);
+            using HttpMessage message = CreatePut200SucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Succeeded");
             scope.Start();
@@ -192,12 +193,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200Succeeded"/> and <see cref="Put200SucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200SucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200SucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -251,7 +249,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content, options);
+            using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -321,7 +319,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content, options);
+            using HttpMessage message = CreatePatch200SucceededIgnoreHeadersRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Patch200SucceededIgnoreHeaders");
             scope.Start();
@@ -350,12 +348,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch200SucceededIgnoreHeaders"/> and <see cref="Patch200SucceededIgnoreHeadersAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch200SucceededIgnoreHeadersRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch200SucceededIgnoreHeadersRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -409,7 +404,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201SucceededRequest(content, options);
+            using HttpMessage message = CreatePut201SucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -479,7 +474,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201SucceededRequest(content, options);
+            using HttpMessage message = CreatePut201SucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201Succeeded");
             scope.Start();
@@ -508,12 +503,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201Succeeded"/> and <see cref="Put201SucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut201SucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut201SucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -554,7 +546,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202ListRequest(options);
+            using HttpMessage message = CreatePost202ListRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -612,7 +604,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202ListRequest(options);
+            using HttpMessage message = CreatePost202ListRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -642,11 +634,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202List"/> and <see cref="Post202ListAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202ListRequest(RequestOptions options = null)
+        private HttpMessage CreatePost202ListRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -698,7 +688,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200SucceededNoStateRequest(content, options);
+            using HttpMessage message = CreatePut200SucceededNoStateRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -768,7 +758,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200SucceededNoStateRequest(content, options);
+            using HttpMessage message = CreatePut200SucceededNoStateRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200SucceededNoState");
             scope.Start();
@@ -797,12 +787,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200SucceededNoState"/> and <see cref="Put200SucceededNoStateAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200SucceededNoStateRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200SucceededNoStateRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -856,7 +843,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut202Retry200Request(content, options);
+            using HttpMessage message = CreatePut202Retry200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -926,7 +913,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut202Retry200Request(content, options);
+            using HttpMessage message = CreatePut202Retry200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put202Retry200");
             scope.Start();
@@ -955,12 +942,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put202Retry200"/> and <see cref="Put202Retry200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut202Retry200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut202Retry200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1014,7 +998,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, options);
+            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1085,7 +1069,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content, options);
+            using HttpMessage message = CreatePut201CreatingSucceeded200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -1115,12 +1099,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingSucceeded200"/> and <see cref="Put201CreatingSucceeded200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut201CreatingSucceeded200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1174,7 +1155,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content, options);
+            using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1244,7 +1225,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content, options);
+            using HttpMessage message = CreatePut200UpdatingSucceeded204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200UpdatingSucceeded204");
             scope.Start();
@@ -1273,12 +1254,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200UpdatingSucceeded204"/> and <see cref="Put200UpdatingSucceeded204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200UpdatingSucceeded204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200UpdatingSucceeded204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1332,7 +1310,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingFailed200Request(content, options);
+            using HttpMessage message = CreatePut201CreatingFailed200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1403,7 +1381,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201CreatingFailed200Request(content, options);
+            using HttpMessage message = CreatePut201CreatingFailed200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put201CreatingFailed200");
             scope.Start();
@@ -1433,12 +1411,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201CreatingFailed200"/> and <see cref="Put201CreatingFailed200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut201CreatingFailed200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut201CreatingFailed200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1492,7 +1467,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200Acceptedcanceled200Request(content, options);
+            using HttpMessage message = CreatePut200Acceptedcanceled200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -1562,7 +1537,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200Acceptedcanceled200Request(content, options);
+            using HttpMessage message = CreatePut200Acceptedcanceled200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Put200Acceptedcanceled200");
             scope.Start();
@@ -1591,12 +1566,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200Acceptedcanceled200"/> and <see cref="Put200Acceptedcanceled200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200Acceptedcanceled200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200Acceptedcanceled200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1650,7 +1622,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNoHeaderInRetryRequest(content, options);
+            using HttpMessage message = CreatePutNoHeaderInRetryRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -1720,7 +1692,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNoHeaderInRetryRequest(content, options);
+            using HttpMessage message = CreatePutNoHeaderInRetryRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNoHeaderInRetry");
             scope.Start();
@@ -1749,12 +1721,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNoHeaderInRetry"/> and <see cref="PutNoHeaderInRetryAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNoHeaderInRetryRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNoHeaderInRetryRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1808,7 +1777,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -1878,7 +1847,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePutAsyncRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -1907,12 +1876,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRetrySucceeded"/> and <see cref="PutAsyncRetrySucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRetrySucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1966,7 +1932,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -2036,7 +2002,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrySucceeded");
             scope.Start();
@@ -2065,12 +2031,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoRetrySucceeded"/> and <see cref="PutAsyncNoRetrySucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncNoRetrySucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncNoRetrySucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2124,7 +2087,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetryFailedRequest(content, options);
+            using HttpMessage message = CreatePutAsyncRetryFailedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -2194,7 +2157,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncRetryFailedRequest(content, options);
+            using HttpMessage message = CreatePutAsyncRetryFailedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncRetryFailed");
             scope.Start();
@@ -2223,12 +2186,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncRetryFailed"/> and <see cref="PutAsyncRetryFailedAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncRetryFailedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncRetryFailedRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2282,7 +2242,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -2352,7 +2312,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoRetrycanceledRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoRetrycanceled");
             scope.Start();
@@ -2381,12 +2341,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoRetrycanceled"/> and <see cref="PutAsyncNoRetrycanceledAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncNoRetrycanceledRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncNoRetrycanceledRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2440,7 +2397,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -2510,7 +2467,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNoHeaderInRetryRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNoHeaderInRetry");
             scope.Start();
@@ -2539,12 +2496,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNoHeaderInRetry"/> and <see cref="PutAsyncNoHeaderInRetryAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncNoHeaderInRetryRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncNoHeaderInRetryRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2588,7 +2542,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonResourceRequest(content, options);
+            using HttpMessage message = CreatePutNonResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -2648,7 +2602,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNonResourceRequest(content, options);
+            using HttpMessage message = CreatePutNonResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutNonResource");
             scope.Start();
@@ -2677,12 +2631,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNonResource"/> and <see cref="PutNonResourceAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNonResourceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNonResourceRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2726,7 +2677,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNonResourceRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNonResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -2786,7 +2737,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncNonResourceRequest(content, options);
+            using HttpMessage message = CreatePutAsyncNonResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncNonResource");
             scope.Start();
@@ -2815,12 +2766,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncNonResource"/> and <see cref="PutAsyncNonResourceAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncNonResourceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncNonResourceRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2866,7 +2814,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutSubResourceRequest(content, options);
+            using HttpMessage message = CreatePutSubResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -2928,7 +2876,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutSubResourceRequest(content, options);
+            using HttpMessage message = CreatePutSubResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutSubResource");
             scope.Start();
@@ -2957,12 +2905,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutSubResource"/> and <see cref="PutSubResourceAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutSubResourceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutSubResourceRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3008,7 +2953,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncSubResourceRequest(content, options);
+            using HttpMessage message = CreatePutAsyncSubResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -3070,7 +3015,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutAsyncSubResourceRequest(content, options);
+            using HttpMessage message = CreatePutAsyncSubResourceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PutAsyncSubResource");
             scope.Start();
@@ -3099,12 +3044,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutAsyncSubResource"/> and <see cref="PutAsyncSubResourceAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutAsyncSubResourceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutAsyncSubResourceRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -3145,7 +3087,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(options);
+            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -3203,7 +3145,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest(options);
+            using HttpMessage message = CreateDeleteProvisioning202Accepted200SucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -3233,11 +3175,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202Accepted200Succeeded"/> and <see cref="DeleteProvisioning202Accepted200SucceededAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteProvisioning202Accepted200SucceededRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3276,7 +3216,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request(options);
+            using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -3334,7 +3274,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request(options);
+            using HttpMessage message = CreateDeleteProvisioning202DeletingFailed200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -3364,11 +3304,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202DeletingFailed200"/> and <see cref="DeleteProvisioning202DeletingFailed200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteProvisioning202DeletingFailed200Request(RequestOptions options = null)
+        private HttpMessage CreateDeleteProvisioning202DeletingFailed200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3407,7 +3345,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request(options);
+            using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -3465,7 +3403,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request(options);
+            using HttpMessage message = CreateDeleteProvisioning202Deletingcanceled200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -3495,11 +3433,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteProvisioning202Deletingcanceled200"/> and <see cref="DeleteProvisioning202Deletingcanceled200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteProvisioning202Deletingcanceled200Request(RequestOptions options = null)
+        private HttpMessage CreateDeleteProvisioning202Deletingcanceled200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3526,7 +3462,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204SucceededRequest(options);
+            using HttpMessage message = CreateDelete204SucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -3571,7 +3507,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204SucceededRequest(options);
+            using HttpMessage message = CreateDelete204SucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete204Succeeded");
             scope.Start();
@@ -3600,11 +3536,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete204Succeeded"/> and <see cref="Delete204SucceededAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete204SucceededRequest(RequestOptions options = null)
+        private HttpMessage CreateDelete204SucceededRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3643,7 +3577,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202Retry200Request(options);
+            using HttpMessage message = CreateDelete202Retry200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -3701,7 +3635,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202Retry200Request(options);
+            using HttpMessage message = CreateDelete202Retry200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -3731,11 +3665,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202Retry200"/> and <see cref="Delete202Retry200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete202Retry200Request(RequestOptions options = null)
+        private HttpMessage CreateDelete202Retry200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3774,7 +3706,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202NoRetry204Request(options);
+            using HttpMessage message = CreateDelete202NoRetry204Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -3832,7 +3764,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202NoRetry204Request(options);
+            using HttpMessage message = CreateDelete202NoRetry204Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -3862,11 +3794,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202NoRetry204"/> and <see cref="Delete202NoRetry204Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete202NoRetry204Request(RequestOptions options = null)
+        private HttpMessage CreateDelete202NoRetry204Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -3893,7 +3823,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteNoHeaderInRetryRequest(options);
+            using HttpMessage message = CreateDeleteNoHeaderInRetryRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -3939,7 +3869,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteNoHeaderInRetryRequest(options);
+            using HttpMessage message = CreateDeleteNoHeaderInRetryRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteNoHeaderInRetry");
             scope.Start();
@@ -3969,11 +3899,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteNoHeaderInRetry"/> and <see cref="DeleteNoHeaderInRetryAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteNoHeaderInRetryRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteNoHeaderInRetryRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4000,7 +3928,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest(options);
+            using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -4046,7 +3974,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest(options);
+            using HttpMessage message = CreateDeleteAsyncNoHeaderInRetryRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoHeaderInRetry");
             scope.Start();
@@ -4076,11 +4004,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncNoHeaderInRetry"/> and <see cref="DeleteAsyncNoHeaderInRetryAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncNoHeaderInRetryRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncNoHeaderInRetryRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4107,7 +4033,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -4152,7 +4078,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetrySucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrySucceeded");
             scope.Start();
@@ -4181,11 +4107,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetrySucceeded"/> and <see cref="DeleteAsyncRetrySucceededAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRetrySucceededRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRetrySucceededRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4212,7 +4136,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest(options);
+            using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -4257,7 +4181,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest(options);
+            using HttpMessage message = CreateDeleteAsyncNoRetrySucceededRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncNoRetrySucceeded");
             scope.Start();
@@ -4286,11 +4210,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncNoRetrySucceeded"/> and <see cref="DeleteAsyncNoRetrySucceededAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncNoRetrySucceededRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncNoRetrySucceededRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4317,7 +4239,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetryFailedRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetryFailedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -4362,7 +4284,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetryFailedRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetryFailedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetryFailed");
             scope.Start();
@@ -4391,11 +4313,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetryFailed"/> and <see cref="DeleteAsyncRetryFailedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRetryFailedRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRetryFailedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4422,7 +4342,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -4467,7 +4387,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest(options);
+            using HttpMessage message = CreateDeleteAsyncRetrycanceledRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.DeleteAsyncRetrycanceled");
             scope.Start();
@@ -4496,11 +4416,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DeleteAsyncRetrycanceled"/> and <see cref="DeleteAsyncRetrycanceledAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDeleteAsyncRetrycanceledRequest(RequestOptions options = null)
+        private HttpMessage CreateDeleteAsyncRetrycanceledRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -4534,7 +4452,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost200WithPayloadRequest(options);
+            using HttpMessage message = CreatePost200WithPayloadRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -4587,7 +4505,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost200WithPayloadRequest(options);
+            using HttpMessage message = CreatePost200WithPayloadRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -4617,11 +4535,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post200WithPayload"/> and <see cref="Post200WithPayloadAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost200WithPayloadRequest(RequestOptions options = null)
+        private HttpMessage CreatePost200WithPayloadRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -4661,7 +4577,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Retry200Request(content, options);
+            using HttpMessage message = CreatePost202Retry200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -4719,7 +4635,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Retry200Request(content, options);
+            using HttpMessage message = CreatePost202Retry200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202Retry200");
             scope.Start();
@@ -4748,12 +4664,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202Retry200"/> and <see cref="Post202Retry200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202Retry200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202Retry200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -4807,7 +4720,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NoRetry204Request(content, options);
+            using HttpMessage message = CreatePost202NoRetry204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -4877,7 +4790,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202NoRetry204Request(content, options);
+            using HttpMessage message = CreatePost202NoRetry204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.Post202NoRetry204");
             scope.Start();
@@ -4906,12 +4819,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202NoRetry204"/> and <see cref="Post202NoRetry204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202NoRetry204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202NoRetry204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -4952,7 +4862,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -5009,7 +4919,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalLocationGetRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -5038,11 +4948,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalLocationGet"/> and <see cref="PostDoubleHeadersFinalLocationGetAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostDoubleHeadersFinalLocationGetRequest(RequestOptions options = null)
+        private HttpMessage CreatePostDoubleHeadersFinalLocationGetRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5081,7 +4989,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -5138,7 +5046,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -5167,11 +5075,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalAzureHeaderGet"/> and <see cref="PostDoubleHeadersFinalAzureHeaderGetAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetRequest(RequestOptions options = null)
+        private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5210,7 +5116,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -5267,7 +5173,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(options);
+            using HttpMessage message = CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -5296,11 +5202,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostDoubleHeadersFinalAzureHeaderGetDefault"/> and <see cref="PostDoubleHeadersFinalAzureHeaderGetDefaultAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest(RequestOptions options = null)
+        private HttpMessage CreatePostDoubleHeadersFinalAzureHeaderGetDefaultRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5352,7 +5256,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -5423,7 +5327,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -5453,12 +5357,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetrySucceeded"/> and <see cref="PostAsyncRetrySucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRetrySucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5512,7 +5413,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -5583,7 +5484,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content, options);
+            using HttpMessage message = CreatePostAsyncNoRetrySucceededRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncNoRetrySucceeded");
             scope.Start();
@@ -5613,12 +5514,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncNoRetrySucceeded"/> and <see cref="PostAsyncNoRetrySucceededAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncNoRetrySucceededRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncNoRetrySucceededRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5660,7 +5558,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetryFailedRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetryFailedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -5718,7 +5616,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetryFailedRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetryFailedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetryFailed");
             scope.Start();
@@ -5747,12 +5645,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetryFailed"/> and <see cref="PostAsyncRetryFailedAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRetryFailedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRetryFailedRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -5794,7 +5689,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();
@@ -5852,7 +5747,7 @@ namespace lro_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content, options);
+            using HttpMessage message = CreatePostAsyncRetrycanceledRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("LROsClient.PostAsyncRetrycanceled");
             scope.Start();
@@ -5881,12 +5776,9 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PostAsyncRetrycanceled"/> and <see cref="PostAsyncRetrycanceledAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePostAsyncRetrycanceledRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePostAsyncRetrycanceledRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();

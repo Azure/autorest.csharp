@@ -17,7 +17,8 @@ namespace body_string_LowLevel
     public partial class EnumClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace body_string_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -66,7 +67,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotExpandableRequest(options);
+            using HttpMessage message = CreateGetNotExpandableRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -111,7 +112,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotExpandableRequest(options);
+            using HttpMessage message = CreateGetNotExpandableRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetNotExpandable");
             scope.Start();
@@ -140,11 +141,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNotExpandable"/> and <see cref="GetNotExpandableAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNotExpandableRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNotExpandableRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -172,7 +171,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNotExpandableRequest(content, options);
+            using HttpMessage message = CreatePutNotExpandableRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -218,7 +217,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNotExpandableRequest(content, options);
+            using HttpMessage message = CreatePutNotExpandableRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutNotExpandable");
             scope.Start();
@@ -247,12 +246,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNotExpandable"/> and <see cref="PutNotExpandableAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNotExpandableRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNotExpandableRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -281,7 +277,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetReferencedRequest(options);
+            using HttpMessage message = CreateGetReferencedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -326,7 +322,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetReferencedRequest(options);
+            using HttpMessage message = CreateGetReferencedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferenced");
             scope.Start();
@@ -355,11 +351,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetReferenced"/> and <see cref="GetReferencedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetReferencedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetReferencedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -387,7 +381,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutReferencedRequest(content, options);
+            using HttpMessage message = CreatePutReferencedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -433,7 +427,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutReferencedRequest(content, options);
+            using HttpMessage message = CreatePutReferencedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferenced");
             scope.Start();
@@ -462,12 +456,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutReferenced"/> and <see cref="PutReferencedAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutReferencedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutReferencedRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -503,7 +494,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetReferencedConstantRequest(options);
+            using HttpMessage message = CreateGetReferencedConstantRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
@@ -555,7 +546,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetReferencedConstantRequest(options);
+            using HttpMessage message = CreateGetReferencedConstantRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.GetReferencedConstant");
             scope.Start();
@@ -584,11 +575,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetReferencedConstant"/> and <see cref="GetReferencedConstantAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetReferencedConstantRequest(RequestOptions options = null)
+        private HttpMessage CreateGetReferencedConstantRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -623,7 +612,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
+            using HttpMessage message = CreatePutReferencedConstantRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
@@ -676,7 +665,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutReferencedConstantRequest(content, options);
+            using HttpMessage message = CreatePutReferencedConstantRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("EnumClient.PutReferencedConstant");
             scope.Start();
@@ -705,12 +694,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutReferencedConstant"/> and <see cref="PutReferencedConstantAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutReferencedConstantRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutReferencedConstantRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();

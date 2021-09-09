@@ -17,7 +17,8 @@ namespace body_string_LowLevel
     public partial class StringClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace body_string_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -66,7 +67,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest(options);
+            using HttpMessage message = CreateGetNullRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
@@ -111,7 +112,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest(options);
+            using HttpMessage message = CreateGetNullRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
@@ -140,11 +141,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNullRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNullRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -172,7 +171,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNullRequest(content, options);
+            using HttpMessage message = CreatePutNullRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
@@ -218,7 +217,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutNullRequest(content, options);
+            using HttpMessage message = CreatePutNullRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutNull");
             scope.Start();
@@ -247,12 +246,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutNull"/> and <see cref="PutNullAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutNullRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutNullRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -281,7 +277,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(options);
+            using HttpMessage message = CreateGetEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
@@ -326,7 +322,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(options);
+            using HttpMessage message = CreateGetEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
@@ -355,11 +351,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -387,7 +381,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutEmptyRequest(content, options);
+            using HttpMessage message = CreatePutEmptyRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
@@ -433,7 +427,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutEmptyRequest(content, options);
+            using HttpMessage message = CreatePutEmptyRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutEmpty");
             scope.Start();
@@ -462,12 +456,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutEmptyRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutEmptyRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -496,7 +487,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMbcsRequest(options);
+            using HttpMessage message = CreateGetMbcsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
@@ -541,7 +532,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetMbcsRequest(options);
+            using HttpMessage message = CreateGetMbcsRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
@@ -570,11 +561,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetMbcs"/> and <see cref="GetMbcsAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetMbcsRequest(RequestOptions options = null)
+        private HttpMessage CreateGetMbcsRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -602,7 +591,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutMbcsRequest(content, options);
+            using HttpMessage message = CreatePutMbcsRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
@@ -648,7 +637,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutMbcsRequest(content, options);
+            using HttpMessage message = CreatePutMbcsRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutMbcs");
             scope.Start();
@@ -677,12 +666,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutMbcs"/> and <see cref="PutMbcsAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutMbcsRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutMbcsRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -711,7 +697,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWhitespaceRequest(options);
+            using HttpMessage message = CreateGetWhitespaceRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
@@ -756,7 +742,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetWhitespaceRequest(options);
+            using HttpMessage message = CreateGetWhitespaceRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
@@ -785,11 +771,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetWhitespace"/> and <see cref="GetWhitespaceAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetWhitespaceRequest(RequestOptions options = null)
+        private HttpMessage CreateGetWhitespaceRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -817,7 +801,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutWhitespaceRequest(content, options);
+            using HttpMessage message = CreatePutWhitespaceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
@@ -863,7 +847,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutWhitespaceRequest(content, options);
+            using HttpMessage message = CreatePutWhitespaceRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutWhitespace");
             scope.Start();
@@ -892,12 +876,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutWhitespace"/> and <see cref="PutWhitespaceAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutWhitespaceRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutWhitespaceRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -926,7 +907,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest(options);
+            using HttpMessage message = CreateGetNotProvidedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
@@ -971,7 +952,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest(options);
+            using HttpMessage message = CreateGetNotProvidedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
@@ -1000,11 +981,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNotProvidedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNotProvidedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1031,7 +1010,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64EncodedRequest(options);
+            using HttpMessage message = CreateGetBase64EncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
@@ -1076,7 +1055,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64EncodedRequest(options);
+            using HttpMessage message = CreateGetBase64EncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
@@ -1105,11 +1084,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBase64Encoded"/> and <see cref="GetBase64EncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBase64EncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBase64EncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1136,7 +1113,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64UrlEncodedRequest(options);
+            using HttpMessage message = CreateGetBase64UrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
@@ -1181,7 +1158,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBase64UrlEncodedRequest(options);
+            using HttpMessage message = CreateGetBase64UrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
@@ -1210,11 +1187,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBase64UrlEncoded"/> and <see cref="GetBase64UrlEncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBase64UrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBase64UrlEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1242,7 +1217,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, options);
+            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
@@ -1288,7 +1263,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content, options);
+            using HttpMessage message = CreatePutBase64UrlEncodedRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.PutBase64UrlEncoded");
             scope.Start();
@@ -1317,12 +1292,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutBase64UrlEncoded"/> and <see cref="PutBase64UrlEncodedAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1351,7 +1323,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(options);
+            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
@@ -1396,7 +1368,7 @@ namespace body_string_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest(options);
+            using HttpMessage message = CreateGetNullBase64UrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
@@ -1425,11 +1397,9 @@ namespace body_string_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNullBase64UrlEncoded"/> and <see cref="GetNullBase64UrlEncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNullBase64UrlEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

@@ -17,7 +17,8 @@ namespace body_complex_LowLevel
     public partial class BasicClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace body_complex_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -74,7 +75,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetValidRequest(options);
+            using HttpMessage message = CreateGetValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -127,7 +128,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetValidRequest(options);
+            using HttpMessage message = CreateGetValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetValid");
             scope.Start();
@@ -156,11 +157,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetValidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -196,7 +195,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutValidRequest(content, options);
+            using HttpMessage message = CreatePutValidRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
@@ -250,7 +249,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePutValidRequest(content, options);
+            using HttpMessage message = CreatePutValidRequest(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.PutValid");
             scope.Start();
@@ -279,12 +278,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutValidRequest(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePutValidRequest(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -322,7 +318,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetInvalidRequest(options);
+            using HttpMessage message = CreateGetInvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -375,7 +371,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetInvalidRequest(options);
+            using HttpMessage message = CreateGetInvalidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetInvalid");
             scope.Start();
@@ -404,11 +400,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetInvalid"/> and <see cref="GetInvalidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetInvalidRequest(RequestOptions options = null)
+        private HttpMessage CreateGetInvalidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -443,7 +437,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(options);
+            using HttpMessage message = CreateGetEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -496,7 +490,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetEmptyRequest(options);
+            using HttpMessage message = CreateGetEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetEmpty");
             scope.Start();
@@ -525,11 +519,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateGetEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -564,7 +556,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest(options);
+            using HttpMessage message = CreateGetNullRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -617,7 +609,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNullRequest(options);
+            using HttpMessage message = CreateGetNullRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNull");
             scope.Start();
@@ -646,11 +638,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNullRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNullRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -685,7 +675,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest(options);
+            using HttpMessage message = CreateGetNotProvidedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
@@ -738,7 +728,7 @@ namespace body_complex_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNotProvidedRequest(options);
+            using HttpMessage message = CreateGetNotProvidedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("BasicClient.GetNotProvided");
             scope.Start();
@@ -767,11 +757,9 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNotProvidedRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNotProvidedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

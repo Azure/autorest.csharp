@@ -18,7 +18,8 @@ namespace url_LowLevel
     public partial class QueriesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -46,7 +47,7 @@ namespace url_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -67,7 +68,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            using HttpMessage message = CreateGetBooleanTrueRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -112,7 +113,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanTrueRequest(options);
+            using HttpMessage message = CreateGetBooleanTrueRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
             scope.Start();
@@ -141,11 +142,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBooleanTrueRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBooleanTrueRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -173,7 +172,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            using HttpMessage message = CreateGetBooleanFalseRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -218,7 +217,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanFalseRequest(options);
+            using HttpMessage message = CreateGetBooleanFalseRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
             scope.Start();
@@ -247,11 +246,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBooleanFalseRequest(RequestOptions options = null)
+        private HttpMessage CreateGetBooleanFalseRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -280,7 +277,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery, options);
+            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -326,7 +323,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery, options);
+            using HttpMessage message = CreateGetBooleanNullRequest(boolQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
             scope.Start();
@@ -355,12 +352,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetBooleanNull"/> and <see cref="GetBooleanNullAsync"/> operations. </summary>
-        /// <param name="boolQuery"> null boolean value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetBooleanNullRequest(bool? boolQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -391,7 +385,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -436,7 +430,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
             scope.Start();
@@ -465,11 +459,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetIntOneMillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetIntOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -497,7 +489,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -542,7 +534,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNegativeOneMillionRequest(options);
+            using HttpMessage message = CreateGetIntNegativeOneMillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
             scope.Start();
@@ -571,11 +563,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetIntNegativeOneMillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetIntNegativeOneMillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -604,7 +594,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNullRequest(intQuery, options);
+            using HttpMessage message = CreateGetIntNullRequest(intQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -650,7 +640,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetIntNullRequest(intQuery, options);
+            using HttpMessage message = CreateGetIntNullRequest(intQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
             scope.Start();
@@ -679,12 +669,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetIntNull"/> and <see cref="GetIntNullAsync"/> operations. </summary>
-        /// <param name="intQuery"> null integer value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetIntNullRequest(int? intQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetIntNullRequest(int? intQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -715,7 +702,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest(options);
+            using HttpMessage message = CreateGetTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -760,7 +747,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetTenBillionRequest(options);
+            using HttpMessage message = CreateGetTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
             scope.Start();
@@ -789,11 +776,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetTenBillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -821,7 +806,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            using HttpMessage message = CreateGetNegativeTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -866,7 +851,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetNegativeTenBillionRequest(options);
+            using HttpMessage message = CreateGetNegativeTenBillionRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
             scope.Start();
@@ -895,11 +880,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetNegativeTenBillionRequest(RequestOptions options = null)
+        private HttpMessage CreateGetNegativeTenBillionRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -928,7 +911,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetLongNullRequest(longQuery, options);
+            using HttpMessage message = CreateGetLongNullRequest(longQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -974,7 +957,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGetLongNullRequest(longQuery, options);
+            using HttpMessage message = CreateGetLongNullRequest(longQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
             scope.Start();
@@ -1003,12 +986,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetLongNull"/> and <see cref="GetLongNullAsync"/> operations. </summary>
-        /// <param name="longQuery"> null 64 bit integer value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGetLongNullRequest(long? longQuery = null, RequestOptions options = null)
+        private HttpMessage CreateGetLongNullRequest(long? longQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1039,7 +1019,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            using HttpMessage message = CreateFloatScientificPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -1084,7 +1064,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificPositiveRequest(options);
+            using HttpMessage message = CreateFloatScientificPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
             scope.Start();
@@ -1113,11 +1093,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateFloatScientificPositiveRequest(RequestOptions options = null)
+        private HttpMessage CreateFloatScientificPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1145,7 +1123,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            using HttpMessage message = CreateFloatScientificNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -1190,7 +1168,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatScientificNegativeRequest(options);
+            using HttpMessage message = CreateFloatScientificNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
             scope.Start();
@@ -1219,11 +1197,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateFloatScientificNegativeRequest(RequestOptions options = null)
+        private HttpMessage CreateFloatScientificNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1252,7 +1228,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatNullRequest(floatQuery, options);
+            using HttpMessage message = CreateFloatNullRequest(floatQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -1298,7 +1274,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateFloatNullRequest(floatQuery, options);
+            using HttpMessage message = CreateFloatNullRequest(floatQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
             scope.Start();
@@ -1327,12 +1303,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="FloatNull"/> and <see cref="FloatNullAsync"/> operations. </summary>
-        /// <param name="floatQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateFloatNullRequest(float? floatQuery = null, RequestOptions options = null)
+        private HttpMessage CreateFloatNullRequest(float? floatQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1363,7 +1336,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -1408,7 +1381,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalPositiveRequest(options);
+            using HttpMessage message = CreateDoubleDecimalPositiveRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
             scope.Start();
@@ -1437,11 +1410,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDoubleDecimalPositiveRequest(RequestOptions options = null)
+        private HttpMessage CreateDoubleDecimalPositiveRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1469,7 +1440,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -1514,7 +1485,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleDecimalNegativeRequest(options);
+            using HttpMessage message = CreateDoubleDecimalNegativeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
             scope.Start();
@@ -1543,11 +1514,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDoubleDecimalNegativeRequest(RequestOptions options = null)
+        private HttpMessage CreateDoubleDecimalNegativeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1576,7 +1545,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleNullRequest(doubleQuery, options);
+            using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -1622,7 +1591,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDoubleNullRequest(doubleQuery, options);
+            using HttpMessage message = CreateDoubleNullRequest(doubleQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
             scope.Start();
@@ -1651,12 +1620,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DoubleNull"/> and <see cref="DoubleNullAsync"/> operations. </summary>
-        /// <param name="doubleQuery"> null numeric value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDoubleNullRequest(double? doubleQuery = null, RequestOptions options = null)
+        private HttpMessage CreateDoubleNullRequest(double? doubleQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1687,7 +1653,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest(options);
+            using HttpMessage message = CreateStringUnicodeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -1732,7 +1698,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUnicodeRequest(options);
+            using HttpMessage message = CreateStringUnicodeRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
             scope.Start();
@@ -1761,11 +1727,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringUnicodeRequest(RequestOptions options = null)
+        private HttpMessage CreateStringUnicodeRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1793,7 +1757,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1838,7 +1802,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringUrlEncodedRequest(options);
+            using HttpMessage message = CreateStringUrlEncodedRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
             scope.Start();
@@ -1867,11 +1831,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringUrlEncodedRequest(RequestOptions options = null)
+        private HttpMessage CreateStringUrlEncodedRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1899,7 +1861,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest(options);
+            using HttpMessage message = CreateStringEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1944,7 +1906,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringEmptyRequest(options);
+            using HttpMessage message = CreateStringEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
             scope.Start();
@@ -1973,11 +1935,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateStringEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2006,7 +1966,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringQuery, options);
+            using HttpMessage message = CreateStringNullRequest(stringQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -2052,7 +2012,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateStringNullRequest(stringQuery, options);
+            using HttpMessage message = CreateStringNullRequest(stringQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
             scope.Start();
@@ -2081,12 +2041,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
-        /// <param name="stringQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateStringNullRequest(string stringQuery = null, RequestOptions options = null)
+        private HttpMessage CreateStringNullRequest(string stringQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2118,7 +2075,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumQuery, options);
+            using HttpMessage message = CreateEnumValidRequest(enumQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -2164,7 +2121,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumValidRequest(enumQuery, options);
+            using HttpMessage message = CreateEnumValidRequest(enumQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
             scope.Start();
@@ -2193,12 +2150,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
-        /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateEnumValidRequest(string enumQuery = null, RequestOptions options = null)
+        private HttpMessage CreateEnumValidRequest(string enumQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2230,7 +2184,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumQuery, options);
+            using HttpMessage message = CreateEnumNullRequest(enumQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -2276,7 +2230,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateEnumNullRequest(enumQuery, options);
+            using HttpMessage message = CreateEnumNullRequest(enumQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
             scope.Start();
@@ -2305,12 +2259,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
-        /// <param name="enumQuery"> null string value. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateEnumNullRequest(string enumQuery = null, RequestOptions options = null)
+        private HttpMessage CreateEnumNullRequest(string enumQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2342,7 +2293,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(byteQuery, options);
+            using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -2388,7 +2339,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteMultiByteRequest(byteQuery, options);
+            using HttpMessage message = CreateByteMultiByteRequest(byteQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
             scope.Start();
@@ -2417,12 +2368,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
-        /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery = null, RequestOptions options = null)
+        private HttpMessage CreateByteMultiByteRequest(byte[] byteQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2453,7 +2401,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest(options);
+            using HttpMessage message = CreateByteEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -2498,7 +2446,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteEmptyRequest(options);
+            using HttpMessage message = CreateByteEmptyRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
             scope.Start();
@@ -2527,11 +2475,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteEmptyRequest(RequestOptions options = null)
+        private HttpMessage CreateByteEmptyRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2560,7 +2506,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(byteQuery, options);
+            using HttpMessage message = CreateByteNullRequest(byteQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -2606,7 +2552,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateByteNullRequest(byteQuery, options);
+            using HttpMessage message = CreateByteNullRequest(byteQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
             scope.Start();
@@ -2635,12 +2581,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
-        /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateByteNullRequest(byte[] byteQuery = null, RequestOptions options = null)
+        private HttpMessage CreateByteNullRequest(byte[] byteQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2671,7 +2614,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest(options);
+            using HttpMessage message = CreateDateValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -2716,7 +2659,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateValidRequest(options);
+            using HttpMessage message = CreateDateValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
             scope.Start();
@@ -2745,11 +2688,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateValidRequest(RequestOptions options = null)
+        private HttpMessage CreateDateValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2778,7 +2719,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(dateQuery, options);
+            using HttpMessage message = CreateDateNullRequest(dateQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -2824,7 +2765,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateNullRequest(dateQuery, options);
+            using HttpMessage message = CreateDateNullRequest(dateQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
             scope.Start();
@@ -2853,12 +2794,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
-        /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery = null, RequestOptions options = null)
+        private HttpMessage CreateDateNullRequest(DateTimeOffset? dateQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2889,7 +2827,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest(options);
+            using HttpMessage message = CreateDateTimeValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -2934,7 +2872,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeValidRequest(options);
+            using HttpMessage message = CreateDateTimeValidRequest();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
             scope.Start();
@@ -2963,11 +2901,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateTimeValidRequest(RequestOptions options = null)
+        private HttpMessage CreateDateTimeValidRequest()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2996,7 +2932,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, options);
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -3042,7 +2978,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, options);
+            using HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
             scope.Start();
@@ -3071,12 +3007,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
-        /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null, RequestOptions options = null)
+        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3108,7 +3041,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -3154,7 +3087,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
             scope.Start();
@@ -3183,12 +3116,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvValid"/> and <see cref="ArrayStringCsvValidAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3220,7 +3150,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -3266,7 +3196,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
             scope.Start();
@@ -3295,12 +3225,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvNull"/> and <see cref="ArrayStringCsvNullAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3332,7 +3259,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -3378,7 +3305,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
             scope.Start();
@@ -3407,12 +3334,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringCsvEmpty"/> and <see cref="ArrayStringCsvEmptyAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3444,7 +3368,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -3490,7 +3414,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
             scope.Start();
@@ -3519,12 +3443,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringNoCollectionFormatEmpty"/> and <see cref="ArrayStringNoCollectionFormatEmptyAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3556,7 +3477,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -3602,7 +3523,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
             scope.Start();
@@ -3631,12 +3552,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringSsvValid"/> and <see cref="ArrayStringSsvValidAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3668,7 +3586,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -3714,7 +3632,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
             scope.Start();
@@ -3743,12 +3661,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringTsvValid"/> and <see cref="ArrayStringTsvValidAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -3780,7 +3695,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
@@ -3826,7 +3741,7 @@ namespace url_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, options);
+            using HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
             scope.Start();
@@ -3855,12 +3770,9 @@ namespace url_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="ArrayStringPipesValid"/> and <see cref="ArrayStringPipesValidAsync"/> operations. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null, RequestOptions options = null)
+        private HttpMessage CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();

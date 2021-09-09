@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class HttpSuccessClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -66,7 +67,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead200Request(options);
+            using HttpMessage message = CreateHead200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -111,7 +112,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead200Request(options);
+            using HttpMessage message = CreateHead200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head200");
             scope.Start();
@@ -140,11 +141,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head200"/> and <see cref="Head200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead200Request(RequestOptions options = null)
+        private HttpMessage CreateHead200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -171,7 +170,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Request(options);
+            using HttpMessage message = CreateGet200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
@@ -216,7 +215,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet200Request(options);
+            using HttpMessage message = CreateGet200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
@@ -245,11 +244,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get200"/> and <see cref="Get200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet200Request(RequestOptions options = null)
+        private HttpMessage CreateGet200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -276,7 +273,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions200Request(options);
+            using HttpMessage message = CreateOptions200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
@@ -321,7 +318,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions200Request(options);
+            using HttpMessage message = CreateOptions200Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
@@ -350,11 +347,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options200"/> and <see cref="Options200Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOptions200Request(RequestOptions options = null)
+        private HttpMessage CreateOptions200Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -382,7 +377,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200Request(content, options);
+            using HttpMessage message = CreatePut200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
@@ -428,7 +423,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut200Request(content, options);
+            using HttpMessage message = CreatePut200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
@@ -457,12 +452,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put200"/> and <see cref="Put200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -492,7 +484,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch200Request(content, options);
+            using HttpMessage message = CreatePatch200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
@@ -538,7 +530,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch200Request(content, options);
+            using HttpMessage message = CreatePatch200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
@@ -567,12 +559,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch200"/> and <see cref="Patch200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -602,7 +591,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost200Request(content, options);
+            using HttpMessage message = CreatePost200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
@@ -648,7 +637,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost200Request(content, options);
+            using HttpMessage message = CreatePost200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
@@ -677,12 +666,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post200"/> and <see cref="Post200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -712,7 +698,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete200Request(content, options);
+            using HttpMessage message = CreateDelete200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
@@ -758,7 +744,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete200Request(content, options);
+            using HttpMessage message = CreateDelete200Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
@@ -787,12 +773,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete200"/> and <see cref="Delete200Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete200Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete200Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -822,7 +805,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201Request(content, options);
+            using HttpMessage message = CreatePut201Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
@@ -868,7 +851,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut201Request(content, options);
+            using HttpMessage message = CreatePut201Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
@@ -897,12 +880,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put201"/> and <see cref="Put201Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut201Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut201Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -932,7 +912,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost201Request(content, options);
+            using HttpMessage message = CreatePost201Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
@@ -978,7 +958,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost201Request(content, options);
+            using HttpMessage message = CreatePost201Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
@@ -1007,12 +987,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post201"/> and <see cref="Post201Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost201Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost201Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1042,7 +1019,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut202Request(content, options);
+            using HttpMessage message = CreatePut202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
@@ -1088,7 +1065,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut202Request(content, options);
+            using HttpMessage message = CreatePut202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
@@ -1117,12 +1094,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put202"/> and <see cref="Put202Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut202Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut202Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1152,7 +1126,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch202Request(content, options);
+            using HttpMessage message = CreatePatch202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
@@ -1198,7 +1172,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch202Request(content, options);
+            using HttpMessage message = CreatePatch202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
@@ -1227,12 +1201,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch202"/> and <see cref="Patch202Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch202Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch202Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1262,7 +1233,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Request(content, options);
+            using HttpMessage message = CreatePost202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
@@ -1308,7 +1279,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost202Request(content, options);
+            using HttpMessage message = CreatePost202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
@@ -1337,12 +1308,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post202"/> and <see cref="Post202Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost202Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost202Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1372,7 +1340,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202Request(content, options);
+            using HttpMessage message = CreateDelete202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
@@ -1418,7 +1386,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete202Request(content, options);
+            using HttpMessage message = CreateDelete202Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
@@ -1447,12 +1415,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete202"/> and <see cref="Delete202Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete202Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete202Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1481,7 +1446,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead204Request(options);
+            using HttpMessage message = CreateHead204Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -1526,7 +1491,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead204Request(options);
+            using HttpMessage message = CreateHead204Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head204");
             scope.Start();
@@ -1555,11 +1520,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head204"/> and <see cref="Head204Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead204Request(RequestOptions options = null)
+        private HttpMessage CreateHead204Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1587,7 +1550,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut204Request(content, options);
+            using HttpMessage message = CreatePut204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
@@ -1633,7 +1596,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut204Request(content, options);
+            using HttpMessage message = CreatePut204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
@@ -1662,12 +1625,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put204"/> and <see cref="Put204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1697,7 +1657,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch204Request(content, options);
+            using HttpMessage message = CreatePatch204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
@@ -1743,7 +1703,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch204Request(content, options);
+            using HttpMessage message = CreatePatch204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
@@ -1772,12 +1732,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch204"/> and <see cref="Patch204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1807,7 +1764,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost204Request(content, options);
+            using HttpMessage message = CreatePost204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
@@ -1853,7 +1810,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost204Request(content, options);
+            using HttpMessage message = CreatePost204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
@@ -1882,12 +1839,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post204"/> and <see cref="Post204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1917,7 +1871,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204Request(content, options);
+            using HttpMessage message = CreateDelete204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
@@ -1963,7 +1917,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete204Request(content, options);
+            using HttpMessage message = CreateDelete204Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
@@ -1992,12 +1946,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete204"/> and <see cref="Delete204Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete204Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete204Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2026,7 +1977,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead404Request(options);
+            using HttpMessage message = CreateHead404Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
@@ -2072,7 +2023,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead404Request(options);
+            using HttpMessage message = CreateHead404Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Head404");
             scope.Start();
@@ -2102,11 +2053,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head404"/> and <see cref="Head404Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead404Request(RequestOptions options = null)
+        private HttpMessage CreateHead404Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();

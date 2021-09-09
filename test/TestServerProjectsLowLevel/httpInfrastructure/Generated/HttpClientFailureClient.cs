@@ -17,7 +17,8 @@ namespace httpInfrastructure_LowLevel
     public partial class HttpClientFailureClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public virtual HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get => _pipeline; }
+        private HttpPipeline _pipeline;
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
@@ -45,7 +46,7 @@ namespace httpInfrastructure_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -66,7 +67,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead400Request(options);
+            using HttpMessage message = CreateHead400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
@@ -109,7 +110,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead400Request(options);
+            using HttpMessage message = CreateHead400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head400");
             scope.Start();
@@ -136,11 +137,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head400"/> and <see cref="Head400Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead400Request(RequestOptions options = null)
+        private HttpMessage CreateHead400Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -167,7 +166,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet400Request(options);
+            using HttpMessage message = CreateGet400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
@@ -210,7 +209,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet400Request(options);
+            using HttpMessage message = CreateGet400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get400");
             scope.Start();
@@ -237,11 +236,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get400"/> and <see cref="Get400Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet400Request(RequestOptions options = null)
+        private HttpMessage CreateGet400Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -268,7 +265,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions400Request(options);
+            using HttpMessage message = CreateOptions400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
@@ -311,7 +308,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions400Request(options);
+            using HttpMessage message = CreateOptions400Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options400");
             scope.Start();
@@ -338,11 +335,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options400"/> and <see cref="Options400Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOptions400Request(RequestOptions options = null)
+        private HttpMessage CreateOptions400Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -370,7 +365,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut400Request(content, options);
+            using HttpMessage message = CreatePut400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -414,7 +409,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut400Request(content, options);
+            using HttpMessage message = CreatePut400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put400");
             scope.Start();
@@ -441,12 +436,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put400"/> and <see cref="Put400Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut400Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -476,7 +468,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch400Request(content, options);
+            using HttpMessage message = CreatePatch400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -520,7 +512,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch400Request(content, options);
+            using HttpMessage message = CreatePatch400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch400");
             scope.Start();
@@ -547,12 +539,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch400"/> and <see cref="Patch400Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch400Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -582,7 +571,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost400Request(content, options);
+            using HttpMessage message = CreatePost400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -626,7 +615,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost400Request(content, options);
+            using HttpMessage message = CreatePost400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post400");
             scope.Start();
@@ -653,12 +642,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post400"/> and <see cref="Post400Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost400Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -688,7 +674,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete400Request(content, options);
+            using HttpMessage message = CreateDelete400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -732,7 +718,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete400Request(content, options);
+            using HttpMessage message = CreateDelete400Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete400");
             scope.Start();
@@ -759,12 +745,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete400"/> and <see cref="Delete400Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete400Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete400Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -793,7 +776,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead401Request(options);
+            using HttpMessage message = CreateHead401Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
@@ -836,7 +819,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead401Request(options);
+            using HttpMessage message = CreateHead401Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head401");
             scope.Start();
@@ -863,11 +846,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head401"/> and <see cref="Head401Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead401Request(RequestOptions options = null)
+        private HttpMessage CreateHead401Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -894,7 +875,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet402Request(options);
+            using HttpMessage message = CreateGet402Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
@@ -937,7 +918,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet402Request(options);
+            using HttpMessage message = CreateGet402Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get402");
             scope.Start();
@@ -964,11 +945,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get402"/> and <see cref="Get402Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet402Request(RequestOptions options = null)
+        private HttpMessage CreateGet402Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -995,7 +974,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions403Request(options);
+            using HttpMessage message = CreateOptions403Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
@@ -1038,7 +1017,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions403Request(options);
+            using HttpMessage message = CreateOptions403Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options403");
             scope.Start();
@@ -1065,11 +1044,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options403"/> and <see cref="Options403Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOptions403Request(RequestOptions options = null)
+        private HttpMessage CreateOptions403Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -1096,7 +1073,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet403Request(options);
+            using HttpMessage message = CreateGet403Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
@@ -1139,7 +1116,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet403Request(options);
+            using HttpMessage message = CreateGet403Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get403");
             scope.Start();
@@ -1166,11 +1143,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get403"/> and <see cref="Get403Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet403Request(RequestOptions options = null)
+        private HttpMessage CreateGet403Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1198,7 +1173,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut404Request(content, options);
+            using HttpMessage message = CreatePut404Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -1242,7 +1217,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut404Request(content, options);
+            using HttpMessage message = CreatePut404Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put404");
             scope.Start();
@@ -1269,12 +1244,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put404"/> and <see cref="Put404Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut404Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut404Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1304,7 +1276,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch405Request(content, options);
+            using HttpMessage message = CreatePatch405Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -1348,7 +1320,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch405Request(content, options);
+            using HttpMessage message = CreatePatch405Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch405");
             scope.Start();
@@ -1375,12 +1347,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch405"/> and <see cref="Patch405Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch405Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch405Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -1410,7 +1379,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost406Request(content, options);
+            using HttpMessage message = CreatePost406Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -1454,7 +1423,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost406Request(content, options);
+            using HttpMessage message = CreatePost406Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post406");
             scope.Start();
@@ -1481,12 +1450,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post406"/> and <see cref="Post406Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost406Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost406Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -1516,7 +1482,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete407Request(content, options);
+            using HttpMessage message = CreateDelete407Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -1560,7 +1526,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete407Request(content, options);
+            using HttpMessage message = CreateDelete407Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete407");
             scope.Start();
@@ -1587,12 +1553,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete407"/> and <see cref="Delete407Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete407Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete407Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -1622,7 +1585,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut409Request(content, options);
+            using HttpMessage message = CreatePut409Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -1666,7 +1629,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut409Request(content, options);
+            using HttpMessage message = CreatePut409Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put409");
             scope.Start();
@@ -1693,12 +1656,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put409"/> and <see cref="Put409Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut409Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut409Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -1727,7 +1687,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead410Request(options);
+            using HttpMessage message = CreateHead410Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
@@ -1770,7 +1730,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead410Request(options);
+            using HttpMessage message = CreateHead410Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head410");
             scope.Start();
@@ -1797,11 +1757,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head410"/> and <see cref="Head410Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead410Request(RequestOptions options = null)
+        private HttpMessage CreateHead410Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
@@ -1828,7 +1786,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet411Request(options);
+            using HttpMessage message = CreateGet411Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
@@ -1871,7 +1829,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet411Request(options);
+            using HttpMessage message = CreateGet411Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get411");
             scope.Start();
@@ -1898,11 +1856,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get411"/> and <see cref="Get411Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet411Request(RequestOptions options = null)
+        private HttpMessage CreateGet411Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -1929,7 +1885,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions412Request(options);
+            using HttpMessage message = CreateOptions412Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
@@ -1972,7 +1928,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateOptions412Request(options);
+            using HttpMessage message = CreateOptions412Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Options412");
             scope.Start();
@@ -1999,11 +1955,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Options412"/> and <see cref="Options412Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOptions412Request(RequestOptions options = null)
+        private HttpMessage CreateOptions412Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Options;
             var uri = new RawRequestUriBuilder();
@@ -2030,7 +1984,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet412Request(options);
+            using HttpMessage message = CreateGet412Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
@@ -2073,7 +2027,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet412Request(options);
+            using HttpMessage message = CreateGet412Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get412");
             scope.Start();
@@ -2100,11 +2054,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get412"/> and <see cref="Get412Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet412Request(RequestOptions options = null)
+        private HttpMessage CreateGet412Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2132,7 +2084,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut413Request(content, options);
+            using HttpMessage message = CreatePut413Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -2176,7 +2128,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePut413Request(content, options);
+            using HttpMessage message = CreatePut413Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Put413");
             scope.Start();
@@ -2203,12 +2155,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Put413"/> and <see cref="Put413Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePut413Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePut413Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
@@ -2238,7 +2187,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch414Request(content, options);
+            using HttpMessage message = CreatePatch414Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -2282,7 +2231,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePatch414Request(content, options);
+            using HttpMessage message = CreatePatch414Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Patch414");
             scope.Start();
@@ -2309,12 +2258,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Patch414"/> and <see cref="Patch414Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePatch414Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePatch414Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
@@ -2344,7 +2290,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost415Request(content, options);
+            using HttpMessage message = CreatePost415Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -2388,7 +2334,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreatePost415Request(content, options);
+            using HttpMessage message = CreatePost415Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Post415");
             scope.Start();
@@ -2415,12 +2361,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Post415"/> and <see cref="Post415Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePost415Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreatePost415Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -2449,7 +2392,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet416Request(options);
+            using HttpMessage message = CreateGet416Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
@@ -2492,7 +2435,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateGet416Request(options);
+            using HttpMessage message = CreateGet416Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Get416");
             scope.Start();
@@ -2519,11 +2462,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Get416"/> and <see cref="Get416Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateGet416Request(RequestOptions options = null)
+        private HttpMessage CreateGet416Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
@@ -2551,7 +2492,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete417Request(content, options);
+            using HttpMessage message = CreateDelete417Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
@@ -2595,7 +2536,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateDelete417Request(content, options);
+            using HttpMessage message = CreateDelete417Request(content);
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Delete417");
             scope.Start();
@@ -2622,12 +2563,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Delete417"/> and <see cref="Delete417Async"/> operations. </summary>
-        /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateDelete417Request(RequestContent content, RequestOptions options = null)
+        private HttpMessage CreateDelete417Request(RequestContent content)
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
@@ -2656,7 +2594,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead429Request(options);
+            using HttpMessage message = CreateHead429Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
@@ -2699,7 +2637,7 @@ namespace httpInfrastructure_LowLevel
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            using HttpMessage message = CreateHead429Request(options);
+            using HttpMessage message = CreateHead429Request();
             RequestOptions.Apply(options, message);
             using var scope = _clientDiagnostics.CreateScope("HttpClientFailureClient.Head429");
             scope.Start();
@@ -2726,11 +2664,9 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="Head429"/> and <see cref="Head429Async"/> operations. </summary>
-        /// <param name="options"> The request options. </param>
-        private HttpMessage CreateHead429Request(RequestOptions options = null)
+        private HttpMessage CreateHead429Request()
         {
-            var message = Pipeline.CreateMessage();
+            var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Head;
             var uri = new RawRequestUriBuilder();
