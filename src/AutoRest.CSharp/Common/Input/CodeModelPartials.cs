@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Input
         }
     }
 
-    internal partial class DictionaryOfAny
+    internal partial class DictionaryOfAny // : YamlDotNet.Serialization.IYamlConvertible
     {
         private static char[] _formatSplitChar = new[] { ',', ' ' };
 
@@ -124,12 +124,53 @@ namespace AutoRest.CSharp.Input
 
         public bool MgmtPropertyReferenceType => TryGetValue("x-ms-mgmt-propertyReferenceType", out var value) && Convert.ToBoolean(value);
 
-        public DictionaryOfExampleModel? exampleModels => TryGetValue("example-models", out var value) ? (DictionaryOfExampleModel)value : null;
+        // public DictionaryOfExampleModel? exampleModels => TryGetValue("example-models", out var value) ? DictionaryOfExampleModel.toMe((System.Collections.Generic.Dictionary<object, object>)value) : null;
+
+        //[YamlDotNet.Serialization.YamlMember(Alias = "example-models")]
+        //public DictionaryOfExampleModel? exampleModels { get; set; }
+
+        //public void Read(YamlDotNet.Core.IParser parser, Type type, ObjectDeserializer nestedObjectDeserializer)
+        //{
+        //    nestedObjectDeserializer(type);
+        //    //var scalar = parser
+        //    //if (scalar != null)
+        //    //{
+        //    //    Test = Prod = scalar.Value;
+        //    //}
+        //    //else
+        //    //{
+        //    //    var values = (SettingsBase)nestedObjectDeserializer(typeof(SettingsBase));
+        //    //    this.Test = values.Test;
+        //    //    this.Prod = values.Prod;
+        //    //}
+        //}
+
+        //public void Write(YamlDotNet.Core.IEmitter emitter, ObjectSerializer nestedObjectSerializer)
+        //{
+        //    //if (Test == Prod)
+        //    //{
+        //    //    nestedObjectSerializer(Test);
+        //    //}
+        //    //else
+        //    //{
+        //    //    nestedObjectSerializer(new SettingsBase { Test = this.Test, Prod = this.Prod });
+        //    //}
+        //}
     }
 
     internal partial class DictionaryOfExampleModel: System.Collections.Generic.Dictionary<string, ExampleModel>
     {
+        //public static DictionaryOfExampleModel toMe(System.Collections.Generic.Dictionary<object, object> value)
+        //{
+        //    return (DictionaryOfExampleModel)(value.ToDictionary(k => Convert.ToString(k.Key), k => (ExampleModel)k.Value));
+        //    DictionaryOfExampleModel instance = new DictionaryOfExampleModel();
+        //    foreach (KeyValuePair<object, object> keyValuePair in value)
+        //    {
+        //        instance.Add((string)keyValuePair.Key, keyValuePair.Value as ExampleModel);
 
+        //    }
+        //    return instance;
+        //}
     }
 
     internal partial class ServiceResponse
@@ -282,7 +323,117 @@ namespace AutoRest.CSharp.Input
     internal partial class CodeModel
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "testLayout")]
-        public DictionaryOfAny? TestLayout { get; set; }
+        public TestLayout? TestLayout { get; set; }
+    }
+
+    internal partial class TestDefinitionModel {
+
+        [YamlMember(Alias = "useArmTemplate")]
+        public Boolean UseArmTemplate;
+
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
+
+        [YamlMember(Alias = "outputVariableNames")]
+        public System.Collections.Generic.ICollection<string> OutputVariableNames;
+
+        [YamlMember(Alias = "prepareSteps")]
+        public System.Collections.Generic.ICollection<TestStep> PrepareSteps;
+
+        [YamlMember(Alias = "testScenarios")]
+        public System.Collections.Generic.ICollection<TestScenario> TestScenarios;
+
+        [YamlMember(Alias = "_filePath")]
+        public string FilePath;
+
+        [YamlMember(Alias = "scope")]
+        public string? scope;
+
+        [YamlMember(Alias = "scope")]
+        public System.Collections.Generic.ICollection<string>? requiredVariables;
+    };
+
+    internal partial class TestStep{
+
+        [YamlMember(Alias = "step")]
+        public string type;
+
+
+        // for TestStepArmTemplateDeployment (type==armTemplateDeployment)
+        [YamlMember(Alias = "step")]
+        public string step;
+
+        [YamlMember(Alias = "armTemplatePayload")]
+        public DictionaryOfAny? armTemplatePayload;
+
+        [YamlMember(Alias = "armTemplateParametersPayload")]
+        public DictionaryOfAny? armTemplateParametersPayload;
+
+        // for TestStepRestCall (type==restCall)
+        [YamlMember(Alias = "operation")]
+        public DictionaryOfAny? operation;
+
+        [YamlMember(Alias = "exampleId")]
+        public string? exampleId;
+
+        [YamlMember(Alias = "exampleFilePath")]
+        public string? exampleFilePath;
+
+        [YamlMember(Alias = "requestParameters")]
+        public DictionaryOfAny? requestParameters;
+
+        [YamlMember(Alias = "responseExpected")]
+        public DictionaryOfAny? responseExpected;
+
+
+        // test-modeler properties
+        [YamlMember(Alias = "exampleModel")]
+        public ExampleModel? exampleModel;
+
+        [YamlMember(Alias = "outputVariableNames")]
+        public System.Collections.Generic.ICollection<string>? outputVariableNames;
+    };
+
+    internal partial class TestScenario {
+        [YamlMember(Alias = "requiredVariablesDefault")]
+        public System.Collections.Generic.Dictionary<string, string> RequiredVariablesDefault;
+
+        [YamlMember(Alias = "steps")]
+        public System.Collections.Generic.ICollection<TestStep> Steps;
+
+        [YamlMember(Alias = "_testDef")]
+        public TestDefinitionModel? TestDef;
+
+        [YamlMember(Alias = "_resolvedSteps")]
+        public System.Collections.Generic.ICollection<TestStep>? ResolvedSteps;
+    };
+
+
+    internal partial class TestLayout
+    {
+        [YamlMember(Alias = "mockTests")]
+        public System.Collections.Generic.ICollection<TestGroup> MockTests;
+
+        [YamlMember(Alias = "scenarioTests")]
+        public System.Collections.Generic.ICollection<TestDefinitionModel> ScenarioTests;
+    }
+
+    internal partial class TestGroup
+    {
+        [YamlMember(Alias = "name")]
+        public string Name;
+
+        [YamlMember(Alias = "exampleGroups")]
+        public System.Collections.Generic.ICollection<ExampleGroup> ExampleGroups;
+    }
+
+    internal partial class ExampleGroup
+    {
+        [YamlMember(Alias = "name")]
+        public string Name;
+
+        [YamlMember(Alias = "examples")]
+        public System.Collections.Generic.ICollection<ExampleModel> Examples;
     }
 
     internal partial class ExampleModel
@@ -334,9 +485,18 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "schema")]
         public Schema Schema;
 
-        /**The value is {string:ExampleValue}/[ExampleValue] instance if schema.type==Object/Array, otherwise it's rawValue */
-        [YamlMember(Alias = "value")]
-        public object Value;
+        [YamlMember(Alias = "flattenedNames")]
+        public System.Collections.Generic.ICollection<string>? FlattenedNames;
+
+        /**Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue */
+        [YamlMember(Alias = "rawValue")]
+        public object? RawValue;
+
+        [YamlMember(Alias = "elements")]
+        public System.Collections.Generic.ICollection<ExampleValue>? Elements;
+
+        [YamlMember(Alias = "properties")]
+        public DictionaryOfExamplValue? Properties;
 
         [YamlMember(Alias = "parentsValue")]
         public DictionaryOfExamplValue ParentsValue; // parent class Name--> value

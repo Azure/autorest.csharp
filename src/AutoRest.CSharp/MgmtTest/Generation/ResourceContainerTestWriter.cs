@@ -19,11 +19,13 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Management;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 
 namespace AutoRest.CSharp.Mgmt.TestGeneration
 {
@@ -69,6 +71,8 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
         {
             WriteUsings(_writer);
             _writer.UseNamespace(TypeOfContainer.Namespace);
+            _writer.UseNamespace($"{TypeOfContainer.Namespace}.Models");
+            _writer.UseNamespace("NUnit.Framework");
             _writer.UseNamespace("Azure.Core.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.TestFramework");
             _writer.UseNamespace("Azure.ResourceManager.Resources");
@@ -257,77 +261,306 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
 
         protected void WriteGetContainer()
         {
-            _writer.Line($"var container = Get{TypeNameOfContainer}Async();");
+            _writer.Line($"var container = await Get{TypeNameOfContainer}Async();");
         }
 
         protected string WriteParameter(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, ExampleParameter exampleParameter, Parameter parameter) {
             var variableName = WriteExampleParameterDeclaration(exampleParameter, parameter);
-            //if (parameter.Type.ToString() == _resourceData.Declaration.Name)
-            //{
-            //    WriteDataPropertyAssignments(exampleParameter.ExampleValue, variableName, _resourceData.Properties);
-            //}
             return variableName;
         }
 
-        protected void WriteDataPropertyAssignments(ExampleValue exampleValue, string variableName, ObjectTypeProperty[] objectTypeProperties)
+        protected ObjectTypeProperty? FindPropertyThroughSerialization(List<string> flattenedNames, JsonObjectSerialization obj)
         {
-            if (exampleValue.Schema?.Type == AllSchemaTypes.Array)
+            if (flattenedNames.Count==0)
             {
+                return null;
             }
-            foreach (var property in (DictionaryOfExamplValue)exampleValue.Value)
+            foreach (JsonPropertySerialization property in obj.Properties)
             {
-                // find the target ObjectTypeProperty
-                var objectTypeProperty = objectTypeProperties.Where(x => x.SchemaProperty?.Language.Default.Name == property.Value.Language.Default.Name);
-            }
-        }
-
-        protected void WriteExampleValueAssignment(string variableName, ExampleValue exampleValue)
-        {
-
-        }
-
-        protected string WriteExampleParameterDeclaration(ExampleParameter exampleParameter, Parameter parameter)
-        {
-            var variableName = exampleParameter.Parameter.CSharpName();
-            if (parameter.Type.ToString()==_resourceData.Declaration.Name)
-            {
-                var constructor = _resourceData.Constructors[0];
-                foreach (var c in _resourceData.Constructors)
+                if (flattenedNames[0] == property.Name)
                 {
-                    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
-                        constructor = c;
+                    if (flattenedNames.Count==1)
+                        return property.Property;
+                    return FindPropertyThroughSerialization(flattenedNames.Skip(1).ToList(), (JsonObjectSerialization)property.ValueSerialization);
                 }
+            }
 
-                var signature = constructor.Signature;
-                _writer.Append($"var {variableName} = new {signature.Name}(");
-                foreach (var p in signature.Parameters)
+            return null;
+        }
+        //protected static Parameter[] GetProperties(ObjectType ot)
+        //{
+        //    Parameter[] parameters = new Parameter[] { };
+        //    if (otc.BaseConstructor is not null)
+        //    {
+        //        parameters = parameters.Concat(GetProperties(otc.BaseConstructor)).ToArray();
+        //    }
+        //    parameters = parameters.Concat(otc.Signature.Parameters).ToArray();
+        //    return parameters;
+        //}
+        protected ExampleValue? FindPropertyValue(SchemaObjectType sot, ExampleValue ev, ObjectTypeProperty targetProperty)
+        {
+            var obj = (JsonObjectSerialization)sot.Serializations.Single(x => typeof(JsonSerialization).IsInstanceOfType(x));
+            // var targetProperty = ctr.FindPropertyInitializedByParameter(p);
+            //foreach (JsonPropertySerialization property in obj.Properties)
+            //{
+            //    if (property.Property == targetProperty)
+            //    {
+            //        if (ev.Properties?.ContainsKey(property.Name)?? false)
+            //        {
+            //            return ev.Properties[property.Name];
+            //        }
+            //    }
+            //}
+
+            //foreach (var parent in ev.ParentsValue)
+            //{
+            //    var v = FindPropertyValueByCtrParameter(sot, parent.Value, ctr, p);
+            //    if (v is not null)
+            //    {
+            //        return v;
+            //    }
+            //}
+
+            foreach (var exampleProperty in ev.Properties ?? new DictionaryOfExamplValue()) {
+                var property = FindPropertyThroughSerialization(exampleProperty.Value.FlattenedNames is not null ? exampleProperty.Value.FlattenedNames.ToList()! : new List<string> { exampleProperty.Key }, obj);
+                if (property == targetProperty)
                 {
-                    // _writer.WriteParameter(parameter);
-                    var property = _resourceData.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
+                    return exampleProperty.Value;
+                }
+            }
 
-                    if (exampleParameter.ExampleValue.CSharpName() == property?.CSharpName())
+            return null;
+        }
+        protected void AssignSchemaObjectExampleValue(SchemaObjectType sot, ExampleValue ev, string variableName)
+        {
+            var constructor = sot.Constructors[0];
+            // find the simplest constructor
+            foreach (var c in sot.Constructors)
+            {
+                if (c.Signature.Parameters.Length < constructor.Signature.Parameters.Length)
+                    constructor = c;
+            }
+            HashSet<ObjectTypeProperty> consumedProperties = new HashSet<ObjectTypeProperty>();
+            var signature = constructor.Signature;
+            // var variableName = sot.Declaration.Name;
+            foreach (var p in signature.Parameters)
+            {
+                // _writer.WriteParameter(parameter);
+                // var property2 = sot.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
+                // var property = constructor.FindPropertyInitializedByParameter(p)?.SchemaProperty;
+                var targetProperty = constructor.FindPropertyInitializedByParameter(p);
+                var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                if (paramValue is not null)
+                {
+                    // _writer.Append($"var ");
+                    AssignExampleValue(p.Type, paramValue!, p.Name);
+                }
+                else
+                {
+                    _writer.Line($"{p.Name} = default; // don't find example value for this parameter!");
+                }
+            }
+            _writer.Append($"{variableName} = new {signature.Name}(");
+            foreach (var p in signature.Parameters)
+            {
+                _writer.Append($"{p.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.Line($");");
+
+            foreach (var objectType in sot.EnumerateHierarchy())
+            {
+                foreach (var targetProperty in objectType.Properties)
+                {
+                    var paramValue = FindPropertyValue(sot, ev, targetProperty!);
+                    if (paramValue is not null)
                     {
-                        _writer.Append($"{BuildValueString(exampleParameter.ExampleValue, exampleParameter.ExampleValue.Schema)},");
+                        AssignExampleValue(targetProperty.ValueType, paramValue!, $"{variableName}.{targetProperty.Declaration.Name}");
+                    }
+                }
+            }
+        }
+
+        protected void AssignExampleValue(CSharpType cst, ExampleValue exampleValue, string variableName)
+        {
+            TypeProvider? tp = cst.IsFrameworkType ? null : cst.Implementation;
+            switch (tp)
+            {
+                case SchemaObjectType sot:
+                    // DeserializeExampleValue(sot, exampleValue, variableName);
+                    AssignSchemaObjectExampleValue(sot, exampleValue, variableName);
+                    break;
+                default:
+                    if (exampleValue.RawValue is not null)
+                    {
+                        _writer.Line($"{variableName} = \"{exampleValue.RawValue}\";");
+                    }
+                    else if (exampleValue.Elements is not null)
+                    {
+                        _writer.Line($"{variableName} = {exampleValue.Elements}");
+                    }
+                    else if (exampleValue.Properties is not null)
+                    {
+                        _writer.Line($"{variableName} = {exampleValue.Properties}");
+                    }
+                    else
+                    {
+                        _writer.Line($"{variableName} = default;\"");
+                    }
+                    break;
+            }
+        }
+
+        protected void DeserializeExampleValue(SchemaObjectType sot, ExampleValue exampleValue, string variableName)
+        {
+            var serialization = (JsonSerialization)sot.Serializations.Where(x => typeof(JsonSerialization).IsInstanceOfType(x)).First();
+            if (serialization is JsonObjectSerialization obj)
+            {
+                AssignSchemaObjectExampleValue(sot, exampleValue, variableName);
+                //var itemVariable = new CodeWriterDeclaration("property");
+                //var declared = false;
+                //foreach (JsonPropertySerialization property in obj.Properties)
+                //{
+                //    // string defaultName = property.Property?.SchemaProperty?.Language.Default.Name?? "IMPOSSIBLE_KEY";
+                //    //string defaultName = property.Name;
+                //    //var writer = new CodeWriter();
+                //    //if (exampleValue.Properties.ContainsKey(defaultName))
+                //    //{
+                //    //    if (!declared)
+                //    //    {
+                //    //        _writer.Append($"new {obj.Type?.Name}(");
+                //    //        declared = true;
+                //    //    }
+                //    //    ExampleValue subExampleValue = exampleValue.Properties[defaultName];
+                //    //    DeserializeExampleValue(property.ValueSerialization, subExampleValue);
+                //    //    _writer.Line($", ");
+                //    //}
+                //    //Dictionary<string, string> collection = new Dictionary<string, string>();
+                //    //CollectCtrParameters(sot, exampleValue, collection);
+
+                //}
+                //if (declared)
+                //{
+                //    _writer.RemoveTrailingComma();
+                //    _writer.Append($")");
+                //}
+            }
+
+            else if (serialization is JsonArraySerialization array)
+            {
+                var i = 0;
+                foreach (var element in exampleValue.Elements!)
+                {
+                    i++;
+                    AssignExampleValue(array.ImplementationType, element, $"element{i}");
+                }
+                _writer.Append($"{variableName} = new {array.ImplementationType}{{");
+                i = 0;
+                foreach (var element in exampleValue.Elements!)
+                {
+                    i++;
+                    _writer.Append($"element{i},");
+                }
+                _writer.RemoveTrailingComma();
+                _writer.Append($"}};");
+            }
+            else if (serialization is JsonDictionarySerialization dictionary)
+            {
+                foreach (var property in exampleValue.Properties!)
+                {
+                    using (_writer.Scope())
+                    {
+                        AssignExampleValue(sot.ImplementsDictionaryType!, property.Value, property.Key);
+                    }
+                }
+                _writer.Append($"{variableName} = new {dictionary.Type}(){{");
+                foreach (var property in exampleValue.Properties!)
+                {
+                    using (_writer.Scope())
+                    {
+                        _writer.Append($"\"{property.Key}\", {property.Key}");
                     }
                 }
                 _writer.RemoveTrailingComma();
-                _writer.Line($");");
-
+                _writer.Append($"}};");
             }
-            else if (parameter.Type== new CSharpType(typeof(string)))
+            else if (serialization is JsonValueSerialization valueSerialization)
             {
-                _writer.LineRaw($"var {variableName} = \"{exampleParameter.ExampleValue.Value}\";");
+                if (new string[] { "String", "Location" }.Contains(valueSerialization.Type.Name))
+                {
+                    _writer.LineRaw($"{variableName} = \"{exampleValue.RawValue}\";");
+                }
+                else
+                {
+                    _writer.LineRaw($"{variableName} = {exampleValue.RawValue};");
+                }
+                // writer.DeserializeIntoVariableWithNullHandling(serialization, valueCallback, element);
             }
             else
             {
-                _writer.LineRaw($"var {variableName} = {exampleParameter.ExampleValue.Value};");
+
+                //if (serialization == "String")
+                //{
+                //    _writer.LineRaw($"\"{exampleValue.RawValue}\"");
+                //}
+                //else
+                {
+                    _writer.LineRaw($"{variableName} = {exampleValue.RawValue};");
+                }
+            }
+        }
+        protected string WriteExampleParameterDeclaration(ExampleParameter exampleParameter, Parameter parameter)
+        {
+            var variableName = exampleParameter.Parameter.CSharpName();
+            if (parameter.Type.Name == _resourceData.Declaration.Name)
+            {
+                // var jsonSerialization = _resourceData.Serializations.Where(x => typeof(JsonSerialization).IsInstanceOfType(x)).First();
+                // _writer.Append($"var {variableName} = ");
+                _writer.Append($"var ");
+                //DeserializeExampleValue (_resourceData, exampleParameter.ExampleValue, variableName);
+                AssignSchemaObjectExampleValue(_resourceData, exampleParameter.ExampleValue, variableName);
+
+                // _writer.Line($";");
+                // var constructor = _resourceData.Constructors[0];
+                //foreach (var c in _resourceData.Constructors)
+                //{
+                //    if (c.Signature.Parameters.Length > constructor.Signature.Parameters.Length)
+                //        constructor = c;
+                //}
+
+                //var signature = constructor.Signature;
+                //_writer.Append($"var {variableName} = new {signature.Name}(");
+                //foreach (var p in signature.Parameters)
+                //{
+                //    // _writer.WriteParameter(parameter);
+                //    // var property2 = _resourceData.Properties.Where(x => x.Declaration.Name.ToVariableName() == p.Name).FirstOrDefault().SchemaProperty;
+                //    var property = constructor.FindPropertyInitializedByParameter(p)?.SchemaProperty;
+
+                //    if (exampleParameter.ExampleValue.CSharpName() == property?.CSharpName())
+                //    {
+                //        _writer.Append($"{BuildValueString(exampleParameter.ExampleValue, exampleParameter.ExampleValue.Schema)},");
+                //    }
+                //}
+                //_writer.RemoveTrailingComma();
+                //_writer.Line($");");
+
+            }
+            else if (parameter.Type.Name == "String")
+            {
+                _writer.Append($"var {variableName} = \"{exampleParameter.ExampleValue.RawValue}\";");
+                _writer.Line();
+            }
+            else
+            {
+                _writer.LineRaw($"var {variableName} = {exampleParameter.ExampleValue.RawValue};");
+                _writer.Line();
             }
             return variableName;
         }
 
         protected string BuildValueString(ExampleValue exampleValue, Schema schema)
         {
-            return $"\"{exampleValue.Value}\"";
+            return $"\"{exampleValue.RawValue}\"";
         }
 
         protected void WriteFirstLROMethodTest(RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool isAsync, bool isVirtual, string? methodName = null)
@@ -335,37 +568,39 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
             Debug.Assert(clientMethod.Operation != null);
 
             methodName = methodName ?? clientMethod.Name;
-            CSharpType returnType = isAsync? typeof(Task): typeof(void);
+            // CSharpType returnType = isAsync? typeof(Task): typeof(void);
             var parameterMapping = BuildParameterMapping(clientMethod);
             var passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             WriteTestDecorator(_writer);
             var testMethodName = CreateMethodName(methodName, isAsync);
-            _writer.Append($"public {GetAsyncKeyword(isAsync)} {GetVirtual(isVirtual)} {returnType} {testMethodName}()");
-            var paramNames = new string[] { };
+            _writer.Append($"public async Task {testMethodName}()");
+            var paramNames = new List<string>();
             using (_writer.Scope())
             {
                 WriteGetContainer();
 
-                foreach (KeyValuePair<string, ExampleModel> entry in clientMethod.Operation.Extensions?.exampleModels ?? new DictionaryOfExampleModel())
+                var exampleGroup = (from x in context.CodeModel.TestLayout?.MockTests.First().ExampleGroups where x.Name == $"{_resourceContainer.OperationGroup.Key}_{clientMethod.Operation.Language.Default.Name}" select x).FirstOrDefault();
+                foreach (var exampleModel in exampleGroup?.Examples ?? Enumerable.Empty<ExampleModel>())
                 {
                     // do something with entry.Value or entry.Key
-                    _writer.LineRaw($"// Example: {entry.Key}");
+                    _writer.LineRaw($"// Example: {exampleModel.Name}");
                     foreach (var passThruParameter in passThruParameters)
                     {
                         string? paramName = null;
-                        foreach (ExampleParameter exampleParameter in entry.Value.MethodParameters)
+                        foreach (ExampleParameter exampleParameter in exampleModel.MethodParameters)
                         {
                             if (passThruParameter.Name == exampleParameter.Parameter.CSharpName())
                             {
-                                paramName = WriteParameter(clientMethod, context, exampleParameter, passThruParameter);
+                                // paramName = WriteParameter(clientMethod, context, exampleParameter, passThruParameter);
+                                paramName = WriteExampleParameterDeclaration(exampleParameter, passThruParameter);
                             }
                         }
                         if (paramName is null)
                         {
                             if (passThruParameter.ValidateNotNull)
                             {
-                                throw new Exception($"parameter {passThruParameter.Name} not found in example {entry.Key}");
+                                throw new Exception($"parameter {passThruParameter.Name} not found in example {exampleModel.Name}");
                             }
                             else
                             {
@@ -373,17 +608,18 @@ namespace AutoRest.CSharp.Mgmt.TestGeneration
                                 _writer.LineRaw($"var {paramName} = null;");
                             }
                         }
-                        paramNames.Append(paramName);
+                        paramNames.Add(paramName);
                     }
-                }
 
-                _writer.Append($"{(isAsync ? ("await ") : "")}container.${testMethodName}(");
-                foreach (var paramName in paramNames)
-                {
-                    _writer.Append($"{paramName},");
+                    _writer.Append($"{(isAsync ? ("await ") : "")}container.{testMethodName}(");
+                    foreach (var paramName in paramNames)
+                    {
+                        _writer.Append($"{paramName},");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.LineRaw(");");
+                    break;
                 }
-                _writer.RemoveTrailingComma();
-                _writer.LineRaw(");");
             }
 
             // ///////////////////
