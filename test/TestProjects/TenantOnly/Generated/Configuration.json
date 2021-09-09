@@ -16,5 +16,8 @@
   "OperationGroupToResource": {
     "BillingAccounts": "BillingAccount",
     "Agreements": "Agreement"
+  },
+  "RequestPathToResource": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}": "Agreement"
   }
 }

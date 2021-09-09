@@ -14,10 +14,10 @@ payload-flattening-threshold: 2
 modelerfour:
   lenient-model-deduplication: true
 
-operation-group-to-resource:
-  SshPublicKeys: NonResource
-operation-group-to-parent:
-  SshPublicKeys: resourceGroups
+# operation-group-to-resource:
+#   SshPublicKeys: NonResource
+# operation-group-to-parent:
+#   SshPublicKeys: resourceGroups
 directive:
   - rename-model:
       from: SshPublicKeyResource

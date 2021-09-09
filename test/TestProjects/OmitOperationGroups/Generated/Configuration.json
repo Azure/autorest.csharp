@@ -18,5 +18,8 @@
   },
   "OperationGroupsToOmit": [
     "Model1s"
-  ]
+  ],
+  "RequestPathToResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2sName}/model4s/default": "Model4"
+  }
 }

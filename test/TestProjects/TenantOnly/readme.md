@@ -14,4 +14,6 @@ operation-group-to-resource-type:
 operation-group-to-resource:
    BillingAccounts: BillingAccount
    Agreements: Agreement
+request-path-to-resource:
+   /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}: Agreement
 ```

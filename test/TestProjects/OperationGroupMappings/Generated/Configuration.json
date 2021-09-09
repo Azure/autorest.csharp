@@ -19,5 +19,8 @@
   },
   "OperationGroupToParent": {
     "Usage": "subscriptions"
+  },
+  "RequestPathToResource": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": "AvailabilitySet"
   }
 }
