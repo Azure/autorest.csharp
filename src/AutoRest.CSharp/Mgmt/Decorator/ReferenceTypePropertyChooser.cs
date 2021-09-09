@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -24,6 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         internal const string PropertyReferenceAttribute = "PropertyReferenceType";
         internal const string PropertyReferenceAttributeName = "PropertyReferenceTypeAttribute";
 
+        private static ConcurrentDictionary<Schema, CSharpType?> _valueCache = new ConcurrentDictionary<Schema, CSharpType?>();
+
         private static readonly Type _locationType = typeof(Location);
         private static readonly Type _resourceIdentifierType = typeof(ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(ResourceType);
@@ -43,9 +46,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return FindSimpleReplacements(originalType, frameworkType, context);
         }
 
+        public static CSharpType? TryGetCachedExactMatch(Schema schema, out CSharpType? result)
+        {
+            return _valueCache.TryGetValue(schema, out result);
+        }
+
         public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, BuildContext<MgmtOutputLibrary> context)
         {
-            if (SchemaMatchTracker.TryGetExactMatch(typeToReplace.ObjectSchema, out var result))
+            if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;
             foreach (System.Type replacementType in GetReferenceClassCollection())
             {
@@ -74,11 +82,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 if (PropertyMatchDetection.IsEqual(replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType>{{replacementType, typeToReplace.Type}}))
                 {
                     result = CSharpType.FromSystemType(typeToReplace.Context, replacementType);
-                    SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, result);
+                    // SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, result);
+                    _valueCache.TryAdd(typeToReplace.ObjectSchema, result);
                     return result;
                 }
             }
-            SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, null);
+            _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
+            // SchemaMatchTracker.SetExactMatch(typeToReplace.ObjectSchema, null);
             return null;
         }
 

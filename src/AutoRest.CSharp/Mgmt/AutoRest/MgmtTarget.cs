@@ -35,14 +35,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     //skip things that had exact match replacements
                     //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
-                    if (SchemaMatchTracker.TryGetExactMatch(objSchema.ObjectSchema, out var result))
+                    var usedAsInheritance = InheritanceChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var inheritanceResult);
+                    var usedAsProperty = ReferenceTypePropertyChooser.TryGetCachedExactMatch(objSchema.ObjectSchema, out var propertyResult);
+
+                    if (usedAsInheritance && usedAsProperty)
                     {
-                        if (result != null)
+                        // If the model is used both as a base class for inheritance and a property, we only remove the model when it has matches in both cases.
+                        if (inheritanceResult != null && propertyResult != null)
                             continue;
-                    }
+                    } 
+                    else if (inheritanceResult != null || propertyResult != null)
+                        continue;
                     else if (model is MgmtObjectType mgmtObjType && model.GetType() != typeof(MgmtReferenceType))
                     {
-                        //There could be orphaned models that are not a direct property of another model and SchemaMatchTracker haven't tracked them.
+                        //There could be orphaned models that are not a direct property of another model and is not tracked by cache.
                         //TODO: Can go away after full orphan fix https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/6000
                         if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObjType, context) != null)
                             continue;
